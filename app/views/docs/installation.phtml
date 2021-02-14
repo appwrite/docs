@@ -1,0 +1,69 @@
+<p>Appwrite is a self-hosted backend server packaged as a set of Docker containers. You can install and run Appwrite on any operating system that can run a <a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">Docker CLI</a>. You can use Appwrite on your local desktop or cloud provider of your choice.</p>
+
+<h2>System Requirements</h2>
+
+<p>Appwrite was designed to run well on both small and large deployment. The minimum requirements to run Appwrite is as little as <b>1 CPU core</b> and <b>2GB of RAM</b>, and an operating system that supports Docker.</p>
+
+<h2>Install with Docker</h2>
+
+<p>The easiest way to start running your Appwrite server is by running our Docker installer tool from your terminal. Before running the installation command, make sure you have <a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">Docker CLI</a> installed on your host machine.</p>
+
+<h3>Unix</h3>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run -it --rm \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
+    --volume "$(pwd)"/appwrite:/usr/src/code/appwrite:rw \
+    --entrypoint="install" \
+    appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
+</div>
+
+<h3>Windows</h3>
+
+<p>Hyper-V and Containers Windows features must be enabled to run Appwrite on Windows with Docker. If you don't have these features available, you can install <a href="https://docs.docker.com/toolbox/toolbox_install_windows/" target="_blank" rel="noopener">Docker Toolbox</a> that uses Virtualbox to run Appwrite on a Virtual Machine.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h4>CMD</h4>
+
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="CMD">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run -it --rm ^
+    --volume //var/run/docker.sock:/var/run/docker.sock ^
+    --volume "%cd%"/appwrite:/usr/src/code/appwrite:rw ^
+    --entrypoint="install" ^
+    appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
+        </div>
+
+    </li>
+    <li>
+        <h4>PowerShell</h4>
+
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="PowerShell">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run -it --rm ,
+    --volume /var/run/docker.sock:/var/run/docker.sock ,
+    --volume ${pwd}/appwrite:/usr/src/code/appwrite:rw ,
+    --entrypoint="install" ,
+    appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
+        </div>
+    </li>
+</ul>
+
+<h3>Manual</h3>
+
+<p>For advanced Docker users, the manual installation might seem more familiar. To setup Appwrite manually, download the Appwrite base <a href="/docker-compose.yml" target="_blank">docker-compose.yml</a> file. After the download completes, update the different environment variables as you wish and start the Appwrite stack using the following Docker command:</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose up -d --remove-orphans</code></pre>
+</div>
+
+<hr class="margin-bottom" />
+
+<p>Once the Docker installation completes, go to your machine hostname or IP address on your browser to access the Appwrite console. Please notice that on non-linux native hosts the server might take a few minutes to start after installation completes.</p>
+
+<h2>Learn More</h2>
+
+<ul>
+    <li class="margin-bottom-tiny"><a href="/docs/production" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Running Appwrite in production</a></li>
+    <li class="margin-bottom-tiny"><a href="/docs/environment-variables" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Appwrite server environment variables</a></li>
+    <li class="margin-bottom-tiny"><a href="/docs/email-delivery" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Appwrite setting a custom SMTP server</a></li>
+</ul>

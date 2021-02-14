@@ -1,0 +1,96 @@
+<p>The Appwrite API roles and permissions allow you to manage read and write access across your app different resources such as database documents and storage files.</p>
+
+<p>While roles define access to entire services or API endpoints, permissions are used to manage read and write access to specific resources such as database documents or storage files.</p>
+
+<h2 id="roles">Roles</h2>
+
+<p>Appwrite currently has 6 different roles aimed to handle access control to specific API endpoints or entire services.</p>
+
+<p>You can review Appwrite API references to see which role is needed in order to gain access to a specific API endpoint or service.</p>
+
+<p>For example, only users with a guest role can access authentication endpoints while access to member users is denied.</p>
+
+<p>You can change your project members' roles from your project settings in the Appwrite console.</p>
+
+<table class="full">
+    <thead>
+    <tr>
+        <td style="width: 80px">ID</td>
+        <td style="width: 120px">Name</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>0</td>
+        <td>Guest</td>
+        <td>Any user that has not been authenticated is given this role.</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Member</td>
+        <td>Any user that has successfully authenticated using one of the authentication endpoints is given this role.</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Admin</td>
+        <td>Referred to a user granted this with this role in your Appwrite project console. This role is only available in <a href="/docs/mods">admin mode</a></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Developer</td>
+        <td>Referred to a user granted this with this role in your Appwrite project console. This role is only available in <a href="/docs/mods">admin mode</a></td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Owner</td>
+        <td>Referred to a user granted this with this role in your Appwrite project console. This role is only available in <a href="/docs/mods">admin mode</a></td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>App</td>
+        <td>This role is given to your API key. This role is only available in <a href="/docs/mods">admin mode</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="permissions">Permissions</h2>
+
+<p>Appwrite permissions are more specific than its roles. Permissions are aimed to help you manage read and write access control to specific resource rather than entire endpoints or services.</p>
+
+<p>Using permissions you can decide that only users X and Y will have read access to a specific database document, while user Z will be the only one with write access.</p>
+
+<p>Permission can be given to specific users, entire teams or only to a specific group of users inside a team.</p>
+
+
+<table class="full">
+    <thead>
+    <tr>
+        <td style="width: 160px">Type</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>*</td>
+        <td>Wildcard permission. Gives anyone read or write access.</td>
+    </tr>
+    <tr>
+        <td>user:[USER_ID]</td>
+        <td>Access to a specific user by his UID.</td>
+    </tr>
+    <tr>
+        <td>team:[TEAM_ID]</td>
+        <td>Access to any member of the specific team. To gain access to this permission, user must be the team creator (owner), or receive and accept an invitation from a team member to join this team.</td>
+    </tr>
+
+    <tr>
+        <td>member:[MEMBER_ID]</td>
+        <td>Access to a specific member of a team. This permission will only be valid while user is still an active member of a team. To view user member ID fetch the team <a href="/docs/client/teams">members list</a>.</td>
+    </tr>
+    <tr>
+        <td>role:[ROLE_ID]</td>
+        <td>Access to a user with a specific role. For Example: 'role:4' will give access only to project owners. View the roles table above to learn more about different roles in the platform.</td>
+    </tr>
+    </tbody>
+</table>

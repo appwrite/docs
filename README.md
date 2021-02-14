@@ -1,2 +1,3 @@
-# docs
-The official https://appwrite.io/docs documentation 📝
+# The Appwrite Docs 📝
+
+The official https://appwrite.io/docs documentation source code 📝

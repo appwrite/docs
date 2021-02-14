@@ -1,0 +1,115 @@
+<?php
+$platforms = $this->getParam('platforms');
+$versions = [];
+
+foreach($platforms['client']['languages'] ?? [] as $lang) {
+    $key = (isset($lang['key'])) ? $lang['key'] : '';
+    $version = (isset($lang['version'])) ? '@'.$lang['version'] : '';
+    
+    if(!empty($key)) {
+        $versions[$key] = $version;
+    }
+}
+
+$jsVersion = (isset($versions['web'])) ? $versions['web'] : '';
+?>
+<p>Appwrite is a development platform providing you easy yet powerful API and management console to get your next project up and running quickly.</p>
+
+<p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
+
+<h2>Create Your First Appwrite Project</h2>
+
+<p>Go to your new Appwrite console and once inside click the <i class="icon-plus"></i> icon in the top navigation header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create to get started.</p>
+
+<h2>Add your Web Platform</h2>
+
+<p>For you to init your SDK and interact with Appwrite services you need to add a web platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before and click the 'Add Platform' button.</p>
+
+<p>From the options, choose to add a <b>web</b> platform and add your client app hostname. By adding your hostname to your project platform you are allowing cross-domain communication between your project and the Appwrite API.</p>
+
+<?php //TODO add console ui image here ?>
+
+<h2>Get Appwrite Web SDK</h2>
+
+<h3>NPM</h3>
+
+<p>Use <a href="https://npmjs.com" target="_blank">Javascript package manager, NPM</a> from your command line to add Appwrite SDK to your project.</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>npm install appwrite</code></pre>
+</div>
+
+<p>If you're using a bundler (like <a href="http://browserify.org/" target="_blank" rel="noopener">Browserify<a/> or <a href="https://webpack.js.org/" target="_blank" rel="noopener">webpack</a>), you can import the Appwrite module when you need it:</p>
+
+<div class="ide" data-lang="javascript" data-lang-label="Javascript SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import * as Appwrite from "appwrite";</code></pre>
+</div>
+
+<h3>CDN</h3>
+
+<p>To install with a CDN (content delivery network) add the following scripts to the bottom of your tag, but before you use any Appwrite services:</p>
+
+<div class="ide" data-lang="html" data-lang-label="HTML">
+    <pre class="line-numbers"><code class="prism language-markup" data-prism><?php echo htmlentities('<script src="https://cdn.jsdelivr.net/npm/appwrite'.$this->escape($jsVersion).'"></script>'); ?></code></pre>
+</div>
+
+<h2>Init your SDK</h2>
+
+<p>Initialize your SDK code with your project ID which can be found in your project settings page.</p>
+
+<div class="ide" data-lang="javascript" data-lang-label="Javascript SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Init your Web SDK
+var appwrite = new Appwrite();
+
+appwrite
+    .setEndpoint('http://localhost/v1') // Set only when using self-hosted solution
+    .setProject('455x34dfkj')
+;
+
+</code></pre>
+</div>
+<!-- 
+<div class="notice calm margin-top-large margin-bottom-large">
+    <h4>A Word About API Keys</h4>
+
+    <p>Never pass an API Key when initializing a client SDK. This action will expose your users to any data your API Key has been granted access to, even if your users do not own it! API keys should be used from server-side integrations only!</p>
+</div> -->
+
+<h2>Make Your First Request</h2>
+
+<p>Once your SDK object is set, access any of the Appwrite services and choose any request to send. Full documentation for any service method you would like to use can be found in your SDK documentation or in the API References section.</p>
+
+<div class="ide" data-lang="javascript" data-lang-label="Javascript SDK">
+                    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Register User
+appwrite
+    .account.create('me@example.com', 'password', 'Jane Doe')
+        .then(function (response) {
+            console.log(response);
+        }, function (error) {
+            console.log(error);
+        });
+</code></pre>
+</div>
+
+<h2>Full Example</h2>
+<div class="ide" data-lang="javascript" data-lang-label="Javascript SDK">
+                    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Init your Web SDK
+var appwrite = new Appwrite();
+
+appwrite
+    .setProject('455x34dfkj');
+
+// Register User
+appwrite
+    .account.create('me@example.com', 'password', 'Jane Doe')
+        .then(function (response) {
+            console.log(response);
+        }, function (error) {
+            console.log(error);
+        });
+</code></pre>
+</div>
+
+<h2>Next Steps</h2>
+
+<p>Appwrite has many services and tools to help improve your app and speed up your development. The best way to learn how you can take advantage of them is to explore the different API references docs.</p>

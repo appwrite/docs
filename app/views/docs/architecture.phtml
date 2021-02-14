@@ -1,0 +1,70 @@
+<?php
+
+use Utopia\View;
+
+?>
+
+<p>Appwrite is built on top of a microservices architecture. This architecture allows us to provide a scalable & distributed system for max flexibility, observability, and performance. Most of the Appwrite stack is stateless and can be easily replicated. For persistency, Appwrite uses standard battle-proven tools like MariaDB, Redis, and InfluxDB.</p>
+
+<?php
+$image = new View(__DIR__.'/../general/image.phtml');
+    echo $image
+        ->setParam('srcLight', 'https://raw.githubusercontent.com/appwrite/appwrite/7a06b4e4bfa39c0dfaff45cd7bf978201b856e99/docs/specs/overview.drawio.svg')
+        ->setParam('srcDark', '')
+        ->setParam('alt', 'Appwrite\'s microservices architecture.')
+        ->setParam('description', 'Appwrite\'s microservices architecture')
+        ->render();
+?>
+
+<h2>Observability</h2>
+
+<p>The Appwrite architecture allows to monitor and detect how the different microservices perform efficiently. Each microservice has its own usage metrics and logs to allow you to debug or scale it quickly. Using Docker, you can also limit the resource usage (CPU, Memory, Swap) by specific services.</p>
+
+<h2>Responsibilities</h2>
+<p>Each service in the stack has a specific type of workload he has to handle, like sending emails, executing cloud functions or logging user activity. All the heavy lifting workloads are delegated from the API service to the background workers consuming messages in an event-driven way from the Appwrite pub/sub mechanism (implemented using Redis). Using this design, we make sure the Appwrite API is fast, responsive and has to handle only critical sync operations as appropriate for a request->response based service that should respond as fast as possible for minimum latency.</p>
+
+<h2>Traefik</h2>
+
+<p>Traefik is a modern reverse proxy and load balancer written in Go that makes deploying microservices easy. Traefik integrates with your existing infrastructure components and configures itself automatically and dynamically. We use Traefik as the main entrypoint for the different Appwrite APIs. Traefik is also responsible for serving Appwrite auto-generated SSL certificates. This microservice is completely stateless.</p>
+
+<h2>Appwrite</h2>
+
+<p>The main Appwrite container implements the Appwrite API protocols, handles authentication, authorization, and rate-limiting. This microservice is completely stateless.</p>
+
+<h2>Redis</h2>
+
+<h2>MariaDB</h2>
+
+<h2>InfluxDB</h2>
+
+<h2>StatsD</h2>
+
+<h2>ClamAV</h2>
+ 
+<p>ClamAV is a TCP Anti-virus server responsible for scanning all user uploads to the Appwrite storage. The ClamAV micro service is optional and can be disabled using Appwrite environment variables.</p>
+
+<h2>Maintenance</h2>
+
+<p>The Maintenance microservice is responsible to delegate maintenance jobs for different workers at specific time intervals that can be customized using Appwrite environment variables. The different tasks include deletion of old logs, and cleaning of irrelevant abuse records.</p>
+
+<h2>Schedule</h2>
+
+<p>The Schedule microservice is responsible for delegating future tasks to the workers and set recurring tasks and cloud function executions.</p>
+
+<h2>Workers</h2>
+
+<p><b>Functions</b></p>
+
+<p>The Functions worker is responsible for executing your Appwrite cloud functions in an isolated environment. The service leverages Docker for creating running environment in multiple supported coding languages.</p>
+
+<p><b>Audits</b></p>
+
+<p><b>Usage</b></p>
+
+<p><b>Tasks</b></p>
+
+<p><b>Deletes</b></p>
+
+<p><b>Certificates</b></p>
+
+<p><b>Mails</b></p>

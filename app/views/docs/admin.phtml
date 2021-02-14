@@ -1,0 +1,7 @@
+<p>The Appwrite API has two different modes he can work with, the first mode is the client mode, which is the <b>default</b> mode, and the second one is the <b>admin</b> or server mode.</p>
+
+<p>When using Appwrite from the client-side, you should go with the normal default mode. This mode allows every user of your project to access only resources he has granted access to. When running in admin mode, you remove Appwrite default access restriction and ultimately allow access to any of the resources available on your Appwrite project (files, documents, or collections).</p>
+
+<p>For security reasons, the admin mode only works in combination with an API key. You can create an API key from the Appwrite console, and you can choose what scopes of access you are willing to grant your SDK.</p>
+
+<p>Please note: passing an API key from a client SDK is a <strong>major</strong> security issue. Use your API key only from a server-side integration and make sure you store them securely and privately. There are many sources online that advise what the best practices regarding the storing of secrets and API keys on your server are.</p>

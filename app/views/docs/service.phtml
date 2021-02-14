@@ -1,0 +1,464 @@
+<?php
+$serviceName    = $this->getParam('name', '');
+$service        = $this->getParam('service', []);
+$blacklist      = $this->getParam('blacklist', []);
+$description    = $this->getParam('description', '');
+$spec           = $this->getParam('spec', []);
+$host           = (isset($spec['host'])) ? $spec['host'] : '';
+$base           = (isset($spec['basePath'])) ? $spec['basePath'] : '';
+$endpoint       = $this->getParam('protocol', 'https') . '://' . $host . $base;
+$operations     = [];
+$roles          = $this->getParam('roles', []);
+$family         = $this->getParam('family', '');
+$sdk            = $this->getParam('sdk', '');
+$platforms      = $this->getParam('platforms', []);
+$version        = $this->getParam('version', '');
+$versions       = $this->getParam('versions', []);
+$classess       = [];
+$codes          = [
+    '200' => [
+        'text' => 'OK',
+        'class' => 'text-success'
+    ],
+    '201' => [
+        'text' => 'Created',
+        'class' => 'text-success'
+    ],
+    '204' => [
+        'text' => 'No Content',
+        'class' => 'text-success'
+    ],
+];
+
+$markdown = new \Parsedown();
+$markdown->setSafeMode(true);
+
+$paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
+?>
+
+<div data-ls-attrs="class=language-<?php echo $this->escape($sdk); ?> platform-<?php echo $this->escape($family); ?> examples-in-<?php echo $this->escape($sdk); ?>">
+    <?php
+    foreach ($spec['paths'] as $url => $path) {
+        foreach ($path as $method => $operation) {
+            if(!in_array($service, $operation['tags'])) {
+                continue;
+            }
+
+            $weight         = (isset($operation['x-appwrite']) && isset($operation['x-appwrite']['weight'])) ? $operation['x-appwrite']['weight'] : 0;
+            $snippet        = (isset($operation['x-appwrite']) && isset($operation['x-appwrite']['demo'])) ? $operation['x-appwrite']['demo'] : '';
+            $edit           = (isset($operation['x-appwrite']) && isset($operation['x-appwrite']['edit'])) ? $operation['x-appwrite']['edit'] : '';
+            $rateLimit      = (isset($operation['x-appwrite']) && isset($operation['x-appwrite']['rate-limit'])) ? $operation['x-appwrite']['rate-limit'] : '';
+            $rateTime       = (isset($operation['x-appwrite']) && isset($operation['x-appwrite']['rate-time'])) ? $operation['x-appwrite']['rate-time'] : '';
+            $rateKey        = (isset($operation['x-appwrite']) && isset($operation['x-appwrite']['rate-key'])) ? $operation['x-appwrite']['rate-key'] : '';
+            $scope          = (isset($operation['x-appwrite']) && isset($operation['x-appwrite']['scope'])) ? $operation['x-appwrite']['scope'] : '';
+            $platformsList  = (isset($operation['x-appwrite']) && isset($operation['x-appwrite']['platforms'])) ? $operation['x-appwrite']['platforms'] : [];
+
+            $operation['url'] = $url;
+            $operation['method'] = $method;
+            $operation['weight'] = $weight;
+            $operation['edit'] = $edit;
+            $operation['rateLimit'] = $rateLimit;
+            $operation['rateTime'] = $rateTime;
+            $operation['rateKey'] = $rateKey;
+            $operation['scope'] = $scope;
+            $operation['snippet'] = $snippet;
+            $operation['platforms'] = $platformsList;
+
+            $operations[$weight] = $operation;
+        }
+    }
+
+    usort($operations, function ($a, $b) {
+        return $a['weight'] - $b['weight'];
+    });
+
+    $path = realpath(APP_VENDOR_CE . $description);
+    ?>
+
+    <style>
+        <?php foreach ($platforms as $key => $platform):
+            if(!in_array($key, $blacklist) && $platform['enabled']) {
+                $classess[] = 'example-for-'.$key;
+            }
+            ?>
+
+            <?php foreach ($platform['languages'] as $language):
+                if(!$language['enabled']) {
+                   continue;
+                }
+
+                if(!isset($language['family']) || $language['family'] !== $family) {
+                    continue;
+                }
+                ?>
+
+                .language-<?php echo strtolower($language['key']); ?> .example-in-<?php echo strtolower($language['key']); ?> {
+                    display: block;
+                }
+
+                .example-in-<?php echo strtolower($language['key']); ?> {
+                    display: none;
+                }
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+    </style>
+
+    <ul class="families">
+        <?php if(!in_array(APP_PLATFORM_CLIENT, $blacklist)): ?>
+            <li class="<?php if($family === APP_PLATFORM_CLIENT) { echo 'selected'; } ?>">
+                <a href="/docs/client/<?php echo $serviceName; ?>">Client</a>
+            </li>
+        <?php endif; ?>
+        <?php if(!in_array(APP_PLATFORM_SERVER, $blacklist)): ?>
+            <li class="<?php if($family === APP_PLATFORM_SERVER) { echo 'selected'; } ?>">
+                <a href="/docs/server/<?php echo $serviceName; ?>">Server</a>
+            </li>
+        <?php endif; ?>
+    </ul>
+
+    <div class="actions-bar">
+        <hr class="margin-top-no margin-bottom" />
+
+        <div class="row responsive margin-top-negative-small text-size-small text-fade">
+            <div class="col span-8">
+                <form
+                    data-analytics
+                    data-analytics-event="change"
+                    data-analytics-category="console"
+                    data-analytics-label="Switched SDK Examples"
+                    data-service="router.change"
+                    data-event="change"
+                    data-scope="window.ls"
+                    data-success="reset">
+
+                    <?php echo $this->escape(ucfirst($family)); ?> integration with &nbsp;
+                    <select class="choose-platform" name="URL">
+                        <?php foreach ($platforms as $key => $platform): ?>
+                            <?php foreach ($platform['languages'] as $language):
+                                if(!$language['enabled']) {
+                                    continue;
+                                }
+                                
+                                if(!isset($language['family']) || $language['family'] !== $family) {
+                                    continue;
+                                }
+                                
+                                if($language['dev']) {
+                                    continue;
+                                }
+
+                                $key = (isset($language['key'])) ? $language['key'] : '';
+                                $name = (isset($language['name'])) ? $language['name'] : '';
+                                $beta = (isset($language['beta'])) ? $language['beta'] : false;
+                                ?>
+                                <option value="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?>>
+                            <?php echo $this->escape($name); ?> SDK<?php if($beta): ?>&nbsp;(beta)<?php endif; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </select>
+                    &nbsp; code examples.
+                </form>
+            </div>
+            <div class="col span-4 clear">
+                <form class="pull-end desktops-only" onchange="this.submit()"
+                    method="get" action="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>">
+
+                    <select class="choose-platform" name="v">
+                        <?php foreach ($versions as $key => $value):
+                            $name = (isset($value['name'])) ? $value['name'] : '';
+                            $selected = ($key === $version) ? ' selected' : '';
+                            ?>
+                            <option value="<?php echo $this->escape($name); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?><?php echo $selected; ?>>Version <?php echo $this->escape($name); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </form>
+            </div>
+        </div>
+
+        <hr class="margin-top-small margin-bottom" />
+    </div>
+
+    <?php if(!empty($path) && file_exists($path)): ?>
+        <div class="row responsive <?php echo implode(' ', $classess); ?>">
+            <div class="col span-8 margin-bottom">
+                
+                <div class="content margin-end-xl">
+                    <?php echo $markdown->text(file_get_contents($path)); ?>
+                    
+                    <div class="clear">
+                        <a href="https://github.com/appwrite/appwrite/edit/master<?php echo $description; ?>" class="pull-end text-size-small" target="_blank">Edit on GitHub <i class="icon-github-circled"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col span-4 margin-bottom index">
+                
+                <div class="margin-bottom-small text-fade">In this page</div>
+
+                <ul>
+                    <?php foreach ($operations as $operation):
+                        if(!in_array($family, $operation['platforms'])) {
+                            continue;
+                        }
+
+                        $platformsList = (isset($operation['platforms'])) ? array_map(function($node) {return 'example-for-'.$node;}, $operation['platforms']) : [];
+                        ?>
+                        <li class="margin-bottom-small <?php echo implode(' ', $platformsList); ?>">
+                            <a href="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?><?php echo $this->escape($paramSDK); ?>#<?php echo $operation['operationId']; ?>"><i class="icon-angle-circled-right"></i> <?php echo $this->escape($operation['summary']); ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php foreach ($operations as $operation):
+
+        if(!in_array($family, $operation['platforms'])) {
+            continue;
+        }
+
+        $title = $operation['summary'] ?? '';
+        $url = $operation['url'] ?? '';
+        $method = $operation['method'] ?? '';
+        $description = $operation['description'] ?? '';
+        $parameters = $operation['parameters'] ?? [];
+        $responses = $operation['responses'] ?? [];
+        $produces = $operation['produces'][0] ?? '-';
+        $edit = $operation['edit'] ?? '';
+        $rateLimit = $operation['rateLimit'] ?? '';
+        $rateTime = $operation['rateTime'] ?? '';
+        $rateKey = $operation['rateKey'] ?? '';
+        $scope = $operation['scope'] ?? '';
+        $snippet = $operation['snippet'] ?? '';
+        $platformsList = (isset($operation['platforms'])) ? array_map(function($node) {return 'example-for-'.$node;}, $operation['platforms']) : [];
+
+        usort($parameters, function ($a, $b) {
+            $x = (isset($a['required'])) ? $a['required'] : false;
+            $y = (isset($b['required'])) ? $b['required'] : false;
+
+            return $y - $x;
+        });
+
+        $rateKey = array_map(function($element)
+        {
+            $element = mb_substr($element, 0, mb_strpos($element, ':'));
+            
+            return $element;
+        }, explode(',', $rateKey));
+
+        foreach ($parameters as $key => $parameter) {
+            if($parameter['in'] === 'body') {
+
+                if(isset($parameter['schema']) && isset($parameter['schema']['properties'])) {
+                    foreach ($parameter['schema']['properties'] as $childKey => $childParameter) {
+                        $childParameter['name'] = $childKey;
+                        $childParameter['required'] = (isset($parameter['schema']['required']) && in_array($childKey, $parameter['schema']['required']));
+                        $parameters[$childKey] = $childParameter;
+                    }
+
+                    unset($parameters[$key]);
+                }
+            }
+        }
+        
+        ?>
+        <div class="margin-bottom-large x-function" data-ls-attrs="class=margin-bottom-large x-function <?php echo implode(' ', $platformsList); ?>">
+            <div class="row responsive">
+                <div class="col span-7">
+                    <h2 class="margin-bottom">
+                        <a href="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>#<?php echo $operation['operationId']; ?>" id="<?php echo $operation['operationId']; ?>"><?php echo $this->escape($title); ?></a>
+                    </h2>
+
+                    <div>
+                        <div class="url margin-bottom">
+                            <span class="method <?php echo $this->escape($method); ?>"><?php echo strtoupper($this->escape($method)); ?></span><span class="endpoint"><?php //echo $this->escape($endpoint); ?></span><span class="path">/v1<?php echo $this->escape($url); ?></span>
+                        </div>
+
+                        <?php if(!empty($description)): ?>
+                            <?php echo $markdown->text($description); ?>
+                        <?php endif; ?>
+
+                        <div class="clear">
+                            <a href="<?php echo $edit; ?>" class="pull-end text-size-small" target="_blank">Edit on GitHub <i class="icon-github-circled"></i></a>
+                        </div>
+                    </div>
+
+
+                    <?php if($family === APP_PLATFORM_SERVER): ?>
+                    <div class="margin-bottom-large">
+                        <h3 class="margin-bottom margin-top-small">Authentication</h3>
+
+                        <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys" target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to the <u>"<?php echo $scope; ?>"</u> permission scope.</p>
+                    </div>
+                    <?php endif; ?>
+
+                    <?php if(!empty($rateLimit)): ?>
+                        <div class="margin-bottom-large">
+                            <h3 class="margin-bottom margin-top-small">Rate Limits</h3>
+
+                            <p>This endpoint is limited to <b><?php echo $rateLimit; ?> requests</b> in every <b><?php echo ($rateTime / 60);?> minutes</b>
+                            <?php
+                            $rateKey = array_values(array_filter($rateKey, function($element) {
+                                return ($element !== 'url');
+                            }));
+                            
+                            $count = count($rateKey);
+                            
+                            if(!empty($rateKey)) {
+                                echo ' per ';
+                            }
+
+                            foreach($rateKey as $i => $factor) {
+                                
+                                switch ($factor) {
+                                    case 'ip':
+                                        $factor = 'IP address';
+                                        break;
+    
+                                    case 'url':
+                                        $factor = 'URL';
+                                        break;
+    
+                                    case 'userId':
+                                        $factor = 'user account';
+                                        break;
+    
+                                    case 'email':
+                                        $factor = 'email address';
+                                        break;
+    
+                                    default:
+                                        break;
+                                }
+
+                                if(empty($factor)) {
+                                    continue;
+                                }
+
+                                echo '<b>'.$factor.'</b>';
+             
+                                if($i + 1 !== $count) {
+                                    echo ($i+1 === $count-1) ? ' and ' : ', ';
+                                }
+                            }
+                            ?>. We use rate limits to avoid service abuse by users and as a security practice. <a href="/docs/rate-limits">Learn more about <?php APP_NAME; ?> rate limiting</a>.</p>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if(!empty($parameters)): ?>
+                        <h3 class="margin-bottom margin-top-small margin-start-small">Request</h3>
+                        <table class="vertical full args">
+                            <thead>
+                            <tr>
+                                <td style="width: 120px">Name</td>
+                                <td style="width: 70px"></td>
+                                <td style="width: 70px">Type</td>
+                                <td>Description</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($parameters as $key => $parameter):
+                                $name = (isset($parameter['name'])) ? $parameter['name'] : '';
+                                $type = (isset($parameter['type'])) ? $parameter['type'] : '';
+                                $description = (isset($parameter['description'])) ? $parameter['description'] : '';
+                                $required = (isset($parameter['required'])) ? $parameter['required'] : false;
+                                ?>
+                                <tr>
+                                    <td data-title="Name: ">
+                                        <?php echo $this->escape($name); ?>
+                                    </td>
+                                    <td data-title="">
+                                        <?php if($required): ?>
+                                            <span class="tag red">required</span>
+                                        <?php else: ?>
+                                            <span class="tag">optional</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td data-title="Type: "><?php echo $this->escape($type); ?></td>
+                                    <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>"><?php echo $markdown->text($description); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
+
+                    <?php if (!empty($responses)): ?>
+                        <h3 class="margin-bottom margin-top-large margin-start-small">Response</h3>
+
+                        <table class="vertical full args">
+                            <thead>
+                                <tr>
+                                    <td style="width: 120px">Status Code</td>
+                                    <td style="width: 170px">Content Type</td>
+                                    <td>Payload</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($responses as $code => $response):
+                                $text = $codes[$code]['text'] ?? '';
+                                $class = $codes[$code]['class'] ?? '';
+                                $description = (!empty($response['description']) && isset($response['schema']['$ref'])) ? $response['description'].' Object' : '-';
+                                $model = $response['schema']['$ref'] ?? '';
+                                ?>
+                                <tr>
+                                    <td data-title="Status Code: "><span class="<?php echo $this->escape($class); ?>"><?php echo $this->escape($code); ?></span>&nbsp;&nbsp;<span class="text-fade"><?php echo $this->escape($text); ?></span></td>
+                                    <td data-title="Content Type: "><?php echo $this->escape($produces); ?></td>
+                                    <td data-title="Payload: ">
+                                        <?php if(!empty($model)): ?>
+                                            <?php if($model !== '#/definitions/any'): ?>
+                                                <a href="/docs/models/<?php echo $this->escape(str_replace('#/definitions/', '', $model)); ?>"><?php echo $this->escape($description); ?></a>
+                                            <?php else: ?>
+                                                JSON Object
+                                            <?php endif; ?>
+                                        <?php else: ?>
+                                            -
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
+
+                </div>
+                <div class="col span-5 sticky-top">
+                    <div class="margin-bottom-small margin-top-large clear">
+                        <div class="request-title">Example Request</div>
+                    </div>
+                    <ul class="example">
+                        <?php foreach ($platforms as $platform):
+                            if(!$platform['enabled']) {
+                                continue;
+                            }
+
+                            foreach ($platform['languages'] as $language):
+                                if(!$language['enabled']) {
+                                    continue;
+                                }
+
+                                if(!isset($language['family']) || $language['family'] !== $family) {
+                                    continue;
+                                }
+                                
+                                $example = APP_VENDOR_CE.'/docs/examples/'.$version.'/'.$language['family'].'-'.$language['key'].'/examples/'.$snippet;
+
+                                if(!is_readable($example)) {
+                                    //echo "<p class=\"text-danger\"><b>Failed to read code example for {$language['name']}</b>: ({$example})</p>";
+                                    continue;
+                                }
+                            ?>
+                                <li class="example-in-<?php echo $language['key']; ?>">
+                                    <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?> SDK">
+                                        <pre class="line-numbers"><code class="prism language-<?php echo $language['prism']; ?>" data-prism><?php echo $this->escape(file_get_contents($example)); ?></code></pre>
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>

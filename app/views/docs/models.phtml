@@ -1,0 +1,87 @@
+<?php
+$models = $this->getParam('models', []);
+$model = $this->getParam('model', null);
+$rules = $model['properties'] ?? [];
+
+$markdown = new \Parsedown();
+$markdown->setSafeMode(true);
+
+$example = function ($model, $models) use (&$example)
+{
+    $output = [];
+    $properties = $model['properties'] ?? [];
+
+    foreach($properties as $key => $property) {
+        $value = $property['x-example'] ?? null;
+        $type = $property['type'] ?? null;
+        $child = str_replace('#/definitions/', '', ($property['items']['$ref'] ?? ''));
+
+        if(!empty($child) && \array_key_exists($child, $models)) {
+            $output[$key] = $example($models[$child], $models);
+        }
+        else {
+            $output[$key] = $value;
+        }
+
+        if($type === 'array') {
+            $output[$key] = (is_array($output[$key])) ? [$output[$key]] : [$output[$key]];
+        }
+    }
+
+    return $output;
+};
+?>
+
+<h2>Properties</h2>
+
+<table class="vertical full args">
+    <thead>
+    <tr>
+        <td style="width: 140px">Name</td>
+        <td style="width: 120px">Type</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($rules as $key => $rule):
+        $type = (isset($rule['type'])) ? $rule['type'] : '';
+        $array = ($rule['type'] === 'array') ? true : false;
+        $description = (isset($rule['description'])) ? $rule['description'] : '';
+        $required = (isset($rule['require'])) ? $rule['require'] : false;
+        $arrayType = (isset($rule['items']['type'])) ? $rule['items']['type'] : '';
+        $ref = (isset($rule['items']['$ref'])) ? str_replace('#/definitions/', '', $rule['items']['$ref']) : '';
+        ?>
+        <tr>
+            <td data-title="Name: ">
+                <?php echo $this->escape($key); ?>
+            </td>
+            <td data-title="Type: ">
+                <?php if(\array_key_exists($ref, $models)): ?>
+                    <a href="/docs/models/<?php echo $this->escape($ref); ?>"><?php echo $this->escape($ref); ?><?php if($array): ?>[]<?php endif; ?></a>
+                <?php else: ?>
+                    <?php if($array): ?>
+                        <?php echo $this->escape($arrayType); ?>[]
+                    <?php else: ?>
+                        <?php echo $this->escape($type); ?>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </td>
+            <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>"><?php echo $markdown->text($description); ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+<h2>Examples</h2>
+
+<p><b>JSON</b></p>
+
+<div class="ide" data-lang="json" data-lang-label="JSON">
+    <pre class="line-numbers"><code class="prism language-json" data-prism><?php echo json_encode($example($model, $models), JSON_PRETTY_PRINT); ?></code></pre>
+</div>
+
+<p><b>YAML</b></p>
+
+<div class="ide" data-lang="yaml" data-lang-label="YAML">
+    <pre class="line-numbers"><code class="prism language-yaml" data-prism><?php echo yaml_emit($example($model, $models)); ?></code></pre>
+</div>
