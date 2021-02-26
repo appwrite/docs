@@ -41,7 +41,7 @@ $jsVersion = (isset($versions['web'])) ? $versions['web'] : '';
 
 <p>If you're using a bundler (like <a href="http://browserify.org/" target="_blank" rel="noopener">Browserify<a/> or <a href="https://webpack.js.org/" target="_blank" rel="noopener">webpack</a>), you can import the Appwrite module when you need it:</p>
 
-<div class="ide" data-lang="javascript" data-lang-label="Javascript SDK">
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>import * as Appwrite from "appwrite";</code></pre>
 </div>
 
@@ -57,7 +57,7 @@ $jsVersion = (isset($versions['web'])) ? $versions['web'] : '';
 
 <p>Initialize your SDK code with your project ID which can be found in your project settings page.</p>
 
-<div class="ide" data-lang="javascript" data-lang-label="Javascript SDK">
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Init your Web SDK
 var appwrite = new Appwrite();
 
@@ -79,7 +79,7 @@ appwrite
 
 <p>Once your SDK object is set, access any of the Appwrite services and choose any request to send. Full documentation for any service method you would like to use can be found in your SDK documentation or in the API References section.</p>
 
-<div class="ide" data-lang="javascript" data-lang-label="Javascript SDK">
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
                     <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Register User
 appwrite
     .account.create('me@example.com', 'password', 'Jane Doe')
@@ -92,7 +92,7 @@ appwrite
 </div>
 
 <h2>Full Example</h2>
-<div class="ide" data-lang="javascript" data-lang-label="Javascript SDK">
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
                     <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Init your Web SDK
 var appwrite = new Appwrite();
 
