@@ -7,7 +7,7 @@ $markdown->setSafeMode(true);
 
 <p>Appwrite environment variables allow you to edit your server setup configuration and customize it. You can easily change the environment variables by changing them when running Appwrite using Docker CLI or Docker Compose.</p>
 
-<p>Updating your Appwrite environment variables requires you to edit your Appwrite docker-compose.yml or .env file. Your Docker files should be located inside the "appwrite" folder at the location where you first run the Appwrite installation script.</p>
+<p>Updating your Appwrite environment variables requires you to edit your Appwrite .env file. Your Docker files should be located inside the "appwrite" folder at the location where you first run the Appwrite installation script. It's recommended to use the .env file as a central point for updating your Appwrite configuration rather than changing them directly in your docker-compose.yml file.</p>
 
 <p>After editing your docker-compose.yml or .env files, you will need to restart your Appwrite stack by running the following compose command in your terminal:</p>
 
