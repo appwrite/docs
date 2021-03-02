@@ -1,4 +1,4 @@
-<p>Appwrite default setup uses a default built-in SMTP server. The default SMTP server is a great way to get you started with using Appwrite quickly, but if you plan to move your setup to a production environment, you will have extra configuration work to do in order to make sure email providers respect your SMTP server.</p>
+<p>Appwrite above 0.7 version, by default comes with SMTP disabled and warning regarding email messages. In order for emails to work, you will need to setup proper SMTP configuration as described below.</p>
 
 <p>Because email deliverability can be both tricky and hard, it is often easier to delegate this responsibility to a 3rd-party SMTP provider. This provider help you abstract the complexity of passing SPAM filters by doing a lot of the advanced configuration and validation for you.</p>
 
@@ -66,7 +66,7 @@
 
 <h2>Remove the Default SMTP Container</h2>
 
-<p>As mentioned above, the Appwrite default setup includes the Appwrite default SMTP container. Now that you are using your own SMTP server setting, you don’t need it anymore. Just remove the SMTP container and relevant dependencies from your docker-compose.yml file:</p>
+<p>If you are using Appwrite 0.7 or below, the Appwrite default setup includes the Appwrite default SMTP container. Now that you are using your own SMTP server setting, you don’t need it anymore. Just remove the SMTP container and relevant dependencies from your docker-compose.yml file:</p>
 
 <div class="ide margin-bottom" data-lang="yaml" data-lang-label="yaml">
     <pre class="line-numbers"><code class="prism language-yaml" data-prism>appwrite:
