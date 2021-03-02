@@ -1,0 +1,31 @@
+<p>Appwrite was designed for security and privacy. We built the server, services, and APIs with lots of built-in security features to provide protection by default to both developers building apps on Appwrite and users consuming those apps.</p>
+
+<p>Below is a list of some of the security features enabled by default when you setup your new Appwrite project.</p>
+
+<h2>SSL Certificates</h2>
+
+<p>Appwrite uses <a href="https://github.com/traefik/traefik" target="_blank" rel="noopener">Traefik</a> and <a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let'sencrypt</a> to serve, create, and renew SSL certificates for your Appwrite server and any custom domains set for your projects.</p>
+
+<p>Once a new SSL certificate has been created, Appwrite will renew it 60 days before its 90 days of default expiration. Auto-generation of SSL certificates is only possible for public-facing domains. When used with localhost, Appwrite will generate a <a href="https://en.wikipedia.org/wiki/Self-signed_certificate" target="_blank" rel="noopener">self-signed SSL certificate</a>.</p>
+
+<h2>Data Encryption</h2>
+
+<p>By default, Appwrite stores all your server sensitive information encrypted. This information includes Webhooks HTTP passwords, Tasks HTTP passwords, Cloud Functions custom environment vars and secrets, API keys secret key (from v0.7), and OAuth secret tokens. All the data is encrypted using your server private encryption key, configurable from your server <a href="/docs/environment-variables">environment variables</a>.</p>
+
+<h2>Storage Encryption</h2>
+
+<h2>Password Hashing</h2>
+
+<h2>Resource-level Secuirty</h2>
+
+<h2>Abuse Protection & Rate-Limiting</h2>
+
+<h2>Custom Domains</h2>
+
+<h2>Secure Cookies</h2>
+
+<h2>Enforcing HTTPS</h2>
+
+<h2>Anonymity</h2>
+
+<h2>Data Retention</h2>

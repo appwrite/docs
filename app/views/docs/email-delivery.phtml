@@ -1,0 +1,104 @@
+<p>Appwrite default setup uses a default built-in SMTP server. The default SMTP server is a great way to get you started with using Appwrite quickly, but if you plan to move your setup to a production environment, you will have extra configuration work to do in order to make sure email providers respect your SMTP server.</p>
+
+<p>Because email deliverability can be both tricky and hard, it is often easier to delegate this responsibility to a 3rd-party SMTP provider. This provider help you abstract the complexity of passing SPAM filters by doing a lot of the advanced configuration and validation for you.</p>
+
+<p>In this document, you will learn how to connect your own SMTP server or a 3rd party SMTP provider like MailGun or SendGrid with Appwrite to help you get better email deliverability.</p>
+
+<h2>Update your docker-compose.yml File</h2>
+
+<p>Appwrite offers multiple environment variables to customize your server setup to your needs. To make Appwrite use your own SMTP server instead of the default build-in SMTP server, you need to change the Appwrite container environment variables.</p>
+
+<div class="ide margin-bottom" data-lang="yaml" data-lang-label="yaml">
+    <pre class="line-numbers"><code class="prism language-yaml" data-prism>appwrite:
+    image: appwrite/appwrite:<?php echo APP_VERSION_STABLE . "\n"; ?>
+    restart: unless-stopped
+    networks:
+        - appwrite
+    labels:
+        - traefik.http.routers.appwrite.rule=PathPrefix(`/`)
+        - traefik.http.routers.appwrite-secure.rule=PathPrefix(`/`)
+        - traefik.http.routers.appwrite-secure.tls=true
+    volumes:
+        - appwrite-uploads:/storage/uploads:rw
+        - appwrite-cache:/storage/cache:rw
+        - appwrite-config:/storage/config:rw
+        - appwrite-certificates:/storage/certificates:rw
+    depends_on:
+        - mariadb
+        - redis
+        - smtp
+        - clamav
+        - influxdb
+        - telegraf
+    environment:
+        - _APP_ENV=production
+        - _APP_OPENSSL_KEY_V1=your-secret-key
+        - _APP_DOMAIN=localhost
+        - _APP_DOMAIN_TARGET=localhost
+        - _APP_REDIS_HOST=redis
+        - _APP_REDIS_PORT=6379
+        - _APP_DB_HOST=mariadb
+        - _APP_DB_PORT=3306
+        - _APP_DB_SCHEMA=appwrite
+        - _APP_DB_USER=user
+        - _APP_DB_PASS=password
+        - _APP_INFLUXDB_HOST=influxdb
+        - _APP_INFLUXDB_PORT=8086
+        - _APP_STATSD_HOST=telegraf
+        - _APP_STATSD_PORT=8125
+        - _APP_SMTP_HOST=smtp.mailgun.org
+        - _APP_SMTP_PORT=587
+        - _APP_SMTP_SECURE=tls
+        - _APP_SMTP_USERNAME=YOUR-SMTP-USERNAME
+        - _APP_SMTP_PASSWORD=YOUR-SMTP-PASSWORD
+</code></pre>
+</div>
+
+<p><b>_APP_SMTP_HOST</b> - SMTP server host name address. Default value is: ‘smtp’</p>
+
+<p><b>_APP_SMTP_PORT</b> - SMTP server TCP port. Default value is: ‘25’</p>
+
+<p><b>_APP_SMTP_SECURE</b> - SMTP secure connection protocol. Empty by default, change to ‘tls’ if running on a secure connection.</p>
+
+<p><b>_APP_SMTP_USERNAME</b> - SMTP server user name. Empty by default.</p>
+
+<p><b>_APP_SMTP_PASSWORD</b> - SMTP server user password. Empty by default.</p>
+
+<h2>Remove the Default SMTP Container</h2>
+
+<p>As mentioned above, the Appwrite default setup includes the Appwrite default SMTP container. Now that you are using your own SMTP server setting, you don’t need it anymore. Just remove the SMTP container and relevant dependencies from your docker-compose.yml file:</p>
+
+<div class="ide margin-bottom" data-lang="yaml" data-lang-label="yaml">
+    <pre class="line-numbers"><code class="prism language-yaml" data-prism>appwrite:
+    image: appwrite/appwrite:latest
+    ...
+    depends_on:
+        - mariadb
+        - redis
+        -̶ ̶s̶m̶t̶p̶
+        - clamav
+        - influxdb
+        - telegraf̶
+
+...
+
+s̶m̶t̶p̶:̶
+̶ ̶ ̶ ̶ ̶i̶m̶a̶g̶e̶:̶ ̶a̶p̶p̶w̶r̶i̶t̶e̶/̶s̶m̶t̶p̶:̶1̶.̶0̶.̶1̶
+̶ ̶ ̶ ̶ ̶r̶e̶s̶t̶a̶r̶t̶:̶ ̶u̶n̶l̶e̶s̶s̶-̶s̶t̶o̶p̶p̶e̶d̶
+̶ ̶ ̶ ̶ ̶n̶e̶t̶w̶o̶r̶k̶s̶:̶
+̶ ̶ ̶ ̶ ̶ ̶ ̶ ̶ ̶-̶ ̶a̶p̶p̶w̶r̶i̶t̶e̶
+̶ ̶ ̶ ̶ ̶e̶n̶v̶i̶r̶o̶n̶m̶e̶n̶t̶:̶
+̶ ̶ ̶ ̶ ̶ ̶ ̶ ̶ ̶-̶ ̶M̶A̶I̶L̶N̶A̶M̶E̶=̶a̶p̶p̶w̶r̶i̶t̶e̶
+̶ ̶ ̶ ̶ ̶ ̶ ̶ ̶ ̶-̶ ̶R̶E̶L̶A̶Y̶_̶N̶E̶T̶W̶O̶R̶K̶S̶=̶:̶1̶9̶2̶.̶1̶6̶8̶.̶0̶.̶0̶/̶2̶4̶:̶1̶0̶.̶0̶.̶0̶.̶0̶/̶1̶6̶
+</code></pre>
+</div>
+
+<h2>Restart Your Appwrite Server</h2>
+
+<p>After you finished updating and saving your Appwrite docker-compose.yml server you need to restart your Appwrite stack using the following command from your terminal:</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose up -d</code></pre>
+</div>
+
+<p>That’s it! Go to your Appwrite console again and try to create a new user. If everything went OK, you should get a welcome email in your new user email inbox. As of version 0.5, Appwrite uses its SMTP server to send welcome emails, password recoveries, and user invites. By using a well-configured SMTP server, you can make sure your users enjoy a maximum rate of email deliverability.</p>

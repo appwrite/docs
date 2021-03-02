@@ -1,0 +1,378 @@
+<?php
+
+$dns = [
+    [
+        'name' => 'IONOS',
+        'url' => 'https://www.ionos.com',
+        'docs' => [
+            'a' => null,
+            'cname' => null,
+            'settings' => 'https://www.ionos.com/help/domains/dns-settings/',
+        ]
+    ],
+    [
+        'name' => '101domain',
+        'url' => 'https://101domain.com',
+        'docs' => [
+            'a' => null,
+            'cname' => null,
+            'settings' => 'https://help.101domain.com/domain-management/name-servers-dns/modifying-name-servers-and-records/managing-name-server-records',
+        ]
+    ],
+    [
+        'name' => '123 Reg',
+        'url' => 'https://www.123-reg.co.uk',
+        'docs' => [
+            'a' => 'https://www.123-reg.co.uk/support/domains/how-do-i-point-my-domain-name-to-an-ip-address/',
+            'cname' => 'https://www.123-reg.co.uk/support/domains/how-do-i-set-up-a-cname-record-on-my-domain-name/',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'AWS Route 53',
+        'url' => 'https://aws.amazon.com',
+        'docs' => [
+            'a' => null,
+            'cname' => null,
+            'settings' => 'https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html',
+        ]
+    ],
+    [
+        'name' => 'Alfahosting',
+        'url' => 'https://alfahosting.de',
+        'docs' => [
+            'a' => null,
+            'cname' => null,
+            'settings' => 'https://alfahosting.de/antworten-auf-ihre-fragen/?cid=78#faqContent',
+        ]
+    ],
+    [
+        'name' => 'Binero',
+        'url' => 'https://www.binero.se',
+        'docs' => [
+            'a' => 'https://www.binero.se/guider/guider-dom-nnamn/dns/skapa-a-record',
+            'cname' => 'https://www.binero.se/guider/guider-dom-nnamn/dns/skapa-ett-cname',
+            'settings' => 'https://www.binero.se/guider/guider-dom-nnamn/dns/ndra-eller-radera-dns-information',
+        ]
+    ],
+    [
+        'name' => 'Bluehost',
+        'url' => 'https://bluehost.com',
+        'docs' => [
+            'a' => 'https://my.bluehost.com/hosting/help/whats-an-a-record',
+            'cname' => 'https://my.bluehost.com/hosting/help/cname',
+            'settings' => 'https://my.bluehost.com/hosting/help/559',
+        ]
+    ],
+    [
+        'name' => 'ClouDNS',
+        'url' => 'https://www.cloudns.net',
+        'docs' => [
+            'a' => 'https://www.cloudns.net/wiki/article/10/',
+            'cname' => 'https://www.cloudns.net/wiki/article/13/',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'Cloudflare',
+        'url' => 'https://cloudflare.com',
+        'docs' => [
+            'a' => null,
+            'cname' => null,
+            'settings' => 'https://support.cloudflare.com/hc/en-us/articles/360019093151',
+        ]
+    ],
+    [
+        'name' => 'Crazydomains',
+        'url' => 'https://www.crazydomains.com',
+        'docs' => [
+            'a' => 'https://www.crazydomains.com/help/how-do-i-create-update-an-a-record/',
+            'cname' => 'https://www.crazydomains.com/help/how-do-i-change-update-my-cname-records/',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'DNS Made Easy',
+        'url' => 'http://dnsmadeeasy.com',
+        'docs' => [
+            'a' => 'http://help.dnsmadeeasy.com/managed-dns/records/record/',
+            'cname' => 'http://help.dnsmadeeasy.com/managed-dns/records/cname-record/',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'DNSimple',
+        'url' => 'https://dnsimple.com',
+        'docs' => [
+            'a' => 'https://support.dnsimple.com/articles/manage-a-record/',
+            'cname' => 'https://support.dnsimple.com/articles/manage-cname-record/',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'DigitalOcean',
+        'url' => 'https://www.digitalocean.com',
+        'docs' => [
+            'a' => 'https://www.digitalocean.com/community/tutorials/an-introduction-to-digitalocean-dns#a-records',
+            'cname' => 'https://www.digitalocean.com/community/tutorials/an-introduction-to-digitalocean-dns#cname-records',
+            'settings' => 'https://www.digitalocean.com/community/tutorials/an-introduction-to-digitalocean-dns',
+        ]
+    ],
+    [
+        'name' => 'DreamHost',
+        'url' => 'https://dreamhost.com',
+        'docs' => [
+            'a' => 'https://help.dreamhost.com/hc/en-us/articles/215414867-How-do-I-add-custom-DNS-records-#A_record',
+            'cname' => 'https://help.dreamhost.com/hc/en-us/articles/215414867-How-do-I-add-custom-DNS-records-#CNAME_record',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'Freeparking',
+        'url' => 'https://freeparking.co.nz',
+        'docs' => [
+            'a' => null,
+            'cname' => null,
+            'settings' => 'https://helpdesk.freeparking.co.nz/index.php?/Knowledgebase/Article/View/314/0/managing-basic-dns-records',
+        ]
+    ],
+    [
+        'name' => 'Gandi',
+        'url' => 'https://gandi.net',
+        'docs' => [
+            'a' => 'https://wiki.gandi.net/en/dns/zone/a-record',
+            'cname' => 'https://wiki.gandi.net/en/dns/zone/cname-record',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'Godaddy',
+        'url' => 'https://www.godaddy.com',
+        'docs' => [
+            'a' => 'https://www.godaddy.com/help/add-an-a-record-19238',
+            'cname' => 'https://www.godaddy.com/help/add-a-cname-record-19236',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'Google Domains',
+        'url' => 'https://domains.google',
+        'docs' => [
+            'a' => 'https://support.google.com/a/answer/2579934?hl=en&ref_topic=2721296',
+            'cname' => 'https://support.google.com/a/answer/47283?hl=en',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'Host Europe',
+        'url' => 'https://www.hosteurope.de',
+        'docs' => [
+            'a' => null,
+            'cname' => null,
+            'settings' => 'https://www.hosteurope.de/faq/domains/verwaltung/nameserver-eintraege/',
+        ]
+    ],
+    [
+        'name' => 'Hover',
+        'url' => 'https://hover.com',
+        'docs' => [
+            'a' => null,
+            'cname' => null,
+            'settings' => 'https://help.hover.com/hc/en-us/articles/217282457-How-to-Edit-DNS-records-A-AAAA-CNAME-MX-TXT-SRV-',
+        ]
+    ],
+    [
+        'name' => 'Media Temple',
+        'url' => 'https://mediatemple.net',
+        'docs' => [
+            'a' => null,
+            'cname' => null,
+            'settings' => 'https://mediatemple.net/community/products/dv/204403794/how-can-i-change-the-dns-records-for-my-domain#4',
+        ]
+    ],
+    [
+        'name' => 'NS1',
+        'url' => 'https://ns1.com',
+        'docs' => [
+            'a' => null,
+            'cname' => null,
+            'settings' => 'https://ns1.com/articles/adding-records-to-a-zone',
+        ]
+    ],
+    [
+        'name' => 'Name.com',
+        'url' => 'https://www.name.com',
+        'docs' => [
+            'a' => 'https://www.name.com/support/articles/115004893508-Adding-an-A-record',
+            'cname' => 'https://www.name.com/support/articles/115004895548-Adding-a-CNAME-Record',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'NameSilo',
+        'url' => 'https://www.namesilo.com',
+        'docs' => [
+            'a' => null,
+            'cname' => null,
+            'settings' => 'https://www.namesilo.com/Support/DNS-Manager',
+        ]
+    ],
+    [
+        'name' => 'Namecheap',
+        'url' => 'https://www.namecheap.com',
+        'docs' => [
+            'a' => 'https://www.namecheap.com/support/knowledgebase/article.aspx/319/2237/how-can-i-set-up-an-a-address-record-for-my-domain',
+            'cname' => 'https://www.namecheap.com/support/knowledgebase/article.aspx/9646/2237/how-can-i-set-up-a-cname-record-for-my-domain',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'Network Solutions',
+        'url' => 'http://www.networksolutions.com',
+        'docs' => [
+            'a' => 'http://www.networksolutions.com/support/a-records-ip-addresses/',
+            'cname' => 'http://www.networksolutions.com/support/cname-records-host-aliases/',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'OVH',
+        'url' => '',
+        'docs' => [
+            'a' => null,
+            'cname' => null,
+            'settings' => 'https://docs.ovh.com/gb/en/domains/web_hosting_how_to_edit_my_dns_zone/#cname',
+        ]
+    ],
+    [
+        'name' => 'One.com',
+        'url' => 'https://one.com',
+        'docs' => [
+            'a' => 'https://help.one.com/hc/en-us/articles/115005595925-Manage-your-DNS-settings-#ipaddress',
+            'cname' => 'https://help.one.com/hc/en-us/articles/115005595925-Manage-your-DNS-settings-#cname',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'Wix',
+        'url' => 'https://wix.com',
+        'docs' => [
+            'a' => 'https://support.wix.com/en/article/adding-or-updating-a-records-in-your-wix-account',
+            'cname' => 'https://support.wix.com/en/article/adding-or-updating-cname-records-in-your-wix-account',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'Yahoo',
+        'url' => 'https://smallbusiness.yahoo.net',
+        'docs' => [
+            'a' => 'https://help.smallbusiness.yahoo.net/s/article/SLN17916',
+            'cname' => 'https://help.smallbusiness.yahoo.net/s/article/SLN17912',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'enom',
+        'url' => 'https://enom.com',
+        'docs' => [
+            'a' => null,
+            'cname' => null,
+            'settings' => 'https://help.enom.com/hc/en-us/articles/115000474012-How-to-Change-DNS-Host-Records',
+        ]
+    ],
+    [
+        'name' => 'iPage',
+        'url' => 'https://www.ipage.com',
+        'docs' => [
+            'a' => 'https://www.ipage.com/help/article/dns-management-how-to-update-a-records',
+            'cname' => 'https://www.ipage.com/help/article/dns-management-how-to-update-cname-aliases',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'inmotion',
+        'url' => 'https://www.inmotionhosting.com',
+        'docs' => [
+            'a' => 'https://www.inmotionhosting.com/support/domain-names/dns-nameserver-changes/a-record-change',
+            'cname' => 'https://www.inmotionhosting.com/support/domain-names/dns-nameserver-changes/create-cname-record',
+            'settings' => null,
+        ]
+    ],
+    [
+        'name' => 'iwantmyname',
+        'url' => 'https://iwantmyname.com',
+        'docs' => [
+            'a' => 'https://help.iwantmyname.com/customer/en/portal/articles/209029-how-do-i-add-an-a-dns-record-',
+            'cname' => 'https://help.iwantmyname.com/customer/portal/articles/209023-how-do-i-add-a-cname-dns-record-',
+            'settings' => 'https://iwantmyname.com/services/website-builder/webflow',
+        ]
+    ],
+];
+
+?>
+
+<p><b>Appwrite custom domains feature allows you to use your self-owned domain name as your Appwrite API endpoint. A recent change made in modern browsers will not allow your web app to use 3rd party cookies. This change is done to protect your users' privacy from malicious web tracking services.</b></p>
+
+<p>When accessing Appwrite from a 3rd party domain, like appwrite.io or example.com, some browsers will treat our secure cookies as 3rd party cookies and block them, as a fallback Appwrite will store your users' sessions on the browser localStorage.</p>
+
+<p>Using localStorage is very convenient to help you get started quickly with Appwrite, but it is not the best practice for your users' security. The browser localStorage can't protect your users' sessions from being hijacked by a 3rd party script or an XSS vulnerability in your web app.</p>
+
+<p>To overcome these issues and make sure your web application works securely on all browsers, Appwrite allows you to access the Appwrite API using your own private custom domain. When accessing Appwrite from the same domain as the one your app uses, Appwrite cookies will no longer be treated as 3rd party cookies by any browser and will store your users' sessions securely.</p>
+
+<p>For example, if your app runs on <span class="link">my-app.com</span>, you can set the subdomain <span class="link">appwrite.my-app.com</span> to access the Appwrite API. This will allow browsers to respect the Appwrite sessions cookies as they are set on the same domain as your app.</p>
+
+<h2>Add Your Domain</h2>
+
+<p>You can set your domain name by adding it to your Appwrite project settings page under the 'Custom Domains' tab. After you added your new domain to your project settings from the dashboard, you will need to create a new CNAME DNS record at your DNS provider dashboard.</p>
+
+<h2>Add a CNAME Record</h2>
+
+<p>A <a href="https://en.wikipedia.org/wiki/CNAME_record" target="_blank" rel="noopener">CNAME record</a> (or a Canonical Name record) is a type of resource record in the Domain Name System (DNS), which maps one domain name (an alias) to another.</p>
+
+<p>Every DNS host has its own way of updating DNS settings, and, unfortunately, their dashboard interfaces usually aren't the most intuitive. We recommend that you read the help documentation of your DNS host, also do not hesitate to contact their support for help with their interface and settings.</p>
+
+<p>Below, you'll find a list of registrars and links to their DNS setting documentation‍. If your domain provider isn't listed above, please <a href="/contact" target="_blank">contact us</a>, and we'll include their settings as well.</p>
+
+<table class="vertical">
+    <thead>
+        <tr>
+            <th width="300">Provider</th>
+            <th>Settings</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($dns as $provider): ?>
+        <tr>
+            <td data-title=""><?php echo $provider['name']; ?> &nbsp; (<a rel="noopener" target="_blank" href="<?php echo $provider['url']; ?>"><?php echo str_replace('www.', '', parse_url($provider['url'], PHP_URL_HOST)); ?></a>)</td>
+            <td data-title="">
+                <?php if(!empty($provider['docs']['a'])): ?><a rel="noopener" target="_blank" href="<?php echo $provider['docs']['a']; ?>">A Record</a>&nbsp;&nbsp;&nbsp;&nbsp;<?php endif; ?>
+                <?php if(!empty($provider['docs']['cname'])): ?><a rel="noopener" target="_blank" href="<?php echo $provider['docs']['cname']; ?>">CNAME Record</a>&nbsp;&nbsp;&nbsp;&nbsp;<?php endif; ?>
+                <?php if(!empty($provider['docs']['settings'])): ?><a rel="noopener" target="_blank" href="<?php echo $provider['docs']['settings']; ?>">Settings</S></a>&nbsp;&nbsp;&nbsp;&nbsp;<?php endif; ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<h2>Confirm and Verify Your Domain</h2>
+
+<p>Once you added your new CNAME record to your DNS settings, you will need to verify your new domain name from your Appwrite console. Enter your custom domains tab from your project settings, click the DNS Settings link and click on the 'Confirm and Verify" button. If everything went well, Appwrite will approve your domain and generate a new SSL certificate for it in the background.</p>
+
+<h2>Enjoy your Free SSL Certificate</h2>
+
+<p>Appwrite uses <a href="https://letsencrypt.org/" target="_blank" rel="noopener">Letsencrypt</a> service to generate free and automated SSL certificates for your custom domains. Once your domain is verified, it will take the Appwrite server a few seconds to create a new SSL certificate for it. Once done, you will see your domain TLS setting marked as 'Enabled' in your Appwrite dashboard, and you will be able to connect the Appwrite API using your new domain.</p>
+
+<h2>Connect using Your Custom Domain</h2>
+
+<p>To connect with your Appwrite server using your new domain, you will have to use the 'setEndpoint' (or 'set_endpoint') method in your SDK of choice and pass your new domain value, for example:</p>
+
+<div class="ide margin-bottom" data-lang="javascript" data-lang-label="Javascript">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Init your Web SDK
+var appwrite = new Appwrite();
+
+appwrite
+    .setEndpoint('https://appwrite.example.com/v1')
+    .setProject('455x34dfkj')
+;
+</code></pre>
+</div>

@@ -1,0 +1,104 @@
+<?php
+
+$clients = [
+    [
+        'title' => 'Getting Started for Web',
+        'description' => 'Integrate Appwrite with your website.',
+        'logo' => '/images/clients/web.png',
+        'link' => '/docs/getting-started-for-web',
+    ],
+    [
+        'title' => 'Getting Started for Flutter',
+        'description' => 'Integrate Appwrite with your Flutter apps.',
+        'logo' => '/images/clients/flutter.png',
+        'link' => '/docs/getting-started-for-flutter',
+    ],
+    /*[
+        'title' => 'iOS',
+        'description' => 'Integrate Appwrite with your iOS app.',
+        'logo' => '/images/clients/ios.png',
+        'link' => '/docs/getting-started-for-ios',
+    ],*/
+    /*[
+        'title' => 'Android',
+        'description' => 'Integrate Appwrite with your Android app.',
+        'logo' => '/images/clients/android.png',
+        'link' => '/docs/getting-started-for-android',
+    ],*/
+    /*[
+        'title' => 'Unity',
+        'logo' => '/images/clients/unity.png',
+        'description' => 'Integrate Appwrite with your Unity project.',
+        'link' => '/docs/getting-started-for-unity',
+    ],*/
+    [
+        'title' => 'Getting Started for Servers',
+        'description' => 'Integrate Appwrite with your server side.',
+        'logo' => '/images/clients/servers.png',
+        'link' => '/docs/getting-started-for-server',
+    ],
+    [
+        'title' => 'Command Line',
+        'description' => 'Integrate Appwrite from your terminal or CI.',
+        'logo' => '/images/clients/terminal.png',
+        'link' => '/docs/command-line',
+    ],
+];
+
+?>
+
+<div class="zone xxl">
+
+    <p class="margin-bottom">Welcome to our documentation section. Here you will be able to find quick guides to setup and integrate with Appwrite on your platform of choice. You can also review full and detailed API references to all of our services, tools, and features.</p>
+    
+    <h2 class="margin-bottom">Overview</h2>
+
+    <p>Appwrite is an end-to-end backend server that is aiming to abstract the complexity of common, complex, and repetitive tasks required for building a modern app.</p>
+
+    <p>Appwrite provides you with a set of APIs, tools, and a management console UI to help you build your apps a lot faster and in a much more secure way. Between Appwrite different services, you can find user authentication and account management, user preferences, database and storage persistence, cloud functions, localization, image manipulation, scheduled background tasks, and more.</p>
+
+    <p>Appwrite is both cross-platform and technology agnostic, meaning it can run on any operating system, coding language, framework, or platform. Although Appwrite can easily fit the definition of a serverless technology, it's designed to run well in multiple configurations. You can integrate Appwrite directly with your client app, use it behind your custom backend or alongside your custom backend server.</p>
+
+    <h2 class="margin-bottom">Getting Started Tutorials</h2>
+
+    <div class="row responsive">
+        <?php foreach ($clients as $i => $client): ?>
+        <div class="col span-6 sdk margin-bottom">
+
+            <a href="<?php echo $this->escape($client['link']); ?>" class="box padding-small clear">
+
+                <img src="<?php echo $client['logo']; ?>" alt="Logo" class="avatar pull-start margin-end" />
+
+                <div class="margin-bottom-tiny text-one-liner"><?php echo $client['title']; ?></div>
+
+                <p class="note text-size-small margin-bottom-no text-one-liner"><?php echo $client['description']; ?></p>
+            </a>
+
+        </div>
+        <?php if(($i+1) % 2 == 0): ?>
+    </div>
+    <div class="row responsive">
+        <?php endif; ?>
+
+        <?php endforeach; ?>
+    </div>
+
+    <div class="margin-bottom-large">
+        <h2 class="margin-bottom">API References</h2>
+        
+        <p>The Appwrite API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded or JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.</p>        
+    </div>
+
+    <div class="margin-bottom-large">
+        <h2 class="margin-bottom">Contributing</h2>
+
+        <p>Are you looking to get started contributing to Appwrite? Our <a href="https://github.com/appwrite/appwrite/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">contribution guide</a> has you covered. Want an SDK for a language we don’t yet support? Check out the <a href="https://github.com/appwrite/sdk-generator" target="_blank" rel="noopener">SDK generator</a> project. Also, have a look at our <a href="https://github.com/appwrite" target="_blank" rel="noopener">GitHub organization</a>.</p>
+    </div>
+
+    <div class="margin-bottom-large">
+        <h2 class="margin-bottom">Learn More</h2>
+
+        <p>Follow our <a href="https://medium.com/appwrite-io" target="_blank" rel="noopener">blog</a> and subscribe to our newsletter to learn more about Appwrite and stay up-to-date with Appwrite latest news and announcements. You can also join our <a href="https://discord.gg/GSeTUeA" target="_blank" rel="noopener">Discord server</a>, where you can chat with fellow developers and get support from our team and community members.</p>
+    </div>
+
+</div>

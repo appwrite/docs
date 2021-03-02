@@ -1,0 +1,30 @@
+{
+    "name": "appwrite/docs",
+    "description": "The official https://appwrite.io/docs documentation source code 📝",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Eldad Fux",
+            "email": "eldad@appwrite.io"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "ext-curl": "*",
+        "ext-imagick": "*",
+        "ext-mbstring": "*",
+        "ext-json": "*",
+
+        "utopia-php/framework": "0.10.0"
+    },
+    "require-dev": {
+        "vimeo/psalm": "4.1.1"
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
+    }
+}

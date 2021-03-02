@@ -1,0 +1,105 @@
+<?php
+$layout     = $this->getParam('layout', 'xxl');
+$sdk        = $this->getParam('sdk', '');
+$family     = $this->getParam('family', '');
+$title      = $this->getParam('title', '');
+$subtitle   = $this->getParam('subtitle', '');
+
+$clientSDK      = ($family === APP_PLATFORM_CLIENT && !empty($sdk)) ? '?sdk='.$sdk : '';
+$serverSDK      = ($family === APP_PLATFORM_SERVER && !empty($sdk)) ? '?sdk='.$sdk : '';
+
+$cols = [
+        'xxl' => ['nav' => 'span-3', 'main' => 'span-9'],
+        'xxxl' => ['nav' => 'span-2', 'main' => 'span-10'],
+]
+?>
+<div class="zone <?php echo $layout; ?> docs" data-general-strech-value="<?php echo $layout; ?>">
+    <div class="row responsive text-size-small">
+        <div class="col <?php echo $cols[$layout]['nav']; ?>">
+            <nav data-ui-highlight data-ls-ui-open>
+                <h2 class="margin-start-negative-tiny"><i class="icon-menu"></i><i class="icon-cancel"></i> &nbsp; Table of contents</h2>
+
+                <ul class="margin-bottom">
+                    <li><a href="/docs">Home</a></li>
+                </ul>
+
+                <div class="margin-bottom-small">
+                    <b class="text-size-small">Getting Started</b>
+                </div>
+
+                <ul class="margin-bottom">
+                    <!-- <li><a href="/docs/overview">Overview</a></li> -->
+                    <li>
+                        <a href="/docs/installation"><i class="icon-right-dir"></i> Installation</a>
+
+                        <ul class="margin-top-small margin-bottom-small">
+                            <li>&nbsp;&nbsp;<a href="/docs/production" data-selected="/docs/installation"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Production</a></li>
+                            <li>&nbsp;&nbsp;<a href="/docs/environment-variables" data-selected="/docs/installation"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Env. Variables</a></li>
+                            <li>&nbsp;&nbsp;<a href="/docs/email-delivery" data-selected="/docs/installation"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Email Delivery</a></li>
+                            <li>&nbsp;&nbsp;<a href="/docs/debugging" data-selected="/docs/installation"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Debugging</a></li>
+                            <li>&nbsp;&nbsp;<a href="/docs/upgrade" data-selected="/docs/installation"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Upgrade</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/docs/getting-started-for-web">Appwrite for Web</a></li>
+                    <li><a href="/docs/getting-started-for-flutter">Appwrite for Flutter (beta)</a></li>
+                    <li><a href="/docs/getting-started-for-server">Appwrite for Server</a></li>
+                    <li><a href="/docs/command-line">Appwrite CLI</a></li>
+                    <li><a href="/docs/sdks">SDKs</a></li>
+                </ul>
+
+                <div class="margin-bottom-small">
+                    <b class="text-size-small">REST API</b>
+                </div>
+
+                <ul class="margin-bottom">
+                    <li><a href="/docs/client/account<?php echo $this->escape($clientSDK); ?>">Account</a></li>
+                    <li><a href="/docs/server/users<?php echo $this->escape($serverSDK);; ?>">Users</a></li>
+                    <li><a href="/docs/client/teams<?php echo $this->escape($clientSDK);; ?>">Teams</a></li>
+                    <li><a href="/docs/client/database<?php echo $this->escape($clientSDK);; ?>">Database</a></li>
+                    <li><a href="/docs/client/storage<?php echo $this->escape($clientSDK);; ?>">Storage</a></li>
+                    <li><a href="/docs/client/functions<?php echo $this->escape($serverSDK);; ?>">Functions</a></li>
+                    <li><a href="/docs/client/locale<?php echo $this->escape($clientSDK);; ?>">Localization</a></li>
+                    <li><a href="/docs/client/avatars<?php echo $this->escape($clientSDK);; ?>">Avatars</a></li>
+                    <li><a href="/docs/server/health<?php echo $this->escape($serverSDK);; ?>">Health</a></li>
+                </ul>
+
+                <div class="margin-bottom-small">
+                    <b class="text-size-small">Learn More</b>
+                </div>
+                
+                <ul class="margin-bottom">
+                    <li><a href="/docs/functions">Functions</a></li>
+                    <li><a href="/docs/keys">API Keys</a></li>
+                    <li><a href="/docs/webhooks">Webhooks</a></li>
+                    <li><a href="/docs/tasks">Tasks</a></li>
+                </ul>
+                
+                <div class="margin-bottom-small">
+                    <b class="text-size-small">Advanced</b>
+                </div>
+
+                <ul class="margin-bottom">
+                    <li><a href="/docs/custom-domains">Custom Domains</a></li>
+                    <li><a href="/docs/permissions">Permissions</a></li>
+                    <li><a href="/docs/error-codes">Error Codes</a></li>
+                    <li><a href="/docs/rate-limits">Rate Limits</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col <?php echo $cols[$layout]['main']; ?>">
+                <article>
+                    <a href="/docs" class="back"><i class="icon-left-open"></i> Docs</a>
+
+                    <h1 class="margin-top-small margin-bottom">
+                        <?php echo $this->escape($title); ?>
+
+                        <?php if(!empty($subtitle)): ?>
+                            &nbsp;<span class="text-fade text-size-normal">| <?php echo $this->escape($subtitle); ?></span>
+                        <?php endif; ?>
+                    </h1>
+
+                    <?php echo $this->exec($this->getParam('page', [])); ?>
+                </article>&nbsp;
+        </div>
+    </div>
+</div>
