@@ -6,7 +6,7 @@
 
 <p>We provide libraries and SDKs for major programming languages and platforms so you don't have to write code for interacting with our HTTP APIs from scratch.</p>
 
-<p>Choose your desired SDK corresponding to your product development platform and import it using the given package manager. <b>For the sake of this tutorial we will use code examples using Appwrite SDKs for Node.js, PHP, Python, Ruby, and Deno, but the same can be applied to any of <a href="/docs/sdks#server">our server side SDKs</a></b>.</p>
+<p>Choose your desired SDK corresponding to your product development platform and import it using the given package manager. <b>For the sake of this tutorial we will use code examples using Appwrite SDKs for Node.js, PHP, Python, Ruby, Dart, and Deno, but the same can be applied to any of <a href="/docs/sdks#server">our server side SDKs</a></b>.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -37,6 +37,24 @@
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>import * as sdk from "https://deno.land/x/appwrite/mod.ts";</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div>
+            <p>Add dart_appwrite to pubspec.yaml</p>
+            <div class="ide margin-top-small" data-lang="yaml" data-lang-label="Dart SDK">
+                <pre class="line-numbers"><code class="prism language-yaml" data-prism>dependency:
+    dart_appwrite: <latest></code></pre>
+            </div>
+            <p>Get Dependency</p>
+            <div class="ide margin-top-small" data-lang="bash" data-lang-label="Dart SDK">
+                <pre class="line-numbers"><code class="prism language-bash" data-prism>dart pub get</code></pre>
+            </div>
+            <p>Import Dependency</p>
+            <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
+                <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';</code></pre>
+            </div>
         </div>
     </li>
 </ul>
@@ -132,6 +150,19 @@ client
 ;</code></pre>
         </div>
     </li>
+    <li>
+        <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
+            
+final client = Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+    .setKey('919c2d18fb5d4...a2ae413da83346ad2'); // Your secret API key</code></pre>
+        </div>
+    </li>
 </ul>
 
 <h2>Make Your First Request</h2>
@@ -191,6 +222,20 @@ promise.then(function (response) {
     console.log(response);
 }, function (error) {
     console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>final users = Users(client);
+
+final res = users.create('email@example.com', 'password');
+
+res.then((response) {
+    print(response);
+}).catchError((error) {
+    print(error);
 });</code></pre>
         </div>
     </li>
@@ -301,6 +346,28 @@ promise.then(function (response) {
     console.log(response);
 }, function (error) {
     console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
+
+final client = Client();
+final users = Users(client);
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+    .setKey('919c2d18fb5d4...a2ae413da83346ad2'); // Your secret API key
+
+final res = users.create('email@example.com', 'password');
+
+res.then((response) {
+    print(response);
+}).catchError((error) {
+    print(error);
 });</code></pre>
         </div>
     </li>
