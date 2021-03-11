@@ -3,15 +3,15 @@ $platforms = $this->getParam('platforms');
 $versions = [];
 
 foreach($platforms['client']['languages'] ?? [] as $lang) {
-    $key = (isset($lang['key'])) ? $lang['key'] : '';
-    $version = (isset($lang['version'])) ? '@'.$lang['version'] : '';
+    $key = $lang['key'] ?? '';
+    $version = $lang['version'] ?? '';
     
     if(!empty($key)) {
         $versions[$key] = $version;
     }
 }
 
-$jsVersion = (isset($versions['web'])) ? $versions['web'] : '';
+$jsVersion = $versions['web'] ?? '';
 ?>
 <p>Appwrite is a development platform providing you easy yet powerful API and management console to get your next project up and running quickly.</p>
 
@@ -50,7 +50,7 @@ $jsVersion = (isset($versions['web'])) ? $versions['web'] : '';
 <p>To install with a CDN (content delivery network) add the following scripts to the bottom of your tag, but before you use any Appwrite services:</p>
 
 <div class="ide" data-lang="html" data-lang-label="HTML">
-    <pre class="line-numbers"><code class="prism language-markup" data-prism><?php echo htmlentities('<script src="https://cdn.jsdelivr.net/npm/appwrite'.$this->escape($jsVersion).'"></script>'); ?></code></pre>
+    <pre class="line-numbers"><code class="prism language-markup" data-prism><?php echo htmlentities('<script src="https://cdn.jsdelivr.net/npm/appwrite@'.$this->escape($jsVersion).'"></script>'); ?></code></pre>
 </div>
 
 <h2>Init your SDK</h2>

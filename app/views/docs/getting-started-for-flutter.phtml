@@ -3,9 +3,9 @@ $platforms = $this->getParam('platforms');
 $versions = [];
 
 foreach($platforms['client']['languages'] as $lang) {
-    $key = (isset($lang['key'])) ? $lang['key'] : '';
-    $version = (isset($lang['version'])) ? $lang['version'] : '';
-    
+    $key = $lang['key'] ?? '';
+    $version = $lang['version'] ?? '';
+
     if(!empty($key)) {
         $versions[$key] = $version;
     }
