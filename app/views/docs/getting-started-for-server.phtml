@@ -58,12 +58,12 @@ $dartVersion = $versions['dart'] ?? '';
     <li>
         <h3>Dart</h3>
         <div>
-            <p>Add dart_appwrite to pubspec.yaml</p>
+            <p>Add the Appwrite SDK to your pubspec.yaml</p>
             <div class="ide margin-top-small" data-lang="yaml" data-lang-label="Dart SDK">
                 <pre class="line-numbers"><code class="prism language-yaml" data-prism>dependency:
     dart_appwrite: <?php echo $this->escape($dartVersion); ?></code></pre>
             </div>
-            <p>Get Dependency</p>
+            <p>Install using Pub</p>
             <div class="ide margin-top-small" data-lang="bash" data-lang-label="Dart SDK">
                 <pre class="line-numbers"><code class="prism language-bash" data-prism>dart pub get</code></pre>
             </div>
@@ -172,7 +172,8 @@ final client = Client();
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
     .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2'); // Your secret API key</code></pre>
+    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+;</code></pre>
         </div>
     </li>
 </ul>
