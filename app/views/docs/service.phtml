@@ -14,7 +14,6 @@ $sdk            = $this->getParam('sdk', '');
 $platforms      = $this->getParam('platforms', []);
 $version        = $this->getParam('version', '');
 $versions       = $this->getParam('versions', []);
-$versions       = array_unique(array_map(function($elem){ return $elem['docs']; }, $versions));
 $classess       = [];
 $codes          = [
     '200' => [
@@ -167,7 +166,8 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
 
                     <select class="choose-platform" name="v">
                         <?php foreach ($versions as $key => $value):
-                            $name = (isset($value['name'])) ? $value['name'] : '';
+                            $name = $value['name'] ?? '';
+                            $docs = $value['docs'] ?? '';
                             $selected = ($key === $version) ? ' selected' : '';
                             ?>
                             <option value="<?php echo $this->escape($name); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?><?php echo $selected; ?>>Version <?php echo $this->escape($name); ?></option>
