@@ -14,6 +14,7 @@ $sdk            = $this->getParam('sdk', '');
 $platforms      = $this->getParam('platforms', []);
 $version        = $this->getParam('version', '');
 $versions       = $this->getParam('versions', []);
+$versions       = array_unique(array_map(function($elem){return $elem['docs'];}, $a));
 $classess       = [];
 $codes          = [
     '200' => [
