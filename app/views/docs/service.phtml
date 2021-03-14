@@ -13,6 +13,7 @@ $family         = $this->getParam('family', '');
 $sdk            = $this->getParam('sdk', '');
 $platforms      = $this->getParam('platforms', []);
 $version        = $this->getParam('version', '');
+$versionDocs    = $this->getParam('versionDocs', '');
 $versions       = $this->getParam('versions', []);
 $classess       = [];
 $codes          = [
@@ -166,11 +167,10 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
 
                     <select class="choose-platform" name="v">
                         <?php foreach ($versions as $key => $value):
-                            $name = $value['name'] ?? '';
-                            $docs = $value['docs'] ?? '';
+                            $name = (isset($value['name'])) ? $value['name'] : '';
                             $selected = ($key === $version) ? ' selected' : '';
                             ?>
-                            <option value="<?php echo $this->escape($name); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?><?php echo $selected; ?>>Version <?php echo $this->escape($name); ?></option>
+                            <option value="<?php echo $this->escape($key); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?><?php echo $selected; ?>>Version <?php echo $this->escape($key); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </form>
@@ -197,18 +197,26 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                 <div class="margin-bottom-small text-fade">In this page</div>
 
                 <ul>
-                    <?php foreach ($operations as $operation):
+                    <?php
+                    $endpoints = 0;
+                    foreach ($operations as $operation):
                         if(!in_array($family, $operation['platforms'])) {
                             continue;
                         }
 
                         $platformsList = (isset($operation['platforms'])) ? array_map(function($node) {return 'example-for-'.$node;}, $operation['platforms']) : [];
+
+                        $endpoints++;
                         ?>
                         <li class="margin-bottom-small <?php echo implode(' ', $platformsList); ?>">
                             <a href="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?><?php echo $this->escape($paramSDK); ?>#<?php echo $operation['operationId']; ?>"><i class="icon-angle-circled-right"></i> <?php echo $this->escape($operation['summary']); ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
+
+                <?php if(!$endpoints): ?>
+                    <p>No endpoint found for this version and platform. Switch to a newer version.</p>
+                <?php endif; ?>
 
             </div>
         </div>
@@ -443,7 +451,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                     continue;
                                 }
                                 
-                                $example = APP_VENDOR_CE.'/docs/examples/'.$version.'/'.$language['family'].'-'.$language['key'].'/examples/'.$snippet;
+                                $example = APP_VENDOR_CE.'/docs/examples/'.$versionDocs.'/'.$language['family'].'-'.$language['key'].'/examples/'.$snippet;
 
                                 if(!is_readable($example)) {
                                     //echo "<p class=\"text-danger\"><b>Failed to read code example for {$language['name']}</b>: ({$example})</p>";
