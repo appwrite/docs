@@ -211,7 +211,7 @@ void main() { // Init SDK
         <?php foreach($environments as $key => $environment): ?>
         <tr>
             <td><img src="" data-ls-attrs="src=/images/environments/<?php echo $this->escape($environment['logo'] ?? ''); ?>" alt="Function Env." class="avatar xxs" /></td>
-            <td><?php echo $this->escape($environment['name'] ?? ''); ?> <?php echo $this->escape($environment['version'] ?? ''); ?></td>
+            <td><span data-general-copy><?php echo $key ?> </span></td>
             <td><a href="https://hub.docker.com/r/appwrite/env-<?php echo $this->escape($key); ?>" target="_blank" rel="noopener"><?php echo $this->escape($environment['image'] ?? ''); ?> <i class="icon-link-ext"></i></a></td>
             <td><?php echo $this->escape(implode(' / ', $environment['supports'] ?? [])); ?></td>
         </tr>
