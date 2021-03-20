@@ -16,7 +16,7 @@
         "ext-mbstring": "*",
         "ext-json": "*",
 
-        "utopia-php/framework": "0.10.0"
+        "utopia-php/framework": "0.*.*"
     },
     "require-dev": {
         "vimeo/psalm": "4.1.1"
