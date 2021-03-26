@@ -279,6 +279,34 @@ void main() { // Init SDK
             </td>
             <td>Your function event payload. This value is available only when your function trigger is 'event'. This variable value contains a string in JSON format with your specific event data.</td>
         </tr>
+        <tr>
+            <td>
+                APPWRITE_FUNCTION_DATA
+                <p class="margin-top-small text-fade">version >= 0.8.0</p>
+            </td>
+            <td>Your function's custom execution data. This variable's value contains a string in any format. If the custom data is in JSON FORMAT, it must be parsed inside the function code.</td>
+        </tr>
+        <tr>
+            <td>
+                APPWRITE_FUNCTION_PROJECT_ID
+                <p class="margin-top-small text-fade">version >= 0.8.0</p>
+            </td>
+            <td>Your function's project ID.</td>
+        </tr>
+        <tr>
+            <td>
+                APPWRITE_FUNCTION_USER_ID
+                <p class="margin-top-small text-fade">version >= 0.8.0</p>
+            </td>
+            <td>The userId of the user that triggered your function's execution. Executions triggered in the Appwrite console will be prepended with "admin-".</td>
+        </tr>
+        <tr>
+            <td>
+                APPWRITE_FUNCTION_JWT
+                <p class="margin-top-small text-fade">version >= 0.8.0</p>
+            </td>
+            <td>A <a href="https://jwt.io/">JSON Web Token</a> generated for the user that executes your function.</td>
+        </tr>
     </tbody>
 </table>
 
