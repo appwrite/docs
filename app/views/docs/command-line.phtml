@@ -94,12 +94,13 @@
 
 <h3>Configuration</h3>
 
-<p>At any point, if you would like to change your project endpoint, project ID, project Key, or locale configuration you set during the CLI init, you can make use of the `client` service.</p>
+<p>At any point, if you would like to change your project endpoint, project ID, project Key, selfSigned certificate acceptance or locale configuration you set during the CLI init, you can make use of the `client` service.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client setEndpoint --endpoint="http://192.168.1.6/v1"
 appwrite client setProject --project="5ff450422d42f"
 appwrite client setKey --key="23f24gwrhSDgefaY"
+appwrite client setSelfSigned --value=true
 appwrite client setLocale --locale="en-US"</code></pre>
 </div>
 
