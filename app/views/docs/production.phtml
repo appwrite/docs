@@ -40,7 +40,7 @@
 <h3>Enable ClamAV in Appwrite container</h3>
 <p>
     In order to enable ClamAV service to scan the storage, in `appwrite` service, in <b>docker-compose.yml</b> under <b>depends_on</b> uncomment the line containing <b>clamav</b>. After that update the environment variables.
-    Using the environment variable <b>_APP_STORAGE_ANTIVIRUS</b>, you can either disable or enable the antivirus. To enable it, in the environment section, find <b>_APP_STORAGE_ANTIVIRUS</b> and set its value to <b>enabled</b>, then set <b>_APP_STORAGE_ANTIVIRUS_HOST</b> to <b>clamav</b> and <b>_APP_STORAGE_ANTIVIRUS_PORT</b> to <b>3310</b>. This will enable the antivirus checking during new file uploads.
+    Using the environment variable <b>_APP_STORAGE_ANTIVIRUS</b>, you can either disable or enable the antivirus. To enable it, in the environment section, find <b>_APP_STORAGE_ANTIVIRUS</b> and set its value to <b>enabled</b>. The host and port are already setup if you are using the default values in the <b>docker-compose.yml</b> This will enable the antivirus checking during new file uploads.
 </p>
 
 <p>Finally, you can now restart the <b>appwrite</b> service and start the <b>clamav</b> service. You can do that simply by using <b>docker-compose up -d</b> command. This should start the <b>clamav</b> service as well as recreate the <b>appwrite</b> service.</p>
