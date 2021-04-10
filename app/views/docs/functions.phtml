@@ -275,7 +275,7 @@ void main() { // Init SDK
         </tr>
         <tr>
             <td>
-                APPWRITE_FUNCTION_EVENT_PAYLOAD
+                APPWRITE_FUNCTION_EVENT_DATA
             </td>
             <td>Your function event payload. This value is available only when your function trigger is 'event'. This variable value contains a string in JSON format with your specific event data.</td>
         </tr>
@@ -306,6 +306,13 @@ void main() { // Init SDK
                 <p class="margin-top-small text-fade">version >= 0.8.0</p>
             </td>
             <td>A <a href="https://jwt.io/">JSON Web Token</a> generated for the user that executes your function.</td>
+        </tr>
+        <tr>
+            <td>
+                APPWRITE_FUNCTION_EVENT_PAYLOAD
+                <p class="margin-top-small text-fade">version &lt; 0.8.0 <span class="text-danger">(deprecated)</span></p>
+            </td>
+            <td>Your function event payload. Deprecated in favor of APPWRITE_FUNCTION_EVENT_DATA in version 0.8.0.</td>
         </tr>
     </tbody>
 </table>
