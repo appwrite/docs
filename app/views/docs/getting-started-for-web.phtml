@@ -129,6 +129,9 @@ appwrite
         <?php foreach($demos as $demo):
             $name = $demo['name'] ?? '';
             $icon = $demo['icon'] ?? '';
+            $source = $demo['source'] ?? '';
+            $url = $demo['url'] ?? '';
+            $repo = str_replace('https://github.com/', '', $source);
             ?>
             <tr>
                 <td>
@@ -137,6 +140,12 @@ appwrite
                 </td>
                 <td>
                     <?php echo $name; ?>
+                </td>
+                <td>
+                    <a href="<?php echo $source; ?>" target="_blank" rel="noopener"><?php echo $repo; ?></a>
+                </td>
+                <td>
+                    <a href="<?php echo $url; ?>" target="_blank" rel="noopener">Live Example</a>
                 </td>
             </tr>
         <?php endforeach; ?>
