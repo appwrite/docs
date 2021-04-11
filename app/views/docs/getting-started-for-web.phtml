@@ -112,6 +112,37 @@ appwrite
 </code></pre>
 </div>
 
+<h2>Demos</h2>
+
+<p>Below you can find a list of some demos to help you get started with Appwrite for web using you favorite tools and framework of choice.</p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large text-size-small vertical">
+        <thead>
+        <tr>
+            <th style="width: 100px"></th>
+            <th style="width: 160px">Demo</th>
+            <th>GitHub Repository</th>
+            <th style="width: 140px"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach($demos as $demo):
+            $name = $demo['name'] ?? '';
+            $icon = $demo['icon'] ?? '';
+            ?>
+            <tr>
+                <td>
+                    <img src="/images-ee/platforms/<?php echo $icon; ?>.svg" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
+                    <img src="/images-ee/platforms/dark/<?php echo $icon; ?>.svg" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
+                </td>
+                <td>
+                    <?php echo $name; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+
 <h2>Next Steps</h2>
 
 <p>Appwrite has many services and tools to help improve your app and speed up your development. The best way to learn how you can take advantage of them is to explore the different API references docs.</p>
