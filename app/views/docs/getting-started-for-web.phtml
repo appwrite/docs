@@ -1,17 +1,19 @@
 <?php
 $platforms = $this->getParam('platforms');
-$versions = [];
+$platform = [];
 
 foreach($platforms['client']['languages'] ?? [] as $lang) {
+
     $key = $lang['key'] ?? '';
-    $version = $lang['version'] ?? '';
     
-    if(!empty($key)) {
-        $versions[$key] = $version;
+    if($key === 'web') {
+        $platform = $lang;
+        break;
     }
 }
 
-$jsVersion = $versions['web'] ?? '';
+$version = $platform['version'] ?? '';
+$demos = $platform['demos'] ?? [];
 ?>
 <p>Appwrite is a development platform providing you easy yet powerful API and management console to get your next project up and running quickly.</p>
 
@@ -50,7 +52,7 @@ $jsVersion = $versions['web'] ?? '';
 <p>To install with a CDN (content delivery network) add the following scripts to the bottom of your tag, but before you use any Appwrite services:</p>
 
 <div class="ide" data-lang="html" data-lang-label="HTML">
-    <pre class="line-numbers"><code class="prism language-markup" data-prism><?php echo htmlentities('<script src="https://cdn.jsdelivr.net/npm/appwrite@'.$this->escape($jsVersion).'"></script>'); ?></code></pre>
+    <pre class="line-numbers"><code class="prism language-markup" data-prism><?php echo htmlentities('<script src="https://cdn.jsdelivr.net/npm/appwrite@'.$this->escape($version).'"></script>'); ?></code></pre>
 </div>
 
 <h2>Init your SDK</h2>
@@ -109,6 +111,47 @@ appwrite
         });
 </code></pre>
 </div>
+
+<h2>Demos</h2>
+
+<p>Below you can find a list of some demos to help you get started with Appwrite for Web using your favorite tools and framework of choice.</p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large text-size-small vertical">
+        <thead>
+        <tr>
+            <th style="width: 80px"></th>
+            <th style="width: 180px">Demo</th>
+            <th>GitHub Repository</th>
+            <th style="width: 120px"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach($demos as $demo):
+            $name = $demo['name'] ?? '';
+            $icon = $demo['icon'] ?? '';
+            $description = $demo['description'] ?? '';
+            $source = $demo['source'] ?? '';
+            $url = $demo['url'] ?? '';
+            $repo = str_replace('https://github.com/', '', $source);
+            ?>
+            <tr>
+                <td>
+                    <img src="/images-ee/platforms/<?php echo $icon; ?>" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
+                    <img src="/images-ee/platforms/dark/<?php echo $icon; ?>" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
+                </td>
+                <td>
+                    <?php echo $name; ?> <span class="tooltip" data-tooltip="<?php echo $this->escape($description); ?>"><i class="icon-info-circled"></i></span>
+                </td>
+                <td>
+                    <a href="<?php echo $source; ?>" target="_blank" rel="noopener"><?php echo $repo; ?></a>
+                </td>
+                <td>
+                    <a href="<?php echo $url; ?>" target="_blank" rel="noopener">Live Example</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
 
 <h2>Next Steps</h2>
 
