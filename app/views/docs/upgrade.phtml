@@ -1,9 +1,14 @@
-<p>To upgrade your Appwrite server from an older version, you should use the Appwrite migration tool once you have installed the new version. Make sure to run th migration tool <b>after</b> you already finished installing the new version.</p>
+<p>To upgrade your Appwrite server from an older version, you should use the Appwrite migration tool once you have installed the new version. Make sure to run the migration tool <b>after</b> you already finished installing the new version.</p>
 
 <div class="notice margin-bottom">
     <h3>A Note About Migration</h3>
     
     <p>It is highly recommended to <a href="https://medium.com/sunkay-imho/docker-data-volumes-and-data-volume-containers-use-cases-abde84a10317" target="_blank" rel="noopener">backup your server</a> data and your <b>docker-compose.yml</b> file settings before running the migration.</p>
+</div>
+
+<p>Before upgrading, bring down your Appwrite containers if they are still running with:</p>
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose down</code></pre>
 </div>
 
 <p>When updating to a new Appwrite version, make sure to run the <a href="/docs/installation">installation script for the new version</a> from the same location, you executed your original setup. This will allow the installation script to update your existing docker-compose.yml file. The correct location for execution is the parent directory of your existing <?php echo strtolower(APP_NAME); ?> directory.</p>
