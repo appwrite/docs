@@ -3,7 +3,7 @@
 use Utopia\View;
 
 $events = $this->getParam('events', []);
-$environments = $this->getParam('environments', []);
+$runtimes = $this->getParam('runtimes', []);
 
 ?>
 
@@ -192,11 +192,11 @@ void main() { // Init SDK
 
 <p>When triggering a Cloud Function execution from the client, your users will be limited to a specific amount of execution per minute to make sure your Appwrite server is not being abused. The default limit is 60 calls per 1 minute. You can edit this limit using the server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
 
-<h2>Supported Environments</h2>
+<h2>Supported Runtimes</h2>
 
-<p>Appwrite provides multiple code environments to execute your custom functions. Each environment uses a Docker image tied to a specific language version to provide a safe, isolated playground to run your team's code.</p>
+<p>Appwrite provides multiple code runtimes to execute your custom functions. Each runtime uses a Docker image tied to a specific language version to provide a safe, isolated playground to run your team's code.</p>
 
-<p>Below is a list of supported Cloud Functions environments. The Appwrite team continually adds support for new environments. You can easily change which environments your Appwrite setup supports by editing your server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
+<p>Below is a list of supported Cloud Functions runtimes. The Appwrite team continually adds support for new runtimes. You can easily change which runtimes your Appwrite setup supports by editing your server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -208,12 +208,12 @@ void main() { // Init SDK
         </tr>
     </thead>
     <tbody>
-        <?php foreach($environments as $key => $environment): ?>
+        <?php foreach($runtimes as $key => $runtime): ?>
         <tr>
-            <td><img src="" data-ls-attrs="src=/images/environments/<?php echo $this->escape($environment['logo'] ?? ''); ?>" alt="Function Env." class="avatar xxs" /></td>
+            <td><img src="" data-ls-attrs="src=/images/runtimes/<?php echo $this->escape($runtime['logo'] ?? ''); ?>" alt="Function Env." class="avatar xxs" /></td>
             <td><span data-general-copy><?php echo $this->escape($key); ?> </span></td>
-            <td><a href="https://hub.docker.com/r/appwrite/env-<?php echo $this->escape($key); ?>" target="_blank" rel="noopener"><?php echo $this->escape($environment['image'] ?? ''); ?> <i class="icon-link-ext"></i></a></td>
-            <td><?php echo $this->escape(implode(' / ', $environment['supports'] ?? [])); ?></td>
+            <td><a href="https://hub.docker.com/r/appwrite/env-<?php echo $this->escape($key); ?>" target="_blank" rel="noopener"><?php echo $this->escape($runtime['image'] ?? ''); ?> <i class="icon-link-ext"></i></a></td>
+            <td><?php echo $this->escape(implode(' / ', $runtime['supports'] ?? [])); ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
