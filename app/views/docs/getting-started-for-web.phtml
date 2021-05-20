@@ -44,7 +44,7 @@ $demos = $platform['demos'] ?? [];
 <p>If you're using a bundler (like <a href="http://browserify.org/" target="_blank" rel="noopener">Browserify<a/> or <a href="https://webpack.js.org/" target="_blank" rel="noopener">webpack</a>), you can import the Appwrite module when you need it:</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import * as Appwrite from "appwrite";</code></pre>
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";</code></pre>
 </div>
 
 <h3>CDN</h3>
@@ -61,7 +61,7 @@ $demos = $platform['demos'] ?? [];
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Init your Web SDK
-var appwrite = new Appwrite();
+const appwrite = new Appwrite();
 
 appwrite
     .setEndpoint('http://localhost/v1') // Set only when using self-hosted solution
@@ -96,7 +96,7 @@ appwrite
 <h2>Full Example</h2>
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
                     <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Init your Web SDK
-var appwrite = new Appwrite();
+const appwrite = new Appwrite();
 
 appwrite
     .setProject('455x34dfkj');
