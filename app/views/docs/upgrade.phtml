@@ -5,12 +5,12 @@
 <div class="notice margin-bottom">
     <h3>A Note About Migration</h3>
     
-    <p>It is highly recommended to <a href="https://medium.com/sunkay-imho/docker-data-volumes-and-data-volume-containers-use-cases-abde84a10317" target="_blank" rel="noopener">backup your server</a> data and your <b>docker-compose.yml</b> file settings before running the migration tool. It is recommended to run the migration process on a dev instance and make sufre your application is working well, and that you have checked for any breaking chages in the new version <a href="https://github.com/appwrite/appwrite/blob/master/CHANGES.md" target="blank" rel="noopener">change log.</p>
+    <p>It is highly recommended to <a href="https://medium.com/sunkay-imho/docker-data-volumes-and-data-volume-containers-use-cases-abde84a10317" target="_blank" rel="noopener">backup your server</a> data and your <b>docker-compose.yml</b> file settings before running the migration tool. It is recommended to run the migration process on a dev instance and make sufre your application is working well, and that you have checked for any breaking chages in the new version <a href="https://github.com/appwrite/appwrite/blob/master/CHANGES.md" target="blank" rel="noopener">change log.</a></p>
 </div>
 
-<p>When updating to a new Appwrite version, make sure to run the <a href="/docs/installation">installation script for the new version</a> from the same location, you executed your original setup. This will allow the installation script to update your existing docker-compose.yml file. The correct location for execution is the parent directory of your existing appwrite directory.</p>
+<!-- <p>When updating to a new Appwrite version, make sure to run the <a href="/docs/installation">installation script for the new version</a> from the same location, you executed your original setup. This will allow the installation script to update your existing docker-compose.yml file. The correct location for execution is the parent directory of your existing appwrite directory.</p> -->
 
-<p>The data migration tool will allow you to easily migrate your current Appwrite data to work with the new version. </p>
+<!-- <p>The data migration tool will allow you to easily migrate your current Appwrite data to work with the new version. </p> -->
 
 <p>To start the migration, run the following command from your terminal once your backup is ready and that your new Appwrite setup has completed successfully. Replace "[APPWRITE_CONTAINER_ID]" with your container ID. You can find your container ID by running `docker ps` command.</p>
 
