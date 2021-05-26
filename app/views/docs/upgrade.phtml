@@ -1,7 +1,9 @@
-<p>To upgrade your Appwrite server from an older version, you should use the Appwrite migration tool <b>after you have installed the new version</b>. The migration tool will adjust your Appwrite data to the new version structure to make sure your Appwrite data is compatible with any internal changes.</p>
+<p>To upgrade your Appwrite server from an older version, you should use the Appwrite migration tool <b>after you have installed the new version</b>. The migration tool will adjust your Appwrite data to the new version structure to make sure your Appwrite data is compatible with any internal changes. </p>
 
 <div class="notice margin-bottom">
     <h3>A Note About Migration</h3>
+
+    <p>At present, we only support migrations only to the immediately higher versions, i.e from 0.6 to 0.7 and 0.7 to 0.8 and so on. So if you're trying to migrate from 0.6 to 0.8, you will first need to migrate to 0.7 and then to 0.8</p>
 
     <p>It is highly recommended to <a href="https://medium.com/sunkay-imho/docker-data-volumes-and-data-volume-containers-use-cases-abde84a10317" target="_blank" rel="noopener">backup your server</a> data and your <b>docker-compose.yml</b> file settings before running the migration tool. It is recommended to run the migration process on a dev instance and make sure your application is working well and that you have checked for any breaking changes in the new version <a href="https://github.com/appwrite/appwrite/blob/master/CHANGES.md" target="blank" rel="noopener">changelog.</a></p>
 </div>
@@ -10,16 +12,9 @@
 
 <!-- <p>The data migration tool will allow you to easily migrate your current Appwrite data to work with the new version. </p> -->
 
-<p> Head over to the directory containing your <b>docker-compose.yml</b> . If Appwrite is currently running, your first step would be to shut it down using: </p>
-<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose down</code></pre>
-</div>
-
-<p>Next you need to go to the parent directory and install the latest version of Appwrite</p>
+<p> The first step is to install the latest version of Appwrite. Head to the directory where you first installed Appwrite. This is where you will find the <b>appwrite</b> directory and the <b>appwrite/docker-compose.yml</b>. Make sure that you are at the same level at the <b>appwrite</b> directory and then execute the following command</p>
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>
-    cd ../
-
     docker run -it --rm \
     --volume /var/run/docker.sock:/var/run/docker.sock \
     --volume "$(pwd)"/appwrite:/usr/src/code/appwrite:rw \
@@ -36,5 +31,10 @@
 <p>We can now start the migration. Navigate to the <b>appwrite</b> directory where your <b>docker-compose.yml</b> is present and run the following command</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose exec appwrite migrate</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>
+    cd appwrite/
+    docker-compose exec appwrite migrate
+    </code></pre>
 </div>
+
+<p>Once the migration process has completed successfully, you're all set to use the latest version of Appwrite!</p>
