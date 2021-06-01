@@ -77,10 +77,10 @@ $version = (isset($versions['android'])) ? $versions['android'] : '';
 <p>Initialize your SDK code with your project ID, which can be found in your project settings page.</p>
 
 <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-    <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.AppwriteClient
-import io.appwrite.services.AccountService
+    <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
 
-val client = AppwriteClient(context)
+val client = Client(context)
   .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
   .setProject("5df5acd0d48c2") // Your project ID
   .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
@@ -98,25 +98,25 @@ val client = AppwriteClient(context)
 
 <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
                     <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// Register User
-val accountService = AccountService(client)
-val response = accountService.create("email@example.com", "password")
+val account = Account(client)
+val response = account.create("email@example.com", "password")
 val json = response.body?.string()
 </code></pre>
 </div>
 
 <h2>Full Example</h2>
 <div class="ide" data-lang="dart" data-lang-label="Dart SDK">
-                    <pre class="line-numbers"><code class="prism language-dart" data-prism>import io.appwrite.AppwriteClient
-import io.appwrite.services.AccountService
+                    <pre class="line-numbers"><code class="prism language-dart" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
 
-val client = AppwriteClient(context)
+val client = Client(context)
   .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
   .setProject("5df5acd0d48c2") // Your project ID
   .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
   .setSelfSigned() //remove in production
 
-val accountService = AccountService(client)
-val response = accountService.create("email@example.com", "password")
+val account = Account(client)
+val response = account.create("email@example.com", "password")
 val json = response.body?.string()
 </code></pre>
 </div>
