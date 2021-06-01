@@ -85,23 +85,15 @@ dotnet add package Appwrite</code></pre>
 
 <p>Go to your new Appwrite console and once inside click the <i class="icon-plus"></i> icon in the top navigation header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create to get started.</p>
 
-<h2>Grab an API Key</h2>
+<h2>Authentication</h2>
 
-<p>For you to init your SDK and interact with Appwrite services you need an API key. To get your first API key, go to your appwrite console, choose the project you created in the step before and click the 'API Keys' link.</p>
+<p>The Appwrite server API provides you with two authentication methods. The first one uses an API key, and the second is using a JSON Web Token (JWT). Each method has different use cases, and you can use whichever fills your app needs.</p>
 
-<p>Once inside your API keys screen click the 'Add API Key' button, choose your key name, for example: 'Demo Key' and select the scopes your key will be granted to use. To learn about the different API scopes available to you read more about <a href="/docs/keys">Appwrite API Keys</a> </p>
+<h3>API Key</h3>
 
-<div class="notice">
-    <h3>A Note About API Keys & Admin Mode</h3>
-    
-    <p>When using Appwrite API from your server-side with an API Key you will automatically run in <b>admin mode</b>. Admin mode disables the default user <a href="/docs/permissions">permission access control</a> restrictions and allows you to access all the resources available on your project. This is very useful when you want to manipulate your users' data like files and documents or even if you want to get a list of your users.</p>
-    
-    <p>Please notice it is <b>highly</b> not recommended to run the admin mode from your client-side as it will probably lead to huge privacy and security issues. Check the <a href="/docs/admin">Admin Mode</a> documentation to learn more</p>
-</div>
+<p>Using an API Key you can interact with the Appwrite server API as an admin. You'll be able to access all of your project resources as long as your key has the relevant access scopes attached. To get your first API key, go to your appwrite console, choose the project you created in the step before and click the 'API Keys' link.</p>
 
-<h2>Init your SDK</h2>
-
-<p>Initialize your SDK code with your project ID which can be found in your project settings page and your new API secret Key from previous phase.</p>
+<p>Once inside your API keys screen, click the 'Add API Key' button, choose your key name, for example: 'Demo Key', and select the scopes your key will be granted to use. Once completed, you could copy your new API Key and use it to initialize your Appwrite server SDK. To learn about the different API scopes available to you, read more about <a href="/docs/keys">Appwrite API Keys</a> </p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -172,31 +164,115 @@ client
 ;</code></pre>
         </div>
     </li>
-    <li>
-        <h3>.NET</h3>
-        <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
-            
-var client = Client();
+</ul>
 
-client
-  .setEndpoint('http://[HOSTNAME_OR_IP]/v1') // Make sure your endpoint is accessible
-  .setProject('5ff3379a01d25') // Your project ID
-  .setKey('cd868c7af8bdc893b4...93b7535db89')
-;</code></pre>
+<div class="notice">
+    <h3>A Note About API Keys & Admin Mode</h3>
+    
+    <p>When using Appwrite API from your server-side with an API Key you will automatically run in <b>admin mode</b>. Admin mode disables the default user <a href="/docs/permissions">permission access control</a> restrictions and allows you to access all the resources available on your project. This is very useful when you want to manipulate your users' data like files and documents or even if you want to get a list of your users.</p>
+    
+    <p>Please note it is <b>highly</b> not recommended to run the admin mode from your client-side as it will probably lead to huge privacy and security issues. Check the <a href="/docs/admin">Admin Mode</a> documentation to learn more</p>
+</div>
+
+<h3>JSON Web Token (JWT) &nbsp;<span class="text-size-small text-fade">version >= 0.8</span></h3>
+
+<p>Using a JSON Web Token (JWT), you can interact with the Appwrite server API as a specific user. You'll be able to access only the relevant user resources and perform actions on his behalf.</p>
+
+<p>To create a JWT, you need to use the "account->createJWT" method using one of the Appwrite client SDKs. Before creating a token, you need to make sure your user is authenticated using the `createSession` method or log in with an OAuth provider.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web SDK</h3>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>appwrite // Get a JWT for authenticated user
+    .account.createJWT()
+            .then(function (response) {
+                console.log(response);
+            }, function (error) {
+                console.log(error);
+            });</code></pre>
         </div>
     </li>
     <li>
-        <h3>Dart</h3>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
-            
-final client = Client();
+        <h3>Flutter SDK</h3>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>Account account = Account(client);
+
+Response user = await account
+    .createJWT();</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>Once you get your valid token, you can pass it to your server and use it to initialize your Appwrite Server SDK and start making API calls. Your JWT will be valid for a maximum time of 15 minutes or less if the user session has expired before that time.</p>
+
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
+
+let client = new sdk.Client();
 
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
     .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+    .setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret JWT
+;</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>$client = new Client();
+
+$client
+    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    ->setProject('5df5acd0d48c2') // Your project ID
+    ->setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret JWT
+;</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+from appwrite.services.users import Users
+
+client = Client()
+
+(client
+  .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
+  .set_project('5df5acd0d48c2') # Your project ID
+  .set_jwt('919c2d18fb5d4...a2ae413da83346ad2') # Your secret JWT
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby SDK">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
+
+client = Appwrite::Client.new()
+
+client
+    .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
+    .set_project('5df5acd0d48c2') # Your project ID
+    .set_jwt('919c2d18fb5d4...a2ae413da83346ad2') # Your secret JWT
+;</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>let client = new sdk.Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+    .setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret JWT
 ;</code></pre>
         </div>
     </li>
@@ -400,7 +476,6 @@ promise.then(function (response) {
 });</code></pre>
         </div>
     </li>
-    <li>
     <li>
         <h3>.NET</h3>
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">

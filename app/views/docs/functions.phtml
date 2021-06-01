@@ -3,17 +3,17 @@
 use Utopia\View;
 
 $events = $this->getParam('events', []);
-$environments = $this->getParam('environments', []);
+$runtimes = $this->getParam('runtimes', []);
 
 ?>
 
 <p>Appwrite Functions allow you to extend and customize your Appwrite server functionality by executing your custom code. Appwrite can execute your custom code in response to any <a href="/docs/webhooks#events" target="_blank">Appwrite system event</a> like account creation, user login, or document update. You can also schedule your functions to run according to a CRON schedule or start them manually by triggering your function from an HTTP endpoint using the Appwrite client or server APIs.</p>
 
-<p>Appwrite Functions run in a secure, isolated Docker container. By default, Appwrite supports multiple environments for different languages that you can use to run your code.</p>
+<p>Appwrite Functions run in a secure, isolated Docker container. By default, Appwrite supports multiple runtimes for different languages that you can use to run your code.</p>
 
 <h2>Add Your Function</h2>
 
-<p>You can add a new function from your Appwrite project's dashboard. Access your Functions settings from your projects left navigation panel. Click the 'Add Function' button and choose your function name and code environment. In your Functions settings page, you can set your function event triggers, CRON schedule and set secure environment variables for your function environment.</p>
+<p>You can add a new function from your Appwrite project's dashboard. Access your Functions settings from your projects left navigation panel. Click the 'Add Function' button and choose your function name and code runtime. In your Functions settings page, you can set your function event triggers, CRON schedule and set secure environment variables for your function runtime.</p>
 
 <h2>Deploy Your Code</h2>
 
@@ -192,11 +192,11 @@ void main() { // Init SDK
 
 <p>When triggering a Cloud Function execution from the client, your users will be limited to a specific amount of execution per minute to make sure your Appwrite server is not being abused. The default limit is 60 calls per 1 minute. You can edit this limit using the server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
 
-<h2>Supported Environments</h2>
+<h2>Supported Runtimes</h2>
 
-<p>Appwrite provides multiple code environments to execute your custom functions. Each environment uses a Docker image tied to a specific language version to provide a safe, isolated playground to run your team's code.</p>
+<p>Appwrite provides multiple code runtimes to execute your custom functions. Each runtime uses a Docker image tied to a specific language version to provide a safe, isolated playground to run your team's code.</p>
 
-<p>Below is a list of supported Cloud Functions environments. The Appwrite team continually adds support for new environments. You can easily change which environments your Appwrite setup supports by editing your server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
+<p>Below is a list of supported Cloud Functions runtimes. The Appwrite team continually adds support for new runtimes. You can easily change which runtimes your Appwrite setup supports by editing your server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -208,12 +208,12 @@ void main() { // Init SDK
         </tr>
     </thead>
     <tbody>
-        <?php foreach($environments as $key => $environment): ?>
+        <?php foreach($runtimes as $key => $runtime): ?>
         <tr>
-            <td><img src="" data-ls-attrs="src=/images/environments/<?php echo $this->escape($environment['logo'] ?? ''); ?>" alt="Function Env." class="avatar xxs" /></td>
+            <td><img src="" data-ls-attrs="src=/images/runtimes/<?php echo $this->escape($runtime['logo'] ?? ''); ?>" alt="Function Env." class="avatar xxs" /></td>
             <td><span data-general-copy><?php echo $this->escape($key); ?> </span></td>
-            <td><a href="https://hub.docker.com/r/appwrite/env-<?php echo $this->escape($key); ?>" target="_blank" rel="noopener"><?php echo $this->escape($environment['image'] ?? ''); ?> <i class="icon-link-ext"></i></a></td>
-            <td><?php echo $this->escape(implode(' / ', $environment['supports'] ?? [])); ?></td>
+            <td><a href="https://hub.docker.com/r/appwrite/env-<?php echo $this->escape($key); ?>" target="_blank" rel="noopener"><?php echo $this->escape($runtime['image'] ?? ''); ?> <i class="icon-link-ext"></i></a></td>
+            <td><?php echo $this->escape(implode(' / ', $runtime['supports'] ?? [])); ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
@@ -226,7 +226,7 @@ void main() { // Init SDK
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
         <tr>
-            <th style="width: 240px">Name</th>
+            <th style="width: 250px">Name</th>
             <th>Description</th>
         </tr>
     </thead>
@@ -257,13 +257,13 @@ void main() { // Init SDK
         </tr>
         <tr>
             <td>
-                APPWRITE_FUNCTION_ENV_NAME
+                APPWRITE_FUNCTION_RUNTIME_NAME
             </td>
             <td>Your function environment name. Can be any of Appwrite supported execution environments.</td>
         </tr>
         <tr>
             <td>
-                APPWRITE_FUNCTION_ENV_VERSION
+                APPWRITE_FUNCTION_RUNTIME_VERSION
             </td>
             <td>Your function environment version.</td>
         </tr>
@@ -284,7 +284,7 @@ void main() { // Init SDK
                 APPWRITE_FUNCTION_DATA
                 <p class="margin-top-small text-fade">version >= 0.8.0</p>
             </td>
-            <td>Your function's custom execution data. This variable's value contains a string in any format. If the custom data is in JSON FORMAT, it must be parsed inside the function code.</td>
+            <td>Your function's custom execution data. This variable's value contains a string in any format. If the custom data is in JSON FORMAT, it must be parsed inside the function code. Note that this variable can be set only when triggering a function using the <a href="https://appwrite.io/docs/client/functions?sdk=web#functionsCreateExecution">SDK or HTTP API</a> and the Appwrite Dashboard.</td>
         </tr>
         <tr>
             <td>
@@ -314,6 +314,20 @@ void main() { // Init SDK
             </td>
             <td>Your function event payload. Deprecated in favor of APPWRITE_FUNCTION_EVENT_DATA in version 0.8.0.</td>
         </tr>
+        <tr>
+            <td>
+                APPWRITE_FUNCTION_ENV_NAME
+                <p class="margin-top-small text-fade">version &lt; 0.8.0 <span class="text-danger">(deprecated)</span></p>
+            </td>
+            <td>Your function environment name. Can be any of Appwrite supported execution environments.</td>
+        </tr>
+        <tr>
+            <td>
+                APPWRITE_FUNCTION_ENV_VERSION
+                <p class="margin-top-small text-fade">version &lt; 0.8.0 <span class="text-danger">(deprecated)</span></p>
+            </td>
+            <td>Your function environment version.</td>
+        </tr>
     </tbody>
 </table>
 
@@ -335,7 +349,7 @@ $image = new View(__DIR__.'/../general/image.phtml');
 
 <h3>Run Offline</h3>
 
-<p>You can quickly run your Cloud Function locally by executing the Appwrite environment locally using its corresponding Docker image. You can pass your offline container any environment variables your script needs and your entry command like in the example below.</p>
+<p>You can quickly run your Cloud Function locally by executing the Appwrite runtime locally using its corresponding Docker image. You can pass your offline container any environment variables your script needs and your entry command like in the example below.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -373,9 +387,9 @@ $image = new View(__DIR__.'/../general/image.phtml');
     </li>
 </ul>
 
-<p>The example above shows how you can mount your current working dir into the "appwrite/env-node-15.5:1.0.0" Cloud Functions environment and execute a custom command to simulate exactly how the Appwirte server will execute the function on the Appwrite server. You can also pass multiple environment variables that your code might require.</p>
+<p>The example above shows how you can mount your current working dir into the "appwrite/env-node-15.5:1.0.0" Cloud Functions runtime and execute a custom command to simulate exactly how the Appwirte server will execute the function on the Appwrite server. You can also pass multiple environment variables that your code might require.</p>
 
-<p>When running a Cloud Functions environment for a coding language that uses a central directory for managing all dependencies, you will need to package all your dependencies in your working directory under the ".appwrite" folder as mentioned in the "Handling Dependencies" step above. This will ensure your function container can access all required packages and execute your function successfully.</p>
+<p>When running a Cloud Functions runtime for a coding language that uses a central directory for managing all dependencies, you will need to package all your dependencies in your working directory under the ".appwrite" folder as mentioned in the "Handling Dependencies" step above. This will ensure your function container can access all required packages and execute your function successfully.</p>
 
 <h2>Demos & Examples</h2>
 
