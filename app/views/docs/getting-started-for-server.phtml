@@ -40,16 +40,6 @@
         </div>
     </li>
     <li>
-        <h3>.NET</h3>
-        <div class="ide margin-top-small" data-lang="bash" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism># Package Manager
-Install-Package Appwrite
-
-# or .NET CLI
-dotnet add package Appwrite</code></pre>
-        </div>
-    </li>
-    <li>
         <h3>Dart</h3>
         <div>
             <div class="ide margin-top-small" data-lang="bash" data-lang-label="Dart SDK">
@@ -343,20 +333,6 @@ promise.then(function (response) {
         </div>
     </li>
     <li>
-        <h3>.NET</h3>
-        <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>var users = Users(client);
-
-try {
-  var request = await users.create('email@example.com', 'password', 'name');
-  var response = await request.Content.ReadAsStringAsync();
-  Console.WriteLine(response);
-} catch (AppwriteException e) {
-  Console.WriteLine(e.Message);
-}</code></pre>
-        </div>
-    </li>
-    <li>
         <h3>Dart</h3>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>final users = Users(client);
@@ -478,33 +454,6 @@ promise.then(function (response) {
 }, function (error) {
     console.log(error);
 });</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>.NET</h3>
-        <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
-
-static async Task Main(string[] args)
-{
-  var client = Client();
-
-  client
-    .setEndpoint('http://[HOSTNAME_OR_IP]/v1') // Make sure your endpoint is accessible
-    .setProject('5ff3379a01d25') // Your project ID
-    .setKey('cd868c7af8bdc893b4...93b7535db89')
-  ;
-
-  var users = Users(client);
-
-  try {
-    var request = await users.create('email@example.com', 'password', 'name');
-    var response = await request.Content.ReadAsStringAsync();
-    Console.WriteLine(response);
-  } catch (AppwriteException e) {
-    Console.WriteLine(e.Message);
-  }
-}</code></pre>
         </div>
     </li>
     <li>
