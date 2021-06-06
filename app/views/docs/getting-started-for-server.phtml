@@ -1,19 +1,3 @@
-<?php
-$platforms = $this->getParam('platforms');
-$versions = [];
-
-foreach($platforms['server']['languages'] ?? [] as $lang) {
-    $key = $lang['key'] ?? '';
-    $version = $lang['version'] ?? '';
-    
-    if(!empty($key)) {
-        $versions[$key] = $version;
-    }
-}
-
-$dartVersion = $versions['dart'] ?? '';
-?>
-
 <p>Appwrite is a development platform providing you easy yet powerful API and management console to get your next project up and running quickly.</p>
 
 <p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
@@ -68,14 +52,8 @@ dotnet add package Appwrite</code></pre>
     <li>
         <h3>Dart</h3>
         <div>
-            <p>Add the Appwrite SDK to your pubspec.yaml</p>
-            <div class="ide margin-top-small" data-lang="yaml" data-lang-label="Dart SDK">
-                <pre class="line-numbers"><code class="prism language-yaml" data-prism>dependency:
-    dart_appwrite: <?php echo $this->escape($dartVersion); ?></code></pre>
-            </div>
-            <p>Install using Pub</p>
             <div class="ide margin-top-small" data-lang="bash" data-lang-label="Dart SDK">
-                <pre class="line-numbers"><code class="prism language-bash" data-prism>dart pub get</code></pre>
+                <pre class="line-numbers"><code class="prism language-bash" data-prism>dart pub add dart_appwrite</code></pre>
             </div>
         </div>
     </li>
@@ -157,6 +135,19 @@ client
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>let client = new sdk.Client();
 
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+;</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Dart SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
+
+Client client = Client();
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
     .setProject('5df5acd0d48c2') // Your project ID
@@ -273,6 +264,19 @@ client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
     .setProject('5df5acd0d48c2') // Your project ID
     .setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret JWT
+;</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Dart SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
+
+Client client = Client();
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+    .setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
 ;</code></pre>
         </div>
     </li>
