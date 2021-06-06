@@ -31,7 +31,7 @@ $markdown->setSafeMode(true);
     $description = $node['description'] ?? '';
     ?>
 
-    <h2 id="<?php echo $this->escape(strtolower(str_replace(' ', '_', $category))); ?>"><?php echo $this->escape($category); ?></h2>
+    <h2 id="<?php echo $this->escape(strtolower(str_replace(' ', '_', $category))); ?>"><a href="/docs/environment-variables#<?php echo $this->escape(strtolower(str_replace(' ', '_', $category))); ?>"><?php echo $this->escape($category); ?></a></h2>
 
     <?php if($description): ?>
         <p><?php echo $markdown->text($this->escape($description)); ?></p>
