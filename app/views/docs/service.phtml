@@ -37,7 +37,7 @@ $markdown->setSafeMode(true);
 $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
 ?>
 
-<div data-ls-attrs="class=language-<?php echo $this->escape($sdk); ?> platform-<?php echo $this->escape($family); ?> examples-in-<?php echo $this->escape($sdk); ?>">
+<div data-ls-attrs="class=language-<?php echo $this->escape($sdk); ?> platform-<?php echo $this->escape($family); ?> examples-in-<?php echo $this->escape($sdk); ?> references">
     <?php
     foreach ($spec['paths'] as $url => $path) {
         foreach ($path as $method => $operation) {
