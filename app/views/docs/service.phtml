@@ -241,6 +241,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
         $rateKey = $operation['rateKey'] ?? '';
         $scope = $operation['scope'] ?? '';
         $snippet = $operation['snippet'] ?? '';
+        $security = $operation['security'][0] ?? '';
         $platformsList = (isset($operation['platforms'])) ? array_map(function($node) {return 'example-for-'.$node;}, $operation['platforms']) : [];
 
         usort($parameters, function ($a, $b) {
@@ -299,7 +300,13 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                     <div class="margin-bottom-large">
                         <h3 class="margin-bottom margin-top-small">Authentication</h3>
 
-                        <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys" target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to the <u>"<?php echo $scope; ?>"</u> permission scope.</p>
+                        <?php if(array_key_exists('Key', $security) && array_key_exists('JWT', $security)): ?>
+                            <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys" target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to the <u>"<?php echo $scope; ?>"</u> permission scope. You can also authenticate using a valid <a href="/docs/client/account#accountCreateJWT" target="_blank">JWT</a> and perform actions on behalf of your user.</p>
+                        <?php elseif(array_key_exists('Key', $security)): ?>
+                            <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys" target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to the <u>"<?php echo $scope; ?>"</u> permission scope.</p>
+                        <?php elseif(array_key_exists('JWT', $security)): ?>
+                            <p>To access this route, init your SDK with your project unique ID and a valid JWT. Using the <a href="/docs/client/account#accountCreateJWT" target="_blank">JWT</a> authentication you will be able to perform API actions on behalf of your user.</p>
+                        <?php endif; ?>
                     </div>
                     <?php endif; ?>
 
