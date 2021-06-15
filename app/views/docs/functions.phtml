@@ -86,7 +86,7 @@ $runtimes = $this->getParam('runtimes', []);
 
     <p>If your code uses a package manager like NPM, Yarn, or Composer to install packages, you have to make sure your code directory includes your packages directory (node_modules for node or vendor for PHP) before you try to package and deploy your code.</p>
 
-    <p>If you're using a programming language that saves your packages under a global directory like Dart, Python or Ruby, you should set your package manager to keep your code under the '.appwrite' code directory under your code working directory to be deployed and available in your cloud functions environment.</p>
+    <p>If you're using a programming language that saves your packages under a global directory like Dart, Python or Ruby, you should set your package manager to keep your code under the '.appwrite' code directory under your code working directory to be deployed and available in your cloud functions runtime.</p>
 
     <p>For most languages, this can be achieved easily by adding an environment variable before installing your dependencies. Below you can find some simple examples:</p>
 
@@ -221,7 +221,7 @@ void main() { // Init SDK
 
 <h2>Environment Variables</h2>
 
-<p>Environment variables supplied by Appwrite in addition to your own defined environment variables that you can access from your function code. These variables give you information about your execution environment.</p>
+<p>Environment variables supplied by Appwrite in addition to your own defined environment variables that you can access from your function code. These variables give you information about your execution runtime environment.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -259,13 +259,13 @@ void main() { // Init SDK
             <td>
                 APPWRITE_FUNCTION_RUNTIME_NAME
             </td>
-            <td>Your function environment name. Can be any of Appwrite supported execution environments.</td>
+            <td>Your function runtime name. Can be any of Appwrite supported execution environments.</td>
         </tr>
         <tr>
             <td>
                 APPWRITE_FUNCTION_RUNTIME_VERSION
             </td>
-            <td>Your function environment version.</td>
+            <td>Your function runtime version.</td>
         </tr>
         <tr>
             <td>
