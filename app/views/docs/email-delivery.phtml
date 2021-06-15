@@ -58,15 +58,14 @@ The next possible source of error is the configuration in your .env file. Make s
 <p>
 Another source of error could be that the environment variables have not been set in the appwrite container. You can check this using 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose exec appwrite vars</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose exec appwrite-worker-mails vars</code></pre>
 </div>
 If this is the case, you can try rebuilding your appwrite stack using:
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose up -d --build --force-recreate</code></pre>
 </div>
 
-If you're still stuck, feel free to reach out to us on our <a href="https://appwrite.io/discord">Discord server</a>.
 </p>
 
 
-<p>That's it! Head over to your Appwrite console, logout from your account and try to recover your password by navigating to </b>Forgot password?</b>. If everything has been setup correctly, you should receive an e-mail with instructions to reset your password. Obviously this is not necessary and only a test to check if the SMTP integration is working. By using a well-configured SMTP server, you can make sure your users enjoy a maximum rate of email deliverability.</p>
+<p>Now you can head over to your Appwrite console, logout from your account and try to recover your password  or send invites to other team members from the your Appwrite console using your newly configured SMTP provider.</p>
