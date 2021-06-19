@@ -11,6 +11,10 @@ $example = function ($model, $models) use (&$example)
     $output = [];
     $properties = $model['properties'] ?? [];
 
+    if(empty($properties) && $model['additionalProperties']) {
+        return new \stdClass();
+    }
+
     foreach($properties as $key => $property) {
         $value = $property['x-example'] ?? null;
         $type = $property['type'] ?? null;
