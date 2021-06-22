@@ -1,3 +1,19 @@
+<?php
+$platforms = $this->getParam('platforms');
+$versions = [];
+
+foreach($platforms['server']['languages'] ?? [] as $lang) {
+    $key = $lang['key'] ?? '';
+    $version = $lang['version'] ?? '';
+    
+    if(!empty($key)) {
+        $versions[$key] = $version;
+    }
+}
+
+$kotlinVersion = $versions['kotlin'] ?? '';
+?>
+
 <p>Appwrite is a development platform providing you easy yet powerful API and management console to get your next project up and running quickly.</p>
 
 <p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
@@ -57,7 +73,7 @@
             <p>Add Appwrite SDK under dependencies in your `build.gradle(.kts)` file</p>
             <div class="ide margin-top-small" data-lang="gradle" data-lang-label="Gradle">
                 <pre class="line-numbers"><code class="prism language-gradle" data-prism>dependencies {
-    implementation("io.appwrite:sdk-for-kotlin:0.0.0-SNAPSHOT")
+    implementation("io.appwrite:sdk-for-kotlin:<?php $this->escape($kotlinVersion); ?>")
 }</code></pre>
             </div>
         </div>
