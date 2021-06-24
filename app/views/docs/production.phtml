@@ -1,18 +1,18 @@
 <p>Appwrite default setup is designed to help you get started quickly with using the Appwrite server. To run Appwrite successfully in a production environment, you should follow a few basic concepts and best practices. This document assumes you have some very basic understanding of Docker and Docker Compose command-line tools.</p>
 
-<h2>Encryption</h2>
+<h2><a href="#encryption" id="encryption">Encryption</a></h2>
 
 <p>By default, the Appwrite setup doesn’t come with a uniquely generated encryption key. This key is used to store your files and sensitive data like webhook passwords or API keys in a safe way. To take advantage of this feature, you must generate a unique key and set it as the value of the <b>_APP_OPENSSL_KEY_V1</b> environment variable.</p>
 
 <p>Make sure to keep this key in a safe place and never make it publicly accessible. There are many online resources with methods of keeping your secret keys safe in your servers.</p>
 
-<h2>Limit Console Access</h2>
+<h2><a href="#LimitConsoleAccess" id="LimitConsoleAccess">Limit Console Access</a></h2>
 
 <p>By default, anyone can signup for your Appwrite server, create projects, and use your computing power. While this is great for testing around or running your Appwrite service in a network isolated environment, it is highly not recommended for public production use.</p>
 
 <p>We are providing three different methods to limit access to your Appwrite console. You can either set a list of IPs or email address which users are allowed to signup from. You can choose one or multiple restriction methods to apply.</p>
 
-<h2>Scaling</h2>
+<h2><a href="#Scaling" id="Scaling">Scaling</a></h2>
 
 <p>Appwrite was built with scalability in mind. Appwrite can scale both horizontally and vertically.</p>
 
@@ -22,13 +22,13 @@
 
 <p>There are three Appwrite containers that do keep their state. MariaDB, Redis, and InfluxDB containers are used for storing data, cache and pub/sub messaging, and usage stats (in this order). To scale them out, all you need to do is set up a standard cluster (same as you would with any other app using these technologies) according to your needs and performance.</p>
 
-<h2>Emails</h2>
+<h2><a href="#Emails" id="Emails">Emails</a></h2>
 
 <p>Sending emails is hard. There are a lot of SPAM rules and configurations to master in order to set a functional SMTP server. The SMTP server that comes packaged with Appwrite is great for development but needs some work done to function well against SPAM filters.</p>
 
 <p>Another easier option is to use an ‘SMTP as a service’ product like Sendgrid or Mailgun. You can <a href="/docs/email-delivery">change Appwrite SMTP settings</a> and credentials to any 3rd party provider you like who support SMTP integration using our Docker environment variables. Most SMPT providers offer a decent free tier to get started with.</p>
 
-<h2>Backups</h2>
+<h2><a href="#Backups" id="Backups">Backups</a></h2>
 
 <p>Backups are highly recommended for any production environment. Currently, there is no built-in script we provide to do this automatically. To be able to backup your Appwrite server data, stats, and files, you will need to do the following.</p>
 
@@ -38,7 +38,7 @@
     <li>Create a script to backup Appwrite storage volume. There are many online resources explaining different ways to backup a docker volume. When running on multiple servers, it is very recommended to use an attachable storage point. Some cloud providers offer integrated backups to such attachable mount like GCP, AWS, DigitalOcean, and the list continues.</li>
 </ol>
 
-<h2>Error Reporting</h2>
+<h2><a href="#ErrorReporting" id="ErrorReporting">Error Reporting<</a></h2>
 
 <p>By default, Appwrite installation comes with error debugging is turned off, You can turn it on in dev mode to try and debug issues, or report problems while still in development mode.</p>
 
