@@ -11,7 +11,7 @@ foreach($platforms['client']['languages'] as $lang) {
     }
 }
 
-$version = (isset($versions['android'])) ? $versions['android'] : '';
+$androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 ?>
 <p>Appwrite is a development platform providing you easy yet powerful API and management console to get your next project up and running quickly.</p>
 
@@ -33,13 +33,7 @@ $version = (isset($versions['android'])) ? $versions['android'] : '';
 <div class="ide" data-lang="groovy" data-lang-label="Groovy">
   <pre class="line-numbers">
   <code class="prism language-groovy" data-prism><?php echo $this->escape('repositories {
-    maven { 
-        url = "https://maven.pkg.github.com/{{ sdk.gitUserName|url_encode }}/{{ sdk.gitRepoName|url_encode }}"
-        credentials {
-           username = GITHUB_USER
-           password = GITHUB_TOKEN
-       }
-    }
+    mavenCentral()
 }');?>
   </code>
   </pre>
@@ -49,7 +43,7 @@ $version = (isset($versions['android'])) ? $versions['android'] : '';
 
 <div class="ide" data-lang="groovy" data-lang-label="Groovy">
   <pre class="line-numbers">
-  <code class="prism language-groovy" data-prism>'implementation("appwrite-kotlin-android:<?php echo $this->escape($version); ?>")'
+  <code class="prism language-groovy" data-prism>'implementation("io.appwrite.sdk-for-android:<?php echo $this->escape($androidVersion); ?>")'
   </code>
   </pre>
 </div>
@@ -105,8 +99,8 @@ val json = response.body?.string()
 </div>
 
 <h2>Full Example</h2>
-<div class="ide" data-lang="dart" data-lang-label="Dart SDK">
-                    <pre class="line-numbers"><code class="prism language-dart" data-prism>import io.appwrite.Client
+<div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+                    <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
 
 val client = Client(context)
