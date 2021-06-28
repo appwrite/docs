@@ -17,11 +17,11 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 
 <p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
 
-<h2>Create Your First Appwrite Project</h2>
+<h2><a href="#createYourProject" id="createYourProject">Create Your First Appwrite Project</a></h2>
 
 <p>Go to your new Appwrite console, and once inside, click the <i class="icon-plus"></i> icon in the top navigation header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create to get started.</p>
 
-<h2>Add your Flutter Platform</h2>
+<h2><a href="#addYourPlatform" id="addYourPlatform">Add your Flutter Platform</a></h2>
 
 <p>To init your SDK and start interacting with Appwrite services, you need to add a new Flutter platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and click the 'Add Platform' button.</p>
 
@@ -35,7 +35,7 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 <h3>Android</h3>
 <p>For <b>Android</b> add your app <u>name</u> and <u>package name</u>, Your package name is generally the applicationId in your app-level build.gradle file. By registering your new app platform, you are allowing your app to communicate with the Appwrite API.</p>
 
-<h2>Get Appwrite Flutter SDK</h2>
+<h2><a href="#getSDK" id="getSDK">Get Appwrite Flutter SDK</a></h2>
 
 <p>Add <a href="https://pub.dev/packages/appwrite" target="_blank" rel="noopener">Appwrite SDK</a> to your package's pubspec.yaml file <a href="https://github.com/appwrite/playground-for-flutter/blob/master/pubspec.yaml" target="_blank" rel="noopener">(view example)</a>:</p>
 
@@ -92,7 +92,7 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
   <p>While running Flutter Web, make sure your Appwrite server and your Flutter client are using the same top-level domain and the same protocol (HTTP or HTTPS) to communicate. When trying to communicate between different domains or protocols, you may receive HTTP status error 401 because some modern browsers block cross-site or insecure cookies for enhanced privacy. In production, Appwrite allows you set multiple <a href="/docs/custom-domains">custom-domains</a> for each project.</p>
 </div>
 
-<h2>Init your SDK</h2>
+<h2><a href="#initSDK" id="initSDK">Init your SDK</a></h2>
 
 <p>Initialize your SDK code with your project ID, which can be found in your project settings page.</p>
 
@@ -113,7 +113,7 @@ client
 
 <p>When trying to connect to Appwrite from an emulator or a mobile device, localhost is the hostname for the device or emulator and not your local Appwrite instance. You should replace localhost with your private IP as the Appwrite endpoint's hostname. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite API.</p>
 
-<h2>Make Your First Request</h2>
+<h2><a href="#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
 <p>Once your SDK object is set, access any of the Appwrite services and choose any request to send. Full documentation for any service method you would like to use can be found in your SDK documentation or in the API References section.</p>
 
@@ -130,7 +130,7 @@ Response user = await account
 </code></pre>
 </div>
 
-<h2>Full Example</h2>
+<h2><a href="#fullExample" id="fullExample">Full Example</a></h2>
 <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
   <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
@@ -154,6 +154,6 @@ Response user = await account
 </code></pre>
 </div>
 
-<h2>Next Steps</h2>
+<h2><a href="#nextSteps" id="nextSteps">Next Steps</a></h2>
 
 <p>Appwrite has many services and tools to help improve your app and speed up your development. The best way to learn how you can take advantage of them is to explore the different API references docs.</p>
