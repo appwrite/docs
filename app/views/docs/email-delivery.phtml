@@ -51,17 +51,16 @@ The next possible source of error is the configuration in your .env file. Make s
 
 <p> Moving on to the next source of error. Some SMTP providers have a concept of <a href="https://help.mailgun.com/hc/en-us/articles/217531258-Authorized-Recipients">authorized recipients</a> in their sandbox (or dev) environments and you can only send emails to recipients in this list. Make sure that the recipient of the email that you're trying to send is a part of this list.</p>
 
-<p>
-Another source of error could be that the environment variables have not been set in the appwrite container. You can check this using 
+<p>Another source of error could be that the environment variables have not been set in the appwrite container. You can check this using </p>
+
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose exec appwrite-worker-mails vars</code></pre>
 </div>
-If this is the case, you can try rebuilding your appwrite stack using:
+
+<p>If this is the case, you can try rebuilding your appwrite stack using:</p>
+
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose up -d --build --force-recreate</code></pre>
 </div>
-
-</p>
-
 
 <p>Now you can head over to your Appwrite console, logout from your account and try to recover your password or send invites to other team members from your Appwrite console using your newly configured SMTP provider.</p>
