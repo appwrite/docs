@@ -4,7 +4,7 @@
 
 <p>Inside your Appwrite console, you can view all your tasks, their current statuses, previous and next runtime and a response log to view the result of previous executions.</p>
 
-<h2>CRON Syntax</h2>
+<h2><a href="#cron" id="cron">CRON Syntax</a></h2>
 
 <p>Cron format is a simple, yet powerful and flexible way to define the time and frequency of various actions. The create a new task, you need to supply Appwrite with a valid CRON syntax.</p>
 
@@ -44,7 +44,7 @@
     <pre class="line-numbers"><code class="prism language-bash" data-prism>0 17 * * sun,fri</code></pre>
 </div>
 
-<h2>Headers</h2>
+<h2><a href="#headers" id="headers">Headers</a></h2>
 
 <p>HTTP payloads that are delivered to your task's configured URL endpoint will contain several special headers:</p>
 
@@ -71,7 +71,7 @@
     </tbody>
 </table>
 
-<h2>Errors</h2>
+<h2><a href="#errors" id="errors">Errors</a></h2>
 
 <p>Appwrite tasks server will treat any none 2** status code resulted from a task execution as an error or a failed task. The server will attempt to execute the failed tasks for 5 more times before changing tasks status to paused and stop future executions.</p>
 

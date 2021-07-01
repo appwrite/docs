@@ -11,11 +11,11 @@ $runtimes = $this->getParam('runtimes', []);
 
 <p>Appwrite Functions run in a secure, isolated Docker container. By default, Appwrite supports multiple runtimes for different languages that you can use to run your code.</p>
 
-<h2>Add Your Function</h2>
+<h2><a href="#addFunction" id="addFunction">Add Your Function</a></h2>
 
 <p>You can add a new function from your Appwrite project's dashboard. Access your Functions settings from your projects left navigation panel. Click the 'Add Function' button and choose your function name and code runtime. In your Functions settings page, you can set your function event triggers, CRON schedule and set secure environment variables for your function runtime.</p>
 
-<h2>Deploy Your Code</h2>
+<h2><a href="#deployCode" id="deployCode">Deploy Your Code</a></h2>
 
 <p>You can deploy your code using the <a href="/docs/command-line">Appwrite CLI</a> tool, the Appwrite <a href="/docs/getting-started-for-server">Server API</a> or manually from the Appwrite console.</p>
 
@@ -115,7 +115,7 @@ $runtimes = $this->getParam('runtimes', []);
     </div>
 </div>
 
-<h2>Execute</h2>
+<h2><a href="#execute" id="execute">Execute</a></h2>
 
 <p>Besides setting a schedule or allowing your function to listen to Appwrite’s system events, you can also manually execute your cloud functions from your Appwrite console or API.</p>
 
@@ -129,7 +129,7 @@ $image = new View(__DIR__.'/../general/image.phtml');
         ->render();
 ?>
 
-<p>To execute a function from the Appwrite console, click the 'Execute Now' button on your function's overview page. To execute a function from the API, send a POST request to the <a href="" target="_blank">function execution endpoint</a>.</p>
+<p>To execute a function from the Appwrite console, click the 'Execute Now' button on your function's overview page. To execute a function from the API, send a POST request to the <a href="/docs/client/functions#functionsCreateExecution" target="_blank">function execution endpoint</a>.</p>
 
 <p>The function execution endpoint is available from both Appwrite client and server APIs. To execute your function from the <b>server API</b>, you need an API key with 'execution.write' scope.</p>
 
@@ -192,7 +192,7 @@ void main() { // Init SDK
 
 <p>When triggering a Cloud Function execution from the client, your users will be limited to a specific amount of execution per minute to make sure your Appwrite server is not being abused. The default limit is 60 calls per 1 minute. You can edit this limit using the server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
 
-<h2>Supported Runtimes</h2>
+<h2><a href="#supportedRuntimes" id="supportedRuntimes">Supported Runtimes</a></h2>
 
 <p>Appwrite provides multiple code runtimes to execute your custom functions. Each runtime uses a Docker image tied to a specific language version to provide a safe, isolated playground to run your team's code.</p>
 
@@ -219,7 +219,7 @@ void main() { // Init SDK
     </tbody>
 </table>
 
-<h2>Environment Variables</h2>
+<h2><a href="#enviromentVariables" id="enviromentVariables">Environment Variables</a></h2>
 
 <p>Environment variables supplied by Appwrite in addition to your own defined environment variables that you can access from your function code. These variables give you information about your execution runtime environment.</p>
 
@@ -331,9 +331,9 @@ void main() { // Init SDK
     </tbody>
 </table>
 
-<h2>Monitor & Debug</h2>
+<h2><a href="#monitorDebug" id="monitorDebug">Monitor & Debug</a></h2>
 
-<p>You can monitor your function execution usgae stats and logs from both your Appwrite console and the <a href="" traget="_blank">Appwrite server API</a>. To access your functions usage stats and logs from your console, click the 'Usage' tab in your function dashboard.</p>
+<p>You can monitor your function execution usage stats and logs from your Appwrite console. To access your functions usage stats and logs, click the 'Usage' tab in your function dashboard.</p>
 
 <p>The usage screen in your console will allow you to track the number of execution and your function CPU usage time. You can also review a detailed log of your function execution history, including the function exit code, output log, and error log.</p>
 
@@ -391,6 +391,6 @@ $image = new View(__DIR__.'/../general/image.phtml');
 
 <p>When running a Cloud Functions runtime for a coding language that uses a central directory for managing all dependencies, you will need to package all your dependencies in your working directory under the ".appwrite" folder as mentioned in the "Handling Dependencies" step above. This will ensure your function container can access all required packages and execute your function successfully.</p>
 
-<h2>Demos & Examples</h2>
+<h2><a href="#demosExamples" id="demosExamples">Demos & Examples</a></h2>
 
 <p>There are many Cloud Function demos and examples created by the Appwrite team and community in multiple coding languages. These examples are available at our <a href="https://github.com/appwrite/demos-for-functions" target="_blank" rel="noopener">demos repository</a> on GitHub. You can also submit your examples by submitting a <a href="https://github.com/appwrite/demos-for-functions/pulls" target="_blank" rel="noopener">pull-request</a>.</p>
