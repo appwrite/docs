@@ -98,7 +98,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                 ?>
 
                 <?php foreach($docDirectories as $docDirectoryKey => $docDirectory): ?>
-                    .language-<?php echo strtolower($language['key']); ?> .example-in-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> {
+                    .language-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> .example-in-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> {
                         display: block;
                     }
 
@@ -137,7 +137,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                     data-event="change"
                     data-scope="window.ls"
                     data-success="reset">
-                    <?php echo $sdk; ?>
+
                     <?php echo $this->escape(ucfirst($family)); ?> integration with &nbsp;
                     <select class="choose-platform" name="URL">
                         <?php foreach ($platforms as $key => $platform): ?>
