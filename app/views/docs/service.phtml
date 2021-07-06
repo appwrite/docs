@@ -91,6 +91,10 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                 if(!isset($language['family']) || $language['family'] !== $family) {
                     continue;
                 }
+
+                $docDirectories = (isset($language['docDirectories']))
+                    ? $language['docDirectories']
+                    : ['Lang' => 'examples'];
                 ?>
 
                 <?php foreach($docDirectories as $docDirectoryKey => $docDirectory): ?>
