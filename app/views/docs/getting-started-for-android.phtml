@@ -33,15 +33,13 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 <div class="ide" data-lang="groovy" data-lang-label="Groovy">
   <pre class="line-numbers"><code class="prism language-groovy" data-prism><?php echo $this->escape('repositories {
     mavenCentral()
-}');?></code>
-  </pre>
+}');?></code></pre>
 </div>
 
 <p>And add this to your project's build.gradle file:</p>
 
 <div class="ide" data-lang="groovy" data-lang-label="Groovy">
-  <pre class="line-numbers"><code class="prism language-groovy" data-prism>'implementation("io.appwrite.sdk-for-android:<?php echo $this->escape($androidVersion); ?>")'</code>
-  </pre>
+  <pre class="line-numbers"><code class="prism language-groovy" data-prism>'implementation("io.appwrite.sdk-for-android:<?php echo $this->escape($androidVersion); ?>")'</code></pre>
 </div>
 
 <h3>OAuth Callback</h3>
@@ -87,8 +85,7 @@ val client = Client(context)
                     <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// Register User
 val account = Account(client)
 val response = account.create("email@example.com", "password")
-val json = response.body?.string()
-</code></pre>
+val json = response.body?.string()</code></pre>
 </div>
 
 <h2>Full Example</h2>
@@ -104,8 +101,7 @@ val client = Client(context)
 
 val account = Account(client)
 val response = account.create("email@example.com", "password")
-val json = response.body?.string()
-</code></pre>
+val json = response.body?.string()</code></pre>
 </div>
 
 <h2>Next Steps</h2>
