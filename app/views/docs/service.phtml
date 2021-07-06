@@ -137,7 +137,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                     data-event="change"
                     data-scope="window.ls"
                     data-success="reset">
-
+                    <?php echo $sdk; ?>
                     <?php echo $this->escape(ucfirst($family)); ?> integration with &nbsp;
                     <select class="choose-platform" name="URL">
                         <?php foreach ($platforms as $key => $platform): ?>
