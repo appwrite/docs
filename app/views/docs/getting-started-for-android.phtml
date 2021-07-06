@@ -31,23 +31,18 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 
 <p>First, add this to your root level build.gradle file: </p>
 <div class="ide" data-lang="groovy" data-lang-label="Groovy">
-  <pre class="line-numbers">
-  <code class="prism language-groovy" data-prism><?php echo $this->escape('repositories {
+  <pre class="line-numbers"><code class="prism language-groovy" data-prism><?php echo $this->escape('repositories {
     mavenCentral()
-}');?>
-  </code>
+}');?></code>
   </pre>
 </div>
 
 <p>And add this to your project's build.gradle file:</p>
 
 <div class="ide" data-lang="groovy" data-lang-label="Groovy">
-  <pre class="line-numbers">
-  <code class="prism language-groovy" data-prism>'implementation("io.appwrite.sdk-for-android:<?php echo $this->escape($androidVersion); ?>")'
-  </code>
+  <pre class="line-numbers"><code class="prism language-groovy" data-prism>'implementation("io.appwrite.sdk-for-android:<?php echo $this->escape($androidVersion); ?>")'</code>
   </pre>
 </div>
-
 
 <h3>OAuth Callback</h3>
 
@@ -62,8 +57,7 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
             <data android:scheme="appwrite-callback-[PROJECT_ID]"  />
         </intent-filter>
     </activity>
-'); ?>
-</code></pre>
+'); ?></code></pre>
 </div>
 
 <h2>Init your SDK</h2>
@@ -78,8 +72,7 @@ val client = Client(context)
   .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
   .setProject("5df5acd0d48c2") // Your project ID
   .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
-  .setSelfSigned() // For self signed certificates only use for development
-</code></pre>
+  .setSelfSigned() // For self signed certificates only use for development</code></pre>
 </div>
 
 <p>Before starting to send any API calls to your new Appwrite instance, make sure your Android emulators has network access to the Appwrite server hostname or IP address.</p>
