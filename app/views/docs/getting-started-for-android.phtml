@@ -48,13 +48,13 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 
 <div class="ide" data-lang="html" data-lang-label="XML">
     <pre class="line-numbers"><code class="prism language-xml" data-prism><?php echo $this->escape('<activity android:name="io.appwrite.views.CallbackActivity" >
-        <intent-filter android:label="android_web_auth">
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="appwrite-callback-[PROJECT_ID]"  />
-        </intent-filter>
-    </activity>
+    <intent-filter android:label="android_web_auth">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="appwrite-callback-[PROJECT_ID]"  />
+    </intent-filter>
+</activity>
 '); ?></code></pre>
 </div>
 
