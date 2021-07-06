@@ -477,7 +477,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                     $example = APP_VENDOR_CE.'/docs/examples/'.$versionDocs.'/'.$language['family'].'-'.$language['key'].'/'.$docDirectory.'/'.$snippet;
 
                                     if(!is_readable($example)) {
-                                        echo "<p class=\"text-danger\"><b>Failed to read code example for {$language['name']}</b>: ({$example})</p>";
+                                        // echo "<p class=\"text-danger\"><b>Failed to read code example for {$language['name']}</b>: ({$example})</p>";
                                         continue;
                                     }
                                     ?>
