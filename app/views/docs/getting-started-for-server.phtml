@@ -18,7 +18,7 @@ $kotlinVersion = $versions['kotlin'] ?? '';
 
 <p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
 
-<h2>Get the Appwrite SDK for Your Platform</h2>
+<h2><a href="#getSDK" id="getSDK">Get the Appwrite SDK for Your Platform</a></h2>
 
 <p>We provide libraries and SDKs for major programming languages and platforms so you don't have to write code for interacting with our HTTP APIs from scratch.</p>
 
@@ -80,15 +80,15 @@ $kotlinVersion = $versions['kotlin'] ?? '';
     </li>
 </ul>
 
-<h2>Create Your First Appwrite Project</h2>
+<h2><a href="#createProject" id="createProject">Create Your First Appwrite Project</a></h2>
 
 <p>Go to your new Appwrite console and once inside click the <i class="icon-plus"></i> icon in the top navigation header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create to get started.</p>
 
-<h2>Authentication</h2>
+<h2><a href="#authentication" id="authentication">Authentication</a></h2>
 
 <p>The Appwrite server API provides you with two authentication methods. The first one uses an API key, and the second is using a JSON Web Token (JWT). Each method has different use cases, and you can use whichever fills your app needs.</p>
 
-<h3>API Key</h3>
+<h3><a href="#apiKey" id="apiKey">API Key</a></h3>
 
 <p>Using an API Key you can interact with the Appwrite server API as an admin. You'll be able to access all of your project resources as long as your key has the relevant access scopes attached. To get your first API key, go to your appwrite console, choose the project you created in the step before and click the 'API Keys' link.</p>
 
@@ -198,7 +198,7 @@ client
     <p>Please note it is <b>highly</b> not recommended to run the admin mode from your client-side as it will probably lead to huge privacy and security issues. Check the <a href="/docs/admin">Admin Mode</a> documentation to learn more</p>
 </div>
 
-<h3>JSON Web Token (JWT) &nbsp;<span class="text-size-small text-fade">version >= 0.8</span></h3>
+<h3><a href="#jwt" id="jwt">JSON Web Token (JWT) &nbsp;<span class="text-size-small text-fade">version >= 0.8</span></a></h3>
 
 <p>Using a JSON Web Token (JWT), you can interact with the Appwrite server API as a specific user. You'll be able to access only the relevant user resources and perform actions on his behalf.</p>
 
@@ -336,7 +336,7 @@ client
     </li>
 </ul>
 
-<h2>Make Your First Request</h2>
+<h2><a href="#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
 <p>Once your SDK object is set, create any of the Appwrite service objects and choose any request to send. Full documentation for any service method you would like to use can be found in your SDK documentation or in the API References section.</p>
 
@@ -423,7 +423,7 @@ println(res.body?.string())</code></pre>
     </li>
 </ul>
 
-<h2>Full Example</h2>
+<h2><a href="#fullExample" id="fullExample">Full Example</a></h2>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -576,6 +576,6 @@ println(res.body?.string())</code></pre>
     </li>
 </ul>
 
-<h2>Next Steps</h2>
+<h2><a href="#nextSteps" id="nextSteps">Next Steps</a></h2>
 
 <p>Appwrite has many services and tools to help improve your app and speed up your development. The best way to learn how you can take advantage of them is to explore the different API references docs.</p>

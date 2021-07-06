@@ -4,7 +4,7 @@
 
 <p>In this document, you will learn how to connect a 3rd party SMTP provider like MailGun or SendGrid with Appwrite to help you get better email deliverability.</p>
 
-<h2>Update Your .env File</h2>
+<h2><a href="#updateEnvFile" id="updateEnvFile">Update Your .env File</a></h2>
 
 <p>At this stage, we assume that you have already installed Appwrite. Else, you can follow our <a href="/docs/installation">Getting Started Guide</a> for the installation. Appwrite offers multiple environment variables to customize your server setup to your needs. To configure Appwrite to use your own SMTP server, you need to set the following environment variables in the hidden .env file that comes with your Appwrite installation.</p>
 
@@ -28,7 +28,7 @@ _APP_SMTP_USERNAME=YOUR-SMTP-USERNAME
 _APP_SMTP_PASSWORD=YOUR-SMTP-PASSWORD</code></pre>
 </div>
 
-<h2>Restart Your Appwrite Server</h2>
+<h2><a href="#restartServer" id="restartServer">Restart Your Appwrite Server</a></h2>
 
 <p>Once you've updated your .env file, you need to restart your Appwrite stack using the following command from your terminal:</p>
 
@@ -36,7 +36,7 @@ _APP_SMTP_PASSWORD=YOUR-SMTP-PASSWORD</code></pre>
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose up -d</code></pre>
 </div>
 
-<h2>Debugging</h2>
+<h2><a href="#debugging" id="debugging">Debugging</a></h2>
 
 <p>If you are unable to send emails, there is most likely an issue with your integration. The first place to look for possible errors is the <b>Appwrite Emails Worker</b>. You can access the logs of this container using: 
 
@@ -51,17 +51,16 @@ The next possible source of error is the configuration in your .env file. Make s
 
 <p> Moving on to the next source of error. Some SMTP providers have a concept of <a href="https://help.mailgun.com/hc/en-us/articles/217531258-Authorized-Recipients">authorized recipients</a> in their sandbox (or dev) environments and you can only send emails to recipients in this list. Make sure that the recipient of the email that you're trying to send is a part of this list.</p>
 
-<p>
-Another source of error could be that the environment variables have not been set in the appwrite container. You can check this using 
+<p>Another source of error could be that the environment variables have not been set in the appwrite container. You can check this using </p>
+
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose exec appwrite-worker-mails vars</code></pre>
 </div>
-If this is the case, you can try rebuilding your appwrite stack using:
+
+<p>If this is the case, you can try rebuilding your appwrite stack using:</p>
+
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose up -d --build --force-recreate</code></pre>
 </div>
-
-</p>
-
 
 <p>Now you can head over to your Appwrite console, logout from your account and try to recover your password or send invites to other team members from your Appwrite console using your newly configured SMTP provider.</p>
