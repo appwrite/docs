@@ -467,14 +467,15 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 $docDirectories = (isset($language['docDirectories']))
                                     ? $language['docDirectories']
                                     : ['Lang' => 'examples'];
-                                
-                                if(!is_readable($example)) {
-                                    //echo "<p class=\"text-danger\"><b>Failed to read code example for {$language['name']}</b>: ({$example})</p>";
-                                    continue;
-                                }
+   
                             ?>
                                 <?php foreach($docDirectories as $docDirectoryKey => $docDirectory):
                                     $example = APP_VENDOR_CE.'/docs/'.$docDirectory.'/'.$versionDocs.'/'.$language['family'].'-'.$language['key'].'/examples/'.$snippet;
+
+                                    if(!is_readable($example)) {
+                                        //echo "<p class=\"text-danger\"><b>Failed to read code example for {$language['name']}</b>: ({$example})</p>";
+                                        continue;
+                                    }
                                     ?>
                                     <li class="example-in-<?php echo $language['key']; ?>-<?php echo strtolower($docDirectoryKey); ?>">
                                         <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?> SDK">
