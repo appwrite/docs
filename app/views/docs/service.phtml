@@ -155,9 +155,12 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                     ? $language['docDirectories']
                                     : ['Lang' => APP_VENDOR_CE.'/docs/examples/'.$versionDocs.'/'.$language['family'].'-'.$language['key'].'/examples/'.$snippet];
                                 ?>
-                                <?php foreach ($docDirectories as $docDirectory): ?>
+                                <?php foreach ($docDirectories as $docDirectoryKey => $docDirectory): ?>
                                 <option value="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?>>
-                                    <?php echo $this->escape($name); ?> SDK<?php if($beta): ?>&nbsp;(beta)<?php endif; ?>
+                                    <?php echo $this->escape($name); ?> SDK<?php if($beta || count($docDirectories) > 1): ?>&nbsp;(
+                                        <?php if(count($docDirectories) > 1): ?><?php echo $docDirectoryKey; ?> examples<?php if($beta): ?>&nbsp; - &nbsp;<?php endif; ?><?php endif; ?>
+                                        <?php if($beta): ?>beta<?php endif; ?>
+                                    )<?php endif; ?>
                                 </option>
                                 <?php endforeach; ?>
                             <?php endforeach; ?>
