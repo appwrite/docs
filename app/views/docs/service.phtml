@@ -91,15 +91,21 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                 if(!isset($language['family']) || $language['family'] !== $family) {
                     continue;
                 }
+
+                $docDirectories = (isset($language['docDirectories']))
+                    ? $language['docDirectories']
+                    : ['Default' => 'examples'];
                 ?>
 
-                .language-<?php echo strtolower($language['key']); ?> .example-in-<?php echo strtolower($language['key']); ?> {
-                    display: block;
-                }
+                <?php foreach($docDirectories as $docDirectoryKey => $docDirectory): ?>
+                    .language-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> .example-in-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> {
+                        display: block;
+                    }
 
-                .example-in-<?php echo strtolower($language['key']); ?> {
-                    display: none;
-                }
+                    .example-in-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> {
+                        display: none;
+                    }
+                <?php endforeach; ?>
             <?php endforeach; ?>
         <?php endforeach; ?>
     </style>
@@ -151,14 +157,18 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 $key = (isset($language['key'])) ? $language['key'] : '';
                                 $name = (isset($language['name'])) ? $language['name'] : '';
                                 $beta = (isset($language['beta'])) ? $language['beta'] : false;
+                                $docDirectories = (isset($language['docDirectories']))
+                                    ? $language['docDirectories']
+                                    : ['Default' => 'examples'];
                                 ?>
-                                <option value="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?>>
-                            <?php echo $this->escape($name); ?> SDK<?php if($beta): ?>&nbsp;(beta)<?php endif; ?>
+                                <?php foreach ($docDirectories as $docDirectoryKey => $docDirectory): ?>
+                                <option value="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>-<?php echo $this->escape(strtolower($docDirectoryKey)); ?>"<?php echo (($key . '-' . strtolower($docDirectoryKey)) === $sdk) ? ' selected' : ''; ?>>
+                                    <?php echo $this->escape($name); ?> SDK <?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?> examples)<?php endif; ?>
                                 </option>
+                                <?php endforeach; ?>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
                     </select>
-                    &nbsp; code examples.
                 </form>
             </div>
             <div class="col span-4 clear">
@@ -457,19 +467,26 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 if(!isset($language['family']) || $language['family'] !== $family) {
                                     continue;
                                 }
-                                
-                                $example = APP_VENDOR_CE.'/docs/examples/'.$versionDocs.'/'.$language['family'].'-'.$language['key'].'/examples/'.$snippet;
 
-                                if(!is_readable($example)) {
-                                    //echo "<p class=\"text-danger\"><b>Failed to read code example for {$language['name']}</b>: ({$example})</p>";
-                                    continue;
-                                }
+                                $docDirectories = (isset($language['docDirectories']))
+                                    ? $language['docDirectories']
+                                    : ['Default' => 'examples'];
+   
                             ?>
-                                <li class="example-in-<?php echo $language['key']; ?>">
-                                    <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?> SDK">
-                                        <pre class="line-numbers"><code class="prism language-<?php echo $language['prism']; ?>" data-prism><?php echo $this->escape(file_get_contents($example)); ?></code></pre>
-                                    </div>
-                                </li>
+                                <?php foreach($docDirectories as $docDirectoryKey => $docDirectory):
+                                    $example = APP_VENDOR_CE.'/docs/examples/'.$versionDocs.'/'.$language['family'].'-'.$language['key'].'/'.$docDirectory.'/'.$snippet;
+
+                                    if(!is_readable($example)) {
+                                        // echo "<p class=\"text-danger\"><b>Failed to read code example for {$language['name']}</b>: ({$example})</p>";
+                                        continue;
+                                    }
+                                    ?>
+                                    <li class="example-in-<?php echo $language['key']; ?>-<?php echo strtolower($docDirectoryKey); ?>">
+                                        <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?> SDK">
+                                            <pre class="line-numbers"><code class="prism language-<?php echo $language['prism']; ?>" data-prism><?php echo $this->escape(file_get_contents($example)); ?></code></pre>
+                                        </div>
+                                    </li>
+                                <?php endforeach; ?>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
                     </ul>
