@@ -208,11 +208,11 @@ void main() { // Init SDK
         </tr>
     </thead>
     <tbody>
-        <?php foreach($runtimes as $key => $runtime): var_dump($runtime); ?>
+        <?php foreach($runtimes as $key => $runtime): ?>
         <tr>
             <td><img src="" data-ls-attrs="src=/images/runtimes/<?php echo $this->escape($runtime['logo'] ?? ''); ?>" alt="Function Env." class="avatar xxs" /></td>
             <td><span data-general-copy><?php echo $this->escape($key); ?> </span></td>
-            <td><a href="https://hub.docker.com/r/appwrite/runtime-for-<?php echo $this->escape($runtime['key'] ?? '') ?>" target="_blank" rel="noopener"><?php echo $this->escape($runtime['image'] ?? ''); ?> <i class="icon-link-ext"></i></a></td>
+            <td><a href="https://hub.docker.com/r/appwrite/runtime-for-<?php echo $this->escape(substr(0, strpos($runtime['image'] ?? '', ':', 0))); ?>" target="_blank" rel="noopener"><?php echo $this->escape($runtime['image'] ?? ''); ?> <i class="icon-link-ext"></i></a></td>
             <td><?php echo $this->escape(implode(' / ', $runtime['supports'] ?? [])); ?></td>
         </tr>
         <?php endforeach; ?>
