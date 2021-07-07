@@ -5,15 +5,15 @@ $events = $this->getParam('events', []);
 ?>
 <p>Webhooks allow you to build or set up integrations which subscribe to certain events on Appwrite. When one of those events is triggered, we'll send an HTTP POST payload to the webhook's configured URL. Webhooks can be used to purge cache from CDN, calculate data or send a Slack notification. You're only limited by your imagination.</p>
 
-<h2><a href="#addWebhook" id="addWebhook">Add Your Webhook</a></h2>
+<h2><a href="/docs/webhooks#addWebhook" id="addWebhook">Add Your Webhook</a></h2>
 
 <p>You can set your webhook by adding it from your Appwrite project dashboard. You can access your webhooks settings from your project dashboard or on the left navigation panel. Click the 'Add Webhook' button and choose your webhook name and the events that should trigger it. You can also set an optional basic HTTP authentication username and password to protect your endpoint from unauthorized access. </p>
 
-<h2><a href="#payload" id="payload">Payload</a></h2>
+<h2><a href="/docs/webhooks#payload" id="payload">Payload</a></h2>
 
 <p>Each event type has a specific payload format with the relevant event information. All event payloads mirror the payloads for the API payload which parallel to the <a href="/docs/webhooks#events">event types</a>.</p>
 
-<h2><a href="#headers" id="headers">Headers</a></h2>
+<h2><a href="/docs/webhooks#headers" id="headers">Headers</a></h2>
 
 <p>HTTP requests made to your webhook's configured URL endpoint will contain several special headers:</p>
 
@@ -61,7 +61,7 @@ $events = $this->getParam('events', []);
     </tbody>
 </table>
 
-<h2 id="events"><a href="#events">Events</a></h2>
+<h2 id="events"><a href="/docs/webhooks#events">Events</a></h2>
 
 <p>A list of all currently available events you can hook to:</p>
 
