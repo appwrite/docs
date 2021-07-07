@@ -208,7 +208,7 @@ void main() { // Init SDK
         </tr>
     </thead>
     <tbody>
-        <?php foreach($runtimes as $key => $runtime): ?>
+        <?php foreach($runtimes as $key => $runtime): var_dump($runtime); ?>
         <tr>
             <td><img src="" data-ls-attrs="src=/images/runtimes/<?php echo $this->escape($runtime['logo'] ?? ''); ?>" alt="Function Env." class="avatar xxs" /></td>
             <td><span data-general-copy><?php echo $this->escape($key); ?> </span></td>
