@@ -21,7 +21,7 @@ $markdown->setSafeMode(true);
 
 <?php foreach($platforms as $platform): ?>
     <?php if(!$platform['enabled']) { continue; } ?>
-    <h2 id="<?php echo strtolower($platform['name']); ?>"><?php echo $platform['name']; ?> SDKs<?php if($platform['beta']): ?> (beta)<?php endif; ?></h2>
+    <h2 href="/docs/sdks#<?php echo strtolower($platform['name']); ?>" id="<?php echo strtolower($platform['name']); ?>"><?php echo $platform['name']; ?> SDKs<?php if($platform['beta']): ?> (beta)<?php endif; ?></h2>
 
     <p><?php echo $markdown->text($platform['description']); ?></p>
 
