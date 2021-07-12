@@ -24,29 +24,29 @@ Use the following HTML structure to present code examples:
 </div>
 ```
 
-As of writing this are the supported langauges for code examples:
+As of writing this, these are the supported languages for code examples:
 
-* markup
-* css
-* clike
-* javascript
-* bash
-* csharp
-* dart
-* go
-* graphql
-* http
-* java
-* json
-* kotlin
-* markup-templating
-* php
-* powershell
-* python
-* ruby
-* swift
-* typescript
-* yaml
+* Markup
+* CSS
+* CLike
+* JavaScript
+* Bash
+* C#
+* Dart
+* Go
+* GraphQL
+* HTTP
+* Java
+* JSON
+* Kotlin
+* Markup-templating
+* PHP
+* Powershell
+* Python
+* Ruby
+* Swift
+* TypeScript
+* YAML
 
 For showing examples in multiple languages use the list structure:
 
