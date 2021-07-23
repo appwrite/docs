@@ -13,21 +13,19 @@
 
 <p>The easiest way to start running your Appwrite server is by running our Docker installer tool from your terminal. Before running the installation command, make sure you have <a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">Docker CLI</a> installed on your host machine.</p>
 
-<h3><a href="/docs/installation#unix" id="unix">Unix</a></h3>
-
-<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run -it --rm \
-    --volume /var/run/docker.sock:/var/run/docker.sock \
-    --volume "$(pwd)"/appwrite:/usr/src/code/appwrite:rw \
-    --entrypoint="install" \
-    appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
-</div>
-
-<h3><a href="/docs/installation#windows" id="windows">Windows</a></h3>
-
-<p>Hyper-V and Containers Windows features must be enabled to run Appwrite on Windows with Docker. If you don't have these features available, you can install <a href="https://docs.docker.com/toolbox/toolbox_install_windows/" target="_blank" rel="noopener">Docker Toolbox</a> that uses Virtualbox to run Appwrite on a Virtual Machine.</p>
-
 <ul class="phases clear" data-ui-phases>
+    <li>
+        <h4>Unix</h4>
+
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run -it --rm \
+            --volume /var/run/docker.sock:/var/run/docker.sock \
+            --volume "$(pwd)"/appwrite:/usr/src/code/appwrite:rw \
+            --entrypoint="install" \
+            appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
+        </div>
+
+    </li>
     <li>
         <h4>CMD</h4>
 
