@@ -253,7 +253,7 @@ void main() { // Init SDK
             <td>
                 APPWRITE_FUNCTION_TRIGGER
             </td>
-            <td>The name of the event that triggered that executed the function. This value can be any of Appwrite <a href="/docs/webhooks#events" target="_blank">system events</a>, 'api' if your function was triggered manually or by an API call, or 'schedule' if your CRON schedule triggered it.</td>
+            <td>Either 'event' when triggered by one of the selected scopes, 'http' when triggered by an http request or the dashboard or 'schedule' when triggered by the cron schedule.</td>
         </tr>
         <tr>
             <td>
