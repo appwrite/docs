@@ -334,8 +334,11 @@ client.setEndpointRealtime('[ENDPOINT]')</code></pre>
     </li>
 </ul>
 <h2><a href="/docs/realtime#known-limitations" id="known-limitations">Known limitations</a></h2>
-<h3>Be careful with multiple quick changes of different subscribed channels.</h3>
 
+<h3>Authentication with existing subscription</h3>
+<p>If you authenticate a user and have an already existing subscription, the subscription will not receive updates for the newly authenticated user. You would need to re-create the subscription so that it will work with the new user.</p>
+
+<h3>Be careful with multiple quick changes of different subscribed channels.</h3>
 <p>The SDK creates a single WebSocket connection for all subscribed channels. Each time a channel is added or unsubscribed - the SDK currently creates a completely new connection and terminates the old one. Therefore, subscriptions to channels should always be done in conjunction with state management so as not to be unnecessarily built up several times by multiple components' life cycles.</p>
 
 <h3>Nested Documents.</h3>
