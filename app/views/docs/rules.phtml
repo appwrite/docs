@@ -159,8 +159,8 @@ $markdown->setSafeMode(true);
 <div class="ide" data-lang="nodejs" data-lang-label="Node.js SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>const appwrite = require('node-appwrite');
     
-let client = new appwrite.Client();
-let database = new appwrite.Database(client);
+const client = new appwrite.Client();
+const database = new appwrite.Database(client);
 
 client
     .setEndpoint('YOUR_SERVER_ENDPOINT') // http://localhost/v1
@@ -232,8 +232,8 @@ promise.then(function (response) {
 
 async function boot() {
 
-  let client = new appwrite.Client();
-  let database = new appwrite.Database(client);
+  const client = new appwrite.Client();
+  const database = new appwrite.Database(client);
 
   client
       .setEndpoint('YOUR_SERVER_ENDPOINT') // http://localhost/v1

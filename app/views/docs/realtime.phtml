@@ -21,7 +21,7 @@ $channels = [
     <li>
         <h3>Web</h3>
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>let sdk = new Appwrite();
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();
 
 sdk.subscribe(channel, callback);</code></pre>
         </div>
@@ -71,7 +71,7 @@ realtime.subscribe(channels, callback)</code></pre>
     <li>
         <h3>Web</h3>
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>let sdk = new Appwrite();
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();
 
 sdk.subscribe('account', response => {
     // Callback will be executed on all account events.
@@ -116,7 +116,7 @@ realtime.subscribe("account", callback = { param ->
     <li>
         <h3>Web</h3>
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>let sdk = new Appwrite();
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();
 
 sdk.subscribe(['documents.A', 'files'], response => {
     // Callback will be executed on changes for documents A and all files.
@@ -160,7 +160,7 @@ realtime.subscribe(["documents.A", "files"], callback = { param ->
     <li>
         <h3>Web</h3>
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>let sdk = new Appwrite();
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();
 
 const unsubscribe = sdk.subscribe('files', response => {
     // Callback will be executed on changes for all files.
@@ -314,7 +314,7 @@ subscription()</code></pre>
     <li>
         <h3>Web</h3>
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>let sdk = new Appwrite();
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();
 
 sdk.setEndpointRealtime('[ENDPOINT]');</code></pre>
         </div>

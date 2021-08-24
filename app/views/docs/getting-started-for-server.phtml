@@ -100,7 +100,7 @@ $kotlinVersion = $versions['kotlin'] ?? '';
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
 
-let client = new sdk.Client();
+const client = new sdk.Client();
 
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
@@ -154,7 +154,7 @@ client
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>let client = new sdk.Client();
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>const client = new sdk.Client();
 
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
@@ -246,7 +246,7 @@ val response = account
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
 
-let client = new sdk.Client();
+const client = new sdk.Client();
 
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
@@ -300,7 +300,7 @@ client
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>let client = new sdk.Client();
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>const client = new sdk.Client();
 
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
@@ -344,7 +344,7 @@ client
     <li>
         <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>let users = new sdk.Users(client);
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const users = new sdk.Users(client);
 
 let promise = users.create('email@example.com', 'password');
 
@@ -385,7 +385,7 @@ puts response</code></pre>
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>let users = new sdk.Users(client);
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>const users = new sdk.Users(client);
 
 let promise = users.create('email@example.com', 'password');
 
@@ -431,7 +431,7 @@ println(res.body?.string())</code></pre>
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
 
-let client = new sdk.Client();
+const client = new sdk.Client();
 
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
@@ -439,7 +439,7 @@ client
     .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
 ;
 
-let users = new sdk.Users(client);
+const users = new sdk.Users(client);
 let promise = users.create('email@example.com', 'password');
 
 promise.then(function (response) {
@@ -513,8 +513,8 @@ puts response</code></pre>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>import * as sdk from "https://deno.land/x/appwrite/mod.ts";
 
-let client = new sdk.Client();
-let users = new sdk.Users(client);
+const client = new sdk.Client();
+const users = new sdk.Users(client);
 
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
