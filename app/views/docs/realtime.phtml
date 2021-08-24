@@ -107,7 +107,7 @@ realtime.subscribe("account", callback = { param ->
 <h3><a href="/docs/realtime#subscribe-to-multiple-channels" id="subscribe-to-multiple-channels">Subscribe to multiple channels</a></h3>
 
 <p>You can also listen to multiple <a href="/docs/realtime#channels">channels</a> at once by passing an array of channels. This will trigger the callback for any events for all channels passed.</p>
-<p>In this example we are listening to the documents A and B by subscribing to the <span class="tag">documents.A</span> and <span class="tag">documents.B</span> channels.</p>
+<p>In this example we are listening to the document A and all files by subscribing to the <span class="tag">documents.A</span> and <span class="tag">files</span> channels.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -115,8 +115,8 @@ realtime.subscribe("account", callback = { param ->
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>let sdk = new Appwrite();
 
-sdk.subscribe(['documents.A', 'documents.B'], response => {
-    // Callback will be executed on changes for documents A and B.
+sdk.subscribe(['documents.A', 'files'], response => {
+    // Callback will be executed on changes for documents A and all files.
     console.log(response);
 });</code></pre>
         </div>
@@ -127,10 +127,10 @@ sdk.subscribe(['documents.A', 'documents.B'], response => {
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
 final realtime = Realtime(client);
-final subscription = realtime.subscribe(['documents.A', 'documents.B']);
+final subscription = realtime.subscribe(['documents.A', 'files']);
 
 subscription.stream.listen((response) {
-    // Callback will be executed on changes for documents A and B.
+    // Callback will be executed on changes for documents A and all files.
     print(response);
 })</code></pre>
         </div>
@@ -141,8 +141,8 @@ subscription.stream.listen((response) {
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client()
 val realtime = Realtime(client)
 
-realtime.subscribe(["documents.A", "documents.B"], callback = { param ->
-    // Callback will be executed on changes for documents A and B.
+realtime.subscribe(["documents.A", "files"], callback = { param ->
+    // Callback will be executed on changes for documents A and all files.
     print(param.toString())
 })</code></pre>
         </div>
@@ -151,7 +151,7 @@ realtime.subscribe(["documents.A", "documents.B"], callback = { param ->
 
 <h3><a href="/docs/realtime#unsubscribe" id="unsubscribe">Unsubscribe</a></h3>
 
-<p>If you no longer want to receive updates from a subscription, you can unsubscribe so that your callbacks are not longer called.</p>
+<p>If you no longer want to receive updates from a subscription, you can unsubscribe so that your callbacks are no longer called.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -245,7 +245,7 @@ subscription()</code></pre>
                 integer
             </td>
             <td data-title="Description: ">
-                The UNIX timestamp from the server to ensure consistency across all client platforms and real-time technologies.
+                The <a href="https://en.wikipedia.org/wiki/Unix_time" rel="noopener" target="_blank">UNIX timestamp</a> from the server to ensure consistency across all client platforms and real-time technologies.
             </td>
         </tr>
         <tr>
@@ -262,7 +262,7 @@ subscription()</code></pre>
     </tbody>
 </table>
 
-<p>If you subscribe to the <span class="tag">documents</span> channel and a document the user is allowed to read is updated, you will receive an object containing informations about the event and also the updated document.</p>
+<p>If you subscribe to the <span class="tag">documents</span> channel and a document the user is allowed to read is updated, you will receive an object containing informations about the event and the updated document.</p>
 
 <p>The response will look like this:</p>
 
@@ -305,7 +305,7 @@ subscription()</code></pre>
 </table>
 
 <h2><a href="/docs/realtime#custom-endpoint" id="custom-endpoint">Custom Endpoint</a></h2>
-<p>The SDK will guess the endpoint of the Realtime endpoint when setting the HTTP endpoint of your Appwrite instance. If you are running a custom proxy and changed the endpoint of the Realtime server to something different, you can call <b>setEndpointRealtime</b> on the Client SDK.</p>
+<p>The SDK will guess the endpoint of the Realtime API when setting the endpoint of your Appwrite instance. If you are running Appwrite with a custom proxy and changed the route of the Realtime API, you can call the <b>setEndpointRealtime</b> method on the Client SDK and set your new endpoint value.</p>
 <p>By default the endpoint is <b>wss://[ENDPOINT]/v1/realtime</b>.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
