@@ -8,6 +8,10 @@ $channels = [
     'documents.[ID]' => 'Any create/update/delete events to a given document',
     'files' => 'Any create/update/delete events to any file',
     'files.[ID]' => 'Any create/update/delete events to a given file',
+    'teams' => 'Any create/update/delete events to a any team',
+    'teams.[ID]' => 'Any create/update/delete events to a given team',
+    'memberships' => 'Any create/update/delete events to a any membership',
+    'memberships.[ID]' => 'Any create/update/delete events to a given membership',
     'executions' => 'Any update to executions',
     'executions.[ID]' => 'Any update to a given execution',
     'functions.[ID]' => 'Any execution event to a given function'
@@ -340,10 +344,10 @@ client.setEndpointRealtime('[ENDPOINT]')</code></pre>
 <h3>Authentication with existing subscription</h3>
 <p>If you authenticate a user and have an already existing subscription, the subscription will not receive updates for the newly authenticated user. You would need to re-create the subscription so that it will work with the new user.</p>
 
-<h3>Be careful with multiple quick changes of different subscribed channels.</h3>
+<h3>Be careful with multiple quick changes of different subscribed channels</h3>
 <p>The SDK creates a single WebSocket connection for all subscribed channels. Each time a channel is added or unsubscribed - the SDK currently creates a completely new connection and terminates the old one. Therefore, subscriptions to channels should always be done in conjunction with state management so as not to be unnecessarily built up several times by multiple components' life cycles.</p>
 
-<h3>Nested Documents.</h3>
+<h3>Nested Documents</h3>
 <p>Nested Documents will not trigger events related to their parent documents. Meaning, updates to a child document - will not trigger an event for the parent document. But it will trigger an event for the child document itself.</p>
 
 <h3>Server-Side?</h3>
