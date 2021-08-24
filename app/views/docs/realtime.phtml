@@ -14,9 +14,9 @@ $channels = [
 ];
 ?>
 
-<p>Realtime allows you to listen to any events on the server-side in realtime using the <b>subscribe</b> method in the Client SDK's.</p>
-<p>Instead of requesting new data via HTTP, the subscription will receive new data everytime it changes, any connected client receives that update within milliseconds via a single established WebSocket connection.</p>
-
+<p>Realtime allows you to listen to any events on the server-side in realtime using the <b>subscribe</b> method.</p>
+<p>Instead of requesting new data via HTTP, the subscription will receive new data everytime it changes, any connected client receives that update within milliseconds via a WebSocket connection.</p>
+<p>This lets you build an interactive and responsive user experience by providing informations from all of Appwrite's services in realtime.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
@@ -49,11 +49,12 @@ realtime.subscribe(channels, callback)</code></pre>
 </ul>
 
 <p>To subscribe to updates from different resources, you need to specify one or more channels. The <a href="/docs/realtime#channels">channels</a> offer a wide and powerful selection that will allow you to listen to all possible resources. This allows you to receive updates not only from the database, but from all the services that Appwrite offers.</p>
+<p>If you listen to all documents from a collection by subscribing to the <span class="tag">collections.[ID].documents</span> channel, you can use the <b>event</b> attribute in the callback to distinguish whether a new document was created or an existing one was updated. All possible events can be found <a href="/docs/webhooks#events">here</a>.</p>
 
 <div class="notice calm margin-top-large margin-bottom-large">
     <h3>Permissions</h3>
     <p>All subscriptions are secured by the <a href="/docs/permissions">permissions</a> offered by Appwrite, meaning a user will only receive updates to resources to which he has read permission.</p>
-    <p>Using a wildcard (<span class="tag">*</span>) on read permissions will allow any client to receive updates.</p>
+    <p>Using a wildcard <span class="tag">*</span> on read permissions will allow any client to receive updates.</p>
 </div>
 
 <h2><a href="/docs/realtime#examples" id="examples">Examples</a></h2>
@@ -106,7 +107,7 @@ realtime.subscribe("account", callback = { param ->
 <h3><a href="/docs/realtime#subscribe-to-multiple-channels" id="subscribe-to-multiple-channels">Subscribe to multiple channels</a></h3>
 
 <p>You can also listen to multiple <a href="/docs/realtime#channels">channels</a> at once by passing an array of channels. This will trigger the callback for any events for all channels passed.</p>
-<p>In this example we are subscribing to the documents A and B by subscribing to the <span class="tag">documents.A</span> and <span class="tag">documents.B</span> channels.</p>
+<p>In this example we are listening to the documents A and B by subscribing to the <span class="tag">documents.A</span> and <span class="tag">documents.B</span> channels.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -150,7 +151,7 @@ realtime.subscribe(["documents.A", "documents.B"], callback = { param ->
 
 <h3><a href="/docs/realtime#unsubscribe" id="unsubscribe">Unsubscribe</a></h3>
 
-<p>If you no longer want to receive update from a subscription, you must unsubscribe your listener so that your callbacks are not longer called.</p>
+<p>If you no longer want to receive updates from a subscription, you can unsubscribe so that your callbacks are not longer called.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -261,7 +262,7 @@ subscription()</code></pre>
     </tbody>
 </table>
 
-<p>If you subscribe to the <span class="tag">documents</span> channel and a document the user is allows to read is updated, you will receive an object containing informations about the event and also the updated document.</p>
+<p>If you subscribe to the <span class="tag">documents</span> channel and a document the user is allowed to read is updated, you will receive an object containing informations about the event and also the updated document.</p>
 
 <p>The response will look like this:</p>
 
@@ -304,7 +305,8 @@ subscription()</code></pre>
 </table>
 
 <h2><a href="/docs/realtime#custom-endpoint" id="custom-endpoint">Custom Endpoint</a></h2>
-<p>By default, the SDK will guess the endpoint of the Realtime endpoint when setting the endpoint of your Appwrite instance. If you are running a custom proxy and changed the endpoint of the WebSOcket server to something different than <b>wss://[ENDPOINT]/v1/realtime</b> you can call <b>setEndpointRealtime</b> on the Client SDK.</p>
+<p>The SDK will guess the endpoint of the Realtime endpoint when setting the HTTP endpoint of your Appwrite instance. If you are running a custom proxy and changed the endpoint of the Realtime server to something different, you can call <b>setEndpointRealtime</b> on the Client SDK.</p>
+<p>By default the endpoint is <b>wss://[ENDPOINT]/v1/realtime</b>.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
