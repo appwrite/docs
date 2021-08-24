@@ -49,6 +49,7 @@ realtime.subscribe(channels, callback)</code></pre>
 </ul>
 
 <p>To subscribe to updates from different resources, you need to specify one or more channels. The <a href="/docs/realtime#channels">channels</a> offer a wide and powerful selection that will allow you to listen to all possible resources. This allows you to receive updates not only from the database, but from all the services that Appwrite offers.</p>
+
 <p>If you listen to all documents from a collection by subscribing to the <span class="tag">collections.[ID].documents</span> channel, you can use the <b>event</b> attribute in the callback to distinguish whether a new document was created or an existing one was updated. All possible events can be found <a href="/docs/webhooks#events">here</a>.</p>
 
 <div class="notice calm margin-top-large margin-bottom-large">
