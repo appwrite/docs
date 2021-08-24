@@ -16,7 +16,7 @@ $channels = [
 
 <p>Realtime allows you to listen to any events on the server-side in realtime using the <b>subscribe</b> method.</p>
 <p>Instead of requesting new data via HTTP, the subscription will receive new data everytime it changes, any connected client receives that update within milliseconds via a WebSocket connection.</p>
-<p>This lets you build an interactive and responsive user experience by providing informations from all of Appwrite's services in realtime.</p>
+<p>This lets you build an interactive and responsive user experience by providing information from all of Appwrite's services in realtime.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
@@ -49,6 +49,7 @@ realtime.subscribe(channels, callback)</code></pre>
 </ul>
 
 <p>To subscribe to updates from different resources, you need to specify one or more channels. The <a href="/docs/realtime#channels">channels</a> offer a wide and powerful selection that will allow you to listen to all possible resources. This allows you to receive updates not only from the database, but from all the services that Appwrite offers.</p>
+
 <p>If you listen to all documents from a collection by subscribing to the <span class="tag">collections.[ID].documents</span> channel, you can use the <b>event</b> attribute in the callback to distinguish whether a new document was created or an existing one was updated. All possible events can be found <a href="/docs/webhooks#events">here</a>.</p>
 
 <div class="notice calm margin-top-large margin-bottom-large">
@@ -280,7 +281,7 @@ subscription()</code></pre>
         "$collection": "[COLLECTION_ID]",
         "$permissions": [],
         "attribute1": "lorem",
-        "attribute2": 2020
+        "attribute2": 2030
     }
 }</code></pre>
 </div>
@@ -334,6 +335,7 @@ client.setEndpointRealtime('[ENDPOINT]')</code></pre>
 </ul>
 <h2><a href="/docs/realtime#known-limitations" id="known-limitations">Known limitations</a></h2>
 <h3>Be careful with multiple quick changes of different subscribed channels.</h3>
+
 <p>The SDK creates a single WebSocket connection for all subscribed channels. Each time a channel is added or unsubscribed - the SDK currently creates a completely new connection and terminates the old one. Therefore, subscriptions to channels should always be done in conjunction with state management so as not to be unnecessarily built up several times by multiple components' life cycles.</p>
 
 <h3>Nested Documents.</h3>
