@@ -36,8 +36,9 @@ sdk.subscribe(channel, callback);</code></pre>
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
 final realtime = Realtime(client);
+final subscription = realtime.subscribe(channel);
 
-realtime.subscribe(channel).stream.listen(callback)
+subscription.stream.listen(callback);
 </code></pre>
         </div>
     </li>
@@ -89,7 +90,7 @@ sdk.subscribe('account', response => {
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
 final realtime = Realtime(client);
-final subscription = realtime.subscribe('account');
+final subscription = realtime.subscribe(['account']);
 
 subscription.stream.listen((response) {
     // Callback will be executed on all account events.
@@ -204,7 +205,7 @@ val subscription = realtime.subscribe("files", callback = { param ->
 })
 
 // Closes the subscription.
-subscription()</code></pre>
+subscription.close()</code></pre>
         </div>
     </li>
 </ul>
