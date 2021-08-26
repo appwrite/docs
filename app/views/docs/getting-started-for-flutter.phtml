@@ -149,7 +149,7 @@ Response user = await account
 <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
   <pre class="line-numbers"><code class="prism language-dart" data-prism>// Subscribe to files channel
 final realtime = Realtime(client);
-final subscription = realtime.subscribe('files');
+final subscription = realtime.subscribe(['files']);
 
 subscription.stream.listen((response) {
     if(response.event === 'storage.files.create') {
@@ -184,7 +184,7 @@ Response user = await account
 
 // Subscribe to files channel
 final realtime = Realtime(client);
-final subscription = realtime.subscribe('files');
+final subscription = realtime.subscribe(['files']);
 
 subscription.stream.listen((response) {
     if(response.event === 'storage.files.create') {
