@@ -68,8 +68,7 @@ import io.appwrite.services.Account
 val client = Client(context)
   .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
   .setProject("5df5acd0d48c2") // Your project ID
-  .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
-  .setSelfSigned(true) // For self signed certificates only use for development</code></pre>
+  .setSelfSigned(true) // For self signed certificates, only use for development</code></pre>
 </div>
 
 <p>Before starting to send any API calls to your new Appwrite instance, make sure your Android emulators has network access to the Appwrite server hostname or IP address.</p>
@@ -112,8 +111,7 @@ import io.appwrite.services.Account
 val client = Client(context)
   .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
   .setProject("5df5acd0d48c2") // Your project ID
-  .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
-  .setSelfSigned(true) // For self signed certificates only use for development
+  .setSelfSigned(true) // For self signed certificates, only use for development
 
 // Register User
 val account = Account(client)

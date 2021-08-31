@@ -5,7 +5,7 @@ $platform = [];
 foreach($platforms['client']['languages'] ?? [] as $lang) {
 
     $key = $lang['key'] ?? '';
-    
+
     if($key === 'web') {
         $platform = $lang;
         break;
@@ -64,8 +64,8 @@ $demos = $platform['demos'] ?? [];
 const appwrite = new Appwrite();
 
 appwrite
-    .setEndpoint('http://localhost/v1') // Set only when using self-hosted solution
-    .setProject('455x34dfkj')
+    .setEndpoint('http://localhost/v1') // Your Appwrite Endpoint
+    .setProject('455x34dfkj') // Your project ID
 ;
 
 </code></pre>
@@ -114,7 +114,8 @@ appwrite.subscribe('files', response => {
 const appwrite = new Appwrite();
 
 appwrite
-    .setProject('455x34dfkj');
+    .setEndpoint('http://localhost/v1') // Your Appwrite Endpoint
+    .setProject('455x34dfkj') // Your project ID
 
 // Register User
 appwrite

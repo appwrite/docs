@@ -26,6 +26,10 @@ $channels = [
         <h3>Web</h3>
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();
+sdk
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+;
 
 sdk.subscribe(channel, callback);</code></pre>
         </div>
@@ -35,6 +39,13 @@ sdk.subscribe(channel, callback);</code></pre>
 
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
+
+client
+    .setEndpoint('https://localhost/v1') // Your Appwrite Endpoint
+    .setProject('5e8cf4f46b5e8') // Your project ID
+    .setSelfSigned(true) For self signed certificates, only use for development
+;
+
 final realtime = Realtime(client);
 final subscription = realtime.subscribe(channel);
 
@@ -46,6 +57,11 @@ subscription.stream.listen(callback);
         <h3>Android</h3>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client()
+client
+  .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+  .setProject("5df5acd0d48c2") // Your project ID
+  .setSelfSigned(true) // For self signed certificates, only use for development
+
 val realtime = Realtime(client)
 
 realtime.subscribe(channels, callback)</code></pre>
