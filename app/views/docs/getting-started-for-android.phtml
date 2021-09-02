@@ -68,8 +68,7 @@ import io.appwrite.services.Account
 val client = Client(context)
   .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
   .setProject("5df5acd0d48c2") // Your project ID
-  .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
-  .setSelfSigned(true) // For self signed certificates only use for development</code></pre>
+  .setSelfSigned(true) // For self signed certificates, only use for development</code></pre>
 </div>
 
 <p>Before starting to send any API calls to your new Appwrite instance, make sure your Android emulators has network access to the Appwrite server hostname or IP address.</p>
@@ -87,6 +86,23 @@ val response = account.create("email@example.com", "password")
 val json = response.body?.string()</code></pre>
 </div>
 
+<h2><a href="/docs/getting-started-for-android#listenToChanges" id="listenToChanges">Listen to changes</a></h2>
+
+<p>If you want to listen to changes in realtime from Appwrite, you can subscribe to a variety of channels and receive updates within milliseconds. Full documentation for Realtime can be found <a href="/docs/realtime">here</a>.</p>
+
+<div class="ide" data-lang="android" data-lang-label="Android SDK">
+  <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// Subscribe to files channel
+val realtime = Realtime(client)
+
+realtime.subscribe("files", callback = { response ->
+    if(response.event === 'storage.files.create') {
+        // Log when a new file is uploaded
+        print(response.payload.toString());
+    }
+})
+</code></pre>
+</div>
+
 <h2><a href="/docs/getting-started-for-android#fullExample" id="fullExample">Full Example</a></h2>
 <div class="ide" data-lang="android" data-lang-label="Android SDK">
                     <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
@@ -95,12 +111,22 @@ import io.appwrite.services.Account
 val client = Client(context)
   .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
   .setProject("5df5acd0d48c2") // Your project ID
-  .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
-  .setSelfSigned(true) // For self signed certificates only use for development
+  .setSelfSigned(true) // For self signed certificates, only use for development
 
+// Register User
 val account = Account(client)
 val response = account.create("email@example.com", "password")
-val json = response.body?.string()</code></pre>
+val json = response.body?.string()
+
+// Subscribe to files channel
+val realtime = Realtime(client)
+
+realtime.subscribe("files", callback = { response ->
+    if(response.event === 'storage.files.create') {
+        // Log when a new file is uploaded
+        print(response.payload.toString());
+    }
+})</code></pre>
 </div>
 
 <h2><a href="/docs/getting-started-for-android#nextSteps" id="nextSteps">Next Steps</a></h2>

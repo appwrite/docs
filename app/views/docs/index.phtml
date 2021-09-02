@@ -5,12 +5,12 @@ $family     = $this->getParam('family', '');
 $title      = $this->getParam('title', '');
 $subtitle   = $this->getParam('subtitle', '');
 
-$clientSDK      = ($family === APP_PLATFORM_CLIENT && !empty($sdk)) ? '?sdk='.$sdk : '';
-$serverSDK      = ($family === APP_PLATFORM_SERVER && !empty($sdk)) ? '?sdk='.$sdk : '';
+$clientSDK      = ($family === APP_PLATFORM_CLIENT && !empty($sdk)) ? '?sdk=' . $sdk : '';
+$serverSDK      = ($family === APP_PLATFORM_SERVER && !empty($sdk)) ? '?sdk=' . $sdk : '';
 
 $cols = [
-        'xxl' => ['nav' => 'span-3', 'main' => 'span-9'],
-        'xxxl' => ['nav' => 'span-2', 'main' => 'span-10'],
+    'xxl' => ['nav' => 'span-3', 'main' => 'span-9'],
+    'xxxl' => ['nav' => 'span-2', 'main' => 'span-10'],
 ]
 ?>
 <div class="zone <?php echo $layout; ?> docs" data-general-strech-value="<?php echo $layout; ?>">
@@ -67,14 +67,15 @@ $cols = [
                 <div class="margin-bottom-small">
                     <b class="text-size-small">Learn More</b>
                 </div>
-                
+
                 <ul class="margin-bottom">
+                    <li><a href="/docs/realtime">Realtime</a></li>
                     <li><a href="/docs/functions">Functions</a></li>
                     <li><a href="/docs/keys">API Keys</a></li>
                     <li><a href="/docs/webhooks">Webhooks</a></li>
                     <li><a href="/docs/tasks">Tasks</a></li>
                 </ul>
-                
+
                 <div class="margin-bottom-small">
                     <b class="text-size-small">Advanced</b>
                 </div>
@@ -88,19 +89,19 @@ $cols = [
             </nav>
         </div>
         <div class="col <?php echo $cols[$layout]['main']; ?>">
-                <article>
-                    <a href="/docs" class="back"><i class="icon-left-open"></i> Docs</a>
+            <article>
+                <a href="/docs" class="back"><i class="icon-left-open"></i> Docs</a>
 
-                    <h1 class="margin-top-small margin-bottom">
-                        <?php echo $this->escape($title); ?>
+                <h1 class="margin-top-small margin-bottom">
+                    <?php echo $this->escape($title); ?>
 
-                        <?php if(!empty($subtitle)): ?>
-                            &nbsp;<span class="text-fade text-size-normal">| <?php echo $this->escape($subtitle); ?></span>
-                        <?php endif; ?>
-                    </h1>
+                    <?php if (!empty($subtitle)) : ?>
+                        &nbsp;<span class="text-fade text-size-normal">| <?php echo $this->escape($subtitle); ?></span>
+                    <?php endif; ?>
+                </h1>
 
-                    <?php echo $this->exec($this->getParam('page', [])); ?>
-                </article>&nbsp;
+                <?php echo $this->exec($this->getParam('page', [])); ?>
+            </article>&nbsp;
         </div>
     </div>
 </div>

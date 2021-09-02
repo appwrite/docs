@@ -116,7 +116,7 @@ Client client = Client();
 client
     .setEndpoint('https://localhost/v1') // Your Appwrite Endpoint
     .setProject('5e8cf4f46b5e8') // Your project ID
-    .setSelfSigned() // Remove in production
+    .setSelfSigned(true) // For self signed certificates, only use for development
 ;
 </code></pre>
 </div>
@@ -142,6 +142,24 @@ Response user = await account
 </code></pre>
 </div>
 
+<h2><a href="/docs/getting-started-for-flutter#listenToChanges" id="listenToChanges">Listen to changes</a></h2>
+
+<p>If you want to listen to changes in realtime from Appwrite, you can subscribe to a variety of channels and receive updates within milliseconds. Full documentation for Realtime can be found <a href="/docs/realtime">here</a>.</p>
+
+<div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>// Subscribe to files channel
+final realtime = Realtime(client);
+final subscription = realtime.subscribe(['files']);
+
+subscription.stream.listen((response) {
+    if(response.event === 'storage.files.create') {
+        // Log when a new file is uploaded
+        print(response.payload);
+    }
+})
+</code></pre>
+</div>
+
 <h2><a href="/docs/getting-started-for-flutter#fullExample" id="fullExample">Full Example</a></h2>
 <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
   <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
@@ -151,7 +169,7 @@ Client client = Client();
 client
     .setEndpoint('https://localhost/v1') // Your Appwrite Endpoint
     .setProject('5e8cf4f46b5e8') // Your project ID
-    .setSelfSigned() // Remove in production
+    .setSelfSigned(true) // For self signed certificates, only use for development
 ;
 
 // Register User
@@ -163,6 +181,17 @@ Response user = await account
         password: 'password',
         name: 'My Name'
     );
+
+// Subscribe to files channel
+final realtime = Realtime(client);
+final subscription = realtime.subscribe(['files']);
+
+subscription.stream.listen((response) {
+    if(response.event === 'storage.files.create') {
+        // Log when a new file is uploaded
+        print(response.payload);
+    }
+})
 </code></pre>
 </div>
 
