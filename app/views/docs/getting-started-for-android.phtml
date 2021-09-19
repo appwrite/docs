@@ -44,17 +44,24 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 
 <h3><a href="/docs/getting-started-for-android#OAuthCallback" id="OAuthCallback">OAuth Callback</a></h3>
 
-<p>In order to capture the Appwrite OAuth callback url, the following activity needs to be added to your <a href="https://github.com/appwrite/playground-for-android/blob/master/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener">AndroidManifest.xml</a>. Be sure to replace the <b>[PROJECT_ID]</b> string with your actual Appwrite project ID. You can find your Appwrite project ID in you project settings screen in your Appwrite console.</p>
+<p>In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `<application>` tag, along side the existing `<activity>` tags in your <a href="https://github.com/appwrite/playground-for-android/blob/master/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener">AndroidManifest.xml</a>. Be sure to relpace the <b>[PROJECT_ID]</b> string with your actual Appwrite project ID. You can find your Appwrite project ID in you project settings screen in your Appwrite console.</p>
 
 <div class="ide" data-lang="html" data-lang-label="XML">
-    <pre class="line-numbers"><code class="prism language-xml" data-prism><?php echo $this->escape('<activity android:name="io.appwrite.views.CallbackActivity" >
-    <intent-filter android:label="android_web_auth">
+    <pre class="line-numbers"><code class="prism language-xml" data-prism><?php echo $this->escape('<manifest ...>
+  ...
+  <application ...>
+    ...
+    <!-- Add this inside the `<application>` tag, along side the existing `<activity>` tags -->
+    <activity android:name="io.appwrite.views.CallbackActivity" >
+      <intent-filter android:label="android_web_auth">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="appwrite-callback-[PROJECT_ID]"  />
-    </intent-filter>
-</activity>'); ?></code></pre>
+        <data android:scheme="appwrite-callback-[PROJECT_ID]" />
+      </intent-filter>
+    </activity>
+  </application>
+</manifest>'); ?>
 </div>
 
 <h2><a href="/docs/getting-started-for-android#initSDK" id="initSDK">Init your SDK</a></h2>
