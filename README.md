@@ -3,12 +3,12 @@
 The official https://appwrite.io/docs documentation source code.
 ## 🚀 Contributing
 1. Clone the repository
-2. Updated, add, or fix current docs
+2. Update, add, or fix current docs
 3. Once content is ready, raise a PR
 
 ### Content Guidelines
-- Use proper title hierarchy h1-h6 and valid HTML
-- External links to (not https://appwrite.io) should be opened in a new tab (`target="_blank"`)
+- Use proper title hierarchy (h1-h6) and valid HTML
+- External links (not https://appwrite.io) should be opened in a new tab (`target="_blank"`)
 - External links should have an HTML attribute of `rel="noopener"`
 - All filenames should be dash-based and nested in a way that makes sense
 - All images should be in PNG format and 2600x1400px. Do not include any sensitive data in images. All screenshot of the Appwrite dashboard should support light and dark mode.
