@@ -200,7 +200,7 @@ unsubscribe();</code></pre>
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
 final realtime = Realtime(client);
-final subscription = realtime.subscribe('files');
+final subscription = realtime.subscribe(['files']);
 
 subscription.stream.listen((response) {
     // Callback will be executed on changes for all files.
