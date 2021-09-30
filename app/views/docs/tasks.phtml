@@ -6,7 +6,7 @@
 
 <h2><a href="/docs/tasks#cron" id="cron">CRON Syntax</a></h2>
 
-<p>Cron format is a simple, yet powerful and flexible way to define the time and frequency of various actions. The create a new task, you need to supply Appwrite with a valid CRON syntax.</p>
+<p>Cron format is a simple, yet powerful and flexible way to define the time and frequency of various actions. To create a new task, you need to supply Appwrite with a valid CRON syntax.</p>
 
 <p>The Appwrite cron parser can handle increments of ranges (e.g. */12, 2-59/3), intervals (e.g. 0-9), lists (e.g. 1,2,3), W to find the nearest weekday for a given day of the month, L to find the last day of the month, L to find the last given weekday of a month, and hash (#) to find the nth weekday of a given month. <a href="https://en.wikipedia.org/wiki/Cron" target="_blank" rel="nofollow">Learn more about the CRON syntax</a>.</p>
 
@@ -38,7 +38,7 @@
 
 <b>Schedule task to execute on selected days</b>
 
-<p class="note margin-top-small">If you required scheduling a task to be executed for selected days only. Below example will run on each Sunday and Friday at 5 PM.</p>
+<p class="note margin-top-small">If you require scheduling a task to be executed for selected days only. Below example will run on each Sunday and Friday at 5 PM.</p>
 
 <div class="ide margin-top-small">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>0 17 * * sun,fri</code></pre>
