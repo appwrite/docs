@@ -2,9 +2,12 @@
 
 The official https://appwrite.io/docs documentation source code.
 ## 🚀 Contributing
-1. Clone the repository
-2. Update, add, or fix current docs
-3. Once content is ready, raise a PR
+:point_right: 1. Clone the repository
+
+:point_right: 2. Update, add, or fix current docs
+
+:point_right: 3. Once content is ready, raise a PR
+
 
 ### Content Guidelines
 - Use proper title hierarchy (h1-h6) and valid HTML
@@ -79,6 +82,7 @@ Use the following HTML structure to add important notes inside your docs:
   <h2>Important Message</h2>
   <p>Message content here.</p>
 </div>
+
 ```
 
 #### Images
@@ -100,6 +104,6 @@ $image = new View(__DIR__.'/../general/image.phtml');
 ## 🤘 Support 
 At any point, if you are stuck, feel free to hop on our [Discord server](https://appwrite.io/discord) to ask questions or seek mentorship!
 
-## Follow Us
+## :right_anger_bubble: Follow Us
 Join our growing community around the world! See our official [Blog](https://medium.com/appwrite-io). Follow us on [Twitter](https://twitter.com/appwrite_io), [Facebook Page](https://www.facebook.com/appwrite.io), [Facebook Group](https://www.facebook.com/groups/appwrite.developers/) or join our live [Discord server](https://discord.gg/GSeTUeA) for more help, ideas, and discussions.
 
