@@ -477,13 +477,16 @@ println(res.body?.string())</code></pre>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-let users = Users(client: client);
+let users = Users(client: client)
 users.create(email: 'email@example.com', password: 'password') { result in
     switch result {
-        case .failure(let error): print(error.localizedDescription)
-        case .success(var response):
+    case .failure(let error):
+        print(error.localizedDescription)
+    case .success(var response):
+        print(response.body!.readString(length: response.body!.readableBytes)
+    }
 }
-println(res.body?.string())</code></pre>
+</code></pre>
         </div>
     </li>
 </ul>
@@ -621,7 +624,7 @@ res.then((response) {
     </li>
     <li>
         <h3>Kotlin</h3>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Kotlin SDK">
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Users
 
@@ -637,6 +640,29 @@ val users = Users(client);
 val res = users.create('email@example.com', 'password');
 
 println(res.body?.string())</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client();
+
+client
+    .setEndpoint(endPoint: 'https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject(value: '5df5acd0d48c2') // Your project ID
+    .setKey(value: '919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+
+let users = Users(client: client);
+users.create(email: 'email@example.com', password: 'password') { result in
+    switch result {
+    case .failure(let error):
+        print(error.localizedDescription)
+    case .success(var response):
+        print(response.body!.readString(length: response.body!.readableBytes)
+    }
+}</code></pre>
         </div>
     </li>
 </ul>
