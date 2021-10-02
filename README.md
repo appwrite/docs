@@ -12,7 +12,7 @@ The official https://appwrite.io/docs documentation source code.
 - External links should have an HTML attribute of `rel="noopener"`
 - All filenames should be dash-based and nested in a way that makes sense
 - All images should be in PNG format and 2600x1400px. Do not include any sensitive data in images. All screenshot of the Appwrite dashboard should support light and dark mode.
-- When creating new content or adjusting docs heirarchy please consult the Appwrite team by opening a Github Issue in this repository
+- When creating new content or adjusting docs hierarchy, please consult the Appwrite team by opening a Github Issue in this repository
 
 #### Code Examples
 
