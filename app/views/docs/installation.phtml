@@ -65,6 +65,26 @@
 
 <p>Once the Docker installation completes, go to your machine hostname or IP address on your browser to access the Appwrite console. Please notice that on non-linux native hosts the server might take a few minutes to start after installation completes.</p>
 
+<h2><a href="/docs/installation#stopAppwrite" id="stopAppwrite">Stop Appwrite</a></h2>
+
+<p>When Appwrite is installed, the support containers for Appwrite are started on your system. You can stop these containers to stop Appwrite instance. </p>
+
+<h3><a href="/docs/installation#unix" id="unix">Unix</a></h3>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker container stop $(docker container ls -q --filter name=appwrite*)</code></pre>
+</div>
+
+<h3><a href="/docs/installation#manual" id="manual">Manual (using docker-compose.yml)</a></h3>
+
+<p> If you installed Appwrite using docker-compose, you can stop the running containers by running the following Docker command in the directory containing the <a href="https://gist.github.com/eldadfux/977869ff6bdd7312adfd4e629ee15cc5" target="_blank">docker-compose.yml and .env</a> file : </p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose down</code></pre>
+</div>
+
+<hr class="margin-bottom" />
+
 <h2><a href="/docs/installation#learnMore" id="learnMore">Learn More</a></h2>
 
 <ul>
