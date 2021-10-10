@@ -19,8 +19,10 @@ $channels = [
 ?>
 
 <p>Realtime allows you to listen to any events on the server-side in realtime using the <b>subscribe</b> method.</p>
-<p>Instead of requesting new data via HTTP, the subscription will receive new data everytime it changes, any connected client receives that update within milliseconds via a WebSocket connection.</p>
-<p>This lets you build an interactive and responsive user experience by providing information from all of Appwrite's services in realtime.</p>
+<p>Instead of requesting new data via HTTP, the subscription will receive new data everytime it changes, any connected
+    client receives that update within milliseconds via a WebSocket connection.</p>
+<p>This lets you build an interactive and responsive user experience by providing information from all of Appwrite's
+    services in realtime.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
@@ -71,15 +73,21 @@ realtime.subscribe(channels, callback)</code></pre>
     </li>
 </ul>
 
-<p>To subscribe to updates from different resources, you need to specify one or more channels. The <a href="/docs/realtime#channels">channels</a> offer a wide and powerful selection that will allow you to listen to all possible resources. This allows you to receive updates not only from the database, but from all the services that Appwrite offers.</p>
+<p>To subscribe to updates from different resources, you need to specify one or more channels. The <a
+        href="/docs/realtime#channels">channels</a> offer a wide and powerful selection that will allow you to listen to
+    all possible resources. This allows you to receive updates not only from the database, but from all the services
+    that Appwrite offers.</p>
 
-<p>If you listen to all documents from a collection by subscribing to the <span class="tag">collections.[ID].documents</span> channel, you can use the <b>event</b> attribute in the callback to distinguish whether a new document was created or an existing one was updated.</p>
+<p>If you listen to all documents from a collection by subscribing to the <span
+        class="tag">collections.[ID].documents</span> channel, you can use the <b>event</b> attribute in the callback to
+    distinguish whether a new document was created or an existing one was updated.</p>
 
 <p>All possible events can be found <a href="/docs/webhooks#events">here</a>.</p>
 
 <div class="notice margin-top-large margin-bottom-large">
     <h3>Permissions</h3>
-    <p>All subscriptions are secured by the <a href="/docs/permissions">permissions</a> offered by Appwrite, meaning a user will only receive updates to resources to which he has read permission.</p>
+    <p>All subscriptions are secured by the <a href="/docs/permissions">permissions</a> offered by Appwrite, meaning a
+        user will only receive updates to resources to which he has read permission.</p>
     <p>Using a wildcard <span class="tag">*</span> on read permissions will allow any client to receive updates.</p>
 </div>
 
@@ -88,7 +96,9 @@ realtime.subscribe(channels, callback)</code></pre>
 
 <h3><a href="/docs/realtime#subscribe-to-a-channel" id="subscribe-to-a-channel">Subscribe to a channel</a></h3>
 
-<p>In this example we are subscribing to all updates related to our account by using the <span class="tag">account</span> channel. This will be triggered by any update related to the authenticated user, like updating the user's name or e-mail address.</p>
+<p>In this example we are subscribing to all updates related to our account by using the <span
+        class="tag">account</span> channel. This will be triggered by any update related to the authenticated user, like
+    updating the user's name or e-mail address.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -130,10 +140,13 @@ realtime.subscribe("account", callback = { param ->
     </li>
 </ul>
 
-<h3><a href="/docs/realtime#subscribe-to-multiple-channels" id="subscribe-to-multiple-channels">Subscribe to multiple channels</a></h3>
+<h3><a href="/docs/realtime#subscribe-to-multiple-channels" id="subscribe-to-multiple-channels">Subscribe to multiple
+        channels</a></h3>
 
-<p>You can also listen to multiple <a href="/docs/realtime#channels">channels</a> at once by passing an array of channels. This will trigger the callback for any events for all channels passed.</p>
-<p>In this example we are listening to the document A and all files by subscribing to the <span class="tag">documents.A</span> and <span class="tag">files</span> channels.</p>
+<p>You can also listen to multiple <a href="/docs/realtime#channels">channels</a> at once by passing an array of
+    channels. This will trigger the callback for any events for all channels passed.</p>
+<p>In this example we are listening to the document A and all files by subscribing to the <span
+        class="tag">documents.A</span> and <span class="tag">files</span> channels.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -177,7 +190,8 @@ realtime.subscribe(["documents.A", "files"], callback = { param ->
 
 <h3><a href="/docs/realtime#unsubscribe" id="unsubscribe">Unsubscribe</a></h3>
 
-<p>If you no longer want to receive updates from a subscription, you can unsubscribe so that your callbacks are no longer called.</p>
+<p>If you no longer want to receive updates from a subscription, you can unsubscribe so that your callbacks are no
+    longer called.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -271,7 +285,8 @@ subscription.close()</code></pre>
                 integer
             </td>
             <td data-title="Description: ">
-                The <a href="https://en.wikipedia.org/wiki/Unix_time" rel="noopener" target="_blank">UNIX timestamp</a> from the server to ensure consistency across all client platforms and real-time technologies.
+                The <a href="https://en.wikipedia.org/wiki/Unix_time" rel="noopener" target="_blank">UNIX timestamp</a>
+                from the server to ensure consistency across all client platforms and real-time technologies.
             </td>
         </tr>
         <tr>
@@ -288,7 +303,8 @@ subscription.close()</code></pre>
     </tbody>
 </table>
 
-<p>If you subscribe to the <span class="tag">documents</span> channel and a document the user is allowed to read is updated, you will receive an object containing informations about the event and the updated document.</p>
+<p>If you subscribe to the <span class="tag">documents</span> channel and a document the user is allowed to read is
+    updated, you will receive an object containing informations about the event and the updated document.</p>
 
 <p>The response will look like this:</p>
 
@@ -322,16 +338,18 @@ subscription.close()</code></pre>
     </thead>
     <tbody>
         <?php foreach ($channels as $channel => $description) : ?>
-            <tr>
-                <td><?php echo $this->escape($channel); ?></td>
-                <td><?php echo $this->escape($description); ?></td>
-            </tr>
+        <tr>
+            <td><?php echo $this->escape($channel); ?></td>
+            <td><?php echo $this->escape($description); ?></td>
+        </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 
 <h2><a href="/docs/realtime#custom-endpoint" id="custom-endpoint">Custom Endpoint</a></h2>
-<p>The SDK will guess the endpoint of the Realtime API when setting the endpoint of your Appwrite instance. If you are running Appwrite with a custom proxy and changed the route of the Realtime API, you can call the <b>setEndpointRealtime</b> method on the Client SDK and set your new endpoint value.</p>
+<p>The SDK will guess the endpoint of the Realtime API when setting the endpoint of your Appwrite instance. If you are
+    running Appwrite with a custom proxy and changed the route of the Realtime API, you can call the
+    <b>setEndpointRealtime</b> method on the Client SDK and set your new endpoint value.</p>
 <p>By default the endpoint is <b>wss://[ENDPOINT]/v1/realtime</b>.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -361,13 +379,19 @@ client.setEndpointRealtime('[ENDPOINT]')</code></pre>
 <h2><a href="/docs/realtime#known-limitations" id="known-limitations">Known limitations</a></h2>
 
 <h3>Authentication with existing subscription</h3>
-<p>If you authenticate a user and have an already existing subscription, the subscription will not receive updates for the newly authenticated user. You would need to re-create the subscription so that it will work with the new user.</p>
+<p>If you authenticate a user and have an already existing subscription, the subscription will not receive updates for
+    the newly authenticated user. You would need to re-create the subscription so that it will work with the new user.
+</p>
 
 <h3>Be careful with multiple quick changes of different subscribed channels</h3>
-<p>The SDK creates a single WebSocket connection for all subscribed channels. Each time a channel is added or unsubscribed - the SDK currently creates a completely new connection and terminates the old one. Therefore, subscriptions to channels should always be done in conjunction with state management so as not to be unnecessarily built up several times by multiple components' life cycles.</p>
+<p>The SDK creates a single WebSocket connection for all subscribed channels. Each time a channel is added or
+    unsubscribed - the SDK currently creates a completely new connection and terminates the old one. Therefore,
+    subscriptions to channels should always be done in conjunction with state management so as not to be unnecessarily
+    built up several times by multiple components' life cycles.</p>
 
 <h3>Nested Documents</h3>
-<p>Nested Documents will not trigger events related to their parent documents. Meaning, updates to a child document - will not trigger an event for the parent document. But it will trigger an event for the child document itself.</p>
+<p>Nested Documents will not trigger events related to their parent documents. Meaning, updates to a child document -
+    will not trigger an event for the parent document. But it will trigger an event for the child document itself.</p>
 
 <h3>Server-Side?</h3>
 <p>We currently are not offering access to realtime with Server SDKs and an API key.</p>

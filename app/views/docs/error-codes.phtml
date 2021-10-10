@@ -1,4 +1,7 @@
-<p>Appwrite uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted, invalid input, etc.). Codes in the 5xx range indicate an error with the Appwrite server, but these are rare.</p>
+<p>Appwrite uses conventional HTTP response codes to indicate the success or failure of an API request. In general:
+    Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information
+    provided (e.g., a required parameter was omitted, invalid input, etc.). Codes in the 5xx range indicate an error
+    with the Appwrite server, but these are rare.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full vertical text-size-small">
     <thead>
@@ -17,7 +20,9 @@
         <tr>
             <td data-title="Code: ">204</td>
             <td data-title="Text: ">No Content</td>
-            <td data-title="Description: ">The server has successfully fulfilled the request and that there is no additional content to send in the response payload body. This status will usually return on successful delete operations.</td>
+            <td data-title="Description: ">The server has successfully fulfilled the request and that there is no
+                additional content to send in the response payload body. This status will usually return on successful
+                delete operations.</td>
         </tr>
         <tr>
             <td data-title="Code: ">304</td>
@@ -28,61 +33,74 @@
         <tr>
             <td data-title="Code: ">400</td>
             <td data-title="Text: ">Bad Request</td>
-            <td data-title="Description: ">The request was invalid or cannot be otherwise served. An accompanying error message will explain further. Requests with wrong or invalid input will yield this response.</td>
+            <td data-title="Description: ">The request was invalid or cannot be otherwise served. An accompanying error
+                message will explain further. Requests with wrong or invalid input will yield this response.</td>
         </tr>
 
         <tr>
             <td data-title="Code: ">401</td>
             <td data-title="Text: ">Unauthorized</td>
-            <td data-title="Description: ">Missing or incorrect authentication credentials can happen when the API key or user permission is not sufficient.</td>
+            <td data-title="Description: ">Missing or incorrect authentication credentials can happen when the API key
+                or user permission is not sufficient.</td>
         </tr>
 
         <tr>
             <td data-title="Code: ">403</td>
             <td data-title="Text: ">Forbidden</td>
-            <td data-title="Description: ">The request is understood, but it has been refused, or access is not allowed. An accompanying error message will explain why. Make sure to register your app in your project's dashboard platform list.</td>
+            <td data-title="Description: ">The request is understood, but it has been refused, or access is not allowed.
+                An accompanying error message will explain why. Make sure to register your app in your project's
+                dashboard platform list.</td>
         </tr>
 
         <tr>
             <td data-title="Code: ">404</td>
             <td data-title="Text: ">Not Found</td>
-            <td data-title="Description: ">The URI requested is invalid or the resource requested, such as a user, does not exist.</td>
+            <td data-title="Description: ">The URI requested is invalid or the resource requested, such as a user, does
+                not exist.</td>
         </tr>
 
         <tr>
             <td data-title="Code: ">409</td>
             <td data-title="Text: ">Conflict</td>
-            <td data-title="Description: ">This response is sent when a request conflicts with the current state of the server. This status code will usually appear when you're trying to create an already existing resource.</td>
+            <td data-title="Description: ">This response is sent when a request conflicts with the current state of the
+                server. This status code will usually appear when you're trying to create an already existing resource.
+            </td>
         </tr>
 
         <tr>
             <td data-title="Code: ">429</td>
             <td data-title="Text: ">Too Many Requests</td>
-            <td data-title="Description: ">Returned in when a request cannot be served due to the application’s rate limit having been exhausted for the resource. <a href="/docs/rate-limits">See Rate Limits</a></td>
+            <td data-title="Description: ">Returned in when a request cannot be served due to the application’s rate
+                limit having been exhausted for the resource. <a href="/docs/rate-limits">See Rate Limits</a></td>
         </tr>
 
         <tr>
             <td data-title="Code: ">500</td>
             <td data-title="Text: ">Internal Server Error</td>
-            <td data-title="Description: ">Something is broken. Contact our <a href="/support">team</a>, or raise a <a href="https://github.com/appwrite/appwrite/issues/new" target="_blank" rel="noopener">GitHub issue</a>.</td>
+            <td data-title="Description: ">Something is broken. Contact our <a href="/support">team</a>, or raise a <a
+                    href="https://github.com/appwrite/appwrite/issues/new" target="_blank" rel="noopener">GitHub
+                    issue</a>.</td>
         </tr>
 
         <tr>
             <td data-title="Code: ">501</td>
             <td data-title="Text: ">Not Implemented</td>
-            <td data-title="Description: ">The feature is not implemented. Usually returned when the project owner has disabled an auth method or an entire service.</td>
+            <td data-title="Description: ">The feature is not implemented. Usually returned when the project owner has
+                disabled an auth method or an entire service.</td>
         </tr>
 
         <tr>
             <td data-title="Code: ">503</td>
             <td data-title="Text: ">Service Unavailable</td>
-            <td data-title="Description: ">The Appwrite servers are up but overloaded with requests. Try again later.</td>
+            <td data-title="Description: ">The Appwrite servers are up but overloaded with requests. Try again later.
+            </td>
         </tr>
 
         <tr>
             <td data-title="Code: ">504</td>
             <td data-title="Text: ">Gateway timeout</td>
-            <td data-title="Description: ">The Appwrite servers are up, but the request couldn’t be serviced due to some failure within the stack. Try again later.</td>
+            <td data-title="Description: ">The Appwrite servers are up, but the request couldn’t be serviced due to some
+                failure within the stack. Try again later.</td>
         </tr>
 
     </tbody>
@@ -90,7 +108,8 @@
 
 <h2><a href="/docs/error-codes#errorMessages" id="errorMessages">Error Messages</a></h2>
 
-<p>When the Appwrite APIs return error messages, it does so in JSON format. For example, an error might look like this:</p>
+<p>When the Appwrite APIs return error messages, it does so in JSON format. For example, an error might look like this:
+</p>
 
 <div class="ide">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>{

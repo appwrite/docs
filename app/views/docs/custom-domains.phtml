@@ -311,27 +311,46 @@ $dns = [
 
 ?>
 
-<p><b>Appwrite custom domains feature allows you to use your self-owned domain name as your Appwrite API endpoint. A recent change made in modern browsers will not allow your web app to use 3rd party cookies. This change is done to protect your users' privacy from malicious web tracking services.</b></p>
+<p><b>Appwrite custom domains feature allows you to use your self-owned domain name as your Appwrite API endpoint. A
+        recent change made in modern browsers will not allow your web app to use 3rd party cookies. This change is done
+        to protect your users' privacy from malicious web tracking services.</b></p>
 
-<p>When accessing Appwrite from a 3rd party domain, like appwrite.io or example.com, some browsers will treat our secure cookies as 3rd party cookies and block them, as a fallback Appwrite will store your users' sessions on the browser localStorage.</p>
+<p>When accessing Appwrite from a 3rd party domain, like appwrite.io or example.com, some browsers will treat our secure
+    cookies as 3rd party cookies and block them, as a fallback Appwrite will store your users' sessions on the browser
+    localStorage.</p>
 
-<p>Using localStorage is very convenient to help you get started quickly with Appwrite, but it is not the best practice for your users' security. The browser localStorage can't protect your users' sessions from being hijacked by a 3rd party script or an XSS vulnerability in your web app.</p>
+<p>Using localStorage is very convenient to help you get started quickly with Appwrite, but it is not the best practice
+    for your users' security. The browser localStorage can't protect your users' sessions from being hijacked by a 3rd
+    party script or an XSS vulnerability in your web app.</p>
 
-<p>To overcome these issues and make sure your web application works securely on all browsers, Appwrite allows you to access the Appwrite API using your own private custom domain. When accessing Appwrite from the same domain as the one your app uses, Appwrite cookies will no longer be treated as 3rd party cookies by any browser and will store your users' sessions securely.</p>
+<p>To overcome these issues and make sure your web application works securely on all browsers, Appwrite allows you to
+    access the Appwrite API using your own private custom domain. When accessing Appwrite from the same domain as the
+    one your app uses, Appwrite cookies will no longer be treated as 3rd party cookies by any browser and will store
+    your users' sessions securely.</p>
 
-<p>For example, if your app runs on <span class="link">my-app.com</span>, you can set the subdomain <span class="link">appwrite.my-app.com</span> to access the Appwrite API. This will allow browsers to respect the Appwrite sessions cookies as they are set on the same domain as your app.</p>
+<p>For example, if your app runs on <span class="link">my-app.com</span>, you can set the subdomain <span
+        class="link">appwrite.my-app.com</span> to access the Appwrite API. This will allow browsers to respect the
+    Appwrite sessions cookies as they are set on the same domain as your app.</p>
 
 <h2><a href="/docs/custom-domains#addYourDomain" id="addYourDomain">Add Your Domain</a></h2>
 
-<p>You can set your domain name by adding it to your Appwrite project settings page under the 'Custom Domains' tab. After you added your new domain to your project settings from the dashboard, you will need to create a new CNAME DNS record at your DNS provider dashboard.</p>
+<p>You can set your domain name by adding it to your Appwrite project settings page under the 'Custom Domains' tab.
+    After you added your new domain to your project settings from the dashboard, you will need to create a new CNAME DNS
+    record at your DNS provider dashboard.</p>
 
 <h2><a href="/docs/custom-domains#addCNAME" id="addCNAME">Add a CNAME Record</a></h2>
 
-<p>A <a href="https://en.wikipedia.org/wiki/CNAME_record" target="_blank" rel="noopener">CNAME record</a> (or a Canonical Name record) is a type of resource record in the Domain Name System (DNS), which maps one domain name (an alias) to another.</p>
+<p>A <a href="https://en.wikipedia.org/wiki/CNAME_record" target="_blank" rel="noopener">CNAME record</a> (or a
+    Canonical Name record) is a type of resource record in the Domain Name System (DNS), which maps one domain name (an
+    alias) to another.</p>
 
-<p>Every DNS host has its own way of updating DNS settings, and, unfortunately, their dashboard interfaces usually aren't the most intuitive. We recommend that you read the help documentation of your DNS host, also do not hesitate to contact their support for help with their interface and settings.</p>
+<p>Every DNS host has its own way of updating DNS settings, and, unfortunately, their dashboard interfaces usually
+    aren't the most intuitive. We recommend that you read the help documentation of your DNS host, also do not hesitate
+    to contact their support for help with their interface and settings.</p>
 
-<p>Below, you'll find a list of registrars and links to their DNS setting documentation‍. If your domain provider isn't listed above, please <a href="/contact" target="_blank">contact us</a>, and we'll include their settings as well.</p>
+<p>Below, you'll find a list of registrars and links to their DNS setting documentation‍. If your domain provider isn't
+    listed above, please <a href="/contact" target="_blank">contact us</a>, and we'll include their settings as well.
+</p>
 
 <table class="vertical">
     <thead>
@@ -343,11 +362,17 @@ $dns = [
     <tbody>
         <?php foreach($dns as $provider): ?>
         <tr>
-            <td data-title=""><?php echo $provider['name']; ?> &nbsp; (<a rel="noopener" target="_blank" href="<?php echo $provider['url']; ?>"><?php echo str_replace('www.', '', parse_url($provider['url'], PHP_URL_HOST)); ?></a>)</td>
+            <td data-title=""><?php echo $provider['name']; ?> &nbsp; (<a rel="noopener" target="_blank"
+                    href="<?php echo $provider['url']; ?>"><?php echo str_replace('www.', '', parse_url($provider['url'], PHP_URL_HOST)); ?></a>)
+            </td>
             <td data-title="">
-                <?php if(!empty($provider['docs']['a'])): ?><a rel="noopener" target="_blank" href="<?php echo $provider['docs']['a']; ?>">A Record</a>&nbsp;&nbsp;&nbsp;&nbsp;<?php endif; ?>
-                <?php if(!empty($provider['docs']['cname'])): ?><a rel="noopener" target="_blank" href="<?php echo $provider['docs']['cname']; ?>">CNAME Record</a>&nbsp;&nbsp;&nbsp;&nbsp;<?php endif; ?>
-                <?php if(!empty($provider['docs']['settings'])): ?><a rel="noopener" target="_blank" href="<?php echo $provider['docs']['settings']; ?>">Settings</S></a>&nbsp;&nbsp;&nbsp;&nbsp;<?php endif; ?>
+                <?php if(!empty($provider['docs']['a'])): ?><a rel="noopener" target="_blank"
+                    href="<?php echo $provider['docs']['a']; ?>">A Record</a>&nbsp;&nbsp;&nbsp;&nbsp;<?php endif; ?>
+                <?php if(!empty($provider['docs']['cname'])): ?><a rel="noopener" target="_blank"
+                    href="<?php echo $provider['docs']['cname']; ?>">CNAME
+                    Record</a>&nbsp;&nbsp;&nbsp;&nbsp;<?php endif; ?>
+                <?php if(!empty($provider['docs']['settings'])): ?><a rel="noopener" target="_blank"
+                    href="<?php echo $provider['docs']['settings']; ?>">Settings</S></a>&nbsp;&nbsp;&nbsp;&nbsp;<?php endif; ?>
             </td>
         </tr>
         <?php endforeach; ?>
@@ -356,15 +381,23 @@ $dns = [
 
 <h2><a href="/docs/custom-domains#verifyDomain" id="verifyDomain">Confirm and Verify Your Domain</a></h2>
 
-<p>Once you added your new CNAME record to your DNS settings, you will need to verify your new domain name from your Appwrite console. Enter your custom domains tab from your project settings, click the DNS Settings link and click on the 'Confirm and Verify" button. If everything went well, Appwrite will approve your domain and generate a new SSL certificate for it in the background.</p>
+<p>Once you added your new CNAME record to your DNS settings, you will need to verify your new domain name from your
+    Appwrite console. Enter your custom domains tab from your project settings, click the DNS Settings link and click on
+    the 'Confirm and Verify" button. If everything went well, Appwrite will approve your domain and generate a new SSL
+    certificate for it in the background.</p>
 
 <h2><a href="/docs/custom-domains#enjoySSLCert" id="enjoySSLCert">Enjoy your Free SSL Certificate</a></h2>
 
-<p>Appwrite uses <a href="https://letsencrypt.org/" target="_blank" rel="noopener">Letsencrypt</a> service to generate free and automated SSL certificates for your custom domains. Once your domain is verified, it will take the Appwrite server a few seconds to create a new SSL certificate for it. Once done, you will see your domain TLS setting marked as 'Enabled' in your Appwrite dashboard, and you will be able to connect the Appwrite API using your new domain.</p>
+<p>Appwrite uses <a href="https://letsencrypt.org/" target="_blank" rel="noopener">Letsencrypt</a> service to generate
+    free and automated SSL certificates for your custom domains. Once your domain is verified, it will take the Appwrite
+    server a few seconds to create a new SSL certificate for it. Once done, you will see your domain TLS setting marked
+    as 'Enabled' in your Appwrite dashboard, and you will be able to connect the Appwrite API using your new domain.</p>
 
-<h2><a href="/docs/custom-domains#connectCustomDomain" id="connectCustomDomain">Connect using Your Custom Domain</a></h2>
+<h2><a href="/docs/custom-domains#connectCustomDomain" id="connectCustomDomain">Connect using Your Custom Domain</a>
+</h2>
 
-<p>To connect with your Appwrite server using your new domain, you will have to use the 'setEndpoint' (or 'set_endpoint') method in your SDK of choice and pass your new domain value, for example:</p>
+<p>To connect with your Appwrite server using your new domain, you will have to use the 'setEndpoint' (or
+    'set_endpoint') method in your SDK of choice and pass your new domain value, for example:</p>
 
 <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Javascript">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Init your Web SDK

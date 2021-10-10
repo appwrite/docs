@@ -7,17 +7,26 @@ $runtimes = $this->getParam('runtimes', []);
 
 ?>
 
-<p>Appwrite Functions allow you to extend and customize your Appwrite server functionality by executing your custom code. Appwrite can execute your custom code in response to any <a href="/docs/webhooks#events" target="_blank">Appwrite system event</a> like account creation, user login, or document update. You can also schedule your functions to run according to a CRON schedule or start them manually by triggering your function from an HTTP endpoint using the Appwrite client or server APIs.</p>
+<p>Appwrite Functions allow you to extend and customize your Appwrite server functionality by executing your custom
+    code. Appwrite can execute your custom code in response to any <a href="/docs/webhooks#events"
+        target="_blank">Appwrite system event</a> like account creation, user login, or document update. You can also
+    schedule your functions to run according to a CRON schedule or start them manually by triggering your function from
+    an HTTP endpoint using the Appwrite client or server APIs.</p>
 
-<p>Appwrite Functions run in a secure, isolated Docker container. By default, Appwrite supports multiple runtimes for different languages that you can use to run your code.</p>
+<p>Appwrite Functions run in a secure, isolated Docker container. By default, Appwrite supports multiple runtimes for
+    different languages that you can use to run your code.</p>
 
 <h2><a href="/docs/functions#addFunction" id="addFunction">Add Your Function</a></h2>
 
-<p>You can add a new function from your Appwrite project's dashboard. Access your Functions settings from your projects left navigation panel. Click the 'Add Function' button and choose your function name and code runtime. In your Functions settings page, you can set your function event triggers, CRON schedule and set secure environment variables for your function runtime.</p>
+<p>You can add a new function from your Appwrite project's dashboard. Access your Functions settings from your projects
+    left navigation panel. Click the 'Add Function' button and choose your function name and code runtime. In your
+    Functions settings page, you can set your function event triggers, CRON schedule and set secure environment
+    variables for your function runtime.</p>
 
 <h2><a href="/docs/functions#deployCode" id="deployCode">Deploy Your Code</a></h2>
 
-<p>You can deploy your code using the <a href="/docs/command-line">Appwrite CLI</a> tool, the Appwrite <a href="/docs/getting-started-for-server">Server API</a> or manually from the Appwrite console.</p>
+<p>You can deploy your code using the <a href="/docs/command-line">Appwrite CLI</a> tool, the Appwrite <a
+        href="/docs/getting-started-for-server">Server API</a> or manually from the Appwrite console.</p>
 
 <h3><a href="/docs/functions#createTag" id="createTag">Create Tag</a></h3>
 
@@ -58,66 +67,82 @@ $runtimes = $this->getParam('runtimes', []);
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom text-size-small">
     <thead>
-    <tr>
-        <th style="width: 140px">Name</th>
-        <th>Description</th>
-    </tr>
+        <tr>
+            <th style="width: 140px">Name</th>
+            <th>Description</th>
+        </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>functionId</td>
-        <td>The ID of the Function you created in the previous step. You can find your function ID on your function page in your project dashboard.</td>
-    </tr>
-    <tr>
-        <td>command</td>
-        <td>The default command to execute when your function is triggered.</td>
-    </tr>
-    <tr>
-        <td>code</td>
-        <td>Gzip file with your code package. When used with the Appwrite CLI, pass the path to your code directory, and the CLI will automatically package your code. <br /><br /><b>For increased security, The Appwrite CLI only has access to file paths within the current working directory. In other words, it doesn't support file paths that try to access the parent directories (../../mycode).</b></td>
-    </tr>
+        <tr>
+            <td>functionId</td>
+            <td>The ID of the Function you created in the previous step. You can find your function ID on your function
+                page in your project dashboard.</td>
+        </tr>
+        <tr>
+            <td>command</td>
+            <td>The default command to execute when your function is triggered.</td>
+        </tr>
+        <tr>
+            <td>code</td>
+            <td>Gzip file with your code package. When used with the Appwrite CLI, pass the path to your code directory,
+                and the CLI will automatically package your code. <br /><br /><b>For increased security, The Appwrite
+                    CLI only has access to file paths within the current working directory. In other words, it doesn't
+                    support file paths that try to access the parent directories (../../mycode).</b></td>
+        </tr>
     </tbody>
 </table>
 
-<p><a href="/docs/server/functions#functionsCreateTag" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> You can also deploy new code tags using the Appwrite server API</a></p>
+<p><a href="/docs/server/functions#functionsCreateTag" rel="noopener"><i
+            class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> You can also deploy new
+        code tags using the Appwrite server API</a></p>
 
 <div class="notice">
     <h3>Handling Dependencies</h3>
 
-    <p>If your code uses a package manager like NPM, Yarn, or Composer to install packages, you have to make sure your code directory includes your packages directory (node_modules for node or vendor for PHP) before you try to package and deploy your code.</p>
+    <p>If your code uses a package manager like NPM, Yarn, or Composer to install packages, you have to make sure your
+        code directory includes your packages directory (node_modules for node or vendor for PHP) before you try to
+        package and deploy your code.</p>
 
-    <p>If you're using a programming language that saves your packages under a global directory like Dart, Python or Ruby, you should set your package manager to keep your code under the '.appwrite' code directory under your code working directory to be deployed and available in your cloud functions runtime.</p>
+    <p>If you're using a programming language that saves your packages under a global directory like Dart, Python or
+        Ruby, you should set your package manager to keep your code under the '.appwrite' code directory under your code
+        working directory to be deployed and available in your cloud functions runtime.</p>
 
-    <p>For most languages, this can be achieved easily by adding an environment variable before installing your dependencies. Below you can find some simple examples:</p>
+    <p>For most languages, this can be achieved easily by adding an environment variable before installing your
+        dependencies. Below you can find some simple examples:</p>
 
     <p><b>Python</b></p>
 
     <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-        <pre class="line-numbers"><code class="prism language-bash" data-prism>PIP_TARGET=./.appwrite pip install -r ./requirements.txt --upgrade --ignore-installed</code></pre>
+        <pre
+            class="line-numbers"><code class="prism language-bash" data-prism>PIP_TARGET=./.appwrite pip install -r ./requirements.txt --upgrade --ignore-installed</code></pre>
     </div>
 
     <p><b>Dart</b></p>
 
     <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-        <pre class="line-numbers"><code class="prism language-bash" data-prism>PUB_CACHE=./.appwrite pub get</code></pre>
+        <pre
+            class="line-numbers"><code class="prism language-bash" data-prism>PUB_CACHE=./.appwrite pub get</code></pre>
     </div>
 
     <p><b>Deno</b></p>
 
     <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-        <pre class="line-numbers"><code class="prism language-bash" data-prism>DENO_DIR=./.appwrite deno cache main.ts</code></pre>
+        <pre
+            class="line-numbers"><code class="prism language-bash" data-prism>DENO_DIR=./.appwrite deno cache main.ts</code></pre>
     </div>
 
     <p><b>Ruby</b></p>
 
     <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-        <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run --rm -v $(pwd):/app -w /app --env GEM_HOME=./.appwrite appwrite/env-ruby-2.7:1.0.2 bundle install</code></pre>
+        <pre
+            class="line-numbers"><code class="prism language-bash" data-prism>docker run --rm -v $(pwd):/app -w /app --env GEM_HOME=./.appwrite appwrite/env-ruby-2.7:1.0.2 bundle install</code></pre>
     </div>
 </div>
 
 <h2><a href="/docs/functions#execute" id="execute">Execute</a></h2>
 
-<p>Besides setting a schedule or allowing your function to listen to Appwrite’s system events, you can also manually execute your cloud functions from your Appwrite console or API.</p>
+<p>Besides setting a schedule or allowing your function to listen to Appwrite’s system events, you can also manually
+    execute your cloud functions from your Appwrite console or API.</p>
 
 <?php
 $image = new View(__DIR__.'/../general/image.phtml');
@@ -129,11 +154,16 @@ $image = new View(__DIR__.'/../general/image.phtml');
         ->render();
 ?>
 
-<p>To execute a function from the Appwrite console, click the 'Execute Now' button on your function's overview page. To execute a function from the API, send a POST request to the <a href="/docs/client/functions#functionsCreateExecution" target="_blank">function execution endpoint</a>.</p>
+<p>To execute a function from the Appwrite console, click the 'Execute Now' button on your function's overview page. To
+    execute a function from the API, send a POST request to the <a
+        href="/docs/client/functions#functionsCreateExecution" target="_blank">function execution endpoint</a>.</p>
 
-<p>The function execution endpoint is available from both Appwrite client and server APIs. To execute your function from the <b>server API</b>, you need an API key with 'execution.write' scope.</p>
+<p>The function execution endpoint is available from both Appwrite client and server APIs. To execute your function from
+    the <b>server API</b>, you need an API key with 'execution.write' scope.</p>
 
-<p>Executing the function from the <b>client API</b> requires the current user to have execution permission for the function. You can change the execution permission from the function's settings page in the Appwrite console, by default no user, team, or role has this permission.</p>
+<p>Executing the function from the <b>client API</b> requires the current user to have execution permission for the
+    function. You can change the execution permission from the function's settings page in the Appwrite console, by
+    default no user, team, or role has this permission.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -188,15 +218,23 @@ void main() { // Init SDK
 
 <h3><a href="/docs/functions#abuseLimits" id="abuseLimits">Abuse and Limits</a></h3>
 
-<p>Appwrite allows your project's end-users to execute Cloud Functions using client API or your client SDK. Execution is permitted to any user who has been granted the "execute" permission in your Cloud Functions settings page. The execution permission can accept any of the typical Appwrite <a href="/docs/permissions">permission types</a>.</p>
+<p>Appwrite allows your project's end-users to execute Cloud Functions using client API or your client SDK. Execution is
+    permitted to any user who has been granted the "execute" permission in your Cloud Functions settings page. The
+    execution permission can accept any of the typical Appwrite <a href="/docs/permissions">permission types</a>.</p>
 
-<p>When triggering a Cloud Function execution from the client, your users will be limited to a specific amount of execution per minute to make sure your Appwrite server is not being abused. The default limit is 60 calls per 1 minute. You can edit this limit using the server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
+<p>When triggering a Cloud Function execution from the client, your users will be limited to a specific amount of
+    execution per minute to make sure your Appwrite server is not being abused. The default limit is 60 calls per 1
+    minute. You can edit this limit using the server <a href="/docs/environment-variables#functions">environment
+        variables</a>.</p>
 
 <h2><a href="/docs/functions#supportedRuntimes" id="supportedRuntimes">Supported Runtimes</a></h2>
 
-<p>Appwrite provides multiple code runtimes to execute your custom functions. Each runtime uses a Docker image tied to a specific language version to provide a safe, isolated playground to run your team's code.</p>
+<p>Appwrite provides multiple code runtimes to execute your custom functions. Each runtime uses a Docker image tied to a
+    specific language version to provide a safe, isolated playground to run your team's code.</p>
 
-<p>Below is a list of supported Cloud Functions runtimes. The Appwrite team continually adds support for new runtimes. You can easily change which runtimes your Appwrite setup supports by editing your server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
+<p>Below is a list of supported Cloud Functions runtimes. The Appwrite team continually adds support for new runtimes.
+    You can easily change which runtimes your Appwrite setup supports by editing your server <a
+        href="/docs/environment-variables#functions">environment variables</a>.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -210,9 +248,12 @@ void main() { // Init SDK
     <tbody>
         <?php foreach($runtimes as $key => $runtime): ?>
         <tr>
-            <td><img src="" data-ls-attrs="src=/images/runtimes/<?php echo $this->escape($runtime['logo'] ?? ''); ?>" alt="Function Env." class="avatar xxs" /></td>
+            <td><img src="" data-ls-attrs="src=/images/runtimes/<?php echo $this->escape($runtime['logo'] ?? ''); ?>"
+                    alt="Function Env." class="avatar xxs" /></td>
             <td><span data-general-copy><?php echo $this->escape($key); ?> </span></td>
-            <td><a href="https://hub.docker.com/r/<?php echo $this->escape(strtok($runtime['image'], ':')); ?>" target="_blank" rel="noopener"><?php echo $this->escape($runtime['image'] ?? ''); ?> <i class="icon-link-ext"></i></a></td>
+            <td><a href="https://hub.docker.com/r/<?php echo $this->escape(strtok($runtime['image'], ':')); ?>"
+                    target="_blank" rel="noopener"><?php echo $this->escape($runtime['image'] ?? ''); ?> <i
+                        class="icon-link-ext"></i></a></td>
             <td><?php echo $this->escape(implode(' / ', $runtime['supports'] ?? [])); ?></td>
         </tr>
         <?php endforeach; ?>
@@ -221,7 +262,8 @@ void main() { // Init SDK
 
 <h2><a href="/docs/functions#enviromentVariables" id="enviromentVariables">Environment Variables</a></h2>
 
-<p>Environment variables supplied by Appwrite in addition to your own defined environment variables that you can access from your function code. These variables give you information about your execution runtime environment.</p>
+<p>Environment variables supplied by Appwrite in addition to your own defined environment variables that you can access
+    from your function code. These variables give you information about your execution runtime environment.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -253,7 +295,9 @@ void main() { // Init SDK
             <td>
                 APPWRITE_FUNCTION_TRIGGER
             </td>
-            <td>The name of the event that triggered that executed the function. This value can be any of Appwrite <a href="/docs/webhooks#events" target="_blank">system events</a>, 'api' if your function was triggered manually or by an API call, or 'schedule' if your CRON schedule triggered it.</td>
+            <td>The name of the event that triggered that executed the function. This value can be any of Appwrite <a
+                    href="/docs/webhooks#events" target="_blank">system events</a>, 'api' if your function was triggered
+                manually or by an API call, or 'schedule' if your CRON schedule triggered it.</td>
         </tr>
         <tr>
             <td>
@@ -271,20 +315,26 @@ void main() { // Init SDK
             <td>
                 APPWRITE_FUNCTION_EVENT
             </td>
-            <td>Your function event name. This value is available only when your function trigger is 'event.' This variable value can be any of Appwrite <a href="/docs/webhooks#events">system events</a>.</td>
+            <td>Your function event name. This value is available only when your function trigger is 'event.' This
+                variable value can be any of Appwrite <a href="/docs/webhooks#events">system events</a>.</td>
         </tr>
         <tr>
             <td>
                 APPWRITE_FUNCTION_EVENT_DATA
             </td>
-            <td>Your function event payload. This value is available only when your function trigger is 'event'. This variable value contains a string in JSON format with your specific event data.</td>
+            <td>Your function event payload. This value is available only when your function trigger is 'event'. This
+                variable value contains a string in JSON format with your specific event data.</td>
         </tr>
         <tr>
             <td>
                 APPWRITE_FUNCTION_DATA
                 <p class="margin-top-small text-fade">version >= 0.8.0</p>
             </td>
-            <td>Your function's custom execution data. This variable's value contains a string in any format. If the custom data is in JSON FORMAT, it must be parsed inside the function code. Note that this variable can be set only when triggering a function using the <a href="https://appwrite.io/docs/client/functions?sdk=web#functionsCreateExecution">SDK or HTTP API</a> and the Appwrite Dashboard.</td>
+            <td>Your function's custom execution data. This variable's value contains a string in any format. If the
+                custom data is in JSON FORMAT, it must be parsed inside the function code. Note that this variable can
+                be set only when triggering a function using the <a
+                    href="https://appwrite.io/docs/client/functions?sdk=web#functionsCreateExecution">SDK or HTTP
+                    API</a> and the Appwrite Dashboard.</td>
         </tr>
         <tr>
             <td>
@@ -298,7 +348,8 @@ void main() { // Init SDK
                 APPWRITE_FUNCTION_USER_ID
                 <p class="margin-top-small text-fade">version >= 0.8.0</p>
             </td>
-            <td>The userId of the user that triggered your function's execution. Executions triggered in the Appwrite console will be prepended with "admin-".</td>
+            <td>The userId of the user that triggered your function's execution. Executions triggered in the Appwrite
+                console will be prepended with "admin-".</td>
         </tr>
         <tr>
             <td>
@@ -310,21 +361,24 @@ void main() { // Init SDK
         <tr>
             <td>
                 APPWRITE_FUNCTION_EVENT_PAYLOAD
-                <p class="margin-top-small text-fade">version &lt; 0.8.0 <span class="text-danger">(deprecated)</span></p>
+                <p class="margin-top-small text-fade">version &lt; 0.8.0 <span class="text-danger">(deprecated)</span>
+                </p>
             </td>
             <td>Your function event payload. Deprecated in favor of APPWRITE_FUNCTION_EVENT_DATA in version 0.8.0.</td>
         </tr>
         <tr>
             <td>
                 APPWRITE_FUNCTION_ENV_NAME
-                <p class="margin-top-small text-fade">version &lt; 0.8.0 <span class="text-danger">(deprecated)</span></p>
+                <p class="margin-top-small text-fade">version &lt; 0.8.0 <span class="text-danger">(deprecated)</span>
+                </p>
             </td>
             <td>Your function environment name. Can be any of Appwrite supported execution environments.</td>
         </tr>
         <tr>
             <td>
                 APPWRITE_FUNCTION_ENV_VERSION
-                <p class="margin-top-small text-fade">version &lt; 0.8.0 <span class="text-danger">(deprecated)</span></p>
+                <p class="margin-top-small text-fade">version &lt; 0.8.0 <span class="text-danger">(deprecated)</span>
+                </p>
             </td>
             <td>Your function environment version.</td>
         </tr>
@@ -333,9 +387,12 @@ void main() { // Init SDK
 
 <h2><a href="/docs/functions#monitorDebug" id="monitorDebug">Monitor & Debug</a></h2>
 
-<p>You can monitor your function execution usage stats and logs from your Appwrite console. To access your functions usage stats and logs, click the 'Usage' tab in your function dashboard.</p>
+<p>You can monitor your function execution usage stats and logs from your Appwrite console. To access your functions
+    usage stats and logs, click the 'Usage' tab in your function dashboard.</p>
 
-<p>The usage screen in your console will allow you to track the number of execution and your function CPU usage time. You can also review a detailed log of your function execution history, including the function exit code, output log, and error log.</p>
+<p>The usage screen in your console will allow you to track the number of execution and your function CPU usage time.
+    You can also review a detailed log of your function execution history, including the function exit code, output log,
+    and error log.</p>
 
 <?php
 $image = new View(__DIR__.'/../general/image.phtml');
@@ -349,7 +406,9 @@ $image = new View(__DIR__.'/../general/image.phtml');
 
 <h3><a href="/docs/functions#runOffline" id="runOffline">Run Offline</a></h3>
 
-<p>You can quickly run your Cloud Function locally by executing the Appwrite runtime locally using its corresponding Docker image. You can pass your offline container any environment variables your script needs and your entry command like in the example below.</p>
+<p>You can quickly run your Cloud Function locally by executing the Appwrite runtime locally using its corresponding
+    Docker image. You can pass your offline container any environment variables your script needs and your entry command
+    like in the example below.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -373,7 +432,7 @@ $image = new View(__DIR__.'/../general/image.phtml');
     node index.js"</code></pre>
         </div>
     </li>
-    
+
     <li>
         <h3>PowerShell</h3>
 
@@ -387,10 +446,18 @@ $image = new View(__DIR__.'/../general/image.phtml');
     </li>
 </ul>
 
-<p>The example above shows how you can mount your current working dir into the "appwrite/env-node-15.5:1.0.0" Cloud Functions runtime and execute a custom command to simulate exactly how the Appwirte server will execute the function on the Appwrite server. You can also pass multiple environment variables that your code might require.</p>
+<p>The example above shows how you can mount your current working dir into the "appwrite/env-node-15.5:1.0.0" Cloud
+    Functions runtime and execute a custom command to simulate exactly how the Appwirte server will execute the function
+    on the Appwrite server. You can also pass multiple environment variables that your code might require.</p>
 
-<p>When running a Cloud Functions runtime for a coding language that uses a central directory for managing all dependencies, you will need to package all your dependencies in your working directory under the ".appwrite" folder as mentioned in the "Handling Dependencies" step above. This will ensure your function container can access all required packages and execute your function successfully.</p>
+<p>When running a Cloud Functions runtime for a coding language that uses a central directory for managing all
+    dependencies, you will need to package all your dependencies in your working directory under the ".appwrite" folder
+    as mentioned in the "Handling Dependencies" step above. This will ensure your function container can access all
+    required packages and execute your function successfully.</p>
 
 <h2><a href="/docs/functions#demosExamples" id="demosExamples">Demos & Examples</a></h2>
 
-<p>There are many Cloud Function demos and examples created by the Appwrite team and community in multiple coding languages. These examples are available at our <a href="https://github.com/appwrite/demos-for-functions" target="_blank" rel="noopener">demos repository</a> on GitHub. You can also submit your examples by submitting a <a href="https://github.com/appwrite/demos-for-functions/pulls" target="_blank" rel="noopener">pull-request</a>.</p>
+<p>There are many Cloud Function demos and examples created by the Appwrite team and community in multiple coding
+    languages. These examples are available at our <a href="https://github.com/appwrite/demos-for-functions"
+        target="_blank" rel="noopener">demos repository</a> on GitHub. You can also submit your examples by submitting a
+    <a href="https://github.com/appwrite/demos-for-functions/pulls" target="_blank" rel="noopener">pull-request</a>.</p>

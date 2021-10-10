@@ -3,7 +3,8 @@ $markdown = new \Parsedown();
 $markdown->setSafeMode(true);
 ?>
 
-<p>Rules are the building blocks of Appwrite Database collections. Using rules and their validators you are able to structure your project data and make sure you only get the data in the formats you expect to.</p>
+<p>Rules are the building blocks of Appwrite Database collections. Using rules and their validators you are able to
+    structure your project data and make sure you only get the data in the formats you expect to.</p>
 
 <h2><a href="/docs/rules#ruleOjbect" id="ruleObject">Rule Object</a></h2>
 
@@ -56,15 +57,15 @@ $markdown->setSafeMode(true);
 
 <table class="vertical full margin-bottom-large">
     <thead>
-    <tr>
-        <td style="width: 140px">Name</td>
-        <td style="width: 70px"></td>
-        <td style="width: 70px">Type</td>
-        <td>Description</td>
-    </tr>
+        <tr>
+            <td style="width: 140px">Name</td>
+            <td style="width: 70px"></td>
+            <td style="width: 70px">Type</td>
+            <td>Description</td>
+        </tr>
     </thead>
     <tbody>
-    <?php foreach ($parameters as $key => $parameter):
+        <?php foreach ($parameters as $key => $parameter):
         $name = (isset($parameter['name'])) ? $parameter['name'] : '';
         $type = (isset($parameter['type'])) ? $parameter['type'] : '';
         $description = (isset($parameter['description'])) ? $parameter['description'] : '';
@@ -76,15 +77,16 @@ $markdown->setSafeMode(true);
             </td>
             <td data-title="Required? ">
                 <?php if($required): ?>
-                    <span class="tag red">required</span>
+                <span class="tag red">required</span>
                 <?php else: ?>
-                    <span class="tag">optional</span>
+                <span class="tag">optional</span>
                 <?php endif; ?>
             </td>
             <td data-title="Type: "><?php echo $this->escape($type); ?></td>
-            <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>"><?php echo $markdown->text($description); ?></td>
+            <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>">
+                <?php echo $markdown->text($description); ?></td>
         </tr>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
     </tbody>
 </table>
 
@@ -96,10 +98,10 @@ $markdown->setSafeMode(true);
 
 <table class="vertical full margin-bottom-large">
     <thead>
-    <tr>
-        <td style="width: 140px">Value</td>
-        <td>Description</td>
-    </tr>
+        <tr>
+            <td style="width: 140px">Value</td>
+            <td>Description</td>
+        </tr>
     </thead>
     <tbody>
         <tr>
@@ -139,7 +141,9 @@ $markdown->setSafeMode(true);
 
         <tr>
             <td data-title="Name: ">document</td>
-            <td data-title="Description: ">Accept a valid child document. When using this type you are also required to pass the 'list' parameter with an array of the collections UID values of the document types you want to accept.</td>
+            <td data-title="Description: ">Accept a valid child document. When using this type you are also required to
+                pass the 'list' parameter with an array of the collections UID values of the document types you want to
+                accept.</td>
         </tr>
 
     </tbody>
@@ -150,11 +154,14 @@ $markdown->setSafeMode(true);
 
 <p>The examples below will show you how you can use the rule objects to define a new Appwrite collection.</p>
 
-<p>The following examples are using the <a href="https://github.com/appwrite/sdk-for-node" target="_blank" rel="noopener">Appwrite Node.js SDK</a> but can be applied similarly to any of the other <a href="/docs/sdks">Appwrite SDKs</a>.</p>
+<p>The following examples are using the <a href="https://github.com/appwrite/sdk-for-node" target="_blank"
+        rel="noopener">Appwrite Node.js SDK</a> but can be applied similarly to any of the other <a
+        href="/docs/sdks">Appwrite SDKs</a>.</p>
 
 <h3 id="example-1">Example #1 - Movies Collection</h3>
 
-<p>In this example we are creating a simple movies collection that accepts a name, release year and notes attributes. Out notes attribute will only accept an array of text based values and not a single value.</p>
+<p>In this example we are creating a simple movies collection that accepts a name, release year and notes attributes.
+    Out notes attribute will only accept an array of text based values and not a single value.</p>
 
 <div class="ide" data-lang="nodejs" data-lang-label="Node.js SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>const appwrite = require('node-appwrite');
@@ -225,7 +232,8 @@ promise.then(function (response) {
 
 <h3 id="example-1">Example #2 - Nested Documents</h3>
 
-<p>In this example, we are creating a simple movies and actors collections. The new movie collection will accept a new actors attribute that will include an array of actor type documents.</p>
+<p>In this example, we are creating a simple movies and actors collections. The new movie collection will accept a new
+    actors attribute that will include an array of actor type documents.</p>
 
 <div class="ide" data-lang="nodejs" data-lang-label="Node.js SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>const appwrite = require('node-appwrite');
@@ -319,4 +327,5 @@ boot();
 </code></pre>
 </div>
 
-<p>Note that child document must declare both their unique collection ID and permissions settings individually, to help the Appwrite API run the correct set of validation rules on your input.</p>
+<p>Note that child document must declare both their unique collection ID and permissions settings individually, to help
+    the Appwrite API run the correct set of validation rules on your input.</p>

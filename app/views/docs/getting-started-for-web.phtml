@@ -15,19 +15,27 @@ foreach($platforms['client']['languages'] ?? [] as $lang) {
 $version = $platform['version'] ?? '';
 $demos = $platform['demos'] ?? [];
 ?>
-<p>Appwrite is a development platform providing you easy yet powerful API and management console to get your next project up and running quickly.</p>
+<p>Appwrite is a development platform providing you easy yet powerful API and management console to get your next
+    project up and running quickly.</p>
 
-<p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
+<p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you
+    have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server
+    instance up and running on your host machine or server.</p>
 
 <h2><a href="/docs/getting-started-for-web#createProject" id="createProject">Create Your First Appwrite Project</a></h2>
 
-<p>Go to your new Appwrite console and once inside click the <i class="icon-plus"></i> icon in the top navigation header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create to get started.</p>
+<p>Go to your new Appwrite console and once inside click the <i class="icon-plus"></i> icon in the top navigation header
+    or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create
+    to get started.</p>
 
 <h2><a href="/docs/getting-started-for-web#addPlatform" id="addPlatform">Add Your Web Platform</a></h2>
 
-<p>For you to init your SDK and interact with Appwrite services you need to add a web platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before and click the 'Add Platform' button.</p>
+<p>For you to init your SDK and interact with Appwrite services you need to add a web platform to your project. To add a
+    new platform, go to your Appwrite console, choose the project you created in the step before and click the 'Add
+    Platform' button.</p>
 
-<p>From the options, choose to add a <b>web</b> platform and add your client app hostname. By adding your hostname to your project platform you are allowing cross-domain communication between your project and the Appwrite API.</p>
+<p>From the options, choose to add a <b>web</b> platform and add your client app hostname. By adding your hostname to
+    your project platform you are allowing cross-domain communication between your project and the Appwrite API.</p>
 
 <?php //TODO add console ui image here ?>
 
@@ -35,24 +43,30 @@ $demos = $platform['demos'] ?? [];
 
 <h3><a href="/docs/getting-started-for-web#npm" id="npm">NPM</a></h3>
 
-<p>Use <a href="https://npmjs.com" target="_blank">NPM (node package manager)</a> from your command line to add Appwrite SDK to your project.</p>
+<p>Use <a href="https://npmjs.com" target="_blank">NPM (node package manager)</a> from your command line to add Appwrite
+    SDK to your project.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>npm install appwrite</code></pre>
 </div>
 
-<p>If you're using a bundler (like <a href="http://browserify.org/" target="_blank" rel="noopener">Browserify<a/> or <a href="https://webpack.js.org/" target="_blank" rel="noopener">webpack</a>), you can import the Appwrite module when you need it:</p>
+<p>If you're using a bundler (like <a href="http://browserify.org/" target="_blank" rel="noopener">Browserify<a /> or <a
+            href="https://webpack.js.org/" target="_blank" rel="noopener">webpack</a>), you can import the Appwrite
+        module when you need it:</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";</code></pre>
+    <pre
+        class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";</code></pre>
 </div>
 
 <h3><a href="/docs/getting-started-for-web#cdn" id="cdn">CDN</a></h3>
 
-<p>To install with a CDN (content delivery network) add the following scripts to the bottom of your tag, but before you use any Appwrite services:</p>
+<p>To install with a CDN (content delivery network) add the following scripts to the bottom of your tag, but before you
+    use any Appwrite services:</p>
 
 <div class="ide" data-lang="html" data-lang-label="HTML">
-    <pre class="line-numbers"><code class="prism language-markup" data-prism><?php echo htmlentities('<script src="https://cdn.jsdelivr.net/npm/appwrite@'.$this->escape($version).'"></script>'); ?></code></pre>
+    <pre
+        class="line-numbers"><code class="prism language-markup" data-prism><?php echo htmlentities('<script src="https://cdn.jsdelivr.net/npm/appwrite@'.$this->escape($version).'"></script>'); ?></code></pre>
 </div>
 
 <h2><a href="/docs/getting-started-for-web#initSDK" id="initSDK">Init your SDK</a></h2>
@@ -79,10 +93,12 @@ appwrite
 
 <h2><a href="/docs/getting-started-for-web#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
-<p>Once your SDK object is set, access any of the Appwrite services and choose any request to send. Full documentation for any service method you would like to use can be found in your SDK documentation or in the API References section.</p>
+<p>Once your SDK object is set, access any of the Appwrite services and choose any request to send. Full documentation
+    for any service method you would like to use can be found in your SDK documentation or in the API References
+    section.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-                    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Register User
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Register User
 appwrite
     .account.create('me@example.com', 'password', 'Jane Doe')
         .then(response => {
@@ -95,10 +111,11 @@ appwrite
 
 <h2><a href="/docs/getting-started-for-web#listenToChanges" id="listenToChanges">Listen to changes</a></h2>
 
-<p>If you want to listen to changes in realtime from Appwrite, you can subscribe to a variety of channels and receive updates within milliseconds. Full documentation for Realtime can be found <a href="/docs/realtime">here</a>.</p>
+<p>If you want to listen to changes in realtime from Appwrite, you can subscribe to a variety of channels and receive
+    updates within milliseconds. Full documentation for Realtime can be found <a href="/docs/realtime">here</a>.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-                    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Subscribe to files channel
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Subscribe to files channel
 appwrite.subscribe('files', response => {
     if(response.event === 'storage.files.create') {
         // Log when a new file is uploaded
@@ -110,7 +127,7 @@ appwrite.subscribe('files', response => {
 
 <h2><a href="/docs/getting-started-for-web#fullExample" id="fullExample">Full Example</a></h2>
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-                    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Init your Web SDK
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Init your Web SDK
 const appwrite = new Appwrite();
 
 appwrite
@@ -138,18 +155,19 @@ appwrite.subscribe('files', response => {
 
 <h2><a href="/docs/getting-started-for-web#demos" id="demos">Demos</a></h2>
 
-<p>Below you can find a list of some demos to help you get started with Appwrite for Web using your favorite tools and framework of choice.</p>
+<p>Below you can find a list of some demos to help you get started with Appwrite for Web using your favorite tools and
+    framework of choice.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large text-size-small vertical">
-        <thead>
+    <thead>
         <tr>
             <th style="width: 80px"></th>
             <th style="width: 180px">Demo</th>
             <th>GitHub Repository</th>
             <th style="width: 120px"></th>
         </tr>
-        </thead>
-        <tbody>
+    </thead>
+    <tbody>
         <?php foreach($demos as $demo):
             $name = $demo['name'] ?? '';
             $icon = $demo['icon'] ?? '';
@@ -158,25 +176,28 @@ appwrite.subscribe('files', response => {
             $url = $demo['url'] ?? '';
             $repo = str_replace('https://github.com/', '', $source);
             ?>
-            <tr>
-                <td>
-                    <img src="/images-ee/platforms/<?php echo $icon; ?>" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
-                    <img src="/images-ee/platforms/dark/<?php echo $icon; ?>" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
-                </td>
-                <td>
-                    <?php echo $name; ?>
-                </td>
-                <td>
-                    <a href="<?php echo $source; ?>" target="_blank" rel="noopener"><?php echo $repo; ?></a>
-                </td>
-                <td>
-                    <a href="<?php echo $url; ?>" target="_blank" rel="noopener">Live Example</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <img src="/images-ee/platforms/<?php echo $icon; ?>" alt="Logo" height="30"
+                    class="force-light sdk-logo margin-start margin-end" />
+                <img src="/images-ee/platforms/dark/<?php echo $icon; ?>" alt="Logo" height="30"
+                    class="force-dark sdk-logo margin-start margin-end" />
+            </td>
+            <td>
+                <?php echo $name; ?>
+            </td>
+            <td>
+                <a href="<?php echo $source; ?>" target="_blank" rel="noopener"><?php echo $repo; ?></a>
+            </td>
+            <td>
+                <a href="<?php echo $url; ?>" target="_blank" rel="noopener">Live Example</a>
+            </td>
+        </tr>
         <?php endforeach; ?>
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
 <h2><a href="/docs/getting-started-for-web#nextSteps" id="nextSteps">Next Steps</a></h2>
 
-<p>Appwrite has many services and tools to help improve your app and speed up your development. The best way to learn how you can take advantage of them is to explore the different API references docs.</p>
+<p>Appwrite has many services and tools to help improve your app and speed up your development. The best way to learn
+    how you can take advantage of them is to explore the different API references docs.</p>

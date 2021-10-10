@@ -14,27 +14,36 @@ foreach($platforms['server']['languages'] ?? [] as $lang) {
 $kotlinVersion = $versions['kotlin'] ?? '';
 ?>
 
-<p>Appwrite is a development platform providing you easy yet powerful API and management console to get your next project up and running quickly.</p>
+<p>Appwrite is a development platform providing you easy yet powerful API and management console to get your next
+    project up and running quickly.</p>
 
-<p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
+<p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you
+    have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server
+    instance up and running on your host machine or server.</p>
 
 <h2><a href="/docs/getting-started-for-server#getSDK" id="getSDK">Get the Appwrite SDK for Your Platform</a></h2>
 
-<p>We provide libraries and SDKs for major programming languages and platforms so you don't have to write code for interacting with our HTTP APIs from scratch.</p>
+<p>We provide libraries and SDKs for major programming languages and platforms so you don't have to write code for
+    interacting with our HTTP APIs from scratch.</p>
 
-<p>Choose your desired SDK corresponding to your product development platform and import it using the given package manager. <b>For the sake of this tutorial we will use code examples using Appwrite SDKs for Node.js, PHP, Python, Ruby, Dart, and Deno, but the same can be applied to any of <a href="/docs/sdks#server">our server side SDKs</a></b>.</p>
+<p>Choose your desired SDK corresponding to your product development platform and import it using the given package
+    manager. <b>For the sake of this tutorial we will use code examples using Appwrite SDKs for Node.js, PHP, Python,
+        Ruby, Dart, and Deno, but the same can be applied to any of <a href="/docs/sdks#server">our server side
+            SDKs</a></b>.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>npm install node-appwrite --save</code></pre>
+            <pre
+                class="line-numbers"><code class="prism language-bash" data-prism>npm install node-appwrite --save</code></pre>
         </div>
     </li>
     <li>
         <h3>PHP</h3>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>composer require 'appwrite/appwrite'</code></pre>
+            <pre
+                class="line-numbers"><code class="prism language-bash" data-prism>composer require 'appwrite/appwrite'</code></pre>
         </div>
     </li>
     <li>
@@ -46,19 +55,22 @@ $kotlinVersion = $versions['kotlin'] ?? '';
     <li>
         <h3>Ruby</h3>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>gem install appwrite --save</code></pre>
+            <pre
+                class="line-numbers"><code class="prism language-bash" data-prism>gem install appwrite --save</code></pre>
         </div>
     </li>
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import * as sdk from "https://deno.land/x/appwrite/mod.ts";</code></pre>
+            <pre
+                class="line-numbers"><code class="prism language-typescript" data-prism>import * as sdk from "https://deno.land/x/appwrite/mod.ts";</code></pre>
         </div>
     </li>
     <li>
         <h3>Dart</h3>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>dart pub add dart_appwrite</code></pre>
+            <pre
+                class="line-numbers"><code class="prism language-bash" data-prism>dart pub add dart_appwrite</code></pre>
         </div>
     </li>
     <li>
@@ -80,19 +92,29 @@ $kotlinVersion = $versions['kotlin'] ?? '';
     </li>
 </ul>
 
-<h2><a href="/docs/getting-started-for-server#createProject" id="createProject">Create Your First Appwrite Project</a></h2>
+<h2><a href="/docs/getting-started-for-server#createProject" id="createProject">Create Your First Appwrite Project</a>
+</h2>
 
-<p>Go to your new Appwrite console and once inside click the <i class="icon-plus"></i> icon in the top navigation header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create to get started.</p>
+<p>Go to your new Appwrite console and once inside click the <i class="icon-plus"></i> icon in the top navigation header
+    or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create
+    to get started.</p>
 
 <h2><a href="/docs/getting-started-for-server#authentication" id="authentication">Authentication</a></h2>
 
-<p>The Appwrite server API provides you with two authentication methods. The first one uses an API key, and the second is using a JSON Web Token (JWT). Each method has different use cases, and you can use whichever fills your app needs.</p>
+<p>The Appwrite server API provides you with two authentication methods. The first one uses an API key, and the second
+    is using a JSON Web Token (JWT). Each method has different use cases, and you can use whichever fills your app
+    needs.</p>
 
 <h3><a href="/docs/getting-started-for-server#apiKey" id="apiKey">API Key</a></h3>
 
-<p>Using an API Key you can interact with the Appwrite server API as an admin. You'll be able to access all of your project resources as long as your key has the relevant access scopes attached. To get your first API key, go to your appwrite console, choose the project you created in the step before and click the 'API Keys' link.</p>
+<p>Using an API Key you can interact with the Appwrite server API as an admin. You'll be able to access all of your
+    project resources as long as your key has the relevant access scopes attached. To get your first API key, go to your
+    appwrite console, choose the project you created in the step before and click the 'API Keys' link.</p>
 
-<p>Once inside your API keys screen, click the 'Add API Key' button, choose your key name, for example: 'Demo Key', and select the scopes your key will be granted to use. Once completed, you could copy your new API Key and use it to initialize your Appwrite server SDK. To learn about the different API scopes available to you, read more about <a href="/docs/keys">Appwrite API Keys</a> </p>
+<p>Once inside your API keys screen, click the 'Add API Key' button, choose your key name, for example: 'Demo Key', and
+    select the scopes your key will be granted to use. Once completed, you could copy your new API Key and use it to
+    initialize your Appwrite server SDK. To learn about the different API scopes available to you, read more about <a
+        href="/docs/keys">Appwrite API Keys</a> </p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -192,17 +214,26 @@ client
 
 <div class="notice">
     <h3>A Note About API Keys & Admin Mode</h3>
-    
-    <p>When using Appwrite API from your server-side with an API Key you will automatically run in <b>admin mode</b>. Admin mode disables the default user <a href="/docs/permissions">permission access control</a> restrictions and allows you to access all the resources available on your project. This is very useful when you want to manipulate your users' data like files and documents or even if you want to get a list of your users.</p>
-    
-    <p>Please note it is <b>highly</b> not recommended to run the admin mode from your client-side as it will probably lead to huge privacy and security issues. Check the <a href="/docs/admin">Admin Mode</a> documentation to learn more</p>
+
+    <p>When using Appwrite API from your server-side with an API Key you will automatically run in <b>admin mode</b>.
+        Admin mode disables the default user <a href="/docs/permissions">permission access control</a> restrictions and
+        allows you to access all the resources available on your project. This is very useful when you want to
+        manipulate your users' data like files and documents or even if you want to get a list of your users.</p>
+
+    <p>Please note it is <b>highly</b> not recommended to run the admin mode from your client-side as it will probably
+        lead to huge privacy and security issues. Check the <a href="/docs/admin">Admin Mode</a> documentation to learn
+        more</p>
 </div>
 
-<h3><a href="/docs/getting-started-for-server#jwt" id="jwt">JSON Web Token (JWT) &nbsp;<span class="text-size-small text-fade">version >= 0.8</span></a></h3>
+<h3><a href="/docs/getting-started-for-server#jwt" id="jwt">JSON Web Token (JWT) &nbsp;<span
+            class="text-size-small text-fade">version >= 0.8</span></a></h3>
 
-<p>Using a JSON Web Token (JWT), you can interact with the Appwrite server API as a specific user. You'll be able to access only the relevant user resources and perform actions on his behalf.</p>
+<p>Using a JSON Web Token (JWT), you can interact with the Appwrite server API as a specific user. You'll be able to
+    access only the relevant user resources and perform actions on his behalf.</p>
 
-<p>To create a JWT, you need to use the "account->createJWT" method using one of the Appwrite client SDKs. Before creating a token, you need to make sure your user is authenticated using the `createSession` method or log in with an OAuth provider.</p>
+<p>To create a JWT, you need to use the "account->createJWT" method using one of the Appwrite client SDKs. Before
+    creating a token, you need to make sure your user is authenticated using the `createSession` method or log in with
+    an OAuth provider.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -237,7 +268,9 @@ val response = account
     </li>
 </ul>
 
-<p>Once you get your valid token, you can pass it to your server and use it to initialize your Appwrite Server SDK and start making API calls. Your JWT will be valid for a maximum time of 15 minutes or less if the user session has expired before that time.</p>
+<p>Once you get your valid token, you can pass it to your server and use it to initialize your Appwrite Server SDK and
+    start making API calls. Your JWT will be valid for a maximum time of 15 minutes or less if the user session has
+    expired before that time.</p>
 
 
 <ul class="phases clear" data-ui-phases>
@@ -338,7 +371,9 @@ client
 
 <h2><a href="/docs/getting-started-for-server#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
-<p>Once your SDK object is set, create any of the Appwrite service objects and choose any request to send. Full documentation for any service method you would like to use can be found in your SDK documentation or in the API References section.</p>
+<p>Once your SDK object is set, create any of the Appwrite service objects and choose any request to send. Full
+    documentation for any service method you would like to use can be found in your SDK documentation or in the API
+    References section.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -578,4 +613,5 @@ println(res.body?.string())</code></pre>
 
 <h2><a href="/docs/getting-started-for-server#nextSteps" id="nextSteps">Next Steps</a></h2>
 
-<p>Appwrite has many services and tools to help improve your app and speed up your development. The best way to learn how you can take advantage of them is to explore the different API references docs.</p>
+<p>Appwrite has many services and tools to help improve your app and speed up your development. The best way to learn
+    how you can take advantage of them is to explore the different API references docs.</p>

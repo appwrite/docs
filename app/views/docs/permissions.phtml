@@ -1,90 +1,110 @@
-<p>Appwrite permission mechanism offers a simple and yet flexible way to manage which users, teams, or roles can access a specific resource of your project, like documents and files.</p>
+<p>Appwrite permission mechanism offers a simple and yet flexible way to manage which users, teams, or roles can access
+    a specific resource of your project, like documents and files.</p>
 
-<p>Using permissions, you can decide that only <span class="tag">user A</span> and <span class="tag">user B</span> will have read access to a specific database document, while <span class="tag">user C</span> and <span class="tag">team X</span> will be the only ones with write access.</p>
+<p>Using permissions, you can decide that only <span class="tag">user A</span> and <span class="tag">user B</span> will
+    have read access to a specific database document, while <span class="tag">user C</span> and <span class="tag">team
+        X</span> will be the only ones with write access.</p>
 
-<p>As the name suggests, read permission will allow users and teams to view a resource while with write permission, they will be able to both update or delete it.</p>
+<p>As the name suggests, read permission will allow users and teams to view a resource while with write permission, they
+    will be able to both update or delete it.</p>
 
-<p>Read and write permissions can be given to specific users, entire teams, or only to a particular group of role members inside a team.</p>
+<p>Read and write permissions can be given to specific users, entire teams, or only to a particular group of role
+    members inside a team.</p>
 
-<p>A project user can only grant a resource with permissions he or she owns. For example, if a user is trying to share a document with a team, he or she are not members of, they will encounter a 401 not authorized error.</p>
+<p>A project user can only grant a resource with permissions he or she owns. For example, if a user is trying to share a
+    document with a team, he or she are not members of, they will encounter a 401 not authorized error.</p>
 
 <div class="notice calm margin-top-large margin-bottom-large">
     <h4>Appwrite Resource</h4>
-    
-    <p>An Appwrite resource can be a database collection, database document, or a storage file. Each resource has both read and write permissions to define who can access it.</p>
-    
-    <p>Using the Appwirte permissions mechanism, you can share resources between users, teams, and members with different roles.</p>
+
+    <p>An Appwrite resource can be a database collection, database document, or a storage file. Each resource has both
+        read and write permissions to define who can access it.</p>
+
+    <p>Using the Appwirte permissions mechanism, you can share resources between users, teams, and members with
+        different roles.</p>
 </div>
 
 <h2 id="default-values"><a href="/docs/permissions#default-values">Default Values</a></h2>
 
-<p>When not providing a resource with read or write permissions, the default value will be empty. When a read or write permissions is missing, no one will be granted access control to the resource.</p>
+<p>When not providing a resource with read or write permissions, the default value will be empty. When a read or write
+    permissions is missing, no one will be granted access control to the resource.</p>
 
 <div class="notice calm margin-top-large margin-bottom-large">
     <h4>Note</h4>
-    
+
     <p>You will need an active session to handle database transactions for your collections.</p>
-    <p>If you have rules where you allow for wild cards or role:guest in a collection, you can create an Anonymous Session before you make the API call.</p>
+    <p>If you have rules where you allow for wild cards or role:guest in a collection, you can create an Anonymous
+        Session before you make the API call.</p>
 </div>
 
 <h2 id="server-integration"><a href="/docs/permissions#server-integration">Server Integration</a></h2>
 
-<p>A server or <a href="/docs/admin" target="_blank">admin integration</a> can be used for increased flexibility. When using a server integration in combination with the proper <a href="/docs/keys#scopes" target="_blank">API scopes</a>, you can have both read and write access to any of your project resources regardless of their permissions.</p>
+<p>A server or <a href="/docs/admin" target="_blank">admin integration</a> can be used for increased flexibility. When
+    using a server integration in combination with the proper <a href="/docs/keys#scopes" target="_blank">API
+        scopes</a>, you can have both read and write access to any of your project resources regardless of their
+    permissions.</p>
 
-<p>Using the server integration flexibility, you can change resource permissions, share resources between different users and teams, or edit and delete them without any limitations.</p>
+<p>Using the server integration flexibility, you can change resource permissions, share resources between different
+    users and teams, or edit and delete them without any limitations.</p>
 
 <h2 id="types"><a href="/docs/permissions#types">Permission Types</a></h2>
 
 <table class="full text-size-small">
     <thead>
-    <tr>
-        <td style="width: 180px">Type</td>
-        <td>Description</td>
-    </tr>
+        <tr>
+            <td style="width: 180px">Type</td>
+            <td>Description</td>
+        </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>*</td>
-        <td>Wildcard permission. Gives anyone read or write access.</td>
-    </tr>
-    <tr>
-        <td>user:[USER_ID]</td>
-        <td>Access to a specific user by his UID.</td>
-    </tr>
-    <tr>
-        <td>team:[TEAM_ID]</td>
-        <td>Access to any member of the specific team. To gain access to this permission, the user must be the team creator (owner), or receive and accept an invitation to join this team.</td>
-    </tr>
-    <tr>
-        <td>team:[TEAM_ID]/[ROLE]</td>
-        <td>Access to any member who possesses a specific role in a team. To gain access to this permission, the user must be a member of the specific team and have the given role assigned to him or her. Team roles can be assigned when inviting a user to become a team member.</td>
-    </tr>
-    <tr>
-        <td>member:[MEMBER_ID]</td>
-        <td>Access to a specific member of a team. Unlike the basic user permission, this permission will only be valid as long as the user is still an active member of the specific team. To view user member ID, fetch the team <a href="/docs/client/teams#teamsGetMemberships">members list</a>.</td>
-    </tr>
-    <tr>
-        <td>
-            role:guest
-            <p class="margin-top-small text-fade">version >= 0.7</p>
-        </td>
-        <td>Access to any guest user. Logged in users don't have access to this role.</td>
-    </tr>
-    <tr>
-        <td>
-            role:member
-            <p class="margin-top-small text-fade">version >= 0.7</p>
-        </td>
-        <td>Access to any logged in user. A logged in user is a user with a valid session. Logged in users don't have access to `role:guest` role. For wildcard access use `*` role.</td>
-    </tr>
-    <!-- <tr>
+        <tr>
+            <td>*</td>
+            <td>Wildcard permission. Gives anyone read or write access.</td>
+        </tr>
+        <tr>
+            <td>user:[USER_ID]</td>
+            <td>Access to a specific user by his UID.</td>
+        </tr>
+        <tr>
+            <td>team:[TEAM_ID]</td>
+            <td>Access to any member of the specific team. To gain access to this permission, the user must be the team
+                creator (owner), or receive and accept an invitation to join this team.</td>
+        </tr>
+        <tr>
+            <td>team:[TEAM_ID]/[ROLE]</td>
+            <td>Access to any member who possesses a specific role in a team. To gain access to this permission, the
+                user must be a member of the specific team and have the given role assigned to him or her. Team roles
+                can be assigned when inviting a user to become a team member.</td>
+        </tr>
+        <tr>
+            <td>member:[MEMBER_ID]</td>
+            <td>Access to a specific member of a team. Unlike the basic user permission, this permission will only be
+                valid as long as the user is still an active member of the specific team. To view user member ID, fetch
+                the team <a href="/docs/client/teams#teamsGetMemberships">members list</a>.</td>
+        </tr>
+        <tr>
+            <td>
+                role:guest
+                <p class="margin-top-small text-fade">version >= 0.7</p>
+            </td>
+            <td>Access to any guest user. Logged in users don't have access to this role.</td>
+        </tr>
+        <tr>
+            <td>
+                role:member
+                <p class="margin-top-small text-fade">version >= 0.7</p>
+            </td>
+            <td>Access to any logged in user. A logged in user is a user with a valid session. Logged in users don't
+                have access to `role:guest` role. For wildcard access use `*` role.</td>
+        </tr>
+        <!-- <tr>
         <td>
             role:app
             <p class="margin-top-small text-fade">version >= 0.7</p>
         </td>
         <td>Access to any generated API key in the project. Useful when you want to limit access to a server integration only.</td>
     </tr> -->
-    <!-- <tr>
+        <!-- <tr>
         <td>role:[ROLE_ID]</td>
         <td>Access to a user with a specific role. For Example: 'role:4' will give access only to project owners. View the roles table above to learn more about different roles in the platform.</td>
     </tr> -->
@@ -93,13 +113,17 @@
 
 <h2 id="examples"><a href="/docs/permissions#examples">Examples</a></h2>
 
-<p>The examples below will show you how you can use the different Appwrite permissions to manage access control to your project resources.</p>
+<p>The examples below will show you how you can use the different Appwrite permissions to manage access control to your
+    project resources.</p>
 
-<p>The following examples are using the <a href="https://github.com/appwrite/sdk-for-js" target="_blank" rel="noopener">Appwrite Web SDK</a> but can be applied similarly to any of the other <a href="/docs/sdks">Appwrite SDKs</a>.</p>
+<p>The following examples are using the <a href="https://github.com/appwrite/sdk-for-js" target="_blank"
+        rel="noopener">Appwrite Web SDK</a> but can be applied similarly to any of the other <a
+        href="/docs/sdks">Appwrite SDKs</a>.</p>
 
 <h3 id="example-1"><a href="/docs/permissions#example-1">Example #1 - Basic Usage</a></h3>
 
-<p>In the following example, we are creating a document that can be read by everyone and only be edited, or deleted by a user with a UID <span class="tag">user:5c1f88b42259e</span>.</p>
+<p>In the following example, we are creating a document that can be read by everyone and only be edited, or deleted by a
+    user with a UID <span class="tag">user:5c1f88b42259e</span>.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();
@@ -126,7 +150,9 @@ promise.then(function (response) {
 
 <h3 id="example-2"><a href="/docs/permissions#example-2">Example #2 - Team Roles</a></h3>
 
-<p>In the following example, we are creating a document that can be read-only by members of <span class="tag">team:5c1f88b87435e</span> and can only be edited, or deleted by members of the same team that possesses the role <span class="tag">owner</span>.</p>
+<p>In the following example, we are creating a document that can be read-only by members of <span
+        class="tag">team:5c1f88b87435e</span> and can only be edited, or deleted by members of the same team that
+    possesses the role <span class="tag">owner</span>.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();

@@ -40,14 +40,14 @@ $example = function ($model, $models) use (&$example)
 
 <table class="vertical full args">
     <thead>
-    <tr>
-        <td style="width: 140px">Name</td>
-        <td style="width: 120px">Type</td>
-        <td>Description</td>
-    </tr>
+        <tr>
+            <td style="width: 140px">Name</td>
+            <td style="width: 120px">Type</td>
+            <td>Description</td>
+        </tr>
     </thead>
     <tbody>
-    <?php foreach ($rules as $key => $rule):
+        <?php foreach ($rules as $key => $rule):
         $type = (isset($rule['type'])) ? $rule['type'] : '';
         $array = ($rule['type'] === 'array') ? true : false;
         $description = (isset($rule['description'])) ? $rule['description'] : '';
@@ -61,18 +61,20 @@ $example = function ($model, $models) use (&$example)
             </td>
             <td data-title="Type: ">
                 <?php if(\array_key_exists($ref, $models)): ?>
-                    <a href="/docs/models/<?php echo $this->escape($ref); ?>"><?php echo $this->escape($ref); ?><?php if($array): ?>[]<?php endif; ?></a>
+                <a
+                    href="/docs/models/<?php echo $this->escape($ref); ?>"><?php echo $this->escape($ref); ?><?php if($array): ?>[]<?php endif; ?></a>
                 <?php else: ?>
-                    <?php if($array): ?>
-                        <?php echo $this->escape($arrayType); ?>[]
-                    <?php else: ?>
-                        <?php echo $this->escape($type); ?>
-                    <?php endif; ?>
+                <?php if($array): ?>
+                <?php echo $this->escape($arrayType); ?>[]
+                <?php else: ?>
+                <?php echo $this->escape($type); ?>
+                <?php endif; ?>
                 <?php endif; ?>
             </td>
-            <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>"><?php echo $markdown->text($description); ?></td>
+            <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>">
+                <?php echo $markdown->text($description); ?></td>
         </tr>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
     </tbody>
 </table>
 
@@ -81,7 +83,8 @@ $example = function ($model, $models) use (&$example)
 <p><b>JSON</b></p>
 
 <div class="ide" data-lang="json" data-lang-label="JSON">
-    <pre class="line-numbers"><code class="prism language-json" data-prism><?php echo json_encode($example($model, $models), JSON_PRETTY_PRINT); ?></code></pre>
+    <pre
+        class="line-numbers"><code class="prism language-json" data-prism><?php echo json_encode($example($model, $models), JSON_PRETTY_PRINT); ?></code></pre>
 </div>
 
 <!-- <p><b>YAML</b></p>

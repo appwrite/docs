@@ -37,7 +37,8 @@ $markdown->setSafeMode(true);
 $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
 ?>
 
-<div data-ls-attrs="class=language-<?php echo $this->escape($sdk); ?> platform-<?php echo $this->escape($family); ?> examples-in-<?php echo $this->escape($sdk); ?>">
+<div
+    data-ls-attrs="class=language-<?php echo $this->escape($sdk); ?> platform-<?php echo $this->escape($family); ?> examples-in-<?php echo $this->escape($sdk); ?>">
     <?php
     foreach ($spec['paths'] as $url => $path) {
         foreach ($path as $method => $operation) {
@@ -77,49 +78,51 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
     ?>
 
     <style>
-        <?php foreach ($platforms as $key => $platform):
-            if(!in_array($key, $blacklist) && $platform['enabled']) {
-                $classess[] = 'example-for-'.$key;
-            }
-            ?>
+    <?php foreach ($platforms as $key=> $platform): if( !in_array($key, $blacklist) && $platform['enabled']) {
+        $classess[]='example-for-'.$key;
+    }
 
-            <?php foreach ($platform['languages'] as $language):
-                if(!$language['enabled']) {
-                   continue;
-                }
+    ?><?php foreach ($platform['languages'] as $language): if( !$language['enabled']) {
+        continue;
+    }
 
-                if(!isset($language['family']) || $language['family'] !== $family) {
-                    continue;
-                }
+    if( !isset($language['family']) || $language['family'] !==$family) {
+        continue;
+    }
 
-                $docDirectories = (isset($language['docDirectories']))
-                    ? $language['docDirectories']
-                    : ['Default' => 'examples'];
-                ?>
+    $docDirectories=(isset($language['docDirectories'])) ? $language['docDirectories'] : ['Default'=>'examples'];
+    ?><?php foreach($docDirectories as $docDirectoryKey=> $docDirectory): ?>.language-<?php echo strtolower($language['key']);
+    ?>-<?php echo strtolower($docDirectoryKey);
+    ?>.example-in-<?php echo strtolower($language['key']);
+    ?>-<?php echo strtolower($docDirectoryKey);
 
-                <?php foreach($docDirectories as $docDirectoryKey => $docDirectory): ?>
-                    .language-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> .example-in-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> {
-                        display: block;
-                    }
+    ?> {
+        display: block;
+    }
 
-                    .example-in-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> {
-                        display: none;
-                    }
-                <?php endforeach; ?>
-            <?php endforeach; ?>
-        <?php endforeach; ?>
+    .example-in-<?php echo strtolower($language['key']);
+    ?>-<?php echo strtolower($docDirectoryKey);
+
+    ?> {
+        display: none;
+    }
+
+    <?php endforeach;
+    ?><?php endforeach;
+    ?><?php endforeach;
+    ?>
     </style>
 
     <ul class="families">
         <?php if(!in_array(APP_PLATFORM_CLIENT, $blacklist)): ?>
-            <li class="<?php if($family === APP_PLATFORM_CLIENT) { echo 'selected'; } ?>">
-                <a href="/docs/client/<?php echo $serviceName; ?>">Client</a>
-            </li>
+        <li class="<?php if($family === APP_PLATFORM_CLIENT) { echo 'selected'; } ?>">
+            <a href="/docs/client/<?php echo $serviceName; ?>">Client</a>
+        </li>
         <?php endif; ?>
         <?php if(!in_array(APP_PLATFORM_SERVER, $blacklist)): ?>
-            <li class="<?php if($family === APP_PLATFORM_SERVER) { echo 'selected'; } ?>">
-                <a href="/docs/server/<?php echo $serviceName; ?>">Server</a>
-            </li>
+        <li class="<?php if($family === APP_PLATFORM_SERVER) { echo 'selected'; } ?>">
+            <a href="/docs/server/<?php echo $serviceName; ?>">Server</a>
+        </li>
         <?php endif; ?>
     </ul>
 
@@ -128,20 +131,14 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
 
         <div class="row responsive margin-top-negative-small text-size-small text-fade">
             <div class="col span-8">
-                <form
-                    data-analytics
-                    data-analytics-event="change"
-                    data-analytics-category="console"
-                    data-analytics-label="Switched SDK Examples"
-                    data-service="router.change"
-                    data-event="change"
-                    data-scope="window.ls"
-                    data-success="reset">
+                <form data-analytics data-analytics-event="change" data-analytics-category="console"
+                    data-analytics-label="Switched SDK Examples" data-service="router.change" data-event="change"
+                    data-scope="window.ls" data-success="reset">
 
                     <?php echo $this->escape(ucfirst($family)); ?> integration with &nbsp;
                     <select class="choose-platform" name="URL">
                         <?php foreach ($platforms as $key => $platform): ?>
-                            <?php foreach ($platform['languages'] as $language):
+                        <?php foreach ($platform['languages'] as $language):
                                 if(!$language['enabled']) {
                                     continue;
                                 }
@@ -161,26 +158,32 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                     ? $language['docDirectories']
                                     : ['Default' => 'examples'];
                                 ?>
-                                <?php foreach ($docDirectories as $docDirectoryKey => $docDirectory): ?>
-                                <option value="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>-<?php echo $this->escape(strtolower($docDirectoryKey)); ?>"<?php echo (($key . '-' . strtolower($docDirectoryKey)) === $sdk) ? ' selected' : ''; ?>>
-                                    <?php echo $this->escape($name); ?> SDK <?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?> examples)<?php endif; ?>
-                                </option>
-                                <?php endforeach; ?>
-                            <?php endforeach; ?>
+                        <?php foreach ($docDirectories as $docDirectoryKey => $docDirectory): ?>
+                        <option
+                            value="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>-<?php echo $this->escape(strtolower($docDirectoryKey)); ?>"
+                            <?php echo (($key . '-' . strtolower($docDirectoryKey)) === $sdk) ? ' selected' : ''; ?>>
+                            <?php echo $this->escape($name); ?> SDK
+                            <?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?>
+                            examples)<?php endif; ?>
+                        </option>
+                        <?php endforeach; ?>
+                        <?php endforeach; ?>
                         <?php endforeach; ?>
                     </select>
                 </form>
             </div>
             <div class="col span-4 clear">
-                <form class="pull-end desktops-only" onchange="this.submit()"
-                    method="get" action="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>">
+                <form class="pull-end desktops-only" onchange="this.submit()" method="get"
+                    action="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>">
 
                     <select class="choose-platform" name="v">
                         <?php foreach ($versions as $key => $value):
                             $name = (isset($value['name'])) ? $value['name'] : '';
                             $selected = ($key === $version) ? ' selected' : '';
                             ?>
-                            <option value="<?php echo $this->escape($key); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?><?php echo $selected; ?>>Version <?php echo $this->escape($key); ?></option>
+                        <option value="<?php echo $this->escape($key); ?>"
+                            <?php echo ($key === $sdk) ? ' selected' : ''; ?><?php echo $selected; ?>>Version
+                            <?php echo $this->escape($key); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </form>
@@ -191,23 +194,25 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
     </div>
 
     <?php if(!empty($path) && file_exists($path)): ?>
-        <div class="row responsive <?php echo implode(' ', $classess); ?>">
-            <div class="col span-8 margin-bottom">
-                
-                <div class="content margin-end-xl">
-                    <?php echo $markdown->text(file_get_contents($path)); ?>
-                    
-                    <div class="clear">
-                        <a href="https://github.com/appwrite/appwrite/edit/master<?php echo $description; ?>" class="pull-end text-size-small" target="_blank">Edit on GitHub <i class="icon-github-circled"></i></a>
-                    </div>
+    <div class="row responsive <?php echo implode(' ', $classess); ?>">
+        <div class="col span-8 margin-bottom">
+
+            <div class="content margin-end-xl">
+                <?php echo $markdown->text(file_get_contents($path)); ?>
+
+                <div class="clear">
+                    <a href="https://github.com/appwrite/appwrite/edit/master<?php echo $description; ?>"
+                        class="pull-end text-size-small" target="_blank">Edit on GitHub <i
+                            class="icon-github-circled"></i></a>
                 </div>
             </div>
-            <div class="col span-4 margin-bottom index">
-                
-                <div class="margin-bottom-small text-fade">In this page</div>
+        </div>
+        <div class="col span-4 margin-bottom index">
 
-                <ul>
-                    <?php
+            <div class="margin-bottom-small text-fade">In this page</div>
+
+            <ul>
+                <?php
                     $endpoints = 0;
                     foreach ($operations as $operation):
                         if(!in_array($family, $operation['platforms'])) {
@@ -218,18 +223,21 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
 
                         $endpoints++;
                         ?>
-                        <li class="margin-bottom-small <?php echo implode(' ', $platformsList); ?>">
-                            <a href="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?><?php echo $this->escape($paramSDK); ?>#<?php echo $operation['operationId']; ?>"><i class="icon-angle-circled-right"></i> <?php echo $this->escape($operation['summary']); ?></a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
+                <li class="margin-bottom-small <?php echo implode(' ', $platformsList); ?>">
+                    <a
+                        href="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?><?php echo $this->escape($paramSDK); ?>#<?php echo $operation['operationId']; ?>"><i
+                            class="icon-angle-circled-right"></i>
+                        <?php echo $this->escape($operation['summary']); ?></a>
+                </li>
+                <?php endforeach; ?>
+            </ul>
 
-                <?php if(!$endpoints): ?>
-                    <p>No endpoint found for this version and platform. Switch to a newer version.</p>
-                <?php endif; ?>
+            <?php if(!$endpoints): ?>
+            <p>No endpoint found for this version and platform. Switch to a newer version.</p>
+            <?php endif; ?>
 
-            </div>
         </div>
+    </div>
     <?php endif; ?>
 
     <?php foreach ($operations as $operation):
@@ -284,48 +292,64 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
         }
         
         ?>
-        <div class="margin-bottom-large x-function" data-ls-attrs="class=margin-bottom-large x-function <?php echo implode(' ', $platformsList); ?>">
-            <div class="row responsive">
-                <div class="col span-7">
-                    <h2 class="margin-bottom">
-                        <a href="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>#<?php echo $operation['operationId']; ?>" id="<?php echo $operation['operationId']; ?>" class="references"><?php echo $this->escape($title); ?></a>
-                    </h2>
+    <div class="margin-bottom-large x-function"
+        data-ls-attrs="class=margin-bottom-large x-function <?php echo implode(' ', $platformsList); ?>">
+        <div class="row responsive">
+            <div class="col span-7">
+                <h2 class="margin-bottom">
+                    <a href="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>#<?php echo $operation['operationId']; ?>"
+                        id="<?php echo $operation['operationId']; ?>"
+                        class="references"><?php echo $this->escape($title); ?></a>
+                </h2>
 
-                    <div>
-                        <div class="url margin-bottom">
-                            <span class="method <?php echo $this->escape($method); ?>"><?php echo strtoupper($this->escape($method)); ?></span><span class="endpoint"><?php //echo $this->escape($endpoint); ?></span><span class="path">/v1<?php echo $this->escape($url); ?></span>
-                        </div>
-
-                        <?php if(!empty($description)): ?>
-                            <?php echo $markdown->text($description); ?>
-                        <?php endif; ?>
-
-                        <div class="clear">
-                            <a href="<?php echo $edit; ?>" class="pull-end text-size-small" target="_blank">Edit on GitHub <i class="icon-github-circled"></i></a>
-                        </div>
+                <div>
+                    <div class="url margin-bottom">
+                        <span
+                            class="method <?php echo $this->escape($method); ?>"><?php echo strtoupper($this->escape($method)); ?></span><span
+                            class="endpoint"><?php //echo $this->escape($endpoint); ?></span><span
+                            class="path">/v1<?php echo $this->escape($url); ?></span>
                     </div>
 
-
-                    <?php if($family === APP_PLATFORM_SERVER): ?>
-                    <div class="margin-bottom-large">
-                        <h3 class="margin-bottom margin-top-small">Authentication</h3>
-
-                        <?php if(array_key_exists('Key', $security) && array_key_exists('JWT', $security)): ?>
-                            <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys" target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to the <u>"<?php echo $scope; ?>"</u> permission scope. You can also authenticate using a valid <a href="/docs/client/account#accountCreateJWT" target="_blank">JWT</a> and perform actions on behalf of your user.</p>
-                        <?php elseif(array_key_exists('Key', $security)): ?>
-                            <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys" target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to the <u>"<?php echo $scope; ?>"</u> permission scope.</p>
-                        <?php elseif(array_key_exists('JWT', $security)): ?>
-                            <p>To access this route, init your SDK with your project unique ID and a valid JWT. Using the <a href="/docs/client/account#accountCreateJWT" target="_blank">JWT</a> authentication you will be able to perform API actions on behalf of your user.</p>
-                        <?php endif; ?>
-                    </div>
+                    <?php if(!empty($description)): ?>
+                    <?php echo $markdown->text($description); ?>
                     <?php endif; ?>
 
-                    <?php if(!empty($rateLimit)): ?>
-                        <div class="margin-bottom-large">
-                            <h3 class="margin-bottom margin-top-small">Rate Limits</h3>
+                    <div class="clear">
+                        <a href="<?php echo $edit; ?>" class="pull-end text-size-small" target="_blank">Edit on GitHub
+                            <i class="icon-github-circled"></i></a>
+                    </div>
+                </div>
 
-                            <p>This endpoint is limited to <b><?php echo $rateLimit; ?> requests</b> in every <b><?php echo ($rateTime / 60);?> minutes</b>
-                            <?php
+
+                <?php if($family === APP_PLATFORM_SERVER): ?>
+                <div class="margin-bottom-large">
+                    <h3 class="margin-bottom margin-top-small">Authentication</h3>
+
+                    <?php if(array_key_exists('Key', $security) && array_key_exists('JWT', $security)): ?>
+                    <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys"
+                            target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to
+                        the <u>"<?php echo $scope; ?>"</u> permission scope. You can also authenticate using a valid <a
+                            href="/docs/client/account#accountCreateJWT" target="_blank">JWT</a> and perform actions on
+                        behalf of your user.</p>
+                    <?php elseif(array_key_exists('Key', $security)): ?>
+                    <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys"
+                            target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to
+                        the <u>"<?php echo $scope; ?>"</u> permission scope.</p>
+                    <?php elseif(array_key_exists('JWT', $security)): ?>
+                    <p>To access this route, init your SDK with your project unique ID and a valid JWT. Using the <a
+                            href="/docs/client/account#accountCreateJWT" target="_blank">JWT</a> authentication you will
+                        be able to perform API actions on behalf of your user.</p>
+                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
+
+                <?php if(!empty($rateLimit)): ?>
+                <div class="margin-bottom-large">
+                    <h3 class="margin-bottom margin-top-small">Rate Limits</h3>
+
+                    <p>This endpoint is limited to <b><?php echo $rateLimit; ?> requests</b> in every
+                        <b><?php echo ($rateTime / 60);?> minutes</b>
+                        <?php
                             $rateKey = array_values(array_filter($rateKey, function($element) {
                                 return ($element !== 'url');
                             }));
@@ -369,92 +393,97 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                     echo ($i+1 === $count-1) ? ' and ' : ', ';
                                 }
                             }
-                            ?>. We use rate limits to avoid service abuse by users and as a security practice. <a href="/docs/rate-limits">Learn more about <?php APP_NAME; ?> rate limiting</a>.</p>
-                        </div>
-                    <?php endif; ?>
+                            ?>. We use rate limits to avoid service abuse by users and as a security practice. <a
+                            href="/docs/rate-limits">Learn more about <?php APP_NAME; ?> rate limiting</a>.</p>
+                </div>
+                <?php endif; ?>
 
-                    <?php if(!empty($parameters)): ?>
-                        <h3 class="margin-bottom margin-top-small margin-start-small">Request</h3>
-                        <table class="vertical full args">
-                            <thead>
-                            <tr>
-                                <td style="width: 120px">Name</td>
-                                <td style="width: 70px"></td>
-                                <td style="width: 70px">Type</td>
-                                <td>Description</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach ($parameters as $key => $parameter):
+                <?php if(!empty($parameters)): ?>
+                <h3 class="margin-bottom margin-top-small margin-start-small">Request</h3>
+                <table class="vertical full args">
+                    <thead>
+                        <tr>
+                            <td style="width: 120px">Name</td>
+                            <td style="width: 70px"></td>
+                            <td style="width: 70px">Type</td>
+                            <td>Description</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($parameters as $key => $parameter):
                                 $name = (isset($parameter['name'])) ? $parameter['name'] : '';
                                 $type = (isset($parameter['type'])) ? $parameter['type'] : '';
                                 $description = (isset($parameter['description'])) ? $parameter['description'] : '';
                                 $required = (isset($parameter['required'])) ? $parameter['required'] : false;
                                 ?>
-                                <tr>
-                                    <td data-title="Name: ">
-                                        <?php echo $this->escape($name); ?>
-                                    </td>
-                                    <td data-title="">
-                                        <?php if($required): ?>
-                                            <span class="tag red">required</span>
-                                        <?php else: ?>
-                                            <span class="tag">optional</span>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td data-title="Type: "><?php echo $this->escape($type); ?></td>
-                                    <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>"><?php echo $markdown->text($description); ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    <?php endif; ?>
+                        <tr>
+                            <td data-title="Name: ">
+                                <?php echo $this->escape($name); ?>
+                            </td>
+                            <td data-title="">
+                                <?php if($required): ?>
+                                <span class="tag red">required</span>
+                                <?php else: ?>
+                                <span class="tag">optional</span>
+                                <?php endif; ?>
+                            </td>
+                            <td data-title="Type: "><?php echo $this->escape($type); ?></td>
+                            <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>">
+                                <?php echo $markdown->text($description); ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?php endif; ?>
 
-                    <?php if (!empty($responses)): ?>
-                        <h3 class="margin-bottom margin-top-large margin-start-small">Response</h3>
+                <?php if (!empty($responses)): ?>
+                <h3 class="margin-bottom margin-top-large margin-start-small">Response</h3>
 
-                        <table class="vertical full args">
-                            <thead>
-                                <tr>
-                                    <td style="width: 120px">Status Code</td>
-                                    <td style="width: 170px">Content Type</td>
-                                    <td>Payload</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach ($responses as $code => $response):
+                <table class="vertical full args">
+                    <thead>
+                        <tr>
+                            <td style="width: 120px">Status Code</td>
+                            <td style="width: 170px">Content Type</td>
+                            <td>Payload</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($responses as $code => $response):
                                 $text = $codes[$code]['text'] ?? '';
                                 $class = $codes[$code]['class'] ?? '';
                                 $description = (!empty($response['description']) && isset($response['schema']['$ref'])) ? $response['description'].' Object' : '-';
                                 $model = $response['schema']['$ref'] ?? '';
                                 ?>
-                                <tr>
-                                    <td data-title="Status Code: "><span class="<?php echo $this->escape($class); ?>"><?php echo $this->escape($code); ?></span>&nbsp;&nbsp;<span class="text-fade"><?php echo $this->escape($text); ?></span></td>
-                                    <td data-title="Content Type: "><?php echo $this->escape($produces); ?></td>
-                                    <td data-title="Payload: ">
-                                        <?php if(!empty($model)): ?>
-                                            <?php if($model !== '#/definitions/any'): ?>
-                                                <a href="/docs/models/<?php echo $this->escape(str_replace('#/definitions/', '', $model)); ?>"><?php echo $this->escape($description); ?></a>
-                                            <?php else: ?>
-                                                JSON Object
-                                            <?php endif; ?>
-                                        <?php else: ?>
-                                            -
-                                        <?php endif; ?>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    <?php endif; ?>
+                        <tr>
+                            <td data-title="Status Code: "><span
+                                    class="<?php echo $this->escape($class); ?>"><?php echo $this->escape($code); ?></span>&nbsp;&nbsp;<span
+                                    class="text-fade"><?php echo $this->escape($text); ?></span></td>
+                            <td data-title="Content Type: "><?php echo $this->escape($produces); ?></td>
+                            <td data-title="Payload: ">
+                                <?php if(!empty($model)): ?>
+                                <?php if($model !== '#/definitions/any'): ?>
+                                <a
+                                    href="/docs/models/<?php echo $this->escape(str_replace('#/definitions/', '', $model)); ?>"><?php echo $this->escape($description); ?></a>
+                                <?php else: ?>
+                                JSON Object
+                                <?php endif; ?>
+                                <?php else: ?>
+                                -
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?php endif; ?>
 
+            </div>
+            <div class="col span-5 sticky-top">
+                <div class="margin-bottom-small margin-top-large clear">
+                    <div class="request-title">Example Request</div>
                 </div>
-                <div class="col span-5 sticky-top">
-                    <div class="margin-bottom-small margin-top-large clear">
-                        <div class="request-title">Example Request</div>
-                    </div>
-                    <ul class="example">
-                        <?php foreach ($platforms as $platform):
+                <ul class="example">
+                    <?php foreach ($platforms as $platform):
                             if(!$platform['enabled']) {
                                 continue;
                             }
@@ -473,7 +502,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                     : ['Default' => 'examples'];
    
                             ?>
-                                <?php foreach($docDirectories as $docDirectoryKey => $docDirectory):
+                    <?php foreach($docDirectories as $docDirectoryKey => $docDirectory):
                                     $example = APP_VENDOR_CE.'/docs/examples/'.$versionDocs.'/'.$language['family'].'-'.$language['key'].'/'.$docDirectory.'/'.$snippet;
 
                                     if(!is_readable($example)) {
@@ -481,17 +510,19 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                         continue;
                                     }
                                     ?>
-                                    <li class="example-in-<?php echo $language['key']; ?>-<?php echo strtolower($docDirectoryKey); ?>">
-                                        <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?> SDK">
-                                            <pre class="line-numbers"><code class="prism language-<?php echo $language['prism']; ?>" data-prism><?php echo $this->escape(file_get_contents($example)); ?></code></pre>
-                                        </div>
-                                    </li>
-                                <?php endforeach; ?>
-                            <?php endforeach; ?>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
+                    <li class="example-in-<?php echo $language['key']; ?>-<?php echo strtolower($docDirectoryKey); ?>">
+                        <div class="ide" data-lang="<?php echo $language['key']; ?>"
+                            data-lang-label="<?php echo $language['name']; ?> SDK">
+                            <pre
+                                class="line-numbers"><code class="prism language-<?php echo $language['prism']; ?>" data-prism><?php echo $this->escape(file_get_contents($example)); ?></code></pre>
+                        </div>
+                    </li>
+                    <?php endforeach; ?>
+                    <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </ul>
             </div>
         </div>
+    </div>
     <?php endforeach; ?>
 </div>

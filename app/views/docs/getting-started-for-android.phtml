@@ -13,25 +13,35 @@ foreach($platforms['client']['languages'] as $lang) {
 
 $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 ?>
-<p>Appwrite is a development platform providing you an easy yet powerful API and management console to get your next project up and running quickly.</p>
+<p>Appwrite is a development platform providing you an easy yet powerful API and management console to get your next
+    project up and running quickly.</p>
 
-<p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
+<p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you
+    have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server
+    instance up and running on your host machine or server.</p>
 
-<h2><a href="/docs/getting-started-for-android#createYourProject" id="createYourProject">Create Your First Appwrite Project</a></h2>
+<h2><a href="/docs/getting-started-for-android#createYourProject" id="createYourProject">Create Your First Appwrite
+        Project</a></h2>
 
-<p>Go to your new Appwrite console, and once inside, click the <i class="icon-plus"></i> icon in the top navigation header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create to get started.</p>
+<p>Go to your new Appwrite console, and once inside, click the <i class="icon-plus"></i> icon in the top navigation
+    header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click
+    create to get started.</p>
 
 <h2><a href="/docs/getting-started-for-android#addProject" id="addProject">Add your Android Platform</a></h2>
 
-<p>To init your SDK and start interacting with Appwrite services, you need to add a new Android platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and click the 'Add Platform' button.</p>
+<p>To init your SDK and start interacting with Appwrite services, you need to add a new Android platform to your
+    project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and
+    click the 'Add Platform' button.</p>
 
-<p>From the options, choose to add a new <b>Android</b> platform and add add your app <u>name</u> and <u>package name</u>, Your package name is generally the applicationId in your app-level build.gradle file. By registering your new app platform, you are allowing your app to communicate with the Appwrite API.</p>
+<p>From the options, choose to add a new <b>Android</b> platform and add add your app <u>name</u> and <u>package
+        name</u>, Your package name is generally the applicationId in your app-level build.gradle file. By registering
+    your new app platform, you are allowing your app to communicate with the Appwrite API.</p>
 
 <h2><a href="/docs/getting-started-for-android#getSDK" id="getSDK">Get Appwrite Android SDK</a></h2>
 
 <p>First, add this to your root level build.gradle file: </p>
 <div class="ide" data-lang="groovy" data-lang-label="Groovy">
-  <pre class="line-numbers"><code class="prism language-groovy" data-prism><?php echo $this->escape('repositories {
+    <pre class="line-numbers"><code class="prism language-groovy" data-prism><?php echo $this->escape('repositories {
     mavenCentral()
 }');?></code></pre>
 </div>
@@ -39,12 +49,18 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 <p>And add this to your project's build.gradle file:</p>
 
 <div class="ide" data-lang="groovy" data-lang-label="Groovy">
-  <pre class="line-numbers"><code class="prism language-groovy" data-prism>'implementation("io.appwrite:sdk-for-android:<?php echo $this->escape($androidVersion); ?>")'</code></pre>
+    <pre
+        class="line-numbers"><code class="prism language-groovy" data-prism>'implementation("io.appwrite:sdk-for-android:<?php echo $this->escape($androidVersion); ?>")'</code></pre>
 </div>
 
 <h3><a href="/docs/getting-started-for-android#OAuthCallback" id="OAuthCallback">OAuth Callback</a></h3>
 
-<p>In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `<application>` tag, along side the existing `<activity>` tags in your <a href="https://github.com/appwrite/playground-for-android/blob/master/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener">AndroidManifest.xml</a>. Be sure to relpace the <b>[PROJECT_ID]</b> string with your actual Appwrite project ID. You can find your Appwrite project ID in you project settings screen in your Appwrite console.</p>
+<p>In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `
+    <application>` tag, along side the existing `<activity>` tags in your <a
+                href="https://github.com/appwrite/playground-for-android/blob/master/app/src/main/AndroidManifest.xml"
+                target="_blank" rel="noopener">AndroidManifest.xml</a>. Be sure to relpace the <b>[PROJECT_ID]</b>
+            string with your actual Appwrite project ID. You can find your Appwrite project ID in you project settings
+            screen in your Appwrite console.</p>
 
 <div class="ide" data-lang="html" data-lang-label="XML">
     <pre class="line-numbers"><code class="prism language-xml" data-prism><?php echo $this->escape('<manifest ...>
@@ -78,16 +94,22 @@ val client = Client(context)
   .setSelfSigned(true) // For self signed certificates, only use for development</code></pre>
 </div>
 
-<p>Before starting to send any API calls to your new Appwrite instance, make sure your Android emulators has network access to the Appwrite server hostname or IP address.</p>
+<p>Before starting to send any API calls to your new Appwrite instance, make sure your Android emulators has network
+    access to the Appwrite server hostname or IP address.</p>
 
-<p>When trying to connect to Appwrite from an emulator or a mobile device, localhost is the hostname for the device or emulator and not your local Appwrite instance. You should replace localhost with your private IP as the Appwrite endpoint's hostname. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite API.</p>
+<p>When trying to connect to Appwrite from an emulator or a mobile device, localhost is the hostname for the device or
+    emulator and not your local Appwrite instance. You should replace localhost with your private IP as the Appwrite
+    endpoint's hostname. You can also use a service like <a href="https://ngrok.com/" target="_blank"
+        rel="noopener">ngrok</a> to proxy the Appwrite API.</p>
 
 <h2><a href="/docs/getting-started-for-android#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
-<p>Once your SDK object is set, access any of the Appwrite services and choose any request to send. Full documentation for any service method you would like to use can be found in your SDK documentation or in the API References section.</p>
+<p>Once your SDK object is set, access any of the Appwrite services and choose any request to send. Full documentation
+    for any service method you would like to use can be found in your SDK documentation or in the API References
+    section.</p>
 
 <div class="ide" data-lang="android" data-lang-label="Android SDK">
-                    <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// Register User
+    <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// Register User
 val account = Account(client)
 val response = account.create("email@example.com", "password")
 val json = response.body?.string()</code></pre>
@@ -95,10 +117,11 @@ val json = response.body?.string()</code></pre>
 
 <h2><a href="/docs/getting-started-for-android#listenToChanges" id="listenToChanges">Listen to changes</a></h2>
 
-<p>If you want to listen to changes in realtime from Appwrite, you can subscribe to a variety of channels and receive updates within milliseconds. Full documentation for Realtime can be found <a href="/docs/realtime">here</a>.</p>
+<p>If you want to listen to changes in realtime from Appwrite, you can subscribe to a variety of channels and receive
+    updates within milliseconds. Full documentation for Realtime can be found <a href="/docs/realtime">here</a>.</p>
 
 <div class="ide" data-lang="android" data-lang-label="Android SDK">
-  <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// Subscribe to files channel
+    <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// Subscribe to files channel
 val realtime = Realtime(client)
 
 realtime.subscribe("files", callback = { response ->
@@ -112,7 +135,7 @@ realtime.subscribe("files", callback = { response ->
 
 <h2><a href="/docs/getting-started-for-android#fullExample" id="fullExample">Full Example</a></h2>
 <div class="ide" data-lang="android" data-lang-label="Android SDK">
-                    <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+    <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
 
 val client = Client(context)
@@ -138,4 +161,5 @@ realtime.subscribe("files", callback = { response ->
 
 <h2><a href="/docs/getting-started-for-android#nextSteps" id="nextSteps">Next Steps</a></h2>
 
-<p>Appwrite has many services and tools to help improve your app and speed up your development. The best way to learn how you can take advantage of them is to explore the different API references docs.</p>
+<p>Appwrite has many services and tools to help improve your app and speed up your development. The best way to learn
+    how you can take advantage of them is to explore the different API references docs.</p>

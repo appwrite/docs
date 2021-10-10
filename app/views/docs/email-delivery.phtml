@@ -1,24 +1,33 @@
-<p>Appwrite v0.7 and above come with support for easy integrations with 3rd party SMTP providers. In order for emails to work, you will need to setup proper SMTP configuration as described below.</p>
+<p>Appwrite v0.7 and above come with support for easy integrations with 3rd party SMTP providers. In order for emails to
+    work, you will need to setup proper SMTP configuration as described below.</p>
 
-<p>Because email deliverability can be both tricky and hard, it is often easier to delegate this responsibility to a 3rd-party SMTP provider. These providers help you abstract the complexity of passing SPAM filters by doing a lot of the advanced configuration and validation for you.</p>
+<p>Because email deliverability can be both tricky and hard, it is often easier to delegate this responsibility to a
+    3rd-party SMTP provider. These providers help you abstract the complexity of passing SPAM filters by doing a lot of
+    the advanced configuration and validation for you.</p>
 
-<p>In this document, you will learn how to connect a 3rd party SMTP provider like MailGun or SendGrid with Appwrite to help you get better email deliverability.</p>
+<p>In this document, you will learn how to connect a 3rd party SMTP provider like MailGun or SendGrid with Appwrite to
+    help you get better email deliverability.</p>
 
 <h2><a href="/docs/email-delivery#updateEnvFile" id="updateEnvFile">Update Your .env File</a></h2>
 
-<p>At this stage, we assume that you have already installed Appwrite. Else, you can follow our <a href="/docs/installation">Getting Started Guide</a> for the installation. Appwrite offers multiple environment variables to customize your server setup to your needs. To configure Appwrite to use your own SMTP server, you need to set the following environment variables in the hidden .env file that comes with your Appwrite installation.</p>
+<p>At this stage, we assume that you have already installed Appwrite. Else, you can follow our <a
+        href="/docs/installation">Getting Started Guide</a> for the installation. Appwrite offers multiple environment
+    variables to customize your server setup to your needs. To configure Appwrite to use your own SMTP server, you need
+    to set the following environment variables in the hidden .env file that comes with your Appwrite installation.</p>
 
-<p><b>_APP_SMTP_HOST</b> - SMTP server host name address. Use an empty string to disable all mail sending from the server. The default value for this variable is an empty string</p>
+<p><b>_APP_SMTP_HOST</b> - SMTP server host name address. Use an empty string to disable all mail sending from the
+    server. The default value for this variable is an empty string</p>
 
 <p><b>_APP_SMTP_PORT</b> - SMTP server TCP port. Empty by default.</p>
 
-<p><b>_APP_SMTP_SECURE</b> - SMTP secure connection protocol. Empty by default, change to ‘tls’ if running on a secure connection.</p>
+<p><b>_APP_SMTP_SECURE</b> - SMTP secure connection protocol. Empty by default, change to ‘tls’ if running on a secure
+    connection.</p>
 
 <p><b>_APP_SMTP_USERNAME</b> - SMTP server user name. Empty by default.</p>
 
 <p><b>_APP_SMTP_PASSWORD</b> - SMTP server user password. Empty by default.</p>
 
-<p>Here's a sample configuration if you're using SendGrid as your SMTP provider. </p> 
+<p>Here's a sample configuration if you're using SendGrid as your SMTP provider. </p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>_APP_SMTP_HOST=smtp.sendgrid.net
@@ -30,7 +39,8 @@ _APP_SMTP_PASSWORD=YOUR-SMTP-PASSWORD</code></pre>
 
 <h2><a href="/docs/email-delivery#restartServer" id="restartServer">Restart Your Appwrite Server</a></h2>
 
-<p>Once you've updated your .env file, you need to restart your Appwrite stack using the following command from your terminal:</p>
+<p>Once you've updated your .env file, you need to restart your Appwrite stack using the following command from your
+    terminal:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose up -d</code></pre>
@@ -38,29 +48,39 @@ _APP_SMTP_PASSWORD=YOUR-SMTP-PASSWORD</code></pre>
 
 <h2><a href="/docs/email-delivery#debugging" id="debugging">Debugging</a></h2>
 
-<p>If you are unable to send emails, there is most likely an issue with your integration. The first place to look for possible errors is the <b>Appwrite Emails Worker</b>. You can access the logs of this container using: 
+<p>If you are unable to send emails, there is most likely an issue with your integration. The first place to look for
+    possible errors is the <b>Appwrite Emails Worker</b>. You can access the logs of this container using:
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose logs -f appwrite-worker-mails</code></pre>
+    <pre
+        class="line-numbers"><code class="prism language-bash" data-prism>docker-compose logs -f appwrite-worker-mails</code></pre>
 </div>
 </p>
 
 <p>
-The next possible source of error is the configuration in your .env file. Make sure that the keys and values are correct and test the credentials by sending a test email using your SMTP providers' SDK or cURL requests.
+    The next possible source of error is the configuration in your .env file. Make sure that the keys and values are
+    correct and test the credentials by sending a test email using your SMTP providers' SDK or cURL requests.
 </p>
 
-<p> Moving on to the next source of error. Some SMTP providers have a concept of <a href="https://help.mailgun.com/hc/en-us/articles/217531258-Authorized-Recipients">authorized recipients</a> in their sandbox (or dev) environments and you can only send emails to recipients in this list. Make sure that the recipient of the email that you're trying to send is a part of this list.</p>
+<p> Moving on to the next source of error. Some SMTP providers have a concept of <a
+        href="https://help.mailgun.com/hc/en-us/articles/217531258-Authorized-Recipients">authorized recipients</a> in
+    their sandbox (or dev) environments and you can only send emails to recipients in this list. Make sure that the
+    recipient of the email that you're trying to send is a part of this list.</p>
 
-<p>Another source of error could be that the environment variables have not been set in the appwrite container. You can check this using </p>
+<p>Another source of error could be that the environment variables have not been set in the appwrite container. You can
+    check this using </p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose exec appwrite-worker-mails vars</code></pre>
+    <pre
+        class="line-numbers"><code class="prism language-bash" data-prism>docker-compose exec appwrite-worker-mails vars</code></pre>
 </div>
 
 <p>If this is the case, you can try rebuilding your appwrite stack using:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose up -d --build --force-recreate</code></pre>
+    <pre
+        class="line-numbers"><code class="prism language-bash" data-prism>docker-compose up -d --build --force-recreate</code></pre>
 </div>
 
-<p>Now you can head over to your Appwrite console, logout from your account and try to recover your password or send invites to other team members from your Appwrite console using your newly configured SMTP provider.</p>
+<p>Now you can head over to your Appwrite console, logout from your account and try to recover your password or send
+    invites to other team members from your Appwrite console using your newly configured SMTP provider.</p>
