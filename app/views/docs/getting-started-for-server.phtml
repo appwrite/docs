@@ -484,7 +484,7 @@ println(res.body?.string())</code></pre>
 
 let users = Users(client: client)
 
-users.create(email: 'email@example.com', password: 'password') { result in
+users.create(email: "email@example.com", password: "password") { result in
     switch result {
     case .failure(let error): print(error.message)
     case .success(let user): print(String(describing: user))
@@ -660,7 +660,7 @@ client
 
 let users = Users(client: client)
 
-users.create(email: 'email@example.com', password: 'password') { result in
+users.create(email: "email@example.com", password: "password") { result in
     switch result {
     case .failure(let error): print(error.message)
     case .success(let user): print(String(describing: user))
