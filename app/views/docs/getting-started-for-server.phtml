@@ -85,7 +85,7 @@ $kotlinVersion = $versions['kotlin'] ?? '';
             <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
     // ...
-    .package(url: "https://github.com/appwrite/sdk-for-swift.git", .branch("develop"))
+    .package(url: "https://github.com/appwrite/sdk-for-swift.git", from: "0.0.1")
     // ...
 ]</code></pre>
             </div>
@@ -213,9 +213,9 @@ client
 
 let client = Client()
 client
-    .setEndpoint(endPoint: 'https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject(value: '5df5acd0d48c2') // Your project ID
-    .setKey(value: '919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key</code></pre>
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+    .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key</code></pre>
         </div>
     </li>
 </ul>
@@ -271,7 +271,12 @@ val response = account
             <pre class="line-numbers"><code class="prism language-swift" data-prism>let account = Account(client: client)
 
 let response = account
-    .createJWT()</code></pre>
+    .createJWT() { result in
+        switch result {
+        case .failure(let error): print(error.message)
+        case .success(let token): print(token.jwt)
+        }
+    }</code></pre>
         </div>
     </li>
 </ul>
@@ -380,9 +385,9 @@ client
 
 let client = Client()
 client
-    .setEndpoint(endPoint: "https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject(value: "5df5acd0d48c2") // Your project ID
-    .setJWT(value: "919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key</code></pre>
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+    .setJWT("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key</code></pre>
         </div>
     </li>
 </ul>
@@ -478,12 +483,11 @@ println(res.body?.string())</code></pre>
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let users = Users(client: client)
+
 users.create(email: 'email@example.com', password: 'password') { result in
     switch result {
-    case .failure(let error):
-        print(error.localizedDescription)
-    case .success(var response):
-        print(response.body!.readString(length: response.body!.readableBytes)
+    case .failure(let error): print(error.message)
+    case .success(let user): print(String(describing: user))
     }
 }
 </code></pre>
@@ -650,17 +654,16 @@ println(res.body?.string())</code></pre>
 let client = Client();
 
 client
-    .setEndpoint(endPoint: 'https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject(value: '5df5acd0d48c2') // Your project ID
-    .setKey(value: '919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+    .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
 
-let users = Users(client: client);
+let users = Users(client: client)
+
 users.create(email: 'email@example.com', password: 'password') { result in
     switch result {
-    case .failure(let error):
-        print(error.localizedDescription)
-    case .success(var response):
-        print(response.body!.readString(length: response.body!.readableBytes)
+    case .failure(let error): print(error.message)
+    case .success(let user): print(String(describing: user))
     }
 }</code></pre>
         </div>
