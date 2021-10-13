@@ -113,13 +113,15 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
   <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-Client client = Client();
+  void main() {
+    Client client = Client();
 
-client
-    .setEndpoint('https://localhost/v1') // Your Appwrite Endpoint
-    .setProject('5e8cf4f46b5e8') // Your project ID
-    .setSelfSigned(true) // For self signed certificates, only use for development
-;
+    client
+        .setEndpoint('https://localhost/v1') // Your Appwrite Endpoint
+        .setProject('5e8cf4f46b5e8') // Your project ID
+        .setSelfSigned(true) // For self signed certificates, only use for development
+    ;
+  }
 </code></pre>
 </div>
 
@@ -166,34 +168,36 @@ subscription.stream.listen((response) {
 <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
   <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-Client client = Client();
+  void main() {
+    Client client = Client();
 
-client
-    .setEndpoint('https://localhost/v1') // Your Appwrite Endpoint
-    .setProject('5e8cf4f46b5e8') // Your project ID
-    .setSelfSigned(true) // For self signed certificates, only use for development
-;
+    client
+        .setEndpoint('https://localhost/v1') // Your Appwrite Endpoint
+        .setProject('5e8cf4f46b5e8') // Your project ID
+        .setSelfSigned(true) // For self signed certificates, only use for development
+    ;
 
-// Register User
-Account account = Account(client);
+    // Register User
+    Account account = Account(client);
 
-Response user = await account
-    .create(
-        email: 'me@appwrite.io',
-        password: 'password',
-        name: 'My Name'
-    );
+    Response user = await account
+        .create(
+            email: 'me@appwrite.io',
+            password: 'password',
+            name: 'My Name'
+        );
 
-// Subscribe to files channel
-final realtime = Realtime(client);
-final subscription = realtime.subscribe(['files']);
+    // Subscribe to files channel
+    final realtime = Realtime(client);
+    final subscription = realtime.subscribe(['files']);
 
-subscription.stream.listen((response) {
-    if(response.event === 'storage.files.create') {
-        // Log when a new file is uploaded
-        print(response.payload);
-    }
-})
+    subscription.stream.listen((response) {
+        if(response.event === 'storage.files.create') {
+            // Log when a new file is uploaded
+            print(response.payload);
+        }
+    })
+  }
 </code></pre>
 </div>
 
