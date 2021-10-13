@@ -11,7 +11,7 @@ foreach($platforms['client']['languages'] as $lang) {
     }
 }
 
-$appleVersion = (isset($versions['apple'])) ? $versions['apple'] : '';
+$appleVersion = (isset($versions['swift-client'])) ? $versions['swift-client'] : '';
 ?>
 <p>Appwrite is a development platform providing you an easy yet powerful API and management console to get your next project up and running quickly.</p>
 
@@ -44,9 +44,9 @@ $appleVersion = (isset($versions['apple'])) ? $versions['apple'] : '';
 <p>Add this to your Package.swift file: </p>
 
 <div class="ide" data-lang="swift" data-lang-label="Swift">
-  <pre class="line-numbers"><code class="prism language-swift" data-prism><?php echo $this->escape('dependencies: [
-    .package(url: "https://github.com/appwrite/sdk-for-apple", from: "0.0.1"),
-]');?></code></pre>
+  <pre class="line-numbers"><code class="prism language-swift" data-prism>'dependencies: [
+    .package(url: "https://github.com/appwrite/sdk-for-apple", from: "<?php echo $this->escape($appleVersion); ?>"),
+]')'</code></pre>
 </div>
 
 <p>Then add the dependency to your target:</p>
