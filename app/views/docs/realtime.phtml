@@ -19,8 +19,11 @@ $channels = [
 ?>
 
 <p>Realtime allows you to listen to any events on the server-side in realtime using the <b>subscribe</b> method.</p>
-<p>Instead of requesting new data via HTTP, the subscription will receive new data everytime it changes, any connected client receives that update within milliseconds via a WebSocket connection.</p>
+
+<p>Instead of requesting new data via HTTP, the subscription will receive new data every time it changes, any connected client receives that update within milliseconds via a WebSocket connection.</p>
+
 <p>This lets you build an interactive and responsive user experience by providing information from all of Appwrite's services in realtime.</p>
+
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
@@ -331,8 +334,11 @@ subscription.close()</code></pre>
 </table>
 
 <h2><a href="/docs/realtime#custom-endpoint" id="custom-endpoint">Custom Endpoint</a></h2>
+
 <p>The SDK will guess the endpoint of the Realtime API when setting the endpoint of your Appwrite instance. If you are running Appwrite with a custom proxy and changed the route of the Realtime API, you can call the <b>setEndpointRealtime</b> method on the Client SDK and set your new endpoint value.</p>
+
 <p>By default the endpoint is <b>wss://[ENDPOINT]/v1/realtime</b>.</p>
+
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
@@ -360,10 +366,10 @@ client.setEndpointRealtime('[ENDPOINT]')</code></pre>
 </ul>
 <h2><a href="/docs/realtime#known-limitations" id="known-limitations">Known limitations</a></h2>
 
-<h3>Authentication with existing subscription</h3>
+<h3>Authentication with Existing Subscription</h3>
 <p>If you authenticate a user and have an already existing subscription, the subscription will not receive updates for the newly authenticated user. You would need to re-create the subscription so that it will work with the new user.</p>
 
-<h3>Be careful with multiple quick changes of different subscribed channels</h3>
+<h3>Rapid Subscriptions Changes</h3>
 <p>The SDK creates a single WebSocket connection for all subscribed channels. Each time a channel is added or unsubscribed - the SDK currently creates a completely new connection and terminates the old one. Therefore, subscriptions to channels should always be done in conjunction with state management so as not to be unnecessarily built up several times by multiple components' life cycles.</p>
 
 <h3>Nested Documents</h3>
