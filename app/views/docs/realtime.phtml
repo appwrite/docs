@@ -89,7 +89,7 @@ realtime.subscribe(channels, callback)</code></pre>
 <h2><a href="/docs/realtime#examples" id="examples">Examples</a></h2>
 <p>The examples below will show you how you can use Realtime in various ways.</p>
 
-<h3><a href="/docs/realtime#subscribe-to-a-channel" id="subscribe-to-a-channel">Subscribe to a channel</a></h3>
+<h3><a href="/docs/realtime#subscribe-to-a-channel" id="subscribe-to-a-channel">Subscribe to a Channel</a></h3>
 
 <p>In this example we are subscribing to all updates related to our account by using the <span class="tag">account</span> channel. This will be triggered by any update related to the authenticated user, like updating the user's name or e-mail address.</p>
 
@@ -133,7 +133,7 @@ realtime.subscribe("account", callback = { param ->
     </li>
 </ul>
 
-<h3><a href="/docs/realtime#subscribe-to-multiple-channels" id="subscribe-to-multiple-channels">Subscribe to multiple channels</a></h3>
+<h3><a href="/docs/realtime#subscribe-to-multiple-channels" id="subscribe-to-multiple-channels">Subscribe to Multiple Channels</a></h3>
 
 <p>You can also listen to multiple <a href="/docs/realtime#channels">channels</a> at once by passing an array of channels. This will trigger the callback for any events for all channels passed.</p>
 <p>In this example we are listening to the document A and all files by subscribing to the <span class="tag">documents.A</span> and <span class="tag">files</span> channels.</p>
@@ -315,7 +315,9 @@ subscription.close()</code></pre>
 </div>
 
 <h2><a href="/docs/realtime#channels" id="channels">Channels</a></h2>
+
 <p>A list of all channels available you can subscribe to:</p>
+
 <table class="full text-size-small">
     <thead>
         <tr>
@@ -364,7 +366,8 @@ client.setEndpointRealtime('[ENDPOINT]')</code></pre>
         </div>
     </li>
 </ul>
-<h2><a href="/docs/realtime#known-limitations" id="known-limitations">Known limitations</a></h2>
+
+<h2><a href="/docs/realtime#known-limitations" id="known-limitations">Known Limitations</a></h2>
 
 <h3>Authentication with Existing Subscription</h3>
 <p>If you authenticate a user and have an already existing subscription, the subscription will not receive updates for the newly authenticated user. You would need to re-create the subscription so that it will work with the new user.</p>
