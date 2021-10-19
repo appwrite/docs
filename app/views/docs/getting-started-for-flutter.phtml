@@ -33,7 +33,7 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 
 <p>For <b>Android</b> first add your app <u>name</u> and <u>package name</u>, Your package name is generally the <b>applicationId</b> in your app-level <a href="https://github.com/appwrite/playground-for-flutter/blob/0fdbdff98384fff940ed0b1e08cf14cfe3a2be3e/android/app/build.gradle#L41" target="_blank" rel="noopener">build.gradle</a> file. By registering your new app platform, you are allowing your app to communicate with the Appwrite API.</p>
 
-<p>In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `<application>` tag, along side the existing `<activity>` tags in your <a href="https://github.com/appwrite/playground-for-flutter/blob/master/android/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener">AndroidManifest.xml</a>. Be sure to relpace the <b>[PROJECT_ID]</b> string with your actual Appwrite project ID. You can find your Appwrite project ID in you project settings screen in your Appwrite console.</p>
+<p>In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `<application>` tag, along side the existing `<activity>` tags in your <a href="https://github.com/appwrite/playground-for-flutter/blob/master/android/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener">AndroidManifest.xml</a>. Be sure to replace the <b>[PROJECT_ID]</b> string with your actual Appwrite project ID. You can find your Appwrite project ID in you project settings screen in your Appwrite console.</p>
 
 <div class="ide" data-lang="html" data-lang-label="XML">
     <pre class="line-numbers"><code class="prism language-xml" data-prism><?php echo $this->escape('<manifest ...>
@@ -118,7 +118,7 @@ Client client = Client();
 client
     .setEndpoint('https://localhost/v1') // Your Appwrite Endpoint
     .setProject('5e8cf4f46b5e8') // Your project ID
-    .setSelfSigned(true) // For self signed certificates, only use for development
+    .setSelfSigned(status: true) // For self signed certificates, only use for development
 ;
 </code></pre>
 </div>
