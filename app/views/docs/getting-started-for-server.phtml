@@ -186,12 +186,14 @@ client
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
-Client client = Client();
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;</code></pre>
+void main() {
+  Client client = Client();
+  client
+      .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+      .setProject('5df5acd0d48c2') // Your project ID
+      .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+  ;
+}</code></pre>
         </div>
     </li>
     <li>
@@ -358,12 +360,14 @@ client
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
-Client client = Client();
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;</code></pre>
+void main() {
+  Client client = Client();
+  client
+      .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+      .setProject('5df5acd0d48c2') // Your project ID
+      .setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+  ;
+}</code></pre>
         </div>
     </li>
     <li>
@@ -608,22 +612,24 @@ promise.then(function (response) {
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
-final client = Client();
-final users = Users(client);
+void main() {
+  final client = Client();
+  final users = Users(client);
 
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;
+  client
+      .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+      .setProject('5df5acd0d48c2') // Your project ID
+      .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+  ;
 
-final res = users.create('email@example.com', 'password');
+  final res = users.create('email@example.com', 'password');
 
-res.then((response) {
-    print(response);
-}).catchError((error) {
-    print(error);
-});</code></pre>
+  res.then((response) {
+      print(response);
+  }).catchError((error) {
+      print(error);
+  });
+}</code></pre>
         </div>
     </li>
     <li>
