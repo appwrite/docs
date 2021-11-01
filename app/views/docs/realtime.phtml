@@ -47,7 +47,7 @@ sdk.subscribe(channel, callback);</code></pre>
 client
     .setEndpoint('https://localhost/v1') // Your Appwrite Endpoint
     .setProject('5e8cf4f46b5e8') // Your project ID
-    .setSelfSigned(true) // For self signed certificates, only use for development
+    .setSelfSigned(status: true) // For self signed certificates, only use for development
 ;
 
 final realtime = Realtime(client);
@@ -65,7 +65,7 @@ subscription.stream.listen(callback);
 client
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2") // Your project ID
-    .setSelfSigned(true) // For self signed certificates, only use for development
+    .setSelfSigned(status: true) // For self signed certificates, only use for development
 
 val realtime = Realtime(client)
 
