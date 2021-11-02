@@ -1,0 +1,182 @@
+<?php
+$platforms = $this->getParam('platforms');
+$versions = [];
+
+foreach($platforms['client']['languages'] as $lang) {
+    $key = $lang['key'] ?? '';
+    $version = $lang['version'] ?? '';
+
+    if(!empty($key)) {
+        $versions[$key] = $version;
+    }
+}
+
+$appleVersion = (isset($versions['swift-client'])) ? $versions['swift-client'] : '';
+?>
+<p>Appwrite is a development platform providing you an easy yet powerful API and management console to get your next project up and running quickly.</p>
+
+<p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
+
+<h2><a href="/docs/getting-started-for-apple#createYourProject" id="createYourProject">Create Your First Appwrite Project</a></h2>
+
+<p>Go to your new Appwrite console, and once inside, click the <i class="icon-plus"></i> icon in the top navigation header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create to get started.</p>
+
+<h2><a href="/docs/getting-started-for-apple#addProject" id="addProject">Add your Apple Platform</a></h2>
+
+<p>To init your SDK and start interacting with Appwrite services, you need to add a new Apple platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and click the 'Add Platform' button.</p>
+
+<p>From the options, choose to add a new <b>Apple</b> platform, select the iOS, macOS, watchOS or tvOS tab and add your app <u>name</u> and <u>bundle identifier</u>, Your bundle identifier can be found at the top of the `General` tab in your project settings, or in your `Info.plist` file. By registering your new app platform, you are allowing your app to communicate with the Appwrite API.</p>
+
+<h2><a href="/docs/getting-started-for-apple#getSDK" id="getSDK">Get Appwrite Apple SDK</a></h2>
+
+<h3>Using Xcode</h3>
+
+<ol>
+    <li>Select File > Swift Packages > Add Package Dependency</li>
+    <li>Search for the Appwrite SDK with the URL https://github.com/appwrite/sdk-for-apple</li>
+    <li>Add version rules</li>
+    <li>Select next and wait for package resolution to complete</li>
+    <li>Make sure `Appwrite` is selected to add to your target and select finish</li>
+</ol>
+
+<h3>Using Swift Packages</h3>
+
+<p>Add this to your Package.swift file: </p>
+
+<div class="ide" data-lang="swift" data-lang-label="Swift">
+  <pre class="line-numbers"><code class="prism language-swift" data-prism>'dependencies: [
+    .package(url: "https://github.com/appwrite/sdk-for-apple", from: "<?php echo $this->escape($appleVersion); ?>"),
+]')'</code></pre>
+</div>
+
+<p>Then add the dependency to your target:</p>
+
+<div class="ide" data-lang="swift" data-lang-label="Swift">
+  <pre class="line-numbers"><code class="prism language-swift" data-prism><?php echo $this->escape('targets: [
+    .target(
+        name: "[YOUR_TARGET]",
+        dependencies: [
+            .product(name: "Appwrite", package: "sdk-for-apple")
+        ]
+    )
+]');?></code></pre>
+</div>
+
+<h3><a href="/docs/getting-started-for-apple#OAuthCallback" id="OAuthCallback">OAuth Callback</a></h3>
+
+<p>In order to capture the Appwrite OAuth callback url, the following URL scheme needs to added to your `Info.plist`</p>
+
+<div class="ide" data-lang="html" data-lang-label="XML">
+    <pre class="line-numbers"><code class="prism language-xml" data-prism><?php echo $this->escape('<key>CFBundleURLTypes</key>
+<array>
+<dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLName</key>
+    <string>io.appwrite</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+        <string>appwrite-callback-[PROJECT_ID]</string>
+    </array>
+</dict>
+</array>
+');?></code></pre>
+</div>
+
+<p>If you're using UIKit, you'll also need to add a hook to your `SceneDelegate.swift` file to ensure cookies work correctly.</p>
+
+<div class="ide" data-lang="swift" data-lang-label="Swift">
+  <pre class="line-numbers"><code class="prism language-swift" data-prism><?php echo $this->escape('targets: [
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let url = URLContexts.first?.url,
+            url.absoluteString.contains("appwrite-callback") else {
+            return
+        }
+        WebAuthComponent.handleIncomingCookie(from: url)
+    }
+]');?></code></pre>
+</div>
+
+<h2><a href="/docs/getting-started-for-apple#initSDK" id="initSDK">Init your SDK</a></h2>
+
+<p>Initialize your SDK code with your project ID, which can be found in your project settings page.</p>
+
+<div class="ide" data-lang="swift" data-lang-label="Swift">
+    <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+  .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+  .setProject("5df5acd0d48c2") // Your project ID
+  .setSelfSigned() // For self signed certificates, only use for development</code></pre>
+</div>
+
+<p>If you're using a physical device instead of a simulator, ensure that you can access your Appwrite instance before sending API calls.</p>
+
+<p>When trying to connect to Appwrite from a physical device, localhost is the hostname for the device and not your local Appwrite instance. You should replace localhost with your private IP as the Appwrite endpoint's hostname. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite API.</p>
+
+<h2><a href="/docs/getting-started-for-apple#makeRequest" id="makeRequest">Make Your First Request</a></h2>
+
+<p>Once your SDK object is set, access any of the Appwrite services and choose any request to send. Complete documentation for any service method you would like to use can be found in your SDK documentation or in the API References section.</p>
+
+<div class="ide" data-lang="apple" data-lang-label="Swift">
+                    <pre class="line-numbers"><code class="prism language-swift" data-prism>// Register User
+let account = Account(client: client)
+account.create(email: "email@example.com", password: "password") { result in
+    switch result {
+    case .failure(let error): print(error.message)
+    case .success(let user): print(String(describing: user))
+    }
+}</code></pre>
+</div>
+
+<h2><a href="/docs/getting-started-for-apple#listenToChanges" id="listenToChanges">Listen to Changes</a></h2>
+
+<p>If you want to listen to changes in realtime from Appwrite, you can subscribe to a variety of channels and receive updates within milliseconds. Full documentation for Realtime can be found <a href="/docs/realtime">here</a>.</p>
+
+<div class="ide" data-lang="apple" data-lang-label="Apple SDK">
+  <pre class="line-numbers"><code class="prism language-swift" data-prism>// Subscribe to files channel
+let realtime = Realtime(client: client)
+
+let subscription = realtime.subscribe(channels: ["files"]) { message in
+    if(message.event == "storage.files.create") {
+        // Log when a new file is uploaded
+        print(String(describing: message.payload))
+    }
+}</code></pre>
+</div>
+
+<p>If you're using macOS, for realtime to function correctly you need to ensure you have both "Outgoing Connections (Client)" <i>and</i> "Incoming Connections (Server)" enabled in your App Sandbox settings in your project file.</p>
+
+<h2><a href="/docs/getting-started-for-apple#fullExample" id="fullExample">Full Example</a></h2>
+<div class="ide" data-lang="apple" data-lang-label="Swift">
+                    <pre class="line-numbers"><code class="prism language-swift" data-prism>import io.appwrite.Client
+import Appwrite
+
+let client = Client()
+  .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+  .setProject("5df5acd0d48c2") // Your project ID
+  .setSelfSigned() // For self signed certificates, only use for development
+
+// Register User
+let account = Account(client: client)
+account.create(email: "email@example.com", password: "password") { result in
+    switch result {
+    case .failure(let error): print(error.message)
+    case .success(let user): print(String(describing: user))
+    }
+}
+
+// Subscribe to files channel
+let realtime = Realtime(client: client)
+
+let subscription = realtime.subscribe(channels: ["files"]) { message in
+    if(message.event == "storage.files.create") {
+        // Log when a new file is uploaded
+        print(String(describing: message.payload))
+    }
+}</code></pre>
+</div>
+
+<h2><a href="/docs/getting-started-for-apple#nextSteps" id="nextSteps">Next Steps</a></h2>
+
+<p>Appwrite has many services and tools to help improve your app and speed up your development. The best way to learn how you can take advantage of them is to explore the different API references docs.</p>

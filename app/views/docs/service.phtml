@@ -16,6 +16,7 @@ $version        = $this->getParam('version', '');
 $versionDocs    = $this->getParam('versionDocs', '');
 $versions       = $this->getParam('versions', []);
 $classess       = [];
+$paths          = $spec['paths'] ?? [];
 $codes          = [
     '200' => [
         'text' => 'OK',
@@ -39,7 +40,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
 
 <div data-ls-attrs="class=language-<?php echo $this->escape($sdk); ?> platform-<?php echo $this->escape($family); ?> examples-in-<?php echo $this->escape($sdk); ?>">
     <?php
-    foreach ($spec['paths'] as $url => $path) {
+    foreach ($paths as $url => $path) {
         foreach ($path as $method => $operation) {
             if(!in_array($service, $operation['tags'])) {
                 continue;

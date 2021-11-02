@@ -5,7 +5,7 @@ $versions = [];
 foreach($platforms['server']['languages'] ?? [] as $lang) {
     $key = $lang['key'] ?? '';
     $version = $lang['version'] ?? '';
-    
+
     if(!empty($key)) {
         $versions[$key] = $version;
     }
@@ -46,7 +46,7 @@ $kotlinVersion = $versions['kotlin'] ?? '';
     <li>
         <h3>Ruby</h3>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>gem install appwrite --save</code></pre>
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>gem install appwrite</code></pre>
         </div>
     </li>
     <li>
@@ -76,6 +76,24 @@ $kotlinVersion = $versions['kotlin'] ?? '';
     implementation("io.appwrite:sdk-for-kotlin:<?php $this->escape($kotlinVersion); ?>")
 }</code></pre>
             </div>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div>
+            <p>Add the Appwrite Swift SDK package as a dependency</p>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
+    // ...
+    .package(url: "https://github.com/appwrite/sdk-for-swift.git", from: "0.0.1")
+    // ...
+]</code></pre>
+            </div>
+            <p>Add the dependency product to your target</p>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
+    .product(name: "Appwrite", package: "sdk-for-swift"),
+]</code></pre>
         </div>
     </li>
 </ul>
@@ -188,13 +206,25 @@ client
     .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key</code></pre>
         </div>
     </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+    .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key</code></pre>
+        </div>
+    </li>
 </ul>
 
 <div class="notice">
     <h3>A Note About API Keys & Admin Mode</h3>
-    
+
     <p>When using Appwrite API from your server-side with an API Key you will automatically run in <b>admin mode</b>. Admin mode disables the default user <a href="/docs/permissions">permission access control</a> restrictions and allows you to access all the resources available on your project. This is very useful when you want to manipulate your users' data like files and documents or even if you want to get a list of your users.</p>
-    
+
     <p>Please note it is <b>highly</b> not recommended to run the admin mode from your client-side as it will probably lead to huge privacy and security issues. Check the <a href="/docs/admin">Admin Mode</a> documentation to learn more</p>
 </div>
 
@@ -233,6 +263,20 @@ Response user = await account
 
 val response = account
     .createJWT()</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple SDK</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>let account = Account(client: client)
+
+let response = account
+    .createJWT() { result in
+        switch result {
+        case .failure(let error): print(error.message)
+        case .success(let token): print(token.jwt)
+        }
+    }</code></pre>
         </div>
     </li>
 </ul>
@@ -334,6 +378,18 @@ client
     .setJWT("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key</code></pre>
         </div>
     </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+    .setJWT("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key</code></pre>
+        </div>
+    </li>
 </ul>
 
 <h2><a href="/docs/getting-started-for-server#makeRequest" id="makeRequest">Make Your First Request</a></h2>
@@ -419,6 +475,22 @@ val users = Users(client);
 
 val res = users.create(email = 'email@example.com', password = 'password');
 println(res.body?.string())</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let users = Users(client: client)
+
+users.create(email: "email@example.com", password: "password") { result in
+    switch result {
+    case .failure(let error): print(error.message)
+    case .success(let user): print(String(describing: user))
+    }
+}
+</code></pre>
         </div>
     </li>
 </ul>
@@ -556,7 +628,7 @@ res.then((response) {
     </li>
     <li>
         <h3>Kotlin</h3>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Kotlin SDK">
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Users
 
@@ -572,6 +644,28 @@ val users = Users(client);
 val res = users.create('email@example.com', 'password');
 
 println(res.body?.string())</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client();
+
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+    .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
+
+let users = Users(client: client)
+
+users.create(email: "email@example.com", password: "password") { result in
+    switch result {
+    case .failure(let error): print(error.message)
+    case .success(let user): print(String(describing: user))
+    }
+}</code></pre>
         </div>
     </li>
 </ul>

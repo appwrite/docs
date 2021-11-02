@@ -44,7 +44,7 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 
 <h3><a href="/docs/getting-started-for-android#OAuthCallback" id="OAuthCallback">OAuth Callback</a></h3>
 
-<p>In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `<application>` tag, along side the existing `<activity>` tags in your <a href="https://github.com/appwrite/playground-for-android/blob/master/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener">AndroidManifest.xml</a>. Be sure to relpace the <b>[PROJECT_ID]</b> string with your actual Appwrite project ID. You can find your Appwrite project ID in you project settings screen in your Appwrite console.</p>
+<p>In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `&lt;application&gt;` tag, along side the existing `&lt;activity&gt;` tags in your <a href="https://github.com/appwrite/playground-for-android/blob/master/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener">AndroidManifest.xml</a>. Be sure to relpace the <b>[PROJECT_ID]</b> string with your actual Appwrite project ID. You can find your Appwrite project ID in you project settings screen in your Appwrite console.</p>
 
 <div class="ide" data-lang="html" data-lang-label="XML">
     <pre class="line-numbers"><code class="prism language-xml" data-prism><?php echo $this->escape('<manifest ...>
@@ -62,6 +62,7 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
     </activity>
   </application>
 </manifest>'); ?>
+</code></pre>
 </div>
 
 <h2><a href="/docs/getting-started-for-android#initSDK" id="initSDK">Init your SDK</a></h2>
@@ -93,7 +94,7 @@ val response = account.create("email@example.com", "password")
 val json = response.body?.string()</code></pre>
 </div>
 
-<h2><a href="/docs/getting-started-for-android#listenToChanges" id="listenToChanges">Listen to changes</a></h2>
+<h2><a href="/docs/getting-started-for-android#listenToChanges" id="listenToChanges">Listen to Changes</a></h2>
 
 <p>If you want to listen to changes in realtime from Appwrite, you can subscribe to a variety of channels and receive updates within milliseconds. Full documentation for Realtime can be found <a href="/docs/realtime">here</a>.</p>
 

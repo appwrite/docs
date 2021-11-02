@@ -13,7 +13,7 @@ $runtimes = $this->getParam('runtimes', []);
 
 <h2><a href="/docs/functions#addFunction" id="addFunction">Add Your Function</a></h2>
 
-<p>You can add a new function from your Appwrite project's dashboard. Access your Functions settings from your projects left navigation panel. Click the 'Add Function' button and choose your function name and code runtime. In your Functions settings page, you can set your function event triggers, CRON schedule and set secure environment variables for your function runtime.</p>
+<p>You can add a new function from your Appwrite project's dashboard. Access your Functions settings from your project's left navigation panel. Click the 'Add Function' button and choose your function name and code runtime. In your Functions settings page, you can set your function event triggers, CRON schedule, and set secure environment variables for your function runtime.</p>
 
 <h2><a href="/docs/functions#deployCode" id="deployCode">Deploy Your Code</a></h2>
 
@@ -86,7 +86,7 @@ $runtimes = $this->getParam('runtimes', []);
 
     <p>If your code uses a package manager like NPM, Yarn, or Composer to install packages, you have to make sure your code directory includes your packages directory (node_modules for node or vendor for PHP) before you try to package and deploy your code.</p>
 
-    <p>If you're using a programming language that saves your packages under a global directory like Dart, Python or Ruby, you should set your package manager to keep your code under the '.appwrite' code directory under your code working directory to be deployed and available in your cloud functions runtime.</p>
+    <p>If you're using a programming language that saves your packages under a global directory like Dart, Python, or Ruby, you should set your package manager to keep your code under the '.appwrite' code directory under your code working directory to be deployed and available in your cloud functions runtime.</p>
 
     <p>For most languages, this can be achieved easily by adding an environment variable before installing your dependencies. Below you can find some simple examples:</p>
 
@@ -253,7 +253,7 @@ void main() { // Init SDK
             <td>
                 APPWRITE_FUNCTION_TRIGGER
             </td>
-            <td>The name of the event that triggered that executed the function. This value can be any of Appwrite <a href="/docs/webhooks#events" target="_blank">system events</a>, 'api' if your function was triggered manually or by an API call, or 'schedule' if your CRON schedule triggered it.</td>
+            <td>Either 'event' when triggered by one of the selected scopes, 'http' when triggered by an HTTP request or the Appwrite Console, or 'schedule' when triggered by the cron schedule.</td>
         </tr>
         <tr>
             <td>
