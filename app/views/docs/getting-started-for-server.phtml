@@ -5,20 +5,20 @@ $versions = [];
 foreach($platforms['server']['languages'] ?? [] as $lang) {
     $key = $lang['key'] ?? '';
     $version = $lang['version'] ?? '';
-    
+
     if(!empty($key)) {
         $versions[$key] = $version;
     }
 }
 
-$dartVersion = $versions['dart'] ?? '';
+$kotlinVersion = $versions['kotlin'] ?? '';
 ?>
 
 <p>Appwrite is a development platform providing you easy yet powerful API and management console to get your next project up and running quickly.</p>
 
 <p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
 
-<h2>Get the Appwrite SDK for Your Platform</h2>
+<h2><a href="/docs/getting-started-for-server#getSDK" id="getSDK">Get the Appwrite SDK for Your Platform</a></h2>
 
 <p>We provide libraries and SDKs for major programming languages and platforms so you don't have to write code for interacting with our HTTP APIs from scratch.</p>
 
@@ -46,7 +46,7 @@ $dartVersion = $versions['dart'] ?? '';
     <li>
         <h3>Ruby</h3>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>gem install appwrite --save</code></pre>
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>gem install appwrite</code></pre>
         </div>
     </li>
     <li>
@@ -57,41 +57,60 @@ $dartVersion = $versions['dart'] ?? '';
     </li>
     <li>
         <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>dart pub add dart_appwrite</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
         <div>
-            <p>Add the Appwrite SDK to your pubspec.yaml</p>
-            <div class="ide margin-top-small" data-lang="yaml" data-lang-label="Dart SDK">
-                <pre class="line-numbers"><code class="prism language-yaml" data-prism>dependency:
-    dart_appwrite: <?php echo $this->escape($dartVersion); ?></code></pre>
+            <p>Add maven repositories to your `build.gradle(.kts)` file</p>
+            <div class="ide margin-top-small" data-lang="gradle" data-lang-label="Gradle">
+                <pre class="line-numbers"><code class="prism language-gradle" data-prism>repositories {
+    mavenCentral()
+}</code></pre>
             </div>
-            <p>Install using Pub</p>
-            <div class="ide margin-top-small" data-lang="bash" data-lang-label="Dart SDK">
-                <pre class="line-numbers"><code class="prism language-bash" data-prism>dart pub get</code></pre>
+            <p>Add Appwrite SDK under dependencies in your `build.gradle(.kts)` file</p>
+            <div class="ide margin-top-small" data-lang="gradle" data-lang-label="Gradle">
+                <pre class="line-numbers"><code class="prism language-gradle" data-prism>dependencies {
+    implementation("io.appwrite:sdk-for-kotlin:<?php $this->escape($kotlinVersion); ?>")
+}</code></pre>
             </div>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div>
+            <p>Add the Appwrite Swift SDK package as a dependency</p>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
+    // ...
+    .package(url: "https://github.com/appwrite/sdk-for-swift.git", from: "0.0.1")
+    // ...
+]</code></pre>
+            </div>
+            <p>Add the dependency product to your target</p>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
+    .product(name: "Appwrite", package: "sdk-for-swift"),
+]</code></pre>
         </div>
     </li>
 </ul>
 
-<h2>Create Your First Appwrite Project</h2>
+<h2><a href="/docs/getting-started-for-server#createProject" id="createProject">Create Your First Appwrite Project</a></h2>
 
 <p>Go to your new Appwrite console and once inside click the <i class="icon-plus"></i> icon in the top navigation header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create to get started.</p>
 
-<h2>Grab an API Key</h2>
+<h2><a href="/docs/getting-started-for-server#authentication" id="authentication">Authentication</a></h2>
 
-<p>For you to init your SDK and interact with Appwrite services you need an API key. To get your first API key, go to your appwrite console, choose the project you created in the step before and click the 'API Keys' link.</p>
+<p>The Appwrite server API provides you with two authentication methods. The first one uses an API key, and the second is using a JSON Web Token (JWT). Each method has different use cases, and you can use whichever fills your app needs.</p>
 
-<p>Once inside your API keys screen click the 'Add API Key' button, choose your key name, for example: 'Demo Key' and select the scopes your key will be granted to use. To learn about the different API scopes available to you read more about <a href="/docs/keys">Appwrite API Keys</a> </p>
+<h3><a href="/docs/getting-started-for-server#apiKey" id="apiKey">API Key</a></h3>
 
-<div class="notice">
-    <h3>A Note About API Keys & Admin Mode</h3>
-    
-    <p>When using Appwrite API from your server-side with an API Key you will automatically run in <b>admin mode</b>. Admin mode disables the default user <a href="/docs/permissions">permission access control</a> restrictions and allows you to access all the resources available on your project. This is very useful when you want to manipulate your users' data like files and documents or even if you want to get a list of your users.</p>
-    
-    <p>Please notice it is <b>highly</b> not recommended to run the admin mode from your client-side as it will probably lead to huge privacy and security issues. Check the <a href="/docs/admin">Admin Mode</a> documentation to learn more</p>
-</div>
+<p>Using an API Key you can interact with the Appwrite server API as an admin. You'll be able to access all of your project resources as long as your key has the relevant access scopes attached. To get your first API key, go to your appwrite console, choose the project you created in the step before and click the 'API Keys' link.</p>
 
-<h2>Init your SDK</h2>
-
-<p>Initialize your SDK code with your project ID which can be found in your project settings page and your new API secret Key from previous phase.</p>
+<p>Once inside your API keys screen, click the 'Add API Key' button, choose your key name, for example: 'Demo Key', and select the scopes your key will be granted to use. Once completed, you could copy your new API Key and use it to initialize your Appwrite server SDK. To learn about the different API scopes available to you, read more about <a href="/docs/keys">Appwrite API Keys</a> </p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -99,7 +118,7 @@ $dartVersion = $versions['dart'] ?? '';
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
 
-let client = new sdk.Client();
+const client = new sdk.Client();
 
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
@@ -153,7 +172,7 @@ client
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>let client = new sdk.Client();
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>const client = new sdk.Client();
 
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
@@ -166,9 +185,8 @@ client
         <h3>Dart</h3>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
-            
-final client = Client();
 
+Client client = Client();
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
     .setProject('5df5acd0d48c2') // Your project ID
@@ -176,9 +194,205 @@ client
 ;</code></pre>
         </div>
     </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+
+val client = Client()
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+    .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key</code></pre>
+        </div>
+    </li>
 </ul>
 
-<h2>Make Your First Request</h2>
+<div class="notice">
+    <h3>A Note About API Keys & Admin Mode</h3>
+
+    <p>When using Appwrite API from your server-side with an API Key you will automatically run in <b>admin mode</b>. Admin mode disables the default user <a href="/docs/permissions">permission access control</a> restrictions and allows you to access all the resources available on your project. This is very useful when you want to manipulate your users' data like files and documents or even if you want to get a list of your users.</p>
+
+    <p>Please note it is <b>highly</b> not recommended to run the admin mode from your client-side as it will probably lead to huge privacy and security issues. Check the <a href="/docs/admin">Admin Mode</a> documentation to learn more</p>
+</div>
+
+<h3><a href="/docs/getting-started-for-server#jwt" id="jwt">JSON Web Token (JWT) &nbsp;<span class="text-size-small text-fade">version >= 0.8</span></a></h3>
+
+<p>Using a JSON Web Token (JWT), you can interact with the Appwrite server API as a specific user. You'll be able to access only the relevant user resources and perform actions on his behalf.</p>
+
+<p>To create a JWT, you need to use the "account->createJWT" method using one of the Appwrite client SDKs. Before creating a token, you need to make sure your user is authenticated using the `createSession` method or log in with an OAuth provider.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web SDK</h3>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>appwrite // Get a JWT for authenticated user
+    .account.createJWT()
+            .then(function (response) {
+                console.log(response);
+            }, function (error) {
+                console.log(error);
+            });</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter SDK</h3>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>Account account = Account(client);
+
+Response user = await account
+    .createJWT();</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android SDK</h3>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val account = Account(client)
+
+val response = account
+    .createJWT()</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple SDK</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>let account = Account(client: client)
+
+let response = account
+    .createJWT() { result in
+        switch result {
+        case .failure(let error): print(error.message)
+        case .success(let token): print(token.jwt)
+        }
+    }</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>Once you get your valid token, you can pass it to your server and use it to initialize your Appwrite Server SDK and start making API calls. Your JWT will be valid for a maximum time of 15 minutes or less if the user session has expired before that time.</p>
+
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
+
+const client = new sdk.Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+    .setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret JWT
+;</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>$client = new Client();
+
+$client
+    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    ->setProject('5df5acd0d48c2') // Your project ID
+    ->setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret JWT
+;</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+from appwrite.services.users import Users
+
+client = Client()
+
+(client
+  .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
+  .set_project('5df5acd0d48c2') # Your project ID
+  .set_jwt('919c2d18fb5d4...a2ae413da83346ad2') # Your secret JWT
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby SDK">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
+
+client = Appwrite::Client.new()
+
+client
+    .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
+    .set_project('5df5acd0d48c2') # Your project ID
+    .set_jwt('919c2d18fb5d4...a2ae413da83346ad2') # Your secret JWT
+;</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>const client = new sdk.Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+    .setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret JWT
+;</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
+
+Client client = Client();
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+    .setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+;</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
+            <pre class="line-numbers"><code class="prism language-Kotlin" data-prism>import io.appwrite.Client
+
+val client = Client()
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+    .setJWT("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+    .setJWT("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key</code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="/docs/getting-started-for-server#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
 <p>Once your SDK object is set, create any of the Appwrite service objects and choose any request to send. Full documentation for any service method you would like to use can be found in your SDK documentation or in the API References section.</p>
 
@@ -186,7 +400,7 @@ client
     <li>
         <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>let users = new sdk.Users(client);
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const users = new sdk.Users(client);
 
 let promise = users.create('email@example.com', 'password');
 
@@ -227,7 +441,7 @@ puts response</code></pre>
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>let users = new sdk.Users(client);
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>const users = new sdk.Users(client);
 
 let promise = users.create('email@example.com', 'password');
 
@@ -252,9 +466,36 @@ res.then((response) {
 });</code></pre>
         </div>
     </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.services.Users
+
+val users = Users(client);
+
+val res = users.create(email = 'email@example.com', password = 'password');
+println(res.body?.string())</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let users = Users(client: client)
+
+users.create(email: "email@example.com", password: "password") { result in
+    switch result {
+    case .failure(let error): print(error.message)
+    case .success(let user): print(String(describing: user))
+    }
+}
+</code></pre>
+        </div>
+    </li>
 </ul>
 
-<h2>Full Example</h2>
+<h2><a href="/docs/getting-started-for-server#fullExample" id="fullExample">Full Example</a></h2>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -262,7 +503,7 @@ res.then((response) {
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
 
-let client = new sdk.Client();
+const client = new sdk.Client();
 
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
@@ -270,7 +511,7 @@ client
     .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
 ;
 
-let users = new sdk.Users(client);
+const users = new sdk.Users(client);
 let promise = users.create('email@example.com', 'password');
 
 promise.then(function (response) {
@@ -344,8 +585,8 @@ puts response</code></pre>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>import * as sdk from "https://deno.land/x/appwrite/mod.ts";
 
-let client = new sdk.Client();
-let users = new sdk.Users(client);
+const client = new sdk.Client();
+const users = new sdk.Users(client);
 
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
@@ -385,8 +626,50 @@ res.then((response) {
 });</code></pre>
         </div>
     </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Users
+
+val client = Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+
+val users = Users(client);
+
+val res = users.create('email@example.com', 'password');
+
+println(res.body?.string())</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client();
+
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+    .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
+
+let users = Users(client: client)
+
+users.create(email: "email@example.com", password: "password") { result in
+    switch result {
+    case .failure(let error): print(error.message)
+    case .success(let user): print(String(describing: user))
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
-<h2>Next Steps</h2>
+<h2><a href="/docs/getting-started-for-server#nextSteps" id="nextSteps">Next Steps</a></h2>
 
 <p>Appwrite has many services and tools to help improve your app and speed up your development. The best way to learn how you can take advantage of them is to explore the different API references docs.</p>

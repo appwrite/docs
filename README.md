@@ -3,16 +3,16 @@
 The official https://appwrite.io/docs documentation source code.
 ## 🚀 Contributing
 1. Clone the repository
-2. Updated, add, or fix current docs
+2. Update, add, or fix current docs
 3. Once content is ready, raise a PR
 
 ### Content Guidelines
-- Use proper title hierarchy h1-h6 and valid HTML
-- External links to (not https://appwrite.io) should be opened in a new tab (`target="_blank"`)
+- Use proper title hierarchy (h1-h6) and valid HTML
+- External links (not https://appwrite.io) should be opened in a new tab (`target="_blank"`)
 - External links should have an HTML attribute of `rel="noopener"`
 - All filenames should be dash-based and nested in a way that makes sense
 - All images should be in PNG format and 2600x1400px. Do not include any sensitive data in images. All screenshot of the Appwrite dashboard should support light and dark mode.
-- When creating new content or adjusting docs heirarchy please consult the Appwrite team by opening a Github Issue in this repository
+- When creating new content or adjusting docs hierarchy, please consult the Appwrite team by opening a Github Issue in this repository
 
 #### Code Examples
 
@@ -24,29 +24,29 @@ Use the following HTML structure to present code examples:
 </div>
 ```
 
-As of writing this are the supported langauges for code examples:
+As of writing this, these are the supported languages for code examples:
 
-* markup
-* css
-* clike
-* javascript
-* bash
-* csharp
-* dart
-* go
-* graphql
-* http
-* java
-* json
-* kotlin
-* markup-templating
-* php
-* powershell
-* python
-* ruby
-* swift
-* typescript
-* yaml
+* Markup
+* CSS
+* CLike
+* JavaScript
+* Bash
+* C#
+* Dart
+* Go
+* GraphQL
+* HTTP
+* Java
+* JSON
+* Kotlin
+* Markup-templating
+* PHP
+* Powershell
+* Python
+* Ruby
+* Swift
+* TypeScript
+* YAML
 
 For showing examples in multiple languages use the list structure:
 
@@ -101,5 +101,5 @@ $image = new View(__DIR__.'/../general/image.phtml');
 At any point, if you are stuck, feel free to hop on our [Discord server](https://appwrite.io/discord) to ask questions or seek mentorship!
 
 ## Follow Us
-Join our growing community around the world! See our official [Blog](https://medium.com/appwrite-io). Follow us on [Twitter](https://twitter.com/appwrite_io), [Facebook Page](https://www.facebook.com/appwrite.io), [Facebook Group](https://www.facebook.com/groups/appwrite.developers/) or join our live [Discord server](https://discord.gg/GSeTUeA) for more help, ideas, and discussions.
+Join our growing community around the world! See our official [Blog](https://medium.com/appwrite-io). Follow us on [Twitter](https://twitter.com/appwrite_io), [Facebook Page](https://www.facebook.com/appwrite.io), [Facebook Group](https://www.facebook.com/groups/appwrite.developers/) , [DEV Community](https://dev.to/appwrite) or join our live [Discord server](https://discord.gg/GSeTUeA) for more help, ideas, and discussions.
 

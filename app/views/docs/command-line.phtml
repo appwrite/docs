@@ -1,6 +1,6 @@
 <p>The <a href="https://github.com/appwrite/sdk-for-cli" target="_blank" rel="noopener">Appwrite CLI</a> is a command-line application that allows you to interact with the <a href="/docs/getting-started-for-server">Appwrite server-side APIs</a> and perform server-side tasks quickly using your terminal. A few examples of these tasks including managing resources (documents, files, users), executing and packaging Cloud Functions, and any other operation available through the Appwrite API.</p>
 
-<h2>Getting started</h2>
+<h2><a href="/docs/command-line#gettingStarted" id="gettingStarted">Getting started</a></h2>
 
 <p>The Appwrite CLI installation is extremely easy and fast. The CLI is packaged as a Docker container, which makes it secure by default, requires no dependencies but <a href="https://docs.docker.com/get-docker/">Docker</a>, and truly platform and language agnostic.</p>
 
@@ -8,7 +8,7 @@
 
 <p>Next, head over to <a href="http://localhost" rel="noopener" target="_blank">http://localhost</a> and create a project in the Appwrite Console, create an <a href="/docs/keys">API key</a>, and we're good to play around with the CLI.</p>
 
-<h3>Installation</h3>
+<h3><a href="/docs/command-line#installation" id="installation">Installation</a></h3>
 
 <p>To install the CLI, we recommend running the installation script for your operating system.</p>
 
@@ -54,7 +54,7 @@
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite [SERVICE] [COMMAND] --[OPTIONS]</code></pre>
 </div>
 
-<h3>Examples</h3>
+<h3><a href="/docs/command-line#examples" id="examples">Examples</a></h3>
 
 <p><b>Create User</b></p>
 
@@ -92,17 +92,18 @@
 </div>
 <!-- Attach image of output -->
 
-<h3>Configuration</h3>
+<h3><a href="/docs/command-line#configuration" id="configuration">Configuration</a></h3>
 
-<p>At any point, if you would like to change your project endpoint, project ID, project Key, or locale configuration you set during the CLI init, you can make use of the `client` service.</p>
+<p>At any point, if you would like to change your project endpoint, project ID, project Key, selfSigned certificate acceptance or locale configuration you set during the CLI init, you can make use of the `client` service.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client setEndpoint --endpoint="http://192.168.1.6/v1"
 appwrite client setProject --project="5ff450422d42f"
 appwrite client setKey --key="23f24gwrhSDgefaY"
+appwrite client setSelfSigned --value=true
 appwrite client setLocale --locale="en-US"</code></pre>
 </div>
 
-<h3>Help</h3>
+<h3><a href="/docs/command-line#help" id="help">Help</a></h3>
 
 <p>If you get stuck anywhere, you can always use the `help` command to get the usage examples. All the examples are also available on the Appwrite API specs docs, and you can view them by switching the examples to the "Appwrite CLI" from the top dropdown.</p>

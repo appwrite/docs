@@ -16,6 +16,7 @@ $version        = $this->getParam('version', '');
 $versionDocs    = $this->getParam('versionDocs', '');
 $versions       = $this->getParam('versions', []);
 $classess       = [];
+$paths          = $spec['paths'] ?? [];
 $codes          = [
     '200' => [
         'text' => 'OK',
@@ -39,7 +40,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
 
 <div data-ls-attrs="class=language-<?php echo $this->escape($sdk); ?> platform-<?php echo $this->escape($family); ?> examples-in-<?php echo $this->escape($sdk); ?>">
     <?php
-    foreach ($spec['paths'] as $url => $path) {
+    foreach ($paths as $url => $path) {
         foreach ($path as $method => $operation) {
             if(!in_array($service, $operation['tags'])) {
                 continue;
@@ -91,15 +92,21 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                 if(!isset($language['family']) || $language['family'] !== $family) {
                     continue;
                 }
+
+                $docDirectories = (isset($language['docDirectories']))
+                    ? $language['docDirectories']
+                    : ['Default' => 'examples'];
                 ?>
 
-                .language-<?php echo strtolower($language['key']); ?> .example-in-<?php echo strtolower($language['key']); ?> {
-                    display: block;
-                }
+                <?php foreach($docDirectories as $docDirectoryKey => $docDirectory): ?>
+                    .language-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> .example-in-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> {
+                        display: block;
+                    }
 
-                .example-in-<?php echo strtolower($language['key']); ?> {
-                    display: none;
-                }
+                    .example-in-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> {
+                        display: none;
+                    }
+                <?php endforeach; ?>
             <?php endforeach; ?>
         <?php endforeach; ?>
     </style>
@@ -151,14 +158,18 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 $key = (isset($language['key'])) ? $language['key'] : '';
                                 $name = (isset($language['name'])) ? $language['name'] : '';
                                 $beta = (isset($language['beta'])) ? $language['beta'] : false;
+                                $docDirectories = (isset($language['docDirectories']))
+                                    ? $language['docDirectories']
+                                    : ['Default' => 'examples'];
                                 ?>
-                                <option value="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?>>
-                            <?php echo $this->escape($name); ?> SDK<?php if($beta): ?>&nbsp;(beta)<?php endif; ?>
+                                <?php foreach ($docDirectories as $docDirectoryKey => $docDirectory): ?>
+                                <option value="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>-<?php echo $this->escape(strtolower($docDirectoryKey)); ?>"<?php echo (($key . '-' . strtolower($docDirectoryKey)) === $sdk) ? ' selected' : ''; ?>>
+                                    <?php echo $this->escape($name); ?> SDK <?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?> examples)<?php endif; ?>
                                 </option>
+                                <?php endforeach; ?>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
                     </select>
-                    &nbsp; code examples.
                 </form>
             </div>
             <div class="col span-4 clear">
@@ -241,6 +252,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
         $rateKey = $operation['rateKey'] ?? '';
         $scope = $operation['scope'] ?? '';
         $snippet = $operation['snippet'] ?? '';
+        $security = $operation['security'][0] ?? '';
         $platformsList = (isset($operation['platforms'])) ? array_map(function($node) {return 'example-for-'.$node;}, $operation['platforms']) : [];
 
         usort($parameters, function ($a, $b) {
@@ -277,7 +289,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
             <div class="row responsive">
                 <div class="col span-7">
                     <h2 class="margin-bottom">
-                        <a href="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>#<?php echo $operation['operationId']; ?>" id="<?php echo $operation['operationId']; ?>"><?php echo $this->escape($title); ?></a>
+                        <a href="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>#<?php echo $operation['operationId']; ?>" id="<?php echo $operation['operationId']; ?>" class="references"><?php echo $this->escape($title); ?></a>
                     </h2>
 
                     <div>
@@ -299,7 +311,13 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                     <div class="margin-bottom-large">
                         <h3 class="margin-bottom margin-top-small">Authentication</h3>
 
-                        <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys" target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to the <u>"<?php echo $scope; ?>"</u> permission scope.</p>
+                        <?php if(array_key_exists('Key', $security) && array_key_exists('JWT', $security)): ?>
+                            <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys" target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to the <u>"<?php echo $scope; ?>"</u> permission scope. You can also authenticate using a valid <a href="/docs/client/account#accountCreateJWT" target="_blank">JWT</a> and perform actions on behalf of your user.</p>
+                        <?php elseif(array_key_exists('Key', $security)): ?>
+                            <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys" target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to the <u>"<?php echo $scope; ?>"</u> permission scope.</p>
+                        <?php elseif(array_key_exists('JWT', $security)): ?>
+                            <p>To access this route, init your SDK with your project unique ID and a valid JWT. Using the <a href="/docs/client/account#accountCreateJWT" target="_blank">JWT</a> authentication you will be able to perform API actions on behalf of your user.</p>
+                        <?php endif; ?>
                     </div>
                     <?php endif; ?>
 
@@ -450,19 +468,26 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 if(!isset($language['family']) || $language['family'] !== $family) {
                                     continue;
                                 }
-                                
-                                $example = APP_VENDOR_CE.'/docs/examples/'.$versionDocs.'/'.$language['family'].'-'.$language['key'].'/examples/'.$snippet;
 
-                                if(!is_readable($example)) {
-                                    //echo "<p class=\"text-danger\"><b>Failed to read code example for {$language['name']}</b>: ({$example})</p>";
-                                    continue;
-                                }
+                                $docDirectories = (isset($language['docDirectories']))
+                                    ? $language['docDirectories']
+                                    : ['Default' => 'examples'];
+   
                             ?>
-                                <li class="example-in-<?php echo $language['key']; ?>">
-                                    <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?> SDK">
-                                        <pre class="line-numbers"><code class="prism language-<?php echo $language['prism']; ?>" data-prism><?php echo $this->escape(file_get_contents($example)); ?></code></pre>
-                                    </div>
-                                </li>
+                                <?php foreach($docDirectories as $docDirectoryKey => $docDirectory):
+                                    $example = APP_VENDOR_CE.'/docs/examples/'.$versionDocs.'/'.$language['family'].'-'.$language['key'].'/'.$docDirectory.'/'.$snippet;
+
+                                    if(!is_readable($example)) {
+                                        // echo "<p class=\"text-danger\"><b>Failed to read code example for {$language['name']}</b>: ({$example})</p>";
+                                        continue;
+                                    }
+                                    ?>
+                                    <li class="example-in-<?php echo $language['key']; ?>-<?php echo strtolower($docDirectoryKey); ?>">
+                                        <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?> SDK">
+                                            <pre class="line-numbers"><code class="prism language-<?php echo $language['prism']; ?>" data-prism><?php echo $this->escape(file_get_contents($example)); ?></code></pre>
+                                        </div>
+                                    </li>
+                                <?php endforeach; ?>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
                     </ul>
