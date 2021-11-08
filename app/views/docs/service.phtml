@@ -15,7 +15,7 @@ $platforms      = $this->getParam('platforms', []);
 $version        = $this->getParam('version', '');
 $versionDocs    = $this->getParam('versionDocs', '');
 $versions       = $this->getParam('versions', []);
-$classess       = [];
+$classes        = [];
 $paths          = $spec['paths'] ?? [];
 $codes          = [
     '200' => [
@@ -80,7 +80,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
     <style>
         <?php foreach ($platforms as $key => $platform):
             if(!in_array($key, $blacklist) && $platform['enabled']) {
-                $classess[] = 'example-for-'.$key;
+                $classes[] = 'example-for-'.$key;
             }
             ?>
 
@@ -192,7 +192,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
     </div>
 
     <?php if(!empty($path) && file_exists($path)): ?>
-        <div class="row responsive <?php echo implode(' ', $classess); ?>">
+        <div class="row responsive <?php echo implode(' ', $classes); ?>">
             <div class="col span-8 margin-bottom">
                 
                 <div class="content margin-end-xl">
