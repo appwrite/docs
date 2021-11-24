@@ -28,7 +28,7 @@ $runtimes = $this->getParam('runtimes', []);
         <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
             <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite functions createTag \
     --functionId=6012cc93d5a7b \
-    --command="node index.js" \
+    --entrypoint="index.js" \
     --code="/myrepo/myfunction"</code></pre>
         </div>
     </li>
@@ -38,7 +38,7 @@ $runtimes = $this->getParam('runtimes', []);
         <div class="ide margin-bottom" data-lang="bash" data-lang-label="CMD">
             <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite functions createTag ^
     --functionId=6012cc93d5a7b ^
-    --command="node index.js" ^
+    --entrypoint="index.js" ^
     --code="/myrepo/myfunction"</code></pre>
         </div>
     </li>
@@ -48,7 +48,7 @@ $runtimes = $this->getParam('runtimes', []);
         <div class="ide margin-bottom" data-lang="bash" data-lang-label="PowerShell">
             <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite functions createTag ,
     --functionId=6012cc93d5a7b ,
-    --command="node index.js" ,
+    --entrypoint="index.js" ,
     --code="/myrepo/myfunction"</code></pre>
         </div>
     </li>
@@ -69,8 +69,8 @@ $runtimes = $this->getParam('runtimes', []);
         <td>The ID of the Function you created in the previous step. You can find your function ID on your function page in your project dashboard.</td>
     </tr>
     <tr>
-        <td>command</td>
-        <td>The default command to execute when your function is triggered.</td>
+        <td>entrypoint</td>
+        <td>The file name of your custom code that is executed when the function is triggered.</td>
     </tr>
     <tr>
         <td>code</td>
@@ -84,17 +84,13 @@ $runtimes = $this->getParam('runtimes', []);
 <div class="notice">
     <h3>Handling Dependencies</h3>
 
-    <p>If your code uses a package manager like NPM, Yarn, or Composer to install packages, you have to make sure your code directory includes your packages directory (node_modules for node or vendor for PHP) before you try to package and deploy your code.</p>
+        <p>With Appwrite Version 0.12 and later dependencies can now be handled by the build stage when your tag is activated however certain steps must be made to ensure that dependencies can be correctly detected and installed.</p>
 
-    <p>If you're using a programming language that saves your packages under a global directory like Dart, Python, or Ruby, you should set your package manager to keep your code under the '.appwrite' code directory under your code working directory to be deployed and available in your cloud functions runtime.</p>
-
-    <p>For most languages, this can be achieved easily by adding an environment variable before installing your dependencies. Below you can find some simple examples:</p>
+        <p>These steps differ from language to language and are outlined below:</p>
 
     <p><b>Python</b></p>
 
-    <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-        <pre class="line-numbers"><code class="prism language-bash" data-prism>PIP_TARGET=./.appwrite pip install -r ./requirements.txt --upgrade --ignore-installed</code></pre>
-    </div>
+    <p>For python dependencies, All you need to do is ensure a requirements.txt file is present in your code tarball</p>
 
     <p><b>Dart</b></p>
 
@@ -104,16 +100,83 @@ $runtimes = $this->getParam('runtimes', []);
 
     <p><b>Deno</b></p>
 
-    <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-        <pre class="line-numbers"><code class="prism language-bash" data-prism>DENO_DIR=./.appwrite deno cache main.ts</code></pre>
-    </div>
+    <p>Dependency fetching is already handled automatically and no extra steps are needed for dependencies to be cached for deno.</p>
 
     <p><b>Ruby</b></p>
 
-    <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-        <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run --rm -v $(pwd):/app -w /app --env GEM_HOME=./.appwrite appwrite/env-ruby-2.7:1.0.2 bundle install</code></pre>
-    </div>
+    <p>For ruby dependencies, All you need to do is ensure a Gemfile file is present in your code tarball</p>
+
+    <p><b>PHP</b></p>
+
+    <p>For php dependencies simply bundle your composer.json file with your code tarball however you must make sure the name of your project in composer.json is `user/function` otherwise dependencies will not work and tag building may fail.</p>
+
+    <p><b>Node</b></p>
+
+    <p>For node dependencies, All you need to do is ensure a package.json file is present in your code tarball</p>
+
+    <p><b>Rust</b></p>
+
+    <!-- TODO: JAVA, RUST and DART -->
 </div>
+
+<h3>Exporting your code functions</h3>
+<p>With the new execution model introduced in 0.12 functions are now no longer executed directly from the interpreter but are instead imported into the runtime. This means that your code will need to be formatted specificially for the runtime you are using.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>npm install node-appwrite --save</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+        <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>composer require 'appwrite/appwrite'</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>pip install appwrite</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>gem install appwrite</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import * as sdk from "https://deno.land/x/appwrite/mod.ts";</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>dart pub add dart_appwrite</code></pre>
+        </div>
+    </li>
+    <h3>Rust</h3>
+        <div>
+            <p>Add the Appwrite Swift SDK package as a dependency</p>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
+    // ...
+    .package(url: "https://github.com/appwrite/sdk-for-swift.git", from: "0.0.1")
+    // ...
+]</code></pre>
+            </div>
+            <p>Add the dependency product to your target</p>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
+    .product(name: "Appwrite", package: "sdk-for-swift"),
+]</code></pre>
+        </div>
+    </li>
+</ul>
 
 <h2><a href="/docs/functions#execute" id="execute">Execute</a></h2>
 
@@ -346,50 +409,6 @@ $image = new View(__DIR__.'/../general/image.phtml');
         ->setParam('description', 'Function usage and logs tracking.')
         ->render();
 ?>
-
-<h3><a href="/docs/functions#runOffline" id="runOffline">Run Offline</a></h3>
-
-<p>You can quickly run your Cloud Function locally by executing the Appwrite runtime locally using its corresponding Docker image. You can pass your offline container any environment variables your script needs and your entry command like in the example below.</p>
-
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Unix</h3>
-        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run --rm --volume $(pwd):/usr/local/src:rw \
-    --env MY_VALUE1="Hello World 1" \
-    --env MY_VALUE2="Hello World 2" \
-    appwrite/env-node-15.5:1.0.0 \
-    node index.js</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>CMD</h3>
-
-        <div class="ide margin-bottom" data-lang="bash" data-lang-label="CMD">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run --rm --volume "%cd%":/usr/local/src:rw ^
-    --env MY_VALUE1="Hello World 1" ^
-    --env MY_VALUE2="Hello World 2" ^
-    appwrite/env-node-15.5:1.0.0 ^
-    node index.js"</code></pre>
-        </div>
-    </li>
-    
-    <li>
-        <h3>PowerShell</h3>
-
-        <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
-            <pre class="line-numbers"><code class="prism language-powershell" data-prism>docker run --rm --volume ${pwd}:/usr/local/src:rw ,
-    --env MY_VALUE1="Hello World 1" ,
-    --env MY_VALUE2="Hello World 2" ,
-    appwrite/env-node-15.5:1.0.0 ,
-    node index.js"</code></pre>
-        </div>
-    </li>
-</ul>
-
-<p>The example above shows how you can mount your current working dir into the "appwrite/env-node-15.5:1.0.0" Cloud Functions runtime and execute a custom command to simulate exactly how the Appwrite server will execute the function on the Appwrite server. You can also pass multiple environment variables that your code might require.</p>
-
-<p>When running a Cloud Functions runtime for a coding language that uses a central directory for managing all dependencies, you will need to package all your dependencies in your working directory under the ".appwrite" folder as mentioned in the "Handling Dependencies" step above. This will ensure your function container can access all required packages and execute your function successfully.</p>
 
 <h2><a href="/docs/functions#demosExamples" id="demosExamples">Demos & Examples</a></h2>
 
