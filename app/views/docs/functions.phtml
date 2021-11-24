@@ -94,7 +94,7 @@ $runtimes = $this->getParam('runtimes', []);
     res.send('Hello World!');
 }</code></pre>
         </div>
-        <h5>Installing Dependencies</h5>
+        <b>Installing Dependencies</b>
         <p>Installing dependencies is as simple as packaging a package.json in your tarball, Appwrite will handle the rest!</p>
         </div>
     </li>
@@ -106,8 +106,9 @@ $runtimes = $this->getParam('runtimes', []);
     $response->send('Hello World!');
 };</code></pre>
         </div>
-        <h5>Installing Dependencies</h5>
-        <p>Adding dependencies to PHP requires you to have a composer.json file. NOTE: Make sure to set the project name to <code>user/function</code> otherwise the build process will crash.</p>
+        <b>Installing Dependencies</b>
+        <p>Adding dependencies to PHP requires you to have a composer.json file. </p>
+        <p>NOTE: Make sure to set the project name to "user/function" otherwise the build process will crash.</p>
     </div>
     </li>
     <li>
@@ -118,19 +119,19 @@ $runtimes = $this->getParam('runtimes', []);
     return res.send('Hello World!')
 </code></pre>
         </div>
-        <h5>Installing Dependencies</h5>
+        <b>Installing Dependencies</b>
         <p>Make sure a requirements.txt file is present in your code tarball, Appwrite will handle the rest!</p>
         </div>
     </li>
     <li>
         <h3>Ruby</h3>
         <div>
-        <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
             <pre class="line-numbers"><code class="prism language-bash" data-prism>def main(request, response)
     return response.send("Hello World!")
 end </code></pre>
         </div>
-        <h5>Installing Dependencies</h5>
+        <b>Installing Dependencies</b>
         <p>All you need to do is ensure a Gemfile is present in your code tarball, Appwrite will handle the rest!</p>
         </div>
     </li>
@@ -142,19 +143,19 @@ end </code></pre>
     res.send("Hello World!")
 }</code></pre>
         </div>
-        <h5>Installing Dependencies</h5>
+        <b>Installing Dependencies</b>
         <p>No Special Steps are required for Deno, Appwrite will handle everything!</p>
         </div>
     </li>
     <li>
         <h3>Dart</h3>
         <div>
-        <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>Future<void> start(Request request, Response response) async {
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>Future&lt;void&gt; start(Request request, Response response) async {
     response.send("Hello World!");
 }</code></pre>
         </div>
-        <h5>Installing Dependencies</h5>
+        <b>Installing Dependencies</b>
         <p>WIP Deno Dependencies are not currently supported.</p>
         </div>
     </li>
@@ -169,7 +170,7 @@ pub fn main(req: RequestValue) -> Response {
     return Response::send("test".to_string());
 }</code></pre>
             </div>
-            <h5>Installing Dependencies</h5>
+            <b>Installing Dependencies</b>
             <p>Rust Dependencies are not currently supported.</p>
         </div>
     </li>
