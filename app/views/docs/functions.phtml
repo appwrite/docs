@@ -126,28 +126,23 @@ $runtimes = $this->getParam('runtimes', []);
     <li>
         <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>
-module.exports = async (req, res) => {
+            <pre class="line-numbers"><code class="prism language-js" data-prism>module.exports = async (req, res) => {
     res.send('Hello World!');
-}
-            </code></pre>
+}</code></pre>
         </div>
     </li>
     <li>
         <h3>PHP</h3>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>
-return function($request, $response) {
+            <pre class="line-numbers"><code class="prism language-php" data-prism>return function($request, $response) {
     $response->send('Hello World!');
-};
-            </code></pre>
+};</code></pre>
         </div>
     </li>
     <li>
         <h3>Python</h3>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>
-def main(req, res):
+            <pre class="line-numbers"><code class="prism language-python" data-prism>def main(req, res):
     return res.send('Hello World!')
 </code></pre>
         </div>
@@ -155,31 +150,25 @@ def main(req, res):
     <li>
         <h3>Ruby</h3>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>
-def main(request, response)
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>def main(request, response)
     return response.send("Hello World!")
-end
-            </code></pre>
+end </code></pre>
         </div>
     </li>
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>
-export default function(req: any, res: any) {
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default function(req: any, res: any) {
     res.send("Hello World!")
-}
-        </code></pre>
+}</code></pre>
         </div>
     </li>
     <li>
         <h3>Dart</h3>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>
-Future<void> start(Request request, Response response) async {
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>Future<void> start(Request request, Response response) async {
     response.send("Hello World!");
-}
-            </code></pre>
+}</code></pre>
         </div>
     </li>
     <li>
@@ -187,13 +176,12 @@ Future<void> start(Request request, Response response) async {
         <div>
             <p>Add the Appwrite Swift SDK package as a dependency</p>
             <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
-use super::{Response, RequestValue};
+            <pre class="line-numbers">
+<code class="prism language-swift" data-prism>use super::{Response, RequestValue};
 
 pub fn main(req: RequestValue) -> Response {
     return Response::send("test".to_string());
-}
-            </code></pre>
+}</code></pre>
             </div>
             <p>Add the dependency product to your target</p>
             <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
