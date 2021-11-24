@@ -81,113 +81,96 @@ $runtimes = $this->getParam('runtimes', []);
 
 <p><a href="/docs/server/functions#functionsCreateTag" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> You can also deploy new code tags using the Appwrite server API</a></p>
 
-<div class="notice">
-    <h3>Handling Dependencies</h3>
-
-    <p>Dependencies are now handled by the build stage when your tag is activated however certain steps must be made to ensure that dependencies can be correctly detected and installed.</p>
-
-    <p>These steps differ from language to language and are outlined below:</p>
-
-    <p><b>Python</b></p>
-
-    <p>For python dependencies, All you need to do is ensure a requirements.txt file is present in your code tarball</p>
-
-    <p><b>Dart</b></p>
-
-    <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-        <pre class="line-numbers"><code class="prism language-bash" data-prism>PUB_CACHE=./.appwrite pub get</code></pre>
-    </div>
-
-    <p><b>Deno</b></p>
-
-    <p>Dependency fetching is already handled automatically and no extra steps are needed for dependencies to be cached for deno.</p>
-
-    <p><b>Ruby</b></p>
-
-    <p>For ruby dependencies, All you need to do is ensure a Gemfile file is present in your code tarball</p>
-
-    <p><b>PHP</b></p>
-
-    <p>For php dependencies simply bundle your composer.json file with your code tarball however you must make sure the name of your project in composer.json is `user/function` otherwise dependencies will not work and tag building may fail.</p>
-
-    <p><b>Node</b></p>
-
-    <p>For node dependencies, All you need to do is ensure a package.json file is present in your code tarball</p>
-
-    <p><b>Rust</b></p>
-
-    <!-- TODO: JAVA, RUST and DART -->
-</div>
-
-<h3>Exporting your code functions</h3>
+<h3>Exporting your code functions correctly</h3>
 <p>With the new execution model, functions are now no longer executed directly from the interpreter but are instead imported into the runtime. This means that your code will need to be formatted specificially for the runtime you are using.</p>
+<p>An example of this for each language can be found below:</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
+        <div>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
             <pre class="line-numbers"><code class="prism language-js" data-prism>module.exports = async (req, res) => {
     res.send('Hello World!');
 }</code></pre>
         </div>
+        <h5>Installing Dependencies</h5>
+        <p>Installing dependencies is as simple as packaging a package.json in your tarball, Appwrite will handle the rest!</p>
+        </div>
     </li>
     <li>
         <h3>PHP</h3>
-        <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+        <div>
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
             <pre class="line-numbers"><code class="prism language-php" data-prism>return function($request, $response) {
     $response->send('Hello World!');
 };</code></pre>
         </div>
+        <h5>Installing Dependencies</h5>
+        <p>Adding dependencies to PHP requires you to have a composer.json file. NOTE: Make sure to set the project name to <code>user/function</code> otherwise the build process will crash.</p>
+    </div>
     </li>
     <li>
         <h3>Python</h3>
-        <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+        <div>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
             <pre class="line-numbers"><code class="prism language-python" data-prism>def main(req, res):
     return res.send('Hello World!')
 </code></pre>
         </div>
+        <h5>Installing Dependencies</h5>
+        <p>Make sure a requirements.txt file is present in your code tarball, Appwrite will handle the rest!</p>
+        </div>
     </li>
     <li>
         <h3>Ruby</h3>
+        <div>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
             <pre class="line-numbers"><code class="prism language-bash" data-prism>def main(request, response)
     return response.send("Hello World!")
 end </code></pre>
         </div>
+        <h5>Installing Dependencies</h5>
+        <p>All you need to do is ensure a Gemfile is present in your code tarball, Appwrite will handle the rest!</p>
+        </div>
     </li>
     <li>
         <h3>Deno</h3>
-        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
+        <div>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default function(req: any, res: any) {
     res.send("Hello World!")
 }</code></pre>
         </div>
+        <h5>Installing Dependencies</h5>
+        <p>No Special Steps are required for Deno, Appwrite will handle everything!</p>
+        </div>
     </li>
     <li>
         <h3>Dart</h3>
+        <div>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
             <pre class="line-numbers"><code class="prism language-bash" data-prism>Future<void> start(Request request, Response response) async {
     response.send("Hello World!");
 }</code></pre>
         </div>
+        <h5>Installing Dependencies</h5>
+        <p>WIP Deno Dependencies are not currently supported.</p>
+        </div>
     </li>
     <li>
     <h3>Rust</h3>
         <div>
-            <p>Add the Appwrite Swift SDK package as a dependency</p>
-            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <div class="ide margin-top-small" data-lang="rust" data-lang-label="Rust">
             <pre class="line-numbers">
-<code class="prism language-swift" data-prism>use super::{Response, RequestValue};
+<code class="prism language-rust" data-prism>use super::{Response, RequestValue};
 
 pub fn main(req: RequestValue) -> Response {
     return Response::send("test".to_string());
 }</code></pre>
             </div>
-            <p>Add the dependency product to your target</p>
-            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
-    .product(name: "Appwrite", package: "sdk-for-swift"),
-]</code></pre>
+            <h5>Installing Dependencies</h5>
+            <p>Rust Dependencies are not currently supported.</p>
         </div>
     </li>
 </ul>
