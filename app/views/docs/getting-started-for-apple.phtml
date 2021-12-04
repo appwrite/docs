@@ -107,7 +107,7 @@ $appleVersion = (isset($versions['swift-client'])) ? $versions['swift-client'] :
 let client = Client()
   .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
   .setProject("5df5acd0d48c2") // Your project ID
-  .setSelfSigned() // For self signed certificates, only use for development</code></pre>
+  .setSelfSigned(status: true) // For self signed certificates, only use for development</code></pre>
 </div>
 
 <p>If you're using a physical device instead of a simulator, ensure that you can access your Appwrite instance before sending API calls.</p>
@@ -155,7 +155,7 @@ import Appwrite
 let client = Client()
   .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
   .setProject("5df5acd0d48c2") // Your project ID
-  .setSelfSigned() // For self signed certificates, only use for development
+  .setSelfSigned(status: true) // For self signed certificates, only use for development
 
 // Register User
 let account = Account(client: client)
