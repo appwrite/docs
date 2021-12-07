@@ -83,6 +83,8 @@ $runtimes = $this->getParam('runtimes', []);
 
 <h3>Exporting your code functions correctly</h3>
 <p>With the new execution model, functions are now no longer executed directly from the interpreter but are instead imported into the runtime. This means that your code will need to be formatted specificially for the runtime you are using.</p>
+<p>When your function is called you will recieve a Request and Response in that order, The Request will contain all data that was sent to the function aswell as other various environment variables, A schema of the Request Object can be found below and will be the same for all runtimes.</p>
+<p>The Response object will have two functions, <code>send</code> and <code>json</code> that can be used to send data back to the client. The Types and Implementation of these functions vary depending on runtime due to all languages being slightly different. A more detailed way of viewing what is required is checking out their Implementation.</p>
 <p>An example of this for each language can be found below:</p>
 
 <ul class="phases clear" data-ui-phases>
@@ -156,7 +158,7 @@ end </code></pre>
 }</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>WIP Deno Dependencies are not currently supported.</p>
+        <p>Dart Dependencies are not currently supported.</p>
         </div>
     </li>
     <li>
@@ -175,6 +177,8 @@ pub fn main(req: RequestValue) -> Response {
         </div>
     </li>
 </ul>
+
+<p>More examples can be found in the <a href="https://github.com/appwrite/demos-for-functions">Demos for Functions Repository</a>.</p>
 
 <h2><a href="/docs/functions#execute" id="execute">Execute</a></h2>
 
