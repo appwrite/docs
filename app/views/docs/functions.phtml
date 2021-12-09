@@ -101,7 +101,7 @@ $runtimes = $this->getParam('runtimes', []);
     <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
         <pre class="line-numbers">
             <code class="prism language-bash" data-prism>$env:PIP_TARGET=.appwrite </code>
-            <code class="prism language-bash" data-prism>pip install -r ./requirements.txt --upgrade --ignore-installed</code>
+            <code class="prism language-bash" data-prism>$env:PIP_TARGET=.appwrite; pip install -r ./requirements.txt --upgrade --ignore-installed</code>
         </pre>
     </div>
 
