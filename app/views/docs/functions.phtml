@@ -94,13 +94,11 @@ $runtimes = $this->getParam('runtimes', []);
 
     <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
         <pre class="line-numbers">
-            <code class="prism language-bash" data-prism>PIP_TARGET=./.appwrite </code>
-            <code class="prism language-bash" data-prism>pip install -r ./requirements.txt --upgrade --ignore-installed</code>
+            <code class="prism language-bash" data-prism>PIP_TARGET=./.appwrite; pip install -r ./requirements.txt --upgrade --ignore-installed</code>
         </pre>
     </div>
     <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
         <pre class="line-numbers">
-            <code class="prism language-bash" data-prism>$env:PIP_TARGET=.appwrite </code>
             <code class="prism language-bash" data-prism>$env:PIP_TARGET=.appwrite; pip install -r ./requirements.txt --upgrade --ignore-installed</code>
         </pre>
     </div>
@@ -109,14 +107,12 @@ $runtimes = $this->getParam('runtimes', []);
 
     <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
         <pre class="line-numbers">
-            <code class="prism language-bash" data-prism>PUB_CACHE=./.appwrite</code>
-            <code class="prism language-bash" data-prism>pub get</code>
+            <code class="prism language-bash" data-prism>PUB_CACHE=./.appwrite; pub get</code>
         </pre>
     </div>
     <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
         <pre class="line-numbers">
-            <code class="prism language-bash" data-prism>$env:PUB_CACHE=.appwrite</code>
-            <code class="prism language-bash" data-prism>pub get</code>
+            <code class="prism language-bash" data-prism>$env:PUB_CACHE=.appwrite; pub get</code>
         </pre>
     </div>
 
@@ -124,14 +120,12 @@ $runtimes = $this->getParam('runtimes', []);
 
     <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
         <pre class="line-numbers">
-            <code class="prism language-bash" data-prism>DENO_DIR=./.appwrite</code>
-            <code class="prism language-bash" data-prism>deno cache main.ts</code>
+            <code class="prism language-bash" data-prism>DENO_DIR=./.appwrite; deno cache main.ts</code>
         </pre>
     </div>
     <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
         <pre class="line-numbers">
-            <code class="prism language-bash" data-prism>$env:DENO_DIR=.appwrite</code>
-            <code class="prism language-bash" data-prism>deno cache main.ts</code>
+            <code class="prism language-bash" data-prism>$env:DENO_DIR=.appwrite; deno cache main.ts</code>
         </pre>
     </div>
 
