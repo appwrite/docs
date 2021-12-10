@@ -1,0 +1,83 @@
+<p>Appwrite storage allow you to manage files in your project. It provides APIs to upload, download, delete, and list files. Not only that Appwrite storage service provides APIs to manipulate image. Using the prveview endpoint you can crop, resize, rotate, add borders and border radius and select the desired output format for your image.</p>
+
+<p>Appwrite storage service is a simple and easy to use service. You can use it to store images, videos, documents, and other files for your projects.</p>
+
+<p>With version 0.13 of Appwrite, we also have introduced storage buckets as a container for your files so that you can give more context to your files. Storage buckets is similar to Collections we have in our <a href="/database">Database</a> service. But a bucket gives you more control over what types of files you allow, what is the maximum file size you allow, whether or not to encrypt the files.</p>
+
+<h2>Buckets</h2>
+
+<p> Storage buckets are way to group files into a meaningful collection and give them context. Buckets also provide more power to decide what kinds of files, what sizes you want to allow in that bucket. Whether or not to encrypt the files, scan with antivirus and more. Let us look at how we can create a bucket and configure it to our needs.</p>
+
+<h3>Create Bucket</h3>
+
+<p>You can create your bucket from your Appwrite project's dashboard or using any of our server side SDKs or directly using our REST API authenticated using  an API Key. In order to create a bucket from dashboard, access your Storage from your project's left navigation panel. Click <b>Add Bucket</b> button and choose your bucket's name. For convenience, you can also set a custom ID for your bucket instead of auto-generated ID. This will create a new bucket and take you to it's settings page, where you can configure various options for your bucket.</p>
+
+<p>In order to create bucket programmatically, you can either use any of our server side SDKs or REST API paired with an API Key. Let's look at a code sample using CURL, how we can create a bucket using our REST API.</p>
+
+<h4>Understanding Bucket Permissions</h4>
+
+As buckets are very similar to Collections we have in database, here again we have similar permission model. Buckets support either bucket level permission or the file level permission to allow different ways to manage access to your buckets and files. Check out the <a href="/docs/permissions">Permissions</a> documentation to learn more about permissions types available.
+
+<h4>Bucket Level Permissions</h4>
+
+<p>With bucket level permission, you only need to provide permissions in your bucket and not in files. If you set the permission to bucket level, file permissions are optional and ignored even if you have set them. This is useful when you want to provide same permission for a collections of files but don't want to repeat the same permission for each file. You provide it once for bucket, set the bucket permission to be bucket level and you are done. If you want to update the permission, you only need to do it once in the bucket. With this permission model, if a user has a read and write permission, they will be able to read all the files and modify all the files in that bucket.</p>
+
+<p>However, with this permission you don't have a granular control over the files inside the bucket. This is more suitable for a use case where you have many people who all have access to same group of files. So instead of adding their permission to each file, you can just create a bucket with bucket level permission and provide them access. Then add all the files they have access to inside that bucket.</p>
+
+<h4>File Level Permission</h4>
+
+<p>With file level permission model, you have more granular control over the access of each file. With this permission model, the bucket permissions are ignored and permissions on each file takes into effect whenever we are trying to read or wirte files into the bucket. This is more suitable in the use cases where you want to have different permission for each file. For example you have a bucket for user's profile image, and you only want each user to only be able to modify their own image then file level permission model will make much more sense and easier to manage.</p>
+
+<h4>More Bucket Configurations</h4>
+
+<p>Unlike Collections, storage buckets have more configuration options regarding type and size of files that can be in the bucket, encryption and anti-virus scanning. If you look at the bucket settings or the REST API example above you can find these configurations. Let's look at what those are:</p>
+
+<ul>
+    <li> <code>allowedFileExtensions</code> parameter allows you to provide a list of file extensions that will be accepted into the bucket.</li>
+    <li><code>maximumFileSize</code> parameter allows you to set the maximum size of a file that a bucket accepts. The buckets will accept any file less than or equal to the size provided here.</li>
+    <li><code>encryption</code> parameter allows you to configure whether or not the files inside the bucket will be encrypted.</li>
+    <li><code>antivirus</code> parameter allows you to configure whether or not the files being added inside the bucket be scanned by antivirus.</li>
+</ul>
+
+<p>You can learn more about storage buckets and APIs you can use to manage storage buckets from our <a href="docs/server/storage">storage documentation</a>. Now that we know how to create and configure buckets for our applications, we will look at how we can manage files using the storage service next.</p>
+
+<h2>Create File</h2>
+
+<p>Once you create a bucket or have navigated to bucket details, you can access the Files tab from where you can upload, view, delete, update files in the bucket using Appwrite project's dashboard. You can perform all those operations from Appwrite's client and server SDKs as well as REST APIs with proper permission.</p>
+
+<p>Once you are in the files tab, you can click <b>Add File</b> and select a file to upload. If the bucket is configured to accept the file type and size you are uploading, your file should be uploaded and you should be able to view the file in the list of files.</p>
+
+<p>You can also upload files using REST API or SDKs. Below is a CURL syntax to create a file.</p>
+
+<!-- Create file code -->
+
+<h3>Large Files (files above 5MB)</h3>
+
+<p>Above method will only work for files up to 5MB size. If any files are above 5MB, you will need to upload them in chunks. But don't worry, if you are using Appwrite's console or any of our SDKs we handle that internally, so no matter what file size you try to upload, it will work like it worked before. Below is a code example in Dart of how you can chunk and upload each chunk. We are using the content-range header provided in the web spec in order to support chunked upload. So if you are using REST API you need to provide chunks and those headers to make a successful upload.</p>
+
+<!-- dart code example -->
+
+<h2>Image Manipulation</h2>
+
+<p>Another great built-in feature of Appwrite is the image manipulation feature. With Appwrite storage's preview endpoint you can manipulate size, add borders and border radius, add background color and set opacity for image and get the image in appropriate output format. This will enable wide range of possibilities from manipulating image to display in responsive websites in appropriate sizes to update image borders, background and border radius to match the theming of your application, without caring about how the image was originally uploaded.</p>
+
+<p>Different parameters offered by preview endpoint to manipulate image</p>
+
+<ul>
+    <li><code>width</code> set the width of the output image, the image will be resized keeping the aspect ratio intact. Accepts integer between 0-4000</li>
+    <li><code>height</code> set the height of the output image, the image will be resized keeping the aspect ratio intact. Accepts integer between 0-4000</li>
+    <li><code>gravity</code> the gravity while cropping the image providing either width or height or both. Accepts any of center, top-left, top, top-right, left, right, bottom-left, bottom, bottom-right</li>
+    <li><code>quality</code> set the quality of the output image. Accepts integer between 0-100, where 100 is the highest quality.</li>
+    <li><code>borderWidth</code> set a border with given width to the output image. Accepts integer between 0-100</li>
+    <li><code>borderColor</code> set a border color for the output image. Accepts any valid Hex color value without the leading #.</li>
+    <li><code>borderRadius</code> set a border radius. Accepts an integer between 0-4000.</li>
+    <li><code>opacity</code> set opacity for the output image. Accepts a float value between 0-1, where 0 makes it transparent. Only works with output format supporting alpha channel like png.</li>
+    <li><code>rotation</code> rotate the output image. Accepts an integer between -360 to 360.</li>
+    <li><code>background</code> set a background color. Accepts any valid Hex color value without the leading #. Only works with output format supporting alpha channel like png.</li>
+    <li><code>output</code> set the output image format. If not provided, will use the original image's format. Supported formats are jpg, jpeg, png, gif and webp.</li>
+</ul>
+
+
+<h2>Download, and streaming with range</h2>
+
+<p>Apart from previewing files and images, downloading is another important feature. And with 0.13 we also support streamed download using the HTTP range header. If you are using our SDKs or console nothing is dirfferent. If you want to download the complete file at once, then even if you use the REST endpoint directly, theresn't any different. However if you want to get only a part of a file from storage, you can supply the range header and the server will respond with appropriate chunk of file.</p>
