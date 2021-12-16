@@ -79,7 +79,7 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 
 <p>Appwrite 0.7, and the Appwrite Flutter SDK 0.3.0 have added support for Flutter Web. To build web apps that integrate with Appwrite successfully, all you have to do is add a web platform on your Appwrite project's dashboard and list the domain your website will use to allow communication to the Appwrite API.</p>
 
-<p>For web in order to capture the OAuth2 callback URL and send it to the application using JavaScript <code>postMessage()</code>, you need to create an html file inside <code>./web</code> folder of your Flutter project. For example <code>auth.html</code> with the following contentl </p>
+<p>For web in order to capture the OAuth2 callback URL and send it to the application using JavaScript <code>postMessage()</code>, you need to create an html file inside <code>./web</code> folder of your Flutter project. For example <code>auth.html</code> with the following content.</p>
 
 <div class="ide" data-lang="html" data-lang-label="html">
     <pre class="line-numbers"><code class="prism language-html" data-prism><?php echo $this->escape('<!DOCTYPE html>
