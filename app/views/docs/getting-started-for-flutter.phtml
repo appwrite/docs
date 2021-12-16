@@ -95,6 +95,8 @@ close the window.
 </code></pre>
 </div>
 
+<p>Redirection URL passed to the authentication service must be the same as the URL on which the application is running (schema, host, port if necessary) and the path must point to created HTML file, /auth.html in this case. The callbackUrlScheme parameter of the authenticate() method does not take into account, so it is possible to use a schema for native platforms in the code.</p>
+
 <div class="notice">
   <h2>Flutter Web Cross-Domain Communication & Cookies</h2>
   <p>While running Flutter Web, make sure your Appwrite server and your Flutter client are using the same top-level domain and the same protocol (HTTP or HTTPS) to communicate. When trying to communicate between different domains or protocols, you may receive HTTP status error 401 because some modern browsers block cross-site or insecure cookies for enhanced privacy. In production, Appwrite allows you set multiple <a href="/docs/custom-domains">custom-domains</a> for each project.</p>
