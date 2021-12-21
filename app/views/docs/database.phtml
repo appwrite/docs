@@ -1,0 +1,56 @@
+<p>
+    Appwrite Database allows you to store your application and users' data and fetch it using different supported queries.
+    Using your Appwrite Database, you can easily manage your project data with a simple to use REST API that acts as an abstraction layer on top of your database of choice.
+    In addition, the Appwrite database provides a built-in validator to check the integrity of your incoming data, a Document and Collection-level permission mechanism to easily allow you to segment data between different users, teams, and roles.
+</p>
+
+<h2>Collections</h2>
+
+<p>
+    Appwrite uses collections as containers of documents.
+    The term collection is used because the Appwrite JSON REST API resembles the API of a traditional NoSQL database, but internally when using an SQL adapter like MariaDB or MySQL, Appwrite will store your documents on native SQL tables.
+</p>
+
+<h3>Document or Collection Level Permissions</h3>
+
+<h2>Attributes</h2>
+
+<p>
+    For each collection, you should define a list of attributes. These attributes will be used to define the rules to validate the integrity of your incoming data and will be used to define your table structure when using a SQL adapter for your collection.
+</p>
+
+<h3>Create a new Attribute</h3>
+
+<p>
+    You can create a new attribute using both the Appwrite API or the Appwrite Console. Each attribute should contain the attribute id, type (or format?), and size. You should also decide whether an attribute is required or not and should it hold an array of elements or just a single value.
+</p>
+
+<p>
+    When adding a new attribute, your request will be processed in the background. The creation process should take a few seconds or minutes, depending on your collection size and the type of database adapter you're using. Once ready, your attribute will be available as part of your collection, then you can start leveraging it as part of your documents data.
+</p>
+
+<h3>Deleting an Attribute</h3>
+
+<h2>Indexes</h2>
+
+<p>
+    For each collection, you can define a list of indexes. Indexes allow you to optimize your database queries and fetch your data quickly.
+</p>
+
+<p>
+    Appwrite support three types of indexes: unique indexes (unique and can be null), plain indexes (not necessarily unique) and full-text indexes (for full-text searching).
+</p>
+
+<p>
+    Indexes are especially important with the Appwrite Database as you can only query an attribute or set of attributes that are properly indexed. This might seem as a strict demand, but it will ensure you avoid any full table/collection scans which will often result in very slow queries and general poor performance.
+</p>
+
+<h2>Documents</h2>
+
+<h3>Custom IDs</h3>
+
+<h2>Permissions</h2>
+
+<h2>Queries</h2>
+
+<h2>Known Limitations</h2>
