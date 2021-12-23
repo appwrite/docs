@@ -1,56 +1,133 @@
 <p>
-    Appwrite Database allows you to store your application and users' data and fetch it using different supported queries.
-    Using your Appwrite Database, you can easily manage your project data with a simple to use REST API that acts as an abstraction layer on top of your database of choice.
-    In addition, the Appwrite database provides a built-in validator to check the integrity of your incoming data, a Document and Collection-level permission mechanism to easily allow you to segment data between different users, teams, and roles.
+    The Database Service allows you to store your application and users’ data and fetch it using different supported queries.
+    Using your Appwrite Database, you can organize your data into collections and documents using your database of choice.
+    In addition, the Database Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance, 
+    as well as a flexible permission mechanism to allow you to segment data between different users, teams, and roles.
 </p>
 
-<h2>Collections</h2>
-
+<h2>Create Your Collections</h2>
 <p>
     Appwrite uses collections as containers of documents.
     The term collection is used because the Appwrite JSON REST API resembles the API of a traditional NoSQL database, but internally when using an SQL adapter like MariaDB or MySQL, Appwrite will store your documents on native SQL tables.
 </p>
 
+<p>
+    You can create your collection by adding it from your Appwrite project’s dashboard. Access your Database settings from your project’s left navigation panel.
+    Click the ‘Add Collection’ button and choose your collection’s name. For convenience, you can also set a custom ID for your collection instead of an auto-generated ID.
+</p>
+
+<div class="notice margin-top-large margin-bottom-large">
+    <p>To work with collections in code, check out our Server SDKs. Any one of our Server and Client SDKs can be used to work with documents.</p>
+</div>
+
 <h3>Document or Collection Level Permissions</h3>
-
-<h2>Attributes</h2>
-
 <p>
-    For each collection, you should define a list of attributes. These attributes will be used to define the rules to validate the integrity of your incoming data and will be used to define your table structure when using a SQL adapter for your collection.
+    Once you create your collection, the dashboard will navigate to the collection’s settings so you can choose the permission model for your collection. Check out the Permissions documentation to learn more about the possible permission types.
 </p>
 
-<h3>Create a new Attribute</h3>
-
+<h4>Document Level Permissions</h4>
 <p>
-    You can create a new attribute using both the Appwrite API or the Appwrite Console. Each attribute should contain the attribute id, type (or format?), and size. You should also decide whether an attribute is required or not and should it hold an array of elements or just a single value.
+    With this permission model, you have granular access control over every document, and users will only be able to access documents for which they have explicit permissions. Document permissions are required in this permission model, and collection permissions are optional.
 </p>
 
+<h4>Collection Level Permissions</h4>
 <p>
-    When adding a new attribute, your request will be processed in the background. The creation process should take a few seconds or minutes, depending on your collection size and the type of database adapter you're using. Once ready, your attribute will be available as part of your collection, then you can start leveraging it as part of your documents data.
+    With collection-level permissions, you assign permissions once for every document in the collection - users with read access to the collection can see all documents. Collection permissions are required in this permission model, and document permissions are optional.
 </p>
 
-<h3>Deleting an Attribute</h3>
+<div class="notice margin-top-large margin-bottom-large">
+    <p>Note: For security purposes, an active Account session is required to create resources. So, even if wildcard write permissions are set, only logged-in users can create documents in a collection. If you require this behavior for your app, create an anonymous session first.</p>
+</div>
+
+
+<h2>Create Attributes</h2>
+<p>
+    Once you choose your permission model, navigate to the <b>Attributes</b> tab of your collection. Attributes are used to define the structure of your documents, so add your first by clicking the <b>Add Attribute</b> button. You can choose from the following types:
+</p>
+<ul>
+    <li>string</li>
+    <li>integer</li>
+    <li>float</li>
+    <li>boolean</li>
+    <li>enum</li>
+    <li>IP address</li>
+    <li>E-Mail address</li>
+    <li>URL</li>
+</ul>
+
+<p>
+    If an attribute must be present in all documents, set it as `required`. If not, a `default` value might be handy. Additionally, decide if the attribute should be a primitive or array of values.
+</p>
+<p>
+    When adding or removing attributes, your requests are processed in the background, indicated by the attribute’s `status`. Depending on your collection’s size and other factors, this could take anywhere from a few seconds to a few minutes to complete. Once all of your attributes are `available`, then you can create a document.
+</p>
+
+<h3>Create Documents</h3>
+<p>
+    Navigate to the ‘Documents’ tab of your collection and click the ‘Add Document’ button, or add a document from code:
+</p>
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
+const sdk = new Appwrite();
+let promise = sdk.database.createDocument('[COLLECTION_ID]', {});
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});
+</code></pre>
+</div>
+
+<h3>Finding Documents</h3>
+<p>
+    To find specific documents in a collection, pass an array of query strings as a parameter to the `[listDocuments](https://appwrite.io/docs/server/database#databaseListDocuments)` endpoint. The SDKs provide a `Query` class to make query building simpler:
+</p>
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
+
+sdk.database.listDocuments('movies', [
+    Query.equal('title', 'Avatar')
+]);
+</code></pre>
+</div>
+
+<p>The following operators are currently supported:</p>
+<ul>
+    <li>equal</li>
+    <li>notEqual</li>
+    <li>lesserEqual</li>
+    <li>greater</li>
+    <li>greaterEqual</li>
+    <li>search (requires a Fulltext Index)</li>
+</ul>
+
+<p>Each query string is logically separated via AND. For OR logic, pass multiple values, separated by commas:</p>
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
+
+sdk.database.listDocuments('movies', [
+    Query.equal('title', 'Avatar', 'Lord of the Rings'),
+    Query.greater('year', 1999)
+]);
+</code></pre>
+</div>
 
 <h2>Indexes</h2>
-
 <p>
-    For each collection, you can define a list of indexes. Indexes allow you to optimize your database queries and fetch your data quickly.
+    Indexes are used by databases to quickly locate data without having to search through every document for results. 
+    To ensure the best performance, Appwrite requires an index for every query. 
+    You can create an index by navigating to the <b>Indexes</b> tab of your collection, or by using your favorite Server SDK.
 </p>
-
 <p>
-    Appwrite support three types of indexes: unique indexes (unique and can be null), plain indexes (not necessarily unique) and full-text indexes (for full-text searching).
+    The following indexes are currently supported:
 </p>
-
-<p>
-    Indexes are especially important with the Appwrite Database as you can only query an attribute or set of attributes that are properly indexed. This might seem as a strict demand, but it will ensure you avoid any full table/collection scans which will often result in very slow queries and general poor performance.
-</p>
-
-<h2>Documents</h2>
-
-<h3>Custom IDs</h3>
-
-<h2>Permissions</h2>
-
-<h2>Queries</h2>
+<ul>
+    <li>Key Index (plain index)</li>
+    <li>Unique Index</li>
+    <li>Fulltext Index (for searching within string attributes)</li>
+</ul>
 
 <h2>Known Limitations</h2>
+
+<h2>Benchmarks</h2>
