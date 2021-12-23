@@ -5,7 +5,7 @@
     as well as a flexible permission mechanism to allow you to segment data between different users, teams, and roles.
 </p>
 
-<h2>Create Your Collections</h2>
+<h2><a href="/docs/advanced-database#collection" id="collection">Create Your Collections</a></h2>
 <p>
     Appwrite uses collections as containers of documents.
     The term collection is used because the Appwrite JSON REST API resembles the API of a traditional NoSQL database, but internally when using an SQL adapter like MariaDB or MySQL, Appwrite will store your documents on native SQL tables.
@@ -20,7 +20,7 @@
     <p>To work with collections in code, check out our Server SDKs. Any one of our Server and Client SDKs can be used to work with documents.</p>
 </div>
 
-<h3>Document or Collection Level Permissions</h3>
+<h3><a href="/docs/advanced-database#collection-permissions" id="collection-permissions">Document or Collection Level Permissions</a></h3>
 <p>
     Once you create your collection, the dashboard will navigate to the collection's settings so you can choose the permission model for your collection. Check out the Permissions documentation to learn more about the possible permission types.
 </p>
@@ -40,7 +40,7 @@
 </div>
 
 
-<h2>Create Attributes</h2>
+<h2><a href="/docs/advanced-database#attributes" id="attributes">Create Attributes</a></h2>
 <p>
     Once you choose your permission model, navigate to the <b>Attributes</b> tab of your collection. Attributes are used to define the structure of your documents, so add your first by clicking the <b>Add Attribute</b> button. You can choose from the following types:
 </p>
@@ -95,7 +95,7 @@
     Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. Once all of your attributes are <span class="tag">available</span>, then you can create a document.
 </p>
 
-<h3>Create Documents</h3>
+<h3><a href="/docs/advanced-database#create-documents" id="create-documents">Create Documents</a></h3>
 <p>
     Navigate to the <b>Documents</b> tab of your collection and click the <b>Add Document</b> button, or add a document from code:
 </p>
@@ -113,7 +113,7 @@ promise.then(function (response) {
 </code></pre>
 </div>
 
-<h3>Finding Documents</h3>
+<h3><a href="/docs/advanced-database#finding-documents" id="finding-documents">Finding Documents</a></h3>
 <p>
     To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/database#databaseListDocuments">listDocuments</a> endpoint. The SDKs provide a <b>Query</b> class to make query building simpler:
 </p>
@@ -172,7 +172,7 @@ sdk.database.listDocuments('movies', [
 </code></pre>
 </div>
 
-<h2>Indexes</h2>
+<h2><a href="/docs/advanced-database#indexes" id="indexes">Indexes</a></h2>
 <p>
     Indexes are used by databases to quickly locate data without having to search through every document for results.
     To ensure the best performance, Appwrite requires an index for every query.
@@ -204,7 +204,7 @@ sdk.database.listDocuments('movies', [
     </tbody>
 </table>
 
-<h2>Known Limitations</h2>
+<h2><a href="/docs/advanced-database#known-limitations" id="known-limitations">Known Limitations</a></h2>
 <h3>Relationships</h3>
 <p>tbd</p>
 <h3>OR query on multiple attributes</h3>
@@ -212,5 +212,5 @@ sdk.database.listDocuments('movies', [
 <h3>Array contains query</h3>
 <p>tbd</p>
 
-<h2>Benchmarks</h2>
+<h2><a href="/docs/advanced-database#benchmarks" id="benchmarks">Benchmarks</a></h2>
 <p>tbd</p>
