@@ -1,3 +1,50 @@
+<p>
+    Pagination is the process of dividing data into discrete pages. In Appwrite, it is achieved by using an offset or a cursor, which both come with their own use case and benefits.
+</p>
+
 <h2>Offset Pagination</h2>
+<p>
+    Using limit and offset you can achieve one of the most common approaches to pagination.
+    With limit you can define to how many documents that can be returned from one request, which can be up to a maximum of 100 documents.
+    The offset is simply the number of records you wish to skip before selecting records.
+</p>
+
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Page 1
+const page1 = await sdk.database.listDocuments('movies', [], 25, 0);
+// Page 2
+const page2 = await sdk.database.listDocuments('movies', [], 25, 25);
+</code></pre>
+</div>
+
+<p>
+    The maximum offset is 5000, since the request gets slower as the number of records increases because the database has to read up to the offset number of rows to know where it should start selecting data.
+    Also when there is data added in high frequency - the individual pages might skip results.
+</p>
 
 <h2>Cursor Pagination</h2>
+<p>
+    A cursor is a unique identifier for a specific record, which acts as a pointer to the next record we want to start querying from to get the next page of results.
+    Additionally you can pass the cursor positioning as the cursorDirection before and after allowing you to get paginate back and forth.
+</p>
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Page 1
+const page1 = await sdk.database.listDocuments('movies', [], 25, 0);
+const lastId = results.documents[results.documents.length - 1].$id;
+
+// Page 2
+const page2 = await sdk.database.listDocuments('movies', [], 25, 0, lastId);
+</code></pre>
+</div>
+
+<h2>When to use what?</h2>
+<p>
+    The different scenarios in which offset or cursor pagination make the most sense depends on the data itself and how often new records are added.
+    When querying static data, the performance cost alone may not be enough for you to use a cursor, as the added complexity that comes with it may be more than you need.
+</p>
+<p>
+    Offset pagination should be used for static data with an indicator to what is the current page and how many pages are available in total. For example a list with up to 20 pages or static data like a list of countries or currencies.
+</p>
+<p>
+    Cursor pagination should be used high-frequency data which is lazy-loaded with infinite scrolling. For example a feed, comment section, chat history or high volume datasets.
+</p>
