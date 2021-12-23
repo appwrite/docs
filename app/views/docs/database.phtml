@@ -1,7 +1,7 @@
 <p>
     The Database Service allows you to store your application and users' data and fetch it using different supported queries.
     Using your Appwrite Database, you can organize your data into collections and documents using your database of choice.
-    In addition, the Database Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance, 
+    In addition, the Database Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance,
     as well as a flexible permission mechanism to allow you to segment data between different users, teams, and roles.
 </p>
 
@@ -91,7 +91,7 @@
     If an attribute must be present in all documents, set it as <span class="tag">required</span>. If not, a <span class="tag">default</span> value might be handy. Additionally, decide if the attribute should be a primitive or array of values.
 </p>
 <p>
-    When adding or removing attributes, your requests are processed in the background, indicated by the attribute's <span class="tag">status</span>. 
+    When adding or removing attributes, your requests are processed in the background, indicated by the attribute's <span class="tag">status</span>.
     Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. Once all of your attributes are <span class="tag">available</span>, then you can create a document.
 </p>
 
@@ -137,27 +137,27 @@ sdk.database.listDocuments('movies', [
     <tbody>
         <tr>
             <td>equal</td>
-            <td></td>
+            <td>Equal to.</td>
         </tr>
         <tr>
             <td>notEqual</td>
-            <td></td>
+            <td>Not equal to.</td>
         </tr>
         <tr>
             <td>lesserEqual</td>
-            <td></td>
+            <td>Less than or equal to.</td>
         </tr>
         <tr>
             <td>greater</td>
-            <td></td>
+            <td>Greater than.</td>
         </tr>
         <tr>
             <td>greaterEqual</td>
-            <td></td>
+            <td>Greater than or equal to.</td>
         </tr>
         <tr>
             <td>search</td>
-            <td>requires a Fulltext Index</td>
+            <td>Requires a Fulltext Index.</td>
         </tr>
     </tbody>
 </table>
@@ -174,8 +174,8 @@ sdk.database.listDocuments('movies', [
 
 <h2>Indexes</h2>
 <p>
-    Indexes are used by databases to quickly locate data without having to search through every document for results. 
-    To ensure the best performance, Appwrite requires an index for every query. 
+    Indexes are used by databases to quickly locate data without having to search through every document for results.
+    To ensure the best performance, Appwrite requires an index for every query.
     You can create an index by navigating to the <b>Indexes</b> tab of your collection, or by using your favorite Server SDK.
 </p>
 <p>
@@ -191,11 +191,11 @@ sdk.database.listDocuments('movies', [
     <tbody>
         <tr>
             <td>Key</td>
-            <td>Plain Index</td>
+            <td>Plain Index to allow queries.</td>
         </tr>
         <tr>
             <td>Unique</td>
-            <td></td>
+            <td>Unique Index which not allows duplicates.</td>
         </tr>
         <tr>
             <td>Fulltext</td>
@@ -205,5 +205,12 @@ sdk.database.listDocuments('movies', [
 </table>
 
 <h2>Known Limitations</h2>
+<h3>Relationships</h3>
+<p>tbd</p>
+<h3>OR query on multiple attributes</h3>
+<p>tbd</p>
+<h3>Array contains query</h3>
+<p>tbd</p>
 
 <h2>Benchmarks</h2>
+<p>tbd</p>
