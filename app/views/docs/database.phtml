@@ -54,35 +54,35 @@
     <tbody>
         <tr>
             <td>string</td>
-            <td></td>
+            <td>String attribute.</td>
         </tr>
         <tr>
             <td>integer</td>
-            <td></td>
+            <td>Integer attribute.</td>
         </tr>
         <tr>
             <td>float</td>
-            <td></td>
+            <td>Float attribute.</td>
         </tr>
         <tr>
             <td>boolean</td>
-            <td></td>
+            <td>Boolean attribute.</td>
         </tr>
         <tr>
             <td>enum</td>
-            <td></td>
+            <td>Enum attribute.</td>
         </tr>
         <tr>
-            <td>IP address</td>
-            <td></td>
+            <td>ip</td>
+            <td>IP address attribute for IPv4 and IPv6.</td>
         </tr>
         <tr>
-            <td>E-Mail address</td>
-            <td></td>
+            <td>email</td>
+            <td>Email address attribute.</td>
         </tr>
         <tr>
-            <td>URL</td>
-            <td></td>
+            <td>url</td>
+            <td>URL attribute.</td>
         </tr>
     </tbody>
 </table>
@@ -100,8 +100,9 @@
 </p>
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
+
 const sdk = new Appwrite();
-let promise = sdk.database.createDocument('[COLLECTION_ID]', {});
+const promise = sdk.database.createDocument('[COLLECTION_ID]', {});
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -162,8 +163,7 @@ sdk.database.listDocuments('movies', [
 
 <p>Each query string is logically separated via AND. For OR logic, pass multiple values, separated by commas:</p>
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
-
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>
 sdk.database.listDocuments('movies', [
     Query.equal('title', 'Avatar', 'Lord of the Rings'),
     Query.greater('year', 1999)
@@ -183,21 +183,21 @@ sdk.database.listDocuments('movies', [
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
         <tr>
-            <th style="width: 250px">Index</th>
+            <th style="width: 250px">Type</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Key Index</td>
+            <td>Key</td>
             <td>Plain Index</td>
         </tr>
         <tr>
-            <td>Unique Index</td>
+            <td>Unique</td>
             <td></td>
         </tr>
         <tr>
-            <td>Fulltext Index</td>
+            <td>Fulltext</td>
             <td>for searching within string attributes</td>
         </tr>
     </tbody>
