@@ -88,15 +88,15 @@
 </table>
 
 <p>
-    If an attribute must be present in all documents, set it as `required`. If not, a `default` value might be handy. Additionally, decide if the attribute should be a primitive or array of values.
+    If an attribute must be present in all documents, set it as <span class="tag">required</span>. If not, a <span class="tag">default</span> value might be handy. Additionally, decide if the attribute should be a primitive or array of values.
 </p>
 <p>
-    When adding or removing attributes, your requests are processed in the background, indicated by the attribute’s `status`. Depending on your collection’s size and other factors, this could take anywhere from a few seconds to a few minutes to complete. Once all of your attributes are `available`, then you can create a document.
+    When adding or removing attributes, your requests are processed in the background, indicated by the attribute’s <span class="tag">status</span>. Depending on your collection’s size and other factors, this could take anywhere from a few seconds to a few minutes to complete. Once all of your attributes are <span class="tag">available</span>, then you can create a document.
 </p>
 
 <h3>Create Documents</h3>
 <p>
-    Navigate to the ‘Documents’ tab of your collection and click the ‘Add Document’ button, or add a document from code:
+    Navigate to the <b>Documents</b> tab of your collection and click the <b>Add Document</b> button, or add a document from code:
 </p>
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
@@ -114,7 +114,7 @@ promise.then(function (response) {
 
 <h3>Finding Documents</h3>
 <p>
-    To find specific documents in a collection, pass an array of query strings as a parameter to the `[listDocuments](https://appwrite.io/docs/server/database#databaseListDocuments)` endpoint. The SDKs provide a `Query` class to make query building simpler:
+    To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/database#databaseListDocuments">listDocuments</a> endpoint. The SDKs provide a <span class="tag">Query</span> class to make query building simpler:
 </p>
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
