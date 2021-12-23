@@ -44,16 +44,48 @@
 <p>
     Once you choose your permission model, navigate to the <b>Attributes</b> tab of your collection. Attributes are used to define the structure of your documents, so add your first by clicking the <b>Add Attribute</b> button. You can choose from the following types:
 </p>
-<ul>
-    <li>string</li>
-    <li>integer</li>
-    <li>float</li>
-    <li>boolean</li>
-    <li>enum</li>
-    <li>IP address</li>
-    <li>E-Mail address</li>
-    <li>URL</li>
-</ul>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Attribute</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>integer</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>float</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>boolean</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>enum</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>IP address</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>E-Mail address</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
 
 <p>
     If an attribute must be present in all documents, set it as `required`. If not, a `default` value might be handy. Additionally, decide if the attribute should be a primitive or array of values.
@@ -93,14 +125,40 @@ sdk.database.listDocuments('movies', [
 </div>
 
 <p>The following operators are currently supported:</p>
-<ul>
-    <li>equal</li>
-    <li>notEqual</li>
-    <li>lesserEqual</li>
-    <li>greater</li>
-    <li>greaterEqual</li>
-    <li>search (requires a Fulltext Index)</li>
-</ul>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Operator</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>equal</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>notEqual</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>lesserEqual</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>greater</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>greaterEqual</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>search</td>
+            <td>requires a Fulltext Index</td>
+        </tr>
+    </tbody>
+</table>
 
 <p>Each query string is logically separated via AND. For OR logic, pass multiple values, separated by commas:</p>
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
@@ -122,11 +180,28 @@ sdk.database.listDocuments('movies', [
 <p>
     The following indexes are currently supported:
 </p>
-<ul>
-    <li>Key Index (plain index)</li>
-    <li>Unique Index</li>
-    <li>Fulltext Index (for searching within string attributes)</li>
-</ul>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Index</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Key Index</td>
+            <td>Plain Index</td>
+        </tr>
+        <tr>
+            <td>Unique Index</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Fulltext Index</td>
+            <td>for searching within string attributes</td>
+        </tr>
+    </tbody>
+</table>
 
 <h2>Known Limitations</h2>
 
