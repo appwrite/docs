@@ -1,5 +1,5 @@
 <p>
-    The Database Service allows you to store your application and users’ data and fetch it using different supported queries.
+    The Database Service allows you to store your application and users' data and fetch it using different supported queries.
     Using your Appwrite Database, you can organize your data into collections and documents using your database of choice.
     In addition, the Database Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance, 
     as well as a flexible permission mechanism to allow you to segment data between different users, teams, and roles.
@@ -12,8 +12,8 @@
 </p>
 
 <p>
-    You can create your collection by adding it from your Appwrite project’s dashboard. Access your Database settings from your project’s left navigation panel.
-    Click the ‘Add Collection’ button and choose your collection’s name. For convenience, you can also set a custom ID for your collection instead of an auto-generated ID.
+    You can create your collection by adding it from your Appwrite project's dashboard. Access your Database settings from your project's left navigation panel.
+    Click the <b>Add Collection</b> button and choose your collection's name. For convenience, you can also set a custom ID for your collection instead of an auto-generated ID.
 </p>
 
 <div class="notice margin-top-large margin-bottom-large">
@@ -22,7 +22,7 @@
 
 <h3>Document or Collection Level Permissions</h3>
 <p>
-    Once you create your collection, the dashboard will navigate to the collection’s settings so you can choose the permission model for your collection. Check out the Permissions documentation to learn more about the possible permission types.
+    Once you create your collection, the dashboard will navigate to the collection's settings so you can choose the permission model for your collection. Check out the Permissions documentation to learn more about the possible permission types.
 </p>
 
 <h4>Document Level Permissions</h4>
@@ -91,7 +91,8 @@
     If an attribute must be present in all documents, set it as <span class="tag">required</span>. If not, a <span class="tag">default</span> value might be handy. Additionally, decide if the attribute should be a primitive or array of values.
 </p>
 <p>
-    When adding or removing attributes, your requests are processed in the background, indicated by the attribute’s <span class="tag">status</span>. Depending on your collection’s size and other factors, this could take anywhere from a few seconds to a few minutes to complete. Once all of your attributes are <span class="tag">available</span>, then you can create a document.
+    When adding or removing attributes, your requests are processed in the background, indicated by the attribute's <span class="tag">status</span>. 
+    Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. Once all of your attributes are <span class="tag">available</span>, then you can create a document.
 </p>
 
 <h3>Create Documents</h3>
@@ -114,7 +115,7 @@ promise.then(function (response) {
 
 <h3>Finding Documents</h3>
 <p>
-    To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/database#databaseListDocuments">listDocuments</a> endpoint. The SDKs provide a <span class="tag">Query</span> class to make query building simpler:
+    To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/database#databaseListDocuments">listDocuments</a> endpoint. The SDKs provide a <b>Query</b> class to make query building simpler:
 </p>
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
