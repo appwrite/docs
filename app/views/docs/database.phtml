@@ -1,14 +1,14 @@
 <p>
     The Database Service allows you to store your application and users' data and fetch it using different supported queries.
-    Using your Appwrite Database, you can organize your data into collections and documents using your database of choice.
+    Using your Appwrite Database, you can organize your data into collections and documents using the Appwrite simple REST API. You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your collections and documents.
     In addition, the Database Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance,
-    as well as a flexible permission mechanism to allow you to segment data between different users, teams, and roles.
+    as well as a flexible permissions mechanism to allow you to easily segment data between different users, teams, and roles.
 </p>
 
 <h2><a href="/docs/advanced-database#collection" id="collection">Create Your Collections</a></h2>
 <p>
     Appwrite uses collections as containers of documents.
-    The term collection is used because the Appwrite JSON REST API resembles the API of a traditional NoSQL database, but internally when using an SQL adapter like MariaDB or MySQL, Appwrite will store your documents on native SQL tables.
+The terms collections and documents are used because the Appwrite JSON REST API resembles the API of a traditional NoSQL database. That said, internally, Appwrite can support both SQL and NoSQL database adapters like MariaDB, MySQL, or MongoDB. When working with an SQL adapter, Appwrite will treat your collections as tables and documents as rows on native SQL tables.
 </p>
 
 <p>
@@ -17,12 +17,12 @@
 </p>
 
 <div class="notice margin-top-large margin-bottom-large">
-    <p>To work with collections in code, check out our Server SDKs. Any one of our Server and Client SDKs can be used to work with documents.</p>
+    <p>You can manage your collections programmatically using one of Appwrite's Server SDKs. You can manage documents with both the Server and Client SDKs.</p>
 </div>
 
-<h3><a href="/docs/advanced-database#collection-permissions" id="collection-permissions">Document or Collection Level Permissions</a></h3>
+<h3><a href="/docs/advanced-database#permissions" id="permissions">Permissions</a></h3>
 <p>
-    Once you create your collection, the dashboard will navigate to the collection's settings so you can choose the permission model for your collection. Check out the Permissions documentation to learn more about the possible permission types.
+    Once you create your collection, you will reach your collection's settings page, where you can choose the permission model for your collection. There are two types of permissions models available, each one with different pros and cons designed to be flexible to best match your use case.  
 </p>
 
 <h4>Document Level Permissions</h4>
@@ -32,7 +32,7 @@
 
 <h4>Collection Level Permissions</h4>
 <p>
-    With collection-level permissions, you assign permissions once for every document in the collection - users with read access to the collection can see all documents. Collection permissions are required in this permission model, and document permissions are optional.
+        With collection-level permissions, you assign permissions once for every document in the collection's settings - users with "read" access to the collection can see all documents in that collection. This permission model requires you to set collection permissions on the collection settings page. Document permissions are optional and will not be evaluated even when set.
 </p>
 
 <div class="notice margin-top-large margin-bottom-large">
@@ -42,7 +42,7 @@
 
 <h2><a href="/docs/advanced-database#attributes" id="attributes">Create Attributes</a></h2>
 <p>
-    Once you choose your permission model, navigate to the <b>Attributes</b> tab of your collection. Attributes are used to define the structure of your documents, so add your first by clicking the <b>Add Attribute</b> button. You can choose from the following types:
+    Once you choose your permission model, navigate to your collection's <b>Attributes</b> tab. Attributes are used to define the structure of your documents and help the Appwrite API validate your users' input. Add your first attribute by clicking the <b>Add Attribute</b> button. You can choose between the following types:
 </p>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -97,7 +97,7 @@
 
 <h3><a href="/docs/advanced-database#create-documents" id="create-documents">Create Documents</a></h3>
 <p>
-    Navigate to the <b>Documents</b> tab of your collection and click the <b>Add Document</b> button, or add a document from code:
+    Navigate to the <b>Documents</b> tab of your collection and click the <b>Add Document</b> button, or add a document programmatically:
 </p>
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
@@ -199,7 +199,7 @@ sdk.database.listDocuments('movies', [
         </tr>
         <tr>
             <td>Fulltext</td>
-            <td>for searching within string attributes</td>
+            <td>For searching within string attributes</td>
         </tr>
     </tbody>
 </table>
