@@ -164,8 +164,7 @@ sdk.database.listDocuments('movies', [
 
 <p>Each query string is logically separated via AND. For OR logic, pass multiple values, separated by commas:</p>
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>
-sdk.database.listDocuments('movies', [
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>sdk.database.listDocuments('movies', [
     Query.equal('title', 'Avatar', 'Lord of the Rings'),
     Query.greater('year', 1999)
 ]);
