@@ -466,20 +466,3 @@ func main() {
 
 <h3><a href="/docs/database#pagination" id="pagination">Pagination</a></h3>
 <p>Appwrite has full support for pagination to better optimize and scale up your applications built on Appwrite. Detailed documentation on pagination and how to implement it can be found on the <a href="/docs/pagination">pagination guide.</a></p>
-
-<h2><a href="/docs/database#known-limitations" id="known-limitations">Known Limitations</a></h2>
-
-<h3>Relationships</h3>
-<p>This Database doesn't allow any relationships out of the box yet. Nontheless you can achieve relationships using Indexes und Query Filters.</p>
-<p>For example if your <b>Author</b> collection has a <span class="tag">String[]</span> attribute which contains multiple ID's from a <b>Blog</b> collection. You can easily query all the blog posts with a <span class="tag">Query.equal('blogpost-1', 'blogpost-2', ...)</span> once you have fetched the user.</p>
-
-<h3>OR query on multiple attributes</h3>
-<p>As of right now, an OR condition between multiple Queries is not supported yet.</p>
-
-<h3>Array contains query</h3>
-<p>Due to a limitation from MariaDB, we don't support a Contains query yet.</p>
-
-<!--
-    <h2><a href="/docs/database#benchmarks" id="benchmarks">Benchmarks</a></h2>
-    <p>tbd</p>
--->
