@@ -44,7 +44,10 @@
     </thead>
     <tbody>
     <tr>
-        <td>*</td>
+        <td>
+            role:all
+            <p class="margin-top-small text-fade">version >= 0.12</p>
+        </td>
         <td>Wildcard permission. Gives anyone read or write access.</td>
     </tr>
     <tr>
@@ -76,6 +79,13 @@
             <p class="margin-top-small text-fade">version >= 0.7</p>
         </td>
         <td>Access to any logged in user. A logged in user is a user with a valid session. Logged in users don't have access to `role:guest` role. For wildcard access use `*` role.</td>
+    </tr>
+    <tr>
+        <td>
+            *
+            <p class="margin-top-small text-fade text-danger">version <= 0.11 (deprecated)</p>
+        </td>
+        <td>Wildcard permission. Gives anyone read or write access.</td>
     </tr>
     <!-- <tr>
         <td>
