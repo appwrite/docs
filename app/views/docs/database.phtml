@@ -36,7 +36,11 @@ The terms collections and documents are used because the Appwrite JSON REST API 
 </p>
 
 <div class="notice margin-top-large margin-bottom-large">
-    <p>Note: For security purposes, an active Account session is required to create resources. So, even if wildcard write permissions are set, only logged-in users can create documents in a collection. If you require this behavior for your app, create an anonymous session first.</p>
+    <h5>Active Session Required</h5>
+
+    <p>For security purposes, an active Account session is required to create resources. So, even if wildcard write permissions are set, only logged-in users can create documents in a collection. If you require this behavior for your app, create an anonymous session first. An active session helps Appwrite enforce rate-control limits and protect your projects from intensive write operations.
+
+I think it can also be a good idea to add a link to the anonymous session docs.</p>
 </div>
 
 
