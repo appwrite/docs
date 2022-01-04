@@ -445,7 +445,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                             <?php endif; ?>
                                         <?php elseif($isOneOf): ?>
                                             <?php
-                                            echo \implode('<span>or</span>', \array_map(function($oneOfRule) {
+                                            echo \implode('<br />', \array_map(function($oneOfRule) {
                                                 $oneOfRule = (isset($oneOfRule['$ref'])) ? str_replace('#/definitions/', '', $oneOfRule['$ref']) : '';
                                                 return '<a href="/docs/models/' . $this->escape($oneOfRule) . '">' . $this->escape($oneOfRule) . '</a>';
                                             }, $response['schema']['x-oneOf']));

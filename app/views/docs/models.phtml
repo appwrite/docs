@@ -75,9 +75,9 @@ $example = function ($model, $models) use (&$example)
 
 
                 <?php elseif($isAnyOf): ?>
-                    <span>array of</span>
+                    <span>array of</span><br />
                     <?php
-                    echo \implode('<span>or</span>', \array_map(function($anyOfRule) {
+                    echo \implode('<br />', \array_map(function($anyOfRule) {
                         $anyOfRule = (isset($anyOfRule['$ref'])) ? str_replace('#/definitions/', '', $anyOfRule['$ref']) : '';
                         return '<a href="/docs/models/' . $this->escape($anyOfRule) . '">' . $this->escape($anyOfRule) . '</a>';
                     }, $rule['items']['x-anyOf']));
