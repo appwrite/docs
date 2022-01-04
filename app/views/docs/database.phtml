@@ -114,6 +114,10 @@ promise.then(function (response) {
 </div>
 
 <h3><a href="/docs/advanced-database#finding-documents" id="finding-documents">Finding Documents</a></h3>
+
+<div class="notice margin-top-large margin-bottom-large">
+    <p>Note: You can only query correctly indexed documents. More details on this can be found <a href="/docs/advanced-database#indexes" id="indexes">here.</a> </p>
+</div>
 <p>
     To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/database#databaseListDocuments">listDocuments</a> endpoint. The SDKs provide a <b>Query</b> class to make query building simpler:
 </p>
