@@ -105,14 +105,14 @@ The terms collections and documents are used because the Appwrite JSON REST API 
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
 
-            const sdk = new Appwrite();
-            const promise = sdk.database.createDocument('[COLLECTION_ID]', {});
+const sdk = new Appwrite();
+const promise = sdk.database.createDocument('[COLLECTION_ID]', {});
 
-            promise.then(function (response) {
-                console.log(response); // Success
-            }, function (error) {
-                console.log(error); // Failure
-            });
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});
             </code></pre>
         </div>
     </li>
@@ -120,16 +120,16 @@ The terms collections and documents are used because the Appwrite JSON REST API 
         <h3>Flutter</h3>
         <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
-            void main() async {
-                final client = Client();
-                final database = Database(client);
-                try {
-                    final doc = database.createDocument('[COLLECTION_ID]', {});
-                    print(doc.toMap());
-                } on AppwriteException catch(e) {
-                    print(e);
-                }
-            }
+void main() async {
+    final client = Client();
+    final database = Database(client);
+    try {
+        final doc = database.createDocument('[COLLECTION_ID]', {});
+        print(doc.toMap());
+    } on AppwriteException catch(e) {
+        print(e);
+    }
+}
             </code></pre>
         </div>
     </li>
@@ -159,11 +159,18 @@ sdk.database.listDocuments('movies', [
     <li>
         <h3>Flutter</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
-        <pre class="line-numbers"><code class="prism language-dart" data-prism>import { Query } from "appwrite";
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-sdk.database.listDocuments('movies', [
-    Query.equal('title', 'Avatar')
-]);
+void main() async {
+    final client = Client();
+    final database = Database(client);
+    try {
+        final docs = await database.listDocuments(collectionId: 'movies', queries: [Query.equal('title', 'Avatar')]);
+        print(docs.toMap());
+    } on AppwriteException catch(e) {
+        print(e);
+    }
+}
 </code></pre>
         </div>
     </li>
