@@ -121,7 +121,7 @@ sdk
 let promise = sdk.database.createDocument(
     '[COLLECTION_ID]',
     {'actorName': 'Chris Evans', 'height': 183},
-    ['*'], // Anyone can view this document
+    ['role:all'], // Anyone can view this document
     ['user:5c1f88b42259e'] // You can only grant permissions you own, this must be the current user UID
 );
 
