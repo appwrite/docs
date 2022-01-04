@@ -160,7 +160,7 @@ class MainActivity : AppCompatActivity() {
                 documentId = "unique()",
                 data = mapOf( "a" to "b" ),
             )
-            val json = response.body?.string()        
+            val json = response.body?.string()
         }
     }
 }</code></pre>
@@ -263,7 +263,7 @@ class MainActivity : AppCompatActivity() {
                 collectionId = "[COLLECTION_ID]",
                 queries = [Query.equal('title', 'Avatar')],
             )
-            val json = response.body?.string()        
+            val json = response.body?.string()
         }
     }
 }</code></pre>
@@ -396,7 +396,7 @@ class MainActivity : AppCompatActivity() {
                     Query.greater('year', 1999),
                 ],
             )
-            val json = response.body?.string()        
+            val json = response.body?.string()
         }
     }
 }</code></pre>
@@ -471,7 +471,7 @@ func main() {
 
 <h3>Relationships</h3>
 <p>This Database doesn't allow any relationships out of the box yet. Nontheless you can achieve relationships using Indexes und Query Filters.</p>
-<p>For example if your <b>Author</b> collection has a <span class="tag">String[]</span> attribute and it contains multiple ID's from a <b>Blog</b> collection. You can easily query all the blog posts with a <span class="tag">Query.equal('blogpost-1', 'blogpost-2', ...)</span> once you have fetched the user.</p>
+<p>For example if your <b>Author</b> collection has a <span class="tag">String[]</span> attribute which contains multiple ID's from a <b>Blog</b> collection. You can easily query all the blog posts with a <span class="tag">Query.equal('blogpost-1', 'blogpost-2', ...)</span> once you have fetched the user.</p>
 
 <h3>OR query on multiple attributes</h3>
 <p>As of right now, an OR condition between multiple Queries is not supported yet.</p>
