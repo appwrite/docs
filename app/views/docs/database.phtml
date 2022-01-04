@@ -12,13 +12,11 @@ The terms collections and documents are used because the Appwrite JSON REST API 
 </p>
 
 <p>
-    You can create your collection by adding it from your Appwrite project's dashboard. Access your Database settings from your project's left navigation panel.
+    You can create your collection by adding it to your Appwrite project's dashboard. Access your Database settings from your project's left navigation panel.
     Click the <b>Add Collection</b> button and choose your collection's name. For convenience, you can also set a custom ID for your collection instead of an auto-generated ID.
 </p>
 
-<div class="notice margin-top-large margin-bottom-large">
-    <p>You can manage your collections programmatically using one of Appwrite's Server SDKs. You can manage documents with both the Server and Client SDKs.</p>
-</div>
+<p>You can manage your collections programmatically using one of Appwrite's Server SDKs. You can manage documents with both the Server and Client SDKs.</p>
 
 <h3><a href="/docs/database#permissions" id="permissions">Permissions</a></h3>
 <p>
@@ -119,7 +117,7 @@ promise.then(function (response) {
 
 <div class="notice margin-top-large margin-bottom-large">
     <h4>Indexes Required</h4>
-    <p>You can only query correctly indexed queries. You can easily add new indexes from both the Appwrite console or one of the <a href="/docs/sdks#server" target="_blank">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it on the<a href="/docs/database#indexes" id="indexes">Appwrite Indexes</a> section.</p>
+    <p>You can only query correctly indexed queries. You can easily add new indexes from both the Appwrite console or one of the <a href="/docs/sdks#server" target="_blank">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it on the <a href="/docs/database#indexes" id="indexes">Appwrite Indexes</a> section.</p>
 </div>
 <p>
     To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/database#databaseListDocuments">listDocuments</a> endpoint. The SDKs provide a <b>Query</b> class to make query building simpler:
@@ -210,7 +208,8 @@ sdk.database.listDocuments('movies', [
     </tbody>
 </table>
 <h3>Pagination</h3>
-<p>Appwrite has full support for pagination to better optmise and scale up your applications built on Appwrite. Detailed documentation on pagination and how to implement it can be found <a href="/docs/pagination#offset-pagination" id="offset-pagination">here.</a></p>
+
+<p>Appwrite has full support for pagination to better optimize and scale up your applications built on Appwrite. Detailed documentation on pagination and how to implement it can be found on the <a href="/docs/pagination">pagination guide.</a></p>
 
 <h2><a href="/docs/database#known-limitations" id="known-limitations">Known Limitations</a></h2>
 <h3>Relationships</h3>
