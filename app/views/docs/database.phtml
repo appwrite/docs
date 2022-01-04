@@ -1,0 +1,468 @@
+<p>
+    The Database Service allows you to store your application and users' data and fetch it using different supported queries.
+    Using your Appwrite Database, you can organize your data into collections and documents using the Appwrite simple REST API. You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your collections and documents.
+    In addition, the Database Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance,
+    as well as a flexible permissions mechanism to allow you to easily segment data between different users, teams, and roles.
+</p>
+
+<h2><a href="/docs/database#collection" id="collection">Create Your Collections</a></h2>
+<p>
+    Appwrite uses collections as containers of documents.
+    The terms collections and documents are used because the Appwrite JSON REST API resembles the API of a traditional NoSQL database. That said, internally, Appwrite can support both SQL and NoSQL database adapters like MariaDB, MySQL, or MongoDB. When working with an SQL adapter, Appwrite will treat your collections as tables and documents as rows on native SQL tables.
+</p>
+
+<p>
+    You can create your collection by adding it to your Appwrite project's dashboard. Access your Database settings from your project's left navigation panel.
+    Click the <b>Add Collection</b> button and choose your collection's name. For convenience, you can also set a custom ID for your collection instead of an auto-generated ID.
+</p>
+
+<p>You can manage your collections programmatically using one of Appwrite's Server SDKs. You can manage documents with both the Server and Client SDKs.</p>
+
+<h3><a href="/docs/database#permissions" id="permissions">Permissions</a></h3>
+<p>
+    Once you create your collection, you will reach your collection's settings page, where you can choose the permission model for your collection. There are two types of permissions models available, each one with different pros and cons designed to be flexible to best match your use case.
+</p>
+
+<h4>Document Level Permissions</h4>
+<p>
+    With this permission model, you have granular access control over every document, and users will only be able to access documents for which they have explicit permissions. Document permissions are required in this permission model, and collection permissions are optional.
+</p>
+
+<h4>Collection Level Permissions</h4>
+<p>
+    With collection-level permissions, you assign permissions once for every document in the collection's settings - users with "read" access to the collection can see all documents in that collection. This permission model requires you to set collection permissions on the collection settings page. Document permissions are optional and will not be evaluated even when set.
+</p>
+
+<div class="notice margin-top-large margin-bottom-large">
+    <h5>Active Session Required</h5>
+
+    <p>For security purposes, an active Account session is required to create resources. So, even if wildcard write permissions are set, only logged-in users can create documents in a collection. If you require this behavior for your app, create an <a href="/docs/client/account?sdk=web-default#accountCreateAnonymousSession" target="_blank">anonymous session</a> first. An active session helps Appwrite enforce rate-control limits and protect your projects from intensive write operations.</p>
+</div>
+
+
+<h2><a href="/docs/database#attributes" id="attributes">Create Attributes</a></h2>
+<p>
+    Once you choose your permission model, navigate to your collection's <b>Attributes</b> tab. Attributes are used to define the structure of your documents and help the Appwrite API validate your users' input. Add your first attribute by clicking the <b>Add Attribute</b> button. You can choose between the following types:
+</p>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Attribute</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>string</td>
+            <td>String attribute.</td>
+        </tr>
+        <tr>
+            <td>integer</td>
+            <td>Integer attribute.</td>
+        </tr>
+        <tr>
+            <td>float</td>
+            <td>Float attribute.</td>
+        </tr>
+        <tr>
+            <td>boolean</td>
+            <td>Boolean attribute.</td>
+        </tr>
+        <tr>
+            <td>enum</td>
+            <td>Enum attribute.</td>
+        </tr>
+        <tr>
+            <td>ip</td>
+            <td>IP address attribute for IPv4 and IPv6.</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>Email address attribute.</td>
+        </tr>
+        <tr>
+            <td>url</td>
+            <td>URL attribute.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    If an attribute must be present in all documents, set it as <span class="tag">required</span>. If not, a <span class="tag">default</span> value might be handy. Additionally, decide if the attribute should be a primitive or array of values.
+</p>
+<p>
+    When adding or removing attributes, your requests are processed in the background, indicated by the attribute's <span class="tag">status</span>.
+    Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. You are able to create a document while your attributes are still being processed, however you are not able to use the attributes on the documents until they are <span class="tag">available</span>
+</p>
+
+<h3><a href="/docs/database#create-documents" id="create-documents">Create Documents</a></h3>
+<p>
+    Navigate to the <b>Documents</b> tab of your collection and click the <b>Add Document</b> button, or add a document programmatically:
+</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
+
+const sdk = new Appwrite();
+const promise = sdk.database.createDocument('[COLLECTION_ID]', 'unique()', {});
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+void main() async {
+    final client = Client();
+    final database = Database(client);
+    try {
+        final doc = database.createDocument(collectionId: '[COLLECTION_ID]', documentId: 'unique()', data: {});
+        print(doc.toMap());
+    } on AppwriteException catch(e) {
+        print(e);
+    }
+}
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import io.appwrite.Client
+import io.appwrite.services.Database
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val client = Client(applicationContext)
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+            .setProject("5df5acd0d48c2") // Your project ID
+
+        val database = Database(client)
+
+        GlobalScope.launch {
+            val response = database.createDocument(
+                collectionId = "[COLLECTION_ID]",
+                documentId = "unique()",
+                data = mapOf( "a" to "b" ),
+            )
+            val json = response.body?.string()
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+func main() {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("my_project") // Your project ID
+
+    let database = Database(client)
+    database.createDocument(
+        collectionId: "[COLLECTION_ID]",
+        documentId: "unique()",
+        data: [:]
+    ) { result in
+        switch result {
+        case .failure(let error):
+            print(error.message)
+        case .success(let document):
+            print(String(describing: document)
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+
+<h3><a href="/docs/database#querying-documents" id="querying-documents">Querying Documents</a></h3>
+
+<div class="notice margin-top-large margin-bottom-large">
+    <h4>Indexes Required</h4>
+    <p>You can only query correctly indexed queries. You can easily add new indexes from both the Appwrite console or one of the <a href="/docs/sdks#server" target="_blank">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it on the <a href="/docs/database#indexes" id="indexes">Appwrite Indexes</a> section.</p>
+</div>
+<p>
+    To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/database#databaseListDocuments">listDocuments</a> endpoint. The SDKs provide a <b>Query</b> class to make query building simpler:
+</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
+
+sdk.database.listDocuments('movies', [
+    Query.equal('title', 'Avatar')
+]);
+</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+void main() async {
+    final client = Client();
+    final database = Database(client);
+    try {
+        final docs = await database.listDocuments(
+            collectionId: 'movies',
+            queries: [Query.equal('title', 'Avatar')]);
+        print(docs.toMap());
+    } on AppwriteException catch(e) {
+        print(e);
+    }
+}
+</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import io.appwrite.Client
+import io.appwrite.services.Database
+import io.appwrite.Query
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val client = Client(applicationContext)
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+            .setProject("5df5acd0d48c2") // Your project ID
+
+        val database = Database(client)
+
+        GlobalScope.launch {
+            val response = database.listDocuments(
+                collectionId = "[COLLECTION_ID]",
+                queries = [Query.equal('title', 'Avatar')],
+            )
+            val json = response.body?.string()
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+func main() {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("my_project") // Your project ID
+
+    let database = Database(client)
+    database.listDocuments(
+        collectionId: "[COLLECTION_ID]",
+        queries: [Query.equal('title', 'Avatar')]
+    ) { result in
+        switch result {
+        case .failure(let error):
+            print(error.message)
+        case .success(let document):
+            print(String(describing: document)
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>The following operators are currently supported:</p>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Operator</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>equal</td>
+            <td>Equal to.</td>
+        </tr>
+        <tr>
+            <td>notEqual</td>
+            <td>Not equal to.</td>
+        </tr>
+        <tr>
+            <td>lesserEqual</td>
+            <td>Less than or equal to.</td>
+        </tr>
+        <tr>
+            <td>greater</td>
+            <td>Greater than.</td>
+        </tr>
+        <tr>
+            <td>greaterEqual</td>
+            <td>Greater than or equal to.</td>
+        </tr>
+        <tr>
+            <td>search</td>
+            <td>Requires a Fulltext Index.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Each query string is logically separated via AND. For OR logic, pass multiple values, separated by commas:</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>sdk.database.listDocuments('movies', [
+            Query.equal('title', 'Avatar', 'Lord of the Rings'),
+            Query.greater('year', 1999)
+        ]);
+        </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+void main() async {
+    final client = Client();
+    final database = Database(client);
+    try {
+        final docs = await database.listDocuments(
+            collectionId: 'movies',
+            queries: [
+                Query.equal('title', ['Avatar', 'Lord of the Rings']),
+                Query.greater('year', 1999),
+                ]);
+        print(docs.toMap());
+    } on AppwriteException catch(e) {
+        print(e);
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import io.appwrite.Client
+import io.appwrite.services.Database
+import io.appwrite.Query
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val client = Client(applicationContext)
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+            .setProject("5df5acd0d48c2") // Your project ID
+
+        val database = Database(client)
+
+        GlobalScope.launch {
+            val response = database.listDocuments(
+                collectionId = "[COLLECTION_ID]",
+                queries = [
+                    Query.equal('title', ['Avatar', 'Lord of the Rings']),
+                    Query.greater('year', 1999),
+                ],
+            )
+            val json = response.body?.string()
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+func main() {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("my_project") // Your project ID
+
+    let database = Database(client)
+    database.listDocuments(
+        collectionId: "[COLLECTION_ID]",
+        queries: [
+            Query.equal('title', ['Avatar', 'Lord of the Rings']),
+            Query.greater('year', 1999)
+        ]
+    ) { result in
+        switch result {
+        case .failure(let error):
+            print(error.message)
+        case .success(let document):
+            print(String(describing: document)
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="/docs/database#indexes" id="indexes">Indexes</a></h2>
+<p>
+    Indexes are used by databases to quickly locate data without having to search through every document for results.
+    To ensure the best performance, Appwrite requires an index for every query.
+    You can create an index by navigating to the <b>Indexes</b> tab of your collection, or by using your favorite Server SDK. It should be noted that Appwrite's database was designed to protect your queries from performing a full-table scan as this is a footgun and could cause catastrophic performance degregation as you scale up your Appwrite project.
+</p>
+<p>
+    The following indexes are currently supported:
+</p>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Key</td>
+            <td>Plain Index to allow queries.</td>
+        </tr>
+        <tr>
+            <td>Unique</td>
+            <td>Unique Index which not allows duplicates.</td>
+        </tr>
+        <tr>
+            <td>Fulltext</td>
+            <td>For searching within string attributes</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3><a href="/docs/database#pagination" id="pagination">Pagination</a></h3>
+<p>Appwrite has full support for pagination to better optimize and scale up your applications built on Appwrite. Detailed documentation on pagination and how to implement it can be found on the <a href="/docs/pagination">pagination guide.</a></p>
