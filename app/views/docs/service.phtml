@@ -262,7 +262,8 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
             return $y - $x;
         });
 
-        var_dump($rateKey);
+        $rateKey = (is_array($rateKey)) ? implode(',', $rateKey) : $rateKey;
+
         $rateKey = array_map(function($element)
         {
             $element = mb_substr($element, 0, mb_strpos($element, ':'));
