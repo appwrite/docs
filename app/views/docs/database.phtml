@@ -8,7 +8,7 @@
 <h2><a href="/docs/database#collection" id="collection">Create Your Collections</a></h2>
 <p>
     Appwrite uses collections as containers of documents.
-The terms collections and documents are used because the Appwrite JSON REST API resembles the API of a traditional NoSQL database. That said, internally, Appwrite can support both SQL and NoSQL database adapters like MariaDB, MySQL, or MongoDB. When working with an SQL adapter, Appwrite will treat your collections as tables and documents as rows on native SQL tables.
+    The terms collections and documents are used because the Appwrite JSON REST API resembles the API of a traditional NoSQL database. That said, internally, Appwrite can support both SQL and NoSQL database adapters like MariaDB, MySQL, or MongoDB. When working with an SQL adapter, Appwrite will treat your collections as tables and documents as rows on native SQL tables.
 </p>
 
 <p>
@@ -20,7 +20,7 @@ The terms collections and documents are used because the Appwrite JSON REST API 
 
 <h3><a href="/docs/database#permissions" id="permissions">Permissions</a></h3>
 <p>
-    Once you create your collection, you will reach your collection's settings page, where you can choose the permission model for your collection. There are two types of permissions models available, each one with different pros and cons designed to be flexible to best match your use case.  
+    Once you create your collection, you will reach your collection's settings page, where you can choose the permission model for your collection. There are two types of permissions models available, each one with different pros and cons designed to be flexible to best match your use case.
 </p>
 
 <h4>Document Level Permissions</h4>
@@ -30,7 +30,7 @@ The terms collections and documents are used because the Appwrite JSON REST API 
 
 <h4>Collection Level Permissions</h4>
 <p>
-        With collection-level permissions, you assign permissions once for every document in the collection's settings - users with "read" access to the collection can see all documents in that collection. This permission model requires you to set collection permissions on the collection settings page. Document permissions are optional and will not be evaluated even when set.
+    With collection-level permissions, you assign permissions once for every document in the collection's settings - users with "read" access to the collection can see all documents in that collection. This permission model requires you to set collection permissions on the collection settings page. Document permissions are optional and will not be evaluated even when set.
 </p>
 
 <div class="notice margin-top-large margin-bottom-large">
@@ -208,7 +208,7 @@ func main() {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-        <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
 
 sdk.database.listDocuments('movies', [
     Query.equal('title', 'Avatar')
@@ -219,7 +219,7 @@ sdk.database.listDocuments('movies', [
     <li>
         <h3>Flutter</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
-        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 void main() async {
     final client = Client();
