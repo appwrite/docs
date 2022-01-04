@@ -99,19 +99,42 @@ The terms collections and documents are used because the Appwrite JSON REST API 
 <p>
     Navigate to the <b>Documents</b> tab of your collection and click the <b>Add Document</b> button, or add a document programmatically:
 </p>
-<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
 
-const sdk = new Appwrite();
-const promise = sdk.database.createDocument('[COLLECTION_ID]', {});
+            const sdk = new Appwrite();
+            const promise = sdk.database.createDocument('[COLLECTION_ID]', {});
 
-promise.then(function (response) {
-    console.log(response); // Success
-}, function (error) {
-    console.log(error); // Failure
-});
-</code></pre>
-</div>
+            promise.then(function (response) {
+                console.log(response); // Success
+            }, function (error) {
+                console.log(error); // Failure
+            });
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code>import 'package:appwrite/appwrite.dart';
+            void main() async {
+                final client = Client();
+                final database = Database(client);
+                try {
+                    final doc = database.createDocument('[COLLECTION_ID]', {});
+                    print(doc.toMap());
+                } on AppwriteException catch(e) {
+                    print(e);
+                }
+            }
+            </code></pre>
+        </div>
+    </li>
+</ul>
+
 
 <h3><a href="/docs/database#finding-documents" id="finding-documents">Finding Documents</a></h3>
 
