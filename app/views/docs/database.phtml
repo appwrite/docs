@@ -175,7 +175,7 @@ sdk.database.listDocuments('movies', [
 <p>
     Indexes are used by databases to quickly locate data without having to search through every document for results.
     To ensure the best performance, Appwrite requires an index for every query.
-    You can create an index by navigating to the <b>Indexes</b> tab of your collection, or by using your favorite Server SDK.
+    You can create an index by navigating to the <b>Indexes</b> tab of your collection, or by using your favorite Server SDK. It should be noted that Appwrite's database was designed to protect your queries from performing a full-table scan as this is a footgun and could cause catastrophic performance degregation as you scale up your appwrite project.
 </p>
 <p>
     The following indexes are currently supported:
