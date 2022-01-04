@@ -106,7 +106,7 @@ The terms collections and documents are used because the Appwrite JSON REST API 
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
 
 const sdk = new Appwrite();
-const promise = sdk.database.createDocument('[COLLECTION_ID]', {});
+const promise = sdk.database.createDocument('[COLLECTION_ID]', 'unique()', {});
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -124,13 +124,72 @@ void main() async {
     final client = Client();
     final database = Database(client);
     try {
-        final doc = database.createDocument('[COLLECTION_ID]', {});
+        final doc = database.createDocument(collectionId: '[COLLECTION_ID]', documentId: 'unique()', data: {});
         print(doc.toMap());
     } on AppwriteException catch(e) {
         print(e);
     }
 }
             </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import io.appwrite.Client
+import io.appwrite.services.Database
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val client = Client(applicationContext)
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+            .setProject("5df5acd0d48c2") // Your project ID
+
+        val database = Database(client)
+
+        GlobalScope.launch {
+            val response = database.createDocument(
+                collectionId = "[COLLECTION_ID]",
+                documentId = "unique()",
+                data = mapOf( "a" to "b" ),
+            )
+            val json = response.body?.string()        
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+func main() {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("my_project") // Your project ID
+
+    let database = Database(client)
+    database.createDocument(
+        collectionId: "[COLLECTION_ID]",
+        documentId: "unique()",
+        data: [:]
+    ) { result in
+        switch result {
+        case .failure(let error):
+            print(error.message)
+        case .success(let document):
+            print(String(describing: document)
+        }
+    }
+}</code></pre>
         </div>
     </li>
 </ul>
@@ -174,6 +233,64 @@ void main() async {
 </code></pre>
         </div>
     </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import io.appwrite.Client
+import io.appwrite.services.Database
+import io.appwrite.Query
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val client = Client(applicationContext)
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+            .setProject("5df5acd0d48c2") // Your project ID
+
+        val database = Database(client)
+
+        GlobalScope.launch {
+            val response = database.listDocuments(
+                collectionId = "[COLLECTION_ID]",
+                queries = [Query.equal('title', 'Avatar')],
+            )
+            val json = response.body?.string()        
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+func main() {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("my_project") // Your project ID
+
+    let database = Database(client)
+    database.listDocuments(
+        collectionId: "[COLLECTION_ID]",
+        queries: [Query.equal('title', 'Avatar')]
+    ) { result in
+        switch result {
+        case .failure(let error):
+            print(error.message)
+        case .success(let document):
+            print(String(describing: document)
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>The following operators are currently supported:</p>
@@ -213,13 +330,104 @@ void main() async {
 </table>
 
 <p>Each query string is logically separated via AND. For OR logic, pass multiple values, separated by commas:</p>
-<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>sdk.database.listDocuments('movies', [
-    Query.equal('title', 'Avatar', 'Lord of the Rings'),
-    Query.greater('year', 1999)
-]);
-</code></pre>
-</div>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>sdk.database.listDocuments('movies', [
+            Query.equal('title', 'Avatar', 'Lord of the Rings'),
+            Query.greater('year', 1999)
+        ]);
+        </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+void main() async {
+    final client = Client();
+    final database = Database(client);
+    try {
+        final docs = await database.listDocuments(
+            collectionId: 'movies',
+            queries: [
+                Query.equal('title', ['Avatar', 'Lord of the Rings']),
+                Query.greater('year', 1999),
+                ]);
+        print(docs.toMap());
+    } on AppwriteException catch(e) {
+        print(e);
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import io.appwrite.Client
+import io.appwrite.services.Database
+import io.appwrite.Query
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val client = Client(applicationContext)
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+            .setProject("5df5acd0d48c2") // Your project ID
+
+        val database = Database(client)
+
+        GlobalScope.launch {
+            val response = database.listDocuments(
+                collectionId = "[COLLECTION_ID]",
+                queries = [
+                    Query.equal('title', ['Avatar', 'Lord of the Rings']),
+                    Query.greater('year', 1999),
+                ],
+            )
+            val json = response.body?.string()        
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+func main() {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("my_project") // Your project ID
+
+    let database = Database(client)
+    database.listDocuments(
+        collectionId: "[COLLECTION_ID]",
+        queries: [
+            Query.equal('title', ['Avatar', 'Lord of the Rings']),
+            Query.greater('year', 1999)
+        ]
+    ) { result in
+        switch result {
+        case .failure(let error):
+            print(error.message)
+        case .success(let document):
+            print(String(describing: document)
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
 
 <h2><a href="/docs/database#indexes" id="indexes">Indexes</a></h2>
 <p>
