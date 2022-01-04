@@ -142,11 +142,11 @@ func main() {
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Page 1
-        const page1 = await sdk.database.listDocuments('movies', [], 25, 0);
-        const lastId = results.documents[results.documents.length - 1].$id;
-        
-        // Page 2
-        const page2 = await sdk.database.listDocuments('movies', [], 25, 0, lastId);
+const page1 = await sdk.database.listDocuments('movies', [], 25, 0);
+const lastId = results.documents[results.documents.length - 1].$id;
+
+// Page 2
+const page2 = await sdk.database.listDocuments('movies', [], 25, 0, lastId);
         </code></pre>
         </div>
     </li>
