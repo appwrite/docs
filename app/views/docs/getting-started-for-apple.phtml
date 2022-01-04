@@ -101,7 +101,7 @@ $appleVersion = (isset($versions['swift-client'])) ? $versions['swift-client'] :
 
 <p>Initialize your SDK code with your project ID, which can be found in your project settings page.</p>
 
-<div class="ide" data-lang="swift" data-lang-label="Swift">
+<div class="ide" data-lang="swift" data-lang-label="Apple SDK">
     <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
@@ -118,7 +118,7 @@ let client = Client()
 
 <p>Once your SDK object is set, access any of the Appwrite services and choose any request to send. Complete documentation for any service method you would like to use can be found in your SDK documentation or in the API References section.</p>
 
-<div class="ide" data-lang="apple" data-lang-label="Swift">
+<div class="ide" data-lang="swift" data-lang-label="Apple SDK">
                     <pre class="line-numbers"><code class="prism language-swift" data-prism>// Register User
 let account = Account(client: client)
 account.create(email: "email@example.com", password: "password") { result in
@@ -133,7 +133,7 @@ account.create(email: "email@example.com", password: "password") { result in
 
 <p>If you want to listen to changes in realtime from Appwrite, you can subscribe to a variety of channels and receive updates within milliseconds. Full documentation for Realtime can be found <a href="/docs/realtime">here</a>.</p>
 
-<div class="ide" data-lang="apple" data-lang-label="Apple SDK">
+<div class="ide" data-lang="swift" data-lang-label="Apple SDK">
   <pre class="line-numbers"><code class="prism language-swift" data-prism>// Subscribe to files channel
 let realtime = Realtime(client: client)
 
@@ -148,7 +148,7 @@ let subscription = realtime.subscribe(channels: ["files"]) { message in
 <p>If you're using macOS, for realtime to function correctly you need to ensure you have both "Outgoing Connections (Client)" <i>and</i> "Incoming Connections (Server)" enabled in your App Sandbox settings in your project file.</p>
 
 <h2><a href="/docs/getting-started-for-apple#fullExample" id="fullExample">Full Example</a></h2>
-<div class="ide" data-lang="apple" data-lang-label="Swift">
+<div class="ide" data-lang="swift" data-lang-label="Apple SDK">
                     <pre class="line-numbers"><code class="prism language-swift" data-prism>import io.appwrite.Client
 import Appwrite
 
