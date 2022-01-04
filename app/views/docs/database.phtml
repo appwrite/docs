@@ -224,7 +224,9 @@ void main() async {
     final client = Client();
     final database = Database(client);
     try {
-        final docs = await database.listDocuments(collectionId: 'movies', queries: [Query.equal('title', 'Avatar')]);
+        final docs = await database.listDocuments(
+            collectionId: 'movies',
+            queries: [Query.equal('title', 'Avatar')]);
         print(docs.toMap());
     } on AppwriteException catch(e) {
         print(e);
