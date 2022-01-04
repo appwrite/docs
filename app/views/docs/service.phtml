@@ -84,30 +84,30 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
             }
             ?>
 
-            <?php foreach ($platform['languages'] as $language):
-                if(!$language['enabled']) {
-                   continue;
-                }
+        <?php foreach ($platform['languages'] as $language):
+            if(!$language['enabled']) {
+               continue;
+            }
 
-                if(!isset($language['family']) || $language['family'] !== $family) {
-                    continue;
-                }
+            if(!isset($language['family']) || $language['family'] !== $family) {
+                continue;
+            }
 
-                $docDirectories = (isset($language['docDirectories']))
-                    ? $language['docDirectories']
-                    : ['Default' => 'examples'];
-                ?>
+            $docDirectories = (isset($language['docDirectories']))
+                ? $language['docDirectories']
+                : ['Default' => 'examples'];
+            ?>
 
-                <?php foreach($docDirectories as $docDirectoryKey => $docDirectory): ?>
-                    .language-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> .example-in-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> {
-                        display: block;
-                    }
+        <?php foreach($docDirectories as $docDirectoryKey => $docDirectory): ?>
+        .language-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> .example-in-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> {
+            display: block;
+        }
 
-                    .example-in-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> {
-                        display: none;
-                    }
-                <?php endforeach; ?>
-            <?php endforeach; ?>
+        .example-in-<?php echo strtolower($language['key']); ?>-<?php echo strtolower($docDirectoryKey); ?> {
+            display: none;
+        }
+        <?php endforeach; ?>
+        <?php endforeach; ?>
         <?php endforeach; ?>
     </style>
 
@@ -130,14 +130,14 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
         <div class="row responsive margin-top-negative-small text-size-small text-fade">
             <div class="col span-8">
                 <form
-                    data-analytics
-                    data-analytics-event="change"
-                    data-analytics-category="console"
-                    data-analytics-label="Switched SDK Examples"
-                    data-service="router.change"
-                    data-event="change"
-                    data-scope="window.ls"
-                    data-success="reset">
+                        data-analytics
+                        data-analytics-event="change"
+                        data-analytics-category="console"
+                        data-analytics-label="Switched SDK Examples"
+                        data-service="router.change"
+                        data-event="change"
+                        data-scope="window.ls"
+                        data-success="reset">
 
                     <?php echo $this->escape(ucfirst($family)); ?> integration with &nbsp;
                     <select class="choose-platform" name="URL">
@@ -146,11 +146,11 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 if(!$language['enabled']) {
                                     continue;
                                 }
-                                
+
                                 if(!isset($language['family']) || $language['family'] !== $family) {
                                     continue;
                                 }
-                                
+
                                 if($language['dev']) {
                                     continue;
                                 }
@@ -166,7 +166,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 <option value="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>-<?php echo $this->escape(strtolower($docDirectoryKey)); ?>"<?php echo (($key . '-' . strtolower($docDirectoryKey)) === $sdk) ? ' selected' : ''; ?>>
                                     <?php echo $this->escape($name); ?> SDK <?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?> examples)<?php endif; ?>
                                 </option>
-                                <?php endforeach; ?>
+                            <?php endforeach; ?>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
                     </select>
@@ -174,7 +174,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
             </div>
             <div class="col span-4 clear">
                 <form class="pull-end desktops-only" onchange="this.submit()"
-                    method="get" action="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>">
+                      method="get" action="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>">
 
                     <select class="choose-platform" name="v">
                         <?php foreach ($versions as $key => $value):
@@ -194,17 +194,17 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
     <?php if(!empty($path) && file_exists($path)): ?>
         <div class="row responsive <?php echo implode(' ', $classes); ?>">
             <div class="col span-8 margin-bottom">
-                
+
                 <div class="content margin-end-xl">
                     <?php echo $markdown->text(file_get_contents($path)); ?>
-                    
+
                     <div class="clear">
                         <a href="https://github.com/appwrite/appwrite/edit/master<?php echo $description; ?>" class="pull-end text-size-small" target="_blank">Edit on GitHub <i class="icon-github-circled"></i></a>
                     </div>
                 </div>
             </div>
             <div class="col span-4 margin-bottom index">
-                
+
                 <div class="margin-bottom-small text-fade">In this page</div>
 
                 <ul>
@@ -267,7 +267,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
         $rateKey = array_map(function($element)
         {
             $element = mb_substr($element, 0, mb_strpos($element, ':'));
-            
+
             return $element;
         }, explode(',', $rateKey));
 
@@ -285,7 +285,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                 }
             }
         }
-        
+
         ?>
         <div class="margin-bottom-large x-function" data-ls-attrs="class=margin-bottom-large x-function <?php echo implode(' ', $platformsList); ?>">
             <div class="row responsive">
@@ -310,17 +310,17 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
 
 
                     <?php if($family === APP_PLATFORM_SERVER): ?>
-                    <div class="margin-bottom-large">
-                        <h3 class="margin-bottom margin-top-small">Authentication</h3>
+                        <div class="margin-bottom-large">
+                            <h3 class="margin-bottom margin-top-small">Authentication</h3>
 
-                        <?php if(array_key_exists('Key', $security) && array_key_exists('JWT', $security)): ?>
-                            <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys" target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to the <u>"<?php echo $scope; ?>"</u> permission scope. You can also authenticate using a valid <a href="/docs/client/account#accountCreateJWT" target="_blank">JWT</a> and perform actions on behalf of your user.</p>
-                        <?php elseif(array_key_exists('Key', $security)): ?>
-                            <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys" target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to the <u>"<?php echo $scope; ?>"</u> permission scope.</p>
-                        <?php elseif(array_key_exists('JWT', $security)): ?>
-                            <p>To access this route, init your SDK with your project unique ID and a valid JWT. Using the <a href="/docs/client/account#accountCreateJWT" target="_blank">JWT</a> authentication you will be able to perform API actions on behalf of your user.</p>
-                        <?php endif; ?>
-                    </div>
+                            <?php if(array_key_exists('Key', $security) && array_key_exists('JWT', $security)): ?>
+                                <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys" target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to the <u>"<?php echo $scope; ?>"</u> permission scope. You can also authenticate using a valid <a href="/docs/client/account#accountCreateJWT" target="_blank">JWT</a> and perform actions on behalf of your user.</p>
+                            <?php elseif(array_key_exists('Key', $security)): ?>
+                                <p>To access this route, init your SDK with your project unique ID and <a href="/docs/keys" target="_blank">API Key</a> secret token. Make sure your API Key is granted with access to the <u>"<?php echo $scope; ?>"</u> permission scope.</p>
+                            <?php elseif(array_key_exists('JWT', $security)): ?>
+                                <p>To access this route, init your SDK with your project unique ID and a valid JWT. Using the <a href="/docs/client/account#accountCreateJWT" target="_blank">JWT</a> authentication you will be able to perform API actions on behalf of your user.</p>
+                            <?php endif; ?>
+                        </div>
                     <?php endif; ?>
 
                     <?php if(!empty($rateLimit)): ?>
@@ -328,51 +328,51 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                             <h3 class="margin-bottom margin-top-small">Rate Limits</h3>
 
                             <p>This endpoint is limited to <b><?php echo $rateLimit; ?> requests</b> in every <b><?php echo ($rateTime / 60);?> minutes</b>
-                            <?php
-                            $rateKey = array_values(array_filter($rateKey, function($element) {
-                                return ($element !== 'url');
-                            }));
-                            
-                            $count = count($rateKey);
-                            
-                            if(!empty($rateKey)) {
-                                echo ' per ';
-                            }
+                                <?php
+                                $rateKey = array_values(array_filter($rateKey, function($element) {
+                                    return ($element !== 'url');
+                                }));
 
-                            foreach($rateKey as $i => $factor) {
-                                
-                                switch ($factor) {
-                                    case 'ip':
-                                        $factor = 'IP address';
-                                        break;
-    
-                                    case 'url':
-                                        $factor = 'URL';
-                                        break;
-    
-                                    case 'userId':
-                                        $factor = 'user account';
-                                        break;
-    
-                                    case 'email':
-                                        $factor = 'email address';
-                                        break;
-    
-                                    default:
-                                        break;
+                                $count = count($rateKey);
+
+                                if(!empty($rateKey)) {
+                                    echo ' per ';
                                 }
 
-                                if(empty($factor)) {
-                                    continue;
-                                }
+                                foreach($rateKey as $i => $factor) {
 
-                                echo '<b>'.$factor.'</b>';
-             
-                                if($i + 1 !== $count) {
-                                    echo ($i+1 === $count-1) ? ' and ' : ', ';
+                                    switch ($factor) {
+                                        case 'ip':
+                                            $factor = 'IP address';
+                                            break;
+
+                                        case 'url':
+                                            $factor = 'URL';
+                                            break;
+
+                                        case 'userId':
+                                            $factor = 'user account';
+                                            break;
+
+                                        case 'email':
+                                            $factor = 'email address';
+                                            break;
+
+                                        default:
+                                            break;
+                                    }
+
+                                    if(empty($factor)) {
+                                        continue;
+                                    }
+
+                                    echo '<b>'.$factor.'</b>';
+
+                                    if($i + 1 !== $count) {
+                                        echo ($i+1 === $count-1) ? ' and ' : ', ';
+                                    }
                                 }
-                            }
-                            ?>. We use rate limits to avoid service abuse by users and as a security practice. <a href="/docs/rate-limits">Learn more about <?php APP_NAME; ?> rate limiting</a>.</p>
+                                ?>. We use rate limits to avoid service abuse by users and as a security practice. <a href="/docs/rate-limits">Learn more about <?php APP_NAME; ?> rate limiting</a>.</p>
                         </div>
                     <?php endif; ?>
 
@@ -418,11 +418,11 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
 
                         <table class="vertical full args">
                             <thead>
-                                <tr>
-                                    <td style="width: 120px">Status Code</td>
-                                    <td style="width: 170px">Content Type</td>
-                                    <td>Payload</td>
-                                </tr>
+                            <tr>
+                                <td style="width: 120px">Status Code</td>
+                                <td style="width: 170px">Content Type</td>
+                                <td>Payload</td>
+                            </tr>
                             </thead>
                             <tbody>
                             <?php foreach ($responses as $code => $response):
@@ -430,6 +430,8 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 $class = $codes[$code]['class'] ?? '';
                                 $description = (!empty($response['description']) && isset($response['schema']['$ref'])) ? $response['description'].' Object' : '-';
                                 $model = $response['schema']['$ref'] ?? '';
+
+                                $isOneOf = isset($response['schema']['x-oneOf']);
                                 ?>
                                 <tr>
                                     <td data-title="Status Code: "><span class="<?php echo $this->escape($class); ?>"><?php echo $this->escape($code); ?></span>&nbsp;&nbsp;<span class="text-fade"><?php echo $this->escape($text); ?></span></td>
@@ -441,6 +443,13 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                             <?php else: ?>
                                                 JSON Object
                                             <?php endif; ?>
+                                        <?php elseif($isOneOf): ?>
+                                            <?php
+                                            echo \implode('<br />', \array_map(function($oneOfRule) {
+                                                $oneOfRule = (isset($oneOfRule['$ref'])) ? str_replace('#/definitions/', '', $oneOfRule['$ref']) : '';
+                                                return '<a href="/docs/models/' . $this->escape($oneOfRule) . '">' . $this->escape($oneOfRule) . '</a>';
+                                            }, $response['schema']['x-oneOf']));
+                                            ?>
                                         <?php else: ?>
                                             -
                                         <?php endif; ?>
@@ -474,22 +483,22 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 $docDirectories = (isset($language['docDirectories']))
                                     ? $language['docDirectories']
                                     : ['Default' => 'examples'];
-   
-                            ?>
-                                <?php foreach($docDirectories as $docDirectoryKey => $docDirectory):
-                                    $example = APP_VENDOR_CE.'/docs/examples/'.$versionDocs.'/'.$language['family'].'-'.$language['key'].'/'.$docDirectory.'/'.$snippet;
 
-                                    if(!is_readable($example)) {
-                                        // echo "<p class=\"text-danger\"><b>Failed to read code example for {$language['name']}</b>: ({$example})</p>";
-                                        continue;
-                                    }
-                                    ?>
-                                    <li class="example-in-<?php echo $language['key']; ?>-<?php echo strtolower($docDirectoryKey); ?>">
-                                        <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?> SDK">
-                                            <pre class="line-numbers"><code class="prism language-<?php echo $language['prism']; ?>" data-prism><?php echo $this->escape(file_get_contents($example)); ?></code></pre>
-                                        </div>
-                                    </li>
-                                <?php endforeach; ?>
+                                ?>
+                                <?php foreach($docDirectories as $docDirectoryKey => $docDirectory):
+                                $example = APP_VENDOR_CE.'/docs/examples/'.$versionDocs.'/'.$language['family'].'-'.$language['key'].'/'.$docDirectory.'/'.$snippet;
+
+                                if(!is_readable($example)) {
+                                    // echo "<p class=\"text-danger\"><b>Failed to read code example for {$language['name']}</b>: ({$example})</p>";
+                                    continue;
+                                }
+                                ?>
+                                <li class="example-in-<?php echo $language['key']; ?>-<?php echo strtolower($docDirectoryKey); ?>">
+                                    <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?> SDK">
+                                        <pre class="line-numbers"><code class="prism language-<?php echo $language['prism']; ?>" data-prism><?php echo $this->escape(file_get_contents($example)); ?></code></pre>
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
                     </ul>
