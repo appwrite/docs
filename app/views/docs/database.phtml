@@ -92,7 +92,7 @@ The terms collections and documents are used because the Appwrite JSON REST API 
 </p>
 <p>
     When adding or removing attributes, your requests are processed in the background, indicated by the attribute's <span class="tag">status</span>.
-    Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. Once all of your attributes are <span class="tag">available</span>, then you can create a document.
+    Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. You are able to create a document while your attributes are still being processed, however you are not able to use the attributes on the documents until they are <span class="tag">available</span>
 </p>
 
 <h3><a href="/docs/advanced-database#create-documents" id="create-documents">Create Documents</a></h3>
