@@ -74,7 +74,7 @@ $swiftVersion = $versions['swift'] ?? '';
             <p>Add Appwrite SDK under dependencies in your `build.gradle(.kts)` file</p>
             <div class="ide margin-top-small" data-lang="gradle" data-lang-label="Gradle">
                 <pre class="line-numbers"><code class="prism language-gradle" data-prism>dependencies {
-    implementation("io.appwrite:sdk-for-kotlin:<?php $this->escape($kotlinVersion); ?>")
+    implementation("io.appwrite:sdk-for-kotlin:<?php echo $this->escape($kotlinVersion); ?>")
 }</code></pre>
             </div>
         </div>
@@ -86,7 +86,7 @@ $swiftVersion = $versions['swift'] ?? '';
             <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
     // ...
-    .package(url: "https://github.com/appwrite/sdk-for-swift.git", from: "<?php $this->escape($swiftVersion); ?>")
+    .package(url: "https://github.com/appwrite/sdk-for-swift.git", from: "<?php echo $this->escape($swiftVersion); ?>")
     // ...
 ]</code></pre>
             </div>

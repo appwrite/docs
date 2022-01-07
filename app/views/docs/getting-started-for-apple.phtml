@@ -11,7 +11,7 @@ foreach($platforms['client']['languages'] as $lang) {
     }
 }
 
-$appleVersion = (isset($versions['swift-client'])) ? $versions['swift-client'] : '';
+$appleVersion = $versions['apple'] ?? '';
 ?>
 <p>Appwrite is a development platform providing you an easy yet powerful API and management console to get your next project up and running quickly.</p>
 
