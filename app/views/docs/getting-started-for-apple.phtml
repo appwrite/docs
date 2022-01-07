@@ -121,7 +121,7 @@ let client = Client()
 <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
                     <pre class="line-numbers"><code class="prism language-swift" data-prism>// Register User
 let account = Account(client: client)
-account.create(email: "email@example.com", password: "password") { result in
+account.create(userId: "unique()", email: "email@example.com", password: "password") { result in
     switch result {
     case .failure(let error): print(error.message)
     case .success(let user): print(String(describing: user))
@@ -159,7 +159,7 @@ let client = Client()
 
 // Register User
 let account = Account(client: client)
-account.create(email: "email@example.com", password: "password") { result in
+account.create(userId: "unique()", email: "email@example.com", password: "password") { result in
     switch result {
     case .failure(let error): print(error.message)
     case .success(let user): print(String(describing: user))
