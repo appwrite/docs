@@ -12,6 +12,7 @@ foreach($platforms['server']['languages'] ?? [] as $lang) {
 }
 
 $kotlinVersion = $versions['kotlin'] ?? '';
+$swiftVersion = $versions['swift'] ?? '';
 ?>
 
 <p>Appwrite is a development platform providing you easy yet powerful API and management console to get your next project up and running quickly.</p>
@@ -85,7 +86,7 @@ $kotlinVersion = $versions['kotlin'] ?? '';
             <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
     // ...
-    .package(url: "https://github.com/appwrite/sdk-for-swift.git", from: "0.0.1")
+    .package(url: "https://github.com/appwrite/sdk-for-swift.git", from: "?php $this->escape($swiftVersion); ?>")
     // ...
 ]</code></pre>
             </div>
@@ -318,7 +319,6 @@ $client
         <h3>Python</h3>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
-from appwrite.services.users import Users
 
 client = Client()
 
@@ -406,7 +406,7 @@ client
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const users = new sdk.Users(client);
 
-let promise = users.create('email@example.com', 'password');
+let promise = users.create('[USER_ID]', 'email@example.com', 'password');
 
 promise.then(function (response) {
     console.log(response);
@@ -429,7 +429,7 @@ $result = $users->create('email@example.com', 'password');</code></pre>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
             <pre class="line-numbers"><code class="prism language-python" data-prism>users = Users(client)
 
-result = users.create('email@example.com', 'password')</code></pre>
+result = users.create('[USER_ID]', 'email@example.com', 'password')</code></pre>
         </div>
     </li>
     <li>
@@ -437,7 +437,7 @@ result = users.create('email@example.com', 'password')</code></pre>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby SDK">
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>users = Appwrite::Users.new(client);
 
-response = users.create(email: 'email@example.com', password: 'password');
+response = users.create(userId: '[USER_ID]', email: 'email@example.com', password: 'password');
 
 puts response</code></pre>
         </div>
@@ -447,7 +447,7 @@ puts response</code></pre>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>const users = new sdk.Users(client);
 
-let promise = users.create('email@example.com', 'password');
+let promise = users.create('[USER_ID]', 'email@example.com', 'password');
 
 promise.then(function (response) {
     console.log(response);
@@ -461,7 +461,7 @@ promise.then(function (response) {
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>final users = Users(client);
 
-final res = users.create('email@example.com', 'password');
+final res = users.create(userId: '[USER_ID]', 'email@example.com', 'password');
 
 res.then((response) {
     print(response);
@@ -477,7 +477,7 @@ res.then((response) {
 
 val users = Users(client);
 
-val res = users.create(email = 'email@example.com', password = 'password');
+val res = users.create(userId = '[USER_ID]', email = 'email@example.com', password = 'password');
 println(res.body?.string())</code></pre>
         </div>
     </li>
@@ -488,7 +488,7 @@ println(res.body?.string())</code></pre>
 
 let users = Users(client: client)
 
-users.create(email: "email@example.com", password: "password") { result in
+users.create(userId: "[USER_ID]", email: "email@example.com", password: "password") { result in
     switch result {
     case .failure(let error): print(error.message)
     case .success(let user): print(String(describing: user))
@@ -516,7 +516,7 @@ client
 ;
 
 const users = new sdk.Users(client);
-let promise = users.create('email@example.com', 'password');
+let promise = users.create('[USER_ID]', 'email@example.com', 'password');
 
 promise.then(function (response) {
     console.log(response);
@@ -542,7 +542,7 @@ $client
 
 $users = new Users($client);
 
-$result = $users->create('email@example.com', 'password');</code></pre>
+$result = $users->create('[USER_ID]', 'email@example.com', 'password');</code></pre>
         </div>
     </li>
     <li>
@@ -561,7 +561,7 @@ client = Client()
 
 users = Users(client)
 
-result = users.create('email@example.com', 'password')</code></pre>
+result = users.create('[USER_ID]', 'email@example.com', 'password')</code></pre>
         </div>
     </li>
     <li>
@@ -579,7 +579,7 @@ client
 
 users = Appwrite::Users.new(client);
 
-response = users.create(email: 'email@example.com', password: 'password');
+response = users.create(userId: '[USER_ID]', email: 'email@example.com', password: 'password');
 
 puts response</code></pre>
         </div>
@@ -598,7 +598,7 @@ client
     .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
 ;
 
-let promise = users.create('email@example.com', 'password');
+let promise = users.create('[USER_ID]', 'email@example.com', 'password');
 
 promise.then(function (response) {
     console.log(response);
@@ -622,7 +622,7 @@ void main() {
       .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
   ;
 
-  final res = users.create('email@example.com', 'password');
+  final res = users.create('[USER_ID]', 'email@example.com', 'password');
 
   res.then((response) {
       print(response);
@@ -647,7 +647,7 @@ client
 
 val users = Users(client);
 
-val res = users.create('email@example.com', 'password');
+val res = users.create('[USER_ID]', 'email@example.com', 'password');
 
 println(res.body?.string())</code></pre>
         </div>
@@ -666,7 +666,7 @@ client
 
 let users = Users(client: client)
 
-users.create(email: "email@example.com", password: "password") { result in
+users.create(userId: "[USER_ID]", email: "email@example.com", password: "password") { result in
     switch result {
     case .failure(let error): print(error.message)
     case .success(let user): print(String(describing: user))
