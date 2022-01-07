@@ -155,7 +155,7 @@ Account account = Account(client);
 
 Response user = await account
     .create(
-        userId: '[USER_ID]',
+        userId: 'unique()',
         email: 'me@appwrite.io',
         password: 'password',
         name: 'My Name'
@@ -198,7 +198,7 @@ Account account = Account(client);
 
 Response user = await account
     .create(
-        userId: '[USER_ID]',
+        userId: 'unique()',
         email: 'me@appwrite.io',
         password: 'password',
         name: 'My Name'

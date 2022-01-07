@@ -84,7 +84,7 @@ appwrite
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
                     <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Register User
 appwrite
-    .account.create('[USER_ID]', 'me@example.com', 'password', 'Jane Doe')
+    .account.create('unique()', 'me@example.com', 'password', 'Jane Doe')
         .then(response => {
             console.log(response);
         }, error => {
@@ -119,7 +119,7 @@ appwrite
 
 // Register User
 appwrite
-    .account.create('[USER_ID]', 'me@example.com', 'password', 'Jane Doe')
+    .account.create('unique()', 'me@example.com', 'password', 'Jane Doe')
         .then(response => {
             console.log(response);
         }, error => {

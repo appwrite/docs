@@ -90,7 +90,7 @@ val client = Client(context)
 <div class="ide" data-lang="android" data-lang-label="Android SDK">
                     <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// Register User
 val account = Account(client)
-val response = account.create("[USER_ID]", "email@example.com", "password")
+val response = account.create("unique()", "email@example.com", "password")
 val json = response.body?.string()</code></pre>
 </div>
 
@@ -123,7 +123,7 @@ val client = Client(context)
 
 // Register User
 val account = Account(client)
-val response = account.create("[USER_ID]", "email@example.com", "password")
+val response = account.create("unique()", "email@example.com", "password")
 val json = response.body?.string()
 
 // Subscribe to files channel
