@@ -338,7 +338,7 @@ func main() {
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>sdk.database.listDocuments('movies', [
-            Query.equal('title', 'Avatar', 'Lord of the Rings'),
+            Query.equal('title', ['Avatar', 'Lord of the Rings']),
             Query.greater('year', 1999)
         ]);
         </code></pre>
