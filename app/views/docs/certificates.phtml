@@ -1,0 +1,22 @@
+<p>Appwrite uses Let&#39;sEncrypt to auto-generate TLS certificates for your Appwrite instance to ensure your API traffic is appropriately encrypted. For Appwrite to properly generate certificates, a few conditions need to be met.</p>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+	<li>You need to use a public-facing domain with a known TLD pointing to your Appwrite instance.</li>
+	<li>Your _APP_ENV <a href="https://appwrite.io/docs/environment-variables">environment variable</a> should be set for production mode. The default Appwrite setup comes with this predefined setting, so you should be OK unless you change it.</li>
+	<li>You need to ensure you have a valid email address set on _APP_SYSTEM_SECURITY_EMAIL_ADDRESS. The default setup comes with certs@appwrite.io as the default value. While this address will work, it&#39;s recommended to change it to your own email.</li>
+	<li>Currently, Appwrite is using the <a href="https://letsencrypt.org/docs/client-options/" target="_blank">ACME</a> HTTP challenge to issue an TLS certificate. This forces us to generate certificates for port 443 when the challenge itself is performed on port 80. At this point, other ports will not work. To overcome this limit, you can set Appwrite on a separate sub-domain or use your own certificate or proxy server in front of Appwrite.</li>
+</ol>
+
+<h2>Debugging</h2>
+
+<p>In case you&#39;re still struggling with getting your certificate to work, check the Appwrite certificates worker log. You can do that with the following command:</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose logs appwrite-worker-certificates</code></pre>
+</div>
+
+<h2>Dev Environment and Localhosts</h2>
+
+<p>You can&#39;t issue a&nbsp;<a href="https://letsencrypt.org/docs/certificates-for-localhost/" target="_blank">signed certificate for localhost</a>. This is because nobody uniquely owns that hostname and not an Appwrite specific limitation, just the way the internet works. By default, Appwrite will issue a self-signed certificate that is good enough for development.</p>
+
+<p>When using a self-signed certificate, you should enable `client.setSelfSigned()` method in your SDK of choice. This will allow your application to trust and connect with your local Appwrite server.</p>
