@@ -124,19 +124,60 @@ As buckets are very similar to Collections we have in the database, here again, 
 
 <p>Below you can find all different parameters offered by preview endpoint to manipulate image</p>
 
-<ul>
-    <li><code>width</code> set the width of the output image in pixels, the image will be resized keeping the aspect ratio intact. Accepts integer between 0-4000</li>
-    <li><code>height</code> set the height of the output image in pixels, the image will be resized keeping the aspect ratio intact. Accepts integer between 0-4000</li>
-    <li><code>gravity</code> the gravity while cropping the image providing either width, height or both. Accepts any of: center, top-left, top, top-right, left, right, bottom-left, bottom, bottom-right</li>
-    <li><code>quality</code> set the quality of the output image. Accepts integer between 0-100, where 100 is the highest quality.</li>
-    <li><code>borderWidth</code> set a border with given width in pixels to the output image. Accepts integer between 0-100</li>
-    <li><code>borderColor</code> set a border color for the output image. Accepts any valid Hex color value without the leading #.</li>
-    <li><code>borderRadius</code> set a border radius in pixels. Accepts an integer between 0-4000.</li>
-    <li><code>opacity</code> set opacity for the output image. Accepts a float value between 0-1, where 0 makes it transparent. Only works with output format supporting alpha channel like png.</li>
-    <li><code>rotation</code> rotate the output image by a degree. Accepts an integer between -360 to 360.</li>
-    <li><code>background</code> set a background color. Accepts any valid Hex color value without the leading #. Only works with output format supporting alpha channel like png.</li>
-    <li><code>output</code> set the output image format. If not provided, will use the original image's format. Supported formats are: jpg, jpeg, png, gif and webp</li>
-</ul>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Parameter</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>height</td>
+            <td>set the height of the output image in pixels, the image will be resized keeping the aspect ratio intact. Accepts integer between 0-4000</td>
+        </tr>
+        <tr>
+            <td>width</td>
+            <td> set the width of the output image in pixels, the image will be resized keeping the aspect ratio intact. Accepts integer between 0-4000</td>
+        </tr>
+        <tr>
+            <td>gravity</td>
+            <td> the gravity while cropping the image providing either width, height or both. Accepts any of: center, top-left, top, top-right, left, right, bottom-left, bottom, bottom-right</td>
+        </tr>
+        <tr>
+            <td>quality</td>
+            <td> set the quality of the output image. Accepts integer between 0-100, where 100 is the highest quality.</td>
+        </tr>
+        <tr>
+            <td>borderWidth</td>
+            <td> set a border with given width in pixels to the output image. Accepts integer between 0-100</td>
+        </tr>
+        <tr>
+            <td>borderColor</td>
+            <td> set a border color for the output image. Accepts any valid Hex color value without the leading #.</td>
+        </tr>
+        <tr>
+            <td>borderRadius</td>
+            <td> set a border radius in pixels. Accepts an integer between 0-4000.</td>
+        </tr>
+        <tr>
+            <td>opacity</td>
+            <td> set opacity for the output image. Accepts a float value between 0-1, where 0 makes it transparent. Only works with output format supporting alpha channel like png.</td>
+        </tr>
+        <tr>
+            <td>rotation</td>
+            <td> rotate the output image by a degree. Accepts an integer between -360 to 360.</td>
+        </tr>
+        <tr>
+            <td>background</td>
+            <td> set a background color. Accepts any valid Hex color value without the leading #. Only works with output format supporting alpha channel like png.</td>
+        </tr>
+        <tr>
+            <td>output</td>
+            <td> set the output image format. If not provided, will use the original image's format. Supported formats are: jpg, jpeg, png, gif and webp</td>
+        </tr>
+    </tbody>
+</table>
 
 
 <h2>Downloading and streaming with range</h2>
