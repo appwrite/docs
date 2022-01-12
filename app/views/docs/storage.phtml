@@ -4,17 +4,17 @@
 
 <p>With version 0.13 of Appwrite, we also have introduced storage buckets as a container for your files so that you can give more context to your files. Storage buckets is similar to Collections we have in our <a href="/docs/database">Database</a> service. The difference is, buckets gives you more control over what types of <b>files</b> you allow, what is the maximum allowed file size, and whether or not to encrypt the files.</p>
 
-<h2>Buckets</h2>
+<h2><a href="/docs/storage#bucket" id="bucket">Buckets</a></h2>
 
 <p> Storage buckets are a way to group files into a meaningful collection and give them context. Buckets also provide more power to decide what kinds of files, what sizes you want to allow in that bucket, whether or not to encrypt the files, scan with antivirus and more. Let's look at how we can create a bucket and configure it to our needs.</p>
 
-<h3>Create Bucket</h3>
+<h3><a href="/docs/storage#createBucket" id="createBucket">Create Bucket</h3>
 
 <p>You can create your bucket from your Appwrite project's dashboard, using any of our server side SDKs or directly using our REST API authenticated using an API Key. In order to create a bucket from the dashboard, access your Storage from your project's left navigation panel. Click <b>Add Bucket</b> button and choose your bucket's name. For convenience, you can also set a custom ID for your bucket instead of auto-generated ID. This will create a new bucket and take you to its settings page, where you can configure various options for your bucket.</p>
 
 <p>You can manage your buckets programmatically using one of Appwrite's Server <a href="/docs/sdks#server">SDKs</a> or REST API paired with an API Key. You can manage files with both Server and Client side.</p>
 
-<h4>Permissions</h4>
+<h4><a href="/docs/storage#permission" id="permission">Permissions</a></h4>
 
 As buckets are very similar to Collections we have in the database, here again, we have a similar permission model. Buckets support either bucket level permission or file level permission to allow different ways to manage access to your buckets and files. Check out the <a href="/docs/permissions">Permissions</a> documentation to learn more about permissions types available.
 
@@ -34,7 +34,7 @@ As buckets are very similar to Collections we have in the database, here again, 
     <p>For security purposes, an active Account session is required to create resources. So, even if wildcard write permissions are set, only logged-in users can create files in a bucket. If you require this behavior for your app, create an <a href="/docs/client/account?sdk=web-default#accountCreateAnonymousSession" target="_blank">anonymous session</a> first. An active session helps Appwrite enforce rate-control limits and protect your projects from intensive write operations.</p>
 </div>
 
-<h4>More Bucket Configurations</h4>
+<h4><a href="/docs/storage#bucketConfig" id="bucketConfig">More Bucket Configurations</a></h4>
 
 <p>Unlike Collections, storage buckets have more configuration options regarding the type and size of files that can be in the bucket, encryption and anti-virus scanning. If you look at the bucket settings or the REST API example above you can find these configurations. Let's look at what those are:</p>
 
@@ -67,7 +67,7 @@ As buckets are very similar to Collections we have in the database, here again, 
 
 <p>You can learn more about storage buckets and APIs you can use to manage storage buckets from our <a href="docs/server/storage">Storage documentation</a>. Now that we know how to create and configure buckets for our applications, let's look at how we can manage files using the storage service.</p>
 
-<h2>Create File</h2>
+<h2><a href="/docs/storage#createFile" id="createFile">Create File</a></h2>
 
 <p>Once you create a bucket or have navigated to bucket details, you can access the Files tab from where you can upload, view, delete and update files in the bucket using Appwrite project's dashboard. You can also perform all those operations from Appwrite's client SDK, server SDKs and REST APIs as long as you have proper permission.</p>
 
@@ -183,7 +183,8 @@ func main() {
 
 <h3>Large Files (files above 5MB)</h3>
 
-<p>Above method will only work for files up to 5MB in size. If any files are above 5MB, you will need to upload them in chunks. Don't worry, if you are using Appwrite's console or any of our SDKs we handle that internally, so no matter what file size you try to upload, it will work. Below is a code example in Dart, that shows how you can upload a large file by chunking it into smaller ones. We are using the content-range header provided in the web spec in order to support chunked upload. So if you are using REST API you need to provide chunks and those headers to make a successful upload.</p>
+<p>If you are trying to upload any files that are above 5MB, you will need to upload them in chunks. Don't worry, if you are using Appwrite's console or any of our SDKs we handle that internally, so no matter what file size you try to upload, it will work.</p>
+<p>If however you want to use REST API directly, below is a code example in Dart, that shows how you can upload a large file by chunking it into smaller ones. We are using the content-range header provided in the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Range">web spec</a> in order to support chunked upload. You need to provide chunks and those headers to make a successful upload.</p>
 
 <div class="ide margin-bottom" data-lang="dart" data-lang-label="Upload Large File">
     <pre class="line-numbers"><code class="prism language-dart" data-prism>void uploadFile() async {
@@ -229,9 +230,9 @@ func main() {
 }</code></pre>
 </div>
 
-<h2>Image Manipulation</h2>
+<h2><a href="/docs/storage#imagePreview" id="imagePreview">Image Manipulation</a></h2>
 
-<p>Another great built-in feature of Appwrite is the image manipulation feature. With Appwrite storage's preview endpoint you can manipulate resolution, add borders and border radius, add background colour, set the opacity for the image and get the image in the appropriate output format. This enables a wide range of possibilities! You can manipulate images resolution to display properly on responsive websites. You can also adjust image border, background colour and border radius to match the theming of your application. You can do all of that without caring about how the image was originally uploaded.</p>
+<p>Another great built-in feature of Appwrite is the image manipulation feature. With Appwrite storage's <a href="/docs/client/storage#storageGetFilePreview">preview endpoint</a> you can manipulate resolution, add borders and border radius, add background colour, set the opacity for the image and get the image in the appropriate output format. This enables a wide range of possibilities! You can manipulate images resolution to display properly on responsive websites. You can also adjust image border, background colour and border radius to match the theming of your application. You can do all of that without caring about how the image was originally uploaded.</p>
 
 <p>Below you can find all different parameters offered by preview endpoint to manipulate image</p>
 
@@ -291,6 +292,6 @@ func main() {
 </table>
 
 
-<h2>Downloading and streaming with range</h2>
+<h2><a href="/docs/storage#streaming" id="streaming">Downloading and streaming with range</a></h2>
 
 <p>Apart from previewing files and images, downloading is another important feature. With 0.13 we also support streamed download using the HTTP range header. If you are using our SDKs or console, nothing is different. Even if you want to download the whole file at once, even if you use the REST endpoint directly, there isn't any difference. However, if you want to get only a part of a file from storage, you can supply the range header and the server will respond with an appropriate chunk of the file.</p>
