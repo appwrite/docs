@@ -73,18 +73,113 @@ As buckets are very similar to Collections we have in the database, here again, 
 
 <p>Once you are in the files tab, you can click <b>Add File</b> and select a file to upload. If the bucket is configured to accept the file type and size you are uploading, your file will be uploaded and you will see the file in the list of files.</p>
 
-<p>You can also upload files using REST API or SDKs. Below is a CURL syntax to create a file.</p>
+<p>You can also upload file programmatically using our SDKs</p>
 
-<div class="ide margin-bottom" data-lang="bash" data-lang-label="Create File">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>curl \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -H "x-appwrite-project: YOUR_PROJECT_ID" \
-    -H "x-appwrite-key: YOUR_API_KEY" \
-    -F "file=@/path/to/file.jpg" \
-    -F "fileId=unique()" \
-    https://YOUR_HOSTNAME/v1/storage/buckets/BUCKET_ID/files</code></pre>
-</div>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
+
+const sdk = new Appwrite();
+const promise = sdk.storage.createFile('[BUCKET_ID]', 'unique()', document.getElementById('uploader').files[0]);
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+void main() { // Init SDK
+  Client client = Client();
+  Storage storage = Storage(client);
+
+  client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+  ;
+  Future result = storage.createFile(
+    bucketId: '[BUCKET_ID]',
+    fileId: '[FILE_ID]',
+    file: await MultipartFile.fromPath('file', './path-to-files/image.jpg', 'image.jpg'),
+  );
+
+  result
+    .then((response) {
+      print(response);
+    }).catchError((error) {
+      print(error.response);
+  });
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="android" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-android" data-prism>import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import io.appwrite.Client
+import io.appwrite.services.Storage
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val client = Client(applicationContext)
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+            .setProject("5df5acd0d48c2") // Your project ID
+
+        val storage = Storage(client)
+
+        GlobalScope.launch {
+            val response = storage.createFile(
+                bucketId = "[BUCKET_ID]",
+                fileId = "[FILE_ID]",
+                file = File("./path-to-files/image.jpg"),
+            )
+            val json = response.body?.string()        
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+func main() {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("5df5acd0d48c2") // Your project ID
+
+    let storage = Storage(client)
+    storage.createFile(
+        bucketId: "[BUCKET_ID]",
+        fileId: "[FILE_ID]",
+        file: File(name: "image.jpg", buffer: yourByteBuffer)
+    ) { result in
+        switch result {
+        case .failure(let error):
+            print(error.message)
+        case .success(let file):
+            print(String(describing: file)
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
 
 <h3>Large Files (files above 5MB)</h3>
 
