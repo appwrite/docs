@@ -12,7 +12,17 @@
 
 <p>You can create your bucket from your Appwrite project's dashboard, using any of our server side SDKs or directly using our REST API authenticated using an API Key. In order to create a bucket from the dashboard, access your Storage from your project's left navigation panel. Click <b>Add Bucket</b> button and choose your bucket's name. For convenience, you can also set a custom ID for your bucket instead of auto-generated ID. This will create a new bucket and take you to its settings page, where you can configure various options for your bucket.</p>
 
-<p>In order to create a bucket programmatically, you can either use any of our server side SDKs or REST API paired with an API Key. Let's look at a code sample using CURL, how we can create a bucket using our REST API.</p>
+<p>In order to [create a bucket](https://appwrite.io/docs/server/storage?sdk=dart-default#storageCreateBucket) programmatically, you can either use any of our server side [SDKs](https://appwrite.io/docs/sdks#server) or REST API paired with an API Key. Let's look at a code sample using CURL, how we can create a bucket using our REST API.</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Create bucket">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>curl \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -H "x-appwrite-project: YOUR_PROJECT_ID" \
+    -H "x-appwrite-key: YOUR_KEY_SECRET" \
+    -d '{"name": "my-bucket", "bucketId": "my-bucket-id", "permission": "file"}' \
+    https://YOUR_HOSTNAME/v1/storage/buckets</code></pre>
+</div>
 
 <h4>Understanding Bucket Permissions</h4>
 
@@ -49,13 +59,64 @@ As buckets are very similar to Collections we have in the database, here again, 
 
 <p>You can also upload files using REST API or SDKs. Below is a CURL syntax to create a file.</p>
 
-<!-- Create file code -->
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Create File">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>curl \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -H "x-appwrite-project: YOUR_PROJECT_ID" \
+    -H "x-appwrite-key: YOUR_KEY_SECRET" \
+    -F "file=@/path/to/file.jpg" \
+    -F "fileId=unique()" \
+    https://YOUR_HOSTNAME/v1/storage/buckets/BUCKET_ID/files</code></pre>
+</div>
 
 <h3>Large Files (files above 5MB)</h3>
 
-<p>Above method will only work for files up to 5MB in size. If any files are above 5MB, you will need to upload them in chunks. Don't worry, if you are using Appwrite's console or any of our SDKs we handle that internally, so no matter what file size you try to upload, it will work. Below is a code example in Dart of how you can chunk and upload each chunk. We are using the content-range header provided in the web spec in order to support chunked upload. So if you are using REST API you need to provide chunks and those headers to make a successful upload.</p>
+<p>Above method will only work for files up to 5MB in size. If any files are above 5MB, you will need to upload them in chunks. Don't worry, if you are using Appwrite's console or any of our SDKs we handle that internally, so no matter what file size you try to upload, it will work. Below is a code example in Dart, that shows how you can upload a large file by chunking it into smaller ones. We are using the content-range header provided in the web spec in order to support chunked upload. So if you are using REST API you need to provide chunks and those headers to make a successful upload.</p>
 
-<!-- dart code example -->
+<div class="ide margin-bottom" data-lang="dart" data-lang-label="Upload Large File">
+    <pre class="line-numbers"><code class="prism language-dart" data-prism>void uploadFile() async {
+  final client = Client();
+  client
+    .setEndpoint('YOUR_ENDPOINT')
+    .setProject('YOUR_PROJECT_ID');
+  final file = File(path);
+  final totalSize = file.lengthSync();
+  final chunkSize = 5 * 1024 * 1024;
+  var start = 0;
+  final raf = file.openSync(mode: FileMode.read);
+  var counter = 0;
+  while (start < totalSize) {
+    counter++;
+    raf.setPositionSync(start);
+    final contents = raf.readSync(chunkSize);
+    final mfile = MultipartFile.fromBytes(contents, filename: 'hello.mkv');
+    final contentRanges =
+        'bytes $start-${min<int>(((start + chunkSize) - 1), totalSize)}/$totalSize';
+    var headers = {
+      'content-type': 'multipart/form-data',
+      'content-range': contentRanges,
+      'x-appwrite-project': 'YOUR_PROJECT_ID',
+      'x-appwrite-key': 'YOUR_KEY'
+    };
+    try {
+      final res = await client.call(HttpMethod.post,
+          path: '/storage/buckets/BUCKET_ID/files',
+          headers: headers,
+          params: <String, dynamic>{
+            'fileId': 'unique()',
+            'file': mfile,
+            'read': ['role:all'],
+            'write': ['role:all']
+          });
+      start += chunkSize;
+    } on AppwriteException catch (e) {
+      print(e.message);
+      print(e.response);
+    }
+  }
+}</code></pre>
+</div>
 
 <h2>Image Manipulation</h2>
 
