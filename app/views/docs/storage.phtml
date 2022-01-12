@@ -12,19 +12,9 @@
 
 <p>You can create your bucket from your Appwrite project's dashboard, using any of our server side SDKs or directly using our REST API authenticated using an API Key. In order to create a bucket from the dashboard, access your Storage from your project's left navigation panel. Click <b>Add Bucket</b> button and choose your bucket's name. For convenience, you can also set a custom ID for your bucket instead of auto-generated ID. This will create a new bucket and take you to its settings page, where you can configure various options for your bucket.</p>
 
-<p>In order to <a href="/docs/server/storage?sdk=dart-default#storageCreateBucket">create bucket</a> programmatically, you can either use any of our server side <a href="/docs/sdks#server">SDKs</a> or REST API paired with an API Key. Let's look at a code sample using CURL, how we can create a bucket using our REST API.</p>
+<p>You can manage your buckets programmatically using one of Appwrite's Server <a href="/docs/sdks#server">SDKs</a> or REST API paired with an API Key. You can manage files with both Server and Client side.</p>
 
-<div class="ide margin-bottom" data-lang="bash" data-lang-label="Create bucket">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>curl \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -H "x-appwrite-project: YOUR_PROJECT_ID" \
-    -H "x-appwrite-key: YOUR_API_KEY" \
-    -d '{"name": "my-bucket", "bucketId": "my-bucket-id", "permission": "file"}' \
-    https://YOUR_HOSTNAME/v1/storage/buckets</code></pre>
-</div>
-
-<h4>Understanding Bucket Permissions</h4>
+<h4>Permissions</h4>
 
 As buckets are very similar to Collections we have in the database, here again, we have a similar permission model. Buckets support either bucket level permission or file level permission to allow different ways to manage access to your buckets and files. Check out the <a href="/docs/permissions">Permissions</a> documentation to learn more about permissions types available.
 
@@ -38,16 +28,42 @@ As buckets are very similar to Collections we have in the database, here again, 
 
 <p>With file level permission model, you have more granular control over the access of each file. With this permission model, the bucket permissions are ignored and permissions on each file take into effect whenever we are trying to read or write files into the bucket. This is more suitable in the use cases where you want to have different permission for each file. For example, you have a bucket for user's profile images, and you only want each user to only be able to modify their own image. In such a scenario, a file level permission model will make much more sense and will be easier to manage.</p>
 
+<div class="notice margin-top-large margin-bottom-large">
+    <h5>Active Session Required</h5>
+
+    <p>For security purposes, an active Account session is required to create resources. So, even if wildcard write permissions are set, only logged-in users can create files in a bucket. If you require this behavior for your app, create an <a href="/docs/client/account?sdk=web-default#accountCreateAnonymousSession" target="_blank">anonymous session</a> first. An active session helps Appwrite enforce rate-control limits and protect your projects from intensive write operations.</p>
+</div>
+
 <h4>More Bucket Configurations</h4>
 
 <p>Unlike Collections, storage buckets have more configuration options regarding the type and size of files that can be in the bucket, encryption and anti-virus scanning. If you look at the bucket settings or the REST API example above you can find these configurations. Let's look at what those are:</p>
 
-<ul>
-    <li> <code>allowedFileExtensions</code> parameter allows you to provide a list of file extensions that will be accepted into the bucket.</li>
-    <li><code>maximumFileSize</code> parameter allows you to set the maximum size of a file that a bucket accepts. The buckets will accept any file less than or equal to the size provided here.</li>
-    <li><code>encryption</code> parameter allows you to configure whether or not the files inside the bucket will be encrypted.</li>
-    <li><code>antivirus</code> parameter allows you to configure whether or not the files being added inside the bucket be scanned by antivirus.</li>
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>allowedFileExtensions</td>
+            <td>parameter allows you to provide a list of file extensions that will be accepted into the bucket.</td>
+        </tr>
+        <tr>
+            <td>maximumFileSize</td>
+            <td> parameter allows you to set the maximum size of a file that a bucket accepts. The buckets will accept any file less than or equal to the size provided here.</td>
+        </tr>
+        <tr>
+            <td>encryption</td>
+            <td> parameter allows you to configure whether or not the files inside the bucket will be encrypted.</td>
+        </tr>
+        <tr>
+            <td>antivirus</td>
+            <td> parameter allows you to configure whether or not the files being added inside the bucket be scanned by antivirus.</td>
+        </tr>
+    </tbody>
+</table>
 
 <p>You can learn more about storage buckets and APIs you can use to manage storage buckets from our <a href="docs/server/storage">Storage documentation</a>. Now that we know how to create and configure buckets for our applications, let's look at how we can manage files using the storage service.</p>
 
