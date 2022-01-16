@@ -177,58 +177,13 @@ func main() {
     </li>
 </ul>
 
-<h3>Large Files (files above 5MB)</h3>
-
-<p>If you are trying to upload any files that are above 5MB, you will need to upload them in chunks. Don't worry, if you are using Appwrite's console or any of our SDKs we handle that internally, so no matter what file size you try to upload, it will work.</p>
-<p>If however you want to use REST API directly, below is a code example in Dart, that shows how you can upload a large file by chunking it into smaller ones. We are using the content-range header provided in the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Range">web spec</a> in order to support chunked upload. You need to provide chunks and those headers to make a successful upload.</p>
-
-<div class="ide margin-bottom" data-lang="dart" data-lang-label="Upload Large File">
-    <pre class="line-numbers"><code class="prism language-dart" data-prism>void uploadFile() async {
-  final client = Client();
-  client
-    .setEndpoint('YOUR_ENDPOINT')
-    .setProject('YOUR_PROJECT_ID');
-  final file = File(path);
-  final totalSize = file.lengthSync();
-  final chunkSize = 5 * 1024 * 1024;
-  var start = 0;
-  final raf = file.openSync(mode: FileMode.read);
-  var counter = 0;
-  while (start < totalSize) {
-    counter++;
-    raf.setPositionSync(start);
-    final contents = raf.readSync(chunkSize);
-    final mfile = MultipartFile.fromBytes(contents, filename: 'hello.mkv');
-    final contentRanges =
-        'bytes $start-${min<int>(((start + chunkSize) - 1), totalSize)}/$totalSize';
-    var headers = {
-      'content-type': 'multipart/form-data',
-      'content-range': contentRanges,
-      'x-appwrite-project': 'YOUR_PROJECT_ID',
-      'x-appwrite-key': 'YOUR_API_KEY'
-    };
-    try {
-      final res = await client.call(HttpMethod.post,
-          path: '/storage/buckets/BUCKET_ID/files',
-          headers: headers,
-          params: <String, dynamic>{
-            'fileId': 'unique()',
-            'file': mfile,
-            'read': ['role:all'],
-            'write': ['role:all']
-          });
-      start += chunkSize;
-    } on AppwriteException catch (e) {
-      print(e.message);
-      print(e.response);
-    }
-  }
-}</code></pre>
-</div>
+<p>When you are trying to upload any files that are above 5MB, you will need to upload them in chunks. Don't worry, if you are using Appwrite's console or any of our SDKs we handle that internally, so no matter what file size you try to upload, it will work.</p>
 
 <h2><a href="/docs/storage#imagePreview" id="imagePreview">Image Manipulation</a></h2>
 
-<p>Another great built-in feature of Appwrite is the image manipulation feature. With Appwrite storage's <a href="/docs/client/storage#storageGetFilePreview">preview endpoint</a> you can manipulate resolution, add borders and border radius, add background colour, set the opacity for the image and get the image in the appropriate output format. This enables a wide range of possibilities! You can manipulate images resolution to display properly on responsive websites. You can also adjust image border, background colour and border radius to match the theming of your application. You can do all of that without caring about how the image was originally uploaded.</p>
+<p>Another great built-in feature of Appwrite is the image manipulation feature. With Appwrite storage's <a href="/docs/client/storage#storageGetFilePreview">preview endpoint</a> you can manipulate resolution, add borders and border radius, add background colour, set the opacity for the image and get the image in the appropriate output format. </p>
+
+<p>This enables a wide range of possibilities! You can manipulate images resolution to display properly on responsive websites. You can also adjust image border, background colour and border radius to match the theming of your application. You can do all of that without caring about how the image was originally uploaded.</p>
 
 <p>Below you can find all different parameters offered by preview endpoint to manipulate image</p>
 
