@@ -6,11 +6,11 @@
 
 <h2><a href="/docs/storage#bucket" id="bucket">Buckets</a></h2>
 
-<p> Storage buckets are a way to group files into a meaningful collection and give them context. Buckets also provide more power to decide what kinds of files, what sizes you want to allow in that bucket, whether or not to encrypt the files, scan with antivirus and more. Let's look at how we can create a bucket and configure it to our needs.</p>
+<p> Storage buckets are a way to group files into a meaningful collection and give them context. Buckets also provide more power to decide what kinds of files, what sizes you want to allow in that bucket, whether or not to encrypt the files, scan with antivirus and more. Let's look at how we can create a bucket and configure it to your needs.</p>
 
 <h3><a href="/docs/storage#createBucket" id="createBucket">Create Bucket</a></h3>
 
-<p>You can create your bucket from your Appwrite project's dashboard, using any of our server side SDKs or directly using our REST API authenticated using an API Key. In order to create a bucket from the dashboard, access your Storage from your project's left navigation panel. Click <b>Add Bucket</b> button and choose your bucket's name. For convenience, you can also set a custom ID for your bucket instead of auto-generated ID. This will create a new bucket and take you to its settings page, where you can configure various options for your bucket.</p>
+<p>You can create your bucket from your Appwrite project's dashboard, using any of our server side SDKs, or directly using our REST API authenticated using an API Key. In order to create a bucket from the dashboard, access your Storage from your project's left navigation panel. Click <b>Add Bucket</b> button and choose your bucket's name. For convenience, you can also set a custom ID for your bucket instead of auto-generated ID. This will create a new bucket and take you to its settings page, where you can configure various options for your bucket.</p>
 
 <p>You can manage your buckets programmatically using one of Appwrite's Server <a href="/docs/sdks#server">SDKs</a> or REST API paired with an API Key. You can manage files with both Server and Client side.</p>
 
@@ -20,7 +20,7 @@ As buckets are very similar to Collections we have in the database, here again, 
 
 <h4>Bucket Level Permissions</h4>
 
-<p>With bucket level permission, you only need to provide permissions in your bucket and not in files. If you set the permission to bucket level, file permissions are optional and ignored even if you have set them. This is useful when you want to provide the same permission for collections of files but don't want to repeat the same permission for each file. You provide it once for bucket, set the bucket permission to be bucket level and you are done. If you want to update the permission, you only need to do it once in the bucket. With this permission model, if a user has a read and write permission, they will be able to read all the files and modify all the files in that bucket.</p>
+<p>With bucket level permissions, you only need to provide permissions in your bucket and not in files. If you set the permissions at the bucket level, file permissions are optional and ignored even if you have set them. This is useful when you want to provide the same permission for collections of files but don't want to repeat the same permission for each file. You provide it once for bucket, set the bucket permissions to be bucket level and you are done. If you want to update the permission, you only need to do it once in the bucket. With this permission model, if a user has a read and write permission, they will be able to read all the files and modify all the files in that bucket.</p>
 
 <p>However, with this permission model, you don't have granular control over the files inside the bucket. This model is more suitable for a use case where you have many people who all have access to the same group of files. Instead of adding their permission to each file, you can just create a bucket with bucket level permission and provide them access. Now you can add all the files they should have access to inside that bucket.</p>
 
@@ -69,9 +69,9 @@ As buckets are very similar to Collections we have in the database, here again, 
 
 <h2><a href="/docs/storage#createFile" id="createFile">Create File</a></h2>
 
-<p>Once you create a bucket or have navigated to bucket details, you can access the Files tab from where you can upload, view, delete and update files in the bucket using Appwrite project's dashboard. You can also perform all those operations from Appwrite's client SDK, server SDKs and REST APIs as long as you have proper permission.</p>
+<p>After you create a bucket or have navigated to bucket details, you can access the Files tab so you can upload, view, delete and update files in the bucket using Appwrite project's dashboard. You can also perform all those operations from Appwrite's client SDK, server SDKs, and REST APIs as long as you have proper permission.</p>
 
-<p>Once you are in the files tab, you can click <b>Add File</b> and select a file to upload. If the bucket is configured to accept the file type and size you are uploading, your file will be uploaded and you will see the file in the list of files.</p>
+<p>When you are in the files tab, you can click <b>Add File</b> and select a file to upload. If the bucket is configured to accept the file type and size you are uploading, your file will be uploaded and you will see the file in the list of files.</p>
 
 <p>You can also upload file programmatically using our SDKs</p>
 
