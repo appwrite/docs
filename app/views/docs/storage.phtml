@@ -14,15 +14,15 @@
 
 As buckets are very similar to Collections we have in the database, here again, we have a similar permission model. Buckets support either bucket level permission or file level permission to allow different ways to manage access to your buckets and files. Check out the <a href="/docs/permissions">Permissions</a> documentation to learn more about permissions types available.
 
+<h4>File Level Permissions</h4>
+<p>
+    With this permission model, you have granular access control over every file, and users will only be able to access files for which they have explicit permissions. File permissions are required in this permission model, and bucket permissions are optional.
+</p>
+
 <h4>Bucket Level Permissions</h4>
-
-<p>With bucket level permissions, you only need to provide permissions in your bucket and not in files. If you set the permissions at the bucket level, file permissions are optional and ignored even if you have set them. This is useful when you want to provide the same permission for collections of files but don't want to repeat the same permission for each file. You provide it once for bucket, set the bucket permissions to be bucket level and you are done. If you want to update the permission, you only need to do it once in the bucket. With this permission model, if a user has a read and write permission, they will be able to read all the files and modify all the files in that bucket.</p>
-
-<p>However, with this permission model, you don't have granular control over the files inside the bucket. This model is more suitable for a use case where you have many people who all have access to the same group of files. Instead of adding their permission to each file, you can just create a bucket with bucket level permission and provide them access. Now you can add all the files they should have access to inside that bucket.</p>
-
-<h4>File Level Permission</h4>
-
-<p>With file level permission model, you have more granular control over the access of each file. With this permission model, the bucket permissions are ignored and permissions on each file take into effect whenever we are trying to read or write files into the bucket. This is more suitable in the use cases where you want to have different permission for each file. For example, you have a bucket for user's profile images, and you only want each user to only be able to modify their own image. In such a scenario, a file level permission model will make much more sense and will be easier to manage.</p>
+<p>
+    With bucket-level permissions, you assign permissions once for every file in the buckets's settings - users with "read" access to the bucket can see all files in that bucket. This permission model requires you to set bucket permissions on the bucket settings page. File permissions are optional and will not be evaluated even when set.
+</p>
 
 <div class="notice margin-top-large margin-bottom-large">
     <h5>Active Session Required</h5>
