@@ -1,6 +1,4 @@
 <?php
-$versions = $this->getParam('versions', []);
-
 $clients = [
     [
         'title' => 'Getting Started for Web',
@@ -46,12 +44,13 @@ $clients = [
     ],
 ];
 
-function getSpecsUrl($type, $platform) use ($versions) {
+$latestVersion = $this->getParam('latestVersion', 'latest');
+
+$getSpecsUrl = function($type, $platform) use ($latestVersion) {
     // $type is 'swagger2' or 'open-api3'
     // $platform is 'client' or 'server'
-    $version = $versions[0]['docs'];
 
-    return 'https://github.com/appwrite/appwrite/blob/master/app/config/specs/' . $type . '-' . $version . '-' . $platform . '.json';
+    return 'https://github.com/appwrite/appwrite/blob/master/app/config/specs/' . $type . '-' . $latestVersion . '-' . $platform . '.json';
 }
 
 ?>
