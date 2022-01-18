@@ -1,4 +1,5 @@
 <?php
+$versions = $this->getParam('versions', []);
 
 $clients = [
     [
@@ -45,11 +46,12 @@ $clients = [
     ],
 ];
 
-function getSpecsUrl($version, $type) {
-    // $version is 'swagger2' or 'open-api3'
-    // $type is 'client' or 'server'
+function getSpecsUrl($type, $platform) use ($versions) {
+    // $type is 'swagger2' or 'open-api3'
+    // $platform is 'client' or 'server'
+    $version = $versions[0]['docs'];
 
-    return 'https://github.com/appwrite/appwrite/blob/master/app/config/specs/' . $version . '-0.11.x-' . $type . '.json';
+    return 'https://github.com/appwrite/appwrite/blob/master/app/config/specs/' . $type . '-' . $version . '-' . $platform . '.json';
 }
 
 ?>
