@@ -12,7 +12,8 @@
 
 <!-- <p>The data migration tool will allow you to easily migrate your current Appwrite data to work with the new version. </p> -->
 
-<p> The first step is to install the latest version of Appwrite. Head to the directory where you first installed Appwrite. This is where you will find the <b>appwrite</b> directory and the <b>appwrite/docker-compose.yml</b> file. Make sure you are at the same level as the <b>appwrite</b> directory and then execute the following command</p>
+<p> The first step is to install the latest version of Appwrite. Head to the directory where you first installed Appwrite. This is the parent directory, where you will find the <b>appwrite</b> directory that contains the <b>docker-compose.yml</b> and <b>.env</b> files.</p>
+
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run -it --rm \
     --volume /var/run/docker.sock:/var/run/docker.sock \
@@ -23,9 +24,11 @@
 
 
 <p>This will pull the <b>docker-compose.yml</b> file for the new version and perform the installation. Once the setup completes, verify that you have the latest version of Appwrite.</p>
+
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker ps | grep appwrite/appwrite</code></pre>
 </div>
+
 <p>Verify that the <b>STATUS</b> doesn't have any errors and all the <b>appwrite/appwrite</b> containers have version : <?php echo APP_VERSION_STABLE; ?></p>
 
 <p>We can now start the migration. Navigate to the <b>appwrite</b> directory where your <b>docker-compose.yml</b> is present and run the following command</p>
@@ -34,5 +37,7 @@
     <pre class="line-numbers"><code class="prism language-bash" data-prism>cd appwrite/
 docker-compose exec appwrite migrate</code></pre>
 </div>
+
+<p>The data migration can take longer depending on the amount of data your Appwrite instance contains. The Appwrite migration command uses multi-threading to speed up the process, meaning that adding more CPU cores can help speed up the process.</p>
 
 <p>Once the migration process has completed successfully, you're all set to use the latest version of Appwrite!</p>

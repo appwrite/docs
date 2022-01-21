@@ -1,5 +1,4 @@
 <?php
-
 $clients = [
     [
         'title' => 'Getting Started for Web',
@@ -45,6 +44,15 @@ $clients = [
     ],
 ];
 
+$latestVersion = $this->getParam('latestVersion', 'latest');
+
+$getSpecsUrl = function($type, $platform) use ($latestVersion) {
+    // $type is 'swagger2' or 'open-api3'
+    // $platform is 'client' or 'server'
+
+    return 'https://github.com/appwrite/appwrite/blob/master/app/config/specs/' . $type . '-' . $latestVersion . '-' . $platform . '.json';
+}
+
 ?>
 
 <div class="zone xxl">
@@ -55,7 +63,7 @@ $clients = [
 
     <p>Appwrite is an end-to-end backend server that is aiming to abstract the complexity of common, complex, and repetitive tasks required for building a modern app.</p>
 
-    <p>Appwrite provides you with a set of APIs, tools, and a management console UI to help you build your apps a lot faster and in a much more secure way. Between Appwrite different services, you can find user authentication and account management, user preferences, database and storage persistence, cloud functions, localization, image manipulation, scheduled background tasks, and more.</p>
+    <p>Appwrite provides you with a set of APIs, tools, and a management console UI to help you build your apps a lot faster and in a much more secure way. Between Appwrite different services, you can find user authentication and account management, user preferences, database and storage persistence, cloud functions, localization, image manipulation, and more.</p>
 
     <p>Appwrite is both cross-platform and technology agnostic, meaning it can run on any operating system, coding language, framework, or platform. Although Appwrite can easily fit the definition of a serverless technology, it's designed to run well in multiple configurations. You can integrate Appwrite directly with your client app, use it behind your custom backend or alongside your custom backend server.</p>
 
@@ -88,7 +96,7 @@ $clients = [
         
         <p>The Appwrite API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded or JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.</p>
 
-        <p>Specifications for the Appwrite API are available in multiple formats, including Open API 3 for <a href="https://appwrite.io/specs/open-api3?platform=client">clients</a> or <a href="https://appwrite.io/specs/open-api3?platform=server">servers</a> and Swagger2 for <a href="https://appwrite.io/specs/swagger2?platform=client">clients</a> or <a href="https://appwrite.io/specs/swagger2?platform=server">servers</a>.</p>
+        <p>Specifications for the Appwrite API are available in multiple formats, including Open API 3 for <a href="<?php echo $getSpecsUrl('open-api3', 'client'); ?>">clients</a> or <a href="<?php echo $getSpecsUrl('open-api3', 'server'); ?>">servers</a> and Swagger2 for <a href="<?php echo $getSpecsUrl('swagger2', 'client'); ?>">clients</a> or <a href="<?php echo $getSpecsUrl('swagger2', 'server'); ?>">servers</a>.</p>
     </div>
 
     <div class="margin-bottom-large">

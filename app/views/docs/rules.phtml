@@ -170,7 +170,7 @@ client
 
 let promise = database.createCollection(
     'Movies', // Collection Name
-    ['*'], // Read permissions
+    ['role:all'], // Read permissions
     ['user:yyy', 'team:xxx'], // Write permissions
     [ // Rules
       {
@@ -243,7 +243,7 @@ async function boot() {
 
   let actorsCollection = await database.createCollection(
       'Actors', // Collection Name
-      ['*'], // Read permissions
+      ['role:all'], // Read permissions
       ['user:yyy', 'team:xxx'], // Write permissions
       [ // Rules
         {
@@ -259,7 +259,7 @@ async function boot() {
 
   let moviesCollection = await database.createCollection(
       'Movies', // Collection Name
-      ['*'], // Read permissions
+      ['role:all'], // Read permissions
       ['user:yyy', 'team:xxx'], // Write permissions
       [ // Rules
         {
@@ -308,7 +308,7 @@ async function boot() {
         }
       ]
     },
-    ['*'], // Read permissions
+    ['role:all'], // Read permissions
   );
 
   console.log(response);
