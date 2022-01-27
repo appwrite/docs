@@ -19,14 +19,14 @@ $runtimes = $this->getParam('runtimes', []);
 
 <p>You can deploy your code using the <a href="/docs/command-line">Appwrite CLI</a> tool, the Appwrite <a href="/docs/getting-started-for-server">Server API</a> or manually from the Appwrite console.</p>
 
-<h3><a href="/docs/functions#createTag" id="createTag">Create Tag</a></h3>
+<h3><a href="/docs/functions#createDeployment" id="createDeployment">Create Deployment</a></h3>
 
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Unix</h3>
 
         <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite functions createTag \
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite functions createDeployment \
     --functionId=6012cc93d5a7b \
     --entrypoint="index.js" \
     --code="/myrepo/myfunction"</code></pre>
@@ -36,7 +36,7 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>CMD</h3>
 
         <div class="ide margin-bottom" data-lang="bash" data-lang-label="CMD">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite functions createTag ^
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite functions createDeployment ^
     --functionId=6012cc93d5a7b ^
     --entrypoint="index.js" ^
     --code="/myrepo/myfunction"</code></pre>
@@ -46,7 +46,7 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>PowerShell</h3>
 
         <div class="ide margin-bottom" data-lang="bash" data-lang-label="PowerShell">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite functions createTag ,
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite functions createDeployment ,
     --functionId=6012cc93d5a7b ,
     --entrypoint="index.js" ,
     --code="/myrepo/myfunction"</code></pre>
@@ -79,7 +79,7 @@ $runtimes = $this->getParam('runtimes', []);
     </tbody>
 </table>
 
-<p><a href="/docs/server/functions#functionsCreateTag" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> You can also deploy new code tags using the Appwrite server API</a></p>
+<p><a href="/docs/server/functions#functionsCreateDeployment" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> You can also create new code deployments using the Appwrite server API</a></p>
 
 <h3>Exporting your code functions correctly</h3>
 <p>With the new execution model, functions are now no longer executed directly from the interpreter but are instead imported into the runtime. This means that your code will need to be formatted specificially for the runtime you are using.</p>
@@ -122,7 +122,7 @@ $runtimes = $this->getParam('runtimes', []);
 </code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Make sure a requirements.txt file is present in your code tarball, Appwrite will handle the rest!</p>
+        <p>Simply package a requirements.txt file in your function, Appwrite will handle the rest!</p>
         </div>
     </li>
     <li>
@@ -134,7 +134,7 @@ $runtimes = $this->getParam('runtimes', []);
 end </code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>All you need to do is ensure a Gemfile is present in your code tarball, Appwrite will handle the rest!</p>
+        <p>Simply package a Gemfile in your function, Appwrite will handle the rest!</p>
         </div>
     </li>
     <li>
@@ -158,7 +158,7 @@ end </code></pre>
 }</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Dart Dependencies are not currently supported.</p>
+        <p>Simply package a pubspec.yaml file in your function, Appwrite will handle the rest!</p>
         </div>
     </li>
     <li>
@@ -169,16 +169,45 @@ end </code></pre>
 <code class="prism language-rust" data-prism>use super::{Response, RequestValue};
 
 pub fn main(req: RequestValue) -> Response {
-    return Response::send("test".to_string());
+    return Response::send("Hello World!".to_string());
 }</code></pre>
             </div>
             <b>Installing Dependencies</b>
             <p>Rust Dependencies are not currently supported.</p>
         </div>
     </li>
+    <li>
+    <h3>Swift</h3>
+        <div>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers">
+<code class="prism language-rust" data-prism>import Foundation
+
+func main(req: RequestValue, res: RequestResponse) -> RequestResponse {
+    return res.send(data: "Hello World!");
+}</code></pre>
+            </div>
+            <b>Installing Dependencies</b>
+            <p>Swift Dependencies are not currently supported.</p>
+        </div>
+    </li>
 </ul>
 
 <p>More examples can be found in the <a href="https://github.com/appwrite/demos-for-functions">Demos for Functions Repository</a>.</p>
+
+<h2><a href="/docs/functions#build" id="build">Builds</a></h2>
+<p>As of Appwrite version 0.13 deployments needs to be built before they can be activated. This is automatically done after creating a deployment and the time taken can vary depending on the runtime.</p>
+
+<p>If a build fails for any reason, the deployment's status field will be set to <code>failed</code> and you will not be able to activate it. You can however retry a build if you think it was caused by a outside factor using the <a href="/docs/api#retry-build">Retry Build</a> endpoint with the buildId from the deployment.</p>
+
+<p>To find more details about a build that has failed you can get the <code>buildId</code> from the deployment and use the <a href="/docs/api#get-build">Get Build</a> endpoint to get more information about the build.</p>
+
+<p>Deployments that have succeeded in building will be marked as "ready" and can be activated and used.</p>
+
+<div class="notice">
+    <h3>Note: </h3>
+    <p>Statically compiled runtimes such as Rust or Swift take much longer to build however yield better performance over their dynamically compiled counterparts such as Node.</p>
+</div>
 
 <h2><a href="/docs/functions#execute" id="execute">Execute</a></h2>
 
@@ -310,9 +339,9 @@ void main() { // Init SDK
         </tr>
         <tr>
             <td>
-                APPWRITE_FUNCTION_TAG
+                APPWRITE_FUNCTION_DEPLOYMENT
             </td>
-            <td>Your function's code tag unique ID.</td>
+            <td>Your function's code deployment unique ID.</td>
         </tr>
         <tr>
             <td>
