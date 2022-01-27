@@ -1,0 +1,269 @@
+<p>
+    Pagination is the process of dividing data into discrete pages. In Appwrite, it is achieved by using an offset or a cursor, which both come with their own use case and benefits.
+</p>
+
+<h2><a href="/docs/pagination#offset-pagination" id="offset-pagination">Offset Pagination</a></h2>
+<p>
+    Using <span class="tag">limit</span> and <span class="tag">offset</span> you can achieve one of the most common approaches to pagination.
+    With <span class="tag">limit</span> you can define to how many documents that can be returned from one request, which can be up to a maximum of 100 documents.
+    The <span class="tag">offset</span> is simply the number of records you wish to skip before selecting records.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Page 1
+const page1 = await sdk.database.listDocuments('movies', [], 25, 0);
+// Page 2
+const page2 = await sdk.database.listDocuments('movies', [], 25, 25);
+        </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+void main() async {
+    final client = Client();
+    final database = Database(client);
+    try {
+        final page1 = await database.listDocuments(
+            collectionId: 'movies',
+            limit: 25,
+            offset: 0);
+        final page2 = await database.listDocuments(
+            collectionId: 'movies',
+            limit: 25,
+            offset: 25);
+    } on AppwriteException catch(e) {
+        print(e);
+    }
+}
+</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import io.appwrite.Client
+import io.appwrite.services.Database
+import io.appwrite.Query
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val client = Client(applicationContext)
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+            .setProject("5df5acd0d48c2") // Your project ID
+
+        val database = Database(client)
+
+        GlobalScope.launch {
+            val page1 = database.listDocuments(
+                collectionId = "[COLLECTION_ID]",
+                limit = 25,
+                offset = 0,
+            )
+
+            val page2 = database.listDocuments(
+                collectionId = "[COLLECTION_ID]",
+                limit = 25,
+                offset = 25,
+            )    
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+func main() {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("my_project") // Your project ID
+
+    let database = Database(client)
+    // page 1
+    database.listDocuments(
+        collectionId: "[COLLECTION_ID]",
+        limit: 25,
+        offset: 0
+    ) { result in
+        switch result {
+        case .failure(let error):
+            print(error.message)
+        case .success(let document):
+            print(String(describing: document)
+        }
+    }
+
+    //page 2
+    database.listDocuments(
+        collectionId: "[COLLECTION_ID]",
+        limit: 25,
+        offset: 25
+    ) { result in
+        switch result {
+        case .failure(let error):
+            print(error.message)
+        case .success(let document):
+            print(String(describing: document)
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>
+    The maximum offset is <b>5000</b>, since the request gets slower as the number of records increases because the database has to read up to the offset number of rows to know where it should start selecting data.
+    Also when there is data added in high frequency - the individual pages might skip results.
+</p>
+
+<h2><a href="/docs/pagination#cursor-pagination" id="cursor-pagination">Cursor Pagination</a></h2>
+<p>
+    The <span class="tag">cursor</span> is a unique identifier for a specific record, which acts as a pointer to the next record we want to start querying from to get the next page of results.
+    Additionally to the <span class="tag">cursor</span> you can pass the cursor position as the <span class="tag">cursorDirection</span> before and after allowing you to get paginate back and forth.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Page 1
+const page1 = await sdk.database.listDocuments('movies', [], 25, 0);
+const lastId = results.documents[results.documents.length - 1].$id;
+
+// Page 2
+const page2 = await sdk.database.listDocuments('movies', [], 25, 0, lastId);
+        </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+void main() async {
+    final client = Client();
+    final database = Database(client);
+    try {
+        final page1 = await database.listDocuments(
+            collectionId: 'movies',
+            limit: 25);
+        final lastId = page1.documents[page1.documents.length - 1].$id;
+
+        //Page 2
+        final page2 = await database.listDocuments(
+            collectionId: 'movies',
+            cursor: lastId);
+    } on AppwriteException catch(e) {
+        print(e);
+    }
+}
+</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import io.appwrite.Client
+import io.appwrite.services.Database
+import io.appwrite.Query
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val client = Client(applicationContext)
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+            .setProject("5df5acd0d48c2") // Your project ID
+
+        val database = Database(client)
+
+        GlobalScope.launch {
+            val page1 = database.listDocuments(
+                collectionId = "[COLLECTION_ID]",
+                limit = 25,
+            )
+            val lastId = page1.documents[page1.documents.length - 1].$id
+
+            //Page 2
+            val page2 = database.listDocuments(
+                collectionId = "[COLLECTION_ID]",
+                cursor = lastId,
+            )    
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+func main() {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("my_project") // Your project ID
+
+    let database = Database(client)
+    // page 1
+    database.listDocuments(
+        collectionId: "[COLLECTION_ID]",
+        limit: 25,
+    ) { result in
+        switch result {
+        case .failure(let error):
+            print(error.message)
+        case .success(let document):
+            let lastId = document.documents[document.documents.count - 1].$id
+            
+            //Page 2
+            database.listDocuments(
+                collectionId: "[COLLECTION_ID]",
+                cursor: lastId,
+            ) { result in
+                switch result {
+                case .failure(let error):
+                    print(error.message)
+                case .success(let document):
+                    print(String(describing: document)
+                }
+            }
+        }
+    }
+
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="/docs/pagination#when-to-use-what" id="when-to-use-what">When to use what?</a></h2>
+<p>
+    The different scenarios in which offset or cursor pagination make the most sense depends on the data itself and how often new records are added.
+    When querying static data, the performance cost alone may not be enough for you to use a cursor, as the added complexity that comes with it may be more than you need.
+</p>
+<p>
+    <b>Offset pagination</b> should be used for static data with an indicator to what is the current page and how many pages are available in total. For example a list with up to 20 pages or static data like a list of countries or currencies.
+</p>
+<p>
+    <b>Cursor pagination</b> should be used high-frequency data which is lazy-loaded with infinite scrolling. For example a feed, comment section, chat history or high volume datasets.
+</p>

@@ -11,7 +11,7 @@ foreach($platforms['client']['languages'] as $lang) {
     }
 }
 
-$appleVersion = (isset($versions['swift-client'])) ? $versions['swift-client'] : '';
+$appleVersion = $versions['apple'] ?? '';
 ?>
 <p>Appwrite is a development platform providing you an easy yet powerful API and management console to get your next project up and running quickly.</p>
 
@@ -101,13 +101,13 @@ $appleVersion = (isset($versions['swift-client'])) ? $versions['swift-client'] :
 
 <p>Initialize your SDK code with your project ID, which can be found in your project settings page.</p>
 
-<div class="ide" data-lang="swift" data-lang-label="Swift">
+<div class="ide" data-lang="swift" data-lang-label="Apple SDK">
     <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
   .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
   .setProject("5df5acd0d48c2") // Your project ID
-  .setSelfSigned() // For self signed certificates, only use for development</code></pre>
+  .setSelfSigned(status: true) // For self signed certificates, only use for development</code></pre>
 </div>
 
 <p>If you're using a physical device instead of a simulator, ensure that you can access your Appwrite instance before sending API calls.</p>
@@ -118,10 +118,10 @@ let client = Client()
 
 <p>Once your SDK object is set, access any of the Appwrite services and choose any request to send. Complete documentation for any service method you would like to use can be found in your SDK documentation or in the API References section.</p>
 
-<div class="ide" data-lang="apple" data-lang-label="Swift">
+<div class="ide" data-lang="swift" data-lang-label="Apple SDK">
                     <pre class="line-numbers"><code class="prism language-swift" data-prism>// Register User
 let account = Account(client: client)
-account.create(email: "email@example.com", password: "password") { result in
+account.create(userId: "unique()", email: "email@example.com", password: "password") { result in
     switch result {
     case .failure(let error): print(error.message)
     case .success(let user): print(String(describing: user))
@@ -133,7 +133,7 @@ account.create(email: "email@example.com", password: "password") { result in
 
 <p>If you want to listen to changes in realtime from Appwrite, you can subscribe to a variety of channels and receive updates within milliseconds. Full documentation for Realtime can be found <a href="/docs/realtime">here</a>.</p>
 
-<div class="ide" data-lang="apple" data-lang-label="Apple SDK">
+<div class="ide" data-lang="swift" data-lang-label="Apple SDK">
   <pre class="line-numbers"><code class="prism language-swift" data-prism>// Subscribe to files channel
 let realtime = Realtime(client: client)
 
@@ -148,18 +148,18 @@ let subscription = realtime.subscribe(channels: ["files"]) { message in
 <p>If you're using macOS, for realtime to function correctly you need to ensure you have both "Outgoing Connections (Client)" <i>and</i> "Incoming Connections (Server)" enabled in your App Sandbox settings in your project file.</p>
 
 <h2><a href="/docs/getting-started-for-apple#fullExample" id="fullExample">Full Example</a></h2>
-<div class="ide" data-lang="apple" data-lang-label="Swift">
+<div class="ide" data-lang="swift" data-lang-label="Apple SDK">
                     <pre class="line-numbers"><code class="prism language-swift" data-prism>import io.appwrite.Client
 import Appwrite
 
 let client = Client()
   .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
   .setProject("5df5acd0d48c2") // Your project ID
-  .setSelfSigned() // For self signed certificates, only use for development
+  .setSelfSigned(status: true) // For self signed certificates, only use for development
 
 // Register User
 let account = Account(client: client)
-account.create(email: "email@example.com", password: "password") { result in
+account.create(userId: "unique()", email: "email@example.com", password: "password") { result in
     switch result {
     case .failure(let error): print(error.message)
     case .success(let user): print(String(describing: user))
