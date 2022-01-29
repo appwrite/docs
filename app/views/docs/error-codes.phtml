@@ -125,20 +125,16 @@ $errorCodes = $this->getParam('errorCodes', []);
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
         <tr>
-            <th style="width: 250px">Error Code</th>
+            <th style="width: 250px">Code</th>
+            <th style="width: 100px">HTTP Status Code</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                APPWRITE_FUNCTION_ID
-            </td>
-            <td>Your function's unique ID.</td>
-        </tr>
 <?php foreach($errorCodes as $code): ?>
         <tr>
             <td><?php echo $code['name']; ?></td>
+            <td><?php echo $code['statusCode']; ?></td>
             <td><?php echo $code['description']?></td>
         </tr>
 <?php endforeach; ?>
