@@ -1,3 +1,7 @@
+<?php
+$errorCodes = $this->getParam('errorCodes', []);
+?>
+
 <p>Appwrite uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted, invalid input, etc.). Codes in the 5xx range indicate an error with the Appwrite server, but these are rare.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full vertical text-size-small">
@@ -13,6 +17,12 @@
             <td data-title="Code: ">200</td>
             <td data-title="Text: ">OK</td>
             <td data-title="Description: ">Success!</td>
+        </tr>
+
+        <tr>
+            <td data-title="Code: ">201</td>
+            <td data-title="Text: ">Created</td>
+            <td data-title="Description: ">The requested resource has been created successfully.</td>
         </tr>
 
         <tr>
@@ -107,3 +117,30 @@
 }
 </code></pre>
 </div>
+
+<h2><a href="/docs/functions#environmentVariables" id="environmentVariables">Error Codes</a></h2>
+
+<p>Appwrite also passes convennient error codes in addition to the http status code to help you get more fine grained control over what went wrong and allowing you to display relevant error messages.</p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Error Code</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                APPWRITE_FUNCTION_ID
+            </td>
+            <td>Your function's unique ID.</td>
+        </tr>
+<?php foreach($errorCodes as $code): ?>
+        <tr>
+            <td><?php echo $code['name']; ?></td>
+            <td><?php echo $code['description']?></td>
+        </tr>
+<?php endforeach; ?>
+    </tbody>
+</table>
