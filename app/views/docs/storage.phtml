@@ -3,7 +3,7 @@
 
 <h2><a href="/docs/storage#bucket" id="bucket">Buckets</a></h2>
 
-<p>With version 0.13 of Appwrite, we also have introduced storage buckets. Storage buckets are similar to Collections we have in our <a href="/docs/database">Database</a> service. The difference is buckets also provide more power to decide what kinds of files, what sizes you want to allow in that bucket, whether or not to encrypt the files, scan with antivirus, and more. Let's look at how we can create a bucket and configure it to your needs.</p>
+<p>With version 0.13 of Appwrite, we also have introduced storage buckets. Storage buckets are similar to collections we have in our <a href="/docs/database">Database</a> service. The difference is buckets also provide more power to decide what kinds of files, what sizes you want to allow in that bucket, whether or not to encrypt the files, scan with antivirus, and more. Let's look at how we can create a bucket and configure it to your needs.</p>
 
 <h3><a href="/docs/storage#createBucket" id="createBucket">Create Bucket</a></h3>
 
@@ -14,7 +14,7 @@ You can manage your buckets programmatically using one of Appwrite's Server SDKs
 
 <h4><a href="/docs/storage#permission" id="permission">Permissions</a></h4>
 
-<p>As buckets are very similar to Collections we have in the database, we have a similar permission model. Buckets support either bucket level permission or file level permission to allow different ways to manage access to your buckets and files. Check out the <a href="/docs/permissions">Permissions</a>  documentation to learn more about the permissions types available.</p>
+<p>As buckets are very similar to collections we have in the database, we have a similar permission model. Buckets support either bucket level permission or file level permission to allow different ways to manage access to your buckets and files. Check out the <a href="/docs/permissions">Permissions</a>  documentation to learn more about the permissions types available.</p>
 
 <h4>File Level Permissions</h4>
 <p>With this permission model, you have granular access control over every file, and users will only be able to access files for which they have explicit permissions. This permission model requires file permissions, and bucket permissions are optional.
@@ -31,7 +31,7 @@ You can manage your buckets programmatically using one of Appwrite's Server SDKs
 
 <h4><a href="/docs/storage#bucketConfig" id="bucketConfig">More Bucket Configurations</a></h4>
 
-<p>Unlike Collections, storage buckets have more configuration options regarding the type and size of the files in the bucket, encryption, and anti-virus scanning. If you look at the bucket settings or the REST API example above, you can find these configurations. Let's look at what those are:</p>
+<p>Unlike collections, storage buckets have more configuration options regarding the type and size of the files in the bucket, encryption, and anti-virus scanning. If you look at the bucket settings or the REST API example above, you can find these configurations. Let's look at what those are:</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
