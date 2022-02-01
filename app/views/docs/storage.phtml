@@ -78,6 +78,11 @@ As buckets are very similar to Collections we have in the database, here again, 
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
 
 const sdk = new Appwrite();
+
+sdk
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
+
 const promise = sdk.storage.createFile('[BUCKET_ID]', 'unique()', document.getElementById('uploader').files[0]);
 
 promise.then(function (response) {
