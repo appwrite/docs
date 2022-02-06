@@ -134,7 +134,7 @@ $errorCodes = $this->getParam('errorCodes', []);
 <?php foreach($errorCodes as $code): ?>
         <tr>
             <td><?php echo $code['name']; ?></td>
-            <td><?php echo $code['statusCode']; ?></td>
+            <td><?php echo $code['code']; ?></td>
             <td><?php echo $code['description']?></td>
         </tr>
 <?php endforeach; ?>
