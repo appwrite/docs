@@ -128,16 +128,16 @@ $errorTypes = $this->getParam('errors', []);
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
         <tr>
-            <th style="width: 220px">Type</th>
             <th style="width: 40px">Code</th>
+            <th style="width: 220px">Type</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
 <?php foreach($errorTypes as $type): ?>
         <tr>
-            <td><?php echo $type['name']; ?></td>
             <td><?php echo $type['code']; ?></td>
+            <td><?php echo $type['name']; ?></td>
             <td><?php echo $type['description']?></td>
         </tr>
 <?php endforeach; ?>
