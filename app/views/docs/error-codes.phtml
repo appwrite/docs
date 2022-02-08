@@ -1,5 +1,5 @@
 <?php
-$errorCodes = $this->getParam('errors', []);
+$errorTypes = $this->getParam('errors', []);
 ?>
 
 <p>Appwrite uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted, invalid input, etc.). Codes in the 5xx range indicate an error with the Appwrite server, but these are rare.</p>
@@ -119,13 +119,13 @@ $errorCodes = $this->getParam('errors', []);
 </code></pre>
 </div>
 
-<h2><a href="/docs/error-codes#errorCodes" id="errorCodes">Error Codes</a></h2>
+<h2><a href="/docs/error-codes#errorTypes" id="errorTypes">Error Types</a></h2>
+
+<p>Appwrite also passes convenient error types in addition to the http status codes to help you get more fine grained control over what went wrong and allowing you to display relevant error messages in your applications.</p>
 
 <div class="notice">
-    <p>Please note that custom error codes were introduced in Appwrite 0.13. </p>
+    <p>Please note that error types were introduced in Appwrite 0.13. </p>
 </div>
-
-<p>Appwrite also passes convenient error codes in addition to the http status codes to help you get more fine grained control over what went wrong and allowing you to display relevant error messages.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -136,11 +136,11 @@ $errorCodes = $this->getParam('errors', []);
         </tr>
     </thead>
     <tbody>
-<?php foreach($errorCodes as $code): ?>
+<?php foreach($errorTypes as $type): ?>
         <tr>
-            <td><?php echo $code['name']; ?></td>
-            <td><?php echo $code['code']; ?></td>
-            <td><?php echo $code['description']?></td>
+            <td><?php echo $type['name']; ?></td>
+            <td><?php echo $type['code']; ?></td>
+            <td><?php echo $type['description']?></td>
         </tr>
 <?php endforeach; ?>
     </tbody>
