@@ -82,7 +82,7 @@ $runtimes = $this->getParam('runtimes', []);
 <p><a href="/docs/server/functions#functionsCreateDeployment" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> You can also create new code deployments using the Appwrite server API</a></p>
 
 <h3>Exporting your code functions correctly</h3>
-<p>With the new execution model, functions are now no longer executed directly from the interpreter but are instead imported into the runtime. This means that your code will need to be formatted specificially for the runtime you are using.</p>
+<p>When creating functions with Appwrite your code must export the function in certain ways depending on the language. This varies between language so refer to the examples below.</p>
 <p>When your function is called you will recieve a Request and Response in that order, The Request will contain all data that was sent to the function aswell as other various environment variables, A schema of the Request Object can be found below and will be the same for all runtimes.</p>
 <p>The Response object will have two functions, <code>send</code> and <code>json</code> that can be used to send data back to the client. The Types and Implementation of these functions vary depending on runtime due to all languages being slightly different. A more detailed way of viewing what is required is checking out their Implementation.</p>
 <p>An example of this for each language can be found below:</p>
