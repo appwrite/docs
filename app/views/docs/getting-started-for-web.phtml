@@ -15,17 +15,17 @@ foreach($platforms['client']['languages'] ?? [] as $lang) {
 $version = $platform['version'] ?? '';
 $demos = $platform['demos'] ?? [];
 ?>
-<p>Appwrite is a development platform providing you with easy yet powerful API and management console to get your next project up and running quickly.</p>
+<p>Appwrite is a development platform that provides a powerful API and management console to get your next project up and running quickly.</p>
 
-<p>This tutorial will help you start using Appwrite products and build your next project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
+<p>This tutorial helps you start using Appwrite with your project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
 
 <h2><a href="/docs/getting-started-for-web#createProject" id="createProject">Create Your First Appwrite Project</a></h2>
 
-<p>Go to your new Appwrite console and once inside, click the <i class="icon-plus"></i> icon in the top navigation header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create to get started.</p>
+<p>Go to your new Appwrite console and click the <i class="icon-plus"></i> icon in the top navigation header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create to get started.</p>
 
 <h2><a href="/docs/getting-started-for-web#addPlatform" id="addPlatform">Add Your Web Platform</a></h2>
 
-<p>For you to init your SDK and interact with Appwrite services, you need to add a web platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before and click the 'Add Platform' button.</p>
+<p>To init your SDK and interact with Appwrite services, you need to add a web platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before and click the 'Add Platform' button.</p>
 
 <p>From the options, choose to add a <b>web</b> platform and add your client app hostname. By adding your hostname to your project platform, you are allowing cross-domain communication between your project and the Appwrite API.</p>
 
@@ -41,10 +41,10 @@ $demos = $platform['demos'] ?? [];
     <pre class="line-numbers"><code class="prism language-bash" data-prism>npm install appwrite</code></pre>
 </div>
 
-<p>If you're using a bundler (like <a href="http://browserify.org/" target="_blank" rel="noopener">Browserify<a/> or <a href="https://webpack.js.org/" target="_blank" rel="noopener">webpack</a>), you can import the Appwrite module when you need it:</p>
+<p>When you're using a bundler (like <a href="http://browserify.org/" target="_blank" rel="noopener">Browserify</a> or <a href="https://webpack.js.org/" target="_blank" rel="noopener">Webpack</a>), import the Appwrite module when you need it:</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";</code></pre>
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from 'appwrite';</code></pre>
 </div>
 
 <h3><a href="/docs/getting-started-for-web#cdn" id="cdn">CDN</a></h3>
@@ -79,7 +79,7 @@ appwrite
 
 <h2><a href="/docs/getting-started-for-web#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
-<p>Once your SDK object is set, access any of the Appwrite services and choose any request to send. Full documentation for any service method you would like to use can be found in your SDK documentation or in the API References section.</p>
+<p>After your SDK configuration is set, access any of the Appwrite services and choose any request to send. Full documentation for any service method you would use is found in the SDK documentation or in the API References section.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
                     <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Register User
@@ -95,7 +95,7 @@ appwrite
 
 <h2><a href="/docs/getting-started-for-web#listenToChanges" id="listenToChanges">Listen to Changes</a></h2>
 
-<p>If you want to listen to changes in realtime from Appwrite, you can subscribe to a variety of channels and receive updates within milliseconds. Full documentation for Realtime can be found <a href="/docs/realtime">here</a>.</p>
+<p>To listen to changes in realtime from Appwrite, subscribe to a variety of channels and receive updates within milliseconds. Full documentation for Realtime is found <a href="/docs/realtime">here</a>.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
                     <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Subscribe to files channel
@@ -138,7 +138,7 @@ appwrite.subscribe('files', response => {
 
 <h2><a href="/docs/getting-started-for-web#demos" id="demos">Demos</a></h2>
 
-<p>Below you can find a list of some demos to help you get started with Appwrite for Web using your favorite tools and framework of choice.</p>
+<p>Below is a list of some demos to help you get started with Appwrite for Web using your favorite tools and framework of choice.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large text-size-small vertical">
         <thead>
