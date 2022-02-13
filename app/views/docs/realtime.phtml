@@ -72,6 +72,21 @@ val realtime = Realtime(client)
 realtime.subscribe(channels, callback)</code></pre>
         </div>
     </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
+
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+    .setSelfSigned(true) // For self signed certificates, only use for development
+
+let realtime = Realtime(client)
+
+realtime.subscribe(channels: channels, callback: callback)</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>To subscribe to updates from different resources, you need to specify one or more channels. The <a href="/docs/realtime#channels">channels</a> offer a wide and powerful selection that will allow you to listen to all possible resources. This allows you to receive updates not only from the database, but from all the services that Appwrite offers.</p>
@@ -131,6 +146,18 @@ realtime.subscribe("account", callback = { param ->
 })</code></pre>
         </div>
     </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
+let realtime = Realtime(client)
+
+realtime.subscribe(channel: "account", callback: { param in
+    // Callback will be executed on all account events.
+    print(String(describing: param))
+})</code></pre>
+        </div>
+    </li>
 </ul>
 
 <h3><a href="/docs/realtime#subscribe-to-multiple-channels" id="subscribe-to-multiple-channels">Subscribe to Multiple Channels</a></h3>
@@ -173,6 +200,18 @@ val realtime = Realtime(client)
 realtime.subscribe(["documents.A", "files"], callback = { param ->
     // Callback will be executed on changes for documents A and all files.
     print(param.toString())
+})</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
+let realtime = Realtime(client)
+
+realtime.subscribe(channels: ["documents.A", "files"], callback: { param in
+    // Callback will be executed on changes for documents A and all files.
+    print(String(describing: param))
 })</code></pre>
         </div>
     </li>
@@ -221,6 +260,21 @@ subscription.close();</code></pre>
 val realtime = Realtime(client)
 
 val subscription = realtime.subscribe("files", callback = { param ->
+    // Callback will be executed on changes for all files.
+    print(param.toString())
+})
+
+// Closes the subscription.
+subscription.close()</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
+let realtime = Realtime(client)
+
+let subscription = realtime.subscribe(channel: "files", callback: { param in
     // Callback will be executed on changes for all files.
     print(param.toString())
 })
@@ -363,6 +417,13 @@ client.setEndpointRealtime('[ENDPOINT]');</code></pre>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client()
 client.setEndpointRealtime('[ENDPOINT]')</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
+client.setEndpointRealtime("[ENDPOINT]")</code></pre>
         </div>
     </li>
 </ul>
