@@ -60,12 +60,12 @@ subscription.stream.listen(callback);
     <li>
         <h3>Android</h3>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client()
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
 
 client
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2") // Your project ID
-    .setSelfSigned(status: true) // For self signed certificates, only use for development
+    .setSelfSigned(status = true) // For self signed certificates, only use for development
 
 val realtime = Realtime(client)
 
@@ -137,7 +137,7 @@ subscription.stream.listen((response) {
     <li>
         <h3>Android</h3>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client()
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
 val realtime = Realtime(client)
 
 realtime.subscribe("account", callback = { param ->
@@ -194,10 +194,10 @@ subscription.stream.listen((response) {
     <li>
         <h3>Android</h3>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client()
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
 val realtime = Realtime(client)
 
-realtime.subscribe(["documents.A", "files"], callback = { param ->
+realtime.subscribe("documents.A", "files", callback = { param ->
     // Callback will be executed on changes for documents A and all files.
     print(param.toString())
 })</code></pre>
@@ -256,7 +256,7 @@ subscription.close();</code></pre>
     <li>
         <h3>Android</h3>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client()
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
 val realtime = Realtime(client)
 
 val subscription = realtime.subscribe("files", callback = { param ->
@@ -415,8 +415,8 @@ client.setEndpointRealtime('[ENDPOINT]');</code></pre>
     <li>
         <h3>Android</h3>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client()
-client.setEndpointRealtime('[ENDPOINT]')</code></pre>
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
+client.setEndpointRealtime("[ENDPOINT]")</code></pre>
         </div>
     </li>
     <li>
