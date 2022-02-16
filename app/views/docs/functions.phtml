@@ -195,7 +195,7 @@ func main(req: RequestValue, res: RequestResponse) -> RequestResponse {
 
 
 <h2><a href="/docs/functions#build" id="build">Builds</a></h2>
-<p>As of Appwrite version 0.13 deployments needs to be built before they can be activated. This is automatically done after creating a deployment and the time taken can vary depending on the runtime.</p>
+<p>Deployments needs to be built before they can be activated. This is automatically done after creating a deployment and the time taken can vary depending on the runtime.</p>
 
 <p>If a build fails for any reason, the deployment's status field will be set to <code>failed</code> and you will not be able to activate it. You can however retry a build if you think it was caused by an external factor using the <a href="/docs/api#retry-build">Retry Build</a> endpoint with the <code>buildId</code> from the deployment.</p>
 
