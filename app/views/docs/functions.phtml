@@ -197,7 +197,7 @@ func main(req: RequestValue, res: RequestResponse) -> RequestResponse {
 <h2><a href="/docs/functions#build" id="build">Builds</a></h2>
 <p>Deployments needs to be built before they can be activated. This is automatically done after creating a deployment and the time taken can vary depending on the runtime.</p>
 
-<p>If a build fails for any reason, the deployment's status field will be set to <code>failed</code> and you will not be able to activate it. You can however retry a build if you think it was caused by an external factor using the <a href="/docs/api#retry-build">Retry Build</a> endpoint with the <code>buildId</code> from the deployment.</p>
+<p>If a build fails for any reason, the deployment's status field is set to <code>failed</code> and you won't be able to activate it. You can however retry a build if you think it was caused by an external factor using the <a href="/docs/api#retry-build">Retry Build</a> endpoint with the <code>buildId</code> from the deployment.</p>
 
 <p>To find more details about a build that has failed you can get the <code>buildId</code> from the deployment and use the <a href="/docs/api#get-build">Get Build</a> endpoint to get more information about the build.</p>
 
