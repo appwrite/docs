@@ -113,6 +113,10 @@ $runtimes = $this->getParam('runtimes', []);
     <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
         <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run --rm -v $(pwd):/app -w /app --env GEM_HOME=./.appwrite appwrite/env-ruby-2.7:1.0.2 bundle install</code></pre>
     </div>
+    
+    <h3>Accessing your Local Appwrite Setup</h3>
+    
+    <p>If you're running Appwrite locally and trying to connect to your local Appwrite instance from a cloud function, you'll have to use your local IP address instead of localhost. This is because if you use localhost, the container that runs the cloud function will try to connect to itself rather than your 'appwrite' container.</p>
 </div>
 
 <h2><a href="/docs/functions#execute" id="execute">Execute</a></h2>
