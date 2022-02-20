@@ -122,14 +122,14 @@ import requests
 import random
 
 def main(request, response):
-    payload = json.loads(request['payload'])
-    env = request['env']
+    payload = json.loads(request.payload or '{}')
+    env = request.env
 
     randomNumber = random.randint(1, 100)
     todo = requests.get(f"https://jsonplaceholder.typicode.com/todos/{randomNumber}").json()
 
     task = {
-        "message": "Hello from Appwrite Functions 👋",
+        "message": "Hello from Appwrite Functions!",
         **todo
     }
 
@@ -140,8 +140,7 @@ def main(request, response):
         "unknown": "Unknown"
     }[env['APPWRITE_FUNCTION_TRIGGER']]
 
-    response.json(task)
-</code></pre>
+    return response.json(task)</code></pre>
         </div>
         <b>Installing Dependencies</b>
         <p>Include a <b>requirements.txt</b> file in your function, Appwrite will handle the rest!</p>
