@@ -187,15 +187,13 @@ func main(request: RequestValue, response: RequestResponse) -> RequestResponse {
     </tbody>
 </table>
 
-<h2><a href="/docs/functions#addFunction" id="addFunction">Add Your Function</a></h2>
+<h2><a href="/docs/functions#createFunction" id="createFunction">Create your Function</a></h2>
 
-<p>You can add a new function from your Appwrite project's dashboard. Access your Functions settings from your project's left navigation panel. Click the 'Add Function' button and choose your function name and code runtime. In your Functions settings page, you can set your function event triggers, CRON schedule, and set secure environment variables for your function runtime.</p>
+<p>Before you can deploy your function, you will need to create a new function from your Appwrite project's dashboard. Access the Function settings from your project's left navigation panel. Click the 'Add Function' button and choose a function name and runtime. In your Functions settings page, you can also set your function event triggers, CRON schedule, and set secure environment variables for your function. </p>
 
 <h2><a href="/docs/functions#deployCode" id="deployCode">Deploy Your Code</a></h2>
 
-<p>You can deploy your code using the <a href="/docs/command-line">Appwrite CLI</a> tool, the Appwrite <a href="/docs/getting-started-for-server">Server API</a> or manually from the Appwrite console.</p>
-
-<h3><a href="/docs/functions#createDeployment" id="createDeployment">Create Deployment</a></h3>
+<p>Once you've written your function, you can now deploy it using the <a href="/docs/command-line">Appwrite CLI</a>, the Appwrite <a href="/docs/getting-started-for-server">Server API</a> or manually from the Appwrite console.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -230,7 +228,7 @@ func main(request: RequestValue, response: RequestResponse) -> RequestResponse {
     </li>
 </ul>
 
-<p>The command above accepts two parameters:</p>
+<p>The command above accepts three parameters:</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom text-size-small">
     <thead>
@@ -250,7 +248,7 @@ func main(request: RequestValue, response: RequestResponse) -> RequestResponse {
     </tr>
     <tr>
         <td>code</td>
-        <td>Gzip file with your code package. When used with the Appwrite CLI, pass the path to your code directory, and the CLI will automatically package your code. <br /><br /><b>For increased security, The Appwrite CLI only has access to file paths within the current working directory. In other words, it doesn't support file paths that try to access the parent directories (../../mycode).</b></td>
+        <td>Path to your function tarball. When used with the Appwrite CLI, simply pass the path to your code directory, and the CLI will automatically package your code. </td>
     </tr>
     </tbody>
 </table>
