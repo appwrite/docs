@@ -8,7 +8,7 @@
 
 <h3><a href="/docs/command-line#installWithNpm" id="installWithNpm">Install with npm</a></h3>
 
-<p>If you have npm set up, installing the CLI is as simple as running</p>
+<p>If you have npm set up, run the command below to install the CLI</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers">
@@ -43,7 +43,7 @@
     </li>
 </ul>
 
-<p>Once the installation is complete, you can verify the install using</p>
+<p>After the installation is complete, verify the install using</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite -v</code></pre>
@@ -57,15 +57,15 @@
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite login</code></pre>
 </div>
 
-<h3><a href="/docs/command-line#initialiseProject" id="initialiseProject">Initialising your project</a></h3>
+<h3><a href="/docs/command-line#initializeProject" id="initializeProject">Initializing your project</a></h3>
 
-<p>Once logged in, the CLI needs to be initialised before you can use it with your Appwrite project. You can do this with the `appwrite init project` command. </p>
+<p>After you're logged in, the CLI needs to be initialized before you can use it with your Appwrite project. Initialize it with the `appwrite init project` command. </p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init project</code></pre>
 </div>
 
-<p>The following prompt will guide you through the setup process. The init command also creates an appwrite.json file representing your Appwrite project. The `appwrite.json` file does a lot of things. </p>
+<p>The following prompts guide you through the setup process. The init command also creates an appwrite.json file representing your Appwrite project. The `appwrite.json` file does the following things. </p>
 
 <ul>
     <li>Provides context to the CLI</li>
@@ -88,7 +88,7 @@
 
 <h3><a href="/docs/command-line#deployFunctions" id="deployFunctions">Deploying cloud functions</a></h3>
 
-<p>The CLI makes it extremely easy to create and deploy Appwrite's cloud functions. Initialise your new function using</p>
+<p>The CLI also handles creating and deploying Appwrite's cloud functions. Initialize your new function using</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>
@@ -98,7 +98,7 @@ appwrite init function
 ✓ Success</code></pre>
 </div>
 
-<p>This will create a new function `My Awesome Function` in your current Appwrite project and also create a template function for you to get started. You can now deploy this function using </p>
+<p>This creates a new function `My Awesome Function` in your current Appwrite project and also creates a template function for you to get started. You can now deploy this function using </p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function</code></pre>
@@ -106,7 +106,7 @@ appwrite init function
 
 <h3><a href="/docs/command-line#deployCollections" id="deployCollections">Deploying collections</a></h3>
 
-<p>The Appwrite CLI also makes it extremely easy to migrate your project from a development server to a production server using the CLI. You can deploy all the collections in your appwrite.json file using</p>
+<p>The Appwrite CLI helps you migrate your project from a development server to a production server using the CLI. You can deploy all the collections in your appwrite.json file using</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collections</code></pre>
@@ -119,8 +119,8 @@ appwrite init function
 </div>
 
 <div class="notice margin-bottom"> 
-    <h3>Self Signed Certificates</h3> 
-    <p>By default, requests to domains with self signed SSL certificates (or no certificates) are disabled. If you trust the domain, you can bypass the certificate validation using</p>
+    <h3>Self-Signed Certificates</h3> 
+    <p>By default, requests to domains with self-signed SSL certificates (or no certificates) are disabled. If you trust the domain, you can bypass the certificate validation using</p>
     <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --selfSigned true</code></pre>
 </div>
@@ -173,7 +173,7 @@ appwrite init function
 
 <p><b>Create Document</b></p>
 
-<p>To create a new document in an existing collection, you can use the `createDocument` command.</p>
+<p>To create a new document in an existing collection, use the `createDocument` command.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite database createDocument --collectionId <ID> --documentId 'unique()' --data '{ "Name": "Iron Man" }' --read role:all team:abc</code></pre>
@@ -181,7 +181,7 @@ appwrite init function
 
 <h3><a href="/docs/command-line#configuration" id="configuration">Configuration</a></h3>
 
-<p>At any point, if you would like to change your server endpoint, project key or selfSigned certificate acceptance, you can use of the `client` service.</p>
+<p>At any point, if you would like to change your server endpoint, project key, or self-signed certificate acceptance, use the `client` service.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>
