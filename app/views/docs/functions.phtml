@@ -50,7 +50,7 @@ module.exports = async (request, response) => {
     const todo = await fetch(`https://jsonplaceholder.typicode.com/todos/${randomNumber}`).then(r => r.json());
 
     let task = {
-        message: 'Hello Open Runtimes 👋',
+        message: 'Hello from Appwrite Functions 👋',
         ...todo
     };
 
@@ -81,7 +81,32 @@ module.exports = async (request, response) => {
         <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
             <pre class="line-numbers"><code class="prism language-php" data-prism>return function($request, $response) {
-    $response->send('Hello World!');
+    $payload = json_decode($request['payload']);
+    $env = $request['env'];
+
+    $randomNumber = rand(1, 100);
+    $todo = json_decode(file_get_contents("https://jsonplaceholder.typicode.com/todos/$randomNumber"), true);
+
+    $task = array_merge($todo, [
+        'message' => 'Hello from Appwrite Functions 👋',
+    ]);
+
+    switch($env['APPWRITE_FUNCTION_TRIGGER']) {
+        case 'http': 
+            $task['trigger'] = 'HTTP'; 
+            break;
+        case 'schedule': 
+            $task['trigger'] = 'CRON'; 
+            break;
+        case 'event': 
+            $task['trigger'] = 'Event'; 
+            break;
+        default: 
+            $task['trigger'] = 'Unknown'; 
+            break;
+    }
+
+    $response->json($task);
 };</code></pre>
         </div>
         <b>Installing Dependencies</b>
@@ -92,8 +117,30 @@ module.exports = async (request, response) => {
         <h3>Python</h3>
         <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>def main(request, response):
-    return response.send('Hello World!')
+            <pre class="line-numbers"><code class="prism language-python" data-prism>import json
+import requests
+import random
+
+def main(request, response):
+    payload = json.loads(request['payload'])
+    env = request['env']
+
+    randomNumber = random.randint(1, 100)
+    todo = requests.get(f"https://jsonplaceholder.typicode.com/todos/{randomNumber}").json()
+
+    task = {
+        "message": "Hello from Appwrite Functions 👋",
+        **todo
+    }
+
+    task["trigger"] = {
+        "http": "HTTP",
+        "schedule": "CRON",
+        "event": "Event",
+        "unknown": "Unknown"
+    }[env['APPWRITE_FUNCTION_TRIGGER']]
+
+    response.json(task)
 </code></pre>
         </div>
         <b>Installing Dependencies</b>
