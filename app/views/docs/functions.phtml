@@ -191,7 +191,7 @@ func main(request: RequestValue, response: RequestResponse) -> RequestResponse {
 
 <p>Before you can deploy your function, you will need to create a new function from your Appwrite project's dashboard. Access the Function settings from your project's left navigation panel. Click the 'Add Function' button and choose a function name and runtime. In your Functions settings page, you can also set your function event triggers, CRON schedule, and set secure environment variables for your function. </p>
 
-<h2><a href="/docs/functions#deployCode" id="deployCode">Deploy Your Code</a></h2>
+<h2><a href="/docs/functions#deployFunction" id="deployFunction">Deploy Your Function</a></h2>
 
 <p>Once you've written your function, you can now deploy it using the <a href="/docs/command-line">Appwrite CLI</a>, the Appwrite <a href="/docs/getting-started-for-server">Server API</a> or manually from the Appwrite console.</p>
 
@@ -258,7 +258,7 @@ func main(request: RequestValue, response: RequestResponse) -> RequestResponse {
 <h2><a href="/docs/functions#build" id="build">Builds</a></h2>
 <p>Deployments needs to be built before they can be activated. This is automatically done after creating a deployment and the time taken can vary depending on the runtime.</p>
 
-<p>If a build fails for any reason, the deployment's status field is set to <code>failed</code> and you won't be able to activate it. You can however retry a build if you think it was caused by an external factor using the <a href="/docs/api#retry-build">Retry Build</a> endpoint with the <code>buildId</code> from the deployment.</p>
+<p>If a build fails for any reason, the deployment's status is set to <b>failed</b> and you won't be able to activate it. You can however retry a build if you think it was caused by an external factor using the <b>Retry Button</b> on the Appwrite Dashboard or <a href="/docs/api#retry-build">Retry Build</a> endpoint with the <b>buildId</b> from the deployment.</p>
 
 <p>To find more details about a build that has failed you can get the <code>buildId</code> from the deployment and use the <a href="/docs/api#get-build">Get Build</a> endpoint to get more information about the build.</p>
 
@@ -267,15 +267,15 @@ func main(request: RequestValue, response: RequestResponse) -> RequestResponse {
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run --rm -v $(pwd):/app -w /app --env GEM_HOME=./.appwrite appwrite/env-ruby-2.7:1.0.2 bundle install</code></pre>
 </div>
-    
+
+<div class="notice">
+    <h3>A note about build times</h3>
+    <p>Statically compiled runtimes such as Rust or Swift take much longer to build however yield better performance over their dynamically compiled counterparts such as Node.</p>
+</div>
+
 <h3>Accessing your Local Appwrite Setup</h3>
     
 <p>If you're running Appwrite locally and trying to connect to your local Appwrite instance from a cloud function, you'll have to use your local IP address instead of localhost. This is because if you use localhost, the container that runs the cloud function will try to connect to itself rather than your 'appwrite' container.</p>
-
-<div class="notice">
-    <h3>Note: </h3>
-    <p>Statically compiled runtimes such as Rust or Swift take much longer to build however yield better performance over their dynamically compiled counterparts such as Node.</p>
-</div>
 
 <h2><a href="/docs/functions#execute" id="execute">Execute</a></h2>
 
