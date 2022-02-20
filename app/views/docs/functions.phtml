@@ -16,19 +16,13 @@ $runtimes = $this->getParam('runtimes', []);
 <p>The quickest way to get started with Appwrite Functions is using the <a href="/docs/command-line">Appwrite CLI</a>. The CLI comes with starter code and a some simple commands to quickly create and deploy your functions. Once you have the CLI installed and setup with an Appwrite project, create your first function using: </p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function
-? What would you like to name your function? Awesome Function
-? What runtime would you like to use? Node.js (node-16.0)
-✓ Success</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function</code></pre>
 </div>
 
 <p>Give your function a name and choose your runtime. This will create a new starter function in the current directory and also add it to your <b>appwrite.json</b> file. Go ahead and deploy your function using :</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function
-? Which functions would you like to deploy? Awesome Function (621229798628cf5bf712)
-ℹ Info Deploying function Awesome Function ( 621229798628cf5bf712 )
-✓ Success Deployed Awesome Function ( 621229798628cf5bf712 )</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function</code></pre>
 </div>
 
 <p>You can now head over to your Appwrite Dashboard, navigate to the Function settings and execute your function. You can find the status of your execution under the <b>Logs</b> tab. </p>
@@ -46,12 +40,12 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>Node.js</h3>
         <div>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>module.exports = async (req, res) => {
-    res.send('Hello World!');
+            <pre class="line-numbers"><code class="prism language-js" data-prism>module.exports = async (request, response) => {
+                response.send('Hello World!');
 }</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Installing dependencies can be done by including a package.json in your tarball, and Appwrite handles the rest! The best practice is to make sure `node_modules` folder is <b>not</b> part of your tarball.</p>
+        <p>Include a <b>package.json</b> along with your function, and Appwrite handles the rest! The best practice is to make sure <b>node_modules</b> folder is <b>not</b> part of your tarball.</p>
         </div>
     </li>
     <li>
@@ -63,20 +57,19 @@ $runtimes = $this->getParam('runtimes', []);
 };</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Adding dependencies to PHP requires you to have a composer.json file. The best practice is to make sure `vendor` folder is <b>not</b> part of your tarball. </p>
-        <p>NOTE: Make sure to set the project name to "user/function" otherwise the build process will crash.</p>
+        <p>Adding dependencies to PHP requires you to have a <b>composer.json</b> file. The best practice is to make sure <b>vendor</b> directory is <b>not</b> part of your tarball. </p>
     </div>
     </li>
     <li>
         <h3>Python</h3>
         <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>def main(req, res):
-    return res.send('Hello World!')
+            <pre class="line-numbers"><code class="prism language-python" data-prism>def main(request, response):
+    return response.send('Hello World!')
 </code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Simply package a requirements.txt file in your function, Appwrite will handle the rest!</p>
+        <p>Include a <b>requirements.txt</b> file in your function, Appwrite will handle the rest!</p>
         </div>
     </li>
     <li>
@@ -88,19 +81,19 @@ $runtimes = $this->getParam('runtimes', []);
 end </code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Include a Gemfile in your function, Appwrite handles the rest!</p>
+        <p>Include a <b>Gemfile</b> in your function, Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
         <h3>Deno</h3>
         <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async function(req: any, res: any) {
-    res.send("Hello World!")
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async function(request: any, response: any) {
+                response.send("Hello World!")
 }</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>No Special Steps are required for Deno, Appwrite handles everything!</p>
+        <p>No special steps are required for Deno, Appwrite handles everything!</p>
         </div>
     </li>
     <li>
@@ -112,7 +105,7 @@ end </code></pre>
 }</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Include a pubspec.yaml file with your function, Appwrite handles the rest!</p>
+        <p>Include a <b>pubspec.yaml</b> file with your function, Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
@@ -122,12 +115,12 @@ end </code></pre>
             <pre class="line-numbers">
 <code class="prism language-rust" data-prism>use super::{Response, RequestValue};
 
-pub fn main(req: RequestValue) -> Response {
+pub fn main(request: RequestValue) -> Response {
     return Response::send("Hello World!".to_string());
 }</code></pre>
             </div>
             <b>Installing Dependencies</b>
-            <p>Rust Dependencies are not currently supported.</p>
+            <p>Rust dependencies are not currently supported.</p>
         </div>
     </li>
     <li>
@@ -137,12 +130,12 @@ pub fn main(req: RequestValue) -> Response {
             <pre class="line-numbers">
 <code class="prism language-rust" data-prism>import Foundation
 
-func main(req: RequestValue, res: RequestResponse) -> RequestResponse {
-    return res.send(data: "Hello World!");
+func main(request: RequestValue, response: RequestResponse) -> RequestResponse {
+    return response.send(data: "Hello World!");
 }</code></pre>
             </div>
             <b>Installing Dependencies</b>
-            <p>Swift Dependencies are not currently supported.</p>
+            <p>Swift dependencies are not currently supported.</p>
         </div>
     </li>
 </ul>
@@ -173,7 +166,7 @@ func main(req: RequestValue, res: RequestResponse) -> RequestResponse {
     </tbody>
 </table>
 
-<p>The response object has two functions, <code>send()</code> and <code>json()</code> that can be used to send data back to the client. The types and implementation of these functions vary depending on runtime due to all languages being slightly different. You can check out implementation in the specific languages to learn more about them. The schema of the response object can be found below: </p>
+<p>The response object has two functions, <b>send()</b> and <b>json()</b> that can be used to send data back to the client. The types and implementation of these functions vary depending on runtime due to all languages being slightly different. You can check out implementation in the specific languages to learn more about them. The schema of the response object can be found below: </p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom text-size-small">
     <thead>
