@@ -41,7 +41,20 @@ $runtimes = $this->getParam('runtimes', []);
         <div>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
             <pre class="line-numbers"><code class="prism language-js" data-prism>module.exports = async (request, response) => {
-    response.send('Hello World!');
+    const payload = JSON.parse(request.payload);
+    const env = request.env;
+    const headers = request.headers;
+
+    switch(env.APPWRITE_FUNCTION_TRIGGER) {
+        case 'http': response.send('Function triggered using the API!');
+            break;
+        case 'schedule': response.send('Function triggered using CRON!');
+            break;
+        case 'event': response.send('Function triggered using an event!');
+            break;
+        default: response.send('Function triggered using an unknown trigger!');
+            break;
+    }
 }</code></pre>
         </div>
         <b>Installing Dependencies</b>
@@ -157,7 +170,7 @@ func main(request: RequestValue, response: RequestResponse) -> RequestResponse {
     </tr>
     <tr>
         <td>payload</td>
-        <td>An object containing the data when you <a href="/docs/client/functions#functionsCreateExecution">created the execution.</a></td>
+        <td>A JSON string containing the data when you <a href="/docs/client/functions#functionsCreateExecution">created the execution.</a></td>
     </tr>
     <tr>
         <td>env</td>
