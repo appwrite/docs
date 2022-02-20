@@ -342,6 +342,63 @@ void main() { // Init SDK
 }</code></pre>
         </div>
     </li>
+    <li>
+        <h3>iOS</h3>
+
+        <div class="ide margin-bottom" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+func main() {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("5df5acd0d48c2") // Your project ID
+
+    let functions = Functions(client)
+    functions.createExecution(
+        functionId: "[FUNCTION_ID]"
+    ) { result in
+        switch result {
+        case .failure(let error):
+            print(error.message)
+        case .success(let execution):
+            print(String(describing: execution)
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+
+        <div class="ide margin-bottom" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import io.appwrite.Client
+import io.appwrite.services.Functions
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val client = Client(applicationContext)
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+            .setProject("5df5acd0d48c2") // Your project ID
+
+        val functions = Functions(client)
+
+        GlobalScope.launch {
+            val response = functions.createExecution(
+                functionId = "[FUNCTION_ID]",
+            )
+            val json = response.body?.string()        
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 
