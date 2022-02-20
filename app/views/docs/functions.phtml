@@ -73,7 +73,7 @@ module.exports = async (request, response) => {
 }</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Include a <b>package.json</b> along with your function, and Appwrite handles the rest! The best practice is to make sure <b>node_modules</b> folder is <b>not</b> part of your tarball.</p>
+        <p>Include a <b>package.json</b> along with your function, and Appwrite handles the rest! The best practice is to make sure <b>node_modules</b> folder is <b>not</b> part of your tarball. This example uses the <a href="https://www.npmjs.com/package/node-fetch">node-fetch</a> package</p>
         </div>
     </li>
     <li>
@@ -129,7 +129,7 @@ def main(request, response):
     todo = requests.get(f"https://jsonplaceholder.typicode.com/todos/{randomNumber}").json()
 
     task = {
-        "message": "Hello from Appwrite Functions!",
+        "message": "Hello from Appwrite Functions 👋",
         **todo
     }
 
@@ -143,7 +143,7 @@ def main(request, response):
     return response.json(task)</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Include a <b>requirements.txt</b> file in your function, Appwrite will handle the rest!</p>
+        <p>Include a <b>requirements.txt</b> file in your function, Appwrite will handle the rest! This example uses the <a href="https://pypi.org/project/requests/">requests</a> package</p>
         </div>
     </li>
     <li>
