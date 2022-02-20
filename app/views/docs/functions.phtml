@@ -40,21 +40,36 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>Node.js</h3>
         <div>
         <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>module.exports = async (request, response) => {
+            <pre class="line-numbers"><code class="prism language-js" data-prism>const fetch = require("node-fetch");
+
+module.exports = async (request, response) => {
     const payload = JSON.parse(request.payload);
     const env = request.env;
-    const headers = request.headers;
+
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    const todo = await fetch(`https://jsonplaceholder.typicode.com/todos/${randomNumber}`).then(r => r.json());
+
+    let task = {
+        message: 'Hello Open Runtimes 👋',
+        ...todo
+    };
 
     switch(env.APPWRITE_FUNCTION_TRIGGER) {
-        case 'http': response.send('Function triggered using the API!');
+        case 'http': 
+            task['trigger'] = 'HTTP'; 
             break;
-        case 'schedule': response.send('Function triggered using CRON!');
+        case 'schedule': 
+            task['trigger'] = 'CRON'; 
             break;
-        case 'event': response.send('Function triggered using an event!');
+        case 'event': 
+            task['trigger'] = 'Event'; 
             break;
-        default: response.send('Function triggered using an unknown trigger!');
+        default: 
+            task['trigger'] = 'Unknown'; 
             break;
     }
+
+    response.json(task);
 }</code></pre>
         </div>
         <b>Installing Dependencies</b>
