@@ -80,7 +80,9 @@ module.exports = async (request, response) => {
         <h3>PHP</h3>
         <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>return function($request, $response) {
+            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php 
+
+return function($request, $response) {
     $payload = json_decode($request['payload']);
     $env = $request['env'];
 
