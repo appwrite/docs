@@ -31,7 +31,11 @@ $runtimes = $this->getParam('runtimes', []);
 ✓ Success Deployed Awesome Function ( 621229798628cf5bf712 )</code></pre>
 </div>
 
-<p>You can now head over to your Appwrite Dashboard, navigate to the Function settings and execute your function. You can find the status of your execution under the <b>Logs</b> tab. Feel free to modify and play around with the starter code and use the <b>appwrite deploy</b> command to instantly deploy your changes to the Appwrite server. The following sections will dive deeper into some more terminology and advanced concepts which can be useful when writing your function from scratch.</p>
+<p>You can now head over to your Appwrite Dashboard, navigate to the Function settings and execute your function. You can find the status of your execution under the <b>Logs</b> tab. </p>
+
+<p>Feel free to modify and play around with the starter code and use the <b>appwrite deploy</b> command to instantly deploy your changes to the Appwrite server. </p>
+
+<p> The following sections will dive deeper into some more terminology and advanced concepts which can be useful when writing your function from scratch.</p>
 
 <h2><a href="/docs/functions#writingYourOwnFunction" id="writingYourOwnFunction">Writing your own Function</a></h2>
 
@@ -144,11 +148,51 @@ func main(req: RequestValue, res: RequestResponse) -> RequestResponse {
 </ul>
 
 
-<p>When your function is called, you receive two parameters, a <b>request</b> and a <b>response</b> object. The request contains all data that was sent to the function including environment variables. A schema of the request object can be found below and is the same for all runtimes.</p>
+<p>When your function is called, you receive two parameters, a <b>request</b> and a <b>response</b> object. The request object contains all data that was sent to the function including environment variables. A schema of the request object can be found below and is the same for all runtimes.</p>
 
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom text-size-small">
+    <thead>
+    <tr>
+        <th style="width: 140px">Property</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>headers</td>
+        <td>An object containing all the request headers.</td>
+    </tr>
+    <tr>
+        <td>payload</td>
+        <td>An object containing the data when you <a href="/docs/client/functions#functionsCreateExecution">created the execution.</a></td>
+    </tr>
+    <tr>
+        <td>env</td>
+        <td>An object containing all the environment variables. This includes </td>
+    </tr>
+    </tbody>
+</table>
 
-<p>The response object has two functions, <code>send()</code> and <code>json()</code> that can be used to send data back to the client. The types and implementation of these functions vary depending on runtime due to all languages being slightly different. You can check out implementation in the specific languages to learn more about them.</p>
+<p>The response object has two functions, <code>send()</code> and <code>json()</code> that can be used to send data back to the client. The types and implementation of these functions vary depending on runtime due to all languages being slightly different. You can check out implementation in the specific languages to learn more about them. The schema of the response object can be found below: </p>
 
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom text-size-small">
+    <thead>
+    <tr>
+        <th style="width: 140px">Function</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>send(text, status)</td>
+        <td>Function to return a text response. Status code defaults to 200</td>
+    </tr>
+    <tr>
+        <td>json(obj, status)</td>
+        <td>Function to return a JSON response. Status code defaults to 200</td>
+    </tr>
+    </tbody>
+</table>
 
 <h2><a href="/docs/functions#addFunction" id="addFunction">Add Your Function</a></h2>
 
