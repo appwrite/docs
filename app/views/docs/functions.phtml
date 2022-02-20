@@ -13,7 +13,24 @@ $runtimes = $this->getParam('runtimes', []);
 
 <h2><a href="/docs/functions#gettingStarted" id="gettingStarted">Getting Started</a></h2>
 
-<p>Getting started with the Appwrite </p>
+<p>The quickest way to get started with Appwrite Functions is using the Appwrite CLI. The CLI comes with starter functions and a some simple commands to quickly create and deploy your functions. Once you have the CLI installed and setup with an Appwrite project, create your first function using: </p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function
+        ? What would you like to name your function? Awesome Function
+        ? What runtime would you like to use? Node.js (node-16.0)
+        ✓ Success</code></pre>
+</div>
+
+<p> This will create a new node-js starter function in the current directory and also add it to your appwrite.json file. Go ahead and deploy your function using :</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function
+? Which functions would you like to deploy? Awesome Function (621229798628cf5bf712)
+ℹ Info Deploying function Awesome Function ( 621229798628cf5bf712 )
+✓ Success Deployed Awesome Function ( 621229798628cf5bf712 )</code></pre>
+</div>
+
 
 <h2><a href="/docs/functions#addFunction" id="addFunction">Add Your Function</a></h2>
 
