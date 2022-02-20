@@ -152,12 +152,37 @@ def main(request, response):
         <h3>Ruby</h3>
         <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>def main(request, response)
-    return response.send("Hello World!")
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>require 'httparty'
+require 'json'
+
+def main(request, response)
+    payload = JSON.parse(request.payload.empty? ? '{}' : request.payload)
+    env = request.env
+    
+    randomNumber = rand(100) + 1
+    todo = JSON.parse(HTTParty.get('https://jsonplaceholder.typicode.com/todos/' + randomNumber).body)
+    
+    task = {
+        message: 'Hello from Appwrite Functions 👋',
+        **todo
+    }
+
+    case env.APPWRITE_FUNCTION_TRIGGER
+    when 'http'
+        task['trigger'] = 'HTTP'
+    when 'schedule'
+        task['trigger'] = 'CRON'
+    when 'event'
+        task['trigger'] = 'Event'
+    else
+        task['trigger'] = 'Unknown'
+    end
+
+    return response.json(task)
 end </code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Include a <b>Gemfile</b> in your function, Appwrite handles the rest!</p>
+        <p>Include a <b>Gemfile</b> in your function, Appwrite handles the rest! This example uses the <a href="https://rubygems.org/gems/httparty">httparty</a> package</p>
         </div>
     </li>
     <li>
