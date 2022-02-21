@@ -210,7 +210,16 @@
 <p>To create a new user in your project, you can use the `create` command. To successfully create a user, make sure your API key is granted with the scope "users.write".</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users create --userId "unique()" --email hello@appwrite.io --password very_strong_password</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users create --userId "unique()" --email hello@appwrite.io --password very_strong_password
+$id : 6212d7db79a1d1252823
+name :
+registration : 1645402075
+status : true
+passwordUpdate : 1645402075
+email : hello@appwrite.io
+emailVerification : false
+prefs
+✓ Success</code></pre>
 </div>
 <!-- Attach image of output  -->
 
@@ -219,7 +228,15 @@
 <p>To get a list of all your project users, you can use the `list` command. To successfully view the list, make sure your API key is granted with the scope "users.read".</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users list</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users list
+sum : 1
+users
+
+  $id                  │ name │ registration │ status │ passwordUpdate │ email             │ emailVerification │ prefs
+ ──────────────────────┼──────┼──────────────┼────────┼────────────────┼───────────────────┼───────────────────┼────────
+  6212d7db79a1d1252823 │      │ 1645402075   │ true   │ 1645402075     │ hello@appwrite.io │ false             │ object
+
+✓ Success</code></pre>
 </div>
 <!-- Attach image of output  -->
 
