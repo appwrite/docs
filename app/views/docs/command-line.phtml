@@ -62,14 +62,7 @@
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init project</code></pre>
 </div>
 
-<p>The following prompts will guide you through the setup process. The init command also creates an <b>appwrite.json</b> file representing your Appwrite project. The <b>appwrite.json</b> file does the following things. </p>
-
-<ol class="margin-top margin-bottom-large">
-  <li class="margin-bottom-small">Provides context to the CLI</li>
-  <li class="margin-bottom-small">Keeps track of all your Cloud Functions</li>
-  <li class="margin-bottom-small">Keeps track of all your project's collections</li>
-  <li class="margin-bottom-small">Helps you deploy your Appwrite project to production and more</li>
-</ol>
+<p>The following prompts will guide you through the setup process. The init command also creates an <b>appwrite.json</b> file representing your Appwrite project.
 
 <p>You can also fetch all the collections in your current project using</p>
 
@@ -124,6 +117,51 @@
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --selfSigned true</code></pre>
 </div>
 </div>
+
+<h3><a href="/docs/command-line#appwriteJSON" id="appwriteJSON">The appwrite.json file</a></h3>
+
+<p>An <b>appwrite.json</b> file is created by the CLI when you initialize your project. It stores all the configuration for the CLI to be able to interact with your Appwrite project. The file has a structure as depicted below. When using the <b>appwrite deploy</b> command, the CLI uses information from <b>appwrite.json</b> to deploy your functions and collections.</p>
+
+<div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
+    <pre class="line-numbers"><code class="prism language-json" data-prism>{
+    "projectId": "6213b54f2e76a06f2ec6",
+    "projectName": "My Awesome Project",
+    "functions": [
+        {
+            "$id": "6213b58cb21dda6c3263",
+            "name": "My Awesome Function",
+            "runtime": "node-17.0",
+            "path": "My Awesome Function",
+            "entrypoint": "src/index.js"
+        }
+    ],
+    "collections": [
+        {
+            "$id": "6213bb2d567d8a206614",
+            "$read": [
+                "team:admin"
+            ],
+            "$write": [
+                "team:admin"
+            ],
+            "name": "Millenium Problems",
+            "enabled": true,
+            "permission": "collection",
+            "attributes": [],
+            "indexes": []
+        }
+    ]
+}</code></pre>
+</div>
+
+<p>The <b>appwrite.json</b> file does the following things </p>
+
+<ol class="margin-top margin-bottom-large">
+  <li class="margin-bottom-small">Provides context to the CLI</li>
+  <li class="margin-bottom-small">Keeps track of all your Cloud Functions</li>
+  <li class="margin-bottom-small">Keeps track of all your project's collections</li>
+  <li class="margin-bottom-small">Helps you deploy your Appwrite project to production and more</li>
+</ol>
 
 <h3><a href="/docs/command-line#usageExamples" id="usageExamples">Usage examples</a></h3>
 
