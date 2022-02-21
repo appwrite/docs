@@ -189,8 +189,36 @@ end </code></pre>
         <h3>Deno</h3>
         <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async function(request: any, response: any) {
-    response.send("Hello World!")
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import axiod from "https://deno.land/x/axiod/mod.ts";
+
+export default async function(request: any, response: any) {
+    const payload = JSON.parse(request.payload ? request.payload : "{}");
+    const env = request.env;
+
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    const todo = (await axiod.get(`https://jsonplaceholder.typicode.com/todos/${randomNumber}`)).data;
+
+    let task = {
+        message: 'Hello from Appwrite Functions 👋',
+        ...todo
+    };
+
+    switch(env.APPWRITE_FUNCTION_TRIGGER) {
+        case 'http': 
+            task['trigger'] = 'HTTP'; 
+            break;
+        case 'schedule': 
+            task['trigger'] = 'CRON'; 
+            break;
+        case 'event': 
+            task['trigger'] = 'Event'; 
+            break;
+        default: 
+            task['trigger'] = 'Unknown'; 
+            break;
+    }
+
+    response.json(task);
 }</code></pre>
         </div>
         <b>Installing Dependencies</b>
