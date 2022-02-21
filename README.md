@@ -8,6 +8,7 @@ The official https://appwrite.io/docs documentation source code.
 
 ### Content Guidelines
 - Use proper title hierarchy (h1-h6) and valid HTML
+- All titles must follow the [Chicago style of headline capitalization](https://capitalizemytitle.com/style/Chicago/)
 - External links (not https://appwrite.io) should be opened in a new tab (`target="_blank"`)
 - External links should have an HTML attribute of `rel="noopener"`
 - All filenames should be dash-based and nested in a way that makes sense
