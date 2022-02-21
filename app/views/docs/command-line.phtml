@@ -56,13 +56,13 @@
 
 <h3><a href="/docs/command-line#initializeProject" id="initializeProject">Initializing your project</a></h3>
 
-<p>After you're logged in, the CLI needs to be initialized before you can use it with your Appwrite project. Initialize it with the `appwrite init project` command. </p>
+<p>After you're logged in, the CLI needs to be initialized with your Appwrite project. You can initialize the CLI using:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init project</code></pre>
 </div>
 
-<p>The following prompts guide you through the setup process. The init command also creates an appwrite.json file representing your Appwrite project. The `appwrite.json` file does the following things. </p>
+<p>The following prompts will guide you through the setup process. The init command also creates an <b>appwrite.json</b> file representing your Appwrite project. The <b>appwrite.json<b> file does the following things. </p>
 
 <ol class="margin-top margin-bottom-large">
   <li class="margin-bottom-small">Provides context to the CLI</li>
@@ -77,7 +77,7 @@
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init collection</code></pre>
 </div>
 
-<p>The CLI also comes with a convenient `--all` flag to perform both these steps at once using</p>
+<p>The init command also comes with a convenient <span class="tag">--all</span> flag to perform both these steps at once using</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init --all</code></pre>
@@ -85,17 +85,16 @@
 
 <h3><a href="/docs/command-line#deployFunctions" id="deployFunctions">Deploying cloud functions</a></h3>
 
-<p>The CLI also handles creating and deploying Appwrite's cloud functions. Initialize your new function using</p>
+<p>The CLI also handles the creation and deployment of Appwrite's cloud functions. You can initialize a new function using</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>
-appwrite init function
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function
 ? What would you like to name your function? My Awesome Function
 ? What runtime would you like to use? Node.js (node-15.5)
 ✓ Success</code></pre>
 </div>
 
-<p>This creates a new function `My Awesome Function` in your current Appwrite project and also creates a template function for you to get started. You can now deploy this function using </p>
+<p>This command creates a new function <b>My Awesome Function</b> in your current Appwrite project and also creates a template function for you to get started. You can now deploy this function using: </p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function</code></pre>
@@ -103,13 +102,13 @@ appwrite init function
 
 <h3><a href="/docs/command-line#deployCollections" id="deployCollections">Deploying collections</a></h3>
 
-<p>The Appwrite CLI helps you migrate your project from a development server to a production server using the CLI. You can deploy all the collections in your appwrite.json file using</p>
+<p>The Appwrite CLI also helps you migrate your project's collections from a development server to a production server. You can deploy all the collections in your <b>appwrite.json</b> file using:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collections</code></pre>
 </div>
 
-<p>The `deploy` command also comes with a convenient `--all` flag to deploy all your functions and collections at once.</p>
+<p>The <b>deploy</b> command also comes with a convenient <span class="tag">--all</span> flag to deploy all your functions and collections at once.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy --all</code></pre>
@@ -128,8 +127,81 @@ appwrite init function
 <p>The Appwrite CLI follows the following general syntax.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite [SERVICE] [COMMAND] --[OPTIONS]</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite [COMMAND] --[OPTIONS]</code></pre>
 </div>
+
+<p>A complete list of supported commands can be found below.</p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="full text-size-small">
+    <thead>
+    <tr>
+        <th style="width: 200px">Command</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>login</td>
+        <td>The login command allows you to authenticate a user into the CLI</td>
+    </tr>
+    <tr>
+        <td>init</td>
+        <td>The init command helps you initialize your Appwrite project, functions and collections</td>
+    </tr>
+    <tr>
+        <td>deploy</td>
+        <td>The deploy command provides a convenient wrapper for deploying your functions and collections</td>
+    </tr>
+    <tr>
+        <td>logout</td>
+        <td>The logout command allows you to logout from the CLI</td>
+    </tr>
+    <tr>
+        <td>projects</td>
+        <td>The projects command allows you to view, create and manage your Appwrite projects</td>
+    </tr>
+    <tr>
+        <td>storage</td>
+        <td>The storage command allows you to manage your project files</td>
+    </tr>
+    <tr>
+        <td>teams</td>
+        <td>The teams command allows you to group users of your project and to enable them to share read and write access to your project's resources</td>
+    </tr>
+    <tr>
+        <td>users</td>
+        <td>The users command allows you to manage your project users</td>
+    </tr>
+    <tr>
+        <td>client</td>
+        <td>The client command allows you to configure your CLI</td>
+    </tr>
+    <tr>
+        <td>account</td>
+        <td>The account command allows you to authenticate and manage a user account</td>
+    </tr>
+    <tr>
+        <td>avatars</td>
+        <td>The avatars command aims to help you complete everyday tasks related to your app image, icons, and avatars</td>
+    </tr>
+    <tr>
+        <td>functions</td>
+        <td>The functions command allows you view, create and manage your Cloud Functions</td>
+    </tr>
+    <tr>
+        <td>database</td>
+        <td>The database command allows you to create structured collections of documents, query and filter lists of documents</td>
+    </tr>
+    <tr>
+        <td>health</td>
+        <td>The health command allows you to both validate and monitor your Appwrite server's health</td>
+    </tr>
+    <tr>
+        <td>locale</td>
+        <td>The locale command allows you to customize your app based on your users' location</td>
+    </tr>
+    </tbody>
+</table>
 
 <p>Here are a few sample commands to get you started</p>
 
