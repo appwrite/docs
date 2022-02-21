@@ -210,16 +210,7 @@
 <p>To create a new user in your project, you can use the `create` command. To successfully create a user, make sure your API key is granted with the scope "users.write".</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users create --userId "unique()" --email hello@appwrite.io --password very_strong_password
-$id : 6212d7db79a1d1252823
-name :
-registration : 1645402075
-status : true
-passwordUpdate : 1645402075
-email : hello@appwrite.io
-emailVerification : false
-prefs
-✓ Success</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users create --userId "unique()" --email hello@appwrite.io --password very_strong_password</code></pre>
 </div>
 <!-- Attach image of output  -->
 
@@ -228,17 +219,14 @@ prefs
 <p>To get a list of all your project users, you can use the `list` command. To successfully view the list, make sure your API key is granted with the scope "users.read".</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users list
-sum : 1
-users
-
-  $id                  │ name │ registration │ status │ passwordUpdate │ email             │ emailVerification │ prefs
- ──────────────────────┼──────┼──────────────┼────────┼────────────────┼───────────────────┼───────────────────┼────────
-  6212d7db79a1d1252823 │      │ 1645402075   │ true   │ 1645402075     │ hello@appwrite.io │ false             │ object
-
-✓ Success</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users list</code></pre>
 </div>
-<!-- Attach image of output  -->
+
+<p>In case of errors with any command, you can get more information about what went wrong using the <span class="tag">--verbose</span> flag</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users list --verbose</code></pre>
+</div>
 
 <p><b>List Collections</b></p> 
 
@@ -247,9 +235,15 @@ users
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite database listCollections</code></pre>
 </div>
+
+<p>If you wish to parse the output from the CLI, you can request the CLI output in JSON format using the <span class="tag">--json</span> flag</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite database listCollections --json</code></pre>
+</div>
 <!-- Attach image of output -->
 
-<p><b>Read Collection</b></p>
+<p><b>Get a Collection</b></p>
 
 <p>To get more information on a particular collection, you can make use of the `getCollection` command and pass in the `collectionId`.  To successfully fetch the collection, make sure your API key is granted with the scope "collections.read".</p>
 
@@ -267,16 +261,18 @@ users
 
 <h3><a href="/docs/command-line#configuration" id="configuration">Configuration</a></h3>
 
-<p>At any point, if you would like to change your server endpoint, project key, or self-signed certificate acceptance, use the `client` service.</p>
+<p>At any point, if you would like to change your server endpoint, project key, or self-signed certificate acceptance, use the <b>client</b> service.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>
 appwrite client --endpoint http://192.168.1.6/v1
 appwrite client --key 23f24gwrhSDgefaY
 appwrite client --selfSigned true
+appwrite client --reset // Resets your CLI configuration
+appwrite client --debug // Prints your current configuration
 </code></pre>
 </div>
 
 <h3><a href="/docs/command-line#help" id="help">Help</a></h3>
 
-<p>If you get stuck anywhere, you can always use the `help` command to get the usage examples. All the examples are also available on the Appwrite API specs docs, and you can view them by switching the examples to the "Appwrite CLI" from the top dropdown.</p>
+<p>If you get stuck anywhere, you can always use the <b>help</b> command to get the usage examples. All the examples are also available on the Appwrite API specs docs, and you can view them by switching the examples to the "Appwrite CLI" from the top dropdown.</p>
