@@ -43,7 +43,7 @@ $runtimes = $this->getParam('runtimes', []);
             <pre class="line-numbers"><code class="prism language-js" data-prism>const fetch = require("node-fetch");
 
 module.exports = async (request, response) => {
-    const payload = JSON.parse(request.payload);
+    const payload = JSON.parse(request.payload ? request.payload : "{}");
     const env = request.env;
 
     const randomNumber = Math.floor(Math.random() * 100) + 1;
@@ -179,7 +179,7 @@ def main(request, response)
     end
 
     return response.json(task)
-end </code></pre>
+end</code></pre>
         </div>
         <b>Installing Dependencies</b>
         <p>Include a <b>Gemfile</b> in your function, Appwrite handles the rest! This example uses the <a href="https://rubygems.org/gems/httparty">httparty</a> package</p>
@@ -229,42 +229,46 @@ export default async function(request: any, response: any) {
         <h3>Dart</h3>
         <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>Future&lt;void&gt; start(Request request, Response response) async {
-    response.send("Hello World!");
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:math';
+import 'dart:async';
+import 'dart:convert';
+import 'package:dio/dio.dart' hide Response;
+
+Future<void> start(final request, final response) async {
+    final env = request.env;
+    final payload = jsonDecode(request.payload.isEmpty ? '{}' : request.payload);
+    
+    final randomNumber = Random().nextInt(100) + 1;
+    final todo = await Dio().get('https://jsonplaceholder.typicode.com/todos/$randomNumber');
+    
+    final task = {
+        'message': 'Hello from Appwrite Functions 👋',
+        'userId': todo.data['userId'],
+        'id': todo.data['id'],
+        'title': todo.data['title'],
+        'completed': todo.data['completed']
+    };
+    
+    switch (env['APPWRITE_FUNCTION_TRIGGER']) {
+        case 'http':
+        task['trigger'] = 'HTTP';
+        break;
+        case 'schedule':
+        task['trigger'] = 'CRON';
+        break;
+        case 'event':
+        task['trigger'] = 'Event';
+        break;
+        default:
+        task['trigger'] = 'Unknown';
+        break;
+    }
+
+    response.json(task);
 }</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Include a <b>pubspec.yaml</b> file with your function, Appwrite handles the rest!</p>
-        </div>
-    </li>
-    <li>
-    <h3>Rust</h3>
-        <div>
-            <div class="ide margin-top-small" data-lang="rust" data-lang-label="Rust">
-            <pre class="line-numbers">
-<code class="prism language-rust" data-prism>use super::{Response, RequestValue};
-
-pub fn main(request: RequestValue) -> Response {
-    return Response::send("Hello World!".to_string());
-}</code></pre>
-            </div>
-            <b>Installing Dependencies</b>
-            <p>Rust dependencies are not currently supported.</p>
-        </div>
-    </li>
-    <li>
-    <h3>Swift</h3>
-        <div>
-            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers">
-<code class="prism language-rust" data-prism>import Foundation
-
-func main(request: RequestValue, response: RequestResponse) -> RequestResponse {
-    return response.send(data: "Hello World!");
-}</code></pre>
-            </div>
-            <b>Installing Dependencies</b>
-            <p>Swift dependencies are not currently supported.</p>
+        <p>Include a <b>pubspec.yaml</b> file with your function, Appwrite handles the rest! This example uses the <a href="https://pub.dev/packages/dio">Dio</a> package</p>
         </div>
     </li>
 </ul>
