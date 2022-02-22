@@ -160,14 +160,14 @@ def main(request, response)
     env = request.env
     
     randomNumber = rand(100) + 1
-    todo = JSON.parse(HTTParty.get('https://jsonplaceholder.typicode.com/todos/' + randomNumber).body)
+    todo = JSON.parse(HTTParty.get('https://jsonplaceholder.typicode.com/todos/' + randomNumber.to_s).body)
     
     task = {
         message: 'Hello from Appwrite Functions 👋',
         **todo
     }
 
-    case env.APPWRITE_FUNCTION_TRIGGER
+    case env['APPWRITE_FUNCTION_TRIGGER']
     when 'http'
         task['trigger'] = 'HTTP'
     when 'schedule'
