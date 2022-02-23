@@ -152,7 +152,7 @@ def main(request, response):
         <h3>Ruby</h3>
         <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>require 'httparty'
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'httparty'
 require 'json'
 
 def main(request, response)
@@ -265,6 +265,64 @@ Future<void> start(final request, final response) async {
     }
 
     response.json(task);
+}</code></pre>
+        </div>
+        <b>Installing Dependencies</b>
+        <p>Include a <b>pubspec.yaml</b> file with your function, Appwrite handles the rest! This example uses the <a href="https://pub.dev/packages/dio">Dio</a> package</p>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
+    
+    let env = req.env
+
+    guard let data = (req.payload.isEmpty ? "{}" : req.payload).data(using: .utf8),
+        let payload = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+            return res.json(data: ["error": "Invalid payload."])
+    }
+    
+    let group = DispatchGroup()
+
+    var todo: [String: Any]? = nil
+    let randomNumber = Int.random(in: 1...100)
+    let url = URL(string: "https://jsonplaceholder.typicode.com/todos/\(randomNumber)")!
+    let fetchTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        defer { group.leave() }
+        guard let data = data else { return }
+        todo = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+    }
+    group.enter()
+    fetchTask.resume()
+    group.wait()
+
+    var task = [
+        "message": "Hello from Appwrite Functions 👋",
+        "userId": todo?["userId"] ?? "",
+        "id": todo?["id"] ?? "",
+        "title": todo?["title"] ?? "",
+        "completed": todo?["completed"] ?? ""
+    ]
+    
+    switch (env["APPWRITE_FUNCTION_TRIGGER"]) {
+    case "http":
+        task["trigger"] = "HTTP"
+    case "schedule":
+        task["trigger"] = "CRON"
+    case "event":
+        task["trigger"] = "Event"
+    default:
+        task["trigger"] = "Unknown"
+    }
+
+    return res.json(data: task)
 }</code></pre>
         </div>
         <b>Installing Dependencies</b>
