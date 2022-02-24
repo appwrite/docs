@@ -20,6 +20,14 @@
 <ul class="phases clear" data-ui-phases>
     <li>
         <h4>MacOS</h4>
+        <p>Using <a href="https://brew.sh" target="_blank">Homebrew</a></p>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>$ brew tap appwrite/sdk-for-cli https://github.com/appwrite/sdk-for-cli
+$ brew update
+$ brew install --HEAD appwrite</code></pre>
+        </div>
+
+        <p>or terminal</p>
         <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
             <pre class="line-numbers"><code class="prism language-bash" data-prism>curl -sL <?php echo $this->getParam('home'); ?>/cli/install.sh | bash</code></pre>
         </div>
