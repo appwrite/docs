@@ -11,15 +11,385 @@ $runtimes = $this->getParam('runtimes', []);
 
 <p>Appwrite Functions run in a secure, isolated Docker container. By default, Appwrite supports multiple runtimes for different languages that you can use to run your code.</p>
 
-<h2><a href="/docs/functions#addFunction" id="addFunction">Add Your Function</a></h2>
+<h2><a href="/docs/functions#gettingStarted" id="gettingStarted">Getting Started</a></h2>
 
-<p>You can add a new function from your Appwrite project's dashboard. Access your Functions settings from your project's left navigation panel. Click the 'Add Function' button and choose your function name and code runtime. In your Functions settings page, you can set your function event triggers, CRON schedule, and set secure environment variables for your function runtime.</p>
+<p>The quickest way to get started with Appwrite Functions is using the <a href="/docs/command-line">Appwrite CLI</a>. The CLI comes with starter code and a some simple commands to quickly create and deploy your functions. Once you have the CLI installed and setup with an Appwrite project, create your first function using: </p>
 
-<h2><a href="/docs/functions#deployCode" id="deployCode">Deploy Your Code</a></h2>
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function</code></pre>
+</div>
 
-<p>You can deploy your code using the <a href="/docs/command-line">Appwrite CLI</a> tool, the Appwrite <a href="/docs/getting-started-for-server">Server API</a> or manually from the Appwrite console.</p>
+<p>Give your function a name and choose your runtime. This will create a new starter function in the current directory and also add it to your <b>appwrite.json</b> file. Go ahead and deploy your function using :</p>
 
-<h3><a href="/docs/functions#createDeployment" id="createDeployment">Create Deployment</a></h3>
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function</code></pre>
+</div>
+
+<p>You can now head over to your Appwrite Dashboard, navigate to the Function settings and execute your function. You can find the status of your execution under the <b>Logs</b> tab. </p>
+
+<p>Feel free to modify and play around with the starter code and use the <b>appwrite deploy</b> command to instantly deploy your changes to the Appwrite server. </p>
+
+<p> The following sections will dive deeper into some more terminology and advanced concepts which can be useful when writing your function from scratch.</p>
+
+<h2><a href="/docs/functions#writingYourOwnFunction" id="writingYourOwnFunction">Writing your own Function</a></h2>
+
+<p>When writing your own Appwrite Function, you must export the code in certain ways depending on the language. This varies between languages so refer to the examples below.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="Javascript">
+            <pre class="line-numbers"><code class="prism language-js" data-prism>const fetch = require("node-fetch");
+
+module.exports = async (request, response) => {
+    const payload = JSON.parse(request.payload ? request.payload : "{}");
+    const env = request.env;
+
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    const todo = await fetch(`https://jsonplaceholder.typicode.com/todos/${randomNumber}`).then(r => r.json());
+
+    let task = {
+        message: 'Hello from Appwrite Functions 👋',
+        ...todo
+    };
+
+    switch(env.APPWRITE_FUNCTION_TRIGGER) {
+        case 'http': 
+            task['trigger'] = 'HTTP'; 
+            break;
+        case 'schedule': 
+            task['trigger'] = 'CRON'; 
+            break;
+        case 'event': 
+            task['trigger'] = 'Event'; 
+            break;
+        default: 
+            task['trigger'] = 'Unknown'; 
+            break;
+    }
+
+    response.json(task);
+}</code></pre>
+        </div>
+        <b>Installing Dependencies</b>
+        <p>Include a <b>package.json</b> along with your function, and Appwrite handles the rest! The best practice is to make sure <b>node_modules</b> folder is <b>not</b> part of your tarball. This example uses the <a href="https://www.npmjs.com/package/node-fetch">node-fetch</a> package</p>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php 
+
+return function($request, $response) {
+    $payload = json_decode($request['payload']);
+    $env = $request['env'];
+
+    $randomNumber = rand(1, 100);
+    $todo = json_decode(file_get_contents("https://jsonplaceholder.typicode.com/todos/$randomNumber"), true);
+
+    $task = array_merge($todo, [
+        'message' => 'Hello from Appwrite Functions 👋',
+    ]);
+
+    switch($env['APPWRITE_FUNCTION_TRIGGER']) {
+        case 'http': 
+            $task['trigger'] = 'HTTP'; 
+            break;
+        case 'schedule': 
+            $task['trigger'] = 'CRON'; 
+            break;
+        case 'event': 
+            $task['trigger'] = 'Event'; 
+            break;
+        default: 
+            $task['trigger'] = 'Unknown'; 
+            break;
+    }
+
+    $response->json($task);
+};</code></pre>
+        </div>
+        <b>Installing Dependencies</b>
+        <p>Adding dependencies to PHP requires you to have a <b>composer.json</b> file. The best practice is to make sure <b>vendor</b> directory is <b>not</b> part of your tarball. </p>
+    </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>import json
+import requests
+import random
+
+def main(request, response):
+    payload = json.loads(request.payload or '{}')
+    env = request.env
+
+    randomNumber = random.randint(1, 100)
+    todo = requests.get(f"https://jsonplaceholder.typicode.com/todos/{randomNumber}").json()
+
+    task = {
+        "message": "Hello from Appwrite Functions 👋",
+        **todo
+    }
+
+    task["trigger"] = {
+        "http": "HTTP",
+        "schedule": "CRON",
+        "event": "Event",
+        "unknown": "Unknown"
+    }[env['APPWRITE_FUNCTION_TRIGGER']]
+
+    return response.json(task)</code></pre>
+        </div>
+        <b>Installing Dependencies</b>
+        <p>Include a <b>requirements.txt</b> file in your function, Appwrite will handle the rest! This example uses the <a href="https://pypi.org/project/requests/">requests</a> package</p>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'httparty'
+require 'json'
+
+def main(request, response)
+    payload = JSON.parse(request.payload.empty? ? '{}' : request.payload)
+    env = request.env
+    
+    randomNumber = rand(100) + 1
+    todo = JSON.parse(HTTParty.get('https://jsonplaceholder.typicode.com/todos/' + randomNumber.to_s).body)
+    
+    task = {
+        message: 'Hello from Appwrite Functions 👋',
+        **todo
+    }
+
+    case env['APPWRITE_FUNCTION_TRIGGER']
+    when 'http'
+        task['trigger'] = 'HTTP'
+    when 'schedule'
+        task['trigger'] = 'CRON'
+    when 'event'
+        task['trigger'] = 'Event'
+    else
+        task['trigger'] = 'Unknown'
+    end
+
+    return response.json(task)
+end</code></pre>
+        </div>
+        <b>Installing Dependencies</b>
+        <p>Include a <b>Gemfile</b> in your function, Appwrite handles the rest! This example uses the <a href="https://rubygems.org/gems/httparty">httparty</a> package</p>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import axiod from "https://deno.land/x/axiod/mod.ts";
+
+export default async function(request: any, response: any) {
+    const payload = JSON.parse(request.payload ? request.payload : "{}");
+    const env = request.env;
+
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    const todo = (await axiod.get(`https://jsonplaceholder.typicode.com/todos/${randomNumber}`)).data;
+
+    let task = {
+        message: 'Hello from Appwrite Functions 👋',
+        ...todo
+    };
+
+    switch(env.APPWRITE_FUNCTION_TRIGGER) {
+        case 'http': 
+            task['trigger'] = 'HTTP'; 
+            break;
+        case 'schedule': 
+            task['trigger'] = 'CRON'; 
+            break;
+        case 'event': 
+            task['trigger'] = 'Event'; 
+            break;
+        default: 
+            task['trigger'] = 'Unknown'; 
+            break;
+    }
+
+    response.json(task);
+}</code></pre>
+        </div>
+        <b>Installing Dependencies</b>
+        <p>No special steps are required for Deno, Appwrite handles everything!</p>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:math';
+import 'dart:async';
+import 'dart:convert';
+import 'package:dio/dio.dart' hide Response;
+
+Future<void> start(final request, final response) async {
+    final env = request.env;
+    final payload = jsonDecode(request.payload.isEmpty ? '{}' : request.payload);
+    
+    final randomNumber = Random().nextInt(100) + 1;
+    final todo = await Dio().get('https://jsonplaceholder.typicode.com/todos/$randomNumber');
+    
+    final task = {
+        'message': 'Hello from Appwrite Functions 👋',
+        'userId': todo.data['userId'],
+        'id': todo.data['id'],
+        'title': todo.data['title'],
+        'completed': todo.data['completed']
+    };
+    
+    switch (env['APPWRITE_FUNCTION_TRIGGER']) {
+        case 'http':
+        task['trigger'] = 'HTTP';
+        break;
+        case 'schedule':
+        task['trigger'] = 'CRON';
+        break;
+        case 'event':
+        task['trigger'] = 'Event';
+        break;
+        default:
+        task['trigger'] = 'Unknown';
+        break;
+    }
+
+    response.json(task);
+}</code></pre>
+        </div>
+        <b>Installing Dependencies</b>
+        <p>Include a <b>pubspec.yaml</b> file with your function, Appwrite handles the rest! This example uses the <a href="https://pub.dev/packages/dio">Dio</a> package</p>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
+    
+    let env = req.env
+
+    guard let data = (req.payload.isEmpty ? "{}" : req.payload).data(using: .utf8),
+        let payload = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+            return res.json(data: ["error": "Invalid payload."])
+    }
+    
+    let group = DispatchGroup()
+
+    var todo: [String: Any]? = nil
+    let randomNumber = Int.random(in: 1...100)
+    let url = URL(string: "https://jsonplaceholder.typicode.com/todos/\(randomNumber)")!
+    let fetchTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        defer { group.leave() }
+        guard let data = data else { return }
+        todo = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+    }
+    group.enter()
+    fetchTask.resume()
+    group.wait()
+
+    var task = [
+        "message": "Hello from Appwrite Functions 👋",
+        "userId": todo?["userId"] ?? "",
+        "id": todo?["id"] ?? "",
+        "title": todo?["title"] ?? "",
+        "completed": todo?["completed"] ?? ""
+    ]
+    
+    switch (env["APPWRITE_FUNCTION_TRIGGER"]) {
+    case "http":
+        task["trigger"] = "HTTP"
+    case "schedule":
+        task["trigger"] = "CRON"
+    case "event":
+        task["trigger"] = "Event"
+    default:
+        task["trigger"] = "Unknown"
+    }
+
+    return res.json(data: task)
+}</code></pre>
+        </div>
+        <b>Installing Dependencies</b>
+        <p>Include a <b>Package.swift</b> file with your function, Appwrite handles the rest!</p>
+        </div>
+    </li>
+</ul>
+
+
+<p>When your function is called, you receive two parameters, a <b>request</b> and a <b>response</b> object. The request object contains all data that was sent to the function including environment variables. A schema of the request object can be found below and is the same for all runtimes.</p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom text-size-small">
+    <thead>
+    <tr>
+        <th style="width: 140px">Property</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>headers</td>
+        <td>An object containing all the request headers.</td>
+    </tr>
+    <tr>
+        <td>payload</td>
+        <td>A JSON string containing the data when you <a href="/docs/client/functions#functionsCreateExecution">created the execution.</a></td>
+    </tr>
+    <tr>
+        <td>env</td>
+        <td>An object containing all the environment variables. This includes </td>
+    </tr>
+    </tbody>
+</table>
+
+<p>The response object has two functions, <b>send()</b> and <b>json()</b> that can be used to send data back to the client. The types and implementation of these functions vary depending on runtime due to all languages being slightly different. You can check out implementation in the specific languages to learn more about them. The schema of the response object can be found below: </p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom text-size-small">
+    <thead>
+    <tr>
+        <th style="width: 140px">Function</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>send(text, status)</td>
+        <td>Function to return a text response. Status code defaults to 200</td>
+    </tr>
+    <tr>
+        <td>json(obj, status)</td>
+        <td>Function to return a JSON response. Status code defaults to 200</td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="notice">
+    <h3>Accessing your Local Appwrite Setup</h3>
+    <p>If you're running Appwrite locally and trying to connect to your local Appwrite instance from a cloud function, you'll have to use your local IP address in place of localhost. This is because, within the container localhost does not refer to the host machine rather the container itself. </p>
+</div>
+
+<h2><a href="/docs/functions#createFunction" id="createFunction">Create your Function</a></h2>
+
+<p>Before you can deploy your function, you will need to create a new function from your Appwrite project's dashboard. Access the Function settings from your project's left navigation panel. Click the 'Add Function' button and choose a function name and runtime. In your Functions settings page, you can also set your function event triggers, CRON schedule, and set secure environment variables for your function. </p>
+
+<h2><a href="/docs/functions#deployFunction" id="deployFunction">Deploy Your Function</a></h2>
+
+<p>Once you've written your function, you can now deploy it using the <a href="/docs/command-line">Appwrite CLI</a>, the Appwrite <a href="/docs/getting-started-for-server">Server API</a> or manually from the Appwrite console.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -54,7 +424,7 @@ $runtimes = $this->getParam('runtimes', []);
     </li>
 </ul>
 
-<p>The command above accepts two parameters:</p>
+<p>The command above accepts three parameters:</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom text-size-small">
     <thead>
@@ -74,145 +444,24 @@ $runtimes = $this->getParam('runtimes', []);
     </tr>
     <tr>
         <td>code</td>
-        <td>Gzip file with your code package. When used with the Appwrite CLI, pass the path to your code directory, and the CLI will automatically package your code. <br /><br /><b>For increased security, The Appwrite CLI only has access to file paths within the current working directory. In other words, it doesn't support file paths that try to access the parent directories (../../mycode).</b></td>
+        <td>Path to your function tarball. When used with the Appwrite CLI, simply pass the path to your code directory, and the CLI will automatically package your code. </td>
     </tr>
     </tbody>
 </table>
 
 <p><a href="/docs/server/functions#functionsCreateDeployment" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> You can also create new code deployments using the Appwrite server API</a></p>
 
-<h3>Exporting your code functions correctly</h3>
-<p>When creating functions with Appwrite your code must export the function in certain ways depending on the language. This varies between languages so refer to the examples below.</p>
-<p>When your function is called you receive two parameters, `request` and `response`. The request contains all data that was sent to the function as well as other various environment variables. A schema of the request object can be found below and is the same for all runtimes.</p>
-<p>The response object has two functions, <code>send()</code> and <code>json()</code> that can be used to send data back to the client. The types and implementation of these functions vary depending on runtime due to all languages being slightly different. You can check out implementation in the specific languages to learn more about them.</p>
-<p>An example of this for each language can be found below:</p>
-
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Node.js</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>module.exports = async (req, res) => {
-    res.send('Hello World!');
-}</code></pre>
-        </div>
-        <b>Installing Dependencies</b>
-        <p>Installing dependencies can be done by including a package.json in your tarball, and Appwrite handles the rest! The best practice is to make sure `node_modules` folder is <b>not</b> part of your tarball.</p>
-        </div>
-    </li>
-    <li>
-        <h3>PHP</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>return function($request, $response) {
-    $response->send('Hello World!');
-};</code></pre>
-        </div>
-        <b>Installing Dependencies</b>
-        <p>Adding dependencies to PHP requires you to have a composer.json file. The best practice is to make sure `vendor` folder is <b>not</b> part of your tarball. </p>
-        <p>NOTE: Make sure to set the project name to "user/function" otherwise the build process will crash.</p>
-    </div>
-    </li>
-    <li>
-        <h3>Python</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>def main(req, res):
-    return res.send('Hello World!')
-</code></pre>
-        </div>
-        <b>Installing Dependencies</b>
-        <p>Simply package a requirements.txt file in your function, Appwrite will handle the rest!</p>
-        </div>
-    </li>
-    <li>
-        <h3>Ruby</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>def main(request, response)
-    return response.send("Hello World!")
-end </code></pre>
-        </div>
-        <b>Installing Dependencies</b>
-        <p>Include a Gemfile in your function, Appwrite handles the rest!</p>
-        </div>
-    </li>
-    <li>
-        <h3>Deno</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async function(req: any, res: any) {
-    res.send("Hello World!")
-}</code></pre>
-        </div>
-        <b>Installing Dependencies</b>
-        <p>No Special Steps are required for Deno, Appwrite handles everything!</p>
-        </div>
-    </li>
-    <li>
-        <h3>Dart</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>Future&lt;void&gt; start(Request request, Response response) async {
-    response.send("Hello World!");
-}</code></pre>
-        </div>
-        <b>Installing Dependencies</b>
-        <p>Include a pubspec.yaml file with your function, Appwrite handles the rest!</p>
-        </div>
-    </li>
-    <li>
-    <h3>Rust</h3>
-        <div>
-            <div class="ide margin-top-small" data-lang="rust" data-lang-label="Rust">
-            <pre class="line-numbers">
-<code class="prism language-rust" data-prism>use super::{Response, RequestValue};
-
-pub fn main(req: RequestValue) -> Response {
-    return Response::send("Hello World!".to_string());
-}</code></pre>
-            </div>
-            <b>Installing Dependencies</b>
-            <p>Rust Dependencies are not currently supported.</p>
-        </div>
-    </li>
-    <li>
-    <h3>Swift</h3>
-        <div>
-            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers">
-<code class="prism language-rust" data-prism>import Foundation
-
-func main(req: RequestValue, res: RequestResponse) -> RequestResponse {
-    return res.send(data: "Hello World!");
-}</code></pre>
-            </div>
-            <b>Installing Dependencies</b>
-            <p>Swift Dependencies are not currently supported.</p>
-        </div>
-    </li>
-</ul>
-
-
 <h2><a href="/docs/functions#build" id="build">Builds</a></h2>
 <p>Deployments needs to be built before they can be activated. This is automatically done after creating a deployment and the time taken can vary depending on the runtime.</p>
 
-<p>If a build fails for any reason, the deployment's status field is set to <code>failed</code> and you won't be able to activate it. You can however retry a build if you think it was caused by an external factor using the <a href="/docs/api#retry-build">Retry Build</a> endpoint with the <code>buildId</code> from the deployment.</p>
+<p>If a build fails for any reason, the deployment's status is set to <b>failed</b> and you won't be able to activate it. You can however retry a build if you think it was caused by an external factor using the <b>Retry Button</b> on the Appwrite Dashboard or <a href="/docs/api#retry-build">Retry Build</a> endpoint with the <b>buildId</b> from the deployment.</p>
 
 <p>To find more details about a build that has failed you can get the <code>buildId</code> from the deployment and use the <a href="/docs/api#get-build">Get Build</a> endpoint to get more information about the build.</p>
 
-<p>Deployments that have been built successfully are marked as "ready" and can be activated and used.</p>
-
-<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run --rm -v $(pwd):/app -w /app --env GEM_HOME=./.appwrite appwrite/env-ruby-2.7:1.0.2 bundle install</code></pre>
-</div>
-    
-<h3>Accessing your Local Appwrite Setup</h3>
-    
-<p>If you're running Appwrite locally and trying to connect to your local Appwrite instance from a cloud function, you'll have to use your local IP address instead of localhost. This is because if you use localhost, the container that runs the cloud function will try to connect to itself rather than your 'appwrite' container.</p>
+<p>Deployments that have been built successfully are marked as <b>ready</b> and can be activated and executed.</p>
 
 <div class="notice">
-    <h3>Note: </h3>
+    <h3>Build Times</h3>
     <p>Statically compiled runtimes such as Rust or Swift take much longer to build however yield better performance over their dynamically compiled counterparts such as Node.</p>
 </div>
 
@@ -281,6 +530,63 @@ void main() { // Init SDK
     }).catchError((error) {
       print(error.response);
   });
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+
+        <div class="ide margin-bottom" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+func main() {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("5df5acd0d48c2") // Your project ID
+
+    let functions = Functions(client)
+    functions.createExecution(
+        functionId: "[FUNCTION_ID]"
+    ) { result in
+        switch result {
+        case .failure(let error):
+            print(error.message)
+        case .success(let execution):
+            print(String(describing: execution)
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+
+        <div class="ide margin-bottom" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import io.appwrite.Client
+import io.appwrite.services.Functions
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val client = Client(applicationContext)
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+            .setProject("5df5acd0d48c2") // Your project ID
+
+        val functions = Functions(client)
+
+        GlobalScope.launch {
+            val response = functions.createExecution(
+                functionId = "[FUNCTION_ID]",
+            )
+            val json = response.body?.string()        
+        }
+    }
 }</code></pre>
         </div>
     </li>
