@@ -41,7 +41,7 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
   <application ...>
     ...
     <!-- Add this inside the `<application>` tag, along side the existing `<activity>` tags -->
-    <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" >
+    <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true">
       <intent-filter android:label="flutter_web_auth">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
