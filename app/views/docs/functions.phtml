@@ -325,6 +325,7 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
     return res.json(data: task)
 }</code></pre>
         </div>
+        <p>With Swift, your <b>entrypoint</b> can be empty since Appwrite automatically infers it from the location of your <b>main()</b> function. Just ensure that your cloud function has a <b>single declaration of main()</b> across your source files.</p>
         <b>Installing Dependencies</b>
         <p>Include a <b>Package.swift</b> file with your function, Appwrite handles the rest!</p>
         </div>
