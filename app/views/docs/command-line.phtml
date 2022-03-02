@@ -1,67 +1,267 @@
-<p>The <a href="https://github.com/appwrite/sdk-for-cli" target="_blank" rel="noopener">Appwrite CLI</a> is a command-line application that allows you to interact with the <a href="/docs/getting-started-for-server">Appwrite server-side APIs</a> and perform server-side tasks quickly using your terminal. A few examples of these tasks including managing resources (documents, files, users), executing and packaging Cloud Functions, and any other operation available through the Appwrite API.</p>
+<p>The <a href="https://github.com/appwrite/sdk-for-cli" target="_blank" rel="noopener">Appwrite CLI</a> is a command-line application that allows you to interact with the <a href="/docs/getting-started-for-server">Appwrite server</a> and perform server-side tasks using your terminal. This includes creating and managing projects, managing resources (documents, files, users), creating and deploying Cloud Functions, and other operations available through Appwrite's API.</p>
 
-<h2><a href="/docs/command-line#gettingStarted" id="gettingStarted">Getting started</a></h2>
+<h2><a href="/docs/command-line#installation" id="installation">Installation</a></h2>
 
-<p>The Appwrite CLI installation is extremely easy and fast. The CLI is packaged as a Docker container, which makes it secure by default, requires no dependencies but <a href="https://docs.docker.com/get-docker/">Docker</a>, and truly platform and language agnostic.</p>
+<p>The CLI is packaged both as an <a href="https://www.npmjs.com/package/appwrite-cli">npm module</a> as well as a <a href="https://github.com/appwrite/sdk-for-node-cli/releases/latest">standalone binary</a> for your operating system, making it completely dependency free, platform independent and language agnostic.</p>
 
-<p>The next step is to have your Appwrite server running. You can grab our simple <a href="/docs/installation">installation command</a> and execute it.</p>
+<h3><a href="/docs/command-line#installWithNpm" id="installWithNpm">Install with NPM</a></h3>
 
-<p>Next, head over to <a href="http://localhost" rel="noopener" target="_blank">http://localhost</a> and create a project in the Appwrite Console, create an <a href="/docs/keys">API key</a>, and we're good to play around with the CLI.</p>
+<p>If you have npm set up, run the command below to install the CLI</p>
 
-<h3><a href="/docs/command-line#installation" id="installation">Installation</a></h3>
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>npm install -g appwrite-cli</code></pre>
+</div>
 
-<p>To install the CLI, we recommend running the installation script for your operating system.</p>
+
+<h3><a href="/docs/command-line#installWithScript" id="installWithScript">Install with Script</a></h3>
+
+<p>For a completely dependency-free installation, the CLI also ships with a convenient installation script for your operating system</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
         <h4>MacOS</h4>
+        <p>Using <a href="https://brew.sh" target="_blank">Homebrew</a></p>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>$ brew tap appwrite/sdk-for-cli https://github.com/appwrite/sdk-for-cli
+$ brew update
+$ brew install --HEAD appwrite</code></pre>
+        </div>
 
+        <p>or terminal</p>
         <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
             <pre class="line-numbers"><code class="prism language-bash" data-prism>curl -sL <?php echo $this->getParam('home'); ?>/cli/install.sh | bash</code></pre>
         </div>
     </li>
+    <!--
     <li>
         <h4>Windows</h4>
-
         <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
             <pre class="line-numbers"><code class="prism language-powershell" data-prism>iwr -useb <?php echo $this->getParam('home'); ?>/cli/install.ps1 | iex</code></pre>
         </div>
     </li>
+    -->
     <li>
         <h4>Linux</h4>
-
         <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
             <pre class="line-numbers"><code class="prism language-bash" data-prism>curl -sL <?php echo $this->getParam('home'); ?>/cli/install.sh | bash</code></pre>
         </div>
     </li>
 </ul>
 
-<p>Once the setup is complete, you can validate your installation using:</p>
+<p>After the installation is complete, verify the install using</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite version</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite -v</code></pre>
 </div>
 
-<p>To start using the CLI with your project, you will first need to initialize the CLI with:</p>
+<p>The next step is to have your Appwrite server running. You can grab our simple <a href="/docs/installation">installation command</a> and execute it. Now, we're all set to play around with the CLI.</p>
+
+<h2><a href="/docs/command-line#gettingStarted" id="gettingStarted">Getting Started</a></h2>
+
+<p>Before you can use the CLI, you need to login to your Appwrite account using</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite login</code></pre>
 </div>
 
-<p>Great! Now you're all set to use the Appwrite CLI. You can access your CLI using the following general syntax:</p>
+<h3><a href="/docs/command-line#initializeProject" id="initializeProject">Initializing Your Project</a></h3>
+
+<p>After you're logged in, the CLI needs to be initialized with your Appwrite project. You can initialize the CLI using:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite [SERVICE] [COMMAND] --[OPTIONS]</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init project</code></pre>
 </div>
 
-<h3><a href="/docs/command-line#examples" id="examples">Examples</a></h3>
+<p>The following prompts will guide you through the setup process. The init command also creates an <b>appwrite.json</b> file representing your Appwrite project.
+
+<p>You can also fetch all the collections in your current project using</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init collection</code></pre>
+</div>
+
+<p>The init command also comes with a convenient <span class="tag">--all</span> flag to perform both these steps at once using</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init --all</code></pre>
+</div>
+
+<h3><a href="/docs/command-line#deployFunctions" id="deployFunctions">Deploying Cloud Functions</a></h3>
+
+<p>The CLI also handles the creation and deployment of Appwrite's Cloud Functions. You can initialize a new function using</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function
+? What would you like to name your function? My Awesome Function
+? What runtime would you like to use? Node.js (node-15.5)
+✓ Success</code></pre>
+</div>
+
+<p>This command creates a new function <b>My Awesome Function</b> in your current Appwrite project and also creates a template function for you to get started. You can now deploy this function using: </p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function
+? Which functions would you like to deploy? Awesome Function (621229798628cf5bf712)
+ℹ Info Deploying function Awesome Function ( 621229798628cf5bf712 )
+✓ Success Deployed Awesome Function ( 621229798628cf5bf712 )</code></pre>
+</div>
+
+<h3><a href="/docs/command-line#deployCollections" id="deployCollections">Deploying collections</a></h3>
+
+<p>The Appwrite CLI also helps you migrate your project's collections from a development server to a production server. You can deploy all the collections in your <b>appwrite.json</b> file using:</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collections</code></pre>
+</div>
+
+<p>The <b>deploy</b> command also comes with a convenient <span class="tag">--all</span> flag to deploy all your functions and collections at once.</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy --all</code></pre>
+</div>
+
+<div class="notice margin-bottom"> 
+    <h3>Self-Signed Certificates</h3> 
+    <p>By default, requests to domains with self-signed SSL certificates (or no certificates) are disabled. If you trust the domain, you can bypass the certificate validation using</p>
+    <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --selfSigned true</code></pre>
+</div>
+</div>
+
+<h3><a href="/docs/command-line#appwriteJSON" id="appwriteJSON">The appwrite.json File</a></h3>
+
+<p>An <b>appwrite.json</b> file is created by the CLI when you initialize your project. It stores all the configuration for the CLI to be able to interact with your Appwrite project. The file has a structure as depicted below. When using the <b>appwrite deploy</b> command, the CLI uses information from <b>appwrite.json</b> to deploy your functions and collections.</p>
+
+<div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
+    <pre class="line-numbers"><code class="prism language-json" data-prism>{
+    "projectId": "6213b54f2e76a06f2ec6",
+    "projectName": "My Awesome Project",
+    "functions": [
+        {
+            "$id": "6213b58cb21dda6c3263",
+            "name": "My Awesome Function",
+            "runtime": "node-17.0",
+            "path": "My Awesome Function",
+            "entrypoint": "src/index.js"
+        }
+    ],
+    "collections": [
+        {
+            "$id": "6213bb2d567d8a206614",
+            "$read": [
+                "team:admin"
+            ],
+            "$write": [
+                "team:admin"
+            ],
+            "name": "Millenium Problems",
+            "enabled": true,
+            "permission": "collection",
+            "attributes": [],
+            "indexes": []
+        }
+    ]
+}</code></pre>
+</div>
+
+<p>The <b>appwrite.json</b> file does the following things </p>
+
+<ol class="margin-top margin-bottom-large">
+  <li class="margin-bottom-small">Provides context to the CLI</li>
+  <li class="margin-bottom-small">Keeps track of all your Cloud Functions</li>
+  <li class="margin-bottom-small">Keeps track of all your project's collections</li>
+  <li class="margin-bottom-small">Helps you deploy your Appwrite project to production and more</li>
+</ol>
+
+<h3><a href="/docs/command-line#usageExamples" id="usageExamples">Usage Examples</a></h3>
+
+<p>The Appwrite CLI follows the following general syntax.</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite [COMMAND] --[OPTIONS]</code></pre>
+</div>
+
+<p>A complete list of supported commands can be found below.</p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="full text-size-small">
+    <thead>
+    <tr>
+        <th style="width: 200px">Command</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>login</td>
+        <td>The login command allows you to authenticate a user into the CLI</td>
+    </tr>
+    <tr>
+        <td>init</td>
+        <td>The init command helps you initialize your Appwrite project, functions and collections</td>
+    </tr>
+    <tr>
+        <td>deploy</td>
+        <td>The deploy command provides a convenient wrapper for deploying your functions and collections</td>
+    </tr>
+    <tr>
+        <td>logout</td>
+        <td>The logout command allows you to logout from the CLI</td>
+    </tr>
+    <tr>
+        <td>projects</td>
+        <td>The projects command allows you to view, create and manage your Appwrite projects</td>
+    </tr>
+    <tr>
+        <td>storage</td>
+        <td>The storage command allows you to manage your project files</td>
+    </tr>
+    <tr>
+        <td>teams</td>
+        <td>The teams command allows you to group users of your project and to enable them to share read and write access to your project's resources</td>
+    </tr>
+    <tr>
+        <td>users</td>
+        <td>The users command allows you to manage your project users</td>
+    </tr>
+    <tr>
+        <td>client</td>
+        <td>The client command allows you to configure your CLI</td>
+    </tr>
+    <tr>
+        <td>account</td>
+        <td>The account command allows you to authenticate and manage a user account</td>
+    </tr>
+    <tr>
+        <td>avatars</td>
+        <td>The avatars command aims to help you complete everyday tasks related to your app image, icons, and avatars</td>
+    </tr>
+    <tr>
+        <td>functions</td>
+        <td>The functions command allows you view, create and manage your Cloud Functions</td>
+    </tr>
+    <tr>
+        <td>database</td>
+        <td>The database command allows you to create structured collections of documents, query and filter lists of documents</td>
+    </tr>
+    <tr>
+        <td>health</td>
+        <td>The health command allows you to both validate and monitor your Appwrite server's health</td>
+    </tr>
+    <tr>
+        <td>locale</td>
+        <td>The locale command allows you to customize your app based on your users' location</td>
+    </tr>
+    </tbody>
+</table>
+
+<p>Here are a few sample commands to get you started</p>
 
 <p><b>Create User</b></p>
 
 <p>To create a new user in your project, you can use the `create` command. To successfully create a user, make sure your API key is granted with the scope "users.write".</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users create --email="hello@appwrite.io" --password="my-secret"</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users create --userId "unique()" --email hello@appwrite.io --password very_strong_password</code></pre>
 </div>
 <!-- Attach image of output  -->
 
@@ -72,7 +272,12 @@
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users list</code></pre>
 </div>
-<!-- Attach image of output  -->
+
+<p>In case of errors with any command, you can get more information about what went wrong using the <span class="tag">--verbose</span> flag</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users list --verbose</code></pre>
+</div>
 
 <p><b>List Collections</b></p> 
 
@@ -81,29 +286,44 @@
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite database listCollections</code></pre>
 </div>
+
+<p>If you wish to parse the output from the CLI, you can request the CLI output in JSON format using the <span class="tag">--json</span> flag</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite database listCollections --json</code></pre>
+</div>
 <!-- Attach image of output -->
 
-<p><b>Read Collection</b></p>
+<p><b>Get a Collection</b></p>
 
 <p>To get more information on a particular collection, you can make use of the `getCollection` command and pass in the `collectionId`.  To successfully fetch the collection, make sure your API key is granted with the scope "collections.read".</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite database getCollection --collectionId=5ff468cfa32a0</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite database getCollection --collectionId 5ff468cfa32a0</code></pre>
 </div>
-<!-- Attach image of output -->
+
+<p><b>Create Document</b></p>
+
+<p>To create a new document in an existing collection, use the `createDocument` command.</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite database createDocument --collectionId <ID> --documentId 'unique()' --data '{ "Name": "Iron Man" }' --read role:all team:abc</code></pre>
+</div>
 
 <h3><a href="/docs/command-line#configuration" id="configuration">Configuration</a></h3>
 
-<p>At any point, if you would like to change your project endpoint, project ID, project Key, selfSigned certificate acceptance or locale configuration you set during the CLI init, you can make use of the `client` service.</p>
+<p>At any point, if you would like to change your server endpoint, project key, or self-signed certificate acceptance, use the <b>client</b> service.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client setEndpoint --endpoint="http://192.168.1.6/v1"
-appwrite client setProject --project="5ff450422d42f"
-appwrite client setKey --key="23f24gwrhSDgefaY"
-appwrite client setSelfSigned --value=true
-appwrite client setLocale --locale="en-US"</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>
+appwrite client --endpoint http://192.168.1.6/v1
+appwrite client --key 23f24gwrhSDgefaY
+appwrite client --selfSigned true
+appwrite client --reset // Resets your CLI configuration
+appwrite client --debug // Prints your current configuration
+</code></pre>
 </div>
 
 <h3><a href="/docs/command-line#help" id="help">Help</a></h3>
 
-<p>If you get stuck anywhere, you can always use the `help` command to get the usage examples. All the examples are also available on the Appwrite API specs docs, and you can view them by switching the examples to the "Appwrite CLI" from the top dropdown.</p>
+<p>If you get stuck anywhere, you can always use the <b>help</b> command to get the usage examples. All the examples are also available on the Appwrite API specs docs, and you can view them by switching the examples to the "Appwrite CLI" from the top dropdown.</p>
