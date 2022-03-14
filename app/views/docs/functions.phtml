@@ -72,6 +72,7 @@ module.exports = async (request, response) => {
     response.json(task);
 }</code></pre>
         </div>
+        <p>Node.JS runtime has a reserved keyword <b>code</b> when sending response using <b>response.json()</b> method. Usage of 'code' keyword is forbidden and results in an error.</p>
         <b>Installing Dependencies</b>
         <p>Include a <b>package.json</b> along with your function, and Appwrite handles the rest! The best practice is to make sure <b>node_modules</b> folder is <b>not</b> part of your tarball. This example uses the <a href="https://www.npmjs.com/package/node-fetch">node-fetch</a> package</p>
         </div>
