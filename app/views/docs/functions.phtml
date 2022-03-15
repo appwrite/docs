@@ -42,11 +42,11 @@ $runtimes = $this->getParam('runtimes', []);
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="Javascript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>module.exports = async (req, res) => {
   const payload =
-    req.payload ??
+    req.payload ||
     'No payload provided. Add custom data when executing function.';
 
   const secretKey =
-    req.env.SECRET_KEY ??
+    req.env.SECRET_KEY ||
     'SECRET_KEY environment variable not found. You can set it in Function settings.';
 
   const randomNumber = Math.random();
@@ -74,11 +74,11 @@ $runtimes = $this->getParam('runtimes', []);
 
 return function ($req, $res) {
   $payload =
-    $req['payload'] ??
+    $req['payload'] ||
     'No payload provided. Add custom data when executing function.';
 
   $secretKey =
-    $req['env']['SECRET_KEY'] ??
+    $req['env']['SECRET_KEY'] ||
     'SECRET_KEY environment variable not found. You can set it in Function settings.';
 
   $randomNumber = \mt_rand() / \mt_getrandmax();
@@ -164,11 +164,11 @@ end</code></pre>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async function (req: any, res: any) {
   const payload =
-    req.payload ??
+    req.payload ||
     'No payload provided. Add custom data when executing function.';
 
   const secretKey =
-    req.env.SECRET_KEY ??
+    req.env.SECRET_KEY ||
     'SECRET_KEY environment variable not found. You can set it in Function settings.';
 
   const randomNumber = Math.random();
@@ -197,11 +197,11 @@ import 'dart:async';
 
 Future < void> start(final req, final res) async {
   final payload =
-    req.payload ??
+    req.payload ||
     'No payload provided. Add custom data when executing function.';
 
   final secretKey =
-    req.env['SECRET_KEY'] ??
+    req.env['SECRET_KEY'] ||
     'SECRET_KEY environment variable not found. You can set it in Function settings.';
 
   final randomNumber = new Random().nextDouble();
