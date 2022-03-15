@@ -63,7 +63,7 @@ $runtimes = $this->getParam('runtimes', []);
 };</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Include a <b>package.json</b> along with your function, and Appwrite handles the rest! The best practice is to make sure <b>node_modules</b> folder is <b>not</b> part of your tarball. This example uses the <a href="https://www.npmjs.com/package/node-fetch">node-fetch</a> package</p>
+        <p>Include a <b>package.json</b> along with your function, and Appwrite handles the rest! The best practice is to make sure <b>node_modules</b> folder is <b>not</b> part of your tarball.</p>
         </div>
     </li>
     <li>
@@ -95,7 +95,7 @@ return function ($req, $res) {
 };</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Adding dependencies to PHP requires you to have a <b>composer.json</b> file. The best practice is to make sure <b>vendor</b> directory is <b>not</b> part of your tarball. </p>
+        <p>Include a <b>composer.json</b> file in your function, make sure to require autoload.php from vendor folder, and Appwrite will handle the rest!. The best practice is to make sure <b>vendor</b> directory is <b>not</b> part of your tarball. </p>
     </div>
     </li>
     <li>
@@ -125,44 +125,37 @@ def main(req, res):
   })</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Include a <b>requirements.txt</b> file in your function, Appwrite will handle the rest! This example uses the <a href="https://pypi.org/project/requests/">requests</a> package</p>
+        <p>Include a <b>requirements.txt</b> file in your function, Appwrite will handle the rest!</p>
         </div>
     </li>
     <li>
         <h3>Ruby</h3>
         <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'httparty'
-require 'json'
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(req, res)
+  payload =
+    req.payload ||
+    'No payload provided. Add custom data when executing function.'
 
-def main(request, response)
-    payload = JSON.parse(request.payload.empty? ? '{}' : request.payload)
-    env = request.env
-    
-    randomNumber = rand(100) + 1
-    todo = JSON.parse(HTTParty.get('https://jsonplaceholder.typicode.com/todos/' + randomNumber.to_s).body)
-    
-    task = {
-        message: 'Hello from Appwrite Functions 👋',
-        **todo
-    }
+  secretKey =
+    req.env['SECRET_KEY'] ||
+    'SECRET_KEY environment variable not found. You can set it in Function settings.'
 
-    case env['APPWRITE_FUNCTION_TRIGGER']
-    when 'http'
-        task['trigger'] = 'HTTP'
-    when 'schedule'
-        task['trigger'] = 'CRON'
-    when 'event'
-        task['trigger'] = 'Event'
-    else
-        task['trigger'] = 'Unknown'
-    end
+  randomNumber = rand()
 
-    return response.json(task)
+  trigger = req.env['APPWRITE_FUNCTION_TRIGGER']
+
+  return res.json({
+    :message => 'Hello from Appwrite!',
+    :payload => payload,
+    :secretKey => secretKey,
+    :randomNumber => randomNumber,
+    :trigger => trigger,
+  })
 end</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Include a <b>Gemfile</b> in your function, Appwrite handles the rest! This example uses the <a href="https://rubygems.org/gems/httparty">httparty</a> package</p>
+        <p>Include a <b>Gemfile</b> in your function, Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
