@@ -40,37 +40,27 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>Node.js</h3>
         <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="Javascript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>const fetch = require("node-fetch");
+            <pre class="line-numbers"><code class="prism language-js" data-prism>module.exports = async (req, res) => {
+  const payload =
+    req.payload ??
+    'No payload provided. Add custom data when executing function.';
 
-module.exports = async (request, response) => {
-    const payload = JSON.parse(request.payload ? request.payload : "{}");
-    const env = request.env;
+  const secretKey =
+    req.env.SECRET_KEY ??
+    'SECRET_KEY environment variable not found. You can set it in Function settings.';
 
-    const randomNumber = Math.floor(Math.random() * 100) + 1;
-    const todo = await fetch(`https://jsonplaceholder.typicode.com/todos/${randomNumber}`).then(r => r.json());
+  const randomNumber = Math.random();
 
-    let task = {
-        message: 'Hello from Appwrite Functions 👋',
-        ...todo
-    };
+  const trigger = req.env.APPWRITE_FUNCTION_TRIGGER;
 
-    switch(env.APPWRITE_FUNCTION_TRIGGER) {
-        case 'http': 
-            task['trigger'] = 'HTTP'; 
-            break;
-        case 'schedule': 
-            task['trigger'] = 'CRON'; 
-            break;
-        case 'event': 
-            task['trigger'] = 'Event'; 
-            break;
-        default: 
-            task['trigger'] = 'Unknown'; 
-            break;
-    }
-
-    response.json(task);
-}</code></pre>
+  res.json({
+    message: 'Hello from Appwrite!',
+    payload,
+    secretKey,
+    randomNumber,
+    trigger,
+  });
+};</code></pre>
         </div>
         <b>Installing Dependencies</b>
         <p>Include a <b>package.json</b> along with your function, and Appwrite handles the rest! The best practice is to make sure <b>node_modules</b> folder is <b>not</b> part of your tarball. This example uses the <a href="https://www.npmjs.com/package/node-fetch">node-fetch</a> package</p>
@@ -80,35 +70,28 @@ module.exports = async (request, response) => {
         <h3>PHP</h3>
         <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php 
+            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
-return function($request, $response) {
-    $payload = json_decode($request['payload']);
-    $env = $request['env'];
+return function ($req, $res) {
+  $payload =
+    $req['payload'] ??
+    'No payload provided. Add custom data when executing function.';
 
-    $randomNumber = rand(1, 100);
-    $todo = json_decode(file_get_contents("https://jsonplaceholder.typicode.com/todos/$randomNumber"), true);
+  $secretKey =
+    $req['env']['SECRET_KEY'] ??
+    'SECRET_KEY environment variable not found. You can set it in Function settings.';
 
-    $task = array_merge($todo, [
-        'message' => 'Hello from Appwrite Functions 👋',
-    ]);
+  $randomNumber = \mt_rand() / \mt_getrandmax();
 
-    switch($env['APPWRITE_FUNCTION_TRIGGER']) {
-        case 'http': 
-            $task['trigger'] = 'HTTP'; 
-            break;
-        case 'schedule': 
-            $task['trigger'] = 'CRON'; 
-            break;
-        case 'event': 
-            $task['trigger'] = 'Event'; 
-            break;
-        default: 
-            $task['trigger'] = 'Unknown'; 
-            break;
-    }
+  $trigger = $req['env']['APPWRITE_FUNCTION_TRIGGER'];
 
-    $response->json($task);
+  $res->json([
+    'message' => 'Hello from Appwrite!',
+    'payload' => $payload,
+    'secretKey' => $secretKey,
+    'randomNumber' => $randomNumber,
+    'trigger' => $trigger,
+  ]);
 };</code></pre>
         </div>
         <b>Installing Dependencies</b>
@@ -119,30 +102,27 @@ return function($request, $response) {
         <h3>Python</h3>
         <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>import json
-import requests
-import random
+            <pre class="line-numbers"><code class="prism language-python" data-prism>import random
 
-def main(request, response):
-    payload = json.loads(request.payload or '{}')
-    env = request.env
+def main(req, res):
+  payload = req.payload or 'No payload provided. Add custom data when executing function.'
 
-    randomNumber = random.randint(1, 100)
-    todo = requests.get(f"https://jsonplaceholder.typicode.com/todos/{randomNumber}").json()
+  secretKey = req.env.get(
+    'SECRET_KEY',
+    'SECRET_KEY environment variable not found. You can set it in Function settings.'
+  )
 
-    task = {
-        "message": "Hello from Appwrite Functions 👋",
-        **todo
-    }
+  randomNumber = random.random()
 
-    task["trigger"] = {
-        "http": "HTTP",
-        "schedule": "CRON",
-        "event": "Event",
-        "unknown": "Unknown"
-    }[env['APPWRITE_FUNCTION_TRIGGER']]
+  trigger = req.env['APPWRITE_FUNCTION_TRIGGER']
 
-    return response.json(task)</code></pre>
+  return res.json({
+    'message': 'Hello from Appwrite!',
+    'payload': payload,
+    'secretKey': secretKey,
+    'randomNumber': randomNumber,
+    'trigger': trigger,
+  })</code></pre>
         </div>
         <b>Installing Dependencies</b>
         <p>Include a <b>requirements.txt</b> file in your function, Appwrite will handle the rest! This example uses the <a href="https://pypi.org/project/requests/">requests</a> package</p>
