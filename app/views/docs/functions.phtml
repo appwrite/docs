@@ -162,37 +162,27 @@ end</code></pre>
         <h3>Deno</h3>
         <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import axiod from "https://deno.land/x/axiod/mod.ts";
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async function (req: any, res: any) {
+  const payload =
+    req.payload ??
+    'No payload provided. Add custom data when executing function.';
 
-export default async function(request: any, response: any) {
-    const payload = JSON.parse(request.payload ? request.payload : "{}");
-    const env = request.env;
+  const secretKey =
+    req.env.SECRET_KEY ??
+    'SECRET_KEY environment variable not found. You can set it in Function settings.';
 
-    const randomNumber = Math.floor(Math.random() * 100) + 1;
-    const todo = (await axiod.get(`https://jsonplaceholder.typicode.com/todos/${randomNumber}`)).data;
+  const randomNumber = Math.random();
 
-    let task = {
-        message: 'Hello from Appwrite Functions 👋',
-        ...todo
-    };
+  const trigger = req.env.APPWRITE_FUNCTION_TRIGGER;
 
-    switch(env.APPWRITE_FUNCTION_TRIGGER) {
-        case 'http': 
-            task['trigger'] = 'HTTP'; 
-            break;
-        case 'schedule': 
-            task['trigger'] = 'CRON'; 
-            break;
-        case 'event': 
-            task['trigger'] = 'Event'; 
-            break;
-        default: 
-            task['trigger'] = 'Unknown'; 
-            break;
-    }
-
-    response.json(task);
-}</code></pre>
+  res.json({
+    message: 'Hello from Appwrite!',
+    payload,
+    secretKey,
+    randomNumber,
+    trigger,
+  });
+};</code></pre>
         </div>
         <b>Installing Dependencies</b>
         <p>No special steps are required for Deno, Appwrite handles everything!</p>
