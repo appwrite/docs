@@ -194,44 +194,31 @@ end</code></pre>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:math';
 import 'dart:async';
-import 'dart:convert';
-import 'package:dio/dio.dart' hide Response;
 
-Future<void> start(final request, final response) async {
-    final env = request.env;
-    final payload = jsonDecode(request.payload.isEmpty ? '{}' : request.payload);
-    
-    final randomNumber = Random().nextInt(100) + 1;
-    final todo = await Dio().get('https://jsonplaceholder.typicode.com/todos/$randomNumber');
-    
-    final task = {
-        'message': 'Hello from Appwrite Functions 👋',
-        'userId': todo.data['userId'],
-        'id': todo.data['id'],
-        'title': todo.data['title'],
-        'completed': todo.data['completed']
-    };
-    
-    switch (env['APPWRITE_FUNCTION_TRIGGER']) {
-        case 'http':
-        task['trigger'] = 'HTTP';
-        break;
-        case 'schedule':
-        task['trigger'] = 'CRON';
-        break;
-        case 'event':
-        task['trigger'] = 'Event';
-        break;
-        default:
-        task['trigger'] = 'Unknown';
-        break;
-    }
+Future < void> start(final req, final res) async {
+  final payload =
+    req.payload ??
+    'No payload provided. Add custom data when executing function.';
 
-    response.json(task);
+  final secretKey =
+    req.env['SECRET_KEY'] ??
+    'SECRET_KEY environment variable not found. You can set it in Function settings.';
+
+  final randomNumber = new Random().nextDouble();
+
+  final trigger = req.env['APPWRITE_FUNCTION_TRIGGER'];
+
+  res.json({
+    'message': 'Hello from Appwrite!',
+    'payload': payload,
+    'secretKey': secretKey,
+    'randomNumber': randomNumber,
+    'trigger': trigger,
+  });
 }</code></pre>
         </div>
         <b>Installing Dependencies</b>
-        <p>Include a <b>pubspec.yaml</b> file with your function, Appwrite handles the rest! This example uses the <a href="https://pub.dev/packages/dio">Dio</a> package</p>
+        <p>Include a <b>pubspec.yaml</b> file with your function, Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
