@@ -324,6 +324,18 @@ appwrite client --debug // Prints your current configuration
 </code></pre>
 </div>
 
+<div class="notice margin-bottom"> 
+<h3><a href="/docs/command-line#CIMode" id="CIMode">CI Mode</a></h3>
+
+<p>The Appwrite CLI can also be used in a non-interactive mode. This is especially useful when you want to automate tasks on let's say, a CI Server. In order to enable CI mode on the CLI, you need to set your <b>project ID, endpoint and API Key.</b></p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --endpoint http://192.168.1.6/v1 --projectId YOUR_PROJECT_ID --key YOUR_API_KEY</code></pre>
+</div>
+
+<p>When you set the global configuration parameters using the <b>client</b> service, they take precedence over the local configuration parameters in your <b>appwrite.json</b> thereby switching the CLI to the CI mode. In this mode, the CLI can only interact with one project at a time. If you look closely, you'll also notice that we use an API Key to autenticate which means the CLI behaves like Appwrite's server SDK.</p>
+</div>
+
 <h3><a href="/docs/command-line#help" id="help">Help</a></h3>
 
 <p>If you get stuck anywhere, you can always use the <b>help</b> command to get the usage examples. All the examples are also available on the Appwrite API specs docs, and you can view them by switching the examples to the "Appwrite CLI" from the top dropdown.</p>
