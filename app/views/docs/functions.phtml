@@ -225,54 +225,25 @@ Future < void> start(final req, final res) async {
         <h3>Swift</h3>
         <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
-func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
+    let payload = req.payload.isEmpty 
+        ? "No payload provided. Add custom data when executing function" 
+        : req.payload
     
-    let env = req.env
+    let secretKey = req.env["SECRET_KEY"] 
+        ?? "SECRET_KEY environment variable not found. You can set it in Function settings."
 
-    guard let data = (req.payload.isEmpty ? "{}" : req.payload).data(using: .utf8),
-        let payload = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-            return res.json(data: ["error": "Invalid payload."])
-    }
-    
-    let group = DispatchGroup()
+    let randomNumber = Double.random(in: 0...1)
 
-    var todo: [String: Any]? = nil
-    let randomNumber = Int.random(in: 1...100)
-    let url = URL(string: "https://jsonplaceholder.typicode.com/todos/\(randomNumber)")!
-    let fetchTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
-        defer { group.leave() }
-        guard let data = data else { return }
-        todo = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-    }
-    group.enter()
-    fetchTask.resume()
-    group.wait()
+    let trigger = req.env["APPWRITE_FUNCTION_TRIGGER"]
 
-    var task = [
-        "message": "Hello from Appwrite Functions 👋",
-        "userId": todo?["userId"] ?? "",
-        "id": todo?["id"] ?? "",
-        "title": todo?["title"] ?? "",
-        "completed": todo?["completed"] ?? ""
-    ]
-    
-    switch (env["APPWRITE_FUNCTION_TRIGGER"]) {
-    case "http":
-        task["trigger"] = "HTTP"
-    case "schedule":
-        task["trigger"] = "CRON"
-    case "event":
-        task["trigger"] = "Event"
-    default:
-        task["trigger"] = "Unknown"
-    }
-
-    return res.json(data: task)
+    return res.json(data: [
+        "message": "Hello from Appwrite!",
+        "payload": payload,
+        "secretKey": secretKey,
+        "randomNumber": randomNumber,
+        "trigger": trigger,
+    ])
 }</code></pre>
         </div>
         <p>With Swift, your <b>entrypoint</b> can be empty since Appwrite automatically infers it from the location of your <b>main()</b> function. Just ensure that your cloud function has a <b>single declaration of main()</b> across your source files.</p>
