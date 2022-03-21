@@ -74,11 +74,11 @@ $runtimes = $this->getParam('runtimes', []);
 
 return function ($req, $res) {
   $payload =
-    $req['payload'] ||
+    $req['payload'] ?:
     'No payload provided. Add custom data when executing function.';
 
   $secretKey =
-    $req['env']['SECRET_KEY'] ||
+    $req['env']['SECRET_KEY'] ?:
     'SECRET_KEY environment variable not found. You can set it in Function settings.';
 
   $randomNumber = \mt_rand() / \mt_getrandmax();
@@ -134,7 +134,7 @@ def main(req, res):
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(req, res)
   payload =
-    req.payload ||
+    !req.payload.empty? ? req.payload :
     'No payload provided. Add custom data when executing function.'
 
   secretKey =
@@ -195,13 +195,13 @@ end</code></pre>
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:math';
 import 'dart:async';
 
-Future < void> start(final req, final res) async {
+Future &lt;void&gt; start(final req, final res) async {
   final payload =
-    req.payload ||
+    !req.payload?.isEmpty ? req.payload :
     'No payload provided. Add custom data when executing function.';
 
   final secretKey =
-    req.env['SECRET_KEY'] ||
+    req.env['SECRET_KEY'] ??
     'SECRET_KEY environment variable not found. You can set it in Function settings.';
 
   final randomNumber = new Random().nextDouble();
