@@ -164,7 +164,7 @@ realtime.subscribe(channel: "account", callback: { param in
 <h3><a href="/docs/realtime#subscribe-to-multiple-channels" id="subscribe-to-multiple-channels">Subscribe to Multiple Channels</a></h3>
 
 <p>You can also listen to multiple <a href="/docs/realtime#channels">channels</a> at once by passing an array of channels. This will trigger the callback for any events for all channels passed.</p>
-<p>In this example we are listening to the document A and all files by subscribing to the <span class="tag">documents.A</span> and <span class="tag">files</span> channels.</p>
+<p>In this example we are listening to the document A and all files by subscribing to the <span class="tag">collections.A.documents.A</span> and <span class="tag">files</span> channels.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -172,7 +172,7 @@ realtime.subscribe(channel: "account", callback: { param in
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();
 
-sdk.subscribe(['documents.A', 'files'], response => {
+sdk.subscribe(['collections.A.documents.A', 'files'], response => {
     // Callback will be executed on changes for documents A and all files.
     console.log(response);
 });</code></pre>
@@ -184,7 +184,7 @@ sdk.subscribe(['documents.A', 'files'], response => {
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
 final realtime = Realtime(client);
-final subscription = realtime.subscribe(['documents.A', 'files']);
+final subscription = realtime.subscribe(['collections.A.documents.A', 'files']);
 
 subscription.stream.listen((response) {
     // Callback will be executed on changes for documents A and all files.
@@ -198,7 +198,7 @@ subscription.stream.listen((response) {
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
 val realtime = Realtime(client)
 
-realtime.subscribe("documents.A", "files", callback = { param ->
+realtime.subscribe("collections.A.documents.A", "files", callback = { param ->
     // Callback will be executed on changes for documents A and all files.
     print(param.toString())
 })</code></pre>
@@ -210,7 +210,7 @@ realtime.subscribe("documents.A", "files", callback = { param ->
             <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
 let realtime = Realtime(client)
 
-realtime.subscribe(channels: ["documents.A", "files"], callback: { param in
+realtime.subscribe(channels: ["collections.A.documents.A", "files"], callback: { param in
     // Callback will be executed on changes for documents A and all files.
     print(String(describing: param))
 })</code></pre>
