@@ -88,39 +88,27 @@ class MainActivity : AppCompatActivity() {
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() {
+func main() async throws {
     let client = Client()
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
     let database = Database(client)
-    // page 1
-    database.listDocuments(
+    // Page 1
+    var list = try await database.listDocuments(
         collectionId: "[COLLECTION_ID]",
         limit: 25,
         offset: 0
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let document):
-            print(String(describing: document)
-        }
-    }
+    )
+    print(list.toMap())
 
-    //page 2
-    database.listDocuments(
+    // Page 2
+    list = try await database.listDocuments(
         collectionId: "[COLLECTION_ID]",
         limit: 25,
         offset: 25
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let document):
-            print(String(describing: document)
-        }
-    }
+    )
+    print(list.toMap())
 }</code></pre>
         </div>
     </li>
@@ -164,7 +152,7 @@ void main() async {
             limit: 25);
         final lastId = page1.documents[page1.documents.length - 1].$id;
 
-        //Page 2
+        // Page 2
         final page2 = await database.listDocuments(
             collectionId: 'movies',
             cursor: lastId);
@@ -204,7 +192,7 @@ class MainActivity : AppCompatActivity() {
             )
             val lastId = page1.documents[page1.documents.length - 1].$id
 
-            //Page 2
+            // Page 2
             val page2 = database.listDocuments(
                 collectionId = "[COLLECTION_ID]",
                 cursor = lastId,
@@ -219,38 +207,27 @@ class MainActivity : AppCompatActivity() {
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() {
+func main() async throws {
     let client = Client()
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
     let database = Database(client)
-    // page 1
-    database.listDocuments(
+    
+    // Page 1
+    var list = database.listDocuments(
         collectionId: "[COLLECTION_ID]",
         limit: 25,
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let document):
-            let lastId = document.documents[document.documents.count - 1].$id
-            
-            //Page 2
-            database.listDocuments(
-                collectionId: "[COLLECTION_ID]",
-                cursor: lastId,
-            ) { result in
-                switch result {
-                case .failure(let error):
-                    print(error.message)
-                case .success(let document):
-                    print(String(describing: document)
-                }
-            }
-        }
-    }
+    )
 
+    let lastId = list.documents[list.documents.count - 1].$id
+            
+    // Page 2
+    list = database.listDocuments(
+        collectionId: "[COLLECTION_ID]",
+        cursor: lastId,
+    )
+    print(list.toMap())
 }</code></pre>
         </div>
     </li>
