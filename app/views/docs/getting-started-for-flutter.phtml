@@ -126,7 +126,7 @@ close the window.
 
 <h2><a href="/docs/getting-started-for-flutter#initSDK" id="initSDK">Init your SDK</a></h2>
 
-<p>Initialize your SDK code with your project ID, which can be found in your project settings page.</p>
+<p>Initialize your SDK with your endpoint and project ID, which can be found in your project settings page. It's usually a good practice to initialize Client and make it available across app using the state management solution of your choice, as client is required use all the other services to make a request to Appwrite.</p>
 
 <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
   <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
@@ -143,7 +143,7 @@ client
 
 <p>Before starting to send any API calls to your new Appwrite instance, make sure your Android or iOS emulators has network access to the Appwrite server hostname or IP address.</p>
 
-<p>When trying to connect to Appwrite from an emulator or a mobile device, localhost is the hostname for the device or emulator and not your local Appwrite instance. You should replace localhost with your private IP as the Appwrite endpoint's hostname. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite API.</p>
+<p>When trying to connect to your Appwrite instance running locally from an emulator or a mobile device, you should use the private IP of the device running your Appwrite server as the hostname of the endpoint instead of localhost. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite server.</p>
 
 <h2><a href="/docs/getting-started-for-flutter#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
@@ -153,7 +153,7 @@ client
   <pre class="line-numbers"><code class="prism language-dart" data-prism>// Register User
 Account account = Account(client);
 
-Response user = await account
+final user = await account
     .create(
         userId: 'unique()',
         email: 'me@appwrite.io',
@@ -196,7 +196,7 @@ client
 // Register User
 Account account = Account(client);
 
-Response user = await account
+final user = await account
     .create(
         userId: 'unique()',
         email: 'me@appwrite.io',
