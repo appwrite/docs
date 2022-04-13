@@ -9,7 +9,7 @@
 
 <h2>Debugging</h2>
 
-<p>In case you&#39;re still struggling with getting your certificate to work, check the Appwrite certificates worker log. You can do that with the following command:</p>
+<p>In case you're still struggling with getting your certificate to work, check the Appwrite certificates worker log. You can do that with the following command:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose logs appwrite-worker-certificates</code></pre>
@@ -34,7 +34,7 @@
 <p>If you want to generate a certificate for a specific domain, pass it as a parameter into the command:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose exec appwrite ssl api.myapp.com</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose exec appwrite ssl domain=api.myapp.com</code></pre>
 </div>
 
 <h2>Dev Environment and Localhosts</h2>
