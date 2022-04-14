@@ -369,7 +369,7 @@ appwrite client --debug // Prints your current configuration
     <li>
         <h4>Windows</h4>
         <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
-            <pre class="line-numbers"><code class="prism language-powershell" data-prism>TODO: Windows</code></pre>
+            <pre class="line-numbers"><code class="prism language-powershell" data-prism>$APPWRITE_INSTALL_DIR = Join-Path -Path $env:LOCALAPPDATA -ChildPath "Appwrite"; Remove-Item -Force -Path $APPWRITE_INSTALL_DIR</code></pre>
         </div>
     </li>
     
@@ -394,7 +394,7 @@ appwrite client --debug // Prints your current configuration
     <li>
         <h4>Windows</h4>
         <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
-            <pre class="line-numbers"><code class="prism language-powershell" data-prism>TODO: Windows</code></pre>
+            <pre class="line-numbers"><code class="prism language-powershell" data-prism>$APPWRITE_CONFIG_DIR = Join-Path -Path $env:UserProfile -ChildPath ".appwrite"; Remove-Item -Recurse -Force -Path $APPWRITE_CONFIG_DIR</code></pre>
         </div>
     </li>
     
