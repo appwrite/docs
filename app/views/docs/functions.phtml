@@ -742,6 +742,11 @@ class MainActivity : AppCompatActivity() {
     </tbody>
 </table>
 
+<div class="notice">
+    <h3>Using an Appwrite SDK in Your Function</h3>
+    <p>Appwrite Server SDKs require an API key, an endpoint, and a project ID for authentication. Appwrite passes in your project ID with the environment variable 'APPWRITE_FUNCTION_PROJECT_ID', but not the endpoint and API key. If you need to use a Server SDK, you will need to add environment variables for your endpoint and API key in the 'Settings' tab of your function.</p>
+</div>
+
 <h2><a href="/docs/functions#monitorDebug" id="monitorDebug">Monitor & Debug</a></h2>
 
 <p>You can monitor your function execution usage stats and logs from your Appwrite console. To access your functions usage stats and logs, click the 'Usage' tab in your function dashboard.</p>
