@@ -5,7 +5,9 @@
 
     <p>At present, we support migrations only to the immediately higher versions, i.e from 0.6 to 0.7 and 0.7 to 0.8 and so on. So if you're trying to migrate from 0.6 to 0.8, you will first need to migrate to 0.7 and then to 0.8</p>
 
-    <p>It is highly recommended to <a href="https://medium.com/sunkay-imho/docker-data-volumes-and-data-volume-containers-use-cases-abde84a10317" target="_blank" rel="noopener">backup your server</a> data and your <b>docker-compose.yml</b> file settings before running the migration tool. It is recommended to run the migration process on a dev instance and make sure your application is working well and that you have checked for any breaking changes in the new version <a href="https://github.com/appwrite/appwrite/blob/master/CHANGES.md" target="blank" rel="noopener">changelog.</a></p>
+    <p>You do not need to run migration when upgrading to a minor version. For example, going from 0.13.0 to 0.13.2 would not require running migration.</p>
+
+    <p>It is highly recommended to <a href="https://gist.github.com/Meldiron/47b5851663668102a676aff43c6341f7" target="_blank" rel="noopener">backup your server</a> data and your <b>docker-compose.yml</b> file settings before running the migration tool. It is recommended to run the migration process on a dev instance and make sure your application is working well and that you have checked for any breaking changes in the new version <a href="https://github.com/appwrite/appwrite/blob/master/CHANGES.md" target="blank" rel="noopener">changelog.</a></p>
 </div>
 
 <!-- <p>When updating to a new Appwrite version, make sure to run the <a href="/docs/installation">installation script for the new version</a> from the same location, you executed your original setup. This will allow the installation script to update your existing docker-compose.yml file. The correct location for execution is the parent directory of your existing appwrite directory.</p> -->
@@ -15,14 +17,15 @@
 <p> The first step is to install the latest version of Appwrite. Head to the directory where you ran your previous Appwrite install command. 
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>
-    parent_directory  <= you run the command in this directory
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>parent_directory  <= you run the command in this directory
     └── appwrite
         └── docker-compose.yml
     </code></pre>
 </div>
 
-This is the parent directory, where you will find the <b>appwrite</b> directory that contains the <b>docker-compose.yml</b> and <b>.env</b> files.</p>
+This is the parent directory, where you will find the <b>appwrite</b> directory, inside which contains the <b>docker-compose.yml</b> and <b>.env</b> files.</p>
+
+<h3><a href="/docs/installation#unix" id="unix">Unix</a></h3>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run -it --rm \
@@ -32,6 +35,33 @@ This is the parent directory, where you will find the <b>appwrite</b> directory 
     appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
 </div>
 
+<h3><a href="/docs/installation#windows" id="windows">Windows</a></h3>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h4>CMD</h4>
+
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="CMD">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run -it --rm ^
+    --volume //var/run/docker.sock:/var/run/docker.sock ^
+    --volume "%cd%"/appwrite:/usr/src/code/appwrite:rw ^
+    --entrypoint="install" ^
+    appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
+        </div>
+
+    </li>
+    <li>
+        <h4>PowerShell</h4>
+
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="PowerShell">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run -it --rm ,
+    --volume /var/run/docker.sock:/var/run/docker.sock ,
+    --volume ${pwd}/appwrite:/usr/src/code/appwrite:rw ,
+    --entrypoint="install" ,
+    appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
+        </div>
+    </li>
+</ul>
 
 <p>This will pull the <b>docker-compose.yml</b> file for the new version and perform the installation. Once the setup completes, verify that you have the latest version of Appwrite.</p>
 
