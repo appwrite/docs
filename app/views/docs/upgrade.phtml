@@ -3,7 +3,7 @@
 <div class="notice margin-bottom">
     <h3>A Note About Migration</h3>
 
-    <p>At present, we support migrations only to the immediately higher versions, i.e from 0.6 to 0.7 and 0.7 to 0.8 and so on. So if you're trying to migrate from 0.6 to 0.8, you will first need to migrate to 0.7 and then to 0.8</p>
+    <p>At present, we support migrations only to the <b>immediately higher versions</b>, i.e from 0.6 to 0.7 and 0.7 to 0.8 and so on. So if you're trying to migrate from 0.6 to 0.8, you will first need to migrate to 0.7 and then to 0.8</p>
 
     <p>You do not need to run migration when upgrading to a minor version. For example, going from 0.13.0 to 0.13.2 would not require running migration.</p>
 
@@ -31,8 +31,9 @@
     --volume /var/run/docker.sock:/var/run/docker.sock \
     --volume "$(pwd)"/appwrite:/usr/src/code/appwrite:rw \
     --entrypoint="install" \
-    appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
+    appwrite/appwrite:[NEXT MAJOR VERSION]</code></pre>
 </div>
+Recall that you can only upgrade to <b>immediately higher versions</b>. Replace <span class="tag">`[NEXT MAJOR VERSION]`</span> with the next major version of Appwrite.
 
 <h3><a href="/docs/installation#windows" id="windows">Windows</a></h3>
 
@@ -45,9 +46,9 @@
     --volume //var/run/docker.sock:/var/run/docker.sock ^
     --volume "%cd%"/appwrite:/usr/src/code/appwrite:rw ^
     --entrypoint="install" ^
-    appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
+    appwrite/appwrite:[NEXT MAJOR VERSION]</code></pre>
         </div>
-
+        Recall that you can only upgrade to <b>immediately higher versions</b>. Replace <span class="tag">`[NEXT MAJOR VERSION]`</span> with the next major version of Appwrite.
     </li>
     <li>
         <h4>PowerShell</h4>
@@ -57,8 +58,9 @@
     --volume /var/run/docker.sock:/var/run/docker.sock ,
     --volume ${pwd}/appwrite:/usr/src/code/appwrite:rw ,
     --entrypoint="install" ,
-    appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
+    appwrite/appwrite:[NEXT MAJOR VERSION]</code></pre>
         </div>
+        Recall that you can only upgrade to <b>immediately higher versions</b>. Replace <span class="tag">`[NEXT MAJOR VERSION]`</span> with the next major version of Appwrite.
     </li>
 </ul>
 
