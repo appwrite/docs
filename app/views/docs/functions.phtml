@@ -549,16 +549,10 @@ func main() {
       .setProject("5df5acd0d48c2") // Your project ID
 
     let functions = Functions(client)
-    functions.createExecution(
+    let execution = functions.createExecution(
         functionId: "[FUNCTION_ID]"
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let execution):
-            print(String(describing: execution)
-        }
-    }
+    )
+    print(execution.toMap())
 }</code></pre>
         </div>
     </li>
