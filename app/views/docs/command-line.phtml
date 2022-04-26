@@ -341,3 +341,67 @@ appwrite client --debug // Prints your current configuration
 <h3><a href="/docs/command-line#help" id="help">Help</a></h3>
 
 <p>If you get stuck anywhere, you can always use the <b>help</b> command to get the usage examples. All the examples are also available on the Appwrite API specs docs, and you can view them by switching the examples to the "Appwrite CLI" from the top dropdown.</p>
+
+<h3><a href="/docs/command-line#uninstall" id="uninstall">Uninstall</a></h3>
+
+<p>If you installed Appwrite CLI using NPM, you can use the following command to uninstall it.</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>npm uninstall -g appwrite-cli</code></pre>
+</div>
+
+<p>If you installed the Appwrite CLI with brew or the installation script for your operating system, use the following command to uninstall it.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h4>MacOS</h4>
+        <p>Using <a href="https://brew.sh" target="_blank">Homebrew</a></p>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>brew uninstall appwrite</code></pre>
+        </div>
+
+        <p>or terminal</p>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>rm -f /usr/local/bin/appwrite | bash</code></pre>
+        </div>
+    </li>
+    
+    <li>
+        <h4>Windows</h4>
+        <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
+            <pre class="line-numbers"><code class="prism language-powershell" data-prism>$APPWRITE_INSTALL_DIR = Join-Path -Path $env:LOCALAPPDATA -ChildPath "Appwrite"; Remove-Item -Force -Path $APPWRITE_INSTALL_DIR</code></pre>
+        </div>
+    </li>
+    
+    <li>
+        <h4>Linux</h4>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>rm -f /usr/local/bin/appwrite | bash</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>You can also remove the configuration, cookies, and API Keys the Appwrite CLI stored. To remove those, run the following command.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h4>MacOS</h4>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>rm -rf ~/.appwrite | bash</code></pre>
+        </div>
+    </li>
+    
+    <li>
+        <h4>Windows</h4>
+        <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
+            <pre class="line-numbers"><code class="prism language-powershell" data-prism>$APPWRITE_CONFIG_DIR = Join-Path -Path $env:UserProfile -ChildPath ".appwrite"; Remove-Item -Recurse -Force -Path $APPWRITE_CONFIG_DIR</code></pre>
+        </div>
+    </li>
+    
+    <li>
+        <h4>Linux</h4>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>rm -rf ~/.appwrite | bash</code></pre>
+        </div>
+    </li>
+</ul>
