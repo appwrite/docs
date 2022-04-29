@@ -386,7 +386,7 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
 
 <h2><a href="/docs/functions#ignoreFiles" id="ignoreFiles">Ignore Files</a></h2>
 
-<p>Libraries folder such as <b>node_modules</b> or <b>vendor</b> should not be included in the tarball, although you want them locally to have full IDE support. Similarly, you should keep files holding secrets out of your deployment. You can use Appwite CLI feature <b>file ignoring</b> to exclude specific files from a deployment.</p>
+<p>Libraries folder such as <b>node_modules</b> or <b>vendor</b> should not be included in the tarball, although you want them locally to have full IDE support. Similarly, you should keep files holding secrets out of your deployment. You can use the Appwite CLI feature <b>file ignoring</b> to exclude specific files from a deployment.</p>
 
 <p>You visit <b>appwrite.json</b> file and look for function definition. In there, you can set value for <b>ignore</b> key to specify which files and folders should be ignored. This value must be array, as seen in example below:</p>
 
@@ -400,18 +400,18 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
             "runtime": "node-17.0",
             "path": "My Awesome Function",
             "entrypoint": "src/index.js",
-            "ignore": [ "node_modules", ".env", "google.json" ]
+            "ignore": [ "node_modules", ".env" ]
         },
         ...
     ],
 }</code></pre>
 </div>
 
-<p>The example configuration above would not deploy folder <b>node_modules</b>, and files <b>.env</b> and <b>google.json</b>.</p>
+<p>The example configuration above would not deploy folder <b>node_modules</b>, and file <b>.env</b>.</p>
 
-<p>Alternatively, you can add <b>.gitignore</b> file into your function folder and Appwrite CLI will ignore files specified in there. Keep in ming that ignore configuration in <b>appwrite.json</b> must bot be present for <b>.gitignore</b> to be used.</p>
+<p>Alternatively, you can add <b>.gitignore</b> file into your function folder and Appwrite CLI will ignore files specified in there. Keep in ming that <b>ignore</b> configuration in <b>appwrite.json</b> must not be present for <b>.gitignore</b> to be used.</p>
 
-<p>If you want to have <b>.gitignore</b> file for your version control and don't want Appwrite CLI to use it, you can specify ignore key in <b>appwrite.json</b> to be empty array.</p>
+<p>If you want to have <b>.gitignore</b> file for your version control and don't want Appwrite CLI to use it, you can specify <b>ignore</b> key in <b>appwrite.json</b> to be empty array.</p>
 
 <h2><a href="/docs/functions#createFunction" id="createFunction">Create your Function</a></h2>
 
