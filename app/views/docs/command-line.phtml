@@ -90,6 +90,10 @@ brew install --HEAD appwrite</code></pre>
 
 <p>The CLI also handles the creation and deployment of Appwrite's Cloud Functions. You can initialize a new function using</p>
 
+<div class="notice margin-bottom"> 
+    <p>Creating a new function using the Appwrite CLI requires <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="_blank" rel="noopener">Git to be installed</a> on your machine.</p>
+</div>
+
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function
 ? What would you like to name your function? My Awesome Function
@@ -124,8 +128,8 @@ brew install --HEAD appwrite</code></pre>
     <h3>Self-Signed Certificates</h3> 
     <p>By default, requests to domains with self-signed SSL certificates (or no certificates) are disabled. If you trust the domain, you can bypass the certificate validation using</p>
     <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --selfSigned true</code></pre>
-</div>
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --selfSigned true</code></pre>
+    </div>
 </div>
 
 <h3><a href="/docs/command-line#appwriteJSON" id="appwriteJSON">The appwrite.json File</a></h3>
