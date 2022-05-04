@@ -31,7 +31,7 @@
     --volume /var/run/docker.sock:/var/run/docker.sock \
     --volume "$(pwd)"/appwrite:/usr/src/code/appwrite:rw \
     --entrypoint="install" \
-    appwrite/appwrite:[NEXT MAJOR VERSION]</code></pre>
+    appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
 </div>
 <p>Recall that you can only upgrade to <b>immediately higher versions</b>. Replace <span class="tag">[NEXT MAJOR VERSION]</span> with the next major version of Appwrite.</p>
 
@@ -46,7 +46,7 @@
     --volume //var/run/docker.sock:/var/run/docker.sock ^
     --volume "%cd%"/appwrite:/usr/src/code/appwrite:rw ^
     --entrypoint="install" ^
-    appwrite/appwrite:[NEXT MAJOR VERSION]</code></pre>
+    appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
         </div>
         <p>Recall that you can only upgrade to <b>immediately higher versions</b>. Replace <span class="tag">[NEXT MAJOR VERSION]</span> with the next major version of Appwrite.</p>
     </li>
@@ -58,7 +58,7 @@
     --volume /var/run/docker.sock:/var/run/docker.sock ,
     --volume ${pwd}/appwrite:/usr/src/code/appwrite:rw ,
     --entrypoint="install" ,
-    appwrite/appwrite:[NEXT MAJOR VERSION]</code></pre>
+    appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
         </div>
         <p>Recall that you can only upgrade to <b>immediately higher versions</b>. Replace <span class="tag">[NEXT MAJOR VERSION]</span> with the next major version of Appwrite.</p>
     </li>
