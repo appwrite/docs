@@ -36,7 +36,13 @@ sdk
     .setProject('5df5acd0d48c2') // Your project ID
 ;
 
-sdk.subscribe(channel, callback);</code></pre>
+// Subscribe to files channel
+appwrite.subscribe('files', response => {
+    if(response.event === 'storage.files.create') {
+        // Log when a new file is uploaded
+        console.log(response.payload);
+    }
+});</code></pre>
         </div>
     </li>
     <li>
@@ -52,10 +58,16 @@ client
 ;
 
 final realtime = Realtime(client);
-final subscription = realtime.subscribe(channel);
 
-subscription.stream.listen(callback);
-</code></pre>
+// Subscribe to files channel
+final subscription = realtime.subscribe(['files']);
+
+subscription.stream.listen((response) {
+    if(response.event === 'storage.files.create') {
+        // Log when a new file is uploaded
+        print(response.payload);
+    }
+})</code></pre>
         </div>
     </li>
     <li>
@@ -70,7 +82,13 @@ client
 
 val realtime = Realtime(client)
 
-realtime.subscribe(channels, callback)</code></pre>
+// Subscribe to files channel
+realtime.subscribe("files", callback = { response ->
+    if(response.event === 'storage.files.create') {
+        // Log when a new file is uploaded
+        print(response.payload.toString());
+    }
+})</code></pre>
         </div>
     </li>
     <li>
@@ -83,9 +101,15 @@ client
     .setProject("5df5acd0d48c2") // Your project ID
     .setSelfSigned(true) // For self signed certificates, only use for development
 
-let realtime = Realtime(client)
+let realtime = Realtime(client: client)
 
-realtime.subscribe(channels: channels, callback: callback)</code></pre>
+// Subscribe to files channel
+let subscription = realtime.subscribe(channels: ["files"]) { message in
+    if(message.event == "storage.files.create") {
+        // Log when a new file is uploaded
+        print(String(describing: message.payload))
+    }
+}</code></pre>
         </div>
     </li>
 </ul>
