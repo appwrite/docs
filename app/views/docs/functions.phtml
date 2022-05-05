@@ -386,7 +386,7 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
 
 <h2><a href="/docs/functions#ignoreFiles" id="ignoreFiles">Ignore Files</a></h2>
 
-<p>Libraries folder such as <b>node_modules</b> or <b>vendor</b> should not be included in the tarball, although you want them locally to have full IDE support. Similarly, you should keep files holding secrets out of your deployment. You can use the Appwite CLI feature <b>file ignoring</b> to exclude specific files from a deployment.</p>
+<p>Library folders such as <b>node_modules</b> or <b>vendor</b> should not be included in the tarball, although you will want them locally so you have syntax highlighting in your IDE. Similarly, you should <b>not</b> include files containing secrets in your deployment. You can use the Appwite CLI's <b>file ignoring</b> feature to exclude specific files from a deployment.</p>
 
 <p>You can open the <b>appwrite.json</b> file and look for your function's definition. In there, you can set the value for the <b>ignore</b> key to specify which files and folders should be ignored. This value must be an array, as seen in the example below:</p>
 
@@ -407,7 +407,7 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
 }</code></pre>
 </div>
 
-<p>The example configuration above would not deploy folder <b>node_modules</b>, and file <b>.env</b>.</p>
+<p>The example configuration above would not deploy the folder <b>node_modules</b> and the file <b>.env</b>.</p>
 
 <p>Alternatively, you can add a <b>.gitignore</b> file into your function folder and Appwrite CLI will ignore files specified in there. Keep in mind that the <b>ignore</b> configuration in <b>appwrite.json</b> must not be present for <b>.gitignore</b> to be used.</p>
 
