@@ -388,7 +388,7 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
 
 <p>Libraries folder such as <b>node_modules</b> or <b>vendor</b> should not be included in the tarball, although you want them locally to have full IDE support. Similarly, you should keep files holding secrets out of your deployment. You can use the Appwite CLI feature <b>file ignoring</b> to exclude specific files from a deployment.</p>
 
-<p>You visit <b>appwrite.json</b> file and look for function definition. In there, you can set value for <b>ignore</b> key to specify which files and folders should be ignored. This value must be array, as seen in example below:</p>
+<p>You can open the <b>appwrite.json</b> file and look for your function's definition. In there, you can set the value for the <b>ignore</b> key to specify which files and folders should be ignored. This value must be an array, as seen in the example below:</p>
 
 <div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
     <pre class="line-numbers"><code class="prism language-json" data-prism>{
@@ -409,9 +409,9 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
 
 <p>The example configuration above would not deploy folder <b>node_modules</b>, and file <b>.env</b>.</p>
 
-<p>Alternatively, you can add <b>.gitignore</b> file into your function folder and Appwrite CLI will ignore files specified in there. Keep in ming that <b>ignore</b> configuration in <b>appwrite.json</b> must not be present for <b>.gitignore</b> to be used.</p>
+<p>Alternatively, you can add a <b>.gitignore</b> file into your function folder and Appwrite CLI will ignore files specified in there. Keep in mind that the <b>ignore</b> configuration in <b>appwrite.json</b> must not be present for <b>.gitignore</b> to be used.</p>
 
-<p>If you want to have <b>.gitignore</b> file for your version control and don't want Appwrite CLI to use it, you can specify <b>ignore</b> key in <b>appwrite.json</b> to be empty array.</p>
+<p>If you want to have a <b>.gitignore</b> file for your version control and don't want Appwrite CLI to use it, you can specify the <b>ignore</b> key in <b>appwrite.json</b> to be an empty array.</p>
 
 <h2><a href="/docs/functions#createFunction" id="createFunction">Create your Function</a></h2>
 
