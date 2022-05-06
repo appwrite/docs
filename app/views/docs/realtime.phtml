@@ -84,7 +84,7 @@ val realtime = Realtime(client)
 
 // Subscribe to files channel
 realtime.subscribe("files", callback = { response ->
-    if(response.event === 'storage.files.create') {
+    if(response.event === "storage.files.create") {
         // Log when a new file is uploaded
         print(response.payload.toString());
     }
