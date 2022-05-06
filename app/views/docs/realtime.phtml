@@ -63,11 +63,11 @@ final realtime = Realtime(client);
 final subscription = realtime.subscribe(['files']);
 
 subscription.stream.listen((response) {
-    if(response.event === 'storage.files.create') {
-        // Log when a new file is uploaded
-        print(response.payload);
+    if(response.event == 'storage.files.create') {
+    // Log when a new file is uploaded
+    print(response.payload);
     }
-})</code></pre>
+});</code></pre>
         </div>
     </li>
     <li>
