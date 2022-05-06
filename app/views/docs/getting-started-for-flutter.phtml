@@ -209,11 +209,11 @@ final realtime = Realtime(client);
 final subscription = realtime.subscribe(['files']);
 
 subscription.stream.listen((response) {
-    if(response.event === 'storage.files.create') {
+    if(response.event == 'storage.files.create') {
         // Log when a new file is uploaded
         print(response.payload);
     }
-})
+});
 </code></pre>
 </div>
 
