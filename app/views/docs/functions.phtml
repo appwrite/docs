@@ -384,35 +384,6 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
     <p>If you're running Appwrite locally and trying to connect to your local Appwrite instance from a cloud function, you'll have to use your local IP address in place of localhost. This is because, within the container localhost does not refer to the host machine rather the container itself. </p>
 </div>
 
-<h2><a href="/docs/functions#ignoreFiles" id="ignoreFiles">Ignore Files</a></h2>
-
-<p>Library folders such as <b>node_modules</b> or <b>vendor</b> should not be included in the tarball, although you will want them locally so you have syntax highlighting in your IDE. Similarly, you should <b>not</b> include files containing secrets in your deployment. You can use the Appwite CLI's <b>file ignoring</b> feature to exclude specific files from a deployment.</p>
-
-<p>You can open the <b>appwrite.json</b> file and look for your function's definition. In there, you can set the value for the <b>ignore</b> key to specify which files and folders should be ignored. This value must be an array, as seen in the example below:</p>
-
-<div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
-    <pre class="line-numbers"><code class="prism language-json" data-prism>{
-    ...
-    "functions": [
-        {
-            "$id": "6213b58cb21dda6c3263",
-            "name": "My Awesome Function",
-            "runtime": "node-17.0",
-            "path": "My Awesome Function",
-            "entrypoint": "src/index.js",
-            "ignore": [ "node_modules", ".env" ]
-        },
-        ...
-    ],
-}</code></pre>
-</div>
-
-<p>The example configuration above would not deploy the folder <b>node_modules</b> and the file <b>.env</b>.</p>
-
-<p>Alternatively, you can add a <b>.gitignore</b> file into your function folder and Appwrite CLI will ignore files specified in there. Keep in mind that the <b>ignore</b> configuration in <b>appwrite.json</b> must not be present for <b>.gitignore</b> to be used.</p>
-
-<p>If you want to have a <b>.gitignore</b> file for your version control and don't want Appwrite CLI to use it, you can specify the <b>ignore</b> key in <b>appwrite.json</b> to be an empty array.</p>
-
 <h2><a href="/docs/functions#createFunction" id="createFunction">Create your Function</a></h2>
 
 <p>Before you can deploy your function, you will need to create a new function from your Appwrite project's dashboard. Access the Function settings from your project's left navigation panel. Click the 'Add Function' button and choose a function name and runtime. In your Functions settings page, you can also set your function event triggers, CRON schedule, and set secure environment variables for your function. </p>
@@ -631,6 +602,35 @@ class MainActivity : AppCompatActivity() {
 <p>Appwrite allows your project's end-users to execute Cloud Functions using client API or your client SDK. Execution is permitted to any user who has been granted the "execute" permission in your Cloud Functions settings page. The execution permission can accept any of the typical Appwrite <a href="/docs/permissions">permission types</a>.</p>
 
 <p>When triggering a Cloud Function execution from the client, your users will be limited to a specific amount of execution per minute to make sure your Appwrite server is not being abused. The default limit is 60 calls per 1 minute. You can edit this limit using the server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
+
+<h2><a href="/docs/functions#ignoreFiles" id="ignoreFiles">Ignore Files</a></h2>
+
+<p>Library folders such as <b>node_modules</b> or <b>vendor</b> should not be included in the tarball, although you will want them locally so you have syntax highlighting in your IDE. Similarly, you should <b>not</b> include files containing secrets in your deployment. You can use the Appwite CLI's <b>file ignoring</b> feature to exclude specific files from a deployment.</p>
+
+<p>You can use the <b>ignore</b> property in your <b>appwrite.json</b> file to specify which files and folders should be ignored. This value must be an array of paths, as seen in the example below:</p>
+
+<div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
+    <pre class="line-numbers"><code class="prism language-json" data-prism>{
+    ...
+    "functions": [
+        {
+            "$id": "6213b58cb21dda6c3263",
+            "name": "My Awesome Function",
+            "runtime": "node-17.0",
+            "path": "My Awesome Function",
+            "entrypoint": "src/index.js",
+            "ignore": [ "node_modules", ".env" ]
+        },
+        ...
+    ],
+}</code></pre>
+</div>
+
+<p>The example configuration above would not deploy the folder <b>node_modules</b> and the file <b>.env</b>.</p>
+
+<p>Alternatively, you can add a <b>.gitignore</b> file into your function folder and Appwrite CLI will ignore files specified in there. Keep in mind that if present, the <b>ignore</b> configuration in <b>appwrite.json</b> nullify the <b>.gitignore</b> file configuration.</p>
+
+<p>If you need to use a <b>.gitignore</b> file for your version control but don't want the Appwrite CLI to use it, you can specify the <b>ignore</b> key in <b>appwrite.json</b> to be an empty array.</p>
 
 <h2><a href="/docs/functions#supportedRuntimes" id="supportedRuntimes">Supported Runtimes</a></h2>
 
