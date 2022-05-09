@@ -171,24 +171,18 @@ class MainActivity : AppCompatActivity() {
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() {
+func main() async throws {
     let client = Client()
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
     let database = Database(client)
-    database.createDocument(
+    let document = try await database.createDocument(
         collectionId: "[COLLECTION_ID]",
         documentId: "unique()",
         data: [:]
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let document):
-            print(String(describing: document)
-        }
-    }
+    )
+    print(document.toMap())
 }</code></pre>
         </div>
     </li>
@@ -274,23 +268,17 @@ class MainActivity : AppCompatActivity() {
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() {
+func main() async throws{
     let client = Client()
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
     let database = Database(client)
-    database.listDocuments(
+    let list = try await database.listDocuments(
         collectionId: "[COLLECTION_ID]",
         queries: [Query.equal('title', 'Avatar')]
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let document):
-            print(String(describing: document)
-        }
-    }
+    )
+    print(list.toMap())
 }</code></pre>
         </div>
     </li>
@@ -411,26 +399,20 @@ class MainActivity : AppCompatActivity() {
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() {
+func main() async throws {
     let client = Client()
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
     let database = Database(client)
-    database.listDocuments(
+    let list = try await database.listDocuments(
         collectionId: "[COLLECTION_ID]",
         queries: [
             Query.equal('title', ['Avatar', 'Lord of the Rings']),
             Query.greater('year', 1999)
         ]
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let document):
-            print(String(describing: document)
-        }
-    }
+    )
+    print(list.toMap())
 }</code></pre>
         </div>
     </li>
