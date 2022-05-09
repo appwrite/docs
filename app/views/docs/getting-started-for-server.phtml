@@ -273,8 +273,7 @@ val response = account
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>let account = Account(client: client)
 
-let response = try await account
-    .createJWT()</code></pre>
+let response = try await account.createJWT()</code></pre>
         </div>
     </li>
 </ul>
@@ -483,7 +482,7 @@ println(res.body?.string())</code></pre>
 
 let users = Users(client: client)
 
-val user = users.create(userId: "unique()", email: "email@example.com", password: "password")
+val user = try await users.create(userId: "unique()", email: "email@example.com", password: "password")
 print(user.toMap())
 </code></pre>
         </div>
@@ -657,7 +656,7 @@ client
 
 let users = Users(client: client)
 
-let user = users.create(userId: "unique()", email: "email@example.com", password: "password")
+let user = try await users.create(userId: "unique()", email: "email@example.com", password: "password")
 print(user.toMap())
 }</code></pre>
         </div>

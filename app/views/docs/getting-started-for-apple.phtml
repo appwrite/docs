@@ -156,7 +156,7 @@ let client = Client()
 
 // Register User
 let account = Account(client: client)
-let user = account.create(userId: "unique()", email: "email@example.com", password: "password")
+let user = try await account.create(userId: "unique()", email: "email@example.com", password: "password")
 print(user.toMap())
 
 // Subscribe to files channel

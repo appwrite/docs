@@ -215,7 +215,7 @@ func main() async throws {
     let database = Database(client)
     
     // Page 1
-    var list = database.listDocuments(
+    var list = try await database.listDocuments(
         collectionId: "[COLLECTION_ID]",
         limit: 25,
     )
@@ -223,7 +223,7 @@ func main() async throws {
     let lastId = list.documents[list.documents.count - 1].$id
             
     // Page 2
-    list = database.listDocuments(
+    list = try await database.listDocuments(
         collectionId: "[COLLECTION_ID]",
         cursor: lastId,
     )
