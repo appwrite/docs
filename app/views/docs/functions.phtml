@@ -597,6 +597,35 @@ class MainActivity : AppCompatActivity() {
 
 <p>When triggering a Cloud Function execution from the client, your users will be limited to a specific amount of execution per minute to make sure your Appwrite server is not being abused. The default limit is 60 calls per 1 minute. You can edit this limit using the server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
 
+<h2><a href="/docs/functions#ignoreFiles" id="ignoreFiles">Ignore Files</a></h2>
+
+<p>Library folders such as <b>node_modules</b> or <b>vendor</b> should not be included in your tarball since these dependencies will be installed during your function's build process. Similarly, you should <b>not</b> include files containing secrets in your deployment. You can use the Appwite CLI's <b>file ignoring</b> feature to exclude specific files from a deployment.</p>
+
+<p>You can use the <b>ignore</b> property in your <b>appwrite.json</b> file to specify which files and folders should be ignored. This value must be an array of paths, as seen in the example below:</p>
+
+<div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
+    <pre class="line-numbers"><code class="prism language-json" data-prism>{
+    ...
+    "functions": [
+        {
+            "$id": "6213b58cb21dda6c3263",
+            "name": "My Awesome Function",
+            "runtime": "node-17.0",
+            "path": "My Awesome Function",
+            "entrypoint": "src/index.js",
+            "ignore": [ "node_modules", ".env" ]
+        },
+        ...
+    ],
+}</code></pre>
+</div>
+
+<p>The example configuration above would not deploy the folder <b>node_modules</b> and the file <b>.env</b>.</p>
+
+<p>Alternatively, you can add a <b>.gitignore</b> file into your function folder and Appwrite CLI will ignore files specified in there. Keep in mind that if present, the <b>ignore</b> configuration in <b>appwrite.json</b> will nullify the <b>.gitignore</b> file configuration.</p>
+
+<p>If you need to use a <b>.gitignore</b> file for your version control but don't want the Appwrite CLI to use it, you can specify the <b>ignore</b> key in <b>appwrite.json</b> to be an empty array.</p>
+
 <h2><a href="/docs/functions#supportedRuntimes" id="supportedRuntimes">Supported Runtimes</a></h2>
 
 <p>Appwrite provides multiple code runtimes to execute your custom functions. Each runtime uses a Docker image tied to a specific language version to provide a safe, isolated playground to run your team's code.</p>
