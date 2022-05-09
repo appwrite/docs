@@ -13,7 +13,7 @@ $runtimes = $this->getParam('runtimes', []);
 
 <h2><a href="/docs/functions#gettingStarted" id="gettingStarted">Getting Started</a></h2>
 
-<p>The quickest way to get started with Appwrite Functions is using the <a href="/docs/command-line">Appwrite CLI</a>. The CLI comes with starter code and a some simple commands to quickly create and deploy your functions. Once you have the CLI installed and setup with an Appwrite project, create your first function using: </p>
+<p>The quickest way to get started with Appwrite Functions is using the <a href="/docs/command-line">Appwrite CLI</a>. The CLI comes with starter code and some simple commands to quickly create and deploy your functions. Once you have the CLI installed and setup with an Appwrite project, create your first function using: </p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function</code></pre>
@@ -458,15 +458,15 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
 <h2><a href="/docs/functions#build" id="build">Builds</a></h2>
 <p>Deployments needs to be built before they can be activated. This is automatically done after creating a deployment and the time taken can vary depending on the runtime.</p>
 
-<p>If a build fails for any reason, the deployment's status is set to <b>failed</b> and you won't be able to activate it. You can however retry a build if you think it was caused by an external factor using the <b>Retry Button</b> on the Appwrite Dashboard or <a href="/docs/api#retry-build">Retry Build</a> endpoint with the <b>buildId</b> from the deployment.</p>
+<p>If a build fails for any reason, the deployment's status is set to <b>failed</b> and you won't be able to activate it. You can however retry a build if you think it was caused by an external factor using the <b>Retry Button</b> on the Appwrite Dashboard or <a href="/docs/server/functions#functionsRetryBuild">Retry Build</a> endpoint with the <b>buildId</b> from the deployment.</p>
 
-<p>To find more details about a build that has failed you can get the <code>buildId</code> from the deployment and use the <a href="/docs/api#get-build">Get Build</a> endpoint to get more information about the build.</p>
+<p>To find more details about a deployment and reasons for its failure, you can use the <a href="/docs/server/functions#functionsGetDeployment">Get Deployment</a> endpoint using the <b>deploymentId</b>.</p>
 
 <p>Deployments that have been built successfully are marked as <b>ready</b> and can be activated and executed.</p>
 
 <div class="notice">
     <h3>Build Times</h3>
-    <p>Statically compiled runtimes such as Rust or Swift take much longer to build however yield better performance over their dynamically compiled counterparts such as Node.</p>
+    <p>Compiled runtimes such as Rust and Swift take much longer to build however yield better performance over their interpreted counterparts such as Node.</p>
 </div>
 
 <h2><a href="/docs/functions#execute" id="execute">Execute</a></h2>
