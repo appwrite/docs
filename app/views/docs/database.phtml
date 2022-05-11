@@ -418,12 +418,15 @@ func main() async throws {
     </li>
 </ul>
 
+<p>When performing a query against multiple attributes, a single index with all queries attributes is required. In the example above, a single index with <b>both</b> <span class="tag">title</span> and <span class="tag">year</span> is queried.</p>
+
 <h2><a href="/docs/database#indexes" id="indexes">Indexes</a></h2>
 <p>
     Indexes are used by databases to quickly locate data without having to search through every document for results.
     To ensure the best performance, Appwrite requires an index for every query.
-    You can create an index by navigating to the <b>Indexes</b> tab of your collection, or by using your favorite Server SDK. It should be noted that Appwrite's database was designed to protect your queries from performing a full-table scan as this is a footgun and could cause catastrophic performance degregation as you scale up your Appwrite project.
+    You can create an index by navigating to the <b>Indexes</b> tab of your collection or by using your favorite Server SDK. If you plan to query multiple attributes in a single query, you will need an index with <b>all</b> queried attributes.
 </p>
+<p>It should be noted that Appwrite's database was designed to protect your queries from performing a full-table scan as this is a footgun and could cause catastrophic performance degregation as you scale up your Appwrite project.</p>
 <p>
     The following indexes are currently supported:
 </p>
