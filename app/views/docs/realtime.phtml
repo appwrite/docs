@@ -21,7 +21,7 @@ $channels = [
 
 <p>Instead of requesting new data via HTTP, the subscription will receive new data every time it changes, any connected client receives that update within milliseconds via a WebSocket connection.</p>
 
-<p>This lets you build an interactive and responsive user experience by providing information from all of Appwrite's services in realtime.</p>
+<p>This lets you build an interactive and responsive user experience by providing information from all of Appwrite's services in realtime. The example below shows subscribing to realtime events for file uploads.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -34,7 +34,13 @@ sdk
     .setProject('5df5acd0d48c2') // Your project ID
 ;
 
-sdk.subscribe(channel, callback);</code></pre>
+// Subscribe to files channel
+sdk.subscribe('files', response => {
+    if(response.event === 'storage.files.create') {
+        // Log when a new file is uploaded
+        console.log(response.payload);
+    }
+});</code></pre>
         </div>
     </li>
     <li>
@@ -44,16 +50,21 @@ sdk.subscribe(channel, callback);</code></pre>
             <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
 
 client
-    .setEndpoint('https://localhost/v1') // Your Appwrite Endpoint
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your Appwrite Endpoint
     .setProject('5e8cf4f46b5e8') // Your project ID
-    .setSelfSigned(status: true) // For self signed certificates, only use for development
 ;
 
 final realtime = Realtime(client);
-final subscription = realtime.subscribe(channel);
 
-subscription.stream.listen(callback);
-</code></pre>
+// Subscribe to files channel
+final subscription = realtime.subscribe(['files']);
+
+subscription.stream.listen((response) {
+    if(response.event == 'storage.files.create') {
+    // Log when a new file is uploaded
+    print(response.payload);
+    }
+});</code></pre>
         </div>
     </li>
     <li>
@@ -64,11 +75,16 @@ subscription.stream.listen(callback);
 client
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2") // Your project ID
-    .setSelfSigned(status = true) // For self signed certificates, only use for development
 
 val realtime = Realtime(client)
 
-realtime.subscribe(channels, callback)</code></pre>
+// Subscribe to files channel
+realtime.subscribe("files", callback = { response ->
+    if(response.event === "storage.files.create") {
+        // Log when a new file is uploaded
+        print(response.payload.toString());
+    }
+})</code></pre>
         </div>
     </li>
     <li>
@@ -79,11 +95,16 @@ realtime.subscribe(channels, callback)</code></pre>
 client
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2") // Your project ID
-    .setSelfSigned(true) // For self signed certificates, only use for development
 
-let realtime = Realtime(client)
+let realtime = Realtime(client: client)
 
-realtime.subscribe(channels: channels, callback: callback)</code></pre>
+// Subscribe to files channel
+let subscription = realtime.subscribe(channels: ["files"]) { message in
+    if(message.event == "storage.files.create") {
+        // Log when a new file is uploaded
+        print(String(describing: message.payload))
+    }
+}</code></pre>
         </div>
     </li>
 </ul>
@@ -392,7 +413,7 @@ subscription.close()</code></pre>
 
 <p>The SDK will guess the endpoint of the Realtime API when setting the endpoint of your Appwrite instance. If you are running Appwrite with a custom proxy and changed the route of the Realtime API, you can call the <b>setEndpointRealtime</b> method on the Client SDK and set your new endpoint value.</p>
 
-<p>By default the endpoint is <b>wss://[ENDPOINT]/v1/realtime</b>.</p>
+<p>By default the endpoint is <b>wss://[HOSTNAME_OR_IP]/v1/realtime</b>.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -400,7 +421,7 @@ subscription.close()</code></pre>
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();
 
-sdk.setEndpointRealtime('[ENDPOINT]');</code></pre>
+sdk.setEndpointRealtime('[HOSTNAME_OR_IP]');</code></pre>
         </div>
     </li>
     <li>
@@ -408,21 +429,21 @@ sdk.setEndpointRealtime('[ENDPOINT]');</code></pre>
 
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
-client.setEndpointRealtime('[ENDPOINT]');</code></pre>
+client.setEndpointRealtime('[HOSTNAME_OR_IP]');</code></pre>
         </div>
     </li>
     <li>
         <h3>Android</h3>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
-client.setEndpointRealtime("[ENDPOINT]")</code></pre>
+client.setEndpointRealtime("[HOSTNAME_OR_IP]")</code></pre>
         </div>
     </li>
     <li>
         <h3>Apple</h3>
         <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
-client.setEndpointRealtime("[ENDPOINT]")</code></pre>
+client.setEndpointRealtime("[HOSTNAME_OR_IP]")</code></pre>
         </div>
     </li>
 </ul>
