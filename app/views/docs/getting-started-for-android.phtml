@@ -23,7 +23,7 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 
 <h2><a href="/docs/getting-started-for-android#addProject" id="addProject">Add your Android Platform</a></h2>
 
-<p>To init your SDK and start interacting with Appwrite services, you need to add a new Android platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and click the 'Add Platform' button.</p>
+<p>To init your SDK and start interacting with Appwrite services, you need to add a new Android platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and click the 'Add Platform' button. Only API requests initiated from platforms added to your Appwrite project will be accepted. This prevents unauthorized apps from accessing your Appwrite project.</p>
 
 <p>From the options, choose to add a new <b>Android</b> platform and add add your app <u>name</u> and <u>package name</u>, your package name is generally the <b>applicationId</b> in your app-level <a href="https://github.com/appwrite/playground-for-android/blob/master/app/build.gradle#L12" target="_blank" rel="noopener">build.gradle</a> file. By registering your new app platform, you are allowing your app to communicate with the Appwrite API.</p>
 
