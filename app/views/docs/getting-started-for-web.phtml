@@ -29,7 +29,7 @@ $demos = $platform['demos'] ?? [];
 
 <p>From the options, choose to add a <b>web</b> platform and add your client app hostname. By adding your hostname to your project platform, you are allowing cross-domain communication between your project and the Appwrite API. Only web apps hosted on domains specified in a web platform will be able to make requests to your Appwrite instance, preventing unwanted access from malicious actors.</p>
 
-<p>Web platfroms allow using wildcards in hostnames through the use of a <span class="tag">*</span>. For example, <span class="tag">*.example.com</span>. Avoiding using wildcards unless necessary to keep your Appwrite project secure.</p>
+<p>Web platfroms allow using wildcards in hostnames through the use of a <span class="tag">*</span> character. The wildcard character can be applied anywhere in a hostname, both <span class="tag">*.example.com</span> and <span class="tag">prod.*.example.com</span> are valid examples. Avoiding using wildcards unless necessary to keep your Appwrite project secure.</p>
 
 <?php //TODO add console ui image here ?>
 
