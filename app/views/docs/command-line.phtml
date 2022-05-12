@@ -4,6 +4,8 @@
 
 <p>The CLI is packaged both as an <a href="https://www.npmjs.com/package/appwrite-cli">npm module</a> as well as a <a href="https://github.com/appwrite/sdk-for-node-cli/releases/latest">standalone binary</a> for your operating system, making it completely dependency free, platform independent and language agnostic.</p>
 
+<p>If you plan to use the CLI to initialize new Cloud Functions, ensure that <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="_blank" rel="noopener">Git is installed</a> on your machine.</p>
+
 <h3><a href="/docs/command-line#installWithNpm" id="installWithNpm">Install with NPM</a></h3>
 
 <p>If you have npm set up, run the command below to install the CLI</p>
@@ -124,8 +126,8 @@ brew install --HEAD appwrite</code></pre>
     <h3>Self-Signed Certificates</h3> 
     <p>By default, requests to domains with self-signed SSL certificates (or no certificates) are disabled. If you trust the domain, you can bypass the certificate validation using</p>
     <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --selfSigned true</code></pre>
-</div>
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --selfSigned true</code></pre>
+    </div>
 </div>
 
 <h3><a href="/docs/command-line#appwriteJSON" id="appwriteJSON">The appwrite.json File</a></h3>
