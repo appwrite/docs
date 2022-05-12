@@ -52,7 +52,7 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
   <application ...>
     ...
     <!-- Add this inside the `<application>` tag, along side the existing `<activity>` tags -->
-    <activity android:name="io.appwrite.views.CallbackActivity" >
+    <activity android:name="io.appwrite.views.CallbackActivity" android:exported="true">
       <intent-filter android:label="android_web_auth">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -103,7 +103,7 @@ val json = response.body?.string()</code></pre>
 val realtime = Realtime(client)
 
 realtime.subscribe("files", callback = { response ->
-    if(response.event === 'storage.files.create') {
+    if(response.event == "storage.files.create") {
         // Log when a new file is uploaded
         print(response.payload.toString());
     }
@@ -130,7 +130,7 @@ val json = response.body?.string()
 val realtime = Realtime(client)
 
 realtime.subscribe("files", callback = { response ->
-    if(response.event === 'storage.files.create') {
+    if(response.event == "storage.files.create") {
         // Log when a new file is uploaded
         print(response.payload.toString());
     }

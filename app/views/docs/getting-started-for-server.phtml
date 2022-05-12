@@ -272,13 +272,7 @@ val response = account
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>let account = Account(client: client)
 
-let response = account
-    .createJWT() { result in
-        switch result {
-        case .failure(let error): print(error.message)
-        case .success(let token): print(token.jwt)
-        }
-    }</code></pre>
+let response = try await account.createJWT()</code></pre>
         </div>
     </li>
 </ul>
@@ -487,12 +481,8 @@ println(res.body?.string())</code></pre>
 
 let users = Users(client: client)
 
-users.create(userId: "unique()", email: "email@example.com", password: "password") { result in
-    switch result {
-    case .failure(let error): print(error.message)
-    case .success(let user): print(String(describing: user))
-    }
-}
+val user = try await users.create(userId: "unique()", email: "email@example.com", password: "password")
+print(user.toMap())
 </code></pre>
         </div>
     </li>
@@ -665,11 +655,8 @@ client
 
 let users = Users(client: client)
 
-users.create(userId: "unique()", email: "email@example.com", password: "password") { result in
-    switch result {
-    case .failure(let error): print(error.message)
-    case .success(let user): print(String(describing: user))
-    }
+let user = try await users.create(userId: "unique()", email: "email@example.com", password: "password")
+print(user.toMap())
 }</code></pre>
         </div>
     </li>

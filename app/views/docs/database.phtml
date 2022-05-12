@@ -135,8 +135,8 @@ void main() async {
     </li>
     <li>
         <h3>Android</h3>
-        <div class="ide" data-lang="android" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-android" data-prism>import androidx.appcompat.app.AppCompatActivity
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -171,24 +171,18 @@ class MainActivity : AppCompatActivity() {
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() {
+func main() async throws {
     let client = Client()
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
     let database = Database(client)
-    database.createDocument(
+    let document = try await database.createDocument(
         collectionId: "[COLLECTION_ID]",
         documentId: "unique()",
         data: [:]
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let document):
-            print(String(describing: document)
-        }
-    }
+    )
+    print(document.toMap())
 }</code></pre>
         </div>
     </li>
@@ -238,8 +232,8 @@ void main() async {
     </li>
     <li>
         <h3>Android</h3>
-        <div class="ide" data-lang="android" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-android" data-prism>import androidx.appcompat.app.AppCompatActivity
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -274,23 +268,17 @@ class MainActivity : AppCompatActivity() {
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() {
+func main() async throws{
     let client = Client()
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
     let database = Database(client)
-    database.listDocuments(
+    let list = try await database.listDocuments(
         collectionId: "[COLLECTION_ID]",
         queries: [Query.equal('title', 'Avatar')]
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let document):
-            print(String(describing: document)
-        }
-    }
+    )
+    print(list.toMap())
 }</code></pre>
         </div>
     </li>
@@ -372,8 +360,8 @@ void main() async {
     </li>
     <li>
         <h3>Android</h3>
-        <div class="ide" data-lang="android" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-android" data-prism>import androidx.appcompat.app.AppCompatActivity
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -411,37 +399,34 @@ class MainActivity : AppCompatActivity() {
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() {
+func main() async throws {
     let client = Client()
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
     let database = Database(client)
-    database.listDocuments(
+    let list = try await database.listDocuments(
         collectionId: "[COLLECTION_ID]",
         queries: [
             Query.equal('title', ['Avatar', 'Lord of the Rings']),
             Query.greater('year', 1999)
         ]
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let document):
-            print(String(describing: document)
-        }
-    }
+    )
+    print(list.toMap())
 }</code></pre>
         </div>
     </li>
 </ul>
 
+<p>When performing a query against multiple attributes, a single index with all queries attributes is required. In the example above, a single index with <b>both</b> <span class="tag">title</span> and <span class="tag">year</span> is queried.</p>
+
 <h2><a href="/docs/database#indexes" id="indexes">Indexes</a></h2>
 <p>
     Indexes are used by databases to quickly locate data without having to search through every document for results.
     To ensure the best performance, Appwrite requires an index for every query.
-    You can create an index by navigating to the <b>Indexes</b> tab of your collection, or by using your favorite Server SDK. It should be noted that Appwrite's database was designed to protect your queries from performing a full-table scan as this is a footgun and could cause catastrophic performance degregation as you scale up your Appwrite project.
+    You can create an index by navigating to the <b>Indexes</b> tab of your collection or by using your favorite Server SDK. If you plan to query multiple attributes in a single query, you will need an index with <b>all</b> queried attributes.
 </p>
+<p>It should be noted that Appwrite's database was designed to protect your queries from performing a full-table scan as this is a footgun and could cause catastrophic performance degregation as you scale up your Appwrite project.</p>
 <p>
     The following indexes are currently supported:
 </p>
