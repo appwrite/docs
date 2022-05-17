@@ -33,8 +33,8 @@ $events = $this->getParam('events', []);
         <td>The ID of the Webhook who triggered the event.</td>
     </tr>
     <tr>
-        <td>X-Appwrite-Webhook-Event</td>
-        <td>Name of the event that triggered this delivery.</td>
+        <td>X-Appwrite-Webhook-Events</td>
+        <td>Names of the events that triggered this delivery.</td>
     </tr>
     <tr>
         <td>X-Appwrite-Webhook-Name</td>
@@ -74,17 +74,14 @@ $events = $this->getParam('events', []);
     </tr>
     </thead>
     <tbody>
-    <?php foreach($events as $event => $data):
-        $description = $data['description'] ?? '';
-        $model = $data['model'] ?? '';
-        $note = $data['note'] ?? '';
+    <?php foreach($events as $event):
+        $pattern = $event['pattern'] ?? '';
+        $description = $event['description'] ?? '';
+        $model = $event['model'] ?? '';
     ?>
     <tr>
         <td>
-            <?php echo $this->escape($event); ?>
-            <?php if(!empty($note)): ?>
-                <p class="margin-top-small text-fade"><?php echo $this->escape($note); ?></p>
-            <?php endif; ?>
+            <?php echo $this->escape($pattern); ?>
         </td>
         <td>
         <?php if(!empty($model)): ?>
