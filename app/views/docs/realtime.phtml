@@ -36,7 +36,7 @@ sdk
 
 // Subscribe to files channel
 sdk.subscribe('files', response => {
-    if(response.event === 'storage.files.create') {
+    if(response.events.includes('buckets.*.files.*.create')) {
         // Log when a new file is uploaded
         console.log(response.payload);
     }
@@ -60,7 +60,7 @@ final realtime = Realtime(client);
 final subscription = realtime.subscribe(['files']);
 
 subscription.stream.listen((response) {
-    if(response.event == 'storage.files.create') {
+    if(response.events.contains('buckets.*.files.*.create')) {
     // Log when a new file is uploaded
     print(response.payload);
     }
@@ -80,7 +80,7 @@ val realtime = Realtime(client)
 
 // Subscribe to files channel
 realtime.subscribe("files", callback = { response ->
-    if(response.event === "storage.files.create") {
+    if(response.events.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(response.payload.toString());
     }
@@ -100,7 +100,7 @@ let realtime = Realtime(client: client)
 
 // Subscribe to files channel
 let subscription = realtime.subscribe(channels: ["files"]) { message in
-    if(message.event == "storage.files.create") {
+    if(message.events.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(String(describing: message.payload))
     }
@@ -111,7 +111,7 @@ let subscription = realtime.subscribe(channels: ["files"]) { message in
 
 <p>To subscribe to updates from different resources, you need to specify one or more channels. The <a href="/docs/realtime#channels">channels</a> offer a wide and powerful selection that will allow you to listen to all possible resources. This allows you to receive updates not only from the database, but from all the services that Appwrite offers.</p>
 
-<p>If you listen to all documents from a collection by subscribing to the <span class="tag">collections.[ID].documents</span> channel, you can use the <b>event</b> attribute in the callback to distinguish whether a new document was created or an existing one was updated.</p>
+<p>If you subscribe to the a channel, you will receive callbacks for a variety of events related to the channel. The <b>events</b> attribute in the callback can be used to filter and respond to specific events in a channel.</p>
 
 <p>All possible events can be found <a href="/docs/webhooks#events">here</a>.</p>
 
@@ -320,13 +320,13 @@ subscription.close()</code></pre>
     <tbody>
         <tr>
             <td data-title="Name: ">
-                event
+                events
             </td>
             <td data-title="Type: ">
-                string
+                string[]
             </td>
             <td data-title="Description: ">
-                The <a href="/docs/webhooks#events">system event</a> that triggered this update.
+                The <a href="/docs/webhooks#events">system events</a> that triggered this update.
             </td>
         </tr>
         <tr>
@@ -371,19 +371,35 @@ subscription.close()</code></pre>
 
 <div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
     <pre class="line-numbers"><code class="prism language-json" data-prism>{
-    "event": "database.documents.update",
+    "events": [
+        "collections.user.documents.627a95c0785cc5c7fff2.delete",
+        "collections.*.documents.*.delete",
+        "collections.user.documents.*.delete",
+        "collections.*.documents.627a95c0785cc5c7fff2.delete",
+        "collections.user.documents.627a95c0785cc5c7fff2",
+        "collections.*.documents.*",
+        "collections.user.documents.*",
+        "collections.*.documents.627a95c0785cc5c7fff2",
+        "collections.user",
+        "collections.*"
+    ],
     "channels": [
         "documents",
-        "documents.[DOCUMENT_ID]",
-        "collections.[COLLECTION_ID].documents"
+        "collections.user.documents",
+        "collections.user.documents.627a95c0785cc5c7fff2"
     ],
-    "timestamp": 1629719169,
+    "timestamp": 1653957271,
     "payload": {
-        "$id": "[DOCUMENT_ID]",
-        "$collection": "[COLLECTION_ID]",
-        "$permissions": [],
-        "attribute1": "lorem",
-        "attribute2": 2030
+        "field1": "lorem ipsum",
+        "field2": [],
+        "$read": [
+            "user:627a958ded6424a98a9f"
+        ],
+        "$write": [
+            "user:627a958ded6424a98a9f"
+        ],
+        "$id": "627a95c0785cc5c7fff2",
+        "$collection": "example-collection"
     }
 }</code></pre>
 </div>
