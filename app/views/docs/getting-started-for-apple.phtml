@@ -135,7 +135,7 @@ print(user.toMap())
 let realtime = Realtime(client: client)
 
 let subscription = realtime.subscribe(channels: ["files"]) { message in
-    if(message.event == "storage.files.create") {
+    if(message.events!.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(String(describing: message.payload))
     }
@@ -163,7 +163,7 @@ print(user.toMap())
 let realtime = Realtime(client: client)
 
 let subscription = realtime.subscribe(channels: ["files"]) { message in
-    if(message.event == "storage.files.create") {
+    if(message.events!.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(String(describing: message.payload))
     }

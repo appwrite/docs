@@ -102,7 +102,7 @@ appwrite
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
                     <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Subscribe to files channel
 appwrite.subscribe('files', response => {
-    if(response.event === 'storage.files.create') {
+    if(response.events.includes('buckets.*.files.*.create')) {
         // Log when a new file is uploaded
         console.log(response.payload);
     }
@@ -130,7 +130,7 @@ appwrite
 
 // Subscribe to files channel
 appwrite.subscribe('files', response => {
-    if(response.event === 'storage.files.create') {
+    if(response.events.includes('buckets.*.files.*.create')) {
         // Log when a new file is uploaded
         console.log(response.payload);
     }
