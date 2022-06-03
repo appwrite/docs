@@ -6,17 +6,25 @@ The official https://appwrite.io/docs documentation source code.
 2. Update, add, or fix current docs
 3. Once content is ready, raise a PR
 
+### Before Proposing Additions
+Documentation is an integral part of Appwrite and follows the same philosophy of quick to get started, easy to grow. Before proposing additions to Appwrite's documentation, think about where these additions fit best.
+- The **Getting Started** section helps a developer create their first Appwrite project and make their first requests so they can begin exploring Appwrite. Avoid adding unnecessary information to this section so a developer's first-impressions remains quick and smooth.
+- The **Guides** section helps a developer get comfortable with individual Appwrite services. Guides are structured to walk a developer through features of an Appwrite service. The topics should be ordered by level of complexity, where complex topics are positioned later into a guide.
+- The **REST API** section helps a developer understand details of individual endpoints. Additions to REST API documentation should remain focused on the API endpoint itself. Avoid adding information about related endpoints and services that are not integral to undestanding documented endpoint. Code example changes should be submitted to the [SDK Generator repo](https://github.com/appwrite/sdk-generator).
+- The **Advanced** section helps a developer learn more complicated concepts like pagination or using permissions. If your proposed addition are not a core component of using a service or requires lengthy explanation, consider adding them to **Advanced**.
+- **External Content** like blog posts and videos are used for documenting examples or integrating Appwrite with third party services. If your proposed addition involves content that are not focused on specific ways of using Appwrite, create a piece of external content. Add the content to the [Awesome Appwrite](https://github.com/appwrite/awesome-appwrite) catalog. The Appwrite team will also be glad to share the external content on Discord and on Appwrite's social accounts.
+
 ### Content Guidelines
-- Use proper title hierarchy (h1-h6) and valid HTML
-- All titles must follow the [Chicago style of headline capitalization](https://capitalizemytitle.com/style/Chicago/)
-- External links (not https://appwrite.io) should be opened in a new tab (`target="_blank"`)
-- External links should have an HTML attribute of `rel="noopener"`
-- All filenames should be dash-based and nested in a way that makes sense
-- All images should be in PNG format and 2600x1400px. Do not include any sensitive data in images. All screenshot of the Appwrite dashboard should support light and dark mode.
-- When creating new content or adjusting docs hierarchy, please consult the Appwrite team by opening a Github Issue in this repository
+- Use proper title hierarchy (h1-h6) and valid HTML.
+- All titles must follow the [Chicago style of headline capitalization](https://capitalizemytitle.com/style/Chicago/).
+- External links (not https://appwrite.io) should be opened in a new tab (`target="_blank"`).
+- External links should have an HTML attribute of `rel="noopener"`.
+- All filenames should be dash-based and nested in a way that makes sense.
+- Use proper punctuation. Sentences should be written in present tense with directive where possible. For example, use "click the cancel button to close the window" instead of "if you need to close the window, click the cancel button."
+- Images should adhere to specifications indicated in the [Images](#images) section of this document.
+- When creating new content or adjusting docs hierarchy, please consult the Appwrite team by opening a Github Issue in this repository.
 
 #### Code Examples
-
 Use the following HTML structure to present code examples:
 
 ```html
@@ -24,6 +32,8 @@ Use the following HTML structure to present code examples:
     <pre class="line-numbers"><code class="prism language-ruby" data-prism>#ruby code here...</code></pre>
 </div>
 ```
+
+Code examples should require minimum modifications to be execute where possible.
 
 As of writing this, these are the supported languages for code examples:
 
@@ -98,8 +108,10 @@ $image = new View(__DIR__.'/../general/image.phtml');
 ?>
 ```
 
+All screenshots should be in PNG format and taken from a 1290x848px viewport. Appwrite console screenshots should display the account name `Walter O'brian` with a profile image of WO. Do not include any sensitive data in images. All screenshot of the Appwrite dashboard should support light and dark mode.
+
 ## 🤘 Support 
-At any point, if you are stuck, feel free to hop on our [Discord server](https://appwrite.io/discord) to ask questions or seek mentorship!
+At any point, if you are stuck, feel free to hop on our [Discord server](https://appwrite.io/discord) to ask questions, provide feedback, or seek collaboration!
 
 ## Follow Us
 Join our growing community around the world! See our official [Blog](https://medium.com/appwrite-io). Follow us on [Twitter](https://twitter.com/appwrite), [Facebook Page](https://www.facebook.com/appwrite.io), [Facebook Group](https://www.facebook.com/groups/appwrite.developers/) , [DEV Community](https://dev.to/appwrite) or join our live [Discord server](https://discord.gg/GSeTUeA) for more help, ideas, and discussions.
