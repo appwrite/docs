@@ -283,6 +283,36 @@ Future &lt;void&gt; start(final req, final res) async {
         <p>Include a <b>Function.csproj</b> file in your function, Appwrite handles the rest!</p>
         </div>
     </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import kotlin.random.Random
+
+@Throws(Exception::class)
+fun main(req: RuntimeRequest, res: RuntimeResponse): RuntimeResponse {
+
+    val payload = if (req.payload.isEmpty() || req.payload == "{}") "No payload provided. Add custom data when executing function." else req.payload
+
+    val secretKey = req.env["SECRET_KEY"] ?: "SECRET_KEY environment variable not found. You can set it in Function settings."
+    
+    val randomNumber = Random.nextInt(0, 30)
+
+    val trigger = req.env["APPWRITE_FUNCTION_TRIGGER"]    
+
+    return res.json(mapOf(
+        "message" to "Hello from Appwrite!",
+        "payload" to payload,
+        "secretKey" to secretKey,
+        "randomNumber" to randomNumber,
+        "trigger" to trigger
+    ))
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>deps.gradle</b> file in your function, Appwrite handles the rest!</p>
+        </div>
+    </li>
 </ul>
 
 
