@@ -251,6 +251,38 @@ Future &lt;void&gt; start(final req, final res) async {
         <p>Include a <b>Package.swift</b> file with your function, Appwrite handles the rest!</p>
         </div>
     </li>
+    <li>
+        <h3>.NET</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>public async Task<RuntimeResponse> Main(RuntimeRequest req, RuntimeResponse res)
+{
+  var payload = string.IsNullOrEmpty(req.Payload) 
+                ? "No payload provided. Add custom data when executing function."
+                : req.Payload; 
+
+  var secretKey = req.Env.ContainsKey("SECRET_KEY")
+                  ? req.Env["SECRET_KEY"]
+                  : "SECRET_KEY environment variable not found. You can set it in Function settings.";
+
+  var randomNumber = new Random().Next();
+
+  var trigger = req.Env["APPWRITE_FUNCTION_TRIGGER"]
+
+  return res.Json(new() 
+  {
+    { "message", "Hello from Appwrite!" },
+    { "payload", payload },
+    { "secretKey", secretKey },
+    { "randomNumber", randomNumber },
+    { "trigger", trigger },
+  });
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>Function.csproj</b> file in your function, Appwrite handles the rest!</p>
+        </div>
+    </li>
 </ul>
 
 
