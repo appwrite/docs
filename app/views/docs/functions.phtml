@@ -257,7 +257,7 @@ Future &lt;void&gt; start(final req, final res) async {
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
             <pre class="line-numbers"><code class="prism language-csharp" data-prism>public async Task<RuntimeResponse> Main(RuntimeRequest req, RuntimeResponse res)
 {
-  var payload = string.IsNullOrEmpty(req.Payload) 
+  var payload = (string.IsNullOrEmpty(req.Payload) || req.Payload.Equals("{}"))
                 ? "No payload provided. Add custom data when executing function."
                 : req.Payload; 
 
@@ -267,7 +267,7 @@ Future &lt;void&gt; start(final req, final res) async {
 
   var randomNumber = new Random().Next();
 
-  var trigger = req.Env["APPWRITE_FUNCTION_TRIGGER"]
+  var trigger = req.Env["APPWRITE_FUNCTION_TRIGGER"];
 
   return res.Json(new() 
   {
