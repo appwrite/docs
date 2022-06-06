@@ -313,6 +313,44 @@ fun main(req: RuntimeRequest, res: RuntimeResponse): RuntimeResponse {
         <p>Include a <b>deps.gradle</b> file in your function, Appwrite handles the rest!</p>
         </div>
     </li>
+    <li>
+        <h3>Java</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+            <pre class="line-numbers"><code class="prism language-java" data-prism>import java.util.Map;
+import java.util.HashMap;
+import java.util.Random;
+
+public RuntimeResponse main(RuntimeRequest req, RuntimeResponse res) throws Exception {
+
+    String payload = (req.getPayload() == null || req.getPayload().isEmpty() || req.getPayload().equals("{}"))
+                     ? "No payload provided. Add custom data when executing function."
+                     : req.getPayload();
+
+    Map<String, String> env = req.getEnv();
+
+    String secretKey = env.containsKey("SECRET_KEY")
+                       ? env.get("SECRET_KEY")
+                       : "SECRET_KEY environment variable not found. You can set it in Function settings.";
+
+    int randomNumber = new Random().nextInt();
+
+    String trigger = env.get("APPWRITE_FUNCTION_TRIGGER");
+
+    Map<String, Object> response = new HashMap();
+        response.put("message", "Hello from Appwrite!");
+        response.put("payload", payload);
+        response.put("secretKey", secretKey);
+        response.put("randomNumber", randomNumber);
+        response.put("trigger", trigger);
+
+    return res.json(response);
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>deps.gradle</b> file in your function, Appwrite handles the rest!</p>
+        </div>
+    </li>
 </ul>
 
 
