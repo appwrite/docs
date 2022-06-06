@@ -110,7 +110,7 @@ $image = new View(__DIR__.'/../general/image.phtml');
 ?>
 ```
 
-All screenshots should be in PNG format and taken from a 1290x848px viewport. Appwrite console screenshots should display the account name `Walter O'brian` with a profile image of WO. Do not include any sensitive data in images. All screenshot of the Appwrite dashboard should support light and dark mode.
+All screenshots should be in PNG format and taken from a 1290 x 848 px viewport. Appwrite console screenshots should display the account name `Walter O'Brian` with a profile image of WO. Do not include any sensitive data in images. All screenshots of the Appwrite dashboard should support light and dark mode.
 
 ## 🤘 Support 
 At any point, if you are stuck, feel free to hop on our [Discord server](https://appwrite.io/discord) to ask questions, provide feedback, or seek collaboration!
