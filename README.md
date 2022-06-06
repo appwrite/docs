@@ -35,7 +35,7 @@ Use the following HTML structure to present code examples:
 </div>
 ```
 
-Code examples should require minimum modifications to be execute where possible.
+Code examples should require minimum modifications to be executed where possible.
 
 As of writing this, these are the supported languages for code examples:
 
