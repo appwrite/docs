@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity() {
 
         val client = Client(applicationContext)
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("5df5acd0d48c2") // Your project ID
+            .setProject("my_project") // Your project ID
 
         val database = Database(client)
 
@@ -248,7 +248,7 @@ class MainActivity : AppCompatActivity() {
 
         val client = Client(applicationContext)
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("5df5acd0d48c2") // Your project ID
+            .setProject("my_project") // Your project ID
 
         val database = Database(client)
 
@@ -276,7 +276,7 @@ func main() async throws{
     let database = Database(client)
     let list = try await database.listDocuments(
         collectionId: "[COLLECTION_ID]",
-        queries: [Query.equal('title', 'Avatar')]
+        queries: [Query.equal("title", "Avatar")]
     )
     print(list.toMap())
 }</code></pre>
@@ -376,7 +376,7 @@ class MainActivity : AppCompatActivity() {
 
         val client = Client(applicationContext)
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("5df5acd0d48c2") // Your project ID
+            .setProject("my_project") // Your project ID
 
         val database = Database(client)
 
@@ -408,8 +408,8 @@ func main() async throws {
     let list = try await database.listDocuments(
         collectionId: "[COLLECTION_ID]",
         queries: [
-            Query.equal('title', ['Avatar', 'Lord of the Rings']),
-            Query.greater('year', 1999)
+            Query.equal("title", ["Avatar", "Lord of the Rings"]),
+            Query.greater("year", 1999)
         ]
     )
     print(list.toMap())
@@ -505,7 +505,7 @@ class MainActivity : AppCompatActivity() {
 
         val client = Client(applicationContext)
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("5df5acd0d48c2") // Your project ID
+            .setProject("my_project") // Your project ID
 
         val database = Database(client)
 
@@ -591,7 +591,7 @@ class MainActivity : AppCompatActivity() {
 
         val client = Client(applicationContext)
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("5df5acd0d48c2") // Your project ID
+            .setProject("my_project") // Your project ID
 
         val database = Database(client)
 
