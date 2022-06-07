@@ -251,6 +251,106 @@ Future &lt;void&gt; start(final req, final res) async {
         <p>Include a <b>Package.swift</b> file with your function, Appwrite handles the rest!</p>
         </div>
     </li>
+    <li>
+        <h3>.NET</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>public async Task<RuntimeResponse> Main(RuntimeRequest req, RuntimeResponse res)
+{
+  var payload = (string.IsNullOrEmpty(req.Payload) || req.Payload.Equals("{}"))
+                ? "No payload provided. Add custom data when executing function."
+                : req.Payload; 
+
+  var secretKey = req.Env.ContainsKey("SECRET_KEY")
+                  ? req.Env["SECRET_KEY"]
+                  : "SECRET_KEY environment variable not found. You can set it in Function settings.";
+
+  var randomNumber = new Random().Next();
+
+  var trigger = req.Env["APPWRITE_FUNCTION_TRIGGER"];
+
+  return res.Json(new() 
+  {
+    { "message", "Hello from Appwrite!" },
+    { "payload", payload },
+    { "secretKey", secretKey },
+    { "randomNumber", randomNumber },
+    { "trigger", trigger },
+  });
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>Function.csproj</b> file in your function, Appwrite handles the rest!</p>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import kotlin.random.Random
+
+@Throws(Exception::class)
+fun main(req: RuntimeRequest, res: RuntimeResponse): RuntimeResponse {
+
+    val payload = if (req.payload.isEmpty() || req.payload == "{}") "No payload provided. Add custom data when executing function." else req.payload
+
+    val secretKey = req.env["SECRET_KEY"] ?: "SECRET_KEY environment variable not found. You can set it in Function settings."
+
+    val randomNumber = Random.nextInt(0, 30)
+
+    val trigger = req.env["APPWRITE_FUNCTION_TRIGGER"]    
+
+    return res.json(mapOf(
+        "message" to "Hello from Appwrite!",
+        "payload" to payload,
+        "secretKey" to secretKey,
+        "randomNumber" to randomNumber,
+        "trigger" to trigger
+    ))
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>deps.gradle</b> file in your function, Appwrite handles the rest!</p>
+        </div>
+    </li>
+    <li>
+        <h3>Java</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+            <pre class="line-numbers"><code class="prism language-java" data-prism>import java.util.Map;
+import java.util.HashMap;
+import java.util.Random;
+
+public RuntimeResponse main(RuntimeRequest req, RuntimeResponse res) throws Exception {
+
+    String payload = (req.getPayload() == null || req.getPayload().isEmpty() || req.getPayload().equals("{}"))
+                     ? "No payload provided. Add custom data when executing function."
+                     : req.getPayload();
+
+    Map<String, String> env = req.getEnv();
+
+    String secretKey = env.containsKey("SECRET_KEY")
+                       ? env.get("SECRET_KEY")
+                       : "SECRET_KEY environment variable not found. You can set it in Function settings.";
+
+    int randomNumber = new Random().nextInt();
+
+    String trigger = env.get("APPWRITE_FUNCTION_TRIGGER");
+
+    Map<String, Object> response = new HashMap();
+        response.put("message", "Hello from Appwrite!");
+        response.put("payload", payload);
+        response.put("secretKey", secretKey);
+        response.put("randomNumber", randomNumber);
+        response.put("trigger", trigger);
+
+    return res.json(response);
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>deps.gradle</b> file in your function, Appwrite handles the rest!</p>
+        </div>
+    </li>
 </ul>
 
 
