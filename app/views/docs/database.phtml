@@ -255,7 +255,7 @@ class MainActivity : AppCompatActivity() {
         GlobalScope.launch {
             val response = database.listDocuments(
                 collectionId = "[COLLECTION_ID]",
-                queries = [Query.equal('title', 'Avatar')],
+                queries = [Query.equal("title", "Avatar")],
             )
             val json = response.body?.string()
         }
@@ -384,8 +384,8 @@ class MainActivity : AppCompatActivity() {
             val response = database.listDocuments(
                 collectionId = "[COLLECTION_ID]",
                 queries = [
-                    Query.equal('title', ['Avatar', 'Lord of the Rings']),
-                    Query.greater('year', 1999),
+                    Query.equal("title", ["Avatar", "Lord of the Rings"]),
+                    Query.greater("year", 1999),
                 ],
             )
             val json = response.body?.string()
@@ -452,6 +452,184 @@ func main() async throws {
         </tr>
     </tbody>
 </table>
+
+<h3><a href="/docs/database#pagination" id="ordering">Ordering Results</a></h3>
+<p>When querying using the <a href="/docs/server/database#databaseListDocuments">listDocuments</a> endpoint, you can specify the order of the documents returned by providing the <b>orderAttributes</b> and <b>orderTypes</b> parameters.</p>
+
+<p>The parameter <b>orderAttributes</b> takes a string array of attributes IDs. The <b>orderTypes</b> parameter takes a string array equal in length to <b>orderAttributes</b> that indicate if each attribute should be sorted in ascending or descending order. Ascending and descending is denoted as <span class="tag">"ASC"</span> and <span class="tag">"DESC"</span> respectively.</p>
+
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>let promise = appwrite.database.listDocuments('movies', [], 25, 0, '', 'after', ['title'], ['ASC']);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+void main() async {
+    final client = Client();
+    final database = Database(client);
+    try {
+        final docs = await database.listDocuments(
+            collectionId: 'movies',
+            orderAttributes: ['title'],
+            orderTypes: ['ASC']
+        );
+        print(docs.toMap());
+    } on AppwriteException catch(e) {
+        print(e);
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import io.appwrite.Client
+import io.appwrite.services.Database
+import io.appwrite.Query
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val client = Client(applicationContext)
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+            .setProject("5df5acd0d48c2") // Your project ID
+
+        val database = Database(client)
+
+        GlobalScope.launch {
+            val response = database.listDocuments(
+                collectionId = "movies",
+                orderAttributes = listOf("title"),
+                orderTypes = listOf("ASC")
+            )
+            val json = response.body?.string()
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+func main() async throws {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("my_project") // Your project ID
+
+    let database = Database(client)
+    let list = try await database.listDocuments(
+        collectionId: "movies",
+        orderAttributes: ["title"],
+        orderTypes: ["ASC"]
+    )
+    print(list.toMap())
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>To sort based on multiple attributes, pass multiple attribute IDs into <b>orderAttributes</b>. The order of the attribute IDs indicate their sort precedence. There must be an index with all attributes used to allow sorting with multiple attributes.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>let promise = appwrite.database.listDocuments('movies', [], 25, 0, '', 'after', ['title', 'year'], ['ASC', 'DESC']);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+void main() async {
+    final client = Client();
+    final database = Database(client);
+    try {
+        final docs = await database.listDocuments(
+            collectionId: 'movies',
+            orderAttributes: ['title', 'year'],
+            orderTypes: ['ASC', 'DESC']
+        );
+        print(docs.toMap());
+    } on AppwriteException catch(e) {
+        print(e);
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import io.appwrite.Client
+import io.appwrite.services.Database
+import io.appwrite.Query
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val client = Client(applicationContext)
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+            .setProject("5df5acd0d48c2") // Your project ID
+
+        val database = Database(client)
+
+        GlobalScope.launch {
+            val response = database.listDocuments(
+                collectionId = "movies",
+                orderAttributes = listOf("title", "year"),
+                orderTypes = listOf("ASC", "DESC")
+            )
+            val json = response.body?.string()
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+func main() async throws {
+    let client = Client()
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+      .setProject("my_project") // Your project ID
+
+    let database = Database(client)
+    let list = try await database.listDocuments(
+        collectionId: "movies",
+        orderAttributes: ["title", "year"],
+        orderTypes: ["ASC", "DESC"]
+    )
+    print(list.toMap())
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>In the example above, the movies returned will be first sorted by title in ascending order, then sorted by year in descending order.</p>
 
 <h3><a href="/docs/database#pagination" id="pagination">Pagination</a></h3>
 <p>Appwrite has full support for pagination to better optimize and scale up your applications built on Appwrite. Detailed documentation on pagination and how to implement it can be found on the <a href="/docs/pagination">pagination guide.</a></p>
