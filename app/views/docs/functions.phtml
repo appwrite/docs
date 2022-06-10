@@ -323,7 +323,7 @@ import java.util.Random;
 
 public RuntimeResponse main(RuntimeRequest req, RuntimeResponse res) throws Exception {
 
-    String payload = (req.getPayload() == null || req.getPayload().isEmpty() || req.getPayload().equals("{}"))
+    String payload = (req.getPayload().isEmpty())
                      ? "No payload provided. Add custom data when executing function."
                      : req.getPayload();
 
