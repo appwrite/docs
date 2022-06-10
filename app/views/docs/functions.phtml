@@ -421,7 +421,7 @@ public RuntimeResponse main(RuntimeRequest req, RuntimeResponse res) throws Exce
     --functionId=6012cc93d5a7b \
     --activate=true \
     --entrypoint="index.js" \
-    --code="/myrepo/myfunction"</code></pre>
+    --code="."</code></pre>
         </div>
     </li>
     <li>
@@ -432,7 +432,7 @@ public RuntimeResponse main(RuntimeRequest req, RuntimeResponse res) throws Exce
     --functionId=6012cc93d5a7b ^
     --activate=true ^
     --entrypoint="index.js" ^
-    --code="/myrepo/myfunction"</code></pre>
+    --code="."</code></pre>
         </div>
     </li>
     <li>
@@ -443,7 +443,7 @@ public RuntimeResponse main(RuntimeRequest req, RuntimeResponse res) throws Exce
     --functionId=6012cc93d5a7b ,
     --activate=true ,
     --entrypoint="index.js" ,
-    --code="/myrepo/myfunction"</code></pre>
+    --code="."</code></pre>
         </div>
     </li>
 </ul>
@@ -616,6 +616,8 @@ class MainActivity : AppCompatActivity() {
 <p>Appwrite allows your project's end-users to execute Cloud Functions using client API or your client SDK. Execution is permitted to any user who has been granted the "execute" permission in your Cloud Functions settings page. The execution permission can accept any of the typical Appwrite <a href="/docs/permissions">permission types</a>.</p>
 
 <p>When triggering a Cloud Function execution from the client, your users will be limited to a specific amount of execution per minute to make sure your Appwrite server is not being abused. The default limit is 60 calls per 1 minute. You can edit this limit using the server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
+
+<p>The response size of a Cloud Function is limited to 1MB. Reponses larger than 1MB should be handled using Appwrite's Database or Storage service.</p>
 
 <h2><a href="/docs/functions#ignoreFiles" id="ignoreFiles">Ignore Files</a></h2>
 
@@ -814,4 +816,4 @@ $image = new View(__DIR__.'/../general/image.phtml');
 
 <h2><a href="/docs/functions#demosExamples" id="demosExamples">Demos & Examples</a></h2>
 
-<p>There are many Cloud Function demos and examples created by the Appwrite team and community in multiple coding languages. These examples are available at our <a href="https://github.com/appwrite/demos-for-functions" target="_blank" rel="noopener">demos repository</a> on GitHub. You can also submit your examples by submitting a <a href="https://github.com/appwrite/demos-for-functions/pulls" target="_blank" rel="noopener">pull-request</a>.</p>
+<p>There are many Cloud Function demos and examples created by the Appwrite team and community in multiple coding languages. These examples are available at our <a href="https://github.com/open-runtimes/examples" target="_blank" rel="noopener">examples repository</a> on GitHub. You can also submit your examples by submitting a <a href="https://github.com/open-runtimes/examples/pulls" target="_blank" rel="noopener">pull-request</a>.</p>
