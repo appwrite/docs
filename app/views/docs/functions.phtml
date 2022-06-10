@@ -265,7 +265,7 @@ Future &lt;void&gt; start(final req, final res) async {
                   ? req.Env["SECRET_KEY"]
                   : "SECRET_KEY environment variable not found. You can set it in Function settings.";
 
-  var randomNumber = new Random().Next();
+  var randomNumber = new Random().NextDouble();
 
   var trigger = req.Env["APPWRITE_FUNCTION_TRIGGER"];
 
@@ -296,7 +296,7 @@ fun main(req: RuntimeRequest, res: RuntimeResponse): RuntimeResponse {
 
     val secretKey = req.env["SECRET_KEY"] ?: "SECRET_KEY environment variable not found. You can set it in Function settings."
     
-    val randomNumber = Random.nextInt(0, 30)
+    val randomNumber = Random.nextDouble(0.0, 1.0)
 
     val trigger = req.env["APPWRITE_FUNCTION_TRIGGER"]    
 
@@ -333,7 +333,7 @@ public RuntimeResponse main(RuntimeRequest req, RuntimeResponse res) throws Exce
                        ? env.get("SECRET_KEY")
                        : "SECRET_KEY environment variable not found. You can set it in Function settings.";
 
-    int randomNumber = new Random().nextInt();
+    double randomNumber = Math.random();
 
     String trigger = env.get("APPWRITE_FUNCTION_TRIGGER");
 
