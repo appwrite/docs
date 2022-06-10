@@ -292,7 +292,7 @@ Future &lt;void&gt; start(final req, final res) async {
 @Throws(Exception::class)
 fun main(req: RuntimeRequest, res: RuntimeResponse): RuntimeResponse {
 
-    val payload = if (req.payload.isEmpty() || req.payload == "{}") "No payload provided. Add custom data when executing function." else req.payload
+    val payload = if (req.payload.isEmpty()) "No payload provided. Add custom data when executing function." else req.payload
 
     val secretKey = req.env["SECRET_KEY"] ?: "SECRET_KEY environment variable not found. You can set it in Function settings."
     
