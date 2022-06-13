@@ -350,6 +350,39 @@ public RuntimeResponse main(RuntimeRequest req, RuntimeResponse res) throws Exce
         <p>Include a <b>deps.gradle</b> file with your function- Appwrite handles the rest!</p>
         </div>
     </li>
+    <li>
+        <h3>C++</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
+            <pre class="line-numbers"><code class="prism language-cpp" data-prism>#include <iostream>
+#include <string>
+
+static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
+
+    std::string payload = req.payload.empty() ? 
+                          "No payload provided. Add custom data when executing function." : 
+                          req.payload;
+
+    std::string secretKey = req.env.get("SECRET_KEY", "SECRET_KEY environment variable not found. You can set it in Function settings.").asString();
+
+    double randomNumber = ((double) rand() / (RAND_MAX));
+
+    std::string trigger = req.env["APPWRITE_FUNCTION_TRIGGER"].asString();
+
+    Json::Value response;
+    response["message"] = "Hello from Appwrite!";
+    response["payload"] = payload;
+    response["secretKey"] = secretKey;
+    response["randomNumber"] = randomNumber;
+    response["trigger"] = trigger;
+    
+    return res.json(response);
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>CMakeLists.txt</b> file with your function- Appwrite handles the rest!</p>
+        </div>
+    </li>
 </ul>
 
 
