@@ -63,7 +63,7 @@ $runtimes = $this->getParam('runtimes', []);
 };</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>package.json</b> along with your function, and Appwrite handles the rest! The best practice is to make sure <b>node_modules</b> folder is <b>not</b> part of your tarball.</p>
+        <p>Include a <b>package.json</b> file along with your function, and Appwrite handles the rest! The best practice is to make sure that the <b>node_modules</b> folder is <b>not</b> a part of your tarball.</p>
         </div>
     </li>
     <li>
@@ -95,7 +95,7 @@ return function ($req, $res) {
 };</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>composer.json</b> file in your function, make sure to require autoload.php from vendor folder, and Appwrite will handle the rest!. The best practice is to make sure <b>vendor</b> directory is <b>not</b> part of your tarball. </p>
+        <p>Include a <b>composer.json</b> file along with your function, make sure to require autoload.php from vendor folder, and Appwrite handles the rest!. The best practice is to make sure that the <b>vendor</b> directory is <b>not</b> a part of your tarball. </p>
     </div>
     </li>
     <li>
@@ -125,7 +125,7 @@ def main(req, res):
   })</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>requirements.txt</b> file in your function, Appwrite will handle the rest!</p>
+        <p>Include a <b>requirements.txt</b> file with your function- Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
@@ -155,7 +155,7 @@ def main(req, res):
 end</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>Gemfile</b> in your function, Appwrite handles the rest!</p>
+        <p>Include a <b>Gemfile</b> with your function- Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
@@ -185,7 +185,7 @@ end</code></pre>
 };</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>No special steps are required for Deno, Appwrite handles everything!</p>
+        <p>No special steps are required for Deno- Appwrite handles everything!</p>
         </div>
     </li>
     <li>
@@ -218,7 +218,7 @@ Future &lt;void&gt; start(final req, final res) async {
 }</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>pubspec.yaml</b> file with your function, Appwrite handles the rest!</p>
+        <p>Include a <b>pubspec.yaml</b> file with your function- Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
@@ -248,7 +248,106 @@ Future &lt;void&gt; start(final req, final res) async {
         </div>
         <p>With Swift, your <b>entrypoint</b> can be empty since Appwrite automatically infers it from the location of your <b>main()</b> function. Just ensure that your cloud function has a <b>single declaration of main()</b> across your source files.</p>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>Package.swift</b> file with your function, Appwrite handles the rest!</p>
+        <p>Include a <b>Package.swift</b> file with your function- Appwrite handles the rest!</p>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>public async Task<RuntimeResponse> Main(RuntimeRequest req, RuntimeResponse res)
+{
+  var payload = (string.IsNullOrEmpty(req.Payload))
+                ? "No payload provided. Add custom data when executing function."
+                : req.Payload; 
+
+  var secretKey = req.Env.ContainsKey("SECRET_KEY")
+                  ? req.Env["SECRET_KEY"]
+                  : "SECRET_KEY environment variable not found. You can set it in Function settings.";
+
+  var randomNumber = new Random().NextDouble();
+
+  var trigger = req.Env["APPWRITE_FUNCTION_TRIGGER"];
+
+  return res.Json(new() 
+  {
+    { "message", "Hello from Appwrite!" },
+    { "payload", payload },
+    { "secretKey", secretKey },
+    { "randomNumber", randomNumber },
+    { "trigger", trigger },
+  });
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>Function.csproj</b> file with your function- Appwrite handles the rest!</p>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import kotlin.random.Random
+
+@Throws(Exception::class)
+fun main(req: RuntimeRequest, res: RuntimeResponse): RuntimeResponse {
+
+    val payload = if (req.payload.isEmpty()) "No payload provided. Add custom data when executing function." else req.payload
+
+    val secretKey = req.env["SECRET_KEY"] ?: "SECRET_KEY environment variable not found. You can set it in Function settings."
+    
+    val randomNumber = Random.nextDouble(0.0, 1.0)
+
+    val trigger = req.env["APPWRITE_FUNCTION_TRIGGER"]    
+
+    return res.json(mapOf(
+        "message" to "Hello from Appwrite!",
+        "payload" to payload,
+        "secretKey" to secretKey,
+        "randomNumber" to randomNumber,
+        "trigger" to trigger
+    ))
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>deps.gradle</b> file with your function- Appwrite handles the rest!</p>
+        </div>
+    </li>
+    <li>
+        <h3>Java</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+            <pre class="line-numbers"><code class="prism language-java" data-prism>import java.util.Map;
+import java.util.HashMap;
+
+public RuntimeResponse main(RuntimeRequest req, RuntimeResponse res) throws Exception {
+
+    String payload = (req.getPayload().isEmpty())
+                     ? "No payload provided. Add custom data when executing function."
+                     : req.getPayload();
+
+    Map<String, String> env = req.getEnv();
+
+    String secretKey = env.containsKey("SECRET_KEY")
+                       ? env.get("SECRET_KEY")
+                       : "SECRET_KEY environment variable not found. You can set it in Function settings.";
+
+    double randomNumber = Math.random();
+
+    String trigger = env.get("APPWRITE_FUNCTION_TRIGGER");
+
+    Map<String, Object> response = new HashMap();
+        response.put("message", "Hello from Appwrite!");
+        response.put("payload", payload);
+        response.put("secretKey", secretKey);
+        response.put("randomNumber", randomNumber);
+        response.put("trigger", trigger);
+
+    return res.json(response);
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>deps.gradle</b> file with your function- Appwrite handles the rest!</p>
         </div>
     </li>
 </ul>
