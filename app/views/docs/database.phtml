@@ -454,7 +454,7 @@ func main() async throws {
 </table>
 
 <h3><a href="/docs/database#pagination" id="ordering">Ordering Results</a></h3>
-<p>When querying using the <a href="/docs/server/database#databaseListDocuments">listDocuments</a> endpoint, you can specify the order of the documents returned by providing the <b>orderAttributes</b> and <b>orderTypes</b> parameters.</p>
+<p>When querying using the <a href="/docs/server/database#databaseListDocuments">listDocuments</a> endpoint, you can specify the order of the documents returned by providing the <b>orderAttributes</b> and <b>orderTypes</b> parameters. The results will be sorted by <b>$id</b> (create date) in ascending order when no order parameters are provided.</p>
 
 <p>The parameter <b>orderAttributes</b> takes a string array of attributes IDs. The <b>orderTypes</b> parameter takes a string array equal in length to <b>orderAttributes</b> that indicate if each attribute should be sorted in ascending or descending order. Ascending and descending is denoted as <span class="tag">"ASC"</span> and <span class="tag">"DESC"</span> respectively.</p>
 
