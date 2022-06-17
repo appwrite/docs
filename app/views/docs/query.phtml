@@ -1,0 +1,304 @@
+<p>
+Many Appwrite endpoints allows you to filter returned results through queries. Appwrite's SDKs include a <span class="tag">Query</span> class that helps construct query strings. This page documents all supported operations for Client SDKs. Server SDKs will behave similarly. 
+</p>
+
+<h2><a href="/docs/query#equal" id="equal">Equal</a></h2>
+<p>
+Returns results where the specified <b>attribute</b> is exactly equal to <b>value</b>.
+</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
+const queryString = Query.equal(attribute, value);
+console.log(queryString);
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.equal(attribute, value);
+print(queryString);
+        </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.equal(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+let queryString = Query.equal(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="/docs/query#not-equal" id="not-equal">Not Equal</a></h2>
+<p>
+Returns results where the specified <b>attribute</b> is not equal to <b>value</b>.
+</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
+const queryString = Query.notEqual(attribute, value);
+console.log(queryString);
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.notEqual(attribute, value);
+print(queryString);
+        </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.notEqual(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+let queryString = Query.notEqual(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="/docs/query#less-than" id="less-than">Less Than</a></h2>
+<p>
+Returns results where the specified <b>attribute</b> is less than <b>value</b>. Can be applied to strings where comparison is based on alphabetical order.
+</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
+const queryString = Query.lesser(attribute, value);
+console.log(queryString);
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.lesser(attribute, value);
+print(queryString);
+        </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.lesser(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+let queryString = Query.lesser(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="/docs/query#less-than-equal" id="less-than-equal">Less Than or Equal To</a></h2>
+<p>
+Returns results where the specified <b>attribute</b> is less than or equal to <b>value</b>. Can be applied to strings where comparison is based on alphabetical order.
+</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
+const queryString = Query.lesserEqual(attribute, value);
+console.log(queryString);
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.lesserEqual(attribute, value);
+print(queryString);
+        </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.lesserEqual(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+let queryString = Query.lesserEqual(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="/docs/query#greater-than" id="greater-than">Greater Than</a></h2>
+<p>
+Returns results where the specified <b>attribute</b> is greater than <b>value</b>. Can be applied to strings where comparison is based on alphabetical order.
+</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
+const queryString = Query.greaterEqual(attribute, value);
+console.log(queryString);
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.greaterEqual(attribute, value);
+print(queryString);
+        </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.greaterEqual(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+let queryString = Query.greaterEqual(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="/docs/query#greater-than" id="greater-than">Greater Than or Equal To</a></h2>
+<p>
+Returns results where the specified <b>attribute</b> is greater than or equal to <b>value</b>. Can be applied to strings where comparison is based on alphabetical order.
+</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
+const queryString = Query.greaterEqual(attribute, value);
+console.log(queryString);
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.greaterEqual(attribute, value);
+print(queryString);
+        </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.greaterEqual(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+let queryString = Query.greaterEqual(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="/docs/query#search" id="search">Search</a></h2>
+<p>
+Search returns results where the search term <b>value</b> matches or partially matches the string stored in <b>attribute</b>. For example, the search term "awesome" would match with the stored string "developers are awesome!". 
+</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
+const queryString = Query.search(attribute, value);
+console.log(queryString);
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Flutter SDK">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.search(attribute, value);
+print(queryString);
+        </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import 'package:appwrite/appwrite.dart';
+String queryString = Query.search(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>iOS</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+let queryString = Query.search(attribute, value)
+print(queryString)
+            </code></pre>
+        </div>
+    </li>
+</ul>
