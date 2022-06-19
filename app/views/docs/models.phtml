@@ -24,12 +24,12 @@ $example = function ($model, $models) use (&$example)
         $isXOf = false;
         $xIfKey = null;
 
-        if(isset($rule['items']['x-anyOf'])) {
+        if(isset($property['items']['x-anyOf'])) {
             $isXOf = true;
             $xIfKey = 'x-anyOf';
         }
 
-        if(isset($rule['items']['x-oneOf'])) {
+        if(isset($property['items']['x-oneOf'])) {
             $isXOf = true;
             $xIfKey = 'x-oneOf';
         }
