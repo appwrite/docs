@@ -110,9 +110,9 @@ let client = Client()
   .setSelfSigned(status: true) // For self signed certificates, only use for development</code></pre>
 </div>
 
-<p>If you're using a physical device instead of a simulator, ensure that you can access your Appwrite instance before sending API calls.</p>
+<p>Before sending any API calls to your new Appwrite project, make sure your device or iOS emulator has network access to your Appwrite project's hostname or IP address.</p>
 
-<p>When trying to connect to Appwrite from a physical device, localhost is the hostname for the device and not your local Appwrite instance. You should replace localhost with your private IP as the Appwrite endpoint's hostname. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite API.</p>
+<p>When connecting to a locally hosted Appwrite project from an emulator or a mobile device, you should use the private IP of the device running your Appwrite project as the hostname of the endpoint instead of localhost. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite server.</p>
 
 <h2><a href="/docs/getting-started-for-apple#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
