@@ -17,32 +17,38 @@ $example = function ($model, $models) use (&$example)
 
     foreach($properties as $key => $property) {
         $value = $property['x-example'] ?? null;
+        $isArray = $property['array'] ?? false;
         $type = $property['type'] ?? null;
         $child = str_replace('#/definitions/', '', ($property['items']['$ref'] ?? ''));
 
         // We consider anyOf and oneOf the same in docs views
         $isXOf = false;
-        $xIfKey = null;
+        $xOfKey = null;
 
         if(isset($property['items']['x-anyOf'])) {
             $isXOf = true;
-            $xIfKey = 'x-anyOf';
+            $xOfKey = 'x-anyOf';
         }
 
         if(isset($property['items']['x-oneOf'])) {
             $isXOf = true;
-            $xIfKey = 'x-oneOf';
+            $xOfKey = 'x-oneOf';
         }
-
 
         if(!empty($child) && \array_key_exists($child, $models)) {
             $output[$key] = $example($models[$child], $models);
         }
         else if($isXOf) {
-            $output[$key] = \array_map(function($anyOfOption) use($example, $models) {
-                $anyofChild = str_replace('#/definitions/', '', ($anyOfOption['$ref'] ?? ''));
-                return $example($models[$anyofChild], $models);
-            }, $property['items'][$xIfKey]);
+            if($isArray) {
+                $output[$key] = \array_map(function($anyOfOption) use($example, $models) {
+                    $anyofChild = str_replace('#/definitions/', '', ($anyOfOption['$ref'] ?? ''));
+                    return $example($models[$anyofChild], $models);
+                }, $property['items'][$xOfKey]);
+            } else {
+                $model = $property['items'][$xOfKey][0];
+                $anyofChild = str_replace('#/definitions/', '', ($model['$ref'] ?? ''));
+                $output[$key] = $example($models[$anyofChild], $models);
+            }
         }
         else {
             $output[$key] = $value;
@@ -78,16 +84,16 @@ $example = function ($model, $models) use (&$example)
 
         // We consider anyOf and oneOf the same in docs views
         $isXOf = false;
-        $xIfKey = null;
+        $xOfKey = null;
 
         if(isset($rule['items']['x-anyOf'])) {
             $isXOf = true;
-            $xIfKey = 'x-anyOf';
+            $xOfKey = 'x-anyOf';
         }
 
         if(isset($rule['items']['x-oneOf'])) {
             $isXOf = true;
-            $xIfKey = 'x-oneOf';
+            $xOfKey = 'x-oneOf';
         }
         ?>
         <tr>
@@ -110,7 +116,7 @@ $example = function ($model, $models) use (&$example)
                     echo \implode('<br />', \array_map(function($xOfRule) {
                         $xOfRule = (isset($xOfRule['$ref'])) ? str_replace('#/definitions/', '', $xOfRule['$ref']) : '';
                         return '<a href="/docs/models/' . $this->escape($xOfRule) . '">' . $this->escape($xOfRule) . '</a>';
-                    }, $rule['items'][$xIfKey]));
+                    }, $rule['items'][$xOfKey]));
                     ?>
                 <?php else: ?>
                     <?php if($array): ?>
