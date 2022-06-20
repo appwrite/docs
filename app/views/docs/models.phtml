@@ -11,7 +11,7 @@ $example = function ($model, $models) use (&$example)
     $output = [];
     $properties = $model['properties'] ?? [];
 
-    if(empty($properties) && $model['additionalProperties']) {
+    if(empty($properties)) {
         return new \stdClass();
     }
 
