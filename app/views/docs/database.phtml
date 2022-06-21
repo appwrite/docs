@@ -1,8 +1,22 @@
 <p>
     The Database Service allows you to store your application and users' data and fetch it using different supported queries.
-    Using your Appwrite Database, you can organize your data into collections and documents using the Appwrite simple REST API. You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your collections and documents.
+    Using your Appwrite Database, you can create multiple databases, organize your data into collections and documents using the Appwrite REST API. You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your collections and documents.
     In addition, the Database Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance,
     as well as a flexible permissions mechanism to allow you to easily segment data between different users, teams, and roles.
+</p>
+
+<h2><a href="/docs/database#database" id="database">Create Your Database</a></h2>
+<p>
+    Appwrite's Database Service allows you to create multiple databases. Each database can contain many collections and can be backed by a different database adaptor in future versions.
+</p>
+
+<p>
+    You can create your database by adding it to your Appwrite project's dashboard. Access your Database settings from your project's left-hand navigation panel.
+    To create a new database, click the click the <b>Add Database</b> button. Name your new database and optionally provide a custom database ID instead of a randomly generated one.
+</p>
+
+<p>
+    You can also create databases with the <a href="/docs/command-line">Appwrite CLI</a> or the <a href="/docs/getting-started-for-server">Appwrite Server SDKs</a>.
 </p>
 
 <h2><a href="/docs/database#collection" id="collection">Create Your Collections</a></h2>
@@ -12,11 +26,10 @@
 </p>
 
 <p>
-    You can create your collection by adding it to your Appwrite project's dashboard. Access your Database settings from your project's left navigation panel.
-    Click the <b>Add Collection</b> button and choose your collection's name. For convenience, you can also set a custom ID for your collection instead of an auto-generated ID.
+    To add a collection to a database, first navigate to the desired database's dashboard. In the database's dashboard, click the <b>Add Collection</b> button and choose your collection's name. For convenience, you can also set a custom ID for your collection instead of an auto-generated ID.
 </p>
 
-<p>You can manage your collections programmatically using one of Appwrite's Server SDKs. You can manage documents with both the Server and Client SDKs.</p>
+<p>You can manage your collections programmatically using the <a href="/docs/command-line">Appwrite CLI</a> or one of <a href="/docs/getting-started-for-server">Appwrite Server SDKs</a>. You can manage documents with both the Server and Client SDKs.</p>
 
 <h3><a href="/docs/database#permissions" id="permissions">Permissions</a></h3>
 <p>
@@ -106,7 +119,7 @@
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
 
 const sdk = new Appwrite();
-const promise = sdk.database.createDocument('[COLLECTION_ID]', 'unique()', {});
+const promise = sdk.database.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', 'unique()', {});
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -124,7 +137,7 @@ void main() async {
     final client = Client();
     final database = Database(client);
     try {
-        final doc = database.createDocument(collectionId: '[COLLECTION_ID]', documentId: 'unique()', data: {});
+        final doc = database.createDocument(databaseId: '[DATABASE_ID]', collectionId: '[COLLECTION_ID]', documentId: 'unique()', data: {});
         print(doc.toMap());
     } on AppwriteException catch(e) {
         print(e);
@@ -156,6 +169,7 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             val response = database.createDocument(
+                databaseId = "[DATABASE_ID]", 
                 collectionId = "[COLLECTION_ID]",
                 documentId = "unique()",
                 data = mapOf( "a" to "b" ),
@@ -178,6 +192,7 @@ func main() async throws {
 
     let database = Database(client)
     let document = try await database.createDocument(
+        databaseId: "[DATABASE_ID]"", 
         collectionId: "[COLLECTION_ID]",
         documentId: "unique()",
         data: [:]
@@ -204,7 +219,7 @@ func main() async throws {
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
 
-sdk.database.listDocuments('movies', [
+sdk.database.listDocuments('[DATABASE_ID]', 'movies', [
     Query.equal('title', 'Avatar')
 ]);
 </code></pre>
@@ -220,6 +235,7 @@ void main() async {
     final database = Database(client);
     try {
         final docs = await database.listDocuments(
+            databaseId: '[DATABASE_ID]', 
             collectionId: 'movies',
             queries: [Query.equal('title', 'Avatar')]);
         print(docs.toMap());
@@ -254,6 +270,7 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             val response = database.listDocuments(
+                databaseId = "[DATABASE_ID]",
                 collectionId = "[COLLECTION_ID]",
                 queries = [Query.equal('title', 'Avatar')],
             )
@@ -275,6 +292,7 @@ func main() async throws{
 
     let database = Database(client)
     let list = try await database.listDocuments(
+        databaseId: "[DATABASE_ID]",
         collectionId: "[COLLECTION_ID]",
         queries: [Query.equal('title', 'Avatar')]
     )
@@ -329,7 +347,7 @@ func main() async throws{
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>sdk.database.listDocuments('movies', [
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>sdk.database.listDocuments('[DATABASE_ID]', 'movies', [
             Query.equal('title', ['Avatar', 'Lord of the Rings']),
             Query.greater('year', 1999)
         ]);
@@ -346,6 +364,7 @@ void main() async {
     final database = Database(client);
     try {
         final docs = await database.listDocuments(
+            databaseId: '[DATABASE_ID]',
             collectionId: 'movies',
             queries: [
                 Query.equal('title', ['Avatar', 'Lord of the Rings']),
@@ -382,6 +401,7 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             val response = database.listDocuments(
+                databaseId: "[DATABASE_ID]",
                 collectionId = "[COLLECTION_ID]",
                 queries = [
                     Query.equal('title', ['Avatar', 'Lord of the Rings']),
@@ -406,6 +426,7 @@ func main() async throws {
 
     let database = Database(client)
     let list = try await database.listDocuments(
+        databaseId: "[DATABASE_ID]",
         collectionId: "[COLLECTION_ID]",
         queries: [
             Query.equal('title', ['Avatar', 'Lord of the Rings']),
