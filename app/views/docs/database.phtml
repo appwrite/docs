@@ -464,14 +464,14 @@ func main() async throws {
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>let promise = appwrite.database.listDocuments(
-    'movies', 
-    [], 
-    25, 
-    0, 
-    '', 
-    'after', 
-    ['title'], 
-    ['ASC']
+    'movies', // collectionId
+    [], // queries
+    25, // limit
+    0, // offset
+    '', // cursor
+    'after', // cursorDirection
+    ['title'], // orderAttributes
+    ['ASC'] // orderTypes
 );</code></pre>
         </div>
     </li>
@@ -559,14 +559,14 @@ func main() async throws {
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>let promise = appwrite.database.listDocuments(
-    'movies', 
-    [], 
-    25, 
-    0, 
-    '', 
-    'after', 
-    ['title', 'year'], 
-    ['ASC', 'DESC']
+    'movies', // collectionId
+    [], // query
+    25, // limit
+    0, // offset
+    '', // cursor
+    'after', // cursorDirection
+    ['title', 'year'], // orderAttributes
+    ['ASC', 'DESC'] // orderTypes	
 );</code></pre>
         </div>
     </li>
