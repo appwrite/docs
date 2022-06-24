@@ -11,25 +11,44 @@ $example = function ($model, $models) use (&$example)
     $output = [];
     $properties = $model['properties'] ?? [];
 
-    if(empty($properties) && $model['additionalProperties']) {
+    if(empty($properties)) {
         return new \stdClass();
     }
 
     foreach($properties as $key => $property) {
         $value = $property['x-example'] ?? null;
+        $isArray = $property['array'] ?? false;
         $type = $property['type'] ?? null;
         $child = str_replace('#/definitions/', '', ($property['items']['$ref'] ?? ''));
-        $isAnyOf = $property['type'] === 'array' && isset($property['items']['x-anyOf']);
 
+        // We consider anyOf and oneOf the same in docs views
+        $isXOf = false;
+        $xOfKey = null;
+
+        if(isset($property['items']['x-anyOf'])) {
+            $isXOf = true;
+            $xOfKey = 'x-anyOf';
+        }
+
+        if(isset($property['items']['x-oneOf'])) {
+            $isXOf = true;
+            $xOfKey = 'x-oneOf';
+        }
 
         if(!empty($child) && \array_key_exists($child, $models)) {
             $output[$key] = $example($models[$child], $models);
         }
-        else if($isAnyOf) {
-            $output[$key] = \array_map(function($anyOfOption) use($example, $models) {
-                $anyofChild = str_replace('#/definitions/', '', ($anyOfOption['$ref'] ?? ''));
-                return $example($models[$anyofChild], $models);
-            }, $property['items']['x-anyOf']);
+        else if($isXOf) {
+            if($isArray) {
+                $output[$key] = \array_map(function($anyOfOption) use($example, $models) {
+                    $anyofChild = str_replace('#/definitions/', '', ($anyOfOption['$ref'] ?? ''));
+                    return $example($models[$anyofChild], $models);
+                }, $property['items'][$xOfKey]);
+            } else {
+                $model = $property['items'][$xOfKey][0];
+                $anyofChild = str_replace('#/definitions/', '', ($model['$ref'] ?? ''));
+                $output[$key] = $example($models[$anyofChild], $models);
+            }
         }
         else {
             $output[$key] = $value;
@@ -63,7 +82,19 @@ $example = function ($model, $models) use (&$example)
         $arrayType = (isset($rule['items']['type'])) ? $rule['items']['type'] : '';
         $ref = (isset($rule['items']['$ref'])) ? str_replace('#/definitions/', '', $rule['items']['$ref']) : '';
 
-        $isAnyOf = $rule['type'] === 'array' && isset($rule['items']['x-anyOf']);
+        // We consider anyOf and oneOf the same in docs views
+        $isXOf = false;
+        $xOfKey = null;
+
+        if(isset($rule['items']['x-anyOf'])) {
+            $isXOf = true;
+            $xOfKey = 'x-anyOf';
+        }
+
+        if(isset($rule['items']['x-oneOf'])) {
+            $isXOf = true;
+            $xOfKey = 'x-oneOf';
+        }
         ?>
         <tr>
             <td data-title="Name: ">
@@ -74,13 +105,18 @@ $example = function ($model, $models) use (&$example)
                     <a href="/docs/models/<?php echo $this->escape($ref); ?>"><?php echo $this->escape($ref); ?><?php if($array): ?>[]<?php endif; ?></a>
 
 
-                <?php elseif($isAnyOf): ?>
-                    <span>array of</span><br />
+                <?php elseif($isXOf): ?>
                     <?php
-                    echo \implode('<br />', \array_map(function($anyOfRule) {
-                        $anyOfRule = (isset($anyOfRule['$ref'])) ? str_replace('#/definitions/', '', $anyOfRule['$ref']) : '';
-                        return '<a href="/docs/models/' . $this->escape($anyOfRule) . '">' . $this->escape($anyOfRule) . '</a>';
-                    }, $rule['items']['x-anyOf']));
+                        if($array) {
+                            echo '<span>array of</span><br />';
+                        }
+                    ?>
+                    
+                    <?php
+                    echo \implode('<br />', \array_map(function($xOfRule) {
+                        $xOfRule = (isset($xOfRule['$ref'])) ? str_replace('#/definitions/', '', $xOfRule['$ref']) : '';
+                        return '<a href="/docs/models/' . $this->escape($xOfRule) . '">' . $this->escape($xOfRule) . '</a>';
+                    }, $rule['items'][$xOfKey]));
                     ?>
                 <?php else: ?>
                     <?php if($array): ?>
