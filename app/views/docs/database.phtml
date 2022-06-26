@@ -210,7 +210,7 @@ func main() async throws {
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
-const database = new Databases(client, "[DATABASE_ID]");
+const database = new Databases(client, "[DATABASE_ID]"); // 'client' comes from setup
 
 database.listDocuments('movies', [
     Query.equal('title', 'Avatar')
@@ -338,7 +338,7 @@ func main() async throws{
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
-const database = new Databases(client, "[DATABASE_ID]");
+const database = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
 
 database.listDocuments('movies', [
     Query.equal('title', ['Avatar', 'Lord of the Rings']),

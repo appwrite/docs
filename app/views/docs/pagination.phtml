@@ -14,7 +14,7 @@
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases } from "appwrite";
-const database = new Databases(client, "[DATABASE_ID]");
+const database = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
                 
 // Page 1
 const page1 = await database.listDocuments('movies', [], 25, 0);
@@ -134,7 +134,7 @@ func main() async throws {
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases } from "appwrite";
-const database = new Databases(client, "[DATABASE_ID]");
+const database = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
 
 // Page 1
 const page1 = await database.listDocuments('movies', [], 25, 0);
