@@ -112,8 +112,7 @@ promise.then(function (response) {
     console.log(response); // Success
 }, function (error) {
     console.log(error); // Failure
-});
-            </code></pre>
+});</code></pre>
         </div>
     </li>
     <li>
@@ -129,8 +128,7 @@ void main() async {
     } on AppwriteException catch(e) {
         print(e);
     }
-}
-            </code></pre>
+}</code></pre>
         </div>
     </li>
     <li>
@@ -206,8 +204,7 @@ func main() async throws {
 
 sdk.database.listDocuments('movies', [
     Query.equal('title', 'Avatar')
-]);
-</code></pre>
+]);</code></pre>
         </div>
     </li>
     <li>
@@ -226,8 +223,7 @@ void main() async {
     } on AppwriteException catch(e) {
         print(e);
     }
-}
-</code></pre>
+}</code></pre>
         </div>
     </li>
     <li>
@@ -330,10 +326,9 @@ func main() async throws{
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>sdk.database.listDocuments('movies', [
-            Query.equal('title', ['Avatar', 'Lord of the Rings']),
-            Query.greater('year', 1999)
-        ]);
-        </code></pre>
+    Query.equal('title', ['Avatar', 'Lord of the Rings']),
+    Query.greater('year', 1999)
+]);</code></pre>
         </div>
     </li>
     <li>
