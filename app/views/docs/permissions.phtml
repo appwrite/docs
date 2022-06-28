@@ -112,13 +112,17 @@
 <p>In the following example, we are creating a document that can be read by everyone and only be edited, or deleted by a user with a UID <span class="tag">user:5c1f88b42259e</span>.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases } from "appwrite";
+        
+const client = new Client();
 
-sdk
-    .setProject('')
-;
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
-let promise = sdk.database.createDocument(
+const databases = new Databases(client, '[DATABASE_ID]');
+
+let promise = databases.createDocument(
     '[COLLECTION_ID]',
     {'actorName': 'Chris Evans', 'height': 183},
     ['role:all'], // Anyone can view this document
@@ -139,13 +143,17 @@ promise.then(function (response) {
 <p>In the following example, we are creating a document that can be read-only by members of <span class="tag">team:5c1f88b87435e</span> and can only be edited, or deleted by members of the same team that possesses the role <span class="tag">owner</span>.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases } from "appwrite";
+        
+const client = new Client();
 
-sdk
-    .setProject('')
-;
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
-let promise = sdk.database.createDocument(
+const databases = new Databases(client, '[DATABASE_ID]');
+
+let promise = databases.createDocument(
     '[COLLECTION_ID]',
     {'actorName': 'Chris Evans', 'height': 183},
     ['team:5c1f88b87435e'], // The user must be a team member to grant this permission

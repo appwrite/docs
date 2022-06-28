@@ -1,24 +1,37 @@
 <p>
-    The Database Service allows you to store your application and users' data and fetch it using different supported queries.
-    Using your Appwrite Database, you can organize your data into collections and documents using the Appwrite simple REST API. You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your collections and documents.
-    In addition, the Database Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance,
+    The Databases Service allows you to store your application and users' data and fetch it using different supported queries.
+    Using your Appwrite Databases, you can create multiple databases, organize your data into collections and documents using the Appwrite REST API. You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your collections and documents.
+    In addition, the Databases Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance,
     as well as a flexible permissions mechanism to allow you to easily segment data between different users, teams, and roles.
 </p>
 
-<h2><a href="/docs/database#collection" id="collection">Create Your Collections</a></h2>
+<h2><a href="/docs/databases#databases" id="databases">Create Your Databases</a></h2>
+<p>
+    Appwrite's Databases Service allows you to create multiple databases. Each database can contain many collections and can be backed by a different database adaptor in future versions.
+</p>
+
+<p>
+    You can create your database by adding it to your Appwrite project's dashboard. Access the Databases Service settings from your project's left-hand navigation panel.
+    To create a new database, click the click the <b>Add Database</b> button. Name your new database and optionally provide a custom database ID instead of a randomly generated one.
+</p>
+
+<p>
+    You can also create databases with the <a href="/docs/command-line">Appwrite CLI</a> or the <a href="/docs/getting-started-for-server">Appwrite Server SDKs</a>.
+</p>
+
+<h2><a href="/docs/databases#collection" id="collection">Create Your Collections</a></h2>
 <p>
     Appwrite uses collections as containers of documents.
     The terms collections and documents are used because the Appwrite JSON REST API resembles the API of a traditional NoSQL database. That said, internally, Appwrite can support both SQL and NoSQL database adapters like MariaDB, MySQL, or MongoDB. When working with an SQL adapter, Appwrite will treat your collections as tables and documents as rows on native SQL tables.
 </p>
 
 <p>
-    You can create your collection by adding it to your Appwrite project's dashboard. Access your Database settings from your project's left navigation panel.
-    Click the <b>Add Collection</b> button and choose your collection's name. For convenience, you can also set a custom ID for your collection instead of an auto-generated ID.
+    To add a collection to a database, first navigate to the desired database's dashboard. In the database's dashboard, click the <b>Add Collection</b> button and choose your collection's name. For convenience, you can also set a custom ID for your collection instead of an auto-generated ID.
 </p>
 
-<p>You can manage your collections programmatically using one of Appwrite's Server SDKs. You can manage documents with both the Server and Client SDKs.</p>
+<p>You can manage your collections programmatically using the <a href="/docs/command-line">Appwrite CLI</a> or one of <a href="/docs/getting-started-for-server">Appwrite Server SDKs</a>. You can manage documents with both the Server and Client SDKs.</p>
 
-<h3><a href="/docs/database#permissions" id="permissions">Permissions</a></h3>
+<h3><a href="/docs/databases#permissions" id="permissions">Permissions</a></h3>
 <p>
     Once you create your collection, you will reach your collection's settings page, where you can choose the permission model for your collection. There are two types of permissions models available, each one with different pros and cons designed to be flexible to best match your use case.
 </p>
@@ -40,7 +53,7 @@
 </div>
 
 
-<h2><a href="/docs/database#attributes" id="attributes">Create Attributes</a></h2>
+<h2><a href="/docs/databases#attributes" id="attributes">Create Attributes</a></h2>
 <p>
     Once you choose your permission model, navigate to your collection's <b>Attributes</b> tab. Attributes are used to define the structure of your documents and help the Appwrite API validate your users' input. Add your first attribute by clicking the <b>Add Attribute</b> button. You can choose between the following types:
 </p>
@@ -95,7 +108,7 @@
     Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. You are able to create a document while your attributes are still being processed, however you are not able to use the attributes on the documents until they are <span class="tag">available</span>
 </p>
 
-<h3><a href="/docs/database#create-documents" id="create-documents">Create Documents</a></h3>
+<h3><a href="/docs/databases#create-documents" id="create-documents">Create Documents</a></h3>
 <p>
     Navigate to the <b>Documents</b> tab of your collection and click the <b>Add Document</b> button, or add a document programmatically:
 </p>
@@ -103,10 +116,17 @@
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases } from "appwrite";
 
-const sdk = new Appwrite();
-const promise = sdk.database.createDocument('[COLLECTION_ID]', 'unique()', {});
+const client = new Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
+
+const databases = new Databases(client, '[DATABASE_ID]');
+
+const promise = databases.createDocument('[COLLECTION_ID]', 'unique()', {});
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -121,9 +141,9 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 void main() async {
     final client = Client();
-    final database = Database(client);
+    final databases = Databases(client, databaseId: '[DATABASE_ID]');
     try {
-        final doc = database.createDocument(collectionId: '[COLLECTION_ID]', documentId: 'unique()', data: {});
+        final doc = databases.createDocument(collectionId: '[COLLECTION_ID]', documentId: 'unique()', data: {});
         print(doc.toMap());
     } on AppwriteException catch(e) {
         print(e);
@@ -139,7 +159,7 @@ import android.os.Bundle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import io.appwrite.Client
-import io.appwrite.services.Database
+import io.appwrite.services.Databases
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -150,10 +170,10 @@ class MainActivity : AppCompatActivity() {
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
             .setProject("my_project") // Your project ID
 
-        val database = Database(client)
+        val databases = Databases(client, "[DATABASE_ID]")
 
         GlobalScope.launch {
-            val response = database.createDocument(
+            val response = databases.createDocument(
                 collectionId = "[COLLECTION_ID]",
                 documentId = "unique()",
                 data = mapOf( "a" to "b" ),
@@ -174,8 +194,8 @@ func main() async throws {
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
-    let database = Database(client)
-    let document = try await database.createDocument(
+    let databases = Databases(client, "[DATABASE_ID]")
+    let document = try await databases.createDocument(
         collectionId: "[COLLECTION_ID]",
         documentId: "unique()",
         data: [:]
@@ -187,22 +207,23 @@ func main() async throws {
 </ul>
 
 
-<h3><a href="/docs/database#querying-documents" id="querying-documents">Querying Documents</a></h3>
+<h3><a href="/docs/databases#querying-documents" id="querying-documents">Querying Documents</a></h3>
 
 <div class="notice margin-top-large margin-bottom-large">
     <h4>Indexes Required</h4>
-    <p>You can only query correctly indexed queries. You can easily add new indexes from both the Appwrite console or one of the <a href="/docs/sdks#server" target="_blank">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it on the <a href="/docs/database#indexes">Appwrite Indexes</a> section.</p>
+    <p>You can only query correctly indexed queries. You can easily add new indexes from both the Appwrite console or one of the <a href="/docs/sdks#server" target="_blank">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it on the <a href="/docs/databases#indexes">Appwrite Indexes</a> section.</p>
 </div>
 <p>
-    To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/database#databaseListDocuments">listDocuments</a> endpoint. The SDKs provide a <b>Query</b> class to make query building simpler:
+    To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/databases#databasesListDocuments">listDocuments</a> endpoint. The SDKs provide a <b>Query</b> class to make query building simpler:
 </p>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
+const databases = new Databases(client, "[DATABASE_ID]"); // 'client' comes from setup
 
-sdk.database.listDocuments('movies', [
+databases.listDocuments('movies', [
     Query.equal('title', 'Avatar')
 ]);</code></pre>
         </div>
@@ -214,9 +235,9 @@ sdk.database.listDocuments('movies', [
 
 void main() async {
     final client = Client();
-    final database = Database(client);
+    final databases = Databases(client, databaseId: '[DATABASE_ID]');
     try {
-        final docs = await database.listDocuments(
+        final docs = await databases.listDocuments(
             collectionId: 'movies',
             queries: [Query.equal('title', 'Avatar')]);
         print(docs.toMap());
@@ -234,7 +255,7 @@ import android.os.Bundle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import io.appwrite.Client
-import io.appwrite.services.Database
+import io.appwrite.services.Databases
 import io.appwrite.Query
 
 class MainActivity : AppCompatActivity() {
@@ -246,10 +267,10 @@ class MainActivity : AppCompatActivity() {
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
             .setProject("my_project") // Your project ID
 
-        val database = Database(client)
+        val databases = Databases(client, "[DATABASE_ID]")
 
         GlobalScope.launch {
-            val response = database.listDocuments(
+            val response = databases.listDocuments(
                 collectionId = "[COLLECTION_ID]",
                 queries = [Query.equal("title", "Avatar")],
             )
@@ -269,8 +290,8 @@ func main() async throws{
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
-    let database = Database(client)
-    let list = try await database.listDocuments(
+    let databases = Databases(client, "[DATABASE_ID]")
+    let list = try await databases.listDocuments(
         collectionId: "[COLLECTION_ID]",
         queries: [Query.equal("title", "Avatar")]
     )
@@ -325,7 +346,10 @@ func main() async throws{
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>sdk.database.listDocuments('movies', [
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
+const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+
+databases.listDocuments('movies', [
     Query.equal('title', ['Avatar', 'Lord of the Rings']),
     Query.greater('year', 1999)
 ]);</code></pre>
@@ -338,9 +362,9 @@ func main() async throws{
 
 void main() async {
     final client = Client();
-    final database = Database(client);
+    final databases = Databases(client, databaseId: '[DATABASE_ID]');
     try {
-        final docs = await database.listDocuments(
+        final docs = await databases.listDocuments(
             collectionId: 'movies',
             queries: [
                 Query.equal('title', ['Avatar', 'Lord of the Rings']),
@@ -361,7 +385,7 @@ import android.os.Bundle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import io.appwrite.Client
-import io.appwrite.services.Database
+import io.appwrite.services.Databases
 import io.appwrite.Query
 
 class MainActivity : AppCompatActivity() {
@@ -373,10 +397,10 @@ class MainActivity : AppCompatActivity() {
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
             .setProject("my_project") // Your project ID
 
-        val database = Database(client)
+        val databases = Databases(client, "[DATABASE_ID]")
 
         GlobalScope.launch {
-            val response = database.listDocuments(
+            val response = databases.listDocuments(
                 collectionId = "[COLLECTION_ID]",
                 queries = [
                     Query.equal("title", ["Avatar", "Lord of the Rings"]),
@@ -399,8 +423,8 @@ func main() async throws {
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
-    let database = Database(client)
-    let list = try await database.listDocuments(
+    let databases = Databases(client, "[DATABASE_ID]")
+    let list = try await databases.listDocuments(
         collectionId: "[COLLECTION_ID]",
         queries: [
             Query.equal("title", ["Avatar", "Lord of the Rings"]),
@@ -415,9 +439,9 @@ func main() async throws {
 
 <p>When performing a query against multiple attributes, a single index with all queries attributes is required. In the example above, a single index with <b>both</b> <span class="tag">title</span> and <span class="tag">year</span> is queried.</p>
 
-<h2><a href="/docs/database#indexes" id="indexes">Indexes</a></h2>
+<h2><a href="/docs/databases#indexes" id="indexes">Indexes</a></h2>
 <p>
-    Indexes are used by databases to quickly locate data without having to search through every document for results.
+    Indexes are used by Databases to quickly locate data without having to search through every document for results.
     To ensure the best performance, Appwrite requires an index for every query.
     You can create an index by navigating to the <b>Indexes</b> tab of your collection or by using your favorite Server SDK. If you plan to query multiple attributes in a single query, you will need an index with <b>all</b> queried attributes.
 </p>
@@ -448,8 +472,8 @@ func main() async throws {
     </tbody>
 </table>
 
-<h3><a href="/docs/database#ordering" id="ordering">Ordering Results</a></h3>
-<p>When querying using the <a href="/docs/server/database#databaseListDocuments">listDocuments</a> endpoint, you can specify the order of the documents returned by providing the <b>orderAttributes</b> and <b>orderTypes</b> parameters. The results will be sorted by <b>$id</b> (create date) in ascending order when no order parameters are provided.</p>
+<h3><a href="/docs/databases#ordering" id="ordering">Ordering Results</a></h3>
+<p>When querying using the <a href="/docs/server/databases#databasesListDocuments">listDocuments</a> endpoint, you can specify the order of the documents returned by providing the <b>orderAttributes</b> and <b>orderTypes</b> parameters. The results will be sorted by <b>$id</b> (create date) in ascending order when no order parameters are provided.</p>
 
 <p>The parameter <b>orderAttributes</b> takes a string array of attributes IDs. The <b>orderTypes</b> parameter takes a string array equal in length to <b>orderAttributes</b> that indicate if each attribute should be sorted in ascending or descending order. Ascending and descending is denoted as <span class="tag">"ASC"</span> and <span class="tag">"DESC"</span> respectively.</p>
 
@@ -458,7 +482,9 @@ func main() async throws {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>let promise = appwrite.database.listDocuments(
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
+const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+databases.listDocuments(
     'movies', // collectionId
     [], // queries
     25, // limit
@@ -477,9 +503,9 @@ func main() async throws {
 
 void main() async {
     final client = Client();
-    final database = Database(client);
+    final databases = Databases(client, databaseId: "[DATABASE_ID]");
     try {
-        final docs = await database.listDocuments(
+        final docs = await databases.listDocuments(
             collectionId: 'movies',
             orderAttributes: ['title'],
             orderTypes: ['ASC']
@@ -499,7 +525,7 @@ import android.os.Bundle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import io.appwrite.Client
-import io.appwrite.services.Database
+import io.appwrite.services.Databases
 import io.appwrite.Query
 
 class MainActivity : AppCompatActivity() {
@@ -511,10 +537,10 @@ class MainActivity : AppCompatActivity() {
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
             .setProject("my_project") // Your project ID
 
-        val database = Database(client)
+        val databases = Databases(client, "[DATABASE_ID]")
 
         GlobalScope.launch {
-            val response = database.listDocuments(
+            val response = databases.listDocuments(
                 collectionId = "movies",
                 orderAttributes = listOf("title"),
                 orderTypes = listOf("ASC")
@@ -535,8 +561,8 @@ func main() async throws {
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
-    let database = Database(client)
-    let list = try await database.listDocuments(
+    let databases = Databases(client, "[DATABASE_ID]")
+    let list = try await databases.listDocuments(
         collectionId: "movies",
         orderAttributes: ["title"],
         orderTypes: ["ASC"]
@@ -553,7 +579,9 @@ func main() async throws {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>let promise = appwrite.database.listDocuments(
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
+const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+databases.listDocuments(
     'movies', // collectionId
     [], // query
     25, // limit
@@ -572,9 +600,9 @@ func main() async throws {
 
 void main() async {
     final client = Client();
-    final database = Database(client);
+    final databases = Databases(client, databaseId: "[DATABASE_ID]");
     try {
-        final docs = await database.listDocuments(
+        final docs = await databases.listDocuments(
             collectionId: 'movies',
             orderAttributes: ['title', 'year'],
             orderTypes: ['ASC', 'DESC']
@@ -594,7 +622,7 @@ import android.os.Bundle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import io.appwrite.Client
-import io.appwrite.services.Database
+import io.appwrite.services.Databases
 import io.appwrite.Query
 
 class MainActivity : AppCompatActivity() {
@@ -606,10 +634,10 @@ class MainActivity : AppCompatActivity() {
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
             .setProject("my_project") // Your project ID
 
-        val database = Database(client)
+        val databases = Databases(client, "[DATABASE_ID]")
 
         GlobalScope.launch {
-            val response = database.listDocuments(
+            val response = databases.listDocuments(
                 collectionId = "movies",
                 orderAttributes = listOf("title", "year"),
                 orderTypes = listOf("ASC", "DESC")
@@ -630,8 +658,8 @@ func main() async throws {
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
-    let database = Database(client)
-    let list = try await database.listDocuments(
+    let databases = Databases(client, "[DATABASE_ID]")
+    let list = try await databases.listDocuments(
         collectionId: "movies",
         orderAttributes: ["title", "year"],
         orderTypes: ["ASC", "DESC"]
@@ -644,5 +672,5 @@ func main() async throws {
 
 <p>In the example above, the movies returned will be first sorted by title in ascending order, then sorted by year in descending order.</p>
 
-<h3><a href="/docs/database#pagination" id="pagination">Pagination</a></h3>
+<h3><a href="/docs/databases#pagination" id="pagination">Pagination</a></h3>
 <p>Appwrite has full support for pagination to better optimize and scale up your applications built on Appwrite. Detailed documentation on pagination and how to implement it can be found on the <a href="/docs/pagination">pagination guide.</a></p>
