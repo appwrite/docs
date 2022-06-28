@@ -124,9 +124,9 @@ client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
-const database = new Databases(client, '[DATABASE_ID]');
+const databases = new Databases(client, '[DATABASE_ID]');
 
-const promise = database.createDocument('[COLLECTION_ID]', 'unique()', {});
+const promise = databases.createDocument('[COLLECTION_ID]', 'unique()', {});
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -142,9 +142,9 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 void main() async {
     final client = Client();
-    final databases = Databases(client);
+    final databases = Databases(client, databaseId: '[DATABASE_ID]');
     try {
-        final doc = databases.createDocument(databaseId: '[DATABASE_ID]', collectionId: '[COLLECTION_ID]', documentId: 'unique()', data: {});
+        final doc = databases.createDocument(collectionId: '[COLLECTION_ID]', documentId: 'unique()', data: {});
         print(doc.toMap());
     } on AppwriteException catch(e) {
         print(e);
@@ -172,11 +172,10 @@ class MainActivity : AppCompatActivity() {
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
             .setProject("my_project") // Your project ID
 
-        val databases = Databases(client)
+        val databases = Databases(client, "[DATABASE_ID]")
 
         GlobalScope.launch {
             val response = databases.createDocument(
-                databaseId = "[DATABASE_ID]", 
                 collectionId = "[COLLECTION_ID]",
                 documentId = "unique()",
                 data = mapOf( "a" to "b" ),
@@ -197,9 +196,8 @@ func main() async throws {
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
-    let databases = Databases(client)
+    let databases = Databases(client, "[DATABASE_ID]")
     let document = try await databases.createDocument(
-        databaseId: "[DATABASE_ID]"", 
         collectionId: "[COLLECTION_ID]",
         documentId: "unique()",
         data: [:]
@@ -225,9 +223,9 @@ func main() async throws {
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
-const database = new Databases(client, "[DATABASE_ID]"); // 'client' comes from setup
+const databases = new Databases(client, "[DATABASE_ID]"); // 'client' comes from setup
 
-database.listDocuments('movies', [
+databases.listDocuments('movies', [
     Query.equal('title', 'Avatar')
 ]);
 </code></pre>
@@ -240,10 +238,9 @@ database.listDocuments('movies', [
 
 void main() async {
     final client = Client();
-    final databases = Databases(client);
+    final databases = Databases(client, databaseId: '[DATABASE_ID]');
     try {
         final docs = await databases.listDocuments(
-            databaseId: '[DATABASE_ID]', 
             collectionId: 'movies',
             queries: [Query.equal('title', 'Avatar')]);
         print(docs.toMap());
@@ -274,11 +271,10 @@ class MainActivity : AppCompatActivity() {
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
             .setProject("my_project") // Your project ID
 
-        val databases = Databases(client)
+        val databases = Databases(client, "[DATABASE_ID]")
 
         GlobalScope.launch {
             val response = databases.listDocuments(
-                databaseId = "[DATABASE_ID]",
                 collectionId = "[COLLECTION_ID]",
                 queries = [Query.equal("title", "Avatar")],
             )
@@ -298,9 +294,8 @@ func main() async throws{
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
-    let databases = Databases(client)
+    let databases = Databases(client, "[DATABASE_ID]")
     let list = try await databases.listDocuments(
-        databaseId: "[DATABASE_ID]",
         collectionId: "[COLLECTION_ID]",
         queries: [Query.equal("title", "Avatar")]
     )
@@ -356,9 +351,9 @@ func main() async throws{
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
-const database = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
 
-database.listDocuments('movies', [
+databases.listDocuments('movies', [
     Query.equal('title', ['Avatar', 'Lord of the Rings']),
     Query.greater('year', 1999)
 ]);
@@ -372,10 +367,9 @@ database.listDocuments('movies', [
 
 void main() async {
     final client = Client();
-    final databases = Databases(client);
+    final databases = Databases(client, databaseId: '[DATABASE_ID]');
     try {
         final docs = await databases.listDocuments(
-            databaseId: '[DATABASE_ID]',
             collectionId: 'movies',
             queries: [
                 Query.equal('title', ['Avatar', 'Lord of the Rings']),
@@ -408,11 +402,10 @@ class MainActivity : AppCompatActivity() {
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
             .setProject("my_project") // Your project ID
 
-        val databases = Databases(client)
+        val databases = Databases(client, "[DATABASE_ID]")
 
         GlobalScope.launch {
             val response = databases.listDocuments(
-                databaseId: "[DATABASE_ID]",
                 collectionId = "[COLLECTION_ID]",
                 queries = [
                     Query.equal("title", ["Avatar", "Lord of the Rings"]),
@@ -435,9 +428,8 @@ func main() async throws {
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
-    let databases = Databases(client)
+    let databases = Databases(client, "[DATABASE_ID]")
     let list = try await databases.listDocuments(
-        databaseId: "[DATABASE_ID]",
         collectionId: "[COLLECTION_ID]",
         queries: [
             Query.equal("title", ["Avatar", "Lord of the Rings"]),
@@ -495,7 +487,9 @@ func main() async throws {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>let promise = appwrite.database.listDocuments(
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
+const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+databases.listDocuments(
     'movies', // collectionId
     [], // queries
     25, // limit
@@ -514,7 +508,7 @@ func main() async throws {
 
 void main() async {
     final client = Client();
-    final databases = Databases(client);
+    final databases = Databases(client, databaseId: "[DATABASE_ID]");
     try {
         final docs = await databases.listDocuments(
             collectionId: 'movies',
@@ -548,7 +542,7 @@ class MainActivity : AppCompatActivity() {
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
             .setProject("my_project") // Your project ID
 
-        val databases = Databases(client)
+        val databases = Databases(client, "[DATABASE_ID]")
 
         GlobalScope.launch {
             val response = databases.listDocuments(
@@ -572,7 +566,7 @@ func main() async throws {
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
-    let databases = Databases(client)
+    let databases = Databases(client, "[DATABASE_ID]")
     let list = try await databases.listDocuments(
         collectionId: "movies",
         orderAttributes: ["title"],
@@ -590,7 +584,9 @@ func main() async throws {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>let promise = appwrite.database.listDocuments(
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
+const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+databases.listDocuments(
     'movies', // collectionId
     [], // query
     25, // limit
@@ -609,7 +605,7 @@ func main() async throws {
 
 void main() async {
     final client = Client();
-    final databases = Databases(client);
+    final databases = Databases(client, databaseId: "[DATABASE_ID]");
     try {
         final docs = await databases.listDocuments(
             collectionId: 'movies',
@@ -643,7 +639,7 @@ class MainActivity : AppCompatActivity() {
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
             .setProject("my_project") // Your project ID
 
-        val databases = Databases(client)
+        val databases = Databases(client, "[DATABASE_ID]")
 
         GlobalScope.launch {
             val response = databases.listDocuments(
@@ -667,7 +663,7 @@ func main() async throws {
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
-    let databases = Databases(client)
+    let databases = Databases(client, "[DATABASE_ID]")
     let list = try await databases.listDocuments(
         collectionId: "movies",
         orderAttributes: ["title", "year"],
