@@ -120,9 +120,9 @@ client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
-const database = new Databases(client, '[DATABASE_ID]');
+const databases = new Databases(client, '[DATABASE_ID]');
 
-let promise = database.createDocument(
+let promise = databases.createDocument(
     '[COLLECTION_ID]',
     {'actorName': 'Chris Evans', 'height': 183},
     ['role:all'], // Anyone can view this document
@@ -151,9 +151,9 @@ client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
-const database = new Databases(client, '[DATABASE_ID]');
+const databases = new Databases(client, '[DATABASE_ID]');
 
-let promise = database.createDocument(
+let promise = databases.createDocument(
     '[COLLECTION_ID]',
     {'actorName': 'Chris Evans', 'height': 183},
     ['team:5c1f88b87435e'], // The user must be a team member to grant this permission

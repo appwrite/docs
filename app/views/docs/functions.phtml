@@ -554,7 +554,7 @@ client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
-const database = new Databases(client, '[DATABASE_ID]');
+const databases = new Databases(client, '[DATABASE_ID]');
 
 let promise = functions.createExecution('[FUNCTION_ID]');
 
@@ -653,7 +653,7 @@ class MainActivity : AppCompatActivity() {
 
 <p>When triggering a Cloud Function execution from the client, your users will be limited to a specific amount of execution per minute to make sure your Appwrite server is not being abused. The default limit is 60 calls per 1 minute. You can edit this limit using the server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
 
-<p>The response size of a Cloud Function is limited to 1MB. Reponses larger than 1MB should be handled using Appwrite's Database or Storage service.</p>
+<p>The response size of a Cloud Function is limited to 1MB. Reponses larger than 1MB should be handled using Appwrite's Databases or Storage service.</p>
 
 <h2><a href="/docs/functions#ignoreFiles" id="ignoreFiles">Ignore Files</a></h2>
 
