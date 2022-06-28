@@ -1,5 +1,7 @@
 <p>To upgrade your Appwrite server from an older version, you should use the Appwrite migration tool <b>after you have installed the new version</b>. The migration tool will adjust your Appwrite data to the new version's structure to make sure your Appwrite data is compatible with any internal changes. </p>
 
+<p>As of version 0.14, Appwrite requires <a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">Docker Compose Version 2</a>. To upgrade Appwrite, make sure your Docker installation is updated to support Composer V2.</p>
+
 <div class="notice margin-bottom">
     <h3>A Note About Migration</h3>
 
@@ -9,10 +11,6 @@
 
     <p>It is highly recommended to <a href="https://gist.github.com/Meldiron/47b5851663668102a676aff43c6341f7" target="_blank" rel="noopener">backup your server</a> data before running the migration. It is recommended to run the migration process on a dev instance and make sure your application is working well and that you have checked for any breaking changes in the new version <a href="https://github.com/appwrite/appwrite/tags" target="_blank" rel="noopener">changelog.</a></p>
 </div>
-
-<!-- <p>When updating to a new Appwrite version, make sure to run the <a href="/docs/installation">installation script for the new version</a> from the same location, you executed your original setup. This will allow the installation script to update your existing docker-compose.yml file. The correct location for execution is the parent directory of your existing appwrite directory.</p> -->
-
-<!-- <p>The data migration tool will allow you to easily migrate your current Appwrite data to work with the new version. </p> -->
 
 <p>The first step is to install the latest version of Appwrite. Head to the directory where you ran your previous Appwrite install command. </p>
 
@@ -76,7 +74,7 @@
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>cd appwrite/
-docker-compose exec appwrite migrate</code></pre>
+docker compose exec appwrite migrate</code></pre>
 </div>
 
 <p>The data migration can take longer depending on the amount of data your Appwrite instance contains. The Appwrite migration command uses multi-threading to speed up the process, meaning that adding more CPU cores can help speed up the process.</p>

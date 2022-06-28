@@ -132,8 +132,7 @@ promise.then(function (response) {
     console.log(response); // Success
 }, function (error) {
     console.log(error); // Failure
-});
-            </code></pre>
+});</code></pre>
         </div>
     </li>
     <li>
@@ -149,8 +148,7 @@ void main() async {
     } on AppwriteException catch(e) {
         print(e);
     }
-}
-            </code></pre>
+}</code></pre>
         </div>
     </li>
     <li>
@@ -213,7 +211,7 @@ func main() async throws {
 
 <div class="notice margin-top-large margin-bottom-large">
     <h4>Indexes Required</h4>
-    <p>You can only query correctly indexed queries. You can easily add new indexes from both the Appwrite console or one of the <a href="/docs/sdks#server" target="_blank">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it on the <a href="/docs/databases#indexes" id="indexes">Appwrite Indexes</a> section.</p>
+    <p>You can only query correctly indexed queries. You can easily add new indexes from both the Appwrite console or one of the <a href="/docs/sdks#server" target="_blank">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it on the <a href="/docs/database#indexes">Appwrite Indexes</a> section.</p>
 </div>
 <p>
     To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/databases#databasesListDocuments">listDocuments</a> endpoint. The SDKs provide a <b>Query</b> class to make query building simpler:
@@ -227,8 +225,7 @@ const databases = new Databases(client, "[DATABASE_ID]"); // 'client' comes from
 
 databases.listDocuments('movies', [
     Query.equal('title', 'Avatar')
-]);
-</code></pre>
+]);</code></pre>
         </div>
     </li>
     <li>
@@ -247,8 +244,7 @@ void main() async {
     } on AppwriteException catch(e) {
         print(e);
     }
-}
-</code></pre>
+}</code></pre>
         </div>
     </li>
     <li>
@@ -356,8 +352,7 @@ const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes fro
 databases.listDocuments('movies', [
     Query.equal('title', ['Avatar', 'Lord of the Rings']),
     Query.greater('year', 1999)
-]);
-        </code></pre>
+]);</code></pre>
         </div>
     </li>
     <li>
@@ -450,7 +445,7 @@ func main() async throws {
     To ensure the best performance, Appwrite requires an index for every query.
     You can create an index by navigating to the <b>Indexes</b> tab of your collection or by using your favorite Server SDK. If you plan to query multiple attributes in a single query, you will need an index with <b>all</b> queried attributes.
 </p>
-<p>It should be noted that Appwrite's Databases Service was designed to protect your queries from performing a full-table scan as this is a footgun and could cause catastrophic performance degregation as you scale up your Appwrite project.</p>
+<p>It should be noted that Appwrite's database was designed to protect your queries from performing a full-table scan as this is a footgun and could cause catastrophic performance degradation as you scale up your Appwrite project.</p>
 <p>
     The following indexes are currently supported:
 </p>

@@ -55,11 +55,99 @@ $events = $this->getParam('events', []);
         <td>The ID of the project who owns the Webhook and API call.</td>
     </tr>
     <tr>
+        <td>
+            X-Appwrite-Webhook-Signature
+            <p class="margin-top-small text-fade">version >= 0.15.0</p>
+        </td>
+        <td>The HMAC-SHA1 signature of the payload. This is used to verify the authenticity of the payload.</td>
+    </tr>
+    <tr>
         <td>User-Agent</td>
         <td>Each request made by Appwrite will be 'Appwrite-Server'.</td>
     </tr>
     </tbody>
 </table>
+
+<h2 id="verification"><a href="/docs/webhooks#verification">Verification</a></h2>
+
+<p>Webhooks can be verfied by using the <a href="/docs/webhooks#headers">X-Appwrite-Webhook-Signature</a> header. This is the HMAC-SHA1 
+signature of the payload. You can find the signature key in your webhooks properties in the dashboard. To generate this hash you append
+the payload to the end of webhook URL (make sure there are no spaces in between) and then use the HMAC-SHA1 algorithm to generate the signature.
+
+After you've generated the signature, compare it to the "X-Appwrite-Webhook-Signature" header value. If they match, the payload is valid and you can trust it came from
+your Appwrite instance. </p>
+
+<!-- CODE EXAMPLES FOR THIS SECTION, Uncomment and finish when we have time -->
+
+<!-- 
+An example of how to generate the signature is shown below:</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>NodeJS</h3>
+        <div class="ide margin-bottom" data-lang="javascript" data-lang-label="NodeJS">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const crypto = require('crypto');
+let token = crypto.createHmac("sha1", process.env.WEBHOOK_SIG_KEY)
+    .update(`https://yourwebhookurl/test${payload.body}`) // Make sure there isn't a space between the URL and body.
+    .digest().toString('base64');
+
+if (token !== payload.headers['x-appwrite-webhook-signature']) {
+    throw new Error('Failed authentication check.')
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+
+        <div class="ide margin-bottom" data-lang="php" data-lang-label="PHP">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>$token = base64_encode(hash_hmac('sha1', 'https://yourwebhookurl/test' . $payload.body, getenv('WEBHOOK_SIG_KEY'), true));
+
+if ($token != $payload.headers['x-appwrite-webhook-signature']) {
+    throw new Error('Failed authentication check.');
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
+
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+
+val realtime = Realtime(client)
+
+// Subscribe to files channel
+realtime.subscribe("files", callback = { response ->
+    if(response.events.contains("buckets.*.files.*.create")) {
+        // Log when a new file is uploaded
+        print(response.payload.toString());
+    }
+})</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
+
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+
+let realtime = Realtime(client: client)
+
+// Subscribe to files channel
+let subscription = realtime.subscribe(channels: ["files"]) { message in
+    if(message.events!.contains("buckets.*.files.*.create")) {
+        // Log when a new file is uploaded
+        print(String(describing: message.payload))
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul> -->
 
 <h2 id="events"><a href="/docs/webhooks#events">Events</a></h2>
 
