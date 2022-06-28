@@ -685,7 +685,7 @@ class MainActivity : AppCompatActivity() {
 
 <p>Appwrite provides multiple code runtimes to execute your custom functions. Each runtime uses a Docker image tied to a specific language version to provide a safe, isolated playground to run your team's code.</p>
 
-<p>Below is a list of supported Cloud Functions runtimes. The Appwrite team continually adds support for new runtimes. You can easily change which runtimes your Appwrite setup supports by editing your server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
+<p>Below is a list of supported Cloud Functions runtimes. The Appwrite team continually adds support for new runtimes.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -707,6 +707,8 @@ class MainActivity : AppCompatActivity() {
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<p>By default, the following runtimes are enabled: "node-16.0, php-8.0, python-3.9, ruby-3.0". To enable or disable runtimes, you can edit the <span class="tag">_APP_FUNCTIONS_RUNTIMES</span> <a href="/docs/functions#environmentVariables">environment variable</a>.</p>
 
 <h2><a href="/docs/functions#environmentVariables" id="environmentVariables">Environment Variables</a></h2>
 
@@ -743,6 +745,12 @@ class MainActivity : AppCompatActivity() {
                 APPWRITE_FUNCTION_TRIGGER
             </td>
             <td>Either 'event' when triggered by one of the selected scopes, 'http' when triggered by an HTTP request or the Appwrite Console, or 'schedule' when triggered by the cron schedule.</td>
+        </tr>
+        <tr>
+            <td>
+                _APP_FUNCTIONS_RUNTIMES
+            </td>
+            <td>Enables function runtimes. Pass a list of runtime names separated by a comma, for example "node-16.0,php-8.0,python-3.9,ruby-3.0".</td>
         </tr>
         <tr>
             <td>
