@@ -70,11 +70,11 @@ $events = $this->getParam('events', []);
 
 <h2 id="verification"><a href="/docs/webhooks#verification">Verification</a></h2>
 
-<p>Webhooks can be verfied by using the <a href="/docs/webhooks#headers">X-Appwrite-Webhook-Signature</a> header. This is a HMAC-SHA1 
+<p>Webhooks can be verfied by using the <a href="/docs/webhooks#headers">X-Appwrite-Webhook-Signature</a> header. This is the HMAC-SHA1 
 signature of the payload. You can find the signature key in your webhooks properties in the dashboard. To generate this hash you append
-the payload to the webhook URL and then use the HMAC-SHA1 algorithm to generate the signature.
+the payload to the end of webhook URL (make sure there are no spaces in between) and then use the HMAC-SHA1 algorithm to generate the signature.
 
-After you've generated the signature, compare it to the one in the header. If they match, the payload is valid and you can trust it came from
+After you've generated the signature, compare it to the "X-Appwrite-Webhook-Signature" header value. If they match, the payload is valid and you can trust it came from
 your Appwrite instance. </p>
 
 <!-- CODE EXAMPLES FOR THIS SECTION, Uncomment and finish when we have time -->
