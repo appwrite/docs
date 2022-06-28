@@ -15,7 +15,7 @@
         "ext-imagick": "*",
         "ext-mbstring": "*",
         "ext-json": "*",
-
+        "erusev/parsedown": "1.7.4",
         "utopia-php/framework": "0.*.*"
     },
     "require-dev": {
