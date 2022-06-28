@@ -62,15 +62,13 @@ $demos = $platform['demos'] ?? [];
 <p>Initialize your SDK code with your project ID which can be found in your project settings page.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Init your Web SDK
-const appwrite = new Appwrite();
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>const client = new Client();
 
-appwrite
-    .setEndpoint('http://localhost/v1') // Your Appwrite Endpoint
-    .setProject('455x34dfkj') // Your project ID
-;
-
-</code></pre>
+// Init your Web SDK
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+;</code></pre>
 </div>
 <!-- 
 <div class="notice calm margin-top-large margin-bottom-large">
@@ -84,15 +82,15 @@ appwrite
 <p>After your SDK configuration is set, access any of the Appwrite services and choose any request to send. Full documentation for any service method you would use is found in the SDK documentation or in the API References section.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-                    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Register User
-appwrite
-    .account.create('unique()', 'me@example.com', 'password', 'Jane Doe')
+                    <pre class="line-numbers"><code class="prism language-javascript" data-prism>const account = new Account(client);
+
+// Register User
+account.create('unique()', 'me@example.com', 'password', 'Jane Doe')
         .then(response => {
             console.log(response);
         }, error => {
             console.log(error);
-        });
-</code></pre>
+        });</code></pre>
 </div>
 
 <h2><a href="/docs/getting-started-for-web#listenToChanges" id="listenToChanges">Listen to Changes</a></h2>
@@ -101,27 +99,30 @@ appwrite
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
                     <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Subscribe to files channel
-appwrite.subscribe('files', response => {
+client.subscribe('files', response => {
     if(response.events.includes('buckets.*.files.*.create')) {
         // Log when a new file is uploaded
         console.log(response.payload);
     }
-});
-</code></pre>
+});</code></pre>
 </div>
 
 <h2><a href="/docs/getting-started-for-web#fullExample" id="fullExample">Full Example</a></h2>
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-                    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Init your Web SDK
-const appwrite = new Appwrite();
+                    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
-appwrite
-    .setEndpoint('http://localhost/v1') // Your Appwrite Endpoint
-    .setProject('455x34dfkj') // Your project ID
+const client = new Client();
+
+// Init your Web SDK
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+;
+
+const account = new Account(client);
 
 // Register User
-appwrite
-    .account.create('unique()', 'me@example.com', 'password', 'Jane Doe')
+account.create('unique()', 'me@example.com', 'password', 'Jane Doe')
         .then(response => {
             console.log(response);
         }, error => {
@@ -129,13 +130,12 @@ appwrite
         });
 
 // Subscribe to files channel
-appwrite.subscribe('files', response => {
+client.subscribe('files', response => {
     if(response.events.includes('buckets.*.files.*.create')) {
         // Log when a new file is uploaded
         console.log(response.payload);
     }
-});
-</code></pre>
+});</code></pre>
 </div>
 
 <h2><a href="/docs/getting-started-for-web#demos" id="demos">Demos</a></h2>
