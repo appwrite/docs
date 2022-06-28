@@ -116,10 +116,17 @@
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases } from "appwrite";
 
-const sdk = new Appwrite();
-const promise = sdk.databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', 'unique()', {});
+const client = new Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
+
+const database = new Databases(client, '[DATABASE_ID]');
+
+const promise = database.createDocument('[COLLECTION_ID]', 'unique()', {});
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -217,9 +224,10 @@ func main() async throws {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Query } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
+const database = new Databases(client, "[DATABASE_ID]"); // 'client' comes from setup
 
-sdk.databases.listDocuments('[DATABASE_ID]', 'movies', [
+database.listDocuments('movies', [
     Query.equal('title', 'Avatar')
 ]);
 </code></pre>
@@ -347,10 +355,13 @@ func main() async throws{
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>sdk.databases.listDocuments('[DATABASE_ID]', 'movies', [
-            Query.equal('title', ['Avatar', 'Lord of the Rings']),
-            Query.greater('year', 1999)
-        ]);
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
+const database = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+
+database.listDocuments('movies', [
+    Query.equal('title', ['Avatar', 'Lord of the Rings']),
+    Query.greater('year', 1999)
+]);
         </code></pre>
         </div>
     </li>

@@ -13,10 +13,14 @@
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Page 1
-const page1 = await sdk.database.listDocuments('movies', [], 25, 0);
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases } from "appwrite";
+const database = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+                
+// Page 1
+const page1 = await database.listDocuments('movies', [], 25, 0);
+
 // Page 2
-const page2 = await sdk.database.listDocuments('movies', [], 25, 25);
+const page2 = await database.listDocuments('movies', [], 25, 25);
         </code></pre>
         </div>
     </li>
@@ -129,12 +133,15 @@ func main() async throws {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Page 1
-const page1 = await sdk.database.listDocuments('movies', [], 25, 0);
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases } from "appwrite";
+const database = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+
+// Page 1
+const page1 = await database.listDocuments('movies', [], 25, 0);
 const lastId = results.documents[results.documents.length - 1].$id;
 
 // Page 2
-const page2 = await sdk.database.listDocuments('movies', [], 25, 0, lastId);
+const page2 = await database.listDocuments('movies', [], 25, 0, lastId);
         </code></pre>
         </div>
     </li>

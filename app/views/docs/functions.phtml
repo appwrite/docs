@@ -546,14 +546,17 @@ $image = new View(__DIR__.'/../general/image.phtml');
     <li>
         <h3>Web</h3>
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Functions } from "appwrite";
 
-sdk
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-;
+const client = new Client();
 
-let promise = sdk.functions.createExecution('[FUNCTION_ID]');
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
+
+const database = new Databases(client, '[DATABASE_ID]');
+
+let promise = functions.createExecution('[FUNCTION_ID]');
 
 promise.then(function (response) {
     console.log(response); // Success
