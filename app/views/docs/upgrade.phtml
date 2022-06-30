@@ -78,5 +78,9 @@ docker compose exec appwrite migrate</code></pre>
 </div>
 
 <p>The data migration can take longer depending on the amount of data your Appwrite instance contains. The Appwrite migration command uses multi-threading to speed up the process, meaning that adding more CPU cores can help speed up the process.</p>
-
+    
 <p>Once the migration process has completed successfully, you're all set to use the latest version of Appwrite!</p>
+    
+<h3><a href="/docs/upgrade#upgrade-sdk" id="upgrade-sdk">Upgrade SDK</a></h3>
+    
+<p>After upgrading the Appwrite server to the latest version, ensure that the SDKs used by your applications are also updated to the latest version. For version specific compatibility, check the changelog of the SDKs. For Example: <a href="https://github.com/appwrite/sdk-for-web/releases" target="_blank" rel="noopener">sdk-for-web</a>.</p>
