@@ -79,3 +79,14 @@ Connection: close
 }
 </code></pre>
 </div>
+
+<h2><a href="/docs/rate-limits#disable-limits" id="disable-limits">Disable Rate Limits</a></h2>
+<p>During development, you may need to frequently make requests to certain endpoints to test your code. To prevent triggering rate limits and blocking your development process, you can temporarily disable rate limiting.</p>
+<p>You can disable rate limiting by setting <span class="tag">_APP_OPTIONS_ABUSE</span> to <span class="tag">disabled</span> in the <b>.env</b> file found in your Appwrite install directory.</p>
+<p>After editing your docker-compose.yml or .env files, you will need to restart your Appwrite stack by running the following compose command in your terminal:</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose up -d</code></pre>
+</div>
+
+<p>Once you finish testing your code, re-enable rate limiting by setting <span class="tag">_APP_OPTIONS_ABUSE</span> to <span class="tag">enabled</span> in the <b>.env</b> file.</p>
