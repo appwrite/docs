@@ -40,6 +40,12 @@ Appwrite has many services and features with many ways to express the same conce
 | Teams API              | The Teams API is an API under the Authentication service that is used to organize created accounts. Avoid "Teams service", because it is not a stand alone service.                                                                                           |
 | Authentication Method  | An authentication method refers to ways to authenticate a user like email, phone, and JWT. Not a proper noun, avoid terms like auth method or login method.                                                                                                   |
 | OAuth2 Providers       | An OAuth2 provider refers to ways to authenticate users using accounts from service providers like AWS, Facebook, or Microsoft. Avoid using simplified terms like OAuth provider and provider to avoid confusion (there are multiple types of providers now). |
+| Sign In/Log In      | Verb form of creating a user session. Use "create session" where relevant, and use sign in/log in to refer to actions on a frontend application.                            |
+| Sign Out/Log Out    | Verb form of deleting a user session.  Use "delete session" where relevant, and use sign out/log out to refer to actions on a frontend application.                         |
+| Login/Signin        | Noun form referring to the information used to sign in/log in. For example, "to log in, provide valid login information".                                                   |
+| Register            | Use "create account" where relevant, and use register/sign up to refer to actions on a frontend application.                                                                |
+ 
+
 
 #### Database
 
