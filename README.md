@@ -23,9 +23,10 @@ Appwrite has many services and features with many ways to express the same conce
 | Console Users | Refers to users that are registered to have access to the Appwrite Console. Not a proper noun, use as "a console user" or "the console user". Differenciate this clearly from users created through a Client SDK. |
 | Client SDK    | Refers to SDKs used by Web, Flutter, Android, and Apple applications. Use as a proper noun, use "a Client SDK" or "the Client SDKs", not client-side SDKs.                                                        |
 | Server SDK    | Refers to SDKs used by backend languages like Java, Node.js, or PHP. Use as a proper noun, use "a Server SDK" or "the Server SDKs", not server-side SDKs.                                                         |
+| Adaptor       | Refers to interfaces used to connect Appwrite with third party technologies. Adaptors are found for OAuth, Databases, Storage, and error logging. When referring to adaptors, use specific adaptor names, such as "an OAuth adaptor" or "a Storage adaptor" to avoid confusion.|
 | Developer     | Refers to Appwrite developers that use Appwrite to create applications.                                                                                                                                           |
 | End User      | Refers to end users of applications with an Appwrite backend. This doesn't refer to developers that interact with Appwrite directly.   |
-| Appwrite Instance | Refers to a single, self-hosted deployment of Appwrite   |
+| Appwrite Cluster | Refers to a single, self-hosted deployment of Appwrite. Use as "an Appwrite Cluster" or "Appwrite Clusters".|
 | Application   | Refers to the application built by the Appwrite developer. Can be referred to as web app, mobile app, flutter app, etc. |
 | Method                | Refers to SDK methods like the method `account.get()`. This helps differentiate SDK methods and Appwite Functions in written language.                                                                                                                             |
 | Parameters            | Refers to parameters in an SDK method or API definition. Use in cases where we speak about needs, such as "takes parameters x, y, and z" or "requires parameters x and y".                                                                                         |
@@ -75,5 +76,5 @@ Appwrite has many services and features with many ways to express the same conce
 | Deploy/Deployment     | When we say we "deploy" a function or create a new deployment, this is when we upload code through the Create Deployment button or endpoint.                                |
 | Activate Deployment   | When we enable a particular version of a function, we say we "activate" the deployment.                                                                                     |
 | Runtimes              | When we refer to a runtime like `node.js 15.5`, call it a "Node.js runtime" or "function runtime". Avoid similar terms like "runtime environment" or "function environment" |
-
+| Execution            | When a function is run, triggered by an event, or triggerd by a CRON job, an "execution" is created. In documentation, refer to "running" a function as "creating an execution".|
 ### Spell Checking
