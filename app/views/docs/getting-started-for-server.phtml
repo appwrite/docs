@@ -240,13 +240,13 @@ client
     <li>
         <h3>Web SDK</h3>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>appwrite // Get a JWT for authenticated user
-    .account.createJWT()
-            .then(function (response) {
-                console.log(response);
-            }, function (error) {
-                console.log(error);
-            });</code></pre>
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const account = new Account(client);
+account.createJWT()
+    .then(function (response) {
+        console.log(response);
+    }, function (error) {
+        console.log(error);
+    });</code></pre>
         </div>
     </li>
     <li>
