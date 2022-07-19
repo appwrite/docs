@@ -55,7 +55,7 @@ Appwrite has many services and features with many ways to express the same conce
 
 | **Term**          | **Suggested Usage**                                                                                                                                                                                  |
 |-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Databases Service | Write as the "Database Service" (as a proper noun). The Databases Service is referred to as "Databases Service", not "Database Service".                                                              |
+| Databases Service | Write as the "Database Service" (as a proper noun). The Databases Service is referred to as "Databases Service" rather than "Database Service".                                                              |
 | Database          | As of 0.15, the Databases Service allows you to create multiple, individual databases. Use "a database" or "databases" as uncapitalized nouns, which differentiates them from the "Database Service". |
 | Collection        | Use "collection" as a noun (no capitalization), use as "a collection" or "collections".  Avoid using similar terms like "table".                                                                      |
 | Document          | Use "document" as a noun (no capitalization), use as "a document" or "documents".  Avoid using similar terms like "entry" or "row".                                                                   |
