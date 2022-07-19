@@ -75,7 +75,7 @@ Appwrite has many services and features with many ways to express the same conce
 #### Functions
 | **Term**              | **Suggested Usage**                                                                                                                                                        |
 |-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Functions Service     | Write as the "Functions Service"(as a proper noun). Not "Function Service" or "Cloud Functions".                                                                            |
+| Functions Service     | Write as the "Functions Service" (as a proper noun) rather than "Function Service" or "Cloud Functions".                                                                            |
 | Function (individual) | When we mention a specific function and not the service as a whole, use "a function" or "functions". Not "a cloud function" or "a Function".                                |
 | Create                | When we "create" a function, it refers to the process of using "Add Function" in console or using `functions.create()` method. No code is uploaded.                         |
 | Deploy/Deployment     | When we say we "deploy" a function or create a new deployment, this is when we upload code through the Create Deployment button or endpoint.                                |
