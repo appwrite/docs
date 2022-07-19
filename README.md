@@ -17,7 +17,7 @@ Appwrite has many services and features with many ways to express the same conce
 #### General
 | **Term**      | **Suggested Usage**                                                                                                                                                                                              |
 |---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Appwrite      | Written as "Appwrite" not "AppWrite" or "appwrite".                      |
+| Appwrite      | Written as "Appwrite" rather than "AppWrite" or "appwrite".                      |
 | Projects      | Each Appwrite instance can have many Appwrite Projects. Use "Appwrite Projects" as a proper noun when referring to the concept, use project or projects when referring to specific projects.                      |
 | Web Console       | Refers to the the web GUI. Can also be referred to as the "Appwrite Web Console" to distinguish from a Mac, Linux, or Windows machine's console or Chrome's developer console.                                                                          |
 | Console Users | Refers to users that are registered to have access to the Appwrite Console. Not a proper noun, use as "a console user" or "the console user". Differenciate this clearly from users created through a Client SDK. |
