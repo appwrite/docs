@@ -2,15 +2,211 @@
 
 ?>
 
-<p>The Appwrite GraphQL API allows you to <b>query</b> and <b>mutate</b> any resource type on your Appwrite server with a single endpoint. Every route available via REST is also available via GraphQL. Additionally, GraphQL provides direct integration with your databases collections.</p>
+<p>The GraphQL API allows you to <b>query</b> and <b>mutate</b> any resource type on your Appwrite server through a single endpoint. Every endpoint available via REST is also available via a corresponding GraphQL <b>field</b>. Additionally, GraphQL provides direct integration with your database's collections.</p>
 
-<p>There are three main features that make GraphQL a great option when compared to the REST API: <b>selection sets</b>, <b>query batching and the database collections integration.</b></p>
+<h2><a href="/docs/graphql#requests" id="requests">Requests</a></h2>
 
-<h2><a href="/docs/graphql#selections" id="examples">Selection Sets</a></h2>
+<p>Requests to GraphQL can be made in many ways, as every action executes through the same endpoint. However, all requests take a common payload format.</p>
 
-<p>Selection sets can be used to tell the GraphQL API exactly which properties of a particular resource you would like to receive in the response. The server will respond with only those properties, nothing more, nothing less. This gives you full control over what data is coming in to your application, instead of the server.</p>
+<table class="vertical full args">
+    <thead>
+    <tr>
+        <td style="width: 140px">Name</td>
+        <td style="width: 100px"></td>
+        <td style="width: 120px">Type</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td data-title="Name: ">
+            query
+        </td>
+        <td data-title="">
+            <span class="tag red">required</span>
+        </td>
+        <td data-title="Type: ">
+            string
+        </td>
+        <td data-title="Description: ">
+            The GraphQL query to execute.
+        </td>
+    </tr>
+    <tr>
+        <td data-title="Name: ">
+            operationName
+        </td>
+        <td data-title="">
+            <span class="tag">optional</span>
+        </td>
+        <td data-title="Type: ">
+            string
+        </td>
+        <td data-title="Description: ">
+            If the query contains several named operations, operationName controls which one to execute
+        </td>
+    </tr>
+    <tr>
+        <td data-title="Name: ">
+            variables
+        </td>
+        <td data-title="">
+            <span class="tag">optional</span>
+        </td>
+        <td data-title="Type: ">
+            object
+        </td>
+        <td data-title="Description: ">
+            An object containing variable names and values for the query. Variables are made available to your query with the <code>$</code> prefix.
+        </td>
+    </tr>
+    </tbody>
+</table>
 
-<p>For example, to retrieve only the email of a currently authenticated user, you could execute the <b>accountGet</b> query, passing <b>only</b> email as the selection set.</p>
+<h3><a href="/docs/graphql#get-requests" id="get-requests">GET Requests</a></h3>
+
+<p>You can execute a GraphQL query via a GET request, passing your <b>query</b> and optionally your <b>operationName</b> and <b>variables</b> as query parameters.</p>
+
+<h3><a href="/docs/graphql#post-requests" id="post-requests">POST Requests</a></h3>
+
+<p>The various ways to make a POST request first break down by content type.</p>
+
+<h4>JSON</h4>
+
+<p>There are two ways to make requests with the <b>application/json</b> content type. You can send a JSON object containing your <b>query</b> and optionally your <b>operationName</b> and <b>variables</b>, or an array of objects of the same shape.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Object</h3>
+        <div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
+            <pre class="line-numbers"><code class="prism language-json" data-prism>{
+    "query": "",
+    "operationName": "",
+    "variables": {}
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Array</h3>
+        <div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
+            <pre class="line-numbers"><code class="prism language-json" data-prism>[
+    {
+        "query": "",
+        "operationName": "",
+        "variables": {}
+    }
+]</code></pre>
+        </div>
+    </li>
+</ul>
+
+<h4>GraphQL</h4>
+
+<p>The <b>application/graphql</b> content type can be used to send a query as the raw POST body.</p>
+
+<div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
+    <pre class="line-numbers"><code class="prism language-graphql" data-prism>{
+    accountGet {
+        email
+    }
+}</code></pre></div>
+
+<h4>Multipart Form Data</h4>
+
+<p>The <b>multipart/form-data</b> content type must be used when uploading files via GraphQL. In this case, the form data must include the following structure in addition to the files to upload:</p>
+
+<table class="vertical full args">
+    <thead>
+    <tr>
+        <td style="width: 140px">Name</td>
+        <td style="width: 100px"></td>
+        <td style="width: 120px">Type</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td data-title="Name: ">
+            operations
+        </td>
+        <td data-title="">
+            <span class="tag red">required</span>
+        </td>
+        <td data-title="Type: ">
+            string
+        </td>
+        <td data-title="Description: ">
+            JSON encoded GraphQL query and optionally operation name and variables. File variables should contain null values.
+        </td>
+    </tr>
+    <tr>
+        <td data-title="Name: ">
+            map
+        </td>
+        <td data-title="">
+            <span class="tag red">required</span>
+        </td>
+        <td data-title="Type: ">
+            string
+        </td>
+        <td data-title="Description: ">
+            JSON encoded map of form-data filenames to the operations dot-path to inject the file to. For example: "variables.file"
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2><a href="/docs/graphql#responses" id="responses">Responses</a></h2>
+
+<p>A response to a GraphQL request will take the following structure:</p>
+
+<table class="vertical full args">
+    <thead>
+    <tr>
+        <td style="width: 140px">Name</td>
+        <td style="width: 120px">Type</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td data-title="Name: ">
+            data
+        </td>
+        <td data-title="Type: ">
+            object
+        </td>
+        <td data-title="Description: ">
+            The data returned by the query, maps requested field names to their results.
+        </td>
+    </tr>
+    <tr>
+        <td data-title="Name: ">
+            errors
+        </td>
+        <td data-title="Type: ">
+            object[]
+        </td>
+        <td data-title="Description: ">
+            An array of errors that occurred during the request.
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<p>The <b>data</b> object will contain sub-objects, keyed by their field name and containing properties that map each child field requested to its value. If no data is returned, the object will not be present in the response.</p>
+
+<p>The errors array will contain error objects, each with their own <b>message</b> and <b>path</b>, which contains the field key that will be null due to the error. If no errors occur, the array will not be present in the response.</p>
+
+<h2><a href="/docs/graphql#graphql-vs-rest" id="graphql-vs-rest">GraphQL vs REST</a></h2>
+
+<p>There are three main features that make GraphQL a great option when compared to the REST API: <b>selection sets</b>, <b>query batching and the databases integration.</b></p>
+
+<h3><a href="/docs/graphql#selection-sets" id="selection-sets">Selection Sets</a></h3>
+
+<p>Selection sets can be used to tell a GraphQL API exactly which <b>fields</b> of a particular resource you would like to receive in the response. The server will respond with only those fields, nothing more, nothing less. This gives you full control over what data comes into your application instead of the server.</p>
+
+<p>For example, to retrieve only the email of a currently authenticated user, you could execute a query using the <b>accountGet</b> field, passing only email as the <b>child field selection set</b>.</p>
 
 <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
     <pre class="line-numbers"><code class="prism language-graphql" data-prism>query GetAccount {
@@ -19,7 +215,7 @@
     }
 }</code></pre></div>
 
-<p>Given this query, the Appwrite GraphQL API will respond with:</p>
+<p>Given this query, the GraphQL API will respond with:</p>
 
 <div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
     <pre class="line-numbers"><code class="prism language-json" data-prism>{
@@ -32,24 +228,21 @@
 
 <p>This can be an extremely useful feature for performance and app responsiveness. As the processing happens on the server, the bandwidth consumed for the request can be <b>dramatically reduced.</b></p>
 
-<h2><a href="/docs/graphql#selections" id="examples">Query Batching</a></h2>
+<h3><a href="/docs/graphql#query-batching" id="query-batching">Query Batching</a></h3>
 
-<p>GraphQL allows sending multiple queries or mutations in the same request. If any of the queries fail, the value of the <b>data</b> key for that field will be null, and it will have an <b>errors</b> key instead.</p>
-
-<p>There are two different ways to batch queries. The simplest is to add all queries <b>or</b> mutations into the same query.</p>
+<p>GraphQL allows sending multiple queries or mutations in the same request. There are two different ways to batch queries. The simplest way is to include multiple fields in a single query <b>or</b> mutation.</p>
 
 <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
-    <pre class="line-numbers"><code class="prism language-graphql" data-prism>query GetMany {
+    <pre class="line-numbers"><code class="prism language-graphql" data-prism>query GetAccountAndLocale {
     accountGet {
         email
     }
     localeGet {
         ip
-        country
     }
 }</code></pre></div>
 
-<p>If both queries succeed, the response would look like:</p>
+<p>If both field executions succeed, the response will contain a data key for each field, containing the values of the selected child fields.</p>
 
 <div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
     <pre class="line-numbers"><code class="prism language-json" data-prism>{
@@ -58,13 +251,12 @@
             "email": "..."
         },
         "localeGet": {
-            "ip": "...",
-            "country": "..."
+            "ip": "..."
         }
     }
 }</code></pre></div>
 
-<p>If there was no authenticated user, the <b>accountGet</b> query would fail. In such a case the errors array would be present instead.</p>
+<p>If there was no authenticated user, the <b>accountGet</b> field would fail to resolve. In such a case the value of the <b>data</b> key for that field will be null, and an object will be added to the <b>errors</b> array instead.</p>
 
 <div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
     <pre class="line-numbers"><code class="prism language-json" data-prism>{
@@ -83,16 +275,16 @@
     ]
 }</code></pre></div>
 
-<p>Batching into a single query has some caveats. Because the root object must be a query <b>or</b> a mutation, all contained queries must queries <b>or</b> mutations.</p>
+<p>Batching with a single query or mutation has some caveats. Because the root must be a query <b>or</b> a mutation, all contained fields must be queries <b>or</b> mutations.</p>
 
 <p>Additionally, all <b>variables</b> must be passed in the same query, which can be cumbersome and hard to maintain.</p>
 
-<p>The second way is to pass an array of queries in the request. In this way, you can execute queries <b>and</b> mutations, as well as keep variables separate for each.</p>
+<p>The second way is to pass an array of queries or mutations in the request. In this way, you can execute queries <b>and</b> mutations and keep variables separated for each.</p>
 
-<div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
-    <pre class="line-numbers"><code class="prism language-graphql" data-prism>[
+<div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
+    <pre class="line-numbers"><code class="prism language-json" data-prism>[
     {
-        "query": "mutation CreateAccount {
+        "query": "mutation CreateAccount($email: String!, $password: String!, $name: String) {
             accountCreate(email: $email, password: $password, name: $name) {
                 email
             }
@@ -106,14 +298,349 @@
     {
         "query": "query GetAccount {
             accountGet {
-                email
+                _id
             }
         }"
     }
 ]</code></pre></div>
 
-<p>This can be extremely powerful as it allows you to execute complex actions in a single request.</p>
+<p>This can be extremely powerful as it allows you to execute complex actions in a single network request.</p>
 
-<h2><a href="/docs/graphql#selections" id="examples">Passing Parameters</a></h2>
+<h3><a href="/docs/graphql#databases-integration" id="query-batching">Databases Integration</a></h3>
 
-<p>You can pass parameters to the GraphQL API using the <b>variables</b> key in the request. The variables are passed as a JSON object. They can then be referenced in your query using the `$variableName` syntax as shown above.</p>
+<p>The Appwrite GraphQL API integrates directly into your project's database's collections, providing a more convenient way to manipulate your collections.</p>
+
+<p>For example, given a project with a collection with ID <b>movies</b>, with attributes <b>name</b> and <b>length</b>, of types string and integer respectively; the following queries would be available to execute:</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Create</h3>
+        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation CreateMovie($name: String!, $length: Int!) {
+            moviesCreate(name: $name, length: $length) {
+                _id
+                name
+                length
+            }
+        }</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>List</h3>
+        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query ListMovies($limit: Int, $offset: Int, cursor: String, cursorDirection: String, orderAttributes: [String!], orderTypes: [String!]) {
+            moviesList(limit: $limit, offset: $offset, cursor: $cursor, cursorDirection: $cursorDirection, orderAttributes: $orderAttributes, orderTypes: $orderType) {
+                _id
+                name
+                length
+            }
+        }</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Get</h3>
+        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query GetMovie($id: String!) {
+            moviesGet(id: $id) {
+                _id
+                name
+                length
+            }
+        }</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Update</h3>
+        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation UpdateMovie {
+            moviesUpdate(name: $name, length: $length) {
+                _id
+                name
+                length
+            }
+        }</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Delete</h3>
+        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation DeleteMovie($id: String!) {
+            moviesDelete(id: $id)
+        }</code></pre>
+        </div>
+    </li>
+</ul>
+
+<h3><a href="/docs/graphql#sdk-usage" id="sdk-usage">SDK Usage</a></h3>
+
+<p>The wide range of Appwrite SDKs also support GraphQL in addition to the REST services.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client } from "appwrite";
+
+const client = new Client();
+
+const graphql = new Graphql(client);
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
+
+const query = graphql.query({
+    query: `query GetAccount {
+        accountGet {
+            _id
+            email
+            name
+        }
+    }`
+});
+
+const mutation = graphql.mutate({
+    query: `mutation CreateAccount($email: String!, $password: String!, $name: String) {
+        accountCreate(email: $email, password: $password, name: $name) {
+            _id
+        }
+    }`,
+    variables: {
+        email: '',
+        password: '',
+        name: ''
+    }
+});
+
+const batch = graphql.mutate([
+    {
+        query: `query GetAccount {
+            accountGet {
+                _id
+            }
+        }`
+    },
+    {
+        query: `mutation CreateAccount($email: String!, $password: String!, $name: String) {
+            accountCreate(email: $email, password: $password, name: $name) {
+                _id
+            }
+        }`,
+        variables: {
+            email: '',
+            password: '',
+            name: ''
+        }
+    }
+]);
+
+Promise.all([query, mutation, batch])
+    .then(responses => {
+        console.log(responses);
+    })
+    .catch(error => {
+        console.log(error);
+    });</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+
+        <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your Appwrite Endpoint
+    .setProject('5e8cf4f46b5e8') // Your project ID
+;
+
+final graphql = Graphql(client);
+
+Future query = graphql.query({
+    'query': '''query GetAccount {
+        accountGet {
+            _id
+            email
+            name
+        }
+    }'''
+});
+
+Future mutation = graphql.mutate({
+    'query': '''mutation CreateAccount($email: String!, $password: String!, $name: String) {
+        accountCreate(email: $email, password: $password, name: $name) {
+            _id
+        }
+    }''',
+    'variables': {
+        'email': '',
+        'password': '',
+        'name': ''
+    }
+});
+
+Future batch = graphql.mutate([
+    {
+        'query': '''query GetAccount {
+            accountGet {
+                _id
+            }
+        }'''
+    },
+    {
+        'query': '''mutation CreateAccount($email: String!, $password: String!, $name: String) {
+            accountCreate(email: $email, password: $password, name: $name) {
+                _id
+            }
+        }''',
+        'variables': {
+            'email': '',
+            'password': '',
+            'name': ''
+        }
+    }
+]);
+
+Future.wait([query, mutation, batch])
+    .then((responses) {
+        print(responses);
+    })
+    .catchError((error) {
+        print(error.message);
+    });</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
+
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+
+val graphql = Graphql(client)
+
+launch {
+    try {
+        val query = graphql.query(mapOf(
+            "query" to """query GetAccount {
+                accountGet {
+                    _id
+                    email
+                    name
+                }
+            }"""
+        ))
+
+    val mutation = graphql.mutation(mapOf(
+        "query" to """mutation CreateAccount($email: String!, $password: String!, $name: String) {
+            accountCreate(email: $email, password: $password, name: $name) {
+                _id
+            }
+        }""",
+        "variables" to mapOf(
+            "email" to "",
+            "password" to "",
+            "name" to ""
+        )
+    ))
+
+    val batch = graphql.mutation(listOf(
+        mapOf(
+            "query" to """query GetAccount {
+                accountGet {
+                    _id
+                }
+            }"""
+        ),
+        mapOf(
+            "query" to """mutation CreateAccount($email: String!, $password: String!, $name: String) {
+                accountCreate(email: $email, password: $password, name: $name) {
+                    _id
+                }
+            }""",
+            "variables" to mapOf(
+                "email" to "",
+                "password" to "",
+                "name" to ""
+            )
+        )
+    ))
+
+    } catch (ex: AppwriteException) {
+        Log.e(javaClass.name, ex.message)
+    }
+
+    Log.d(javaClass.name, query)
+    Log.d(javaClass.name, mutation)
+    Log.d(javaClass.name, batch)
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
+
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+
+let graphql = Graphql(client: client)
+
+do {
+    let query = try await graphql.query([
+        "query": """query GetAccount {
+            accountGet {
+                _id
+                email
+                name
+            }
+        }"""
+    ])
+
+    let mutation = try await graphql.mutation([
+        "query": """mutation CreateAccount($email: String!, $password: String!, $name: String) {
+            accountCreate(email: $email, password: $password, name: $name) {
+                _id
+            }
+        }""",
+        "variables": [
+            "email": "",
+            "password": "",
+            "name": ""
+        ]
+    ])
+
+    let batch = try await graphql.mutation([
+        [
+            "query": """query GetAccount {
+                accountGet {
+                    _id
+                }
+            }"""
+        ],
+        [
+            "query": """mutation CreateAccount($email: String!, $password: String!, $name: String) {
+                accountCreate(email: $email, password: $password, name: $name) {
+                    _id
+                }
+            }""",
+            "variables": [
+                "email": "",
+                "password": "",
+                "name": ""
+            ]
+        ]
+    ])
+
+    print(String(describing: query))
+    print(String(describing: mutation))
+    print(String(describing: batch))
+} catch let error {
+    print(error.localizedDescription)
+}</code></pre>
+        </div>
+    </li>
+</ul>
