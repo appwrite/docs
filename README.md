@@ -38,6 +38,8 @@ When referencing example copy text that appears or could appear on a piece of UI
 ### Referencing File Paths, URLs, and IDs
 When referencing file paths, URLs, IDs, or any text appropriate for monospace representation, use a span element with `class=tag` inline. For example, `<span class="tag">appwrite.json</span>` or `<span class="tag">https://[HOSTNAME_OR_IP]/v1</span>`.
 
+When using generic strings, use double quotes `"`. Double quotes express a string in **all** languages, but single quotes `'` in some languages like Java and C++ represent a **char**. This makes them difficult to copy and paste.
+
 ### Code Examples
 
 Use the following HTML structure to present code examples:
@@ -48,7 +50,7 @@ Use the following HTML structure to present code examples:
 </div>
 ```
 
-Code examples should require minimum modifications to be executed where possible.
+Code examples should require minimum modifications to be executed where possible (working and self-contained).
 
 As of writing this, these are the supported languages for code examples:
 
@@ -97,6 +99,17 @@ For showing examples in multiple languages use the list structure:
 > Don't forget to use proper indenting for all code examples. The indenting of the code examples should be independent from the indentation of the surrounding HTML tags.
 
 For referencing code inline, especially when the code is a non-executable snippet, use spans with `class=tag`. For example, use the method <span class="tag">listDocuments()</span>.
+
+#### Placeholder Values
+- Be consistent with placeholder values for name type fields across languages. For example, all examples for the Databases query guide should use the database `catalogue` and collection `movies`.
+- Where applicable, use `"unique()"` for ids that can be auto-generated.
+- Use a concise value like `"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."` for hash values like long IDs and API keys.
+- Use a placeholder for hostnames like `"https://[HOSTNAME_OR_IP]/v1"` in code examples, but be consistent.
+- Use a known generic name as a place holder like `"John Doe"`, avoid real name and celeberty names.
+- Use generic email passwords as placeholders like `"email@example.com", "password"`.
+- Use a relative file name that is context appropriate like `"img/file.png"`.
+- Where possible, use names for teams, collections, databases, buckets, and other resources that are contextually appropriate and hint at the resource type. This is especially true for code examples in guides like `const result = storage.getFilePreview('image_bucket', 'smiling_penguine.png', '240px', '180px');`, where the parameters passed in are not described.
+- Use sensible variable names :)
 
 ### Notices
 Use notices to point out important information, especially those relevant for first time readers. 
