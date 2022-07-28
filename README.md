@@ -30,6 +30,15 @@ File names should reflect it's content. In general, use dash separated file name
 Internal links that direct to any link under [https://appwrite.io](/docs/command-line#installation) should be relative and precise. For example, when referencing the Appwrite Documentation page, use the `<a href="/docs">Documentation</a>`. When referencing a specific section of a page, link to the section heading where possible. For example `<a href="/docs/databases#databases">Create Your Databases</a>`.
 
 External links (not https://appwrite.io) should be opened in a new tab (`target="_blank"`) and have an HTML attribute of `rel="noopener"`.
+
+Links that are not inline:
+
+```html
+<p>
+<a href="/docs/environment-variables"><i class="icon-angle-circled-right"></i>Learn more about environment variables</a>
+</p>
+```
+
 ### Referencing UI Elements
 When referencing buttons, tabs, and other interactive UI elements, use the full text found on the UI element in bold. For example **Create Project** or **Add Platform**.
 
@@ -39,6 +48,17 @@ When referencing example copy text that appears or could appear on a piece of UI
 When referencing file paths, URLs, IDs, or any text appropriate for monospace representation, use a span element with `class=tag` inline. For example, `<span class="tag">appwrite.json</span>` or `<span class="tag">https://[HOSTNAME_OR_IP]/v1</span>`.
 
 When using generic strings, use double quotes `"`. Double quotes express a string in **all** languages, but single quotes `'` in some languages like Java and C++ represent a **char**. This makes them difficult to copy and paste.
+
+### Procedural Instructions
+When describing steps to do something, especially UI workflows, use an ordered list. For example:
+
+```html
+<ol>
+    <li>Create a script to backups and restore your MariaDB Appwrite schema. Note that trying to backup MariaDB using a docker volume backup can result in a corrupted copy of your data. It is recommended to use MariaDB or MySQL built-in tools for this.</li>
+    <li>Create a script to backups and restore your InfluxDB stats. If you don’t care much about your server stats, you can skip this.</li>
+    <li>Create a script to backup Appwrite storage volume. There are many online resources explaining different ways to backup a docker volume. When running on multiple servers, it is very recommended to use an attachable storage point. Some cloud providers offer integrated backups to such attachable mount like GCP, AWS, DigitalOcean, and the list continues.</li>
+</ol>
+```
 
 ### Code Examples
 
@@ -96,9 +116,47 @@ For showing examples in multiple languages use the list structure:
 </ul>
 ```
 
+For multi-line code examples, the code must be pasted in verbatim between the `<code>` tags.
+
+The following will render correctly:
+```html
+<div class="ide">
+    <pre class="line-numbers"><code class="prism language-http" data-prism>HTTP/1.1 429
+Date: Tue, 20 Aug 2013 14:50:41 GMT
+Status: 429
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 0
+X-RateLimit-Reset: 1377013266
+{
+    "message": "Too many requests",
+    "code": 429
+}</code></pre>
+</div>
+```
+
+The following will have unnecessary line-breaks and indentations. 
+```html
+<div class="ide">
+    <pre class="line-numbers"><code class="prism language-http" data-prism>
+        HTTP/1.1 429
+        Date: Tue, 20 Aug 2013 14:50:41 GMT
+        Status: 429
+        X-RateLimit-Limit: 60
+        X-RateLimit-Remaining: 0
+        X-RateLimit-Reset: 1377013266
+        {
+            "message": "Too many requests",
+            "code": 429
+        }
+    </code></pre>
+</div>
+```
+
 > Don't forget to use proper indenting for all code examples. The indenting of the code examples should be independent from the indentation of the surrounding HTML tags.
 
 For referencing code inline, especially when the code is a non-executable snippet, use spans with `class=tag`. For example, use the method <span class="tag">listDocuments()</span>.
+
+
 
 #### Placeholder Values
 - Be consistent with placeholder values for name type fields across languages. For example, all examples for the Databases query guide should use the database `catalogue` and collection `movies`.
