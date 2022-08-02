@@ -166,7 +166,7 @@ For referencing code inline, especially when the code is a non-executable snippe
 - Use a known generic name as a place holder like `"John Doe"`, avoid real name and celeberty names.
 - Use generic email passwords as placeholders like `"email@example.com", "password"`.
 - Use a relative file name that is context appropriate like `"img/file.png"`.
-- Where possible, use names for teams, collections, databases, buckets, and other resources that are contextually appropriate and hint at the resource type. This is especially true for code examples in guides like `const result = storage.getFilePreview('image_bucket', 'smiling_penguine.png', '240px', '180px');`, where the parameters passed in are not described.
+- Where possible, use names for teams, collections, databases, buckets, and other resources that are contextually appropriate and hint at the resource type. This is especially true for code examples in guides like `const result = storage.getFilePreview('image_bucket', 'smiling_penguin.png', '240px', '180px');`, where the parameters passed in are not described.
 - Use sensible variable names :)
 
 ### Notices
