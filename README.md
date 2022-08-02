@@ -14,7 +14,7 @@ Documentation is an integral part of Appwrite and follows the same philosophy of
 - The **Advanced** section helps a developer learn more complicated concepts like pagination or using permissions. If your proposed addition are not a core component of using a service or requires lengthy explanation, consider adding them to **Advanced**.
 - **External Content** like blog posts and videos are used for documenting examples or integrating Appwrite with third party services. If your proposed addition involves content that are not focused on specific ways of using Appwrite, create a piece of external content. Add the content to the [Awesome Appwrite](https://github.com/appwrite/awesome-appwrite) catalog. The Appwrite team will also be glad to share the external content on Discord and on Appwrite's social accounts.
 
-As a general note, if a behavior is excessively difficult to explain or feels awkwardly complex to document, there is a chance that it is also a design/product issue or bug. Consult Appwrite maintainers and open an issue.
+As a general note, if a behavior is excessively difficult to explain or feels awkwardly complex to document, there is a chance that it is also a design/product issue or bug. If that's the case, consult Appwrite maintainers and [open an issue](https://github.com/appwrite/appwrite/issues/new/choose).
 
 ## Style Guidelines
 When contributing to Appwrite's documentation, use these guidelines to format your contributions.
