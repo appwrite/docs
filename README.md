@@ -72,29 +72,37 @@ Use the following HTML structure to present code examples:
 
 Code examples should require minimum modifications to be executed where possible (working and self-contained).
 
-As of writing this, these are the supported languages for code examples:
+The `data-lang` attribute changes the top right label pill's color. The `data-lang-label` attribute changes the top right label pill's text.
 
-* Markup
-* CSS
-* CLike
-* JavaScript
-* Bash
-* C#
-* Dart
-* Go
-* GraphQL
-* HTTP
-* Java
-* JSON
-* Kotlin
-* Markup-templating
-* PHP
-* Powershell
-* Python
-* Ruby
-* Swift
-* TypeScript
-* YAML
+The supported `data-lang` attribute values can be found in the `ide.less` [style file](https://github.com/appwrite/appwrite/blob/1a0f740459fde58dc41112861f47bc06d1ae5c4c/public/styles/ide.less#L30).
+
+Appwrite uses Prism to highlight code examples. The `class` attribute of the `code` html tag changes how Prism highlights code, The format is `language-<alias>`.
+
+As of writing this, these are the supported languages and their Prism alias for code examples:
+
+|Language           |Prism Alias                                      |
+|-------------------|-------------------------------------------------|
+| Markup            | markup, html, xml, svg, mathml, ssml, atom, rss |
+| CSS               | css                                             |
+| CLike             | clike                                           |
+| JavaScript        | javascript, js                                  |
+| Bash              | bash, shell                                     |
+| C#                | csharp, cs, dotnet                              |
+| Dart              | dart                                            |
+| Go                | go                                              |
+| GraphQL           | graphql                                         |
+| HTTP              | http                                            |
+| Java              | java                                            |
+| JSON              | json                                            |
+| Kotlin            | kotlin, kt, kts                                 |
+| Markup-templating | markup-templating                               |
+| PHP               | php                                             |
+| Powershell        | powershell                                      |
+| Python            | python, py                                      |
+| Ruby              | ruby                                            |
+| Swift             | swift                                           |
+| TypeScript        | typescript, ts                                  |
+
 
 For showing examples in multiple languages use the list structure:
 
