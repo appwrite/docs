@@ -164,7 +164,12 @@ The following will have unnecessary line-breaks and indentations.
 
 For referencing code inline, especially when the code is a non-executable snippet, use spans with `class=tag`. For example, use the method <span class="tag">listDocuments()</span>.
 
+#### Escaping >, <, and &
+Some characters are reserved in HTML and PTHML files, such as `>`, `<`, and `&`. These can be expressed using the following:
 
+- `&` becomes `&amp;`
+- `<` becomes `&lt;`
+- `>` becomes `&gt;`
 
 #### Placeholder Values
 - Be consistent with placeholder values for name type fields across languages. For example, all examples for the Databases query guide should use the database `catalogue` and collection `movies`.
@@ -204,9 +209,7 @@ $image = new View(__DIR__.'/../general/image.phtml');
 ?>
 ```
 
-All screenshots should be in PNG format and taken from a 1290 x 848 px viewport. Appwrite console screenshots should display the account name `Walter O'Brian` with a profile image of WO. Do not include any sensitive data in images. All screenshots of the Appwrite dashboard should support light and dark mode.
-
-Do not include any sensitive data in images. All screenshot of the Appwrite dashboard should support light and dark mode.
+All screenshots should be in PNG format and taken from a 1290 x 848 px viewport. Appwrite console screenshots should display the account name `Walter O'Brian` with a profile image of WO. Do not include any sensitive data in images. Do not include any sensitive data in images.
 
 ### Terminology
 Appwrite has many services and features. Our word choices must be consistent across the many documentation pages to communicate clearly and precisely. 
