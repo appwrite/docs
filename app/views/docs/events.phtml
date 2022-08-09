@@ -1,1 +1,38 @@
-[Placeholder]
+<?php
+
+$events = $this->getParam('events', []);
+
+?>
+
+<h2 id="database-events"><a href="/docs/events#database-events">Database Events</a></h2>
+
+<p>A list of all currently available events you can hook to:</p>
+
+<table class="full text-size-small vertical">
+    <thead>
+    <tr>
+        <th style="width: 240px;">Name</th>
+        <th style="width: 140px;">Payload</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($events as $event):
+        $pattern = $event['pattern'] ?? '';
+        $description = $event['description'] ?? '';
+        $model = $event['model'] ?? '';
+    ?>
+    <tr>
+        <td>
+            <?php echo $this->escape($pattern); ?>
+        </td>
+        <td>
+        <?php if(!empty($model)): ?>
+            <a href="/docs/models/<?php echo $this->escape($model); ?>"><?php echo $this->escape(ucfirst($model)); ?> Object</a>
+        <?php endif; ?>
+        </td>
+        <td><?php echo $this->escape($description); ?></td>
+    </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
