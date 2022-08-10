@@ -3,10 +3,13 @@
 $events = $this->getParam('events', []);
 
 ?>
+<p>Appwrite provides a variety of events that allows your application to react to changes as they happen. A event will fire when a change occurs in your Appwrite project, like when a new user registers or a new file is uploaded to Appwrite. You can consume these events to trigger funtion executions, subscribe to changes in client applications using Appwrite Realtime, or integrate with server side applications using webhooks.</p>
 
-<h2 id="database-events"><a href="/docs/events#database-events">Database Events</a></h2>
+<p>Appwrite events are very versatile, they can be as general or specific as you need. You can subscribe to events for specific resources using their ID or subscribe to changes of all resource of the same type by using a wild card character "*". You can also filter for events of specific actions like "create", "update", or "delete".</p>
 
-<p>A list of all currently available events you can hook to:</p>
+<p>You can find events for changes in the Storage, Databases, Functions, and Authentication services.</p>
+
+<h2 id="storage-events"><a href="/docs/events#storage-events">Storage Service Events</a></h2>
 
 <table class="full text-size-small vertical">
     <thead>
@@ -22,6 +25,7 @@ $events = $this->getParam('events', []);
         $description = $event['description'] ?? '';
         $model = $event['model'] ?? '';
     ?>
+    <?php if(str_starts_with($pattern, 'bucket')): ?>
     <tr>
         <td>
             <?php echo $this->escape($pattern); ?>
@@ -33,6 +37,109 @@ $events = $this->getParam('events', []);
         </td>
         <td><?php echo $this->escape($description); ?></td>
     </tr>
+    <?php endif; ?>
     <?php endforeach; ?>
     </tbody>
 </table>
+
+<h2 id="databases-events"><a href="/docs/events#databases-events">Databases Service Events</a></h2>
+
+<table class="full text-size-small vertical">
+    <thead>
+    <tr>
+        <th style="width: 240px;">Name</th>
+        <th style="width: 140px;">Payload</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($events as $event):
+        $pattern = $event['pattern'] ?? '';
+        $description = $event['description'] ?? '';
+        $model = $event['model'] ?? '';
+    ?>
+    <?php if(str_starts_with($pattern, 'databases')): ?>
+    <tr>
+        <td>
+            <?php echo $this->escape($pattern); ?>
+        </td>
+        <td>
+        <?php if(!empty($model)): ?>
+            <a href="/docs/models/<?php echo $this->escape($model); ?>"><?php echo $this->escape(ucfirst($model)); ?> Object</a>
+        <?php endif; ?>
+        </td>
+        <td><?php echo $this->escape($description); ?></td>
+    </tr>
+    <?php endif; ?>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+<h2 id="functions-events"><a href="/docs/events#functions-events">Functions Service Events</a></h2>
+
+<table class="full text-size-small vertical">
+    <thead>
+    <tr>
+        <th style="width: 240px;">Name</th>
+        <th style="width: 140px;">Payload</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($events as $event):
+        $pattern = $event['pattern'] ?? '';
+        $description = $event['description'] ?? '';
+        $model = $event['model'] ?? '';
+    ?>
+    <?php if(str_starts_with($pattern, 'bucket')): ?>
+    <tr>
+        <td>
+            <?php echo $this->escape($pattern); ?>
+        </td>
+        <td>
+        <?php if(!empty($model)): ?>
+            <a href="/docs/models/<?php echo $this->escape($model); ?>"><?php echo $this->escape(ucfirst($model)); ?> Object</a>
+        <?php endif; ?>
+        </td>
+        <td><?php echo $this->escape($description); ?></td>
+    </tr>
+    <?php endif; ?>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+
+<h2 id="authentication-events"><a href="/docs/events#authentication-events">Authentication Service Events</a></h2>
+
+<table class="full text-size-small vertical">
+    <thead>
+    <tr>
+        <th style="width: 240px;">Name</th>
+        <th style="width: 140px;">Payload</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($events as $event):
+        $pattern = $event['pattern'] ?? '';
+        $description = $event['description'] ?? '';
+        $model = $event['model'] ?? '';
+    ?>
+    <?php if(str_starts_with($pattern, 'users') || str_starts_with($pattern, 'teams')): ?>
+    <tr>
+        <td>
+            <?php echo $this->escape($pattern); ?>
+        </td>
+        <td>
+        <?php if(!empty($model)): ?>
+            <a href="/docs/models/<?php echo $this->escape($model); ?>"><?php echo $this->escape(ucfirst($model)); ?> Object</a>
+        <?php endif; ?>
+        </td>
+        <td><?php echo $this->escape($description); ?></td>
+    </tr>
+    <?php endif; ?>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+<h2 id="events-limitations"><a href="/docs/events#events-limitations">Known Limitations</a></h2>
