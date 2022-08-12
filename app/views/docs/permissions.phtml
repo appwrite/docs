@@ -1,19 +1,19 @@
 <p>Appwrite permission mechanism offers a simple and yet flexible way to manage which users, teams, or roles can access a specific resource of your project, like documents and files.</p>
 
-<p>Using permissions, you can decide that only <span class="tag">user A</span> and <span class="tag">user B</span> will have read access to a specific database document, while <span class="tag">user C</span> and <span class="tag">team X</span> will be the only ones with write access.</p>
+<p>Using permissions, you can decide that only <span class="tag">user A</span> and <span class="tag">user B</span> will have read and update access to a specific database document, while <span class="tag">user C</span> and <span class="tag">team X</span> will be the only ones with create and delete access.</p>
 
-<p>As the name suggests, read permission will allow users and teams to view a resource while with write permission, they will be able to both update or delete it.</p>
+<p>As the name suggests, read permission allows a user to view a resource, create allows users to create new resources, update allows a user to make changes to a resource, and delete allows the user to remove the resource.</p>
 
-<p>Read and write permissions can be given to specific users, entire teams, or only to a particular group of role members inside a team.</p>
+<p>All permissions can be given to specific users, entire teams, or only to team members with a specific role.</p>
 
-<p>A project user can only grant a resource with permissions he or she owns. For example, if a user is trying to share a document with a team, he or she are not members of, they will encounter a 401 not authorized error.</p>
+<p>A project user can only grant a resource with permissions that they own. For example, if a user is trying to share a document with a team he or she are not members of, they will encounter a 401 not authorized error.</p>
 
 <div class="notice calm margin-top-large margin-bottom-large">
     <h4>Appwrite Resource</h4>
     
-    <p>An Appwrite resource can be a database collection, database document, or a storage file. Each resource has both read and write permissions to define who can access it.</p>
+    <p>An Appwrite resource can be a database, collection, document, or a file. Each resource has both read and write permissions to define who can access it.</p>
     
-    <p>Using the Appwrite permissions mechanism, you can share resources between users, teams, and members with different roles.</p>
+    <p>Using the Appwrite permissions mechanism, you can grant resource access to users, teams, and members with different roles.</p>
 </div>
 
 <h2 id="default-values"><a href="/docs/permissions#default-values">Default Values</a></h2>
@@ -23,13 +23,13 @@
 <div class="notice calm margin-top-large margin-bottom-large">
     <h4>Note</h4>
     
-    <p>You will need an active session to handle database transactions for your collections.</p>
+    <p>You will need an active session to perform database transactions for your collections.</p>
     <p>If you have rules where you allow for wild cards or role:guest in a collection, you can create an Anonymous Session before you make the API call.</p>
 </div>
 
 <h2 id="server-integration"><a href="/docs/permissions#server-integration">Server Integration</a></h2>
 
-<p>A server or <a href="/docs/admin" target="_blank">admin integration</a> can be used for increased flexibility. When using a server integration in combination with the proper <a href="/docs/keys#scopes" target="_blank">API scopes</a>, you can have both read and write access to any of your project resources regardless of their permissions.</p>
+<p>A server or <a href="/docs/admin" target="_blank">admin integration</a> can be used for increased flexibility. When using a Server SDK in combination with the proper <a href="/docs/keys#scopes" target="_blank">API key scopes</a>, you can have all types of access to any of your project resources regardless of their permissions.</p>
 
 <p>Using the server integration flexibility, you can change resource permissions, share resources between different users and teams, or edit and delete them without any limitations.</p>
 
@@ -101,6 +101,38 @@
     </tbody>
 </table>
 
+<h2 id="access-types"><a href="/docs/permissions#access-types">Access Types</a></h2>
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 180px">Type</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Permission.read()</td>
+        <td>Access to view a resource. Does not apply to functions.</td>
+    </tr>
+    <tr>
+        <td>Permission.create()</td>
+        <td>Access to create new resources. Only applies to collections, applying this type of access results in an error. Does not apply to functions.</td>
+    </tr>
+    <tr>
+        <td>Permission.update()</td>
+        <td>Access to alter a resource, but not remove or create new resources. Does not apply to functions.</td>
+    </tr>
+    <tr>
+        <td>Permission.delete()</td>
+        <td>Access to remove a resource. Does not apply to functions.</td>
+    </tr>
+    <tr>
+        <td>Permission.execute()</td>
+        <td>Access to execute an Appwrite Function.</td>
+    </tr>
+    </tbody>
+</table>
+
 <h2 id="examples"><a href="/docs/permissions#examples">Examples</a></h2>
 
 <p>The examples below will show you how you can use the different Appwrite permissions to manage access control to your project resources.</p>
@@ -109,7 +141,7 @@
 
 <h3 id="example-1"><a href="/docs/permissions#example-1">Example #1 - Basic Usage</a></h3>
 
-<p>In the following example, we are creating a document that can be read by everyone and only be edited, or deleted by a user with a UID <span class="tag">user:5c1f88b42259e</span>.</p>
+<p>In the following example, we are creating a document can be viewed by anyone, edited by writers or admins, and deleted by a user with UID <span class="tag">user:5c1f88b42259e</span> or administrators.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases } from "appwrite";
@@ -123,10 +155,14 @@ client
 const databases = new Databases(client, '[DATABASE_ID]');
 
 let promise = databases.createDocument(
-    '[COLLECTION_ID]',
-    {'actorName': 'Chris Evans', 'height': 183},
-    ['role:all'], // Anyone can view this document
-    ['user:5c1f88b42259e'] // You can only grant permissions you own, this must be the current user UID
+    '[COLLECTION_ID]', // Collection ID
+    {'actorName': 'Chris Evans', 'height': 183}, // Data
+    [ // Permissions
+        Permission.read("role:all"), // Anyone can view this document
+        Permission.edit(["team:writers", "team:admin"]), // Only writers and admins can edit this document
+        Permission.delete("user:5c1f88b42259e") 
+        Permission.delete("team:admin") // Only user 5c1f88b42259e and admins can delete this document
+    ]
 );
 
 promise.then(function (response) {
@@ -156,8 +192,12 @@ const databases = new Databases(client, '[DATABASE_ID]');
 let promise = databases.createDocument(
     '[COLLECTION_ID]',
     {'actorName': 'Chris Evans', 'height': 183},
-    ['team:5c1f88b87435e'], // The user must be a team member to grant this permission
-    ['team:5c1f88b87435e/owner']); // The user must be a team owner to grant this permission
+    [
+        Permissions.read('team:5c1f88b87435e')
+        Permissions.edit('team:5c1f88b87435e/owner'),
+        Permissions.delete('team:5c1f88b87435e/owner'),
+    ], // The user must be a team member to grant these permissions
+);
 
 promise.then(function (response) {
     console.log(response);
@@ -167,57 +207,3 @@ promise.then(function (response) {
 
 </code></pre>
 </div>
-
-<!-- 
-
-<h2 id="roles">Roles</h2>
-
-<p>Appwrite currently has 6 different roles aimed to handle access control to specific API endpoints or entire services.</p>
-
-<p>You can review Appwrite API references to see which role is needed in order to gain access to a specific API endpoint or service.</p>
-
-<p>For example, only users with a guest role can access authentication endpoints while access to member users is denied.</p>
-
-<p>You can change your project members' roles from your project settings in the Appwrite console.</p>
-
-<table class="full">
-    <thead>
-    <tr>
-        <td style="width: 80px">ID</td>
-        <td style="width: 120px">Name</td>
-        <td>Description</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>0</td>
-        <td>Guest</td>
-        <td>Any user that has not been authenticated is given this role.</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>Member</td>
-        <td>Any user that has successfully authenticated using one of the authentication endpoints is given this role.</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>Admin</td>
-        <td>Referred to a user granted this with this role in your Appwrite project console. This role is only available in <a href="/docs/mods">admin mode</a></td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>Developer</td>
-        <td>Referred to a user granted this with this role in your Appwrite project console. This role is only available in <a href="/docs/mods">admin mode</a></td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>Owner</td>
-        <td>Referred to a user granted this with this role in your Appwrite project console. This role is only available in <a href="/docs/mods">admin mode</a></td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td>App</td>
-        <td>This role is given to your API key. This role is only available in <a href="/docs/mods">admin mode</a></td>
-    </tr>
-    </tbody>
-</table> -->
