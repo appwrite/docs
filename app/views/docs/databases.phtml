@@ -296,7 +296,7 @@ func main() async throws{
     </li>
 </ul>
 
-<p>The following operators are currently supported:</p>
+<p>The following query methods are currently supported:</p>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
         <tr>
@@ -314,25 +314,51 @@ func main() async throws{
             <td>Not equal to.</td>
         </tr>
         <tr>
-            <td>lesser</td>
-            <td>Lesser than.</td>
+            <td>lessThan</td>
+            <td>Less than.</td>
         </tr>
         <tr>
-            <td>lesserEqual</td>
+            <td>lessThanEqual</td>
             <td>Less than or equal to.</td>
         </tr>
         <tr>
-            <td>greater</td>
+            <td>greaterThan</td>
             <td>Greater than.</td>
         </tr>
         <tr>
-            <td>greaterEqual</td>
+            <td>greaterThanEqual</td>
             <td>Greater than or equal to.</td>
         </tr>
         <tr>
             <td>search</td>
             <td>Requires a Fulltext Index.</td>
         </tr>
+        <tr>
+            <td>orderDesc</td>
+            <td>Order results in descending order.</td>
+        </tr>
+        <tr>
+            <td>orderAsc</td>
+            <td>Order results in ascending order.</td>
+        </tr>
+        <tr>
+            <td>limit</td>
+            <td>Limits the number of results returned by the query. Used for pagination.</td>
+        </tr>
+        <tr>
+            <td>offset</td>
+            <td>Offset the results returned by skipping some of the results. Used for pagination.</td>
+        </tr>
+        <tr>
+            <td>cursorAfter</td>
+            <td>Places the cursor after the specified item ID. Used for pagination.</td>
+        </tr>
+        <tr>
+            <td>cursorBefore</td>
+            <td>Places the cursor before the specified item ID. Used for pagination.</td>
+        </tr>
+        
+        orderDesc(string $attribute): self
     </tbody>
 </table>
 
