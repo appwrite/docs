@@ -644,11 +644,13 @@ class MainActivity : AppCompatActivity() {
 
 <h3><a href="/docs/functions#abuseLimits" id="abuseLimits">Abuse and Limits</a></h3>
 
-<p>Appwrite allows your project's end-users to execute Cloud Functions using client API or your client SDK. Execution is permitted to any user who has been granted the "execute" permission in your Cloud Functions settings page. The execution permission can accept any of the typical Appwrite <a href="/docs/permissions">permission types</a>.</p>
+<p>Appwrite Functions can be executed using Client or Server SDKs. Client SDKs must be authenticated with an account that has been granted execution <a href="/docs/permissions">permissions</a> on the function's settings page. Server SDKs require an API key with the correct scopes.</p>
 
-<p>When triggering a Cloud Function execution from the client, your users will be limited to a specific amount of execution per minute to make sure your Appwrite server is not being abused. The default limit is 60 calls per 1 minute. You can edit this limit using the server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
+<p>The Functions Service APIs are rate limited to 60 calls per minute per account when using a Client SDK. Learn more about <a href="docs/rate-limits">rate limiting</a>. The response size of a Cloud Function is limited to 1MB. Responses larger than 1MB should be handled using Appwrite's Databases or Storage service.</p>
 
-<p>The response size of a Cloud Function is limited to 1MB. Reponses larger than 1MB should be handled using Appwrite's Databases or Storage service.</p>
+<p>Each execution has a default timeout of 15 seconds to prevent hanging functions from blocking resources. This timeout can be configured per function on a function's settings page or in <span class="tag">appwrite.json</span> for up to 900 seconds.</p>
+
+<p>The maximum configurable timeout can be increased by changing the <span class="tag">_APP_FUNCTIONS_TIMEOUT</span> environment variable. This environment variable changes the configurable maximum but does not alter existing individual configurations.</p>
 
 <h2><a href="/docs/functions#ignoreFiles" id="ignoreFiles">Ignore Files</a></h2>
 
