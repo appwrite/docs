@@ -11,7 +11,7 @@
 <div class="notice calm margin-top-large margin-bottom-large">
     <h4>Appwrite Resource</h4>
     
-    <p>An Appwrite resource can be a database, collection, document, or a file. Each resource has both read and write permissions to define who can access it.</p>
+    <p>An Appwrite resource can be a database, collection, document, bucket, or a file. Each resource has both read and write permissions to define who can access it.</p>
     
     <p>Using the Appwrite permissions mechanism, you can grant resource access to users, teams, and members with different roles.</p>
 </div>
@@ -24,7 +24,7 @@
     <h4>Note</h4>
     
     <p>You will need an active session to perform database transactions for your collections.</p>
-    <p>If you have rules where you allow for wild cards or role:guest in a collection, you can create an Anonymous Session before you make the API call.</p>
+    <p>If you have rules where you allow for all users or guests in a collection, you can create an Anonymous Session before you make the API call.</p>
 </div>
 
 <h2 id="server-integration"><a href="/docs/permissions#server-integration">Server Integration</a></h2>
@@ -45,10 +45,17 @@
     <tbody>
     <tr>
         <td>
-            role:all
+            all
             <p class="margin-top-small text-fade">version >= 0.12</p>
         </td>
         <td>Wildcard permission. Gives anyone read or write access.</td>
+    </tr>
+    <tr>
+        <td>
+            guests
+            <p class="margin-top-small text-fade">version >= 0.16</p>
+        </td>
+        <td>Access to any guest user. Logged in users don't have access to this role.</td>
     </tr>
     <tr>
         <td>user:[USER_ID]</td>
@@ -66,38 +73,6 @@
         <td>member:[MEMBER_ID]</td>
         <td>Access to a specific member of a team. Unlike the basic user permission, this permission will only be valid as long as the user is still an active member of the specific team. To view user member ID, fetch the team <a href="/docs/client/teams#teamsGetMemberships">members list</a>.</td>
     </tr>
-    <tr>
-        <td>
-            role:guest
-            <p class="margin-top-small text-fade">version >= 0.7</p>
-        </td>
-        <td>Access to any guest user. Logged in users don't have access to this role.</td>
-    </tr>
-    <tr>
-        <td>
-            role:member
-            <p class="margin-top-small text-fade">version >= 0.7</p>
-        </td>
-        <td>Access to any logged in user. A logged in user is a user with a valid session. Logged in users don't have access to `role:guest` role. For wildcard access use `*` role.</td>
-    </tr>
-    <tr>
-        <td>
-            *
-            <p class="margin-top-small text-fade text-danger">version <= 0.11 (deprecated)</p>
-        </td>
-        <td>Wildcard permission. Gives anyone read or write access.</td>
-    </tr>
-    <!-- <tr>
-        <td>
-            role:app
-            <p class="margin-top-small text-fade">version >= 0.7</p>
-        </td>
-        <td>Access to any generated API key in the project. Useful when you want to limit access to a server integration only.</td>
-    </tr> -->
-    <!-- <tr>
-        <td>role:[ROLE_ID]</td>
-        <td>Access to a user with a specific role. For Example: 'role:4' will give access only to project owners. View the roles table above to learn more about different roles in the platform.</td>
-    </tr> -->
     </tbody>
 </table>
 
@@ -158,7 +133,7 @@ let promise = databases.createDocument(
     '[COLLECTION_ID]', // Collection ID
     {'actorName': 'Chris Evans', 'height': 183}, // Data
     [ // Permissions
-        Permission.read("role:all"), // Anyone can view this document
+        Permission.read("all"), // Anyone can view this document
         Permission.edit(["team:writers", "team:admin"]), // Only writers and admins can edit this document
         Permission.delete("user:5c1f88b42259e") 
         Permission.delete("team:admin") // Only user 5c1f88b42259e and admins can delete this document
