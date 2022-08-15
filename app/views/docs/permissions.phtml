@@ -33,8 +33,8 @@
 
 <p>Using the server integration flexibility, you can change resource permissions, share resources between different users and teams, or edit and delete them without any limitations.</p>
 
-<h2 id="types"><a href="/docs/permissions#types">Permission Types</a></h2>
-
+<h2 id="permission-roles"><a href="/docs/permissions#permission-roles">Permission Roles</a></h2>
+<p>In Client and Server SDKs, you will find a <b>Role</b> class with helper methods for each role described below.</p>
 <table class="full text-size-small">
     <thead>
     <tr>
@@ -44,39 +44,34 @@
     </thead>
     <tbody>
     <tr>
-        <td>
-            all
-            <p class="margin-top-small text-fade">version >= 0.12</p>
-        </td>
+        <td>Role.any()</td>
         <td>Wildcard permission. Gives anyone read or write access.</td>
     </tr>
     <tr>
-        <td>
-            guests
-            <p class="margin-top-small text-fade">version >= 0.16</p>
-        </td>
-        <td>Access to any guest user. Logged in users don't have access to this role.</td>
+        <td>Role.guests()</td>
+        <td>Access to any guest user with an anonymous session. Logged in users don't have access to this role.</td>
     </tr>
     <tr>
-        <td>user:[USER_ID]</td>
+        <td>Role.users()</td>
+        <td>Access to authenticated users.</td>
+    </tr>
+    <tr>
+        <td>Role.user([USER_ID])</td>
         <td>Access to a specific user by his UID.</td>
     </tr>
     <tr>
-        <td>team:[TEAM_ID]</td>
+        <td>Role.team([TEAM_ID])</td>
         <td>Access to any member of the specific team. To gain access to this permission, the user must be the team creator (owner), or receive and accept an invitation to join this team.</td>
     </tr>
     <tr>
-        <td>team:[TEAM_ID]/[ROLE]</td>
+        <td>Role.team([TEAM_ID], [ROLE])</td>
         <td>Access to any member who possesses a specific role in a team. To gain access to this permission, the user must be a member of the specific team and have the given role assigned to him or her. Team roles can be assigned when inviting a user to become a team member.</td>
-    </tr>
-    <tr>
-        <td>member:[MEMBER_ID]</td>
-        <td>Access to a specific member of a team. Unlike the basic user permission, this permission will only be valid as long as the user is still an active member of the specific team. To view user member ID, fetch the team <a href="/docs/client/teams#teamsGetMemberships">members list</a>.</td>
     </tr>
     </tbody>
 </table>
 
-<h2 id="access-types"><a href="/docs/permissions#access-types">Access Types</a></h2>
+<h2 id="permission-types"><a href="/docs/permissions#permission-types">Permission Types</a></h2>
+<p>In Client and Server SDKs, you will find a <b>Permission</b> class with helper methods for each role described below.</p>
 <table class="full text-size-small">
     <thead>
     <tr>
@@ -119,7 +114,7 @@
 <p>In the following example, we are creating a document can be viewed by anyone, edited by writers or admins, and deleted by a user with UID <span class="tag">user:5c1f88b42259e</span> or administrators.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases } from "appwrite";
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Permission, Role } from "appwrite";
         
 const client = new Client();
 
@@ -133,10 +128,10 @@ let promise = databases.createDocument(
     '[COLLECTION_ID]', // Collection ID
     {'actorName': 'Chris Evans', 'height': 183}, // Data
     [ // Permissions
-        Permission.read("all"), // Anyone can view this document
-        Permission.edit(["team:writers", "team:admin"]), // Only writers and admins can edit this document
-        Permission.delete("user:5c1f88b42259e") 
-        Permission.delete("team:admin") // Only user 5c1f88b42259e and admins can delete this document
+        Permission.read(Role.any()), // Anyone can view this document
+        Permission.edit([Role.team("writers"), Role.team("admin")]), // Only writers and admins can edit this document
+        Permission.delete(Role.user("5c1f88b42259e")) 
+        Permission.delete(Role.user("5c1f88b42259e")) // Only user 5c1f88b42259e and admins can delete this document
     ]
 );
 
@@ -151,10 +146,10 @@ promise.then(function (response) {
 
 <h3 id="example-2"><a href="/docs/permissions#example-2">Example #2 - Team Roles</a></h3>
 
-<p>In the following example, we are creating a document that can be read-only by members of <span class="tag">team:5c1f88b87435e</span> and can only be edited, or deleted by members of the same team that possesses the role <span class="tag">owner</span>.</p>
+<p>In the following example, we are creating a document that can be read-only by members of <span class="tag">team:5c1f88b87435e</span> and can only be edited, or deleted by members of the same team that possesses the team role <span class="tag">owner</span>.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases } from "appwrite";
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Permission, Role } from "appwrite";
         
 const client = new Client();
 
@@ -168,9 +163,9 @@ let promise = databases.createDocument(
     '[COLLECTION_ID]',
     {'actorName': 'Chris Evans', 'height': 183},
     [
-        Permissions.read('team:5c1f88b87435e')
-        Permissions.edit('team:5c1f88b87435e/owner'),
-        Permissions.delete('team:5c1f88b87435e/owner'),
+        Permission.read(Role.team("5c1f88b87435e"))
+        Permission.edit(Role.team("5c1f88b87435e", "owner")),
+        Permission.delete(Role.team("5c1f88b87435e", "owner"),
     ], // The user must be a team member to grant these permissions
 );
 
