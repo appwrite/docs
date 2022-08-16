@@ -21,7 +21,7 @@ $image = new View(__DIR__.'/../general/image.phtml');
 <p>The Appwrite architecture allows to monitor and detect how the different microservices perform efficiently. Each microservice has its own usage metrics and logs to allow you to debug or scale it quickly. Using Docker, you can also limit the resource usage (CPU, Memory, Swap) by specific services.</p>
 
 <h2>Responsibilities</h2>
-<p>Each service in the stack has a specific type of workload he has to handle, like sending emails, executing cloud functions or logging user activity. All the heavy lifting workloads are delegated from the API service to the background workers consuming messages in an event-driven way from the Appwrite pub/sub mechanism (implemented using Redis). Using this design, we make sure the Appwrite API is fast, responsive and has to handle only critical sync operations as appropriate for a request->response based service that should respond as fast as possible for minimum latency.</p>
+<p>Each service in the stack has a specific type of workload it has to handle, like sending emails, executing cloud functions or logging user activity. All the heavy lifting workloads are delegated from the API service to the background workers consuming messages in an event-driven way from the Appwrite pub/sub mechanism (implemented using Redis). Using this design, we make sure the Appwrite API is fast, responsive and has to handle only critical sync operations as appropriate for a request->response based service that should respond as fast as possible for minimum latency.</p>
 
 <h2>Traefik</h2>
 

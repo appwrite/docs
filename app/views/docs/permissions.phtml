@@ -6,12 +6,12 @@
 
 <p>All permissions can be given to specific users, entire teams, or only to team members with a specific role.</p>
 
-<p>A project user can only grant a resource with permissions that they own. For example, if a user is trying to share a document with a team he or she are not members of, they will encounter a 401 not authorized error.</p>
+<p>A project user can only grant a resource with permissions that they own. For example, if a user is trying to share a document with a team he or she are not members of, they will encounter a 401 not authorized error. If your app needs users to grant access to teams they're not a member of, you can create Appwrite Functions with a <a href="/docs/getting-started-for-server">Server SDK</a> to achieve this functionality.</p>
 
 <div class="notice calm margin-top-large margin-bottom-large">
     <h4>Appwrite Resource</h4>
     
-    <p>An Appwrite resource can be a database, collection, document, bucket, or a file. Each resource has both read and write permissions to define who can access it.</p>
+    <p>An Appwrite resource can be a database, collection, document, bucket, or a file. Each resource can have a set of permissions that govern the type access granted to users.</p>
     
     <p>Using the Appwrite permissions mechanism, you can grant resource access to users, teams, and members with different roles.</p>
 </div>
@@ -45,27 +45,27 @@
     <tbody>
     <tr>
         <td>Role.any()</td>
-        <td>Wildcard permission. Gives anyone read or write access.</td>
+        <td>Grants access to anyone.</td>
     </tr>
     <tr>
         <td>Role.guests()</td>
-        <td>Access to any guest user with an anonymous session. Logged in users don't have access to this role.</td>
+        <td>Grants access to any guest user with an anonymous session. Logged in users don't have access to this role.</td>
     </tr>
     <tr>
         <td>Role.users()</td>
-        <td>Access to authenticated users.</td>
+        <td>Grants access to any authenticated user.</td>
     </tr>
     <tr>
         <td>Role.user([USER_ID])</td>
-        <td>Access to a specific user by his UID.</td>
+        <td>Grants access to a specific user by UID.</td>
     </tr>
     <tr>
         <td>Role.team([TEAM_ID])</td>
-        <td>Access to any member of the specific team. To gain access to this permission, the user must be the team creator (owner), or receive and accept an invitation to join this team.</td>
+        <td>Grants access to any member of the specific team. To gain access to this permission, the user must be the team creator (owner), or receive and accept an invitation to join this team.</td>
     </tr>
     <tr>
         <td>Role.team([TEAM_ID], [ROLE])</td>
-        <td>Access to any member who possesses a specific role in a team. To gain access to this permission, the user must be a member of the specific team and have the given role assigned to him or her. Team roles can be assigned when inviting a user to become a team member.</td>
+        <td>Grants access to any member who possesses a specific role in a team. To gain access to this permission, the user must be a member of the specific team and have the given role assigned to them. Team roles can be assigned when inviting a user to become a team member.</td>
     </tr>
     </tbody>
 </table>
