@@ -142,6 +142,7 @@ $events = $this->getParam('events', []);
 
 <h2 id="events-limitations"><a href="/docs/events#events-limitations">Known Limitations</a></h2>
 <p>When events fire, only existing subscriptions for that event will receive the update. If your client or server side integrations lose network connection temporarily, delivery of the event is not guaranteed.</p>
+<p>For self-hosted instances, when the Appwrite containers are shut down and restarted, events with pending webhooks and subscription updates will not be delivered.</p>
 <p>A change to a resource can cause multiple events to fire. For example adding a new document with ID "lion-king" to a collection called "movies" will cause all of the below events to fire.</p>
 <div class="ide margin-top-small" data-lang="json" data-lang-label="JSON">
     <pre class="line-numbers"><code class="prism language-json" data-prism>{
