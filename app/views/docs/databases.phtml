@@ -35,18 +35,16 @@
 <p>
     Appwrite provides permissions to restrict access to documents at two levels, document and collection level. When a user has the appropriate type of <a href="/docs/permissions/">access permissions</a> granted at **either** the document or the collection level, it will be able to view or make changes to the document. If the permission field is left empty, no one can access the document.
 </p>
-<h4>Document Level Permissions</h4>
-<p>Document-level permissions grant access to individual documents. Document level permissions are only enabled if Document Security is enabled in the settings of your collection.</p>
-
-<h4>Collection Level Permissions</h4>
-<p>Collection-level permissions apply to every document in the collection.</p>
-
 <div class="notice margin-top-large margin-bottom-large">
     <h5>Active Session Required</h5>
 
     <p>For security purposes, an active Account session is required to create resources. So, even if wildcard write permissions are set, only logged-in users can create documents in a collection. If you require this behavior for your app, create an <a href="/docs/client/account?sdk=web-default#accountCreateAnonymousSession">anonymous session</a> first. An active session helps Appwrite enforce rate-control limits and protect your projects from intensive write operations.</p>
 </div>
+<h4>Document Level Permissions</h4>
+<p>Document level permissions grant access to individual documents. Document level permissions are only enabled if Document Security is enabled in the settings of your collection.</p>
 
+<h4>Collection Level Permissions</h4>
+<p>Collection level permissions apply to every document in the collection.</p>
 
 <h2><a href="/docs/databases#attributes" id="attributes">Create Attributes</a></h2>
 <p>

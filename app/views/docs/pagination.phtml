@@ -131,11 +131,11 @@ func main() async throws {
 const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
 
 // Page 1
-const page1 = await databases.listDocuments('movies', [Query.limit(25), Query.offset(0)]);
+const page1 = await databases.listDocuments('movies', [Query.limit(25)]);
 const lastId = results.documents[results.documents.length - 1].$id;
 
 // Page 2
-const page2 = await databases.listDocuments('movies', [Query.limit(25), Query.offset(0), Query.offset(0), Query.cursorAfter(lastId)]);
+const page2 = await databases.listDocuments('movies', [Query.limit(25), Query.cursorAfter(lastId)]);
         </code></pre>
         </div>
     </li>
