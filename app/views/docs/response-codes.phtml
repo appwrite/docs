@@ -80,6 +80,12 @@ $errorTypes = $this->getParam('errors', []);
         </tr>
 
         <tr>
+            <td data-title="Code: ">413</td>
+            <td data-title="Text: ">Payload Too Large</td>
+            <td data-title="Description: ">This indicates that the request entity is larger than limits defined by server. This status code will usually appear happen when uploading a file or function that is too large</td>
+        </tr>
+
+        <tr>
             <td data-title="Code: ">416</td>
             <td data-title="Text: ">Invalid Range</td>
             <td data-title="Description: ">Invalid value in the range or content-range headers. Usually returned while uploading or downloading files using range header but the provided range value is not valid.</td>
