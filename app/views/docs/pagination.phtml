@@ -156,7 +156,7 @@ void main() async {
         // Page 2
         final page2 = await databases.listDocuments(
             collectionId: 'movies',
-            queries: [Query.limit(25), Query.offset(0) Query.cursorAfter(lastId)]);
+            queries: [Query.limit(25), Query.cursorAfter(lastId)]);
     } on AppwriteException catch(e) {
         print(e);
     }
@@ -196,7 +196,7 @@ class MainActivity : AppCompatActivity() {
             // Page 2
             val page2 = databases.listDocuments(
                 collectionId = "[COLLECTION_ID]",
-                queries = [Query.limit(25), Query.offset(0) Query.cursorAfter(lastId)]
+                queries = [Query.limit(25), Query.cursorAfter(lastId)]
             )    
         }
     }
@@ -226,7 +226,7 @@ func main() async throws {
     // Page 2
     list = try await databases.listDocuments(
         collectionId: "[COLLECTION_ID]",
-        queries: [Query.limit(25), Query.offset(0) Query.cursorAfter(lastId)]
+        queries: [Query.limit(25), Query.cursorAfter(lastId)]
     )
     print(list.toMap())
 }</code></pre>
