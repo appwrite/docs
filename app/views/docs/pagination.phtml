@@ -13,14 +13,14 @@
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
 const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
                 
 // Page 1
 const page1 = await databases.listDocuments('movies', [Query.limit(25), Query.offset(0)]);
 
 // Page 2
-const page2 = await databases.listDocuments('movies', [Query.limit(25), Query.offset(25] ));
+const page2 = await databases.listDocuments('movies', [Query.limit(25), Query.offset(25)]);
         </code></pre>
         </div>
     </li>
@@ -127,7 +127,7 @@ func main() async throws {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
 const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
 
 // Page 1
@@ -150,7 +150,7 @@ void main() async {
     try {
         final page1 = await databases.listDocuments(
             collectionId: 'movies',
-            queries: [Query.limit(25), Query.offset(0)])
+            queries: [Query.limit(25)])
         final lastId = page1.documents[page1.documents.length - 1].$id;
 
         // Page 2
@@ -189,7 +189,7 @@ class MainActivity : AppCompatActivity() {
         GlobalScope.launch {
             val page1 = databases.listDocuments(
                 collectionId = "[COLLECTION_ID]",
-                queries = [Query.limit(25), Query.offset(0)]
+                queries = [Query.limit(25)]
             )
             val lastId = page1.documents[page1.documents.length - 1].$id
 
@@ -218,7 +218,7 @@ func main() async throws {
     // Page 1
     var list = try await databases.listDocuments(
         collectionId: "[COLLECTION_ID]",
-        queries: [Query.limit(25), Query.offset(0) Query.cursorAfter(lastId)]
+        queries: [Query.limit(25)]
     )
 
     let lastId = list.documents[list.documents.count - 1].$id

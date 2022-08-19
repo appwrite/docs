@@ -4,14 +4,14 @@
 
 <p>As the name suggests, read permission allows a user to view a resource, create allows users to create new resources, update allows a user to make changes to a resource, and delete allows the user to remove the resource.</p>
 
-<p>All permissions can be given to specific users, entire teams, or only to team members with a specific role.</p>
+<p>All permissions can be granted to inividual or groups of users, entire teams, or only to team members with a specific role. Permission can also be granted based on authentication status such as to all users, only authenticated users, or only guest users.</p>
 
-<p>A project user can only grant a resource with permissions that they own. For example, if a user is trying to share a document with a team he or she are not members of, they will encounter a 401 not authorized error.</p>
+<p>A project user can only grant a resource with permissions that they own. For example, if a user is trying to share a document with a team that they are not a member of, they will encounter a 401 not authorized error.</p>
 
 <div class="notice calm margin-top-large margin-bottom-large">
     <h4>Appwrite Resource</h4>
     
-    <p>An Appwrite resource can be a database, collection, document, bucket, or a file. Each resource has both read and write permissions to define who can access it.</p>
+    <p>An Appwrite resource can be a database, collection, document, bucket, or a file. Each resource has read, write, update, and delete permissions to define who can interact with it.</p>
     
     <p>Using the Appwrite permissions mechanism, you can grant resource access to users, teams, and members with different roles.</p>
 </div>
@@ -45,10 +45,10 @@
     <tbody>
     <tr>
         <td>
-            all
+            any
             <p class="margin-top-small text-fade">version >= 0.12</p>
         </td>
-        <td>Wildcard permission. Gives anyone read or write access.</td>
+        <td>Gives access to anyone.</td>
     </tr>
     <tr>
         <td>
@@ -116,7 +116,7 @@
 
 <h3 id="example-1"><a href="/docs/permissions#example-1">Example #1 - Basic Usage</a></h3>
 
-<p>In the following example, we are creating a document can be viewed by anyone, edited by writers or admins, and deleted by a user with UID <span class="tag">user:5c1f88b42259e</span> or administrators.</p>
+<p>In the following example, we are creating a document that can be viewed by anyone, edited by writers or admins, and deleted by a user with UID <span class="tag">user:5c1f88b42259e</span> or administrators.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases } from "appwrite";
