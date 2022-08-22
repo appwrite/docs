@@ -23,7 +23,7 @@
 <div class="notice calm margin-top-large margin-bottom-large">
     <h4>Note</h4>
     
-    <p>You will need an active session to perform create, update, and delete type actions in your collections. If you have rules where you grant create, update, or delete access to all users or guests in a collection, create an Anonymous Session before you make the API call.</p>
+    <p>You will need an active session to perform create, update, and delete type actions in your collections. Even if create, update, and delete permissions are granted to "Role.any()", you still need to <a href="account#accountCreateAnonymousSession" target="_blank">create an anonymous session</a> before you can perform these actions.</p>
 </div>
 
 <h2 id="server-integration"><a href="/docs/permissions#server-integration">Server Integration</a></h2>
@@ -85,7 +85,7 @@
     </tr>
     <tr>
         <td>Permission.create()</td>
-        <td>Access to create new resources. Only applies to collections and buckets, applying this type of access to other resources results in an error. Does not apply to functions.</td>
+        <td>Access to create new resources. Only applies to collections and buckets, applying this type of access to other resources results in an error.</td>
     </tr>
     <tr>
         <td>Permission.update()</td>
@@ -96,8 +96,8 @@
         <td>Access to remove a resource. Does not apply to functions.</td>
     </tr>
     <tr>
-        <td>Permission.execute()</td>
-        <td>Access to execute an Appwrite Function. Does not apply to any resources other than functions.</td>
+        <td>Permission.write()</td>
+        <td>Alias to grant all of create, update, and delete access.</td>
     </tr>
     </tbody>
 </table>
