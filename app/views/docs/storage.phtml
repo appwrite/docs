@@ -13,15 +13,14 @@
 
 <h4><a href="/docs/storage#permission" id="permission">Permissions</a></h4>
 
-<p>As buckets are very similar to collections we have in the database, we have a similar permission model. Buckets support either bucket level permission or file level permission to allow different ways to manage access to your buckets and files. Check out the <a href="/docs/permissions">Permissions</a>  documentation to learn more about the permissions types available.</p>
+<p>Storage Service allows you to configure permissions at both the bucket level and the file level. When a user has the appropriate type of <a href="/docs/permissions/">access permissions</a> granted at **either** the bucket or the file level, they will be able to access the file. If the permission field is left empty, no one can access the file.</p>
 
-<h4>File-Level Permissions</h4>
-<p>With this permission model, you have granular access control over every file, and users will only be able to access files for which they have explicit permissions. This permission model requires file permissions, and bucket permissions are optional.
+<h4>File Level Permissions</h4>
+<p>File level permissions grant access to individual files. File level permissions are only enabled if File Security is enabled in the settings of your bucket.
 </p>
 
-<h4>Bucket-Level Permissions</h4>
-<p>With bucket-level permissions, you assign permissions once for every file in the buckets' settings - users with "read" access to the bucket can see all files in that bucket. This permission model requires you to set bucket permissions on the bucket settings page. File permissions are optional and will not be evaluated even when set.</p>
-
+<h4>Bucket Level Permissions</h4>
+<p>Bucket level permissions apply to every file in the bucket.</p>
 <div class="notice margin-top-large margin-bottom-large">
     <h5>Active Session Required</h5>
 

@@ -33,18 +33,13 @@
 
 <h3><a href="/docs/databases#permissions" id="permissions">Permissions</a></h3>
 <p>
-    Once you create your collection, you will reach your collection's settings page, where you can choose the permission model for your collection. There are two types of permissions models available, each one with different pros and cons designed to be flexible to best match your use case.
+    Appwrite provides permissions to restrict access to documents at two levels, document and collection level. When a user has the appropriate type of <a href="/docs/permissions/">access permissions</a> granted at **either** the document or the collection level, they will be able to access or change the document. If the permission field is left empty, Client SDKs cannot access the document.
 </p>
-
 <h4>Document Level Permissions</h4>
-<p>
-    With this permission model, you have granular access control over every document, and users will only be able to access documents for which they have explicit permissions. Document permissions are required in this permission model, and collection permissions are optional.
-</p>
+<p>Document level permissions grant access to individual documents. Document level permissions are only enabled if Document Security is enabled in the settings of your collection.</p>
 
 <h4>Collection Level Permissions</h4>
-<p>
-    With collection-level permissions, you assign permissions once for every document in the collection's settings - users with "read" access to the collection can see all documents in that collection. This permission model requires you to set collection permissions on the collection settings page. Document permissions are optional and will not be evaluated even when set.
-</p>
+<p>Collection level permissions apply to every document in the collection.</p>
 
 <div class="notice margin-top-large margin-bottom-large">
     <h5>Active Session Required</h5>
