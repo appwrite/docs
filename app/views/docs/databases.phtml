@@ -305,61 +305,75 @@ func main() async throws{
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
         <tr>
-            <th style="width: 250px">Operator</th>
+            <th style="width: 150px">Query Method</th>
+            <th>SDK Method Example</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>equal</td>
-            <td>Equal to.</td>
+            <td>Query.equal("title", ["Iron Man"])</td>
+            <td>Returns document if attribute is equal to any value in the provided array. Applies to any indexed attribute.</td>
         </tr>
         <tr>
             <td>notEqual</td>
-            <td>Not equal to.</td>
+            <td>Query.equal("title", ["Iron Man"])</td>
+            <td>Returns document if attribute is not equal to any value in the provided array. Applies to any indexed attribute.</td>
         </tr>
         <tr>
             <td>lessThan</td>
-            <td>Less than.</td>
+            <td>Query.lessThan("score", 10)</td>
+            <td>Returns document if attribute is less than the provided value. Applies to any indexed attribute.</td>
         </tr>
         <tr>
             <td>lessThanEqual</td>
-            <td>Less than or equal to.</td>
+            <td>Query.lessThanEqual("score", 10)</td>
+            <td>Returns document if attribute is less than or equal to the provided value. Applies to any indexed attribute.</td>
         </tr>
         <tr>
             <td>greaterThan</td>
-            <td>Greater than.</td>
+            <td>Query.greaterThan("score", 10)</td>
+            <td>Returns document if attribute is greater than the provided value. Applies to any indexed attribute.</td>
         </tr>
         <tr>
             <td>greaterThanEqual</td>
-            <td>Greater than or equal to.</td>
+            <td>Query.greaterThanEqual("score", 10)</td>
+            <td>Returns document if attribute is greater than or equal to the provided value. Applies to any indexed attribute.</td>
         </tr>
         <tr>
             <td>search</td>
-            <td>Requires a Fulltext Index.</td>
+            <td>Query.search("text", "key words")</td>
+            <td>Searches string attributes for provided key words. Applies to any indexed string attribute.</td>
         </tr>
         <tr>
             <td>orderDesc</td>
-            <td>Order results in descending order.</td>
+            <td>Query.orderDesc("attribute")</td>
+            <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
         </tr>
         <tr>
             <td>orderAsc</td>
-            <td>Order results in ascending order.</td>
+            <td>Query.orderAsc("attribute")</td>
+            <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
         </tr>
         <tr>
             <td>limit</td>
+            <td>Query.limit(25)</td>
             <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
         </tr>
         <tr>
             <td>offset</td>
+            <td>Query.offset(0)</td>
             <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
         </tr>
         <tr>
             <td>cursorAfter</td>
+            <td>Query.cursorAfter("62a7...f620")</td>
             <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
         </tr>
         <tr>
             <td>cursorBefore</td>
+            <td>Query.cursorBefore("62a7...a600")</td>
             <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
         </tr>
     </tbody>

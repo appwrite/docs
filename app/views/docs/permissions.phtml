@@ -11,7 +11,7 @@
 <div class="notice calm margin-top-large margin-bottom-large">
     <h4>Appwrite Resource</h4>
     
-    <p>An Appwrite resource can be a database, collection, document, bucket, or a file. Each resource has read, write, update, and delete permissions to define who can interact with it.</p>
+    <p>An Appwrite resource can be a database, collection, document, bucket, or a file. Each resource has it's own set of permissions to define who can interact with it.</p>
 
     <p>Using the Appwrite permissions mechanism, you can grant resource access to users, teams, and members with different roles.</p>
 </div>
@@ -85,7 +85,7 @@
     </tr>
     <tr>
         <td>Permission.create()</td>
-        <td>Access to create new resources. Only applies to collections and buckets, applying this type of access to other resources results in an error.</td>
+        <td>Access to create new resources. Does not apply to files or documents. Applying this type of access to files or documents resources results in an error.</td>
     </tr>
     <tr>
         <td>Permission.update()</td>
