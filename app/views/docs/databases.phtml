@@ -35,6 +35,7 @@
 <p>
     Appwrite provides permissions to restrict access to documents at two levels, document and collection level. When a user has the appropriate type of <a href="/docs/permissions/">access permissions</a> granted at **either** the document or the collection level, they will be able to access or change the document. If the permission field is left empty, Client SDKs cannot access the document.
 </p>
+
 <h4>Document Level Permissions</h4>
 <p>Document level permissions grant access to individual documents. Document level permissions are only enabled if Document Security is enabled in the settings of your collection.</p>
 
@@ -44,9 +45,13 @@
 <div class="notice margin-top-large margin-bottom-large">
     <h5>Active Session Required</h5>
 
-    <p>For security purposes, an active Account session is required to create resources. So, even if wildcard write permissions are set, only logged-in users can create documents in a collection. If you require this behavior for your app, create an <a href="/docs/client/account?sdk=web-default#accountCreateAnonymousSession" target="_blank">anonymous session</a> first. An active session helps Appwrite enforce rate-control limits and protect your projects from intensive write operations.</p>
+    <p>For security purposes, an active Account session is required to create resources. So, even if wildcard write permissions are set, only logged-in users can create documents in a collection. If you require this behavior for your app, create an <a href="/docs/client/account?sdk=web-default#accountCreateAnonymousSession">anonymous session</a> first. An active session helps Appwrite enforce rate-control limits and protect your projects from intensive write operations.</p>
 </div>
+<h4>Document Level Permissions</h4>
+<p>Document level permissions grant access to individual documents. Document level permissions are only applied if Document Security is enabled in the settings of your collection.</p>
 
+<h4>Collection Level Permissions</h4>
+<p>Collection level permissions apply to every document in the collection.</p>
 
 <h2><a href="/docs/databases#attributes" id="attributes">Create Attributes</a></h2>
 <p>
@@ -210,7 +215,7 @@ func main() async throws {
 
 <div class="notice margin-top-large margin-bottom-large">
     <h4>Indexes Required</h4>
-    <p>You can only query correctly indexed queries. You can easily add new indexes from both the Appwrite console or one of the <a href="/docs/sdks#server" target="_blank">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it on the <a href="/docs/databases#indexes">Appwrite Indexes</a> section.</p>
+    <p>You can only query properly indexed attributes. You can easily add new indexes from both the Appwrite console or one of the <a href="/docs/sdks#server">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it on the <a href="/docs/databases#indexes">Appwrite Indexes</a> section.</p>
 </div>
 <p>
     To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/databases#databasesListDocuments">listDocuments</a> endpoint. The SDKs provide a <b>Query</b> class to make query building simpler:
@@ -300,42 +305,80 @@ func main() async throws{
     </li>
 </ul>
 
-<p>The following operators are currently supported:</p>
+<p>The following query methods are currently supported:</p>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
         <tr>
-            <th style="width: 250px">Operator</th>
+            <th style="width: 150px">Query Method</th>
+            <th>SDK Method Example</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>equal</td>
-            <td>Equal to.</td>
+            <td>Query.equal("title", ["Iron Man"])</td>
+            <td>Returns document if attribute is equal to any value in the provided array. Applies to any indexed attribute.</td>
         </tr>
         <tr>
             <td>notEqual</td>
-            <td>Not equal to.</td>
+            <td>Query.notEqual("title", ["Iron Man"])</td>
+            <td>Returns document if attribute is not equal to any value in the provided array. Applies to any indexed attribute.</td>
         </tr>
         <tr>
-            <td>lesser</td>
-            <td>Lesser than.</td>
+            <td>lessThan</td>
+            <td>Query.lessThan("score", 10)</td>
+            <td>Returns document if attribute is less than the provided value. Applies to any indexed attribute.</td>
         </tr>
         <tr>
-            <td>lesserEqual</td>
-            <td>Less than or equal to.</td>
+            <td>lessThanEqual</td>
+            <td>Query.lessThanEqual("score", 10)</td>
+            <td>Returns document if attribute is less than or equal to the provided value. Applies to any indexed attribute.</td>
         </tr>
         <tr>
-            <td>greater</td>
-            <td>Greater than.</td>
+            <td>greaterThan</td>
+            <td>Query.greaterThan("score", 10)</td>
+            <td>Returns document if attribute is greater than the provided value. Applies to any indexed attribute.</td>
         </tr>
         <tr>
-            <td>greaterEqual</td>
-            <td>Greater than or equal to.</td>
+            <td>greaterThanEqual</td>
+            <td>Query.greaterThanEqual("score", 10)</td>
+            <td>Returns document if attribute is greater than or equal to the provided value. Applies to any indexed attribute.</td>
         </tr>
         <tr>
             <td>search</td>
-            <td>Requires a Fulltext Index.</td>
+            <td>Query.search("text", "key words")</td>
+            <td>Searches string attributes for provided keywords. Applies to any string attribute with a full-text index.</td>
+        </tr>
+        <tr>
+            <td>orderDesc</td>
+            <td>Query.orderDesc("attribute")</td>
+            <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+        </tr>
+        <tr>
+            <td>orderAsc</td>
+            <td>Query.orderAsc("attribute")</td>
+            <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+        </tr>
+        <tr>
+            <td>limit</td>
+            <td>Query.limit(25)</td>
+            <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+        </tr>
+        <tr>
+            <td>offset</td>
+            <td>Query.offset(0)</td>
+            <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+        </tr>
+        <tr>
+            <td>cursorAfter</td>
+            <td>Query.cursorAfter("62a7...f620")</td>
+            <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+        </tr>
+        <tr>
+            <td>cursorBefore</td>
+            <td>Query.cursorBefore("62a7...a600")</td>
+            <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
         </tr>
     </tbody>
 </table>
@@ -436,7 +479,7 @@ func main() async throws {
     </li>
 </ul>
 
-<p>When performing a query against multiple attributes, a single index with all queries attributes is required. In the example above, a single index with <b>both</b> <span class="tag">title</span> and <span class="tag">year</span> is queried.</p>
+<p>When performing a query against multiple attributes, a single index with all queries attributes is required. In the example above, a single index with <b>both</b> <span class="tag">title</span> and <span class="tag">year</span> is required.</p>
 
 <h2><a href="/docs/databases#indexes" id="indexes">Indexes</a></h2>
 <p>
