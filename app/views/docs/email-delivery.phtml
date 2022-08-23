@@ -12,13 +12,13 @@
 
 <p><b>_APP_SMTP_PORT</b> - SMTP server TCP port. Empty by default.</p>
 
-<p><b>_APP_SMTP_SECURE</b> - SMTP secure connection protocol. Empty by default, change to ‘tls’ if running on a secure connection.</p>
+<p><b>_APP_SMTP_SECURE</b> - SMTP secure connection protocol. Empty by default, change to 'tls' if running on a secure connection. Valid values are empty, 'tls', and 'ssl'.</p>
 
 <p><b>_APP_SMTP_USERNAME</b> - SMTP server user name. Empty by default.</p>
 
 <p><b>_APP_SMTP_PASSWORD</b> - SMTP server user password. Empty by default.</p>
 
-<p><b>_APP_SYSTEM_EMAIL_ADDRESS</b> - Email address used for sending the emails. "team@appwrite.io" by default.</p>
+<p><b>_APP_SYSTEM_EMAIL_ADDRESS</b> - Configured sender email address, "team@appwrite.io" by default. This is the email address seen by recipients.</p>
 
 <p>Here's a sample configuration if you're using SendGrid as your SMTP provider. </p> 
 
@@ -27,7 +27,8 @@
 _APP_SMTP_PORT=587
 _APP_SMTP_SECURE=tls
 _APP_SMTP_USERNAME=YOUR-SMTP-USERNAME
-_APP_SMTP_PASSWORD=YOUR-SMTP-PASSWORD</code></pre>
+_APP_SMTP_PASSWORD=YOUR-SMTP-PASSWORD
+_APP_SYSTEM_EMAIL_ADDRESS=YOUR-SENDER-EMAIL</code></pre>
 </div>
 
 <h2><a href="/docs/email-delivery#restartServer" id="restartServer">Restart Your Appwrite Server</a></h2>
