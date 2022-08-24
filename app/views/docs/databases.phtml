@@ -387,7 +387,7 @@ const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes fro
 
 databases.listDocuments('movies', [
     Query.equal('title', ['Avatar', 'Lord of the Rings']),
-    Query.greater('year', 1999)
+    Query.greaterThan('year', 1999)
 ]);</code></pre>
         </div>
     </li>
@@ -404,7 +404,7 @@ void main() async {
             collectionId: 'movies',
             queries: [
                 Query.equal('title', ['Avatar', 'Lord of the Rings']),
-                Query.greater('year', 1999),
+                Query.greaterThan('year', 1999),
                 ]);
         print(docs.toMap());
     } on AppwriteException catch(e) {
@@ -440,7 +440,7 @@ class MainActivity : AppCompatActivity() {
                 collectionId = "[COLLECTION_ID]",
                 queries = [
                     Query.equal("title", ["Avatar", "Lord of the Rings"]),
-                    Query.greater("year", 1999),
+                    Query.greaterThan("year", 1999),
                 ],
             )
             val json = response.body?.string()
@@ -464,7 +464,7 @@ func main() async throws {
         collectionId: "[COLLECTION_ID]",
         queries: [
             Query.equal("title", ["Avatar", "Lord of the Rings"]),
-            Query.greater("year", 1999)
+            Query.greaterThan("year", 1999)
         ]
     )
     print(list.toMap())
@@ -509,10 +509,7 @@ func main() async throws {
 </table>
 
 <h3><a href="/docs/databases#ordering" id="ordering">Ordering Results</a></h3>
-<p>When querying using the <a href="/docs/server/databases#databasesListDocuments">listDocuments</a> endpoint, you can specify the order of the documents returned by providing the <b>orderAttributes</b> and <b>orderTypes</b> parameters. The results will be sorted by <b>$id</b> (create date) in ascending order when no order parameters are provided.</p>
-
-<p>The parameter <b>orderAttributes</b> takes a string array of attributes IDs. The <b>orderTypes</b> parameter takes a string array equal in length to <b>orderAttributes</b> that indicate if each attribute should be sorted in ascending or descending order. Ascending and descending is denoted as <span class="tag">"ASC"</span> and <span class="tag">"DESC"</span> respectively.</p>
-
+<p>When querying using the <a href="/docs/server/databases#databasesListDocuments">listDocuments</a> endpoint, you can specify the order of the documents returned using the "Query.orderAsc()" and "Query.orderDesc()" query methods.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -522,13 +519,9 @@ func main() async throws {
 const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
 databases.listDocuments(
     'movies', // collectionId
-    [], // queries
-    25, // limit
-    0, // offset
-    '', // cursor
-    'after', // cursorDirection
-    ['title'], // orderAttributes
-    ['ASC'] // orderTypes
+    [
+        Query.orderAsc('title'), // Order results in ascending order by title
+    ], // queries
 );</code></pre>
         </div>
     </li>
@@ -543,8 +536,7 @@ void main() async {
     try {
         final docs = await databases.listDocuments(
             collectionId: 'movies',
-            orderAttributes: ['title'],
-            orderTypes: ['ASC']
+            query: [ Query.orderAsc('title') ]
         );
         print(docs.toMap());
     } on AppwriteException catch(e) {
@@ -578,8 +570,7 @@ class MainActivity : AppCompatActivity() {
         GlobalScope.launch {
             val response = databases.listDocuments(
                 collectionId = "movies",
-                orderAttributes = listOf("title"),
-                orderTypes = listOf("ASC")
+                query = [ Query.orderAsc("title") ]
             )
             val json = response.body?.string()
         }
@@ -600,8 +591,7 @@ func main() async throws {
     let databases = Databases(client, "[DATABASE_ID]")
     let list = try await databases.listDocuments(
         collectionId: "movies",
-        orderAttributes: ["title"],
-        orderTypes: ["ASC"]
+        query: [ Query.orderAsc("title") ]
     )
     print(list.toMap())
 }</code></pre>
@@ -619,13 +609,10 @@ func main() async throws {
 const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
 databases.listDocuments(
     'movies', // collectionId
-    [], // query
-    25, // limit
-    0, // offset
-    '', // cursor
-    'after', // cursorDirection
-    ['title', 'year'], // orderAttributes
-    ['ASC', 'DESC'] // orderTypes	
+    [
+        Query.orderAsc('title'), // Order by title in ascending order
+        Query.orderDesc('year') // Order by year in descending order   
+    ]
 );</code></pre>
         </div>
     </li>
@@ -640,8 +627,10 @@ void main() async {
     try {
         final docs = await databases.listDocuments(
             collectionId: 'movies',
-            orderAttributes: ['title', 'year'],
-            orderTypes: ['ASC', 'DESC']
+            query: [
+                Query.orderAsc('title'), // Order by title in ascending order
+                Query.orderDesc('year') // Order by year in descending order   
+            ]
         );
         print(docs.toMap());
     } on AppwriteException catch(e) {
@@ -675,8 +664,10 @@ class MainActivity : AppCompatActivity() {
         GlobalScope.launch {
             val response = databases.listDocuments(
                 collectionId = "movies",
-                orderAttributes = listOf("title", "year"),
-                orderTypes = listOf("ASC", "DESC")
+                query = [
+                    Query.orderAsc("title"), // Order by title in ascending order
+                    Query.orderDesc("year") // Order by year in descending order   
+                ]
             )
             val json = response.body?.string()
         }
@@ -697,8 +688,10 @@ func main() async throws {
     let databases = Databases(client, "[DATABASE_ID]")
     let list = try await databases.listDocuments(
         collectionId: "movies",
-        orderAttributes: ["title", "year"],
-        orderTypes: ["ASC", "DESC"]
+        query: [
+                Query.orderAsc("title"), // Order by title in ascending order
+                Query.orderDesc("year") // Order by year in descending order   
+            ]
     )
     print(list.toMap())
 }</code></pre>
