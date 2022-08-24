@@ -12,7 +12,7 @@
 
 <p>
     You can create your database by adding it to your Appwrite project's dashboard. Access the Databases Service settings from your project's left-hand navigation panel.
-    To create a new database, click the click the <b>Add Database</b> button. Name your new database and optionally provide a custom database ID instead of a randomly generated one.
+    To create a new database, click the <b>Add Database</b> button. Name your new database and optionally provide a custom database ID instead of a randomly generated one.
 </p>
 
 <p>
@@ -39,7 +39,7 @@
 <div class="notice margin-top-large margin-bottom-large">
     <h5>Active Session Required</h5>
 
-    <p>For security purposes, an active Account session is required to create resources. So, even if wildcard write permissions are set, only logged-in users can create documents in a collection. If you require this behavior for your app, create an <a href="/docs/client/account?sdk=web-default#accountCreateAnonymousSession">anonymous session</a> first. An active session helps Appwrite enforce rate-control limits and protect your projects from intensive write operations.</p>
+    <p>For security purposes, an active Account session is required to create resources. So, even if wildcard write permissions are set, only logged-in users can create documents in a collection. Create an <a href="/docs/client/account?sdk=web-default#accountCreateAnonymousSession">anonymous session</a> if you require this behavior for your app. An active session helps Appwrite enforce rate-control limits and protect your projects from intensive write operations.</p>
 </div>
 <h4>Document Level Permissions</h4>
 <p>Document level permissions grant access to individual documents. Document level permissions are only applied if Document Security is enabled in the settings of your collection.</p>
@@ -209,7 +209,7 @@ func main() async throws {
 
 <div class="notice margin-top-large margin-bottom-large">
     <h4>Indexes Required</h4>
-    <p>You can only query properly indexed attributes. You can easily add new indexes from both the Appwrite console or one of the <a href="/docs/sdks#server">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it on the <a href="/docs/databases#indexes">Appwrite Indexes</a> section.</p>
+    <p>You can only query properly indexed attributes. You can easily add new indexes from both the Appwrite console and one of the <a href="/docs/sdks#server">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it in the <a href="/docs/databases#indexes">Appwrite Indexes</a> section.</p>
 </div>
 <p>
     To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/databases#databasesListDocuments">listDocuments</a> endpoint. The SDKs provide a <b>Query</b> class to make query building simpler:
@@ -473,7 +473,7 @@ func main() async throws {
     </li>
 </ul>
 
-<p>When performing a query against multiple attributes, a single index with all queries attributes is required. In the example above, a single index with <b>both</b> <span class="tag">title</span> and <span class="tag">year</span> is required.</p>
+<p>When performing a query against multiple attributes, a single index with all query attributes is required. In the example above, a single index with <b>both</b> <span class="tag">title</span> and <span class="tag">year</span> are required.</p>
 
 <h2><a href="/docs/databases#indexes" id="indexes">Indexes</a></h2>
 <p>
