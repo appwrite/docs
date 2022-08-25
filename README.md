@@ -1,6 +1,6 @@
 # The Appwrite Docs 📝
 
-The official https://appwrite.io/docs documentation source code.
+The official [Appwrite Docs](https://appwrite.io/docs) documentation source code.
 ## 🚀 Contributing
 1. Clone the repository
 2. Update, add, or fix current docs
