@@ -3,7 +3,7 @@
 
 <h2><a href="/docs/storage#bucket" id="bucket">Buckets</a></h2>
 
-<p>With version 0.13 of Appwrite, we also have introduced storage buckets. Storage buckets are similar to collections we have in our <a href="/docs/database">Database</a> service. The difference is buckets also provide more power to decide what kinds of files, what sizes you want to allow in that bucket, whether or not to encrypt the files, scan with antivirus, and more. Let's look at how we can create a bucket and configure it to your needs.</p>
+<p>With version 0.13 of Appwrite, we also have introduced storage buckets. Storage buckets are similar to collections we have in our <a href="/docs/databases">Databases</a> service. The difference is buckets also provide more power to decide what kinds of files, what sizes you want to allow in that bucket, whether or not to encrypt the files, scan with antivirus, and more. Let's look at how we can create a bucket and configure it to your needs.</p>
 
 <h3><a href="/docs/storage#createBucket" id="createBucket">Create Bucket</a></h3>
 
@@ -74,15 +74,17 @@
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Appwrite } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Storge } from "appwrite";
 
-const sdk = new Appwrite();
+const client = new Client();
 
-sdk
+client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
-const promise = sdk.storage.createFile('[BUCKET_ID]', 'unique()', document.getElementById('uploader').files[0]);
+const storage = new Storage(client);
+
+const promise = storage.createFile('[BUCKET_ID]', 'unique()', document.getElementById('uploader').files[0]);
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -108,7 +110,7 @@ void main() { // Init SDK
   Future result = storage.createFile(
     bucketId: '[BUCKET_ID]',
     fileId: '[FILE_ID]',
-    file: await MultipartFile.fromPath('file', './path-to-files/image.jpg', 'image.jpg'),
+    file: InputFile(path: './path-to-files/image.jpg', filename: 'image.jpg'),
   );
 
   result
@@ -158,24 +160,18 @@ class MainActivity : AppCompatActivity() {
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() {
+func main() async throws {
     let client = Client()
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("5df5acd0d48c2") // Your project ID
 
     let storage = Storage(client)
-    storage.createFile(
+    let file = try await storage.createFile(
         bucketId: "[BUCKET_ID]",
         fileId: "[FILE_ID]",
         file: File(name: "image.jpg", buffer: yourByteBuffer)
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let file):
-            print(String(describing: file)
-        }
-    }
+    )
+    print(file.toMap())
 }</code></pre>
         </div>
     </li>

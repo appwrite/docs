@@ -23,7 +23,7 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 
 <h2><a href="/docs/getting-started-for-android#addProject" id="addProject">Add your Android Platform</a></h2>
 
-<p>To init your SDK and start interacting with Appwrite services, you need to add a new Android platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and click the 'Add Platform' button.</p>
+<p>To init your SDK and start interacting with Appwrite services, you need to add a new Android platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and click the 'Add Platform' button. Only API requests initiated from platforms added to your Appwrite project will be accepted. This prevents unauthorized apps from accessing your Appwrite project.</p>
 
 <p>From the options, choose to add a new <b>Android</b> platform and add add your app <u>name</u> and <u>package name</u>, your package name is generally the <b>applicationId</b> in your app-level <a href="https://github.com/appwrite/playground-for-android/blob/master/app/build.gradle#L12" target="_blank" rel="noopener">build.gradle</a> file. By registering your new app platform, you are allowing your app to communicate with the Appwrite API.</p>
 
@@ -79,9 +79,9 @@ val client = Client(context)
   .setSelfSigned(status: true) // For self signed certificates, only use for development</code></pre>
 </div>
 
-<p>Before starting to send any API calls to your new Appwrite instance, make sure your Android emulators has network access to the Appwrite server hostname or IP address.</p>
+<p>Before sending any API calls to your new Appwrite project, make sure your Android device or emulator has network access to your Appwrite project's hostname or IP address.</p>
 
-<p>When trying to connect to Appwrite from an emulator or a mobile device, localhost is the hostname for the device or emulator and not your local Appwrite instance. You should replace localhost with your private IP as the Appwrite endpoint's hostname. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite API.</p>
+<p>When connecting to a local self-hosted Appwrite project from an emulator or a mobile device, you should use the private IP of the device running your Appwrite project as the hostname of the endpoint instead of localhost. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite server.</p>
 
 <h2><a href="/docs/getting-started-for-android#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
@@ -103,7 +103,7 @@ val json = response.body?.string()</code></pre>
 val realtime = Realtime(client)
 
 realtime.subscribe("files", callback = { response ->
-    if(response.event === 'storage.files.create') {
+    if(response.events.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(response.payload.toString());
     }
@@ -130,7 +130,7 @@ val json = response.body?.string()
 val realtime = Realtime(client)
 
 realtime.subscribe("files", callback = { response ->
-    if(response.event === 'storage.files.create') {
+    if(response.events.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(response.payload.toString());
     }

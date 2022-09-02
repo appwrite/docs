@@ -65,13 +65,13 @@ $swiftVersion = $versions['swift'] ?? '';
     <li>
         <h3>Kotlin</h3>
         <div>
-            <p>Add maven repositories to your `build.gradle(.kts)` file</p>
+            <p>Add maven repositories to your <b>build.gradle(.kts)</b> file</p>
             <div class="ide margin-top-small" data-lang="gradle" data-lang-label="Gradle">
                 <pre class="line-numbers"><code class="prism language-gradle" data-prism>repositories {
     mavenCentral()
 }</code></pre>
             </div>
-            <p>Add Appwrite SDK under dependencies in your `build.gradle(.kts)` file</p>
+            <p>Add Appwrite SDK under dependencies in your <b>build.gradle(.kts)</b> file</p>
             <div class="ide margin-top-small" data-lang="gradle" data-lang-label="Gradle">
                 <pre class="line-numbers"><code class="prism language-gradle" data-prism>dependencies {
     implementation("io.appwrite:sdk-for-kotlin:<?php echo $this->escape($kotlinVersion); ?>")
@@ -145,7 +145,6 @@ $client
         <h3>Python</h3>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
-from appwrite.services.users import Users
 
 client = Client()
 
@@ -235,19 +234,19 @@ client
 
 <p>Using a JSON Web Token (JWT), you can interact with the Appwrite server API as a specific user. You'll be able to access only the relevant user resources and perform actions on his behalf.</p>
 
-<p>To create a JWT, you need to use the "account->createJWT" method using one of the Appwrite client SDKs. Before creating a token, you need to make sure your user is authenticated using the `createSession` method or log in with an OAuth provider.</p>
+<p>To create a JWT, you need to use the "account->createJWT" method using one of the Appwrite client SDKs. Before creating a token, you need to make sure your user is authenticated using the <span class="tag">createSession</span> method or log in with an OAuth provider.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web SDK</h3>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>appwrite // Get a JWT for authenticated user
-    .account.createJWT()
-            .then(function (response) {
-                console.log(response);
-            }, function (error) {
-                console.log(error);
-            });</code></pre>
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const account = new Account(client);
+account.createJWT()
+    .then(function (response) {
+        console.log(response);
+    }, function (error) {
+        console.log(error);
+    });</code></pre>
         </div>
     </li>
     <li>
@@ -273,13 +272,7 @@ val response = account
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>let account = Account(client: client)
 
-let response = account
-    .createJWT() { result in
-        switch result {
-        case .failure(let error): print(error.message)
-        case .success(let token): print(token.jwt)
-        }
-    }</code></pre>
+let response = try await account.createJWT()</code></pre>
         </div>
     </li>
 </ul>
@@ -488,12 +481,8 @@ println(res.body?.string())</code></pre>
 
 let users = Users(client: client)
 
-users.create(userId: "unique()", email: "email@example.com", password: "password") { result in
-    switch result {
-    case .failure(let error): print(error.message)
-    case .success(let user): print(String(describing: user))
-    }
-}
+val user = try await users.create(userId: "unique()", email: "email@example.com", password: "password")
+print(user.toMap())
 </code></pre>
         </div>
     </li>
@@ -666,11 +655,8 @@ client
 
 let users = Users(client: client)
 
-users.create(userId: "unique()", email: "email@example.com", password: "password") { result in
-    switch result {
-    case .failure(let error): print(error.message)
-    case .success(let user): print(String(describing: user))
-    }
+let user = try await users.create(userId: "unique()", email: "email@example.com", password: "password")
+print(user.toMap())
 }</code></pre>
         </div>
     </li>

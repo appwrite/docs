@@ -4,6 +4,8 @@
 
 <p>Appwrite was designed to run well on both small and large deployment. The minimum requirements to run Appwrite is as little as <b>1 CPU core</b> and <b>2GB of RAM</b>, and an operating system that supports Docker.</p>
 
+<p>Appwrite requires <a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">Docker Compose Version 2</a>. To install Appwrite, make sure your Docker installation is updated to support Composer V2.</p>
+
 <div class="notice margin-bottom">
     <h3>Upgrading From Older Versions</h3>
     <p>If you are migrating from an older version of Appwrite, you need to follow the <a href="/docs/upgrade">migration instructions</a></p>
@@ -100,10 +102,10 @@
 
 <h3><a href="/docs/installation#manual" id="manual">Manual (using docker-compose.yml)</a></h3>
 
-<p>For advanced Docker users, the manual installation might seem more familiar. To setup Appwrite manually, download the Appwrite base <a href="https://gist.github.com/eldadfux/977869ff6bdd7312adfd4e629ee15cc5" target="_blank">docker-compose.yml and .env</a> files. After the download completes, update the different environment variables as you wish in the .env file and start the Appwrite stack using the following Docker command:</p>
+<p>For advanced Docker users, the manual installation might seem more familiar. To setup Appwrite manually, download the Appwrite base <a href="/install/compose" target="_blank">docker-compose.yml</a> and <a href="/install/env" target="_blank">.env</a> files, then move them inside a directory named 'appwrite'. After the download completes, update the different environment variables as you wish in the .env file and start the Appwrite stack using the following Docker command:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose up -d --remove-orphans</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose up -d --remove-orphans</code></pre>
 </div>
 
 <p>Once the Docker installation completes, go to your machine hostname or IP address on your browser to access the Appwrite console. Please notice that on non-linux native hosts the server might take a few minutes to start after installation completes.</p>
@@ -113,7 +115,7 @@
 <p>You can stop your Appwrite containers by using the following command executed from the same directory as your docker-compose.yml file.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose stop</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose stop</code></pre>
 </div>
 
 <h3><a href="/docs/installation#uninstall" id="manual">Uninstall</a></h3>
@@ -121,7 +123,7 @@
 <p>To stop and remove your Appwrite containers you can use the following command executed from the same directory as your docker-compose.yml file.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker-compose down -v</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose down -v</code></pre>
 </div>
 
 <h2><a href="/docs/installation#learnMore" id="learnMore">Learn More</a></h2>

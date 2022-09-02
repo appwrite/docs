@@ -13,10 +13,14 @@
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Page 1
-const page1 = await sdk.database.listDocuments('movies', [], 25, 0);
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases } from "appwrite";
+const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+                
+// Page 1
+const page1 = await databases.listDocuments('movies', [], 25, 0);
+
 // Page 2
-const page2 = await sdk.database.listDocuments('movies', [], 25, 25);
+const page2 = await databases.listDocuments('movies', [], 25, 25);
         </code></pre>
         </div>
     </li>
@@ -27,13 +31,13 @@ const page2 = await sdk.database.listDocuments('movies', [], 25, 25);
 
 void main() async {
     final client = Client();
-    final database = Database(client);
+    final databases = Databases(client, databaseId: '[DATABASE_ID]');
     try {
-        final page1 = await database.listDocuments(
+        final page1 = await databases.listDocuments(
             collectionId: 'movies',
             limit: 25,
             offset: 0);
-        final page2 = await database.listDocuments(
+        final page2 = await databases.listDocuments(
             collectionId: 'movies',
             limit: 25,
             offset: 25);
@@ -52,7 +56,7 @@ import android.os.Bundle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import io.appwrite.Client
-import io.appwrite.services.Database
+import io.appwrite.services.Databases
 import io.appwrite.Query
 
 class MainActivity : AppCompatActivity() {
@@ -64,16 +68,16 @@ class MainActivity : AppCompatActivity() {
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
             .setProject("5df5acd0d48c2") // Your project ID
 
-        val database = Database(client)
+        val databases = Databases(client, "[DATABASE_ID]")
 
         GlobalScope.launch {
-            val page1 = database.listDocuments(
+            val page1 = databases.listDocuments(
                 collectionId = "[COLLECTION_ID]",
                 limit = 25,
                 offset = 0,
             )
 
-            val page2 = database.listDocuments(
+            val page2 = databases.listDocuments(
                 collectionId = "[COLLECTION_ID]",
                 limit = 25,
                 offset = 25,
@@ -88,39 +92,27 @@ class MainActivity : AppCompatActivity() {
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() {
+func main() async throws {
     let client = Client()
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
-    let database = Database(client)
-    // page 1
-    database.listDocuments(
+    let databases = Databases(client, "[DATABASE_ID]")
+    // Page 1
+    var list = try await databases.listDocuments(
         collectionId: "[COLLECTION_ID]",
         limit: 25,
         offset: 0
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let document):
-            print(String(describing: document)
-        }
-    }
+    )
+    print(list.toMap())
 
-    //page 2
-    database.listDocuments(
+    // Page 2
+    list = try await databases.listDocuments(
         collectionId: "[COLLECTION_ID]",
         limit: 25,
         offset: 25
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let document):
-            print(String(describing: document)
-        }
-    }
+    )
+    print(list.toMap())
 }</code></pre>
         </div>
     </li>
@@ -141,12 +133,15 @@ func main() {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>// Page 1
-const page1 = await sdk.database.listDocuments('movies', [], 25, 0);
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases } from "appwrite";
+const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+
+// Page 1
+const page1 = await databases.listDocuments('movies', [], 25, 0);
 const lastId = results.documents[results.documents.length - 1].$id;
 
 // Page 2
-const page2 = await sdk.database.listDocuments('movies', [], 25, 0, lastId);
+const page2 = await databases.listDocuments('movies', [], 25, 0, lastId);
         </code></pre>
         </div>
     </li>
@@ -157,15 +152,15 @@ const page2 = await sdk.database.listDocuments('movies', [], 25, 0, lastId);
 
 void main() async {
     final client = Client();
-    final database = Database(client);
+    final databases = Databases(client, databaseId: '[DATABASE_ID]');
     try {
-        final page1 = await database.listDocuments(
+        final page1 = await databases.listDocuments(
             collectionId: 'movies',
             limit: 25);
         final lastId = page1.documents[page1.documents.length - 1].$id;
 
-        //Page 2
-        final page2 = await database.listDocuments(
+        // Page 2
+        final page2 = await databases.listDocuments(
             collectionId: 'movies',
             cursor: lastId);
     } on AppwriteException catch(e) {
@@ -183,7 +178,7 @@ import android.os.Bundle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import io.appwrite.Client
-import io.appwrite.services.Database
+import io.appwrite.services.Databases
 import io.appwrite.Query
 
 class MainActivity : AppCompatActivity() {
@@ -195,17 +190,17 @@ class MainActivity : AppCompatActivity() {
             .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
             .setProject("5df5acd0d48c2") // Your project ID
 
-        val database = Database(client)
+        val databases = Databases(client, "[DATABASE_ID]")
 
         GlobalScope.launch {
-            val page1 = database.listDocuments(
+            val page1 = databases.listDocuments(
                 collectionId = "[COLLECTION_ID]",
                 limit = 25,
             )
             val lastId = page1.documents[page1.documents.length - 1].$id
 
-            //Page 2
-            val page2 = database.listDocuments(
+            // Page 2
+            val page2 = databases.listDocuments(
                 collectionId = "[COLLECTION_ID]",
                 cursor = lastId,
             )    
@@ -219,38 +214,27 @@ class MainActivity : AppCompatActivity() {
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() {
+func main() async throws {
     let client = Client()
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("my_project") // Your project ID
 
-    let database = Database(client)
-    // page 1
-    database.listDocuments(
+    let databases = Databases(client, "[DATABASE_ID]")
+    
+    // Page 1
+    var list = try await databases.listDocuments(
         collectionId: "[COLLECTION_ID]",
         limit: 25,
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let document):
-            let lastId = document.documents[document.documents.count - 1].$id
-            
-            //Page 2
-            database.listDocuments(
-                collectionId: "[COLLECTION_ID]",
-                cursor: lastId,
-            ) { result in
-                switch result {
-                case .failure(let error):
-                    print(error.message)
-                case .success(let document):
-                    print(String(describing: document)
-                }
-            }
-        }
-    }
+    )
 
+    let lastId = list.documents[list.documents.count - 1].$id
+            
+    // Page 2
+    list = try await databases.listDocuments(
+        collectionId: "[COLLECTION_ID]",
+        cursor: lastId,
+    )
+    print(list.toMap())
 }</code></pre>
         </div>
     </li>

@@ -13,7 +13,7 @@ $runtimes = $this->getParam('runtimes', []);
 
 <h2><a href="/docs/functions#gettingStarted" id="gettingStarted">Getting Started</a></h2>
 
-<p>The quickest way to get started with Appwrite Functions is using the <a href="/docs/command-line">Appwrite CLI</a>. The CLI comes with starter code and a some simple commands to quickly create and deploy your functions. Once you have the CLI installed and setup with an Appwrite project, create your first function using: </p>
+<p>The quickest way to get started with Appwrite Functions is using the <a href="/docs/command-line">Appwrite CLI</a>. The CLI comes with starter code and some simple commands to quickly create and deploy your functions. Once you have the CLI installed and setup with an Appwrite project, create your first function using: </p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function</code></pre>
@@ -40,189 +40,152 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>Node.js</h3>
         <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="Javascript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>const fetch = require("node-fetch");
+            <pre class="line-numbers"><code class="prism language-js" data-prism>module.exports = async (req, res) => {
+  const payload =
+    req.payload ||
+    'No payload provided. Add custom data when executing function.';
 
-module.exports = async (request, response) => {
-    const payload = JSON.parse(request.payload ? request.payload : "{}");
-    const env = request.env;
+  const secretKey =
+    req.env.SECRET_KEY ||
+    'SECRET_KEY environment variable not found. You can set it in Function settings.';
 
-    const randomNumber = Math.floor(Math.random() * 100) + 1;
-    const todo = await fetch(`https://jsonplaceholder.typicode.com/todos/${randomNumber}`).then(r => r.json());
+  const randomNumber = Math.random();
 
-    let task = {
-        message: 'Hello from Appwrite Functions 👋',
-        ...todo
-    };
+  const trigger = req.env.APPWRITE_FUNCTION_TRIGGER;
 
-    switch(env.APPWRITE_FUNCTION_TRIGGER) {
-        case 'http': 
-            task['trigger'] = 'HTTP'; 
-            break;
-        case 'schedule': 
-            task['trigger'] = 'CRON'; 
-            break;
-        case 'event': 
-            task['trigger'] = 'Event'; 
-            break;
-        default: 
-            task['trigger'] = 'Unknown'; 
-            break;
-    }
-
-    response.json(task);
-}</code></pre>
+  res.json({
+    message: 'Hello from Appwrite!',
+    payload,
+    secretKey,
+    randomNumber,
+    trigger,
+  });
+};</code></pre>
         </div>
-        <b>Installing Dependencies</b>
-        <p>Include a <b>package.json</b> along with your function, and Appwrite handles the rest! The best practice is to make sure <b>node_modules</b> folder is <b>not</b> part of your tarball. This example uses the <a href="https://www.npmjs.com/package/node-fetch">node-fetch</a> package</p>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>package.json</b> file along with your function, and Appwrite handles the rest! The best practice is to make sure that the <b>node_modules</b> folder is <b>not</b> a part of your tarball.</p>
         </div>
     </li>
     <li>
         <h3>PHP</h3>
         <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php 
+            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
-return function($request, $response) {
-    $payload = json_decode($request['payload']);
-    $env = $request['env'];
+return function ($req, $res) {
+  $payload =
+    $req['payload'] ?:
+    'No payload provided. Add custom data when executing function.';
 
-    $randomNumber = rand(1, 100);
-    $todo = json_decode(file_get_contents("https://jsonplaceholder.typicode.com/todos/$randomNumber"), true);
+  $secretKey =
+    $req['env']['SECRET_KEY'] ?:
+    'SECRET_KEY environment variable not found. You can set it in Function settings.';
 
-    $task = array_merge($todo, [
-        'message' => 'Hello from Appwrite Functions 👋',
-    ]);
+  $randomNumber = \mt_rand() / \mt_getrandmax();
 
-    switch($env['APPWRITE_FUNCTION_TRIGGER']) {
-        case 'http': 
-            $task['trigger'] = 'HTTP'; 
-            break;
-        case 'schedule': 
-            $task['trigger'] = 'CRON'; 
-            break;
-        case 'event': 
-            $task['trigger'] = 'Event'; 
-            break;
-        default: 
-            $task['trigger'] = 'Unknown'; 
-            break;
-    }
+  $trigger = $req['env']['APPWRITE_FUNCTION_TRIGGER'];
 
-    $response->json($task);
+  $res->json([
+    'message' => 'Hello from Appwrite!',
+    'payload' => $payload,
+    'secretKey' => $secretKey,
+    'randomNumber' => $randomNumber,
+    'trigger' => $trigger,
+  ]);
 };</code></pre>
         </div>
-        <b>Installing Dependencies</b>
-        <p>Adding dependencies to PHP requires you to have a <b>composer.json</b> file. The best practice is to make sure <b>vendor</b> directory is <b>not</b> part of your tarball. </p>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>composer.json</b> file along with your function, make sure to require autoload.php from vendor folder, and Appwrite handles the rest!. The best practice is to make sure that the <b>vendor</b> directory is <b>not</b> a part of your tarball. </p>
     </div>
     </li>
     <li>
         <h3>Python</h3>
         <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>import json
-import requests
-import random
+            <pre class="line-numbers"><code class="prism language-python" data-prism>import random
 
-def main(request, response):
-    payload = json.loads(request.payload or '{}')
-    env = request.env
+def main(req, res):
+  payload = req.payload or 'No payload provided. Add custom data when executing function.'
 
-    randomNumber = random.randint(1, 100)
-    todo = requests.get(f"https://jsonplaceholder.typicode.com/todos/{randomNumber}").json()
+  secretKey = req.env.get(
+    'SECRET_KEY',
+    'SECRET_KEY environment variable not found. You can set it in Function settings.'
+  )
 
-    task = {
-        "message": "Hello from Appwrite Functions 👋",
-        **todo
-    }
+  randomNumber = random.random()
 
-    task["trigger"] = {
-        "http": "HTTP",
-        "schedule": "CRON",
-        "event": "Event",
-        "unknown": "Unknown"
-    }[env['APPWRITE_FUNCTION_TRIGGER']]
+  trigger = req.env['APPWRITE_FUNCTION_TRIGGER']
 
-    return response.json(task)</code></pre>
+  return res.json({
+    'message': 'Hello from Appwrite!',
+    'payload': payload,
+    'secretKey': secretKey,
+    'randomNumber': randomNumber,
+    'trigger': trigger,
+  })</code></pre>
         </div>
-        <b>Installing Dependencies</b>
-        <p>Include a <b>requirements.txt</b> file in your function, Appwrite will handle the rest! This example uses the <a href="https://pypi.org/project/requests/">requests</a> package</p>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>requirements.txt</b> file with your function- Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
         <h3>Ruby</h3>
         <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'httparty'
-require 'json'
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(req, res)
+  payload =
+    !req.payload.empty? ? req.payload :
+    'No payload provided. Add custom data when executing function.'
 
-def main(request, response)
-    payload = JSON.parse(request.payload.empty? ? '{}' : request.payload)
-    env = request.env
-    
-    randomNumber = rand(100) + 1
-    todo = JSON.parse(HTTParty.get('https://jsonplaceholder.typicode.com/todos/' + randomNumber.to_s).body)
-    
-    task = {
-        message: 'Hello from Appwrite Functions 👋',
-        **todo
-    }
+  secretKey =
+    req.env['SECRET_KEY'] ||
+    'SECRET_KEY environment variable not found. You can set it in Function settings.'
 
-    case env['APPWRITE_FUNCTION_TRIGGER']
-    when 'http'
-        task['trigger'] = 'HTTP'
-    when 'schedule'
-        task['trigger'] = 'CRON'
-    when 'event'
-        task['trigger'] = 'Event'
-    else
-        task['trigger'] = 'Unknown'
-    end
+  randomNumber = rand()
 
-    return response.json(task)
+  trigger = req.env['APPWRITE_FUNCTION_TRIGGER']
+
+  return res.json({
+    :message => 'Hello from Appwrite!',
+    :payload => payload,
+    :secretKey => secretKey,
+    :randomNumber => randomNumber,
+    :trigger => trigger,
+  })
 end</code></pre>
         </div>
-        <b>Installing Dependencies</b>
-        <p>Include a <b>Gemfile</b> in your function, Appwrite handles the rest! This example uses the <a href="https://rubygems.org/gems/httparty">httparty</a> package</p>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>Gemfile</b> with your function- Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
         <h3>Deno</h3>
         <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import axiod from "https://deno.land/x/axiod/mod.ts";
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async function (req: any, res: any) {
+  const payload =
+    req.payload ||
+    'No payload provided. Add custom data when executing function.';
 
-export default async function(request: any, response: any) {
-    const payload = JSON.parse(request.payload ? request.payload : "{}");
-    const env = request.env;
+  const secretKey =
+    req.env.SECRET_KEY ||
+    'SECRET_KEY environment variable not found. You can set it in Function settings.';
 
-    const randomNumber = Math.floor(Math.random() * 100) + 1;
-    const todo = (await axiod.get(`https://jsonplaceholder.typicode.com/todos/${randomNumber}`)).data;
+  const randomNumber = Math.random();
 
-    let task = {
-        message: 'Hello from Appwrite Functions 👋',
-        ...todo
-    };
+  const trigger = req.env.APPWRITE_FUNCTION_TRIGGER;
 
-    switch(env.APPWRITE_FUNCTION_TRIGGER) {
-        case 'http': 
-            task['trigger'] = 'HTTP'; 
-            break;
-        case 'schedule': 
-            task['trigger'] = 'CRON'; 
-            break;
-        case 'event': 
-            task['trigger'] = 'Event'; 
-            break;
-        default: 
-            task['trigger'] = 'Unknown'; 
-            break;
-    }
-
-    response.json(task);
-}</code></pre>
+  res.json({
+    message: 'Hello from Appwrite!',
+    payload,
+    secretKey,
+    randomNumber,
+    trigger,
+  });
+};</code></pre>
         </div>
-        <b>Installing Dependencies</b>
-        <p>No special steps are required for Deno, Appwrite handles everything!</p>
+        <p><b>Installing Dependencies</b></p>
+        <p>No special steps are required for Deno- Appwrite handles everything!</p>
         </div>
     </li>
     <li>
@@ -231,103 +194,193 @@ export default async function(request: any, response: any) {
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:math';
 import 'dart:async';
-import 'dart:convert';
-import 'package:dio/dio.dart' hide Response;
 
-Future<void> start(final request, final response) async {
-    final env = request.env;
-    final payload = jsonDecode(request.payload.isEmpty ? '{}' : request.payload);
-    
-    final randomNumber = Random().nextInt(100) + 1;
-    final todo = await Dio().get('https://jsonplaceholder.typicode.com/todos/$randomNumber');
-    
-    final task = {
-        'message': 'Hello from Appwrite Functions 👋',
-        'userId': todo.data['userId'],
-        'id': todo.data['id'],
-        'title': todo.data['title'],
-        'completed': todo.data['completed']
-    };
-    
-    switch (env['APPWRITE_FUNCTION_TRIGGER']) {
-        case 'http':
-        task['trigger'] = 'HTTP';
-        break;
-        case 'schedule':
-        task['trigger'] = 'CRON';
-        break;
-        case 'event':
-        task['trigger'] = 'Event';
-        break;
-        default:
-        task['trigger'] = 'Unknown';
-        break;
-    }
+Future &lt;void&gt; start(final req, final res) async {
+  final payload =
+    !req.payload?.isEmpty ? req.payload :
+    'No payload provided. Add custom data when executing function.';
 
-    response.json(task);
+  final secretKey =
+    req.env['SECRET_KEY'] ??
+    'SECRET_KEY environment variable not found. You can set it in Function settings.';
+
+  final randomNumber = new Random().nextDouble();
+
+  final trigger = req.env['APPWRITE_FUNCTION_TRIGGER'];
+
+  res.json({
+    'message': 'Hello from Appwrite!',
+    'payload': payload,
+    'secretKey': secretKey,
+    'randomNumber': randomNumber,
+    'trigger': trigger,
+  });
 }</code></pre>
         </div>
-        <b>Installing Dependencies</b>
-        <p>Include a <b>pubspec.yaml</b> file with your function, Appwrite handles the rest! This example uses the <a href="https://pub.dev/packages/dio">Dio</a> package</p>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>pubspec.yaml</b> file with your function- Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
         <h3>Swift</h3>
         <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
-func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
+    let payload = req.payload.isEmpty 
+        ? "No payload provided. Add custom data when executing function" 
+        : req.payload
     
-    let env = req.env
+    let secretKey = req.env["SECRET_KEY"] 
+        ?? "SECRET_KEY environment variable not found. You can set it in Function settings."
 
-    guard let data = (req.payload.isEmpty ? "{}" : req.payload).data(using: .utf8),
-        let payload = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-            return res.json(data: ["error": "Invalid payload."])
-    }
-    
-    let group = DispatchGroup()
+    let randomNumber = Double.random(in: 0...1)
 
-    var todo: [String: Any]? = nil
-    let randomNumber = Int.random(in: 1...100)
-    let url = URL(string: "https://jsonplaceholder.typicode.com/todos/\(randomNumber)")!
-    let fetchTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
-        defer { group.leave() }
-        guard let data = data else { return }
-        todo = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-    }
-    group.enter()
-    fetchTask.resume()
-    group.wait()
+    let trigger = req.env["APPWRITE_FUNCTION_TRIGGER"]
 
-    var task = [
-        "message": "Hello from Appwrite Functions 👋",
-        "userId": todo?["userId"] ?? "",
-        "id": todo?["id"] ?? "",
-        "title": todo?["title"] ?? "",
-        "completed": todo?["completed"] ?? ""
-    ]
-    
-    switch (env["APPWRITE_FUNCTION_TRIGGER"]) {
-    case "http":
-        task["trigger"] = "HTTP"
-    case "schedule":
-        task["trigger"] = "CRON"
-    case "event":
-        task["trigger"] = "Event"
-    default:
-        task["trigger"] = "Unknown"
-    }
-
-    return res.json(data: task)
+    return res.json(data: [
+        "message": "Hello from Appwrite!",
+        "payload": payload,
+        "secretKey": secretKey,
+        "randomNumber": randomNumber,
+        "trigger": trigger,
+    ])
 }</code></pre>
         </div>
         <p>With Swift, your <b>entrypoint</b> can be empty since Appwrite automatically infers it from the location of your <b>main()</b> function. Just ensure that your cloud function has a <b>single declaration of main()</b> across your source files.</p>
-        <b>Installing Dependencies</b>
-        <p>Include a <b>Package.swift</b> file with your function, Appwrite handles the rest!</p>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>Package.swift</b> file with your function- Appwrite handles the rest!</p>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>public async Task<RuntimeResponse> Main(RuntimeRequest req, RuntimeResponse res)
+{
+  var payload = (string.IsNullOrEmpty(req.Payload))
+                ? "No payload provided. Add custom data when executing function."
+                : req.Payload; 
+
+  var secretKey = req.Env.ContainsKey("SECRET_KEY")
+                  ? req.Env["SECRET_KEY"]
+                  : "SECRET_KEY environment variable not found. You can set it in Function settings.";
+
+  var randomNumber = new Random().NextDouble();
+
+  var trigger = req.Env["APPWRITE_FUNCTION_TRIGGER"];
+
+  return res.Json(new() 
+  {
+    { "message", "Hello from Appwrite!" },
+    { "payload", payload },
+    { "secretKey", secretKey },
+    { "randomNumber", randomNumber },
+    { "trigger", trigger },
+  });
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>Function.csproj</b> file with your function- Appwrite handles the rest!</p>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import kotlin.random.Random
+
+@Throws(Exception::class)
+fun main(req: RuntimeRequest, res: RuntimeResponse): RuntimeResponse {
+
+    val payload = if (req.payload.isEmpty()) "No payload provided. Add custom data when executing function." else req.payload
+
+    val secretKey = req.env["SECRET_KEY"] ?: "SECRET_KEY environment variable not found. You can set it in Function settings."
+    
+    val randomNumber = Random.nextDouble(0.0, 1.0)
+
+    val trigger = req.env["APPWRITE_FUNCTION_TRIGGER"]    
+
+    return res.json(mapOf(
+        "message" to "Hello from Appwrite!",
+        "payload" to payload,
+        "secretKey" to secretKey,
+        "randomNumber" to randomNumber,
+        "trigger" to trigger
+    ))
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>deps.gradle</b> file with your function- Appwrite handles the rest!</p>
+        </div>
+    </li>
+    <li>
+        <h3>Java</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+            <pre class="line-numbers"><code class="prism language-java" data-prism>import java.util.Map;
+import java.util.HashMap;
+
+public RuntimeResponse main(RuntimeRequest req, RuntimeResponse res) throws Exception {
+
+    String payload = (req.getPayload().isEmpty())
+                     ? "No payload provided. Add custom data when executing function."
+                     : req.getPayload();
+
+    Map<String, String> env = req.getEnv();
+
+    String secretKey = env.containsKey("SECRET_KEY")
+                       ? env.get("SECRET_KEY")
+                       : "SECRET_KEY environment variable not found. You can set it in Function settings.";
+
+    double randomNumber = Math.random();
+
+    String trigger = env.get("APPWRITE_FUNCTION_TRIGGER");
+
+    Map<String, Object> response = new HashMap();
+        response.put("message", "Hello from Appwrite!");
+        response.put("payload", payload);
+        response.put("secretKey", secretKey);
+        response.put("randomNumber", randomNumber);
+        response.put("trigger", trigger);
+
+    return res.json(response);
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>deps.gradle</b> file with your function- Appwrite handles the rest!</p>
+        </div>
+    </li>
+    <li>
+        <h3>C++</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
+
+    std::string payload = req.payload.empty() ? 
+                          "No payload provided. Add custom data when executing function." : 
+                          req.payload;
+
+    std::string secretKey = req.env.get("SECRET_KEY", "SECRET_KEY environment variable not found. You can set it in Function settings.").asString();
+
+    double randomNumber = ((double) rand() / (RAND_MAX));
+
+    std::string trigger = req.env["APPWRITE_FUNCTION_TRIGGER"].asString();
+
+    Json::Value response;
+    response["message"] = "Hello from Appwrite!";
+    response["payload"] = payload;
+    response["secretKey"] = secretKey;
+    response["randomNumber"] = randomNumber;
+    response["trigger"] = trigger;
+    
+    return res.json(response);
+}</code></pre>
+        </div>
+        <p><b>Installing Dependencies</b></p>
+        <p>Include a <b>CMakeLists.txt</b> file with your function- Appwrite handles the rest!</p>
         </div>
     </li>
 </ul>
@@ -379,11 +432,6 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
     </tbody>
 </table>
 
-<div class="notice">
-    <h3>Accessing your Local Appwrite Setup</h3>
-    <p>If you're running Appwrite locally and trying to connect to your local Appwrite instance from a cloud function, you'll have to use your local IP address in place of localhost. This is because, within the container localhost does not refer to the host machine rather the container itself. </p>
-</div>
-
 <h2><a href="/docs/functions#createFunction" id="createFunction">Create your Function</a></h2>
 
 <p>Before you can deploy your function, you will need to create a new function from your Appwrite project's dashboard. Access the Function settings from your project's left navigation panel. Click the 'Add Function' button and choose a function name and runtime. In your Functions settings page, you can also set your function event triggers, CRON schedule, and set secure environment variables for your function. </p>
@@ -401,7 +449,7 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
     --functionId=6012cc93d5a7b \
     --activate=true \
     --entrypoint="index.js" \
-    --code="/myrepo/myfunction"</code></pre>
+    --code="."</code></pre>
         </div>
     </li>
     <li>
@@ -412,7 +460,7 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
     --functionId=6012cc93d5a7b ^
     --activate=true ^
     --entrypoint="index.js" ^
-    --code="/myrepo/myfunction"</code></pre>
+    --code="."</code></pre>
         </div>
     </li>
     <li>
@@ -423,7 +471,7 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
     --functionId=6012cc93d5a7b ,
     --activate=true ,
     --entrypoint="index.js" ,
-    --code="/myrepo/myfunction"</code></pre>
+    --code="."</code></pre>
         </div>
     </li>
 </ul>
@@ -458,15 +506,15 @@ func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
 <h2><a href="/docs/functions#build" id="build">Builds</a></h2>
 <p>Deployments needs to be built before they can be activated. This is automatically done after creating a deployment and the time taken can vary depending on the runtime.</p>
 
-<p>If a build fails for any reason, the deployment's status is set to <b>failed</b> and you won't be able to activate it. You can however retry a build if you think it was caused by an external factor using the <b>Retry Button</b> on the Appwrite Dashboard or <a href="/docs/api#retry-build">Retry Build</a> endpoint with the <b>buildId</b> from the deployment.</p>
+<p>If a build fails for any reason, the deployment's status is set to <b>failed</b> and you won't be able to activate it. You can however retry a build if you think it was caused by an external factor using the <b>Retry Button</b> on the Appwrite Dashboard or <a href="/docs/server/functions#functionsRetryBuild">Retry Build</a> endpoint with the <b>buildId</b> from the deployment.</p>
 
-<p>To find more details about a build that has failed you can get the <code>buildId</code> from the deployment and use the <a href="/docs/api#get-build">Get Build</a> endpoint to get more information about the build.</p>
+<p>To find more details about a deployment and reasons for its failure, you can use the <a href="/docs/server/functions#functionsGetDeployment">Get Deployment</a> endpoint using the <b>deploymentId</b>.</p>
 
 <p>Deployments that have been built successfully are marked as <b>ready</b> and can be activated and executed.</p>
 
 <div class="notice">
     <h3>Build Times</h3>
-    <p>Statically compiled runtimes such as Rust or Swift take much longer to build however yield better performance over their dynamically compiled counterparts such as Node.</p>
+    <p>Compiled runtimes such as Rust and Swift take much longer to build however yield better performance over their interpreted counterparts such as Node.</p>
 </div>
 
 <h2><a href="/docs/functions#execute" id="execute">Execute</a></h2>
@@ -493,14 +541,17 @@ $image = new View(__DIR__.'/../general/image.phtml');
     <li>
         <h3>Web</h3>
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = new Appwrite();
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Functions } from "appwrite";
 
-sdk
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-;
+const client = new Client();
 
-let promise = sdk.functions.createExecution('[FUNCTION_ID]');
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
+
+const databases = new Databases(client, '[DATABASE_ID]');
+
+let promise = functions.createExecution('[FUNCTION_ID]');
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -549,16 +600,10 @@ func main() {
       .setProject("5df5acd0d48c2") // Your project ID
 
     let functions = Functions(client)
-    functions.createExecution(
+    let execution = functions.createExecution(
         functionId: "[FUNCTION_ID]"
-    ) { result in
-        switch result {
-        case .failure(let error):
-            print(error.message)
-        case .success(let execution):
-            print(String(describing: execution)
-        }
-    }
+    )
+    print(execution.toMap())
 }</code></pre>
         </div>
     </li>
@@ -599,15 +644,48 @@ class MainActivity : AppCompatActivity() {
 
 <h3><a href="/docs/functions#abuseLimits" id="abuseLimits">Abuse and Limits</a></h3>
 
-<p>Appwrite allows your project's end-users to execute Cloud Functions using client API or your client SDK. Execution is permitted to any user who has been granted the "execute" permission in your Cloud Functions settings page. The execution permission can accept any of the typical Appwrite <a href="/docs/permissions">permission types</a>.</p>
+<p>Appwrite Functions can be executed using Client or Server SDKs. Client SDKs must be authenticated with an account that has been granted execution <a href="/docs/permissions">permissions</a> on the function's settings page. Server SDKs require an API key with the correct scopes.</p>
 
-<p>When triggering a Cloud Function execution from the client, your users will be limited to a specific amount of execution per minute to make sure your Appwrite server is not being abused. The default limit is 60 calls per 1 minute. You can edit this limit using the server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
+<p>The Functions Service APIs are rate limited to 60 calls per minute per account when using a Client SDK. Learn more about <a href="docs/rate-limits">rate limiting</a>. The response size of a Cloud Function is limited to 1MB. Responses larger than 1MB should be handled using Appwrite's Databases or Storage service.</p>
+
+<p>Each execution has a default timeout of 15 seconds to prevent hanging functions from blocking resources. This timeout can be configured per function on a function's settings page or in <span class="tag">appwrite.json</span> for up to 900 seconds.</p>
+
+<p>The maximum configurable timeout can be increased by changing the <span class="tag">_APP_FUNCTIONS_TIMEOUT</span> environment variable. This environment variable changes the configurable maximum but does not alter existing individual configurations.</p>
+
+<h2><a href="/docs/functions#ignoreFiles" id="ignoreFiles">Ignore Files</a></h2>
+
+<p>Library folders such as <b>node_modules</b> or <b>vendor</b> should not be included in your tarball since these dependencies will be installed during your function's build process. Similarly, you should <b>not</b> include files containing secrets in your deployment. You can use the Appwite CLI's <b>file ignoring</b> feature to exclude specific files from a deployment.</p>
+
+<p>You can use the <b>ignore</b> property in your <b>appwrite.json</b> file to specify which files and folders should be ignored. This value must be an array of paths, as seen in the example below:</p>
+
+<div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
+    <pre class="line-numbers"><code class="prism language-json" data-prism>{
+    ...
+    "functions": [
+        {
+            "$id": "6213b58cb21dda6c3263",
+            "name": "My Awesome Function",
+            "runtime": "node-17.0",
+            "path": "My Awesome Function",
+            "entrypoint": "src/index.js",
+            "ignore": [ "node_modules", ".env" ]
+        },
+        ...
+    ],
+}</code></pre>
+</div>
+
+<p>The example configuration above would not deploy the folder <b>node_modules</b> and the file <b>.env</b>.</p>
+
+<p>Alternatively, you can add a <b>.gitignore</b> file into your function folder and Appwrite CLI will ignore files specified in there. Keep in mind that if present, the <b>ignore</b> configuration in <b>appwrite.json</b> will nullify the <b>.gitignore</b> file configuration.</p>
+
+<p>If you need to use a <b>.gitignore</b> file for your version control but don't want the Appwrite CLI to use it, you can specify the <b>ignore</b> key in <b>appwrite.json</b> to be an empty array.</p>
 
 <h2><a href="/docs/functions#supportedRuntimes" id="supportedRuntimes">Supported Runtimes</a></h2>
 
 <p>Appwrite provides multiple code runtimes to execute your custom functions. Each runtime uses a Docker image tied to a specific language version to provide a safe, isolated playground to run your team's code.</p>
 
-<p>Below is a list of supported Cloud Functions runtimes. The Appwrite team continually adds support for new runtimes. You can easily change which runtimes your Appwrite setup supports by editing your server <a href="/docs/environment-variables#functions">environment variables</a>.</p>
+<p>Below is a list of supported Cloud Functions runtimes. The Appwrite team continually adds support for new runtimes.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -629,6 +707,8 @@ class MainActivity : AppCompatActivity() {
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<p>By default, the following runtimes are enabled: "node-16.0, php-8.0, python-3.9, ruby-3.0". To enable or disable runtimes, you can edit the <span class="tag">_APP_FUNCTIONS_RUNTIMES</span> <a href="/docs/functions#environmentVariables">environment variable</a>.</p>
 
 <h2><a href="/docs/functions#environmentVariables" id="environmentVariables">Environment Variables</a></h2>
 
@@ -742,6 +822,18 @@ class MainActivity : AppCompatActivity() {
     </tbody>
 </table>
 
+<div class="notice">
+    <h3>Using an Appwrite SDK in Your Function</h3>
+    <p>Appwrite Server SDKs require an API key, an endpoint, and a project ID for authentication. Appwrite passes in your project ID with the environment variable  <span class="tag">APPWRITE_FUNCTION_PROJECT_ID</span>, but not the endpoint and API key. If you need to use a Server SDK, you will need to add environment variables for your endpoint and API key in the 'Settings' tab of your function.</p>
+    <p>If you are running a <b>local Appwrite instance</b>, you will need to pass in the machine's public IP instead of <span class="tag">'https://localhost/v1'</span>. Localhost inside the function's runtime container is not the same as localhost of your machine.</p>
+</div>
+
+<h2><a href="/docs/functions#appwriteSDKInFunctions" id="appwriteSDKInFunctions">Appwrite SDKs in Functions</a></h2>
+
+<p>You can integrate Appwrite Functions with other Appwrite services by using the appropriate <a href="/docs/getting-started-for-server" target="_blank">Server SDK</a> for your runtime. You can find starter code for your function's runtime in the <a href="https://github.com/appwrite/functions-starter" target="_blank">Appwrite Function Starter repository</a>.</p>
+
+<p>To initialize a Server SDK in a function, you need to provide your Appwrite project's endpoint and an <a href="/docs/keys" target="_blank">API key</a> as variables in the <b>Settings</b> tab of your Function. The ID of your Appwrite project is passed in automatically as <span class="tag">APPWRITE_FUNCTION_PROJECT_ID</span>.</p>
+
 <h2><a href="/docs/functions#monitorDebug" id="monitorDebug">Monitor & Debug</a></h2>
 
 <p>You can monitor your function execution usage stats and logs from your Appwrite console. To access your functions usage stats and logs, click the 'Usage' tab in your function dashboard.</p>
@@ -760,4 +852,4 @@ $image = new View(__DIR__.'/../general/image.phtml');
 
 <h2><a href="/docs/functions#demosExamples" id="demosExamples">Demos & Examples</a></h2>
 
-<p>There are many Cloud Function demos and examples created by the Appwrite team and community in multiple coding languages. These examples are available at our <a href="https://github.com/appwrite/demos-for-functions" target="_blank" rel="noopener">demos repository</a> on GitHub. You can also submit your examples by submitting a <a href="https://github.com/appwrite/demos-for-functions/pulls" target="_blank" rel="noopener">pull-request</a>.</p>
+<p>There are many Cloud Function demos and examples created by the Appwrite team and community in multiple coding languages. These examples are available at our <a href="https://github.com/open-runtimes/examples" target="_blank" rel="noopener">examples repository</a> on GitHub. You can also submit your examples by submitting a <a href="https://github.com/open-runtimes/examples/pulls" target="_blank" rel="noopener">pull-request</a>.</p>

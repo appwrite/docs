@@ -23,7 +23,7 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 
 <h2><a href="/docs/getting-started-for-flutter#addYourPlatform" id="addYourPlatform">Add your Flutter Platform</a></h2>
 
-<p>To init your SDK and start interacting with Appwrite services, you need to add a new Flutter platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and click the 'Add Platform' button.</p>
+<p>To init your SDK and start interacting with Appwrite services, you need to add a new Flutter platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and click the 'Add Platform' button. Only API requests initiated from platforms added to your Appwrite project will be accepted. This prevents unauthorized apps from accessing your Appwrite project.</p>
 
 <p>From the options, choose to add a new <b>Flutter</b> platform and add your app credentials. Appwrite Flutter SDK currently supports building apps for Android, iOS, Linux, Mac OS, Web and Windows.</p>
 
@@ -41,8 +41,8 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
   <application ...>
     ...
     <!-- Add this inside the `<application>` tag, along side the existing `<activity>` tags -->
-    <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true">
-      <intent-filter android:label="flutter_web_auth">
+    <activity android:name="com.linusu.flutter_web_auth_2.CallbackActivity" android:exported="true">
+      <intent-filter android:label="flutter_web_auth_2">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
@@ -77,7 +77,7 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 
 <h3><a href="/docs/getting-started-for-flutter#web" id="web">Web</a></h3>
 
-<p>Appwrite 0.7, and the Appwrite Flutter SDK 0.3.0 have added support for Flutter Web. To build web apps that integrate with Appwrite successfully, all you have to do is add a web platform on your Appwrite project's dashboard and list the domain your website uses to allow communication to the Appwrite API.</p>
+<p>Appwrite 0.7 and the Appwrite Flutter SDK 0.3.0 have added support for Flutter Web. To build web apps that integrate with Appwrite successfully, you must add a web platform on your Appwrite project's dashboard and list the domain your website uses to allow communication to the Appwrite API.</p>
 
 <p>For web in order to capture the OAuth2 callback URL and send it to the application using JavaScript <code>postMessage()</code>, you need to create an html file inside <code>./web</code> folder of your Flutter project. For example <code>auth.html</code> with the following content.</p>
 
@@ -88,18 +88,18 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 close the window.
 <script>
   window.opener.postMessage({
-    \'flutter-web-auth\': window.location.href
+    \'flutter-web-auth2\': window.location.href
   }, window.location.origin);
   window.close();
 </script>'); ?>
 </code></pre>
 </div>
 
-<p>Redirection URL passed to the authentication service must be the same as the URL on which the application is running (schema, host, port if necessary) and the path must point to created HTML file, /auth.html in this case. The callbackUrlScheme parameter of the authenticate() method does not take into account, so it is possible to use a schema for native platforms in the code.</p>
+<p>The redirection URL passed to the authentication service must be the same as the URL on which the application is running (schema, host, port if necessary), and the path must point to created HTML file, /auth.html in this case. The callbackUrlScheme parameter of the authenticate() method does not take into account, so it is possible to use a schema for native platforms in the code.</p>
 
 <div class="notice">
   <h2>Flutter Web Cross-Domain Communication & Cookies</h2>
-  <p>While running Flutter Web, make sure your Appwrite server and your Flutter client are using the same top-level domain and the same protocol (HTTP or HTTPS) to communicate. When trying to communicate between different domains or protocols, you may receive HTTP status error 401 because some modern browsers block cross-site or insecure cookies for enhanced privacy. In production, Appwrite allows you set multiple <a href="/docs/custom-domains">custom-domains</a> for each project.</p>
+  <p>While running Flutter Web, make sure your Appwrite server and your Flutter client use the same top-level domain and protocol (HTTP or HTTPS) to communicate. When communicating between different domains or protocols, you may receive HTTP status error 401 because some modern browsers block cross-site or insecure cookies for enhanced privacy. In production, Appwrite allows you set multiple <a href="/docs/custom-domains">custom-domains</a> for each project.</p>
 </div>
 
 
@@ -126,7 +126,7 @@ close the window.
 
 <h2><a href="/docs/getting-started-for-flutter#initSDK" id="initSDK">Init your SDK</a></h2>
 
-<p>Initialize your SDK code with your project ID, which can be found in your project settings page.</p>
+<p>Initialize your SDK with your endpoint and project ID, which can be found on your project settings page. It's usually a good practice to initialize the Client and make it available across the app using the state management solution of your choice, as the Client is required for making any calls to the Appwrite API.</p>
 
 <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
   <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
@@ -141,9 +141,9 @@ client
 </code></pre>
 </div>
 
-<p>Before starting to send any API calls to your new Appwrite instance, make sure your Android or iOS emulators has network access to the Appwrite server hostname or IP address.</p>
+<p>Before sending any API calls to your new Appwrite project, make sure your mobile device or emulator has network access to your Appwrite project's hostname or IP address.</p>
 
-<p>When trying to connect to Appwrite from an emulator or a mobile device, localhost is the hostname for the device or emulator and not your local Appwrite instance. You should replace localhost with your private IP as the Appwrite endpoint's hostname. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite API.</p>
+<p>When connecting to a local self-hosted Appwrite project from an emulator or a mobile device, you should use the private IP of the device running your Appwrite project as the hostname of the endpoint instead of localhost. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite server.</p>
 
 <h2><a href="/docs/getting-started-for-flutter#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
@@ -153,7 +153,7 @@ client
   <pre class="line-numbers"><code class="prism language-dart" data-prism>// Register User
 Account account = Account(client);
 
-Response user = await account
+final user = await account
     .create(
         userId: 'unique()',
         email: 'me@appwrite.io',
@@ -173,11 +173,11 @@ final realtime = Realtime(client);
 final subscription = realtime.subscribe(['files']);
 
 subscription.stream.listen((response) {
-    if(response.event === 'storage.files.create') {
+    if(response.events.contains('buckets.*.files.*.create') {
         // Log when a new file is uploaded
         print(response.payload);
     }
-})
+});
 </code></pre>
 </div>
 
@@ -196,7 +196,7 @@ client
 // Register User
 Account account = Account(client);
 
-Response user = await account
+final user = await account
     .create(
         userId: 'unique()',
         email: 'me@appwrite.io',
@@ -209,11 +209,11 @@ final realtime = Realtime(client);
 final subscription = realtime.subscribe(['files']);
 
 subscription.stream.listen((response) {
-    if(response.event === 'storage.files.create') {
+    if(response.events.contains('buckets.*.files.*.create')) {
         // Log when a new file is uploaded
         print(response.payload);
     }
-})
+});
 </code></pre>
 </div>
 

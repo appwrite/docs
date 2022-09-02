@@ -2,7 +2,9 @@
 
 <h2><a href="/docs/command-line#installation" id="installation">Installation</a></h2>
 
-<p>The CLI is packaged both as an <a href="https://www.npmjs.com/package/appwrite-cli">npm module</a> as well as a <a href="https://github.com/appwrite/sdk-for-node-cli/releases/latest">standalone binary</a> for your operating system, making it completely dependency free, platform independent and language agnostic.</p>
+<p>The CLI is packaged both as an <a href="https://www.npmjs.com/package/appwrite-cli">npm module</a> as well as a <a href="https://github.com/appwrite/sdk-for-cli/releases/latest">standalone binary</a> for your operating system, making it completely dependency free, platform independent and language agnostic.</p>
+
+<p>If you plan to use the CLI to initialize new Cloud Functions, ensure that <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="_blank" rel="noopener">Git is installed</a> on your machine.</p>
 
 <h3><a href="/docs/command-line#installWithNpm" id="installWithNpm">Install with NPM</a></h3>
 
@@ -80,12 +82,6 @@ brew install --HEAD appwrite</code></pre>
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init collection</code></pre>
 </div>
 
-<p>The init command also comes with a convenient <span class="tag">--all</span> flag to perform both these steps at once using</p>
-
-<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init --all</code></pre>
-</div>
-
 <h3><a href="/docs/command-line#deployFunctions" id="deployFunctions">Deploying Cloud Functions</a></h3>
 
 <p>The CLI also handles the creation and deployment of Appwrite's Cloud Functions. You can initialize a new function using</p>
@@ -114,18 +110,12 @@ brew install --HEAD appwrite</code></pre>
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collections</code></pre>
 </div>
 
-<p>The <b>deploy</b> command also comes with a convenient <span class="tag">--all</span> flag to deploy all your functions and collections at once.</p>
-
-<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy --all</code></pre>
-</div>
-
 <div class="notice margin-bottom"> 
     <h3>Self-Signed Certificates</h3> 
     <p>By default, requests to domains with self-signed SSL certificates (or no certificates) are disabled. If you trust the domain, you can bypass the certificate validation using</p>
     <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --selfSigned true</code></pre>
-</div>
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --selfSigned true</code></pre>
+    </div>
 </div>
 
 <h3><a href="/docs/command-line#appwriteJSON" id="appwriteJSON">The appwrite.json File</a></h3>
@@ -240,8 +230,8 @@ brew install --HEAD appwrite</code></pre>
         <td>The functions command allows you view, create and manage your Cloud Functions</td>
     </tr>
     <tr>
-        <td>database</td>
-        <td>The database command allows you to create structured collections of documents, query and filter lists of documents</td>
+        <td>databases</td>
+        <td>The databases command allows you to create structured collections of documents, query and filter lists of documents</td>
     </tr>
     <tr>
         <td>health</td>
@@ -284,13 +274,13 @@ brew install --HEAD appwrite</code></pre>
 <p>To get a list of all your collections, you can use the `listCollections` command. To successfully view the list, make sure your API key is granted with the scope "collections.read".</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite database listCollections</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases listCollections</code></pre>
 </div>
 
 <p>If you wish to parse the output from the CLI, you can request the CLI output in JSON format using the <span class="tag">--json</span> flag</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite database listCollections --json</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases listCollections --json</code></pre>
 </div>
 <!-- Attach image of output -->
 
@@ -299,7 +289,7 @@ brew install --HEAD appwrite</code></pre>
 <p>To get more information on a particular collection, you can make use of the `getCollection` command and pass in the `collectionId`.  To successfully fetch the collection, make sure your API key is granted with the scope "collections.read".</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite database getCollection --collectionId 5ff468cfa32a0</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases getCollection --collectionId 5ff468cfa32a0</code></pre>
 </div>
 
 <p><b>Create Document</b></p>
@@ -307,7 +297,7 @@ brew install --HEAD appwrite</code></pre>
 <p>To create a new document in an existing collection, use the `createDocument` command.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite database createDocument --collectionId <ID> --documentId 'unique()' --data '{ "Name": "Iron Man" }' --read role:all team:abc</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases createDocument --collectionId <ID> --documentId 'unique()' --data '{ "Name": "Iron Man" }' --read role:all team:abc</code></pre>
 </div>
 
 <h3><a href="/docs/command-line#configuration" id="configuration">Configuration</a></h3>
@@ -315,13 +305,11 @@ brew install --HEAD appwrite</code></pre>
 <p>At any point, if you would like to change your server endpoint, project key, or self-signed certificate acceptance, use the <b>client</b> service.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>
-appwrite client --endpoint http://192.168.1.6/v1
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --endpoint http://192.168.1.6/v1
 appwrite client --key 23f24gwrhSDgefaY
 appwrite client --selfSigned true
 appwrite client --reset // Resets your CLI configuration
-appwrite client --debug // Prints your current configuration
-</code></pre>
+appwrite client --debug // Prints your current configuration</code></pre>
 </div>
 
 <div class="notice margin-bottom"> 
@@ -340,4 +328,68 @@ appwrite client --debug // Prints your current configuration
 
 <h3><a href="/docs/command-line#help" id="help">Help</a></h3>
 
-<p>If you get stuck anywhere, you can always use the <b>help</b> command to get the usage examples. All the examples are also available on the Appwrite API specs docs, and you can view them by switching the examples to the "Appwrite CLI" from the top dropdown.</p>
+<p>If you get stuck anywhere, you can always use the <b>help</b> command to get the usage examples.</p>
+
+<h3><a href="/docs/command-line#uninstall" id="uninstall">Uninstall</a></h3>
+
+<p>If you installed Appwrite CLI using NPM, you can use the following command to uninstall it.</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>npm uninstall -g appwrite-cli</code></pre>
+</div>
+
+<p>If you installed the Appwrite CLI with brew or the installation script for your operating system, use the following command to uninstall it.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h4>MacOS</h4>
+        <p>Using <a href="https://brew.sh" target="_blank">Homebrew</a></p>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>brew uninstall appwrite</code></pre>
+        </div>
+
+        <p>or terminal</p>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>rm -f /usr/local/bin/appwrite | bash</code></pre>
+        </div>
+    </li>
+    
+    <li>
+        <h4>Windows</h4>
+        <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
+            <pre class="line-numbers"><code class="prism language-powershell" data-prism>$APPWRITE_INSTALL_DIR = Join-Path -Path $env:LOCALAPPDATA -ChildPath "Appwrite"; Remove-Item -Force -Path $APPWRITE_INSTALL_DIR</code></pre>
+        </div>
+    </li>
+    
+    <li>
+        <h4>Linux</h4>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>rm -f /usr/local/bin/appwrite | bash</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>You can also remove the configuration, cookies, and API Keys the Appwrite CLI stored. To remove those, run the following command.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h4>MacOS</h4>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>rm -rf ~/.appwrite | bash</code></pre>
+        </div>
+    </li>
+    
+    <li>
+        <h4>Windows</h4>
+        <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
+            <pre class="line-numbers"><code class="prism language-powershell" data-prism>$APPWRITE_CONFIG_DIR = Join-Path -Path $env:UserProfile -ChildPath ".appwrite"; Remove-Item -Recurse -Force -Path $APPWRITE_CONFIG_DIR</code></pre>
+        </div>
+    </li>
+    
+    <li>
+        <h4>Linux</h4>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>rm -rf ~/.appwrite | bash</code></pre>
+        </div>
+    </li>
+</ul>
