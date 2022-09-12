@@ -1,29 +1,29 @@
 <p>
     Appwrite provides authentication for many different use cases to fit the needs of developers. 
-    Appwrite manages authentication with a combination of users and sessions. 
+    Appwrite manages authentication with a combination of accounts and sessions. 
     Accounts can be created in many different ways, such as through an anonymous session, email and password, OAuth authentication, magic URLs, and more.
 </p>
 
 <h2><a href="/docs/authentication#account-vs-user-service" id="account-vs-user-service">Account vs User Service</a></h2>
 
 <p>
-    While the Users API is integrated from the server-side and operates in an admin scope with access to all your project users, the Account API operates in the scope of the currently logged-in user and usually uses a client-side integration.
+    The Account API operates in the scope of the currently logged-in account and usually used in a frontend or mobile app. The Users API is used in backend integrations and operates in an admin scope using an API key with access to all your project users.
 </p>
 
 <p> 
-    Some of the Account API methods are available from the server SDK when you authenticate with JWT. This allows you to perform server-side actions on behalf of your project user.
+    Some of the Account API methods are available from Server SDKs when you authenticate with a JWT. This allows you to perform actions on behalf of a project account's user on the backend.
 </p>
 
 <h2><a href="/docs/authentication#create-an-account" id="create-an-account">Create An Account</a></h2>
 
 <p>
-    A user account in Appwrite is the primary way to access information for a given project. Accounts can be created in many different ways, including email/password, anonymously, using OAuth providers, phone authentication, and more. Users can create and manage authentication sessions through the REST API or client SDKs.
+    A user account in Appwrite is the primary way to access information for a given project. Accounts can be created in many different ways, including <a href="/docs/client/account#accountCreate">email & password</a>, <a href="/docs/client/account#accountCreateAnonymousSession">anonymous sessions</a>, <a href="/docs/client/account#accountCreateOAuth2Session">OAuth2</a>, <a href="/docs/client/account#accountCreatePhoneSession">phone authentication</a>, and more. Applications can create and manage authentication sessions through the REST API or Client SDKs.
 </p>
 
 <h3><a href="/docs/authentication#email" id="email">Email</a></h3>
 
 <p>
-    Registering an account via email and password is one of the most common ways to sign up for an application. Appwrite provides email and password authentication out of the box. Using one of Appwrite's client SDKs, or the REST APIs directly, you can create an account using an email address and password in your application.
+    Creating an account via email and password is one of the most common ways to sign up for an application. Appwrite provides email and password authentication out of the box. Using one of Appwrite's Client SDKs, or the REST APIs directly, you can create an account using an email address and password in your application.
 </p>
 
 <p>
@@ -54,13 +54,13 @@ promise.then(function (response) {
 </div>
 
 <p>
-    After an account is created, the newly created account must be verified through the account verification route provided by the Appwrite Accounts API, after which the new user can login to their account.
+    After an account is created, the newly created account must be verified through the <a href="/docs/authentication#accountCreateVerification">account verification route</a> provided by the Appwrite Accounts API, after which the new user can login to their account.
 </p>
 
 <h3><a href="/docs/authentication#anonymous-user" id="anonymous-user">Anonymous User</a></h3>
 
 <p>
-    Anonymous authentication allows users to create a temporary valid session without creating an account.
+    Anonymous authentication allows users of your application to create a temporary valid session without creating an account.
 </p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
@@ -115,13 +115,17 @@ account.createOAuth2Session('amazon');
 </div>
 
 <p>  
-    If there is already an active session, the new session will be attached to the logged-in account. If there are no active sessions, the server will attempt to look for a user with the same email address as the email received from the OAuth2 provider and attach the new session to the existing user. If no matching user is found - the server will create a new user.
+    If there is already an active session, the new session will be attached to the logged-in account. If there are no active sessions, the server will attempt to look for an account with the same email address as the email received from the OAuth2 provider and attach the new session to the existing Account. If no matching account is found - the server will create a new account.
 </p>
 
 <h3><a href="/docs/authentication#phone" id="phone">Phone</a></h3>
 
 <p>
     Phone authentication is done using a two-step authentication process. When using phone authentication, the request to authenticate is initiated from the client application, an SMS is sent to the user with a secret key for creating a session. 
+</p>
+
+<p> 
+    Phone authentication requires a provider to be setup to send SMS messages. The supported providers are Twillio, Text Magic, and Telesign. There are <a href="/docs/environment-variables#phone">environment variables</a> that needs to be setup first.
 </p>
 
 <p>
