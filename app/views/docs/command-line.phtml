@@ -138,15 +138,15 @@ brew install --HEAD appwrite</code></pre>
     "collections": [
         {
             "$id": "6213bb2d567d8a206614",
-            "$read": [
-                "team:admin"
-            ],
-            "$write": [
-                "team:admin"
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"team:admin\")",
+                "update(\"team:admin\")",
+                "delete(\"team:admin\")",
             ],
             "name": "Millenium Problems",
             "enabled": true,
-            "permission": "collection",
+            "documentSecurity": false,
             "attributes": [],
             "indexes": []
         }
@@ -297,7 +297,7 @@ brew install --HEAD appwrite</code></pre>
 <p>To create a new document in an existing collection, use the `createDocument` command.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases createDocument --collectionId <ID> --documentId 'unique()' --data '{ "Name": "Iron Man" }' --read role:all team:abc</code></pre>
+<pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases createDocument --collectionId <ID> --documentId 'unique()' --data '{ "Name": "Iron Man" }' --permissions 'read("any")' 'write("team:abc")' </code></pre>
 </div>
 
 <h3><a href="/docs/command-line#configuration" id="configuration">Configuration</a></h3>
