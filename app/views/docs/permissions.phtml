@@ -20,12 +20,6 @@ p>Using permissions, you can decide that only <span class="tag">user A</span> an
 
 <p>When not providing a resource with read or write permissions, the default value will be empty. When a read or write permissions is missing, no one will be granted access control to the resource.</p>
 
-<div class="notice calm margin-top-large margin-bottom-large">
-    <h4>Note</h4>
-    
-    <p>You will need an active session to perform create, update, and delete type actions in your collections. Even if create, update, and delete permissions are granted to "Role.any()", you still need to <a href="/docs/client/account#accountCreateAnonymousSession" target="_blank">create an anonymous session</a> before you can perform these actions.</p>
-</div>
-
 <h2 id="server-integration"><a href="/docs/permissions#server-integration">Server Integration</a></h2>
 
 <p>A server or <a href="/docs/admin">admin integration</a> can be used for increased flexibility. When using a Server SDK in combination with the proper <a href="/docs/keys#scopes">API key scopes</a>, you can have any type of access to any of your project resources regardless of their permissions.</p>
