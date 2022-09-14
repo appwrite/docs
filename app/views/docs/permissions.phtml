@@ -1,8 +1,8 @@
-<p>Appwrite permission mechanism offers a simple, yet flexible way to manage which users, teams, or roles can access a specific resource of your project, like documents and files.</p>
+<p>Appwrite permission mechanism offers a simple, yet flexible way to manage which users, teams, or roles can access a specific resource in your project, like documents and files.</p>
 
-<p>Using permissions, you can decide that only <span class="tag">user A</span> and <span class="tag">user B</span> will have read and update access to a specific database document, while <span class="tag">user C</span> and <span class="tag">team X</span> will be the only ones with create and delete access.</p>
+p>Using permissions, you can decide that only <span class="tag">user A</span> and <span class="tag">user B</span> will have read and update access to a specific database document, while <span class="tag">user C</span> and <span class="tag">team X</span> will be the only ones with delete access.</p>
 
-<p>As the name suggests, read permission allows a user to view a resource, create allows users to create new resources, the update allows a user to make changes to a resource, and delete allows the user to remove the resource.</p>
+<p>As the name suggests, read permission allows a user to read a resource, create allows users to create new resources, update allows a user to make changes to a resource, and delete allows the user to remove the resource.</p>
 
 <p>All permissions can be granted to individuals or groups of users, entire teams, or only to team members with a specific role. Permission can also be granted based on authentication status such as to all users, only authenticated users, or only guest users.</p>
 
@@ -28,7 +28,7 @@
 
 <h2 id="server-integration"><a href="/docs/permissions#server-integration">Server Integration</a></h2>
 
-<p>A server or <a href="/docs/admin">admin integration</a> can be used for increased flexibility. When using a Server SDK in combination with the proper <a href="/docs/keys#scopes">API key scopes</a>, you can have all types of access to any of your project resources regardless of their permissions.</p>
+<p>A server or <a href="/docs/admin">admin integration</a> can be used for increased flexibility. When using a Server SDK in combination with the proper <a href="/docs/keys#scopes">API key scopes</a>, you can have any type of access to any of your project resources regardless of their permissions.</p>
 
 <p>Using the server integration flexibility, you can change resource permissions, share resources between different users and teams, or edit and delete them without any limitations.</p>
 
@@ -81,7 +81,7 @@
     <tbody>
     <tr>
         <td>Permission.read()</td>
-        <td>Access to view a resource. Does not apply to functions.</td>
+        <td>Access to read a resource.</td>
     </tr>
     <tr>
         <td>Permission.create()</td>
@@ -110,7 +110,7 @@
 
 <h3 id="example-1"><a href="/docs/permissions#example-1">Example #1 - Basic Usage</a></h3>
 
-<p>In the following example, we are creating a document that can be viewed by anyone, edited by writers or admins, and deleted by a user with the user ID <span class="tag">user:5c1f88b42259e</span> or administrators.</p>
+<p>In the following example, we are creating a document that can be read by anyone, edited by writers or admins, and deleted by administrators or a user with the user ID <span class="tag">user:5c1f88b42259e</span>.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Permission, Role } from "appwrite";
@@ -128,8 +128,10 @@ let promise = databases.createDocument(
     {'actorName': 'Chris Evans', 'height': 183}, // Data
     [ // Permissions
         Permission.read(Role.any()), // Anyone can view this document
-        Permission.edit([Role.team("writers"), Role.team("admin")]), // Only writers and admins can edit this document
-        Permission.delete([Role.user("5c1f88b42259e"), Role.team("admin")]) // Only user 5c1f88b42259e and admins can delete this document
+        Permission.update(Role.team("writers")), // Writers can update this document
+        Permissions.update(Role.team("admin")), // Admins can update this document
+       Permission.delete(Role.user("5c1f88b42259e")) // User 5c1f88b42259e can delete this document
+       Permission.delete(Role.team("admin")) // Admins can delete this document
     ]
 );
 
@@ -142,7 +144,7 @@ promise.then(function (response) {
 
 <h3 id="example-2"><a href="/docs/permissions#example-2">Example #2 - Team Roles</a></h3>
 
-<p>In the following example, we are creating a document that can be read-only by members of the team with ID <span class="tag">5c1f88b87435e</span> and can only be edited or deleted by members of the same team that possesses the team role <span class="tag">owner</span>.</p>
+<p>In the following example, we are creating a document that can be read by members of the team with ID <span class="tag">5c1f88b87435e</span> and can only be edited or deleted by members of the same team that possess the team role <span class="tag">owner</span>.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Permission, Role } from "appwrite";
@@ -160,7 +162,7 @@ let promise = databases.createDocument(
     {'actorName': 'Chris Evans', 'height': 183},
     [
         Permission.read(Role.team("5c1f88b87435e")), // Only users of team 5c1f88b87435e can read the document
-        Permission.edit(Role.team("5c1f88b87435e", "owner")), // Only users of team 5c1f88b87435e with the role owner can edit the document
+        Permission.update(Role.team("5c1f88b87435e", "owner")), // Only users of team 5c1f88b87435e with the role owner can update the document
         Permission.delete(Role.team("5c1f88b87435e", "owner") // Only users of team 5c1f88b87435e with the role owner can delete the document
     ]
 );
