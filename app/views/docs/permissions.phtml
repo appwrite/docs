@@ -79,12 +79,12 @@ p>Using permissions, you can decide that only <span class="tag">user A</span> an
         <td>Grants access to any guest user without a session. Authenticated users don't have access to this role.</td>
     </tr>
     <tr>
-        <td>Role.users()</td>
-        <td>Grants access to any authenticated or anonymous user.</td>
+        <td>Role.users([STATUS])</td>
+        <td>Grants access to any authenticated or anonymous user. You can optionally pass the <span class="tag">verified</span> or <span class="tag">unverified</span> string to target specifc types of users.</td>
     </tr>
     <tr>
-        <td>Role.user([USER_ID])</td>
-        <td>Grants access to a specific user by user ID.</td>
+        <td>Role.user([USER_ID], [STATUS])</td>
+        <td>Grants access to a specific user by user ID. You can optionally pass the <span class="tag">verified</span> or <span class="tag">unverified</span> string to target specifc types of users.</td>
     </tr>
     <tr>
         <td>Role.team([TEAM_ID])</td>
