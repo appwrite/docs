@@ -26,6 +26,40 @@ p>Using permissions, you can decide that only <span class="tag">user A</span> an
 
 <p>Using the server integration flexibility, you can change resource permissions, share resources between different users and teams, or edit and delete them without any limitations.</p>
 
+<h2 id="permission-types"><a href="/docs/permissions#permission-types">Permission Types</a></h2>
+<p>In Client and Server SDKs, you will find a <b>Permission</b> class with helper methods for each role described below.</p>
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 180px">Type</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Permission.read()</td>
+        <td>Access to read a resource.</td>
+    </tr>
+    <tr>
+        <td>Permission.create()</td>
+        <td>Access to create new resources. Does not apply to files or documents. Applying this type of access to files or documents results in an error.</td>
+    </tr>
+    <tr>
+        <td>Permission.update()</td>
+        <td>Access to change a resource, but not remove or create new resources. Does not apply to functions.</td>
+    </tr>
+    <tr>
+        <td>Permission.delete()</td>
+        <td>Access to remove a resource. Does not apply to functions.</td>
+    </tr>
+    <tr>
+        <td>Permission.write()</td>
+        <td>Alias to grant create, update, and delete access for collections and buckets and update and delete access for documents and files.</td>
+    </tr>
+    </tbody>
+</table>
+
+
 <h2 id="permission-roles"><a href="/docs/permissions#permission-roles">Permission Roles</a></h2>
 <p>In Client and Server SDKs, you will find a <b>Role</b> class with helper methods for each role described below.</p>
 <table class="full text-size-small">
@@ -59,39 +93,6 @@ p>Using permissions, you can decide that only <span class="tag">user A</span> an
     <tr>
         <td>Role.team([TEAM_ID], [ROLE])</td>
         <td>Grants access to any member who possesses a specific role in a team. To gain access to this permission, the user must be a member of the specific team and have the given role assigned to them. Team roles can be assigned when inviting a user to become a team member.</td>
-    </tr>
-    </tbody>
-</table>
-
-<h2 id="permission-types"><a href="/docs/permissions#permission-types">Permission Types</a></h2>
-<p>In Client and Server SDKs, you will find a <b>Permission</b> class with helper methods for each role described below.</p>
-<table class="full text-size-small">
-    <thead>
-    <tr>
-        <td style="width: 180px">Type</td>
-        <td>Description</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>Permission.read()</td>
-        <td>Access to read a resource.</td>
-    </tr>
-    <tr>
-        <td>Permission.create()</td>
-        <td>Access to create new resources. Does not apply to files or documents. Applying this type of access to files or documents results in an error.</td>
-    </tr>
-    <tr>
-        <td>Permission.update()</td>
-        <td>Access to change a resource, but not remove or create new resources. Does not apply to functions.</td>
-    </tr>
-    <tr>
-        <td>Permission.delete()</td>
-        <td>Access to remove a resource. Does not apply to functions.</td>
-    </tr>
-    <tr>
-        <td>Permission.write()</td>
-        <td>Alias to grant create, update, and delete access for collections and buckets and update and delete access for documents and files.</td>
     </tr>
     </tbody>
 </table>
