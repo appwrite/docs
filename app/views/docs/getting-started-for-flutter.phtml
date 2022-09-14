@@ -41,8 +41,8 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
   <application ...>
     ...
     <!-- Add this inside the `<application>` tag, along side the existing `<activity>` tags -->
-    <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true">
-      <intent-filter android:label="flutter_web_auth">
+    <activity android:name="com.linusu.flutter_web_auth_2.CallbackActivity" android:exported="true">
+      <intent-filter android:label="flutter_web_auth_2">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
@@ -88,7 +88,7 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 close the window.
 <script>
   window.opener.postMessage({
-    \'flutter-web-auth\': window.location.href
+    \'flutter-web-auth2\': window.location.href
   }, window.location.origin);
   window.close();
 </script>'); ?>
