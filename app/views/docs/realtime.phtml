@@ -29,9 +29,7 @@ $channels = [
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client } from "appwrite";
 
-const client = new Client();
-
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
@@ -48,12 +46,11 @@ client.subscribe('files', response => {
         <h3>Flutter</h3>
 
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your Appwrite Endpoint
-    .setProject('5e8cf4f46b5e8') // Your project ID
-;
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
 final realtime = Realtime(client);
 
@@ -71,39 +68,41 @@ subscription.stream.listen((response) {
     <li>
         <h3>Android</h3>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Realtime
 
-client
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
+val client = Client(context)
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("[PROJECT_ID]")
 
 val realtime = Realtime(client)
 
 // Subscribe to files channel
-realtime.subscribe("files", callback = { response ->
-    if(response.events.contains("buckets.*.files.*.create")) {
+let subscription = realtime.subscribe("files") {
+    if(it.events.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
-        print(response.payload.toString());
+        print(it.payload.toString());
     }
-})</code></pre>
+}</code></pre>
         </div>
     </li>
     <li>
         <h3>Apple</h3>
         <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import AppwriteModels
 
-client
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("[PROJECT_ID]")
 
-let realtime = Realtime(client: client)
+let realtime = Realtime(client)
 
 // Subscribe to files channel
-let subscription = realtime.subscribe(channels: ["files"]) { message in
+let subscription = realtime.subscribe(channels: ["files"]) { response in
     if(message.events!.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
-        print(String(describing: message.payload))
+        print(String(describing: response))
     }
 }</code></pre>
         </div>
@@ -135,9 +134,7 @@ let subscription = realtime.subscribe(channels: ["files"]) { message in
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client } from "appwrite";
 
-const client = new Client();
-
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
@@ -151,8 +148,14 @@ client.subscribe('account', response => {
         <h3>Flutter</h3>
 
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
+
 final realtime = Realtime(client);
+
 final subscription = realtime.subscribe(['account']);
 
 subscription.stream.listen((response) {
@@ -164,24 +167,36 @@ subscription.stream.listen((response) {
     <li>
         <h3>Android</h3>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Realtime
+
+val client = Client(context)
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("[PROJECT_ID]")
+
 val realtime = Realtime(client)
 
-realtime.subscribe("account", callback = { param ->
+val subscription = realtime.subscribe("account") {
     // Callback will be executed on all account events.
-    print(param.toString())
-})</code></pre>
+    print(it.payload.toString())
+}</code></pre>
         </div>
     </li>
     <li>
         <h3>Apple</h3>
         <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import AppwriteModels
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("[PROJECT_ID]")
+
 let realtime = Realtime(client)
 
-realtime.subscribe(channel: "account", callback: { param in
+let subscription = realtime.subscribe(channel: "account", callback: { response in
     // Callback will be executed on all account events.
-    print(String(describing: param))
+    print(String(describing: response))
 })</code></pre>
         </div>
     </li>
@@ -197,9 +212,8 @@ realtime.subscribe(channel: "account", callback: { param in
         <h3>Web</h3>
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client } from "appwrite";
-const client = new Client();
 
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
@@ -213,8 +227,14 @@ client.subscribe(['collections.A.documents.A', 'files'], response => {
         <h3>Flutter</h3>
 
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
+
 final realtime = Realtime(client);
+
 final subscription = realtime.subscribe(['databases.A.collections.A.documents.A', 'files']);
 
 subscription.stream.listen((response) {
@@ -226,25 +246,36 @@ subscription.stream.listen((response) {
     <li>
         <h3>Android</h3>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Realtime
+
+val client = Client(context)
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("[PROJECT_ID]")
 val realtime = Realtime(client)
 
-realtime.subscribe("databases.A.collections.A.documents.A", "files", callback = { param ->
+realtime.subscribe("databases.A.collections.A.documents.A", "files") {
     // Callback will be executed on changes for documents A and all files.
-    print(param.toString())
-})</code></pre>
+    print(it.toString())
+}</code></pre>
         </div>
     </li>
     <li>
         <h3>Apple</h3>
         <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import AppwriteModels
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("[PROJECT_ID]")
+
 let realtime = Realtime(client)
 
-realtime.subscribe(channels: ["databases.A.collections.A.documents.A", "files"], callback: { param in
+realtime.subscribe(channels: ["databases.A.collections.A.documents.A", "files"]) { response in
     // Callback will be executed on changes for documents A and all files.
-    print(String(describing: param))
-})</code></pre>
+    print(String(describing: response))
+}</code></pre>
         </div>
     </li>
 </ul>
@@ -259,9 +290,7 @@ realtime.subscribe(channels: ["databases.A.collections.A.documents.A", "files"],
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client } from "appwrite";
 
-const client = new Client();
-
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
@@ -278,8 +307,14 @@ unsubscribe();</code></pre>
         <h3>Flutter</h3>
 
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
+
 final realtime = Realtime(client);
+
 final subscription = realtime.subscribe(['files']);
 
 subscription.stream.listen((response) {
@@ -294,13 +329,19 @@ subscription.close();</code></pre>
     <li>
         <h3>Android</h3>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Realtime
+
+val client = Client(context)
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("[PROJECT_ID]")
+
 val realtime = Realtime(client)
 
-val subscription = realtime.subscribe("files", callback = { param ->
+val subscription = realtime.subscribe("files") {
     // Callback will be executed on changes for all files.
     print(param.toString())
-})
+}
 
 // Closes the subscription.
 subscription.close()</code></pre>
@@ -309,13 +350,14 @@ subscription.close()</code></pre>
     <li>
         <h3>Apple</h3>
         <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>
+let client = Client()
 let realtime = Realtime(client)
 
-let subscription = realtime.subscribe(channel: "files", callback: { param in
+let subscription = realtime.subscribe(channel: "files") { response in
     // Callback will be executed on changes for all files.
-    print(param.toString())
-})
+    print(response.toString())
+}
 
 // Closes the subscription.
 subscription.close()</code></pre>
@@ -488,9 +530,6 @@ client.setEndpointRealtime("[HOSTNAME_OR_IP]")</code></pre>
 
 <h3>Rapid Subscriptions Changes</h3>
 <p>The SDK creates a single WebSocket connection for all subscribed channels. Each time a channel is added or unsubscribed - the SDK currently creates a completely new connection and terminates the old one. Therefore, subscriptions to channels should always be done in conjunction with state management so as not to be unnecessarily built up several times by multiple components' life cycles.</p>
-
-<h3>Nested Documents</h3>
-<p>Nested Documents will not trigger events related to their parent documents. Meaning, updates to a child document - will not trigger an event for the parent document. But it will trigger an event for the child document itself.</p>
 
 <h3>Server-Side?</h3>
 <p>We currently are not offering access to realtime with Server SDKs and an API key.</p>
