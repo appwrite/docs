@@ -106,7 +106,7 @@ val user = account.create(
   <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// Subscribe to files channel
 val realtime = Realtime(client)
 
-let subscription = realtime.subscribe("files") {
+val subscription = realtime.subscribe("files") {
     if(it.events.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(it.payload.toString());
@@ -136,7 +136,7 @@ val user = account.create(
 // Subscribe to files channel
 val realtime = Realtime(client)
 
-let subscription = realtime.subscribe("files") {
+val subscription = realtime.subscribe("files") {
     if(it.events.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(it.payload.toString());

@@ -23,9 +23,9 @@ $appleVersion = $versions['apple'] ?? '';
 
 <h2><a href="/docs/getting-started-for-apple#addProject" id="addProject">Add your Apple Platform</a></h2>
 
-<p>To init your SDK and start interacting with Appwrite services, you need to add a new Apple platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and click the 'Add Platform' button. Only API requests initiated from platforms added to your Appwrite project will be accepted. This prevents unauthorized apps from accessing your Appwrite project.</p>
+<p>To init your SDK and start interacting with Appwrite services, you need to add a new Apple platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and click the <b>'Add Platform'</b> button. Only API requests initiated from platforms added to your Appwrite project will be accepted. This prevents unauthorized apps from accessing your Appwrite project.</p>
 
-<p>From the options, choose to add a new <b>Apple</b> platform, select the iOS, macOS, watchOS or tvOS tab and add your app <u>name</u> and <u>bundle identifier</u>, Your bundle identifier can be found at the top of the `General` tab in your project settings, or in your `Info.plist` file. By registering your new app platform, you are allowing your app to communicate with the Appwrite API.</p>
+<p>From the options, choose to add a new <b>Apple</b> platform, select the iOS, macOS, watchOS or tvOS tab and add your app <u>name</u> and <u>bundle identifier</u>, Your bundle identifier can be found at the top of the <b>General</b> tab in your project settings, or in your <b>Info.plist</b> file. By registering your new app platform, you are allowing your app to communicate with the Appwrite API.</p>
 
 <h2><a href="/docs/getting-started-for-apple#getSDK" id="getSDK">Get Appwrite Apple SDK</a></h2>
 
@@ -34,15 +34,14 @@ $appleVersion = $versions['apple'] ?? '';
 <ol>
     <li>Select File > Add Packages</li>
     <li>Search for the Appwrite SDK with the URL https://github.com/appwrite/sdk-for-apple</li>
-    <li>In the right panel, add your desired version rules</li>
-    <li>In the right panel, add to your desired project</li>
+    <li>In the right panel, select your target project and add your desired version rules</li>
     <li>Select Add Package and wait for package resolution to complete</li>
     <li>Make sure the Appwrite package product is checked and select Add Package again</li>
 </ol>
 
 <h3>Using Swift Packages</h3>
 
-<p>Add this to your Package.swift file: </p>
+<p>Add the following to your Package.swift file: </p>
 
 <div class="ide" data-lang="swift" data-lang-label="Swift">
   <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
@@ -142,7 +141,7 @@ let user = try await account.create(
 
 <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
   <pre class="line-numbers"><code class="prism language-swift" data-prism>// Subscribe to files channel
-let realtime = Realtime(client: client)
+let realtime = Realtime(client)
 
 let subscription = realtime.subscribe(channels: ["files"]) { message in
     if(message.events!.contains("buckets.*.files.*.create")) {
@@ -174,7 +173,7 @@ let user = try await account.create(
 )
 
 // Subscribe to files channel
-let realtime = Realtime(client: client)
+let realtime = Realtime(client)
 
 let subscription = realtime.subscribe(channels: ["files"]) { message in
     if(message.events!.contains("buckets.*.files.*.create")) {

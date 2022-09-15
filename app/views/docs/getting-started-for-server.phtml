@@ -85,7 +85,11 @@ $swiftVersion = $versions['swift'] ?? '';
             <p>Add the Appwrite Swift SDK package as a dependency</p>
             <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
-    .package(name: "Appwrite", url: "https://github.com/appwrite/sdk-for-swift.git", .exact("<?php echo $this->escape($swiftVersion); ?>"))
+    .package(
+        name: "Appwrite",
+        url: "https://github.com/appwrite/sdk-for-swift.git",
+        .exact("<?php echo $this->escape($swiftVersion); ?>")
+    )
 ]</code></pre>
             </div>
             <p>Add the dependency product to your target</p>
@@ -482,7 +486,7 @@ val user = users.create(
     <li>
         <h3>Swift</h3>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>let users = Users(client: client)
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>let users = Users(client)
 
 let user = try await users.create(
     userId: ID.unique(),
@@ -669,7 +673,7 @@ let client = Client()
     .setProject("5df5acd0d48c2")                // Your project ID
     .setKey("919c2db5d4...a2a3346ad2")          // Your secret API key
 
-let users = Users(client: client)
+let users = Users(client)
 
 let user = try await users.create(
     userId: ID.unique(),
