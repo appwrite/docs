@@ -46,7 +46,7 @@ $demos = $platform['demos'] ?? [];
 <p>When you're using a bundler (like <a href="http://browserify.org/" target="_blank" rel="noopener">Browserify</a> or <a href="https://webpack.js.org/" target="_blank" rel="noopener">Webpack</a>), import the Appwrite module when you need it:</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from 'appwrite';</code></pre>
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from 'appwrite';</code></pre>
 </div>
 
 <h3><a href="/docs/getting-started-for-web#cdn" id="cdn">CDN</a></h3>
@@ -62,20 +62,11 @@ $demos = $platform['demos'] ?? [];
 <p>Initialize your SDK code with your project ID which can be found in your project settings page.</p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>const client = new Client();
-
-// Init your Web SDK
-client
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-;</code></pre>
+    .setProject('5df5acd0d48c2');               // Your project ID
+</code></pre>
 </div>
-<!-- 
-<div class="notice calm margin-top-large margin-bottom-large">
-    <h4>A Word About API Keys</h4>
-
-    <p>Never pass an API Key when initializing a client SDK. This action will expose your users to any data your API Key has been granted access to, even if your users do not own it! API keys should be used from server-side integrations only!</p>
-</div> -->
 
 <h2><a href="/docs/getting-started-for-web#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
@@ -85,12 +76,16 @@ client
                     <pre class="line-numbers"><code class="prism language-javascript" data-prism>const account = new Account(client);
 
 // Register User
-account.create('unique()', 'me@example.com', 'password', 'Jane Doe')
-        .then(response => {
-            console.log(response);
-        }, error => {
-            console.log(error);
-        });</code></pre>
+account.create(
+    ID.unique(),
+    'me@example.com',
+    'password',
+    'Jane Doe'
+).then(response => {
+    console.log(response);
+}, error => {
+    console.log(error);
+});</code></pre>
 </div>
 
 <h2><a href="/docs/getting-started-for-web#listenToChanges" id="listenToChanges">Listen to Changes</a></h2>
@@ -109,25 +104,25 @@ client.subscribe('files', response => {
 
 <h2><a href="/docs/getting-started-for-web#fullExample" id="fullExample">Full Example</a></h2>
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-                    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+                    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
-const client = new Client();
-
-// Init your Web SDK
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-;
+    .setProject('5df5acd0d48c2');               // Your project ID
 
 const account = new Account(client);
 
 // Register User
-account.create('unique()', 'me@example.com', 'password', 'Jane Doe')
-        .then(response => {
-            console.log(response);
-        }, error => {
-            console.log(error);
-        });
+account.create(
+    ID.unique(),
+    'me@example.com',
+    'password',
+    'Jane Doe'
+).then(response => {
+    console.log(response);
+}, error => {
+    console.log(error);
+});
 
 // Subscribe to files channel
 client.subscribe('files', response => {

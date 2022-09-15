@@ -13,15 +13,32 @@
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
-const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
+
+const databases = new Databases(client);
                 
 // Page 1
-const page1 = await databases.listDocuments('movies', [Query.limit(25), Query.offset(0)]);
+const page1 = await databases.listDocuments(
+    '[DATABASE_ID]',
+    '[COLLECTION_ID]',
+    [
+        Query.limit(25),
+        Query.offset(0)
+    ]
+);
 
 // Page 2
-const page2 = await databases.listDocuments('movies', [Query.limit(25), Query.offset(25)]);
-        </code></pre>
+const page2 = await databases.listDocuments(
+    '[DATABASE_ID]',
+    '[COLLECTION_ID]',
+    [
+        Query.limit(25),
+        Query.offset(25)
+    ]
+);</code></pre>
         </div>
     </li>
     <li>
@@ -30,18 +47,29 @@ const page2 = await databases.listDocuments('movies', [Query.limit(25), Query.of
         <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 void main() async {
-    final client = Client();
-    final databases = Databases(client, databaseId: '[DATABASE_ID]');
-    try {
-        final page1 = await databases.listDocuments(
-            collectionId: 'movies',
-            queries: [Query.limit(25), Query.offset(0)]);
-        final page2 = await databases.listDocuments(
-            collectionId: 'movies',
-            queries: [Query.limit(25), Query.offset(25)]);
-    } on AppwriteException catch(e) {
-        print(e);
-    }
+    final client = Client()
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
+
+    final databases = Databases(client);
+
+    final page1 = await databases.listDocuments(
+        databaseId: '[DATABASE_ID]',
+        collectionId: '[COLLECTION_ID]',
+        queries: [
+            Query.limit(25),
+            Query.offset(0)
+        ]
+    );
+
+    final page2 = await databases.listDocuments(
+        databaseId: '[DATABASE_ID]',
+        collectionId: '[COLLECTION_ID]',
+        queries: [
+            Query.limit(25),
+            Query.offset(25)
+        ]
+    );
 }
 </code></pre>
         </div>
@@ -49,37 +77,36 @@ void main() async {
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import android.util.Log
+import io.appwrite.AppwriteException
 import io.appwrite.Client
-import io.appwrite.services.Databases
 import io.appwrite.Query
+import io.appwrite.services.Databases
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+suspend fun main() {
+    val client = Client(applicationContext)
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")
 
-        val client = Client(applicationContext)
-            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("5df5acd0d48c2") // Your project ID
+    val databases = Databases(client)
 
-        val databases = Databases(client, "[DATABASE_ID]")
+    val page1 = databases.listDocuments(
+        databaseId = "[DATABASE_ID]",
+        collectionId = "[COLLECTION_ID]",
+        queries = [
+            Query.limit(25),
+            Query.offset(0)
+        ]
+    )
 
-        GlobalScope.launch {
-            val page1 = databases.listDocuments(
-                collectionId = "[COLLECTION_ID]",
-                queries = [Query.limit(25), Query.offset(0)]
-            )
-
-            val page2 = databases.listDocuments(
-                collectionId = "[COLLECTION_ID]",
-                queries = [Query.limit(25), Query.offset(25)]
-            )    
-        }
-    }
+    val page2 = databases.listDocuments(
+        databaseId = "[DATABASE_ID]",
+        collectionId = "[COLLECTION_ID]",
+        queries = [
+            Query.limit(25),
+            Query.offset(25)
+        ]
+    )
 }</code></pre>
         </div>
     </li>
@@ -90,23 +117,28 @@ class MainActivity : AppCompatActivity() {
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-      .setProject("my_project") // Your project ID
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+      .setProject("[PROJECT_ID]")
 
-    let databases = Databases(client, "[DATABASE_ID]")
-    // Page 1
-    var list = try await databases.listDocuments(
-        collectionId: "[COLLECTION_ID]",
-        queries: [Query.limit(25), Query.offset(0)]
-    )
-    print(list.toMap())
+    let databases = Databases(client)
 
-    // Page 2
-    list = try await databases.listDocuments(
+    let page1 = try await databases.listDocuments(
+        databaseId: "[DATABASE_ID]",
         collectionId: "[COLLECTION_ID]",
-        queries: [Query.limit(25), Query.offset(25)]
+        queries: [
+            Query.limit(25),
+            Query.offset(0)
+        ]
     )
-    print(list.toMap())
+
+    let page2 = try await databases.listDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]",
+        queries: [
+            Query.limit(25),
+            Query.offset(25)
+        ]
+    )
 }</code></pre>
         </div>
     </li>
@@ -128,15 +160,28 @@ func main() async throws {
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
-const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+const databases = new Databases(client);
 
 // Page 1
-const page1 = await databases.listDocuments('movies', [Query.limit(25)]);
-const lastId = results.documents[results.documents.length - 1].$id;
+const page1 = await databases.listDocuments(
+    '[DATABASE_ID]',
+    '[COLLECTION_ID]',
+    [
+        Query.limit(25),
+    ]
+);
+
+const lastId = page1.documents[page1.documents.length - 1].$id;
 
 // Page 2
-const page2 = await databases.listDocuments('movies', [Query.limit(25), Query.cursorAfter(lastId)]);
-        </code></pre>
+const page2 = await databases.listDocuments(
+    '[DATABASE_ID]',
+    '[COLLECTION_ID]',
+    [
+        Query.limit(25),
+        Query.cursorAfter(lastId),
+    ]
+);</code></pre>
         </div>
     </li>
     <li>
@@ -145,21 +190,31 @@ const page2 = await databases.listDocuments('movies', [Query.limit(25), Query.cu
         <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 void main() async {
-    final client = Client();
-    final databases = Databases(client, databaseId: '[DATABASE_ID]');
-    try {
-        final page1 = await databases.listDocuments(
-            collectionId: 'movies',
-            queries: [Query.limit(25)])
-        final lastId = page1.documents[page1.documents.length - 1].$id;
+    final client = Client()
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
-        // Page 2
-        final page2 = await databases.listDocuments(
-            collectionId: 'movies',
-            queries: [Query.limit(25), Query.cursorAfter(lastId)]);
-    } on AppwriteException catch(e) {
-        print(e);
-    }
+    final databases = Databases(client);
+
+    final page1 = await databases.listDocuments(
+        databaseId: '[DATABASE_ID]',
+        collectionId: '[COLLECTION_ID]',
+        queries: [
+            Query.limit(25)
+        ]
+    );
+
+    final lastId = page1.documents[page1.documents.length - 1].$id;
+
+    final page2 = await databases.listDocuments(
+        databaseId: '[DATABASE_ID]',
+        collectionId: '[COLLECTION_ID]',
+        queries: [
+            Query.limit(25),
+            Query.cursorAfter(lastId)
+        ]
+    );
+
 }
 </code></pre>
         </div>
@@ -167,39 +222,37 @@ void main() async {
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import android.util.Log
+import io.appwrite.AppwriteException
 import io.appwrite.Client
-import io.appwrite.services.Databases
 import io.appwrite.Query
+import io.appwrite.services.Databases
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+suspend fun main() {
+    val client = Client(applicationContext)
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")
 
-        val client = Client(applicationContext)
-            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("5df5acd0d48c2") // Your project ID
+    val databases = Databases(client)
 
-        val databases = Databases(client, "[DATABASE_ID]")
+    val page1 = databases.listDocuments(
+        databaseId = "[DATABASE_ID]",
+        collectionId = "[COLLECTION_ID]",
+        queries = [
+            Query.limit(25)
+        ]
+    )
 
-        GlobalScope.launch {
-            val page1 = databases.listDocuments(
-                collectionId = "[COLLECTION_ID]",
-                queries = [Query.limit(25)]
-            )
-            val lastId = page1.documents[page1.documents.length - 1].$id
+    val lastId = page1.documents[page1.documents.size - 1].$id
 
-            // Page 2
-            val page2 = databases.listDocuments(
-                collectionId = "[COLLECTION_ID]",
-                queries = [Query.limit(25), Query.cursorAfter(lastId)]
-            )    
-        }
-    }
+    val page2 = databases.listDocuments(
+        databaseId = "[DATABASE_ID]",
+        collectionId = "[COLLECTION_ID]",
+        queries = [
+            Query.limit(25),
+            Query.cursorAfter(lastId)
+        ]
+    )
 }</code></pre>
         </div>
     </li>
@@ -210,25 +263,29 @@ class MainActivity : AppCompatActivity() {
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-      .setProject("my_project") // Your project ID
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+      .setProject("[PROJECT_ID]")
 
-    let databases = Databases(client, "[DATABASE_ID]")
-    
-    // Page 1
-    var list = try await databases.listDocuments(
+    let databases = Databases(client)
+
+    let page1 = try await databases.listDocuments(
+        databaseId: "[DATABASE_ID]",
         collectionId: "[COLLECTION_ID]",
-        queries: [Query.limit(25)]
+        queries: [
+            Query.limit(25)
+        ]
     )
 
-    let lastId = list.documents[list.documents.count - 1].$id
-            
-    // Page 2
-    list = try await databases.listDocuments(
+    let lastId = page1.documents[page1.documents.count - 1].$id
+
+    let page2 = try await databases.listDocuments(
+        databaseId: "[DATABASE_ID]",
         collectionId: "[COLLECTION_ID]",
-        queries: [Query.limit(25), Query.cursorAfter(lastId)]
+        queries: [
+            Query.limit(25),
+            Query.cursorAfter(lastId)
+        ]
     )
-    print(list.toMap())
 }</code></pre>
         </div>
     </li>

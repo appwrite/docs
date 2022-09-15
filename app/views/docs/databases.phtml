@@ -107,20 +107,23 @@
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases } from "appwrite";
 
-const client = new Client();
-
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
-const databases = new Databases(client, '[DATABASE_ID]');
+const databases = new Databases(client);
 
-const promise = databases.createDocument('[COLLECTION_ID]', 'unique()', {});
+const promise = databases.createDocument(
+    '[DATABASE_ID]',
+    '[COLLECTION_ID]',
+    ID.unique(),
+    {}
+);
 
 promise.then(function (response) {
-    console.log(response); // Success
+    console.log(response);
 }, function (error) {
-    console.log(error); // Failure
+    console.log(error);
 });</code></pre>
         </div>
     </li>
@@ -128,12 +131,21 @@ promise.then(function (response) {
         <h3>Flutter</h3>
         <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
 void main() async {
-    final client = Client();
-    final databases = Databases(client, databaseId: '[DATABASE_ID]');
+    final client = Client()
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
+
+    final databases = Databases(client);
+
     try {
-        final doc = databases.createDocument(collectionId: '[COLLECTION_ID]', documentId: 'unique()', data: {});
-        print(doc.toMap());
+        final document = databases.createDocument(
+            databaseId: '[DATABASE_ID]',
+            collectionId: '[COLLECTION_ID]',
+            documentId: ID.unique(),
+            data: {}
+        );
     } on AppwriteException catch(e) {
         print(e);
     }
@@ -143,32 +155,25 @@ void main() async {
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import io.appwrite.Client
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Databases
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+suspend fun main() {
+    val client = Client(applicationContext)
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")
 
-        val client = Client(applicationContext)
-            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("my_project") // Your project ID
+    val databases = Databases(client)
 
-        val databases = Databases(client, "[DATABASE_ID]")
-
-        GlobalScope.launch {
-            val response = databases.createDocument(
-                collectionId = "[COLLECTION_ID]",
-                documentId = "unique()",
-                data = mapOf( "a" to "b" ),
-            )
-            val json = response.body?.string()
-        }
+    try {
+        val document = databases.createDocument(
+            databaseId = "[DATABASE_ID]",
+            collectionId = "[COLLECTION_ID]",
+            documentId = ID.unique(),
+            data = mapOf("a" to "b"),
+        )
+    } catch (e: Exception) {
+        Log.e("Appwrite", "Error: " + e.message)
     }
 }</code></pre>
         </div>
@@ -177,19 +182,25 @@ class MainActivity : AppCompatActivity() {
         <h3>iOS</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import AppwriteModels
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-      .setProject("my_project") // Your project ID
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")")
 
-    let databases = Databases(client, "[DATABASE_ID]")
-    let document = try await databases.createDocument(
-        collectionId: "[COLLECTION_ID]",
-        documentId: "unique()",
-        data: [:]
-    )
-    print(document.toMap())
+    let databases = Databases(client)
+
+    do {
+        let document = try await databases.createDocument(
+            databaseId: "[DATABASE_ID]",
+            collectionId: "[COLLECTION_ID]",
+            documentId: ID.unique(),
+            data: [:]
+        )
+    } catch {
+        print(error.localizedDescription)
+    }
 }</code></pre>
         </div>
     </li>
@@ -209,12 +220,27 @@ func main() async throws {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
-const databases = new Databases(client, "[DATABASE_ID]"); // 'client' comes from setup
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
+const client = new Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("[PROJECT_ID]")")
 
-databases.listDocuments('movies', [
-    Query.equal('title', 'Avatar')
-]);</code></pre>
+const databases = new Databases(client);
+
+let promise = databases.listDocuments(
+    "[DATABASE_ID]"
+    "[COLLECTION_ID]",
+    [
+        Query.equal('title', 'Avatar')
+    ]
+);
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});
+</code></pre>
         </div>
     </li>
     <li>
@@ -223,13 +249,20 @@ databases.listDocuments('movies', [
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 void main() async {
-    final client = Client();
-    final databases = Databases(client, databaseId: '[DATABASE_ID]');
+    final client = Client()
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")")
+
+    final databases = Databases(client);
+
     try {
-        final docs = await databases.listDocuments(
-            collectionId: 'movies',
-            queries: [Query.equal('title', 'Avatar')]);
-        print(docs.toMap());
+        final documents = await databases.listDocuments(
+            databaseId: '[DATABASE_ID]',
+            collectionId: '[COLLECTION_ID]',
+            queries: [
+                Query.equal('title', 'Avatar')
+            ]
+        );
     } on AppwriteException catch(e) {
         print(e);
     }
@@ -239,32 +272,29 @@ void main() async {
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import android.util.Log
+import io.appwrite.AppwriteException
 import io.appwrite.Client
-import io.appwrite.services.Databases
 import io.appwrite.Query
+import io.appwrite.services.Databases
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+suspend fun main() {
+    val client = Client(applicationContext)
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")
 
-        val client = Client(applicationContext)
-            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("my_project") // Your project ID
+    val databases = Databases(client)
 
-        val databases = Databases(client, "[DATABASE_ID]")
-
-        GlobalScope.launch {
-            val response = databases.listDocuments(
-                collectionId = "[COLLECTION_ID]",
-                queries = [Query.equal("title", "Avatar")],
+    try {
+        val documents = databases.listDocuments(
+            databaseId = "[DATABASE_ID]",
+            collectionId = "[COLLECTION_ID]",
+            queries = listOf(
+                Query.equal("title", "Avatar")
             )
-            val json = response.body?.string()
-        }
+        )
+    } catch (e: AppwriteException) {
+        Log.e("Appwrite", "Error: " + e.message)
     }
 }</code></pre>
         </div>
@@ -273,18 +303,26 @@ class MainActivity : AppCompatActivity() {
         <h3>iOS</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import AppwriteModels
 
 func main() async throws{
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-      .setProject("my_project") // Your project ID
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")
 
-    let databases = Databases(client, "[DATABASE_ID]")
-    let list = try await databases.listDocuments(
-        collectionId: "[COLLECTION_ID]",
-        queries: [Query.equal("title", "Avatar")]
-    )
-    print(list.toMap())
+    let databases = Databases(client)
+
+    do {
+        let documents = try await databases.listDocuments(
+            databaseId: "[DATABASE_ID]",
+            collectionId: "[COLLECTION_ID]",
+            queries: [
+                Query.equal("title", "Avatar")
+            ]
+        )
+    } catch {
+        print(error.localizedDescription)
+    }
 }</code></pre>
         </div>
     </li>
@@ -373,13 +411,21 @@ func main() async throws{
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
-const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
+const client = new Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("[PROJECT_ID]");
 
-databases.listDocuments('movies', [
-    Query.equal('title', ['Avatar', 'Lord of the Rings']),
-    Query.greaterThan('year', 1999)
-]);</code></pre>
+const databases = new Databases(client);
+
+databases.listDocuments(
+    '[DATABASE_ID]',
+    '[COLLECTION_ID]',
+    [
+        Query.equal('title', ['Avatar', 'Lord of the Rings']),
+        Query.greaterThan('year', 1999)
+    ]
+);</code></pre>
         </div>
     </li>
     <li>
@@ -388,16 +434,21 @@ databases.listDocuments('movies', [
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 void main() async {
-    final client = Client();
-    final databases = Databases(client, databaseId: '[DATABASE_ID]');
+    final client = Client()
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
+
+    final databases = Databases(client);
+
     try {
-        final docs = await databases.listDocuments(
-            collectionId: 'movies',
-            queries: [
+        final documents = await databases.listDocuments(
+            '[DATABASE_ID]',
+            '[COLLECTION_ID]',
+            [
                 Query.equal('title', ['Avatar', 'Lord of the Rings']),
-                Query.greaterThan('year', 1999),
-                ]);
-        print(docs.toMap());
+                Query.greaterThan('year', 1999)
+            ]
+        );
     } on AppwriteException catch(e) {
         print(e);
     }
@@ -407,34 +458,30 @@ void main() async {
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import android.util.Log
+import io.appwrite.AppwriteException
 import io.appwrite.Client
-import io.appwrite.services.Databases
 import io.appwrite.Query
+import io.appwrite.services.Databases
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+suspend fun main() {
         val client = Client(applicationContext)
-            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("my_project") // Your project ID
+            .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+            .setProject("[PROJECT_ID]")
 
-        val databases = Databases(client, "[DATABASE_ID]")
+        val databases = Databases(client)
 
-        GlobalScope.launch {
-            val response = databases.listDocuments(
+        try {
+            val documents = databases.listDocuments(
+                databaseId = "[DATABASE_ID]",
                 collectionId = "[COLLECTION_ID]",
-                queries = [
-                    Query.equal("title", ["Avatar", "Lord of the Rings"]),
-                    Query.greaterThan("year", 1999),
-                ],
+                queries = listOf(
+                    Query.equal("title", listOf("Avatar", "Lord of the Rings")),
+                    Query.greaterThan("year", 1999)
+                )
             )
-            val json = response.body?.string()
+        } catch (e: AppwriteException) {
+            Log.e("Appwrite", e.message)
         }
     }
 }</code></pre>
@@ -447,18 +494,23 @@ class MainActivity : AppCompatActivity() {
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-      .setProject("my_project") // Your project ID
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")
 
-    let databases = Databases(client, "[DATABASE_ID]")
-    let list = try await databases.listDocuments(
-        collectionId: "[COLLECTION_ID]",
-        queries: [
-            Query.equal("title", ["Avatar", "Lord of the Rings"]),
-            Query.greaterThan("year", 1999)
-        ]
-    )
-    print(list.toMap())
+    let databases = Databases(client)
+
+    do {
+        let documents = try await databases.listDocuments(
+            databaseId: "[DATABASE_ID]",
+            collectionId: "[COLLECTION_ID]",
+            queries: [
+                Query.equal("title", ["Avatar", "Lord of the Rings"]),
+                Query.greaterThan("year", 1999)
+            ]
+        )
+    } catch {
+        print(error.localizedDescription)
+    }
 }</code></pre>
         </div>
     </li>
@@ -506,13 +558,20 @@ func main() async throws {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
-const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
+
+const client = new Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("[PROJECT_ID]");
+
+const databases = new Databases(client);
+
 databases.listDocuments(
-    'movies', // collectionId
+    '[DATABASE_ID]',
+    '[COLLECTION_ID]',
     [
-        Query.orderAsc('title'), // Order results in ascending order by title
-    ], // queries
+        Query.orderAsc('title'),
+    ]
 );</code></pre>
         </div>
     </li>
@@ -522,14 +581,20 @@ databases.listDocuments(
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 void main() async {
-    final client = Client();
-    final databases = Databases(client, databaseId: "[DATABASE_ID]");
+    final client = Client()
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]");
+
+    final databases = Databases(client);
+
     try {
-        final docs = await databases.listDocuments(
-            collectionId: 'movies',
-            query: [ Query.orderAsc('title') ]
+        final documents = await databases.listDocuments(
+            databaseId: '[DATABASE_ID]',
+            collectionId: '[COLLECTION_ID]',
+            queries: [
+                Query.orderAsc('title')
+            ]
         );
-        print(docs.toMap());
     } on AppwriteException catch(e) {
         print(e);
     }
@@ -539,32 +604,29 @@ void main() async {
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import android.util.Log
+import io.appwrite.AppwriteException
 import io.appwrite.Client
 import io.appwrite.services.Databases
 import io.appwrite.Query
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+suspend fun main() {
+    val client = Client(applicationContext)
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")
 
-        val client = Client(applicationContext)
-            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("my_project") // Your project ID
+    val databases = Databases(client)
 
-        val databases = Databases(client, "[DATABASE_ID]")
-
-        GlobalScope.launch {
-            val response = databases.listDocuments(
-                collectionId = "movies",
-                query = [ Query.orderAsc("title") ]
-            )
-            val json = response.body?.string()
-        }
+    try {
+        val documents = databases.listDocuments(
+            databaseId = "[DATABASE_ID]",
+            collectionId = "[COLLECTION_ID]",
+            queries = [
+                Query.orderAsc("title")
+            ]
+        )
+    } catch (e: AppwriteException) {
+        Log.e("Appwrite", e.message)
     }
 }</code></pre>
         </div>
@@ -576,15 +638,22 @@ class MainActivity : AppCompatActivity() {
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-      .setProject("my_project") // Your project ID
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+      .setProject("[PROJECT_ID]")
 
-    let databases = Databases(client, "[DATABASE_ID]")
-    let list = try await databases.listDocuments(
-        collectionId: "movies",
-        query: [ Query.orderAsc("title") ]
-    )
-    print(list.toMap())
+    let databases = Databases(client)
+
+    do {
+        let documents = try await databases.listDocuments(
+            databaseId: "[DATABASE_ID]",
+            collectionId: "[COLLECTION_ID]",
+            queries: [
+                Query.orderAsc("title")
+            ]
+        )
+    } catch {
+        print(error.localizedDescription)
+    }
 }</code></pre>
         </div>
     </li>
@@ -596,13 +665,20 @@ func main() async throws {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Databases, Query } from "appwrite";
-const databases = new Databases(client, "[DATABASE_ID]");  // 'client' comes from setup
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
+
+const client = new Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("[PROJECT_ID]");
+
+const databases = new Databases(client);
+
 databases.listDocuments(
-    'movies', // collectionId
+    '[DATABASE_ID]',
+    '[COLLECTION_ID]',
     [
         Query.orderAsc('title'), // Order by title in ascending order
-        Query.orderDesc('year') // Order by year in descending order   
+        Query.orderDesc('year'), // Order by year in descending order
     ]
 );</code></pre>
         </div>
@@ -613,17 +689,20 @@ databases.listDocuments(
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 void main() async {
-    final client = Client();
-    final databases = Databases(client, databaseId: "[DATABASE_ID]");
+    final client = Client()
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]");
+
+    final databases = Databases(client);
     try {
-        final docs = await databases.listDocuments(
-            collectionId: 'movies',
-            query: [
+        final documents = await databases.listDocuments(
+            databaseId: '[DATABASE_ID]',
+            collectionId: '[COLLECTION_ID]',
+            queries: [
                 Query.orderAsc('title'), // Order by title in ascending order
-                Query.orderDesc('year') // Order by year in descending order   
+                Query.orderDesc('year')  // Order by year in descending order
             ]
         );
-        print(docs.toMap());
     } on AppwriteException catch(e) {
         print(e);
     }
@@ -633,35 +712,30 @@ void main() async {
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import android.util.Log
+import io.appwrite.AppwriteException
 import io.appwrite.Client
 import io.appwrite.services.Databases
 import io.appwrite.Query
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+suspend fun main() {
+    val client = Client(applicationContext)
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")
 
-        val client = Client(applicationContext)
-            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("my_project") // Your project ID
+    val databases = Databases(client)
 
-        val databases = Databases(client, "[DATABASE_ID]")
-
-        GlobalScope.launch {
-            val response = databases.listDocuments(
-                collectionId = "movies",
-                query = [
-                    Query.orderAsc("title"), // Order by title in ascending order
-                    Query.orderDesc("year") // Order by year in descending order   
-                ]
-            )
-            val json = response.body?.string()
-        }
+    try {
+        val documents = databases.listDocuments(
+            databaseId = "[DATABASE_ID]",
+            collectionId = "[COLLECTION_ID]",
+            queries = [
+                Query.orderAsc("title"), // Order by title in ascending order
+                Query.orderDesc("year")  // Order by year in descending order
+            ]
+        )
+    } catch (e: AppwriteException) {
+        Log.e("Appwrite", e.message)
     }
 }</code></pre>
         </div>
@@ -670,21 +744,27 @@ class MainActivity : AppCompatActivity() {
         <h3>iOS</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import AppwriteModels
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-      .setProject("my_project") // Your project ID
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+      .setProject("[PROJECT_ID]")
 
-    let databases = Databases(client, "[DATABASE_ID]")
-    let list = try await databases.listDocuments(
-        collectionId: "movies",
-        query: [
+    let databases = Databases(client)
+
+    do {
+        let documents = try await databases.listDocuments(
+            databaseId: "[DATABASE_ID]",
+            collectionId: "[COLLECTION_ID]",
+            queries: [
                 Query.orderAsc("title"), // Order by title in ascending order
-                Query.orderDesc("year") // Order by year in descending order   
+                Query.orderDesc("year")  // Order by year in descending order
             ]
-    )
-    print(list.toMap())
+        )
+    } catch {
+        print(error.localizedDescription)
+    }
 }</code></pre>
         </div>
     </li>

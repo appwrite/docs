@@ -543,13 +543,9 @@ $image = new View(__DIR__.'/../general/image.phtml');
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Functions } from "appwrite";
 
-const client = new Client();
-
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
-
-const databases = new Databases(client, '[DATABASE_ID]');
 
 let promise = functions.createExecution('[FUNCTION_ID]');
 
@@ -566,25 +562,16 @@ promise.then(function (response) {
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-void main() { // Init SDK
-  Client client = Client();
-  Functions functions = Functions(client);
+void main() async {
+    final client = Client()
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
-  client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-  ;
+    final functions = Functions(client);
 
-  Future result = functions.createExecution(
-    functionId: '[FUNCTION_ID]',
-  );
-
-  result
-    .then((response) {
-      print(response);
-    }).catchError((error) {
-      print(error.response);
-  });
+    final execution = await functions.createExecution(
+        functionId: '[FUNCTION_ID]'
+    );
 }</code></pre>
         </div>
     </li>
@@ -594,16 +581,16 @@ void main() { // Init SDK
         <div class="ide margin-bottom" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() {
+func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-      .setProject("5df5acd0d48c2") // Your project ID
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+      .setProject("[PROJECT_ID]")
 
     let functions = Functions(client)
-    let execution = functions.createExecution(
+
+    let execution = try await functions.createExecution(
         functionId: "[FUNCTION_ID]"
     )
-    print(execution.toMap())
 }</code></pre>
         </div>
     </li>
@@ -611,31 +598,19 @@ func main() {
         <h3>Android</h3>
 
         <div class="ide margin-bottom" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import io.appwrite.Client
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Functions
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+suspend fun main() {
+    val client = Client(applicationContext)
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")
 
-        val client = Client(applicationContext)
-            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("5df5acd0d48c2") // Your project ID
+    val functions = Functions(client)
 
-        val functions = Functions(client)
-
-        GlobalScope.launch {
-            val response = functions.createExecution(
-                functionId = "[FUNCTION_ID]",
-            )
-            val json = response.body?.string()        
-        }
-    }
+    val execution = functions.createExecution(
+        functionId = "[FUNCTION_ID]"
+    )
 }</code></pre>
         </div>
     </li>

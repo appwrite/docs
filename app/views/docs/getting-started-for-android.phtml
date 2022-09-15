@@ -36,10 +36,10 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 }');?></code></pre>
 </div>
 
-<p>And add this to your project's build.gradle file:</p>
+<p>Then add this to your project's build.gradle file:</p>
 
 <div class="ide" data-lang="groovy" data-lang-label="Groovy">
-  <pre class="line-numbers"><code class="prism language-groovy" data-prism>'implementation("io.appwrite:sdk-for-android:<?php echo $this->escape($androidVersion); ?>")'</code></pre>
+  <pre class="line-numbers"><code class="prism language-groovy" data-prism>implementation("io.appwrite:sdk-for-android:<?php echo $this->escape($androidVersion); ?>")</code></pre>
 </div>
 
 <h3><a href="/docs/getting-started-for-android#OAuthCallback" id="OAuthCallback">OAuth Callback</a></h3>
@@ -74,9 +74,9 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 import io.appwrite.services.Account
 
 val client = Client(context)
-  .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-  .setProject("5df5acd0d48c2") // Your project ID
-  .setSelfSigned(status: true) // For self signed certificates, only use for development</code></pre>
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setSelfSigned(status: true)                // For self signed certificates, only use for development</code></pre>
 </div>
 
 <p>Before sending any API calls to your new Appwrite project, make sure your Android device or emulator has network access to your Appwrite project's hostname or IP address.</p>
@@ -90,8 +90,12 @@ val client = Client(context)
 <div class="ide" data-lang="android" data-lang-label="Android SDK">
                     <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// Register User
 val account = Account(client)
-val response = account.create("unique()", "email@example.com", "password")
-val json = response.body?.string()</code></pre>
+
+val user = account.create(
+    userId = ID.unique(),
+    email = "email@example.com",
+    password = "password"
+)</code></pre>
 </div>
 
 <h2><a href="/docs/getting-started-for-android#listenToChanges" id="listenToChanges">Listen to Changes</a></h2>
@@ -102,10 +106,10 @@ val json = response.body?.string()</code></pre>
   <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// Subscribe to files channel
 val realtime = Realtime(client)
 
-realtime.subscribe("files", callback = { response ->
-    if(response.events.contains("buckets.*.files.*.create")) {
+let subscription = realtime.subscribe("files") {
+    if(it.events.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
-        print(response.payload.toString());
+        print(it.payload.toString());
     }
 })
 </code></pre>
@@ -117,24 +121,27 @@ realtime.subscribe("files", callback = { response ->
 import io.appwrite.services.Account
 
 val client = Client(context)
-  .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-  .setProject("5df5acd0d48c2") // Your project ID
-  .setSelfSigned(status: true) // For self signed certificates, only use for development
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setSelfSigned(status: true)                // For self signed certificates, only use for development
 
-// Register User
 val account = Account(client)
-val response = account.create("unique()", "email@example.com", "password")
-val json = response.body?.string()
+
+val user = account.create(
+    userId = ID.unique(),
+    email = "email@example.com",
+    password = "password"
+)
 
 // Subscribe to files channel
 val realtime = Realtime(client)
 
-realtime.subscribe("files", callback = { response ->
-    if(response.events.contains("buckets.*.files.*.create")) {
+let subscription = realtime.subscribe("files") {
+    if(it.events.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
-        print(response.payload.toString());
+        print(it.payload.toString());
     }
-})</code></pre>
+}</code></pre>
 </div>
 
 <h2><a href="/docs/getting-started-for-android#nextSteps" id="nextSteps">Next Steps</a></h2>
