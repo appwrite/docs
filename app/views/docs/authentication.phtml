@@ -27,6 +27,10 @@
 </p>
 
 <p>
+    Passwords are hashed with <a href="https://en.wikipedia.org/wiki/Argon2" target="_blank" rel="noopener">Argon2</a>, a resilient and secure password hashing algorithm.
+</p>
+
+<p>
     The example below shows you how to create an account using the Web SDK:
 </p>
 
@@ -48,19 +52,17 @@ promise.then(function (response) {
     console.log(response); // Success
 }, function (error) {
     console.log(error); // Failure
-});
-
-</code></pre>
+});</code></pre>
 </div>
 
 <p>
-    After an account is created, the newly created account must be verified through the <a href="/docs/account#accountCreateVerification">account verification route</a> provided by the Appwrite Accounts API, after which the user can login to their new account.
+    After an account is created, the newly created account can be verified through the <a href="/docs/account#accountCreateVerification">account verification route</a> provided by the Appwrite Accounts API. The user doesn't need to be verified to log in, but you can restrict resource access to verified users only using permissions.
 </p>
 
 <h3><a href="/docs/authentication#anonymous-user" id="anonymous-user">Anonymous User</a></h3>
 
 <p>
-    Anonymous authentication allows users of your application to create a temporary valid session without creating an account.
+    Anonymous authentication allows users of your application to create a temporary valid session without creating an account. The session will last for a year. If an account is created with an active anonymous session, it will be attached to the existing anonymous session.
 </p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
@@ -81,15 +83,13 @@ promise.then(function (response) {
     console.log(response); // Success
 }, function (error) {
     console.log(error); // Failure
-});
-
-</code></pre>
+});</code></pre>
 </div>
 
 <h3><a href="/docs/authentication#oauth" id="oauth">OAuth</a></h3>
 
 <p>
-    OAuth is another way to authenticate a user using a multi-step process. When using OAuth to authenticate, the request to authenticate is initiated from the client application, then the user is redirected to an OAuth2 provider to complete the authentication step, and finally, the user is redirected back to the client application if completed successfully. This provides integration with many third-party services that provide their own OAuth integration as a more secure approach than providing a username/password directly.
+    OAuth is another way to authenticate a user using a multi-step process. When using OAuth to authenticate, the request to authenticate is initiated from the client application, then the user is redirected to an OAuth2 provider to complete the authentication step, and finally, the user is redirected back to the client application. This provides integration with many third-party services that provide their own OAuth integration as a more secure approach than providing a username/password directly.
 </p>
 
 <p>
@@ -109,13 +109,15 @@ client
 ;
 
 // Go to OAuth provider login page
-account.createOAuth2Session('amazon');
-
-</code></pre>
+account.createOAuth2Session('amazon');</code></pre>
 </div>
 
+<p>
+    Notice, the function call for <b>createOAuth2Session</b> is not asynchronous. No need to use <b>await<b>.
+</p>
+
 <p>  
-    If there is already an active session, the new session will be attached to the logged-in account. If there are no active sessions, the server will attempt to look for an account with the same email address as the email received from the OAuth2 provider and attach the new session to the existing Account. If no matching account is found - the server will create a new account.
+    If there is already an active anonymous session, the new session will be attached to the logged-in account. If there are no active sessions, the server will attempt to look for an account with the same email address as the email received from the OAuth2 provider and attach the new session to the existing account. If no matching account is found - the server will create a new account.
 </p>
 
 <h3><a href="/docs/authentication#phone" id="phone">Phone</a></h3>
@@ -125,7 +127,7 @@ account.createOAuth2Session('amazon');
 </p>
 
 <p> 
-    Phone authentication requires a provider to be setup to send SMS messages. The supported providers are Twillio, Text Magic, and Telesign. After creating an SMS sender with one of these providers, configure these <a href="/docs/environment-variables#phone">environment variables</a> and restart your Appwrite containers.
+    Phone authentication requires you to set up an SMS provider to send SMS messages. You will need to configure these <a href="/docs/environment-variables#phone">environment variables</a> and restart your Appwrite containers before you can use phone authentication.
 </p>
 
 <p>
@@ -144,7 +146,7 @@ client
     .setProject('5df5acd0d48c2') // Your project ID
 ;
 
-const promise = account.createPhoneSession('[USER_ID]', '');
+const promise = account.createPhoneSession('[USER_ID]', '+16171234567');
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -156,7 +158,7 @@ promise.then(function (response) {
 </div>
 
 <p>
-    After initiation, the returned username and secret are used to confirm the user.
+    After initiation, the returned username and secret are used to confirm the user. The secret will be a 6 digit number in the SMS message sent to the user.
 </p>
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
@@ -172,7 +174,7 @@ promise.then(function (response) {
 </div>
 
 <p>
-    If the provided user ID has not be registered, a new account will be created.
+    If the provided user ID has not been registered, a new account will be created.
 </p>
 
 <h2><a href="/docs/authentication#login" id="login">Login</a></h2>
