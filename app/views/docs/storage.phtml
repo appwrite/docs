@@ -70,15 +70,17 @@
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Storge } from "appwrite";
 
-const client = new Client();
-
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
 const storage = new Storage(client);
 
-const promise = storage.createFile('[BUCKET_ID]', ID.unique(), document.getElementById('uploader').files[0]);
+const promise = storage.createFile(
+    '[BUCKET_ID]',
+    ID.unique(),
+    document.getElementById('uploader').files[0]
+);
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -94,58 +96,38 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 void main() { // Init SDK
-  Client client = Client();
-  Storage storage = Storage(client);
+  final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
-  client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-  ;
-  Future result = storage.createFile(
+  final storage = Storage(client);
+
+  final file = await storage.createFile(
     bucketId: '[BUCKET_ID]',
-    fileId: '[FILE_ID]',
+    fileId: ID.unique(),
     file: InputFile(path: './path-to-files/image.jpg', filename: 'image.jpg'),
   );
-
-  result
-    .then((response) {
-      print(response);
-    }).catchError((error) {
-      print(error.response);
-  });
 }</code></pre>
         </div>
     </li>
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import io.appwrite.Client
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Storage
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+suspend fun main() {
+    val client = Client(applicationContext)
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+        .setProject("5df5acd0d48c2") // Your project ID
 
-        val client = Client(applicationContext)
-            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("5df5acd0d48c2") // Your project ID
+    val storage = Storage(client)
 
-        val storage = Storage(client)
-
-        GlobalScope.launch {
-            val response = storage.createFile(
-                bucketId = "[BUCKET_ID]",
-                fileId = "[FILE_ID]",
-                file = File("./path-to-files/image.jpg"),
-            )
-            val json = response.body?.string()        
-        }
-    }
+    val file = storage.createFile(
+        bucketId = "[BUCKET_ID]",
+        fileId = ID.unique(),
+        file = File("./path-to-files/image.jpg"),
+    )
 }</code></pre>
         </div>
     </li>
@@ -156,16 +138,19 @@ class MainActivity : AppCompatActivity() {
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-      .setProject("5df5acd0d48c2") // Your project ID
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+      .setProject("[PROJECT_ID]")
 
     let storage = Storage(client)
+
     let file = try await storage.createFile(
         bucketId: "[BUCKET_ID]",
-        fileId: "[FILE_ID]",
-        file: File(name: "image.jpg", buffer: yourByteBuffer)
+        fileId: ID.unique(),
+        file: InputFile.fromBuffer(yourByteBuffer,
+            filename: "image.jpg",
+            mimeType: "image/jpeg"
+        )
     )
-    print(file.toMap())
 }</code></pre>
         </div>
     </li>
