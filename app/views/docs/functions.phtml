@@ -46,12 +46,12 @@ $runtimes = $this->getParam('runtimes', []);
     'No payload provided. Add custom data when executing function.';
 
   const secretKey =
-    req.env.SECRET_KEY ||
-    'SECRET_KEY environment variable not found. You can set it in Function settings.';
+    req.variables.SECRET_KEY ||
+    'SECRET_KEY variable not found. You can set it in Function settings.';
 
   const randomNumber = Math.random();
 
-  const trigger = req.env.APPWRITE_FUNCTION_TRIGGER;
+  const trigger = req.variables.APPWRITE_FUNCTION_TRIGGER;
 
   res.json({
     message: 'Hello from Appwrite!',
@@ -78,12 +78,12 @@ return function ($req, $res) {
     'No payload provided. Add custom data when executing function.';
 
   $secretKey =
-    $req['env']['SECRET_KEY'] ?:
-    'SECRET_KEY environment variable not found. You can set it in Function settings.';
+    $req['variables']['SECRET_KEY'] ?:
+    'SECRET_KEY variable not found. You can set it in Function settings.';
 
   $randomNumber = \mt_rand() / \mt_getrandmax();
 
-  $trigger = $req['env']['APPWRITE_FUNCTION_TRIGGER'];
+  $trigger = $req['variables']['APPWRITE_FUNCTION_TRIGGER'];
 
   $res->json([
     'message' => 'Hello from Appwrite!',
@@ -107,14 +107,14 @@ return function ($req, $res) {
 def main(req, res):
   payload = req.payload or 'No payload provided. Add custom data when executing function.'
 
-  secretKey = req.env.get(
+  secretKey = req.variables.get(
     'SECRET_KEY',
-    'SECRET_KEY environment variable not found. You can set it in Function settings.'
+    'SECRET_KEY variable not found. You can set it in Function settings.'
   )
 
   randomNumber = random.random()
 
-  trigger = req.env['APPWRITE_FUNCTION_TRIGGER']
+  trigger = req.variables['APPWRITE_FUNCTION_TRIGGER']
 
   return res.json({
     'message': 'Hello from Appwrite!',
@@ -138,12 +138,12 @@ def main(req, res):
     'No payload provided. Add custom data when executing function.'
 
   secretKey =
-    req.env['SECRET_KEY'] ||
-    'SECRET_KEY environment variable not found. You can set it in Function settings.'
+    req.variables['SECRET_KEY'] ||
+    'SECRET_KEY variable not found. You can set it in Function settings.'
 
   randomNumber = rand()
 
-  trigger = req.env['APPWRITE_FUNCTION_TRIGGER']
+  trigger = req.variables['APPWRITE_FUNCTION_TRIGGER']
 
   return res.json({
     :message => 'Hello from Appwrite!',
@@ -168,12 +168,12 @@ end</code></pre>
     'No payload provided. Add custom data when executing function.';
 
   const secretKey =
-    req.env.SECRET_KEY ||
-    'SECRET_KEY environment variable not found. You can set it in Function settings.';
+    req.variables.SECRET_KEY ||
+    'SECRET_KEY variable not found. You can set it in Function settings.';
 
   const randomNumber = Math.random();
 
-  const trigger = req.env.APPWRITE_FUNCTION_TRIGGER;
+  const trigger = req.variables.APPWRITE_FUNCTION_TRIGGER;
 
   res.json({
     message: 'Hello from Appwrite!',
@@ -201,12 +201,12 @@ Future &lt;void&gt; start(final req, final res) async {
     'No payload provided. Add custom data when executing function.';
 
   final secretKey =
-    req.env['SECRET_KEY'] ??
-    'SECRET_KEY environment variable not found. You can set it in Function settings.';
+    req.variables['SECRET_KEY'] ??
+    'SECRET_KEY variable not found. You can set it in Function settings.';
 
   final randomNumber = new Random().nextDouble();
 
-  final trigger = req.env['APPWRITE_FUNCTION_TRIGGER'];
+  final trigger = req.variables['APPWRITE_FUNCTION_TRIGGER'];
 
   res.json({
     'message': 'Hello from Appwrite!',
@@ -230,12 +230,12 @@ Future &lt;void&gt; start(final req, final res) async {
         ? "No payload provided. Add custom data when executing function" 
         : req.payload
     
-    let secretKey = req.env["SECRET_KEY"] 
-        ?? "SECRET_KEY environment variable not found. You can set it in Function settings."
+    let secretKey = req.variables["SECRET_KEY"] 
+        ?? "SECRET_KEY variable not found. You can set it in Function settings."
 
     let randomNumber = Double.random(in: 0...1)
 
-    let trigger = req.env["APPWRITE_FUNCTION_TRIGGER"]
+    let trigger = req.variables["APPWRITE_FUNCTION_TRIGGER"]
 
     return res.json(data: [
         "message": "Hello from Appwrite!",
@@ -261,13 +261,13 @@ Future &lt;void&gt; start(final req, final res) async {
                 ? "No payload provided. Add custom data when executing function."
                 : req.Payload; 
 
-  var secretKey = req.Env.ContainsKey("SECRET_KEY")
-                  ? req.Env["SECRET_KEY"]
-                  : "SECRET_KEY environment variable not found. You can set it in Function settings.";
+  var secretKey = req.Variables.ContainsKey("SECRET_KEY")
+                  ? req.Variables["SECRET_KEY"]
+                  : "SECRET_KEY variable not found. You can set it in Function settings.";
 
   var randomNumber = new Random().NextDouble();
 
-  var trigger = req.Env["APPWRITE_FUNCTION_TRIGGER"];
+  var trigger = req.Variables["APPWRITE_FUNCTION_TRIGGER"];
 
   return res.Json(new() 
   {
@@ -294,11 +294,11 @@ fun main(req: RuntimeRequest, res: RuntimeResponse): RuntimeResponse {
 
     val payload = if (req.payload.isEmpty()) "No payload provided. Add custom data when executing function." else req.payload
 
-    val secretKey = req.env["SECRET_KEY"] ?: "SECRET_KEY environment variable not found. You can set it in Function settings."
+    val secretKey = req.variables["SECRET_KEY"] ?: "SECRET_KEY variable not found. You can set it in Function settings."
     
     val randomNumber = Random.nextDouble(0.0, 1.0)
 
-    val trigger = req.env["APPWRITE_FUNCTION_TRIGGER"]    
+    val trigger = req.variables["APPWRITE_FUNCTION_TRIGGER"]    
 
     return res.json(mapOf(
         "message" to "Hello from Appwrite!",
@@ -326,15 +326,15 @@ public RuntimeResponse main(RuntimeRequest req, RuntimeResponse res) throws Exce
                      ? "No payload provided. Add custom data when executing function."
                      : req.getPayload();
 
-    Map<String, String> env = req.getEnv();
+    Map<String, String> variables = req.getVariables();
 
-    String secretKey = env.containsKey("SECRET_KEY")
-                       ? env.get("SECRET_KEY")
-                       : "SECRET_KEY environment variable not found. You can set it in Function settings.";
+    String secretKey = variables.containsKey("SECRET_KEY")
+                       ? variables.get("SECRET_KEY")
+                       : "SECRET_KEY variable not found. You can set it in Function settings.";
 
     double randomNumber = Math.random();
 
-    String trigger = env.get("APPWRITE_FUNCTION_TRIGGER");
+    String trigger = variables.get("APPWRITE_FUNCTION_TRIGGER");
 
     Map<String, Object> response = new HashMap();
         response.put("message", "Hello from Appwrite!");
@@ -363,11 +363,11 @@ static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
                           "No payload provided. Add custom data when executing function." : 
                           req.payload;
 
-    std::string secretKey = req.env.get("SECRET_KEY", "SECRET_KEY environment variable not found. You can set it in Function settings.").asString();
+    std::string secretKey = req.variables.get("SECRET_KEY", "SECRET_KEY variable not found. You can set it in Function settings.").asString();
 
     double randomNumber = ((double) rand() / (RAND_MAX));
 
-    std::string trigger = req.env["APPWRITE_FUNCTION_TRIGGER"].asString();
+    std::string trigger = req.variables["APPWRITE_FUNCTION_TRIGGER"].asString();
 
     Json::Value response;
     response["message"] = "Hello from Appwrite!";
@@ -386,7 +386,7 @@ static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
 </ul>
 
 
-<p>When your function is called, you receive two parameters, a <b>request</b> and a <b>response</b> object. The request object contains all data that was sent to the function including environment variables. A schema of the request object can be found below and is the same for all runtimes.</p>
+<p>When your function is called, you receive two parameters, a <b>request</b> and a <b>response</b> object. The request object contains all data that was sent to the function including function variables. A schema of the request object can be found below and is the same for all runtimes.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom text-size-small">
     <thead>
@@ -405,8 +405,8 @@ static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
         <td>A JSON string containing the data when you <a href="/docs/client/functions#functionsCreateExecution">created the execution.</a></td>
     </tr>
     <tr>
-        <td>env</td>
-        <td>An object containing all the environment variables. This includes </td>
+        <td>variables</td>
+        <td>An object containing all the function variables. This includes <a href="/docs/functions#functionVariables">variables</a> automatically added by Appwrite.</td>
     </tr>
     </tbody>
 </table>
@@ -434,7 +434,7 @@ static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
 
 <h2><a href="/docs/functions#createFunction" id="createFunction">Create your Function</a></h2>
 
-<p>Before you can deploy your function, you will need to create a new function from your Appwrite project's dashboard. Access the Function settings from your project's left navigation panel. Click the 'Add Function' button and choose a function name and runtime. In your Functions settings page, you can also set your function event triggers, CRON schedule, and set secure environment variables for your function. </p>
+<p>Before you can deploy your function, you will need to create a new function from your Appwrite project's dashboard. Access the Function settings from your project's left navigation panel. Click the 'Add Function' button and choose a function name and runtime. In your Functions settings page, you can also set your function event triggers, CRON schedule, and set secure function variables for your function. </p>
 
 <h2><a href="/docs/functions#deployFunction" id="deployFunction">Deploy Your Function</a></h2>
 
@@ -685,9 +685,9 @@ suspend fun main() {
 
 <p>By default, the following runtimes are enabled: "node-16.0, php-8.0, python-3.9, ruby-3.0". To enable or disable runtimes, you can edit the <span class="tag">_APP_FUNCTIONS_RUNTIMES</span> <a href="/docs/functions#environmentVariables">environment variable</a>.</p>
 
-<h2><a href="/docs/functions#environmentVariables" id="environmentVariables">Environment Variables</a></h2>
+<h2><a href="/docs/functions#functionVariables" id="functionVariables">Function Variables</a></h2>
 
-<p>Environment variables supplied by Appwrite in addition to your own defined environment variables that you can access from your function code. These variables give you information about your execution runtime environment.</p>
+<p>Function variables supplied by Appwrite in addition to your own defined function variables that you can access from your function code. These variables give you information about your execution runtime environment.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -799,7 +799,7 @@ suspend fun main() {
 
 <div class="notice">
     <h3>Using an Appwrite SDK in Your Function</h3>
-    <p>Appwrite Server SDKs require an API key, an endpoint, and a project ID for authentication. Appwrite passes in your project ID with the environment variable  <span class="tag">APPWRITE_FUNCTION_PROJECT_ID</span>, but not the endpoint and API key. If you need to use a Server SDK, you will need to add environment variables for your endpoint and API key in the 'Settings' tab of your function.</p>
+    <p>Appwrite Server SDKs require an API key, an endpoint, and a project ID for authentication. Appwrite passes in your project ID with the function variable  <span class="tag">APPWRITE_FUNCTION_PROJECT_ID</span>, but not the endpoint and API key. If you need to use a Server SDK, you will need to add function variables for your endpoint and API key in the 'Settings' tab of your function.</p>
     <p>If you are running a <b>local Appwrite instance</b>, you will need to pass in the machine's public IP instead of <span class="tag">'https://localhost/v1'</span>. Localhost inside the function's runtime container is not the same as localhost of your machine.</p>
 </div>
 
