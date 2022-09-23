@@ -174,7 +174,7 @@ promise.then(function (response) {
 </div>
 
 <p>
-    If the provided user ID has not been registered, a new account will be created.
+    After the secret is verified, a session will be created.
 </p>
 
 <h2><a href="/docs/authentication#login" id="login">Login</a></h2>
@@ -230,7 +230,7 @@ client
     .setProject('5df5acd0d48c2') // Your project ID
 ;
 
-const promise = account.getSession('current');
+const promise = account.get();
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -242,7 +242,7 @@ promise.then(function (response) {
 </div>
 
 <p>
-    An authenticated session in appwrite lasts for 1 year and is then automatically destroyed.
+    An authenticated session in Appwrite lasts for 1 year and is then automatically expired.
 </p>
 
 <h2><a href="/docs/authentication#persistence" id="persistence">Persistence</a></h2>
