@@ -176,6 +176,8 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                 <form class="pull-end desktops-only" onchange="this.submit()"
                       method="get" action="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>">
 
+                    <input type="hidden" name="sdk" value="<?php echo $this->escape($sdk); ?>" />
+
                     <select class="choose-platform" name="v">
                         <?php foreach ($versions as $key => $value):
                             $name = (isset($value['name'])) ? $value['name'] : '';
