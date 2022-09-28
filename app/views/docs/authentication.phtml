@@ -93,6 +93,10 @@ promise.then(function (response) {
 </p>
 
 <p>
+    In applications with first-party redirects, using OAuth2 for authentication is preferred. 
+</p>
+
+<p>
     The example below shows you how to authenticate with OAuth2 using the Web SDK and Amazon's OAuth system.
 </p>
 
@@ -251,6 +255,11 @@ promise.then(function (response) {
     Appwrite handles the persistence of the session in a consistent way across SDKs. After authenticating with an SDK, the SDK will persist the session so that the user will not need to log in again the next time they open the app. The mechanism for persistence depends on the SDK.
 </p>
 
+<div class="notice">
+  <h2>Best Practice</h2>
+  <p>Only keep user sessions active as long as needed and only maintain <b>one</b> instance of the Client SDK in your app to avoid conflicting session data.</p>
+</div>
+
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large text-size-small vertical">
     <thead>
         <tr>
@@ -316,22 +325,3 @@ promise.then(function (response) {
 <p>
     Security is very important to protect users' data and privacy. Appwrite uses a <a href="/docs/permissions">permissions model</a> coupled with user sessions to ensure users only have access to certain information based on the permissions. With Appwrite services, including databases and storage, access is granted at the collection, bucket, document, or file level. This access is consistent across access to these items in relation to document access, file access, and real-time events.
 </p>
-
-<h2><a href="/docs/authentication#best-practices" id="best-practices">Best Practices</a></h2>
-
-<p>
-    Here are some common best practices when handling sessions and keys used for authentication purposes.
-</p>
-
-<ol class="margin-top margin-bottom-large text-size-normal">
-    <li class="margin-bottom-tiny">Only keep user sessions active as long as needed.</li>
-    <li class="margin-bottom-tiny">Only grant scopes required for your use case for your APIs keys, and nothing more.</li>
-    <li class="margin-bottom-tiny">Access Appwrite via HTTPS to prevent any redirects from interfering with your requests.</li>
-    <li class="margin-bottom-tiny">Prefer using OAuth2 for authentication with first-party redirects.</li>
-    <li class="margin-bottom-tiny">Generate an SSL certification for the Appwrite instance.</li>
-    <li class="margin-bottom-tiny">Keep API keys private and out of client-side code.</li>
-    <li class="margin-bottom-tiny">Only maintain <b>one</b> instance of the Client SDK in your app to avoid conflicting session data.</li>
-    <li class="margin-bottom-tiny">When using the realtime service to get users' documents, clean up and resubscribe to the correct resources to maintain the correct app state.</li>
-    <li class="margin-bottom-tiny">Unsubscribing from old resources is also recommended to prevent possible race conditions.</li>
-</ol>
-
