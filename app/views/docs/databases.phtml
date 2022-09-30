@@ -551,7 +551,7 @@ func main() async throws {
 </table>
 
 <h3><a href="/docs/databases#ordering" id="ordering">Ordering Results</a></h3>
-<p>When querying using the <a href="/docs/server/databases#databasesListDocuments">listDocuments</a> endpoint, you can specify the order of the documents returned using the "Query.orderAsc()" and "Query.orderDesc()" query methods.</p>
+<p>When querying using the <a href="/docs/server/databases#databasesListDocuments">listDocuments</a> endpoint, you can specify the order of the documents returned using the <code>Query.orderAsc()</code> and <code>Query.orderDesc()</code> query methods.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -657,7 +657,7 @@ func main() async throws {
     </li>
 </ul>
 
-<p>To sort based on multiple attributes, pass multiple attribute IDs into <b>orderAttributes</b>. The order of the attribute IDs indicate their sort precedence. There must be an index with all attributes used to allow sorting with multiple attributes.</p>
+<p>To sort based on multiple attributes, simply introduct multiple query methods.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
