@@ -100,11 +100,11 @@ let user = try await account.create(
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
 
-val client = new Client()
+val client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
 
-val account = new Account(client)
+val account = Account(client)
 
 val user = account.create(
     userId = "[USER_ID]",
@@ -180,11 +180,11 @@ let user = try await account.createAnonymousSession()</code></pre>
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
 
-val client = new Client()
+val client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
 
-val account = new Account(client)
+val account = Account(client)
 
 val user = account.createAnonymousSession()</code></pre>
         </div>
@@ -253,11 +253,11 @@ try await account.createOAuth2Session("amazon")</code></pre>
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
 
-val client = new Client()
+val client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
 
-val account = new Account(client)
+val account = Account(client)
 
 // Go to OAuth provider login page
 account.createOAuth2Session("amazon")</code></pre>
@@ -347,11 +347,11 @@ let session = try await account.createPhoneSession(
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
 
-val client = new Client()
+val client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
 
-val account = new Account(client)
+val account = Account(client)
 
 val session = account.createPhoneSession(
     userId = "[USER_ID]",
@@ -426,11 +426,11 @@ let session = try await account.updatePhoneSession(
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
 
-val client = new Client()
+val client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
 
-val account = new Account(client)
+val account = Account(client)
 
 val session = account.updatePhoneSession(
     userId = "[USER_ID]",
@@ -515,11 +515,11 @@ let session = try await account.createEmailSession(
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
 
-val client = new Client()
+val client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
 
-val account = new Account(client)
+val account = Account(client)
 
 val session = account.createEmailSession(
     email = "team@appwrite.io",
@@ -589,11 +589,11 @@ let session = try await account.get()</code></pre>
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
 
-val client = new Client()
+val client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
 
-val account = new Account(client)
+val account = Account(client)
 
 val session = account.get()</code></pre>
     </li>
