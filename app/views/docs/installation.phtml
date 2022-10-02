@@ -1,8 +1,8 @@
-<p>Appwrite is a self-hosted backend server packaged as a set of Docker containers. You can install and run Appwrite on any operating system that can run a <a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">Docker CLI</a>. You can use Appwrite on your local desktop or cloud provider of your choice.</p>
+<p>Appwrite is a self-hosted backend server, packaged as a set of Docker containers. You can install and run Appwrite on any operating system that can run a <a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">Docker CLI</a>. You can use Appwrite on your local desktop or a cloud provider of your choice.</p>
 
 <h2><a href="/docs/installation#systemRequirements" id="systemRequirements">System Requirements</a></h2>
 
-<p>Appwrite was designed to run well on both small and large deployment. The minimum requirements to run Appwrite is as little as <b>1 CPU core</b> and <b>2GB of RAM</b>, and an operating system that supports Docker.</p>
+<p>Appwrite is designed to run well in both small and large deployments. The minimum requirements to run Appwrite is as little as <b>1 CPU core</b>, <b>2GB of RAM</b>, and an operating system that supports Docker.</p>
 
 <p>Appwrite requires <a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">Docker Compose Version 2</a>. To install Appwrite, make sure your Docker installation is updated to support Composer V2.</p>
 
@@ -27,7 +27,7 @@
 
 <h3><a href="/docs/installation#windows" id="windows">Windows</a></h3>
 
-<p>Hyper-V and Containers Windows features must be enabled to run Appwrite on Windows with Docker. If you don't have these features available, you can install <a href="https://docs.docker.com/desktop/windows/install/" target="_blank" rel="noopener">Docker Desktop</a> that uses Virtualbox to run Appwrite on a Virtual Machine.</p>
+<p>Hyper-V and Containers Windows features must be enabled to run Appwrite on Windows with Docker. If you don't have these features available, you can install <a href="https://docs.docker.com/desktop/windows/install/" target="_blank" rel="noopener">Docker Desktop</a> which uses Virtualbox to run Appwrite on a Virtual Machine.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -108,7 +108,7 @@
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose up -d --remove-orphans</code></pre>
 </div>
 
-<p>Once the Docker installation completes, go to your machine hostname or IP address on your browser to access the Appwrite console. Please notice that on non-linux native hosts the server might take a few minutes to start after installation completes.</p>
+<p>Once the Docker installation completes, go to your machine's hostname or IP address in your browser to access the Appwrite console. Please note that on non-linux native hosts the server might take a few minutes to start after the installation is complete.</p>
 
 <h3><a href="/docs/installation#stop" id="stop">Stop</a></h3>
 
@@ -120,7 +120,7 @@
 
 <h3><a href="/docs/installation#uninstall" id="uninstall">Uninstall</a></h3>
 
-<p>To stop and remove your Appwrite containers you can use the following command executed from the same directory as your docker-compose.yml file.</p>
+<p>To stop and remove your Appwrite containers, you can use the following command executed from the same directory as your docker-compose.yml file.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose down -v</code></pre>
