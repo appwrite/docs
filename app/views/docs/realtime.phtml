@@ -282,7 +282,7 @@ realtime.subscribe(channels: ["databases.A.collections.A.documents.A", "files"])
 
 <h3><a href="/docs/realtime#unsubscribe" id="unsubscribe">Unsubscribe</a></h3>
 
-<p>If you no longer want to receive updates from a subscription, you can unsubscribe so that your callbacks are no longer called.</p>
+<p>If you no longer want to receive updates from a subscription, you can unsubscribe so that your callbacks are no longer called. Leaving old subscriptions alive and resubscribing can result in duplicate subscriptions and cause race conditions.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
