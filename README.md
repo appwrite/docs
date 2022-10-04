@@ -26,6 +26,7 @@ Titles and subtitles should follow a logical hierarchy (h1-h6) using the [AP sty
 
 ### Naming Files
 File names should reflect it's content. In general, use dash separated file names that reference the title of the page. For example "Documentation Guidelines" could be "documentation-guidelines".
+
 ### Internal and External Links
 Internal links that direct to any link under [https://appwrite.io](/docs/command-line#installation) should be relative and precise. For example, when referencing the Appwrite Documentation page, use the `<a href="/docs">Documentation</a>`. When referencing a specific section of a page, link to the section heading where possible. For example `<a href="/docs/databases#databases">Create Your Databases</a>`.
 
@@ -44,8 +45,8 @@ When referencing buttons, tabs, and other interactive UI elements, use the full 
 
 When referencing example copy text that appears or could appear on a piece of UI, use double quotes. For example, for each function listed in the **Functions** tab, you will see the runtime used by that function, such as "Dart 2.16" or "Node.js 16.0".
 
-### Referencing File Paths, URLs, and IDs
-When referencing file paths, URLs, IDs, or any text appropriate for monospace representation, use a span element with `class=tag` inline. For example, `<span class="tag">appwrite.json</span>` or `<span class="tag">https://[HOSTNAME_OR_IP]/v1</span>`.
+### Verbatim References Inline
+Monospace font inline through the use of `<code></code>` should be used as a visual hint when something is referenced verbatim (literal quote). Anything that can be copied or searched for in code in the exact form presented should be monospace. Common examples are file names, urls, numbers, ids, code, and emails.
 
 When using generic strings, use double quotes `"`. Double quotes express a string in **all** languages, but single quotes `'` in some languages like Java and C++ represent a **char**. This makes them difficult to copy and paste.
 
@@ -53,11 +54,53 @@ When using generic strings, use double quotes `"`. Double quotes express a strin
 When describing steps to do something, especially UI workflows, use an ordered list. For example:
 
 ```html
-<ol>
+<ol class="margin-top margin-bottom-large text-size-normal">
     <li>Create a script to backups and restore your MariaDB Appwrite schema. Note that trying to backup MariaDB using a docker volume backup can result in a corrupted copy of your data. It is recommended to use MariaDB or MySQL built-in tools for this.</li>
     <li>Create a script to backups and restore your InfluxDB stats. If you don’t care much about your server stats, you can skip this.</li>
     <li>Create a script to backup Appwrite storage volume. There are many online resources explaining different ways to backup a docker volume. When running on multiple servers, it is very recommended to use an attachable storage point. Some cloud providers offer integrated backups to such attachable mount like GCP, AWS, DigitalOcean, and the list continues.</li>
 </ol>
+```
+
+### Tables
+Consider using a table instead of a list when listing SDK methods, integrations, SDKs, etc. Tables have a stronger visual representation and are easier to read than an unordered list. 
+
+Here's an example of a table:
+``` html
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large text-size-small vertical">
+    <thead>
+        <tr>
+            <th style="width: 80px"></th>
+            <th style="width: 180px">Provider</th>
+            <th style="width: 120px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <img src="/images-ee/one-click/digitalocean.svg" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
+                <img src="/images-ee/one-click/dark/digitalocean.svg" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
+            </td>
+            <td>
+                DigitalOcean
+            </td>
+            <td>
+                <a href="https://marketplace.digitalocean.com/apps/appwrite" target="_blank" rel="noopener">Click to Install</a>
+            </td>
+        </tr>        
+        <tr>
+            <td>
+                <img src="/images-ee/one-click/gitpod.svg" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
+                <img src="/images-ee/one-click/dark/gitpod.svg" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
+            </td>
+            <td>
+                Gitpod
+            </td>
+            <td>
+                <a href="https://gitpod.io/#https://github.com/appwrite/integration-for-gitpod" target="_blank" rel="noopener">Click to Install</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
 ```
 
 ### Code Examples
@@ -223,6 +266,8 @@ Appwrite has many services and features. Our word choices must be consistent acr
 | Dashboard Users | Refers to users that are registered to have access to the Appwrite Dashboard. Not a proper noun, use as "a dashboard user" or "the dashboard user". Differenciate this clearly from users created through a Client SDK. |
 | Client SDK    | Refers to SDKs used by Web, Flutter, Android, and Apple applications. Use as a proper noun, use "a Client SDK" or "the Client SDKs", not client-side SDKs.                                                        |
 | Server SDK    | Refers to SDKs used by backend languages like Java, Node.js, or PHP. Use as a proper noun, use "a Server SDK" or "the Server SDKs", not server-side SDKs.                                                         |
+| Client Integration    | Refers to Appwrite integrations in Web, Flutter, Android, and Apple applications using session authentication.                           |
+| Server Integration    | Refers to Appwrite integrations on the backend using API authentication. Avoid the phrasing "Admin Mode" and focus on the difference of session vs API based authentication.                                                         |
 | Adapter       | Refers to interfaces used to connect Appwrite with third party technologies. Adapters are found for OAuth, Databases, Storage, and error logging. When referring to adapters, use specific adapter names, such as "a Database adapter" or "a Storage adapter" to avoid confusion.|
 | Developer     | Refers to Appwrite developers that use Appwrite to create applications.                                                                                                                                           |
 | End User      | Refers to end users of applications with an Appwrite backend. This doesn't refer to developers that interact with Appwrite directly.   |
@@ -244,11 +289,8 @@ Appwrite has many services and features. Our word choices must be consistent acr
 | Sign Out/Log Out    | Verb form of deleting a user session.  Use "delete session" where relevant, and use sign out/log out to refer to actions on a frontend application.                         |
 | Login/Signin        | Noun form referring to the information used to sign in/log in. For example, "to log in, provide valid login information".                                                   |
 | Register            | Use "create account" where relevant, and use register/sign up to refer to actions on a frontend application.                                                                |
-| Roles            | Use "role" to describe the authentication status of a user request, such as `role:all`, `role:guest`, and `role:member`.|
-| Membership            | Use "Membership" to express the relationship where a account belongs to a group or a team. Each memebership entity has defined team roles|
-| Team Role                | Use "team role" to describe the arbitrary roles defined in each team memebership entity.|
 
-#### Database
+#### Databases
 
 | **Term**          | **Suggested Usage**                                                                                                                                                                                  |
 |-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -258,8 +300,7 @@ Appwrite has many services and features. Our word choices must be consistent acr
 | Document          | Use "document" as a noun (no capitalization), use as "a document" or "documents".  Avoid using similar terms like "entry" or "row".                                                                   |
 | Attribute         | Use "attribute" as a noun (no capitalization), use as "a attribute" or "attributes".  Avoid using similar terms like "column" or "key/value".                                                         |
 | Index             | Use "index" as a noun (no capitalization), use as "a index" or "indexes". Use "indexes" instead of indices in a DB related context.                                                                   |
-| Permissions       | Use "Permissions" to describe the definition of read and write access to a resource. The definition is by User ID, Team ID, or Role. |
-| Permission Level             | Use "Permission Level" to describe the scope of defined permissions. Permission can be defined per resource (for each file) or per group of resource (for each file in a bucket).|
+| Query Methods            | These are the different methods provided by Appwrite SDKs to compose queries. For example `Query.lessThanEqual("score", 10)` or `Query.orderDesc("attribute")` are query methods.|
 
 #### Storage
 
@@ -280,6 +321,20 @@ Appwrite has many services and features. Our word choices must be consistent acr
 | Runtimes              | When we refer to a runtime like `node.js 15.5`, call it a "Node.js runtime" or "function runtime". Avoid similar terms like "runtime environment" or "function environment" |
 | Execution            | When a function is run, triggered by an event, or triggerd by a CRON job, an "execution" is created. In documentation, refer to "running" a function as "creating an execution".|
 | Variables            | When a function is run, a set of variables are passed in through the `req` object. Some are generated by the runtime, some are defined under the settings of a function. These are referred to as "variables" rather than "environment variables".|
+
+#### Permissions
+| **Term**              | **Suggested Usage**                                                                                                                                                        |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Appwrite Resource       | An Appwrite resource can be a database, collection, document, bucket, or file. Each resource has its own set of permissions to define who can interact with it.  |
+| Permissions       | Use "Permissions" to describe granted access to a resource in session based authentication. This encapsulates permission level, role, and type. For example: `Permission.update(Role.team("writers"))`. |
+| Permission Level             | Use "Permission Level" to describe the scope of defined permissions. Permission can be defined per resource (for each file) or per group of resource (for each file in a bucket).|
+| Permission Types            | Use "permission types" to describes how a resource can be accessed(read, create, update, delete, etc).|
+| Permission Roles            | Use "role" to describe to describe who can access a resource (anyone, a registered user, a team, etc).|
+| Membership            | Use "Membership" to express the relationship where a account belongs to a group or a team. Each memebership entity has defined team roles|
+| Team Role                | Use "team role" to describe the arbitrary roles defined in each team memebership entity.|
+| Scope                | Use "Scope" to describe which resources can be accessed. This is mainly used to describe concepts in API authentication. |
+| API Key                | Used for authentication in Server Integrations. API keys ignore permission roles and types defined, but are restricted by scope when the keys are created. |
+
 
 ### Grammar and Spell Checking
 Run edited pieces of writing through a spell and grammar checking service like Grammarly before contributing changes. Appwrite's documentation follows the [Associated Press (AP) Stylebook](https://www.apstylebook.com/) for grammar and punctuation related guidelines. Appwrite follows American spelling, refer to [Mariam-Webster](https://www.merriam-webster.com/) when unsure of the correct spelling.
