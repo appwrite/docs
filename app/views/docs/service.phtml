@@ -293,7 +293,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
             <div class="row responsive">
                 <div class="col span-7">
                     <h2 class="margin-bottom">
-                        <a href="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($sdk); ?>#<?php echo $operation['operationId']; ?>" id="<?php echo $operation['operationId']; ?>" class="references"><?php echo $this->escape($title); ?></a>
+                        <a href="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($sdk); ?>&v=<?php echo $this->escape($version); ?>#<?php echo $operation['operationId']; ?>" id="<?php echo $operation['operationId']; ?>" class="references"><?php echo $this->escape($title); ?></a>
                     </h2>
 
                     <div>
