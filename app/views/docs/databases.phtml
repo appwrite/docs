@@ -1,8 +1,7 @@
 <p>
     The Databases Service allows you to store your application and users' data and fetch it using different supported queries.
-    Using your Appwrite Databases, you can create multiple databases, organize your data into collections and documents using the Appwrite REST API. You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your collections and documents.
-    In addition, the Databases Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance,
-    as well as a flexible permissions mechanism to allow you to easily segment data between different users, teams, and roles.
+    Using the Databases Service, you can create multiple databases and organize your data into collections and documents using Appwrite's REST API. You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your collections and documents.
+    In addition, the Databases Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance, and a flexible permissions mechanism to easily segment data between different users, teams, and roles.
 </p>
 
 <h2><a href="/docs/databases#databases" id="databases">Create Your Databases</a></h2>
@@ -33,7 +32,7 @@
 
 <h3><a href="/docs/databases#permissions" id="permissions">Permissions</a></h3>
 <p>
-    Appwrite provides permissions to restrict access to documents at two levels, document and collection level. When a user has the appropriate type of <a href="/docs/permissions/">access permissions</a> granted at <b>either</b> the document or the collection level, they will be able to access or change the document. If the permission field is left empty, Client SDKs cannot access the document.
+    Appwrite provides permissions to restrict access to documents at two levels, document and collection level. When a user has the appropriate <a href="/docs/permissions/">permission type</a> granted at <b>either</b> the document or the collection level, they will be able to access or change the document. If the permission field is left empty, Client SDKs cannot access the document.
 </p>
 
 <h4>Document Level Permissions</h4>
@@ -55,46 +54,46 @@
     </thead>
     <tbody>
         <tr>
-            <td>string</td>
+            <td><code>string</code></td>
             <td>String attribute.</td>
         </tr>
         <tr>
-            <td>integer</td>
+            <td><code>integer</code></td>
             <td>Integer attribute.</td>
         </tr>
         <tr>
-            <td>float</td>
+            <td><code>float</code></td>
             <td>Float attribute.</td>
         </tr>
         <tr>
-            <td>boolean</td>
+            <td><code>boolean</code></td>
             <td>Boolean attribute.</td>
         </tr>
         <tr>
-            <td>enum</td>
+            <td><code>enum</code></td>
             <td>Enum attribute.</td>
         </tr>
         <tr>
-            <td>ip</td>
+            <td><code>ip</code></td>
             <td>IP address attribute for IPv4 and IPv6.</td>
         </tr>
         <tr>
-            <td>email</td>
+            <td><code>email</code></td>
             <td>Email address attribute.</td>
         </tr>
         <tr>
-            <td>url</td>
+            <td><code>url</code></td>
             <td>URL attribute.</td>
         </tr>
     </tbody>
 </table>
 
 <p>
-    If an attribute must be present in all documents, set it as <span class="tag">required</span>. If not, a <span class="tag">default</span> value might be handy. Additionally, decide if the attribute should be a primitive or array of values.
+    If an attribute must be populated in all documents, set it as <code>required</code>. If not, a default value might be handy, but is not required. Additionally, decide if the attribute should be a primitive or an array of values.
 </p>
 <p>
-    When adding or removing attributes, your requests are processed in the background, indicated by the attribute's <span class="tag">status</span>.
-    Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. You are able to create a document while your attributes are still being processed, however you are not able to use the attributes on the documents until they are <span class="tag">available</span>
+    When adding or removing attributes, your requests are processed in the background, indicated by the attribute's <code>status</code>.
+    Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. You are able to create a document while your attributes are still being processed, but you are not able to use the attributes on the documents until their <code>status</code> becomes <code>available</code>.
 </p>
 
 <h3><a href="/docs/databases#create-documents" id="create-documents">Create Documents</a></h3>
@@ -211,10 +210,10 @@ func main() async throws {
 
 <div class="notice margin-top-large margin-bottom-large">
     <h4>Indexes Required</h4>
-    <p>You can only query indexed attributes. You can easily add new indexes from both the Appwrite console or any of the <a href="/docs/sdks#server">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it in the <a href="/docs/databases#indexes">Appwrite Indexes</a> section.</p>
+    <p>You can only query indexed attributes. You can easily add new indexes from both your project's dashboard or any of the <a href="/docs/sdks#server">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it in the <a href="/docs/databases#indexes">Appwrite Indexes</a> section.</p>
 </div>
 <p>
-    To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/databases#databasesListDocuments">listDocuments</a> endpoint. The SDKs provide a <b>Query</b> class to make query building simpler:
+    To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/databases#databasesListDocuments">List Documents</a> endpoint. The SDKs provide a <code>Query</code> class to make query building simpler:
 </p>
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -339,74 +338,74 @@ func main() async throws{
     </thead>
     <tbody>
         <tr>
-            <td>equal</td>
-            <td>Query.equal("title", ["Iron Man"])</td>
+            <td>Equal</td>
+            <td><code>Query.equal("title", ["Iron Man"])</code></td>
             <td>Returns document if attribute is equal to any value in the provided array. Applies to any indexed attribute.</td>
         </tr>
         <tr>
-            <td>notEqual</td>
-            <td>Query.notEqual("title", ["Iron Man"])</td>
+            <td>Not Equal</td>
+            <td><code>Query.notEqual("title", ["Iron Man"])</code></td>
             <td>Returns document if attribute is not equal to any value in the provided array. Applies to any indexed attribute.</td>
         </tr>
         <tr>
-            <td>lessThan</td>
-            <td>Query.lessThan("score", 10)</td>
+            <td>Less Than</td>
+            <td><code>Query.lessThan("score", 10)</code></td>
             <td>Returns document if attribute is less than the provided value. Applies to any indexed attribute.</td>
         </tr>
         <tr>
-            <td>lessThanEqual</td>
-            <td>Query.lessThanEqual("score", 10)</td>
+            <td>Less Than or Equal To</td>
+            <td><code>Query.lessThanEqual("score", 10)</code></td>
             <td>Returns document if attribute is less than or equal to the provided value. Applies to any indexed attribute.</td>
         </tr>
         <tr>
-            <td>greaterThan</td>
-            <td>Query.greaterThan("score", 10)</td>
+            <td>Greater Than</td>
+            <td><code>Query.greaterThan("score", 10)</code></td>
             <td>Returns document if attribute is greater than the provided value. Applies to any indexed attribute.</td>
         </tr>
         <tr>
-            <td>greaterThanEqual</td>
-            <td>Query.greaterThanEqual("score", 10)</td>
+            <td>Greater Than or Equal To</td>
+            <td><code>Query.greaterThanEqual("score", 10)</code></td>
             <td>Returns document if attribute is greater than or equal to the provided value. Applies to any indexed attribute.</td>
         </tr>
         <tr>
-            <td>search</td>
-            <td>Query.search("text", "key words")</td>
+            <td>Search</td>
+            <td><code>Query.search("text", "key words")</code></td>
             <td>Searches string attributes for provided keywords. Applies to any string attribute with a full-text index.</td>
         </tr>
         <tr>
-            <td>orderDesc</td>
-            <td>Query.orderDesc("attribute")</td>
+            <td>Order Descending</td>
+            <td><code>Query.orderDesc("attribute")</code></td>
             <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
         </tr>
         <tr>
-            <td>orderAsc</td>
-            <td>Query.orderAsc("attribute")</td>
+            <td>Order Ascending</td>
+            <td><code>Query.orderAsc("attribute")</code></td>
             <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
         </tr>
         <tr>
-            <td>limit</td>
-            <td>Query.limit(25)</td>
+            <td>Limit</td>
+            <td><code>Query.limit(25)</code></td>
             <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
         </tr>
         <tr>
-            <td>offset</td>
-            <td>Query.offset(0)</td>
+            <td>Offset</td>
+            <td><code>Query.offset(0)</code></td>
             <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
         </tr>
         <tr>
-            <td>cursorAfter</td>
-            <td>Query.cursorAfter("62a7...f620")</td>
+            <td>Cursor After</td>
+            <td><code>Query.cursorAfter("62a7...f620")</code></td>
             <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
         </tr>
         <tr>
-            <td>cursorBefore</td>
-            <td>Query.cursorBefore("62a7...a600")</td>
+            <td>Cursor Before</td>
+            <td><code>Query.cursorBefore("62a7...a600")</code></td>
             <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
         </tr>
     </tbody>
 </table>
 
-<p>Each query string is logically separated via AND. For OR logic, pass multiple values, separated by commas:</p>
+<p>Each query string is logically separated via <code>AND</code> operation. For <code>OR</code> operation, pass multiple values separated by commas:</p>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
@@ -515,15 +514,15 @@ func main() async throws {
     </li>
 </ul>
 
-<p>When performing a query against multiple attributes, a single index with all query attributes is required. In the example above, a single index with <b>both</b> <span class="tag">title</span> and <span class="tag">year</span> is required.</p>
+<p>When performing a query against multiple attributes, a single index with all query attributes is required. In the example above, a single index with <b>both</b> <code>title</code> and <code>year</code> is required.</p>
 
 <h2><a href="/docs/databases#indexes" id="indexes">Indexes</a></h2>
 <p>
-    Indexes are used by Databases to quickly locate data without having to search through every document for results.
+    Databases use indexes to quickly locate data without having to search through every document for matches.
     To ensure the best performance, Appwrite requires an index for every query.
-    You can create an index by navigating to the <b>Indexes</b> tab of your collection or by using your favorite Server SDK. If you plan to query multiple attributes in a single query, you will need an index with <b>all</b> queried attributes.
+    You can create an index by navigating to your collection's <b>Indexes</b> tab or by using your favorite Server SDK. If you plan to query multiple attributes in a single query, you will need an index with <b>all</b> queried attributes.
 </p>
-<p>It should be noted that Appwrite's database was designed to protect your queries from performing a full-table scan as this is a footgun and could cause catastrophic performance degradation as you scale up your Appwrite project.</p>
+<p>It should be noted that Appwrite's Databases Service is designed to protect your queries from performing a full-table scan, as this could cause catastrophic performance degradation as you scale up your Appwrite project.</p>
 <p>
     The following indexes are currently supported:
 </p>
@@ -536,15 +535,15 @@ func main() async throws {
     </thead>
     <tbody>
         <tr>
-            <td>key</td>
+            <td><code>key</code></td>
             <td>Plain Index to allow queries.</td>
         </tr>
         <tr>
-            <td>unique</td>
+            <td><code>unique</code></td>
             <td>Unique Index which not allows duplicates.</td>
         </tr>
         <tr>
-            <td>fulltext</td>
+            <td><code>fulltext</code></td>
             <td>For searching within string attributes</td>
         </tr>
     </tbody>
@@ -766,7 +765,7 @@ func main() async throws {
     </li>
 </ul>
 
-<p>In the example above, the movies returned will be first sorted by title in ascending order, then sorted by year in descending order.</p>
+<p>In the example above, the movies returned will be first sorted by <code>title</code> in ascending order, then sorted by <code>year</code> in descending order.</p>
 
 <h3><a href="/docs/databases#pagination" id="pagination">Pagination</a></h3>
 <p>Appwrite has full support for pagination to better optimize and scale up your applications built on Appwrite. Detailed documentation on pagination and how to implement it can be found on the <a href="/docs/pagination">pagination guide.</a></p>
