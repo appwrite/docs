@@ -226,11 +226,11 @@ Future &lt;void&gt; start(final req, final res) async {
         <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>func main(req: RequestValue, res: RequestResponse) throws -> RequestResponse {
-    let payload = req.payload.isEmpty
-        ? "No payload provided. Add custom data when executing function"
+    let payload = req.payload.isEmpty 
+        ? "No payload provided. Add custom data when executing function" 
         : req.payload
-
-    let secretKey = req.variables["SECRET_KEY"]
+    
+    let secretKey = req.variables["SECRET_KEY"] 
         ?? "SECRET_KEY variable not found. You can set it in Function settings."
 
     let randomNumber = Double.random(in: 0...1)
@@ -259,7 +259,7 @@ Future &lt;void&gt; start(final req, final res) async {
 {
   var payload = (string.IsNullOrEmpty(req.Payload))
                 ? "No payload provided. Add custom data when executing function."
-                : req.Payload;
+                : req.Payload; 
 
   var secretKey = req.Variables.ContainsKey("SECRET_KEY")
                   ? req.Variables["SECRET_KEY"]
@@ -269,7 +269,7 @@ Future &lt;void&gt; start(final req, final res) async {
 
   var trigger = req.Variables["APPWRITE_FUNCTION_TRIGGER"];
 
-  return res.Json(new()
+  return res.Json(new() 
   {
     { "message", "Hello from Appwrite!" },
     { "payload", payload },
@@ -295,10 +295,10 @@ fun main(req: RuntimeRequest, res: RuntimeResponse): RuntimeResponse {
     val payload = if (req.payload.isEmpty()) "No payload provided. Add custom data when executing function." else req.payload
 
     val secretKey = req.variables["SECRET_KEY"] ?: "SECRET_KEY variable not found. You can set it in Function settings."
-
+    
     val randomNumber = Random.nextDouble(0.0, 1.0)
 
-    val trigger = req.variables["APPWRITE_FUNCTION_TRIGGER"]
+    val trigger = req.variables["APPWRITE_FUNCTION_TRIGGER"]    
 
     return res.json(mapOf(
         "message" to "Hello from Appwrite!",
@@ -359,8 +359,8 @@ public RuntimeResponse main(RuntimeRequest req, RuntimeResponse res) throws Exce
 
 static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
 
-    std::string payload = req.payload.empty() ?
-                          "No payload provided. Add custom data when executing function." :
+    std::string payload = req.payload.empty() ? 
+                          "No payload provided. Add custom data when executing function." : 
                           req.payload;
 
     std::string secretKey = req.variables.get("SECRET_KEY", "SECRET_KEY variable not found. You can set it in Function settings.").asString();
@@ -375,7 +375,7 @@ static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
     response["secretKey"] = secretKey;
     response["randomNumber"] = randomNumber;
     response["trigger"] = trigger;
-
+    
     return res.json(response);
 }</code></pre>
         </div>
