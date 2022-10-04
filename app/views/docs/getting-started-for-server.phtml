@@ -146,10 +146,11 @@ $client = (new Client())
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 
-client = Client()
+client = (Client()
     .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
     .set_project('5df5acd0d48c2')                # Your project ID
     .set_key('919c2db5d4...a2a3346ad2')          # Your secret API key
+)
 </code></pre>
         </div>
     </li>
@@ -304,10 +305,11 @@ $client = (new Client())
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 
-client = Client()
+client = (Client()
   .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
   .set_project('5df5acd0d48c2')                # Your project ID
   .set_key('919c2db5d4...a2a3346ad2')          # Your secret JWT
+)
 </code></pre>
         </div>
     </li>
@@ -415,10 +417,13 @@ $user = $users->create(
     <li>
         <h3>Python</h3>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>users = Users(client)
+            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.id import ID
+from appwrite.services.users import Users
+
+users = Users(client)
 
 user = users.create(
-    userId=ID.unique(),
+    user_id=ID.unique(),
     email='email@example.com',
     phone=None,
     password='password'
@@ -557,15 +562,16 @@ $user = $users->create(
 from appwrite.id import ID
 from appwrite.services.users import Users
 
-client = Client()
+client = (Client()
   .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
   .set_project('5df5acd0d48c2')                # Your project ID
   .set_key('919c2db5d4...a2a3346ad2')          # Your secret API key
+)
 
 users = Users(client)
 
 user = users.create(
-    userId=ID.unique(),
+    user_id=ID.unique(),
     email='email@example.com',
     phone=None,
     password='password'
