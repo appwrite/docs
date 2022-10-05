@@ -21,7 +21,7 @@
 
 <p>Appwrite was built with scalability in mind. Appwrite can scale both horizontally and vertically.</p>
 
-<p>Appwrite uses a few containers to run, where each container has its job. Most of the Appwrite containers are stateless, and in order to scale them, all you need is to replicate them and setup a load balancer to distribute their load.</p>
+<p>Appwrite uses a few containers to run, where each container has its job. Most of the Appwrite containers are stateless, and in order to scale them, all you need is to replicate them and set up a load balancer to distribute their load.</p>
 
 <p>If you decide to set up a load balancer for a specific container, make sure that the containers that are trying to communicate with it are accessing it through a load balancer and not directly. All connections between Appwrite different containers are set using Docker environment variables.</p>
 
