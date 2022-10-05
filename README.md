@@ -252,7 +252,7 @@ $image = new View(__DIR__.'/../general/image.phtml');
 ?>
 ```
 
-All screenshots should be in PNG format and taken from a 1290 x 848 px viewport. Appwrite console screenshots should display the account name `Walter O'Brian` with a profile image of WO. Do not include any sensitive data in images. Do not include any sensitive data in images.
+All screenshots should be in PNG format and taken from a 1290 x 848 px viewport. Appwrite dashboard screenshots should display the account name `Walter O'Brian` with a profile image of WO. Do not include any sensitive data in images. Do not include any sensitive data in images.
 
 ### Terminology
 Appwrite has many services and features. Our word choices must be consistent across the many documentation pages to communicate clearly and precisely. 
