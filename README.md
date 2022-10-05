@@ -1,4 +1,5 @@
 # The Appwrite Docs 📝
+# Contribute to appwrite issues and participate in hacktoberfest
 
 The official [Appwrite Documentation](https://appwrite.io/docs) source code.
 ## 🚀 Contributing
