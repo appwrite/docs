@@ -1,4 +1,4 @@
-# The Appwrite Docs 📝
+# The Appwrite Docs V2 📝
 
 The official [Appwrite Documentation](https://appwrite.io/docs) source code.
 ## 🚀 Contributing
