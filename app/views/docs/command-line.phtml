@@ -138,15 +138,15 @@ brew install --HEAD appwrite</code></pre>
     "collections": [
         {
             "$id": "6213bb2d567d8a206614",
-            "$read": [
-                "team:admin"
-            ],
-            "$write": [
-                "team:admin"
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"team:admin\")",
+                "update(\"team:admin\")",
+                "delete(\"team:admin\")",
             ],
             "name": "Millenium Problems",
             "enabled": true,
-            "permission": "collection",
+            "documentSecurity": false,
             "attributes": [],
             "indexes": []
         }
@@ -297,7 +297,7 @@ brew install --HEAD appwrite</code></pre>
 <p>To create a new document in an existing collection, use the `createDocument` command.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases createDocument --collectionId <ID> --documentId 'unique()' --data '{ "Name": "Iron Man" }' --read role:all team:abc</code></pre>
+<pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases createDocument --collectionId <ID> --documentId 'unique()' --data '{ "Name": "Iron Man" }' --permissions 'read("any")' 'write("team:abc")' </code></pre>
 </div>
 
 <h3><a href="/docs/command-line#configuration" id="configuration">Configuration</a></h3>
@@ -305,13 +305,11 @@ brew install --HEAD appwrite</code></pre>
 <p>At any point, if you would like to change your server endpoint, project key, or self-signed certificate acceptance, use the <b>client</b> service.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>
-appwrite client --endpoint http://192.168.1.6/v1
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --endpoint http://192.168.1.6/v1
 appwrite client --key 23f24gwrhSDgefaY
 appwrite client --selfSigned true
 appwrite client --reset // Resets your CLI configuration
-appwrite client --debug // Prints your current configuration
-</code></pre>
+appwrite client --debug // Prints your current configuration</code></pre>
 </div>
 
 <div class="notice margin-bottom"> 
@@ -330,7 +328,7 @@ appwrite client --debug // Prints your current configuration
 
 <h3><a href="/docs/command-line#help" id="help">Help</a></h3>
 
-<p>If you get stuck anywhere, you can always use the <b>help</b> command to get the usage examples. All the examples are also available on the Appwrite API specs docs, and you can view them by switching the examples to the "Appwrite CLI" from the top dropdown.</p>
+<p>If you get stuck anywhere, you can always use the <b>help</b> command to get the usage examples.</p>
 
 <h3><a href="/docs/command-line#uninstall" id="uninstall">Uninstall</a></h3>
 

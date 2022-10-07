@@ -41,8 +41,8 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
   <application ...>
     ...
     <!-- Add this inside the `<application>` tag, along side the existing `<activity>` tags -->
-    <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true">
-      <intent-filter android:label="flutter_web_auth">
+    <activity android:name="com.linusu.flutter_web_auth_2.CallbackActivity" android:exported="true">
+      <intent-filter android:label="flutter_web_auth_2">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
@@ -88,7 +88,7 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 close the window.
 <script>
   window.opener.postMessage({
-    \'flutter-web-auth\': window.location.href
+    \'flutter-web-auth-2\': window.location.href
   }, window.location.origin);
   window.close();
 </script>'); ?>
@@ -131,13 +131,10 @@ close the window.
 <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
   <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-Client client = Client();
-
-client
+Client client = Client()
     .setEndpoint('https://localhost/v1') // Your Appwrite Endpoint
-    .setProject('5e8cf4f46b5e8') // Your project ID
-    .setSelfSigned(status: true) // For self signed certificates, only use for development
-;
+    .setProject('5e8cf4f46b5e8')         // Your project ID
+    .setSelfSigned(status: true);        // For self signed certificates, only use for development
 </code></pre>
 </div>
 
@@ -153,13 +150,12 @@ client
   <pre class="line-numbers"><code class="prism language-dart" data-prism>// Register User
 Account account = Account(client);
 
-final user = await account
-    .create(
-        userId: 'unique()',
-        email: 'me@appwrite.io',
-        password: 'password',
-        name: 'My Name'
-    );
+final user = await account.create(
+    userId: ID.unique(),
+    email: 'me@appwrite.io',
+    password: 'password',
+    name: 'My Name'
+);
 </code></pre>
 </div>
 
@@ -185,24 +181,19 @@ subscription.stream.listen((response) {
 <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
   <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-Client client = Client();
+Client client = Client()
+    .setEndpoint('https://localhost/v1')  // Your Appwrite Endpoint
+    .setProject('5e8cf4f46b5e8')          // Your project ID
+    .setSelfSigned(status: true);         // For self signed certificates, only use for development
 
-client
-    .setEndpoint('https://localhost/v1') // Your Appwrite Endpoint
-    .setProject('5e8cf4f46b5e8') // Your project ID
-    .setSelfSigned(status: true) // For self signed certificates, only use for development
-;
-
-// Register User
 Account account = Account(client);
 
-final user = await account
-    .create(
-        userId: 'unique()',
-        email: 'me@appwrite.io',
-        password: 'password',
-        name: 'My Name'
-    );
+final user = await account.create(
+    userId: ID.unique(),
+    email: 'me@appwrite.io',
+    password: 'password',
+    name: 'My Name'
+);
 
 // Subscribe to files channel
 final realtime = Realtime(client);

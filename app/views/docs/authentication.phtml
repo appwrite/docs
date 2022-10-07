@@ -1,0 +1,327 @@
+<p>
+    Appwrite provides authentication for many different use cases to fit the needs of developers. 
+    Appwrite manages authentication with a combination of accounts and sessions. 
+    Accounts can be created in many different ways, such as through an anonymous session, email and password, OAuth authentication, magic URLs, and more.
+</p>
+
+<h2><a href="/docs/authentication#account-vs-user-api" id="account-vs-user-api">Account vs Users API</a></h2>
+
+<p>
+    The Account API operates in the scope of the currently logged-in account and is usually used in a frontend or mobile app. The Users API is used in backend integrations and operates in an admin scope using an API key with access to all your project users.
+</p>
+
+<p> 
+    Some of the Account API methods are available from Server SDKs when you authenticate with a JWT. This allows your Server SDK to perform actions on behalf of a user.
+</p>
+
+<h2><a href="/docs/authentication#create-an-account" id="create-an-account">Create An Account</a></h2>
+
+<p>
+    A user account in Appwrite is the primary way to access information for a given project. Accounts can be created in many different ways, including <a href="/docs/client/account#accountCreateEmailSession">email & password</a>, <a href="/docs/client/account#accountCreateAnonymousSession">anonymous sessions</a>, <a href="/docs/client/account#accountCreateOAuth2Session">OAuth2</a>, <a href="/docs/client/account#accountCreatePhoneSession">phone authentication</a>, and more. Applications can create and manage sessions through the REST API or Client SDKs.
+</p>
+
+<h3><a href="/docs/authentication#email" id="email">Email</a></h3>
+
+<p>
+    Creating an account via email and password is one of the most common ways to sign up for an application. Appwrite provides email and password authentication out of the box. Using one of Appwrite's Client SDKs, or the REST APIs directly, you can create an account using an email address and password in your application.
+</p>
+
+<p>
+    Passwords are hashed with <a href="https://en.wikipedia.org/wiki/Argon2" target="_blank" rel="noopener">Argon2</a>, a resilient and secure password hashing algorithm.
+</p>
+
+<p>
+    The example below shows you how to create an account using the Web SDK:
+</p>
+
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client();
+
+const account = new Account(client);
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+;
+
+const promise = account.create('[USER_ID]', 'email@example.com', 'password');
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
+</div>
+
+<p>
+    After an account is created, it can be verified through the <a href="/docs/account#accountCreateVerification">account verification route</a> provided by the Appwrite Accounts API. The user doesn't need to be verified to log in, but you can restrict resource access to verified users only using permissions.
+</p>
+
+<h3><a href="/docs/authentication#anonymous-user" id="anonymous-user">Anonymous User</a></h3>
+
+<p>
+Anonymous authentication allows users of your application to create a temporary valid session without creating an account. The session has an expiration time of one year. If an account is created while an anonymous session is active, it will be attached to the existing anonymous session.
+</p>
+
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client();
+
+const account = new Account(client);
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+;
+
+const promise = account.createAnonymousSession();
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
+</div>
+
+<h3><a href="/docs/authentication#oauth" id="oauth">OAuth</a></h3>
+
+<p>
+    OAuth is another way to authenticate a user using a multi-step process. When using OAuth to authenticate, the authentication request is initiated from the client application. The user is then redirected to an OAuth2 provider to complete the authentication step, and finally, the user is redirected back to the client application. This provides integration with many third-party services that provide their own OAuth integration as a more secure approach than providing a username/password directly.
+</p>
+
+<p>
+    In applications with first-party redirects, using OAuth2 for authentication is preferred. 
+</p>
+
+<p>
+    The example below shows you how to authenticate with OAuth2 using the Web SDK and Amazon's OAuth system.
+</p>
+
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client();
+
+const account = new Account(client);
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+;
+
+// Go to OAuth provider login page
+account.createOAuth2Session('amazon');</code></pre>
+</div>
+
+<p>
+    Notice, the function call for <b>createOAuth2Session</b> is synchronous and hence, there is no need to use <b>await</b>.
+</p>
+
+<p>  
+    If there is already an active anonymous session, the new session will be attached to it. If there are no active sessions, the server will attempt to look for an account with the same email address as the email received from the OAuth2 provider and attach the new session to the existing account. If no matching account is found - the server will create a new account.
+</p>
+
+<h3><a href="/docs/authentication#phone" id="phone">Phone</a></h3>
+
+<p>
+    Phone authentication is done using a two-step authentication process. When using phone authentication, the authentication request is initiated from the client application and an SMS is sent to the user with a secret key for creating a session. 
+</p>
+
+<p> 
+    Phone authentication requires you to set up an SMS provider to send SMS messages. You will need to configure these <a href="/docs/environment-variables#phone">environment variables</a> and restart your Appwrite containers before you can use phone authentication.
+</p>
+
+<p>
+    The example below shows you how to initiate a phone authentication request using the Web SDK.
+</p>
+
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client();
+
+const account = new Account(client);
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+;
+
+const promise = account.createPhoneSession('[USER_ID]', '+16171234567');
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});
+
+</code></pre>
+</div>
+
+<p>
+    After initiation, the returned user ID and secret are used to confirm the user. The secret will be a 6 digit number in the SMS message sent to the user.
+</p>
+
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>const promise = account.updatePhoneSession('[USER_ID]', '[SECRET]');
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});
+
+</code></pre>
+</div>
+
+<p>
+    After the secret is verified, a session will be created.
+</p>
+
+<h2><a href="/docs/authentication#login" id="login">Login</a></h2>
+
+<p>
+    Logging in with an email and password is one of the most common ways to login into an application. 
+</p>
+
+<p>
+    The example below shows you how to create a session using the Web SDK:
+</p>
+
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client();
+
+const account = new Account(client);
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+;
+
+const promise = account.createEmailSession('email@example.com', 'password');
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});
+
+</code></pre>
+</div>
+
+<p>
+    When a user tries to access restricted resources, you can check if they have a valid, active session. The Account Service provides a <a href="/docs/account#accountGet">get()</a> method that checks whether the current user session is active and returns the account information if successful.
+</p>
+
+<p>
+    The example below shows you how to check whether there is an active session using the Web SDK:
+</p>
+
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client();
+
+const account = new Account(client);
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+;
+
+const promise = account.get();
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});
+
+</code></pre>
+</div>
+
+<p>
+    An authenticated session in Appwrite lasts for 1 year and is then automatically expired.
+</p>
+
+<h2><a href="/docs/authentication#persistence" id="persistence">Persistence</a></h2>
+
+<p>
+    Appwrite handles the persistence of the session in a consistent way across SDKs. After authenticating with an SDK, the SDK will persist the session so that the user will not need to log in again the next time they open the app. The mechanism for persistence depends on the SDK.
+</p>
+
+<div class="notice">
+  <h2>Best Practice</h2>
+  <p>Only keep user sessions active as long as needed and only maintain <b>one</b> instance of the Client SDK in your app to avoid conflicting session data.</p>
+</div>
+
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large text-size-small vertical">
+    <thead>
+        <tr>
+            <th style="width: 80px"></th>
+            <th style="width: 120px">SDK</th>
+            <th>Persistence Method</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <img src="/images-ee/platforms/web.svg" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
+                <img src="/images-ee/platforms/dark/web.svg" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
+            </td>
+            <td>
+                Web
+            </td>
+            <td>
+                Uses a session secure cookie and falls back to local storage when a session cookie is not available.
+            </td>
+        </tr>        
+        <tr>
+            <td>
+                <img src="/images-ee/platforms/flutter.svg" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
+                <img src="/images-ee/platforms/dark/flutter.svg" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
+            </td>
+            <td>
+                Flutter
+            </td>
+            <td>
+                Uses a session cookie stored in Application Documents through the <b>path_provider</b> package.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="/images-ee/platforms/apple.svg" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
+                <img src="/images-ee/platforms/dark/apple.svg" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
+            </td>
+            <td>
+                Apple
+            </td>
+            <td>
+                Uses a session cookie stored in <b>UserDefaults</b>.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="/images-ee/platforms/android.svg" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
+                <img src="/images-ee/platforms/dark/android.svg" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
+            </td>
+            <td>
+                Android
+            </td>
+            <td>
+                Uses a session cookie stored in <b>SharedPreferences</b>.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h2><a href="/docs/authentication#security" id="security">Security</a></h2>
+
+<p>
+    Security is very important to protect users' data and privacy. Appwrite uses a <a href="/docs/permissions">permissions model</a> coupled with user sessions to ensure users only have access to certain information based on the permissions. With Appwrite services, including databases and storage, access is granted at the collection, bucket, document, or file level. This access is consistent across access to these items in relation to document access, file access, and real-time events.
+</p>

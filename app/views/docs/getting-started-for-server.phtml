@@ -65,15 +65,15 @@ $swiftVersion = $versions['swift'] ?? '';
     <li>
         <h3>Kotlin</h3>
         <div>
-            <p>Add maven repositories to your `build.gradle(.kts)` file</p>
-            <div class="ide margin-top-small" data-lang="gradle" data-lang-label="Gradle">
-                <pre class="line-numbers"><code class="prism language-gradle" data-prism>repositories {
+            <p>Add maven repositories to your <b>build.gradle(.kts)</b> file</p>
+            <div class="ide margin-top-small" data-lang="groovy" data-lang-label="Groovy">
+                <pre class="line-numbers"><code class="prism language-groovy" data-prism>repositories {
     mavenCentral()
 }</code></pre>
             </div>
-            <p>Add Appwrite SDK under dependencies in your `build.gradle(.kts)` file</p>
-            <div class="ide margin-top-small" data-lang="gradle" data-lang-label="Gradle">
-                <pre class="line-numbers"><code class="prism language-gradle" data-prism>dependencies {
+            <p>Add Appwrite SDK under dependencies in your <b>build.gradle(.kts)</b> file</p>
+            <div class="ide margin-top-small" data-lang="groovy" data-lang-label="Groovy">
+                <pre class="line-numbers"><code class="prism language-groovy" data-prism>dependencies {
     implementation("io.appwrite:sdk-for-kotlin:<?php echo $this->escape($kotlinVersion); ?>")
 }</code></pre>
             </div>
@@ -85,15 +85,17 @@ $swiftVersion = $versions['swift'] ?? '';
             <p>Add the Appwrite Swift SDK package as a dependency</p>
             <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
-    // ...
-    .package(url: "https://github.com/appwrite/sdk-for-swift.git", from: "<?php echo $this->escape($swiftVersion); ?>")
-    // ...
+    .package(
+        name: "Appwrite",
+        url: "https://github.com/appwrite/sdk-for-swift.git",
+        .exact("<?php echo $this->escape($swiftVersion); ?>")
+    )
 ]</code></pre>
             </div>
             <p>Add the dependency product to your target</p>
             <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>dependencies: [
-    .product(name: "Appwrite", package: "sdk-for-swift"),
+    "Appwrite"
 ]</code></pre>
         </div>
     </li>
@@ -117,28 +119,26 @@ $swiftVersion = $versions['swift'] ?? '';
     <li>
         <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client } = require('node-appwrite');
 
-const client = new sdk.Client();
-
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;</code></pre>
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
+</code></pre>
         </div>
     </li>
     <li>
         <h3>PHP</h3>
 
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>$client = new Client();
+            <pre class="line-numbers"><code class="prism language-php" data-prism>use Appwrite\Client;
 
-$client
+$client = (new Client())
     ->setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    ->setProject('5df5acd0d48c2') // Your project ID
-    ->setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;</code></pre>
+    ->setProject('5df5acd0d48c2')                // Your project ID
+    ->setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
+</code></pre>
         </div>
     </li>
     <li>
@@ -147,12 +147,10 @@ $client
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 
 client = Client()
-
-(client
-  .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
-  .set_project('5df5acd0d48c2') # Your project ID
-  .set_key('919c2d18fb5d4...a2ae413da83346ad2') # Your secret API key
-)</code></pre>
+    .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
+    .set_project('5df5acd0d48c2')                # Your project ID
+    .set_key('919c2db5d4...a2a3346ad2')          # Your secret API key
+</code></pre>
         </div>
     </li>
     <li>
@@ -161,24 +159,22 @@ client = Client()
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
 
 client = Appwrite::Client.new()
-
-client
     .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
-    .set_project('5df5acd0d48c2') # Your project ID
-    .set_key('919c2d18fb5d4...a2ae413da83346ad2') # Your secret API key
-;</code></pre>
+    .set_project('5df5acd0d48c2')                # Your project ID
+    .set_key('919c2db5d4...a2a3346ad2')          # Your secret API key
+</code></pre>
         </div>
     </li>
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>const client = new sdk.Client();
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client } from "https://deno.land/x/appwrite/mod.ts";
 
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;</code></pre>
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
+</code></pre>
         </div>
     </li>
     <li>
@@ -186,14 +182,11 @@ client
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
-void main() {
-  Client client = Client();
-  client
-      .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-      .setProject('5df5acd0d48c2') // Your project ID
-      .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-  ;
-}</code></pre>
+Client client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
+</code></pre>
         </div>
     </li>
     <li>
@@ -202,10 +195,10 @@ void main() {
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 
 val client = Client()
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key</code></pre>
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setKey("919c2db5d4...a2a3346ad2")          // Your secret API key
+</code></pre>
         </div>
     </li>
     <li>
@@ -214,10 +207,10 @@ client
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-client
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
-    .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key</code></pre>
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setKey("919c2db5d4...a2a3346ad2")          // Your secret API key
+</code></pre>
         </div>
     </li>
 </ul>
@@ -234,19 +227,19 @@ client
 
 <p>Using a JSON Web Token (JWT), you can interact with the Appwrite server API as a specific user. You'll be able to access only the relevant user resources and perform actions on his behalf.</p>
 
-<p>To create a JWT, you need to use the "account->createJWT" method using one of the Appwrite client SDKs. Before creating a token, you need to make sure your user is authenticated using the `createSession` method or log in with an OAuth provider.</p>
+<p>To create a JWT, you need to use the "account->createJWT" method using one of the Appwrite client SDKs. Before creating a token, you need to make sure your user is authenticated using the <span class="tag">createSession</span> method or log in with an OAuth provider.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web SDK</h3>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>appwrite // Get a JWT for authenticated user
-    .account.createJWT()
-            .then(function (response) {
-                console.log(response);
-            }, function (error) {
-                console.log(error);
-            });</code></pre>
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const account = new Account(client);
+account.createJWT()
+    .then(function (response) {
+        console.log(response);
+    }, function (error) {
+        console.log(error);
+    });</code></pre>
         </div>
     </li>
     <li>
@@ -254,8 +247,8 @@ client
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>Account account = Account(client);
 
-Response user = await account
-    .createJWT();</code></pre>
+Response user = await account.createJWT();
+</code></pre>
         </div>
     </li>
     <li>
@@ -263,14 +256,14 @@ Response user = await account
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val account = Account(client)
 
-val response = account
-    .createJWT()</code></pre>
+val response = account.createJWT()
+</code></pre>
         </div>
     </li>
     <li>
         <h3>Apple SDK</h3>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>let account = Account(client: client)
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>let account = Account(client)
 
 let response = try await account.createJWT()</code></pre>
         </div>
@@ -284,28 +277,26 @@ let response = try await account.createJWT()</code></pre>
     <li>
         <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client } = require('node-appwrite');
 
-const client = new sdk.Client();
-
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret JWT
-;</code></pre>
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setJWT('919c2db5d4...a2a3346ad2');         // Your secret JWT
+</code></pre>
         </div>
     </li>
     <li>
         <h3>PHP</h3>
 
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>$client = new Client();
+            <pre class="line-numbers"><code class="prism language-php" data-prism>use Appwrite\Client;
 
-$client
+$client = (new Client())
     ->setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    ->setProject('5df5acd0d48c2') // Your project ID
-    ->setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret JWT
-;</code></pre>
+    ->setProject('5df5acd0d48c2')                // Your project ID
+    ->setJWT('919c2db5d4...a2a3346ad2');         // Your secret JWT
+</code></pre>
         </div>
     </li>
     <li>
@@ -314,12 +305,10 @@ $client
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 
 client = Client()
-
-(client
   .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
-  .set_project('5df5acd0d48c2') # Your project ID
-  .set_jwt('919c2d18fb5d4...a2ae413da83346ad2') # Your secret JWT
-)</code></pre>
+  .set_project('5df5acd0d48c2')                # Your project ID
+  .set_key('919c2db5d4...a2a3346ad2')          # Your secret JWT
+</code></pre>
         </div>
     </li>
     <li>
@@ -327,25 +316,23 @@ client = Client()
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby SDK">
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
 
-client = Appwrite::Client.new()
-
-client
+client = Client.new()
     .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
-    .set_project('5df5acd0d48c2') # Your project ID
-    .set_jwt('919c2d18fb5d4...a2ae413da83346ad2') # Your secret JWT
-;</code></pre>
+    .set_project('5df5acd0d48c2')                # Your project ID
+    .set_key('919c2db5d4...a2a3346ad2')          # Your secret JWT
+</code></pre>
         </div>
     </li>
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>const client = new sdk.Client();
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client } from "https://deno.land/x/appwrite/mod.ts";
 
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret JWT
-;</code></pre>
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setJWT('919c2db5d4...a2a3346ad2');         // Your secret JWT
+</code></pre>
         </div>
     </li>
     <li>
@@ -353,26 +340,23 @@ client
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
-void main() {
-  Client client = Client();
-  client
-      .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-      .setProject('5df5acd0d48c2') // Your project ID
-      .setJWT('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-  ;
-}</code></pre>
+Client client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setJWT('919c2db5d4...a2a3346ad2');         // Your secret JWT
+</code></pre>
         </div>
     </li>
     <li>
         <h3>Kotlin</h3>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
-            <pre class="line-numbers"><code class="prism language-Kotlin" data-prism>import io.appwrite.Client
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 
 val client = Client()
-client
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
-    .setJWT("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key</code></pre>
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setJWT("919c2db5d4...a2a3346ad2")          // Your secret JWT
+</code></pre>
         </div>
     </li>
     <li>
@@ -381,10 +365,10 @@ client
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-client
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
-    .setJWT("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key</code></pre>
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setJWT("919c2db5d4...a2a3346ad2")          // Your secret JWT
+</code></pre>
         </div>
     </li>
 </ul>
@@ -397,9 +381,14 @@ client
     <li>
         <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const users = new sdk.Users(client);
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const users = new Users(client);
 
-let promise = users.create('unique()', 'email@example.com', 'password');
+let promise = users.create(
+    ID.unique(),
+    'email@example.com',
+    null,
+    'password'
+);
 
 promise.then(function (response) {
     console.log(response);
@@ -414,7 +403,13 @@ promise.then(function (response) {
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
             <pre class="line-numbers"><code class="prism language-php" data-prism>$users = new Users($client);
 
-$result = $users->create('email@example.com', 'password');</code></pre>
+$user = $users->create(
+    userId: ID::unique(),
+    email: 'email@example.com',
+    phone: null,
+    password: 'password'
+);
+</code></pre>
         </div>
     </li>
     <li>
@@ -422,25 +417,38 @@ $result = $users->create('email@example.com', 'password');</code></pre>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
             <pre class="line-numbers"><code class="prism language-python" data-prism>users = Users(client)
 
-result = users.create('unique()', 'email@example.com', 'password')</code></pre>
+user = users.create(
+    userId=ID.unique(),
+    email='email@example.com',
+    phone=None,
+    password='password'
+)</code></pre>
         </div>
     </li>
     <li>
         <h3>Ruby</h3>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby SDK">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>users = Appwrite::Users.new(client);
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>users = Appwrite::Users.new(client)
 
-response = users.create(userId: 'unique()', email: 'email@example.com', password: 'password');
-
-puts response</code></pre>
+user = users.create(
+    userId: ID.unique(),
+    email: 'email@example.com',
+    phone: nil,
+    password: 'password'
+)</code></pre>
         </div>
     </li>
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>const users = new sdk.Users(client);
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>const users = new Users(client);
 
-let promise = users.create('unique()', 'email@example.com', 'password');
+let promise = users.create(
+    ID.unique(),
+    'email@example.com',
+    null,
+    'password'
+);
 
 promise.then(function (response) {
     console.log(response);
@@ -454,36 +462,38 @@ promise.then(function (response) {
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>final users = Users(client);
 
-final res = users.create(userId: 'unique()', 'email@example.com', 'password');
-
-res.then((response) {
-    print(response);
-}).catchError((error) {
-    print(error);
-});</code></pre>
+final user = await users.create(
+    userId: ID.unique(),
+    email: 'email@example.com',
+    phone: null,
+    password: 'password'
+);</code></pre>
         </div>
     </li>
     <li>
         <h3>Kotlin</h3>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.services.Users
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val users = Users(client)
 
-val users = Users(client);
-
-val res = users.create(userId = 'unique()', email = 'email@example.com', password = 'password');
-println(res.body?.string())</code></pre>
+val user = users.create(
+    userId = ID.unique(),
+    email = 'email@example.com',
+    phone = null,
+    password = 'password'
+)</code></pre>
         </div>
     </li>
     <li>
         <h3>Swift</h3>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>let users = Users(client)
 
-let users = Users(client: client)
-
-val user = try await users.create(userId: "unique()", email: "email@example.com", password: "password")
-print(user.toMap())
-</code></pre>
+let user = try await users.create(
+    userId: ID.unique(),
+    email: "email@example.com",
+    phone: nil,
+    password: "password"
+)</code></pre>
         </div>
     </li>
 </ul>
@@ -494,18 +504,21 @@ print(user.toMap())
     <li>
         <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, ID, Users } = require('node-appwrite');
 
-const client = new sdk.Client();
-
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
 
-const users = new sdk.Users(client);
-let promise = users.create('unique()', 'email@example.com', 'password');
+const users = new Users(client);
+
+let promise = users.create(
+    ID.unique(),
+    'email@example.com',
+    null,
+    'password'
+);
 
 promise.then(function (response) {
     console.log(response);
@@ -519,38 +532,44 @@ promise.then(function (response) {
 
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
             <pre class="line-numbers"><code class="prism language-php" data-prism>use Appwrite\Client;
+use Appwrite\ID;
 use Appwrite\Services\Users;
 
-$client = new Client();
-
-$client
+$client = (new Client())
     ->setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    ->setProject('5df5acd0d48c2') // Your project ID
-    ->setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;
+    ->setProject('5df5acd0d48c2')                // Your project ID
+    ->setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
 
 $users = new Users($client);
 
-$result = $users->create('unique()', 'email@example.com', 'password');</code></pre>
+$user = $users->create(
+    userId: ID::unique(),
+    email: 'email@example.com',
+    phone: null,
+    password: 'password'
+);</code></pre>
         </div>
     </li>
     <li>
         <h3>Python</h3>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+from appwrite.id import ID
 from appwrite.services.users import Users
 
 client = Client()
-
-(client
   .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
-  .set_project('5df5acd0d48c2') # Your project ID
-  .set_key('919c2d18fb5d4...a2ae413da83346ad2') # Your secret API key
-)
+  .set_project('5df5acd0d48c2')                # Your project ID
+  .set_key('919c2db5d4...a2a3346ad2')          # Your secret API key
 
 users = Users(client)
 
-result = users.create('unique()', 'email@example.com', 'password')</code></pre>
+user = users.create(
+    userId=ID.unique(),
+    email='email@example.com',
+    phone=None,
+    password='password'
+)</code></pre>
         </div>
     </li>
     <li>
@@ -558,36 +577,41 @@ result = users.create('unique()', 'email@example.com', 'password')</code></pre>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby SDK">
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
 
-client = Appwrite::Client.new()
+include Appwrite
 
-client
+client = Client.new()
     .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
-    .set_project('5df5acd0d48c2') # Your project ID
-    .set_key('919c2d18fb5d4...a2ae413da83346ad2') # Your secret API key
-;
+    .set_project('5df5acd0d48c2')                # Your project ID
+    .set_key('919c2db5d4...a2a3346ad2')          # Your secret API key
 
-users = Appwrite::Users.new(client);
+users = Users.new(client)
 
-response = users.create(userId: 'unique()', email: 'email@example.com', password: 'password');
-
-puts response</code></pre>
+user = users.create(
+    userId: ID.unique(),
+    email: 'email@example.com',
+    phone: nil,
+    password: 'password'
+)</code></pre>
         </div>
     </li>
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import * as sdk from "https://deno.land/x/appwrite/mod.ts";
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, ID, Users } from "https://deno.land/x/appwrite/mod.ts";
 
-const client = new sdk.Client();
-const users = new sdk.Users(client);
-
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setKey('919c2db5d4...a2a3346ad2')          // Your secret API key
 
-let promise = users.create('unique()', 'email@example.com', 'password');
+const users = new Users(client);
+
+let promise = users.create(
+    ID.unique(),
+    'email@example.com',
+    null,
+    'password'
+);
 
 promise.then(function (response) {
     console.log(response);
@@ -601,63 +625,62 @@ promise.then(function (response) {
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
-void main() {
-  final client = Client();
-  final users = Users(client);
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
 
-  client
-      .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-      .setProject('5df5acd0d48c2') // Your project ID
-      .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-  ;
+final users = Users(client);
 
-  final res = users.create('unique()', 'email@example.com', 'password');
-
-  res.then((response) {
-      print(response);
-  }).catchError((error) {
-      print(error);
-  });
-}</code></pre>
+final user = await users.create(
+    userId: ID.unique(),
+    email: 'email@example.com',
+    phone: null,
+    password: 'password'
+);</code></pre>
         </div>
     </li>
     <li>
         <h3>Kotlin</h3>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.ID
 import io.appwrite.services.Users
 
-val client = Client();
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setKey("919c2db5d4...a2a3346ad2")          // Your secret API key
 
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+val users = Users(client)
 
-val users = Users(client);
-
-val res = users.create('unique()', 'email@example.com', 'password');
-
-println(res.body?.string())</code></pre>
+val user = users.create(
+    userId = ID.unique(),
+    email = 'email@example.com',
+    phone = null,
+    password = 'password'
+)</code></pre>
         </div>
     </li>
     <li>
         <h3>Swift</h3>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import AppwriteModels
 
-let client = Client();
-
-client
+let client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
-    .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setKey("919c2db5d4...a2a3346ad2")          // Your secret API key
 
-let users = Users(client: client)
+let users = Users(client)
 
-let user = try await users.create(userId: "unique()", email: "email@example.com", password: "password")
-print(user.toMap())
-}</code></pre>
+let user = try await users.create(
+    userId: ID.unique(),
+    email: "email@example.com",
+    phone: nil,
+    password: "password"
+)</code></pre>
         </div>
     </li>
 </ul>
