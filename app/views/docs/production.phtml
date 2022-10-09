@@ -8,7 +8,7 @@
 
 <div class="notice">
   <h2>Best Practice</h2>
-  <p>You should always prefer <b>https</b> over http in production environments. This keeps your APIs secure and prevents any redirects from interfering with your requests.</p>
+  <p>You should always prefer <b>HTTPS</b> over HTTP in production environments. This keeps your APIs secure and prevents any redirects from interfering with your requests.</p>
 </div>
 
 <h2><a href="/docs/production#limitConsoleAccess" id="limitConsoleAccess">Limit Console Access</a></h2>
@@ -31,16 +31,16 @@
 
 <p>Sending emails is hard. There are a lot of SPAM rules and configurations to master in order to set a functional SMTP server. The SMTP server that comes packaged with Appwrite is great for development but needs some work done to function well against SPAM filters.</p>
 
-<p>Another easier option is to use an ‘SMTP as a service’ product like Sendgrid or Mailgun. You can <a href="/docs/email-delivery">change Appwrite SMTP settings</a> and credentials to any 3rd party provider you like who support SMTP integration using our Docker environment variables. Most SMTP providers offer a decent free tier to get started with.</p>
+<p>Another easier option is to use an ‘SMTP as a service’ product like Sendgrid or Mailgun. You can <a href="/docs/email-delivery">change Appwrite SMTP settings</a> and credentials to any 3rd party provider you like who supports SMTP integration using our Docker environment variables. Most SMTP providers offer a decent free tier to get started with.</p>
 
 <h2><a href="/docs/production#backups" id="backups">Backups</a></h2>
 
 <p>Backups are highly recommended for any production environment. Currently, there is no built-in script we provide to do this automatically. To be able to backup your Appwrite server data, stats, and files, you will need to do the following.</p>
 
 <ol>
-    <li>Create a script to backups and restore your MariaDB Appwrite schema. Note that trying to backup MariaDB using a docker volume backup can result in a corrupted copy of your data. It is recommended to use MariaDB or MySQL built-in tools for this.</li>
-    <li>Create a script to backups and restore your InfluxDB stats. If you don’t care much about your server stats, you can skip this.</li>
-    <li>Create a script to backup Appwrite storage volume. There are many online resources explaining different ways to backup a docker volume. When running on multiple servers, it is very recommended to use an attachable storage point. Some cloud providers offer integrated backups to such attachable mount like GCP, AWS, DigitalOcean, and the list continues.</li>
+  <li>Create a script to backups and restore your MariaDB Appwrite schema. Note that trying to backup MariaDB using a docker volume backup can result in a corrupted copy of your data. It is recommended to use MariaDB or MySQL built-in tools for this.</li>
+  <li>Create a script to backups and restore your InfluxDB stats. If you don’t care much about your server stats, you can skip this.</li>
+  <li>Create a script to backup Appwrite storage volume. There are many online resources explaining different ways to backup a docker volume. When running on multiple servers, it is very recommended to use an attachable storage point. Some cloud providers offer integrated backups to such attachable mount like GCP, AWS, DigitalOcean, and the list continues.</li>
 </ol>
 
 <h2><a href="/docs/production#errorReporting" id="errorReporting">Error Reporting</a></h2>
