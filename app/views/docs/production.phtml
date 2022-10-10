@@ -27,6 +27,30 @@
 
 <p>There are three Appwrite containers that do keep their state. MariaDB, Redis, and InfluxDB containers are used for storing data, cache and pub/sub messaging, and usage stats (in this order). To scale them out, all you need to do is set up a standard cluster (same as you would with any other app using these technologies) according to your needs and performance.</p>
 
+<h2>[ Optional ] Enable ClamAV</h2>
+
+<h3>Enable ClamAV Service on Docker Compose</h3>
+<p>Once you install Appwrite, in the `docker-compose.yml` file, the ClamAV service is disabled, you can simply enable the service by uncommenting the following lines in the `docker-compose.yml` file by removing preceeding `#` in each line.</p>
+<div class="ide margin-bottom" data-lang="yaml" data-lang-label="Yaml">
+    <pre class="line-numbers"><code class="prism language-yaml" data-prism>  clamav:
+    image: appwrite/clamav:1.2.0
+    container_name: appwrite-clamav
+    networks:
+      - appwrite
+    volumes:
+      - appwrite-uploads:/storage/uploads
+</code></pre>
+</div>
+
+<h3>Enable ClamAV in Appwrite container</h3>
+<p>
+    In order to enable ClamAV service to scan the storage, in `appwrite` service, in <b>docker-compose.yml</b> under <b>depends_on</b> uncomment the line containing <b>clamav</b>. After that update the environment variables.
+    Using the environment variable <b>_APP_STORAGE_ANTIVIRUS</b>, you can either disable or enable the antivirus. To enable it, in the environment section, find <b>_APP_STORAGE_ANTIVIRUS</b> and set its value to <b>enabled</b>. The host and port are already setup if you are using the default values in the <b>docker-compose.yml</b> This will enable the antivirus checking during new file uploads.
+</p>
+
+<p>Finally, you can now restart the <b>appwrite</b> service and start the <b>clamav</b> service. You can do that simply by using <b>docker-compose up -d</b> command. This should start the <b>clamav</b> service as well as recreate the <b>appwrite</b> service.</p>
+
+<h2>Emails</h2>
 <h2><a href="/docs/production#emails" id="emails">Emails</a></h2>
 
 <p>Sending emails is hard. There are a lot of SPAM rules and configurations to master in order to set a functional SMTP server. The SMTP server that comes packaged with Appwrite is great for development but needs some work done to function well against SPAM filters.</p>
