@@ -38,7 +38,7 @@
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
 const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
@@ -47,7 +47,7 @@ const client = new Client()
 const account = new Account(client);
 
 const promise = account.create(
-    '[USER_ID]',
+    ID.unique(),
     'team@appwrite.io',
     'password'
 );
@@ -71,7 +71,7 @@ final client = Client()
 final account = Account(client);
 
 final user = await account.create(
-    userId: '[USER_ID]',
+    userId: ID.unique(),
     email: 'team@appwrite.io',
     password: 'password',
 );</code></pre>
@@ -88,7 +88,7 @@ let client = Client()
 let account = Account(client)
 
 let user = try await account.create(
-    userId: "[USER_ID]",
+    userId: ID.unique(),
     email: "team@appwrite.io",
     password: "password"
 )</code></pre>
@@ -99,6 +99,7 @@ let user = try await account.create(
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
+import io.appwrite.ID
 
 val client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
@@ -107,7 +108,7 @@ val client = Client()
 val account = Account(client)
 
 val user = account.create(
-    userId = "[USER_ID]",
+    userId = ID.unique(),
     email = "team@appwrite.io",
     password = "password"
 )</code></pre>
@@ -233,7 +234,7 @@ final client = Client()
 final account = Account(client);
 
 // Go to OAuth provider login page
-await account.createOAuth2Session('amazon');</code></pre>
+await account.createOAuth2Session(provider: 'amazon');</code></pre>
         </div>
     </li>
     <li>
@@ -248,7 +249,7 @@ let client = Client()
 let account = Account(client)
 
 // Go to OAuth provider login page
-try await account.createOAuth2Session("amazon")</code></pre>
+try await account.createOAuth2Session(provider: "amazon")</code></pre>
         </div>
     </li>
     <li>
@@ -264,7 +265,7 @@ val client = Client()
 val account = Account(client)
 
 // Go to OAuth provider login page
-account.createOAuth2Session("amazon")</code></pre>
+account.createOAuth2Session(provider = "amazon")</code></pre>
         </div>
     </li>
 </ul>
@@ -291,7 +292,7 @@ account.createOAuth2Session("amazon")</code></pre>
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-        <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+        <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
 const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
@@ -300,7 +301,7 @@ const client = new Client()
 const account = new Account(client);
 
 const promise = account.createPhoneSession(
-    '[USER_ID]',
+    ID.unique(),
     '+16171234567'
 );
 
@@ -325,7 +326,7 @@ final client = Client()
 final account = Account(client);
 
 final session = await account.createPhoneSession(
-    userId: '[USER_ID]',
+    userId: ID.unique(),
     phone: '+16171234567'
 );</code></pre>
     </li>
@@ -341,7 +342,7 @@ let client = Client()
 let account = Account(client)
 
 let session = try await account.createPhoneSession(
-    userId: "[USER_ID]",
+    userId: ID.unique(),
     phone: "+16171234567"
 )</code></pre>
     </li>
@@ -350,6 +351,7 @@ let session = try await account.createPhoneSession(
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
+import io.appwrite.ID
 
 val client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
@@ -358,7 +360,7 @@ val client = Client()
 val account = Account(client)
 
 val session = account.createPhoneSession(
-    userId = "[USER_ID]",
+    userId = ID.unique(),
     phone = "+16171234567"
 )</code></pre>
     </li>
@@ -372,7 +374,7 @@ val session = account.createPhoneSession(
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-        <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+        <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
 const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
@@ -381,7 +383,7 @@ const client = new Client()
 const account = new Account(client);
 
 const promise = account.updatePhoneSession(
-    '[USER_ID]',
+    ID.unique(),
     '[SECRET]'
 );
 
@@ -404,7 +406,7 @@ final client = Client()
 final account = Account(client);
 
 final session = await account.updatePhoneSession(
-    userId: '[USER_ID]',
+    userId: ID.unique(),
     secret: '[SECRET]'
 );</code></pre>
     </li>
@@ -420,7 +422,7 @@ let client = Client()
 let account = Account(client)
 
 let session = try await account.updatePhoneSession(
-    userId: "[USER_ID]",
+    userId: ID.unique(),
     secret: "[SECRET]"
 )</code></pre>
     </li>
@@ -429,6 +431,7 @@ let session = try await account.updatePhoneSession(
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
+import io.appwrite.ID
 
 val client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
@@ -437,7 +440,7 @@ val client = Client()
 val account = Account(client)
 
 val session = account.updatePhoneSession(
-    userId = "[USER_ID]",
+    userId = ID.unique(),
     secret = "[SECRET]"
 )</code></pre>
     </li>
