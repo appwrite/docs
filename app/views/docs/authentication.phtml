@@ -31,29 +31,90 @@
 </p>
 
 <p>
-    The example below shows you how to create an account using the Web SDK:
+    The example below shows you how to create an account:
 </p>
 
-<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
-const client = new Client();
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
 
 const account = new Account(client);
 
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-;
-
-const promise = account.create('[USER_ID]', 'email@example.com', 'password');
+const promise = account.create(
+    ID.unique(),
+    'team@appwrite.io',
+    'password'
+);
 
 promise.then(function (response) {
-    console.log(response); // Success
+    console.log(response);
 }, function (error) {
-    console.log(error); // Failure
+    console.log(error);
 });</code></pre>
-</div>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final user = await account.create(
+    userId: ID.unique(),
+    email: 'team@appwrite.io',
+    password: 'password',
+);</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let user = try await account.create(
+    userId: ID.unique(),
+    email: "team@appwrite.io",
+    password: "password"
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+import io.appwrite.ID
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val user = account.create(
+    userId = ID.unique(),
+    email = "team@appwrite.io",
+    password = "password"
+)</code></pre>
+        </div>
+    </li>
+</ul>
 
 <p>
     After an account is created, it can be verified through the <a href="/docs/account#accountCreateVerification">account verification route</a> provided by the Appwrite Accounts API. The user doesn't need to be verified to log in, but you can restrict resource access to verified users only using permissions.
@@ -65,31 +126,76 @@ promise.then(function (response) {
 Anonymous authentication allows users of your application to create a temporary valid session without creating an account. The session has an expiration time of one year. If an account is created while an anonymous session is active, it will be attached to the existing anonymous session.
 </p>
 
-<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
-const client = new Client();
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
 
 const account = new Account(client);
-
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-;
 
 const promise = account.createAnonymousSession();
 
 promise.then(function (response) {
-    console.log(response); // Success
+    console.log(response);
 }, function (error) {
-    console.log(error); // Failure
+    console.log(error);
 });</code></pre>
-</div>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final user = await account.createAnonymousSession();</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let user = try await account.createAnonymousSession()</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val user = account.createAnonymousSession()</code></pre>
+        </div>
+    </li>
+</ul>
 
 <h3><a href="/docs/authentication#oauth" id="oauth">OAuth</a></h3>
 
 <p>
-    OAuth is another way to authenticate a user using a multi-step process. When using OAuth to authenticate, the authentication request is initiated from the client application. The user is then redirected to an OAuth2 provider to complete the authentication step, and finally, the user is redirected back to the client application. This provides integration with many third-party services that provide their own OAuth integration as a more secure approach than providing a username/password directly.
+    OAuth is another way to authenticate a user using a multistep process. When using OAuth to authenticate, the authentication request is initiated from the client application. The user is then redirected to an OAuth2 provider to complete the authentication step, and finally, the user is redirected back to the client application. This provides integration with many third-party services that provide their own OAuth integration as a more secure approach than providing a username/password directly.
 </p>
 
 <p>
@@ -97,28 +203,72 @@ promise.then(function (response) {
 </p>
 
 <p>
-    The example below shows you how to authenticate with OAuth2 using the Web SDK and Amazon's OAuth system.
+    The example below shows you how to authenticate with OAuth2 using Amazon's OAuth system.
 </p>
 
-<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+        <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client();
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
 
 const account = new Account(client);
 
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-;
-
 // Go to OAuth provider login page
 account.createOAuth2Session('amazon');</code></pre>
-</div>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-<p>
-    Notice, the function call for <b>createOAuth2Session</b> is synchronous and hence, there is no need to use <b>await</b>.
-</p>
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+// Go to OAuth provider login page
+await account.createOAuth2Session(provider: 'amazon');</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+// Go to OAuth provider login page
+try await account.createOAuth2Session(provider: "amazon")</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+// Go to OAuth provider login page
+account.createOAuth2Session(provider = "amazon")</code></pre>
+        </div>
+    </li>
+</ul>
 
 <p>  
     If there is already an active anonymous session, the new session will be attached to it. If there are no active sessions, the server will attempt to look for an account with the same email address as the email received from the OAuth2 provider and attach the new session to the existing account. If no matching account is found - the server will create a new account.
@@ -135,47 +285,166 @@ account.createOAuth2Session('amazon');</code></pre>
 </p>
 
 <p>
-    The example below shows you how to initiate a phone authentication request using the Web SDK.
+    The example below shows you how to initiate a phone authentication request.
 </p>
 
-<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+        <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
-const client = new Client();
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
 
 const account = new Account(client);
 
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-;
-
-const promise = account.createPhoneSession('[USER_ID]', '+16171234567');
+const promise = account.createPhoneSession(
+    ID.unique(),
+    '+16171234567'
+);
 
 promise.then(function (response) {
-    console.log(response); // Success
+    console.log(response);
 }, function (error) {
-    console.log(error); // Failure
+    console.log(error);
 });
 
 </code></pre>
-</div>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final session = await account.createPhoneSession(
+    userId: ID.unique(),
+    phone: '+16171234567'
+);</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.createPhoneSession(
+    userId: ID.unique(),
+    phone: "+16171234567"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+import io.appwrite.ID
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val session = account.createPhoneSession(
+    userId = ID.unique(),
+    phone = "+16171234567"
+)</code></pre>
+    </li>
+</ul>
 
 <p>
-    After initiation, the returned user ID and secret are used to confirm the user. The secret will be a 6 digit number in the SMS message sent to the user.
+    After initiation, the returned user ID and secret are used to confirm the user. The secret will be a 6-digit number in the SMS message sent to the user.
 </p>
 
-<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>const promise = account.updatePhoneSession('[USER_ID]', '[SECRET]');
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+        <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.updatePhoneSession(
+    ID.unique(),
+    '[SECRET]'
+);
 
 promise.then(function (response) {
-    console.log(response); // Success
+    console.log(response);
 }, function (error) {
-    console.log(error); // Failure
-});
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-</code></pre>
-</div>
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final session = await account.updatePhoneSession(
+    userId: ID.unique(),
+    secret: '[SECRET]'
+);</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.updatePhoneSession(
+    userId: ID.unique(),
+    secret: "[SECRET]"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+import io.appwrite.ID
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val session = account.updatePhoneSession(
+    userId = ID.unique(),
+    secret = "[SECRET]"
+)</code></pre>
+    </li>
+</ul>
 
 <p>
     After the secret is verified, a session will be created.
@@ -188,62 +457,154 @@ promise.then(function (response) {
 </p>
 
 <p>
-    The example below shows you how to create a session using the Web SDK:
+    The example below shows you how to create a session:
 </p>
 
-<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
-const client = new Client();
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
 
 const account = new Account(client);
 
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-;
-
-const promise = account.createEmailSession('email@example.com', 'password');
+const promise = account.createEmailSession(
+    'team@appwrite.io',
+    'password'
+);
 
 promise.then(function (response) {
-    console.log(response); // Success
+    console.log(response);
 }, function (error) {
-    console.log(error); // Failure
-});
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-</code></pre>
-</div>
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final session = await account.createEmailSession(
+    email: 'team@appwrite.io',
+    password: 'password'
+);</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.createEmailSession(
+    email: "team@appwrite.io",
+    password: "password"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val session = account.createEmailSession(
+    email = "team@appwrite.io",
+    password = "password"
+)</code></pre>
+    </li>
+</ul>
 
 <p>
     When a user tries to access restricted resources, you can check if they have a valid, active session. The Account Service provides a <a href="/docs/account#accountGet">get()</a> method that checks whether the current user session is active and returns the account information if successful.
 </p>
 
 <p>
-    The example below shows you how to check whether there is an active session using the Web SDK:
+    The example below shows you how to check whether there is an active session:
 </p>
 
-<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
-const client = new Client();
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
 
 const account = new Account(client);
-
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-;
 
 const promise = account.get();
 
 promise.then(function (response) {
-    console.log(response); // Success
+    console.log(response);
 }, function (error) {
-    console.log(error); // Failure
-});
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-</code></pre>
-</div>
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final session = await account.get();</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.get()</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val session = account.get()</code></pre>
+    </li>
+</ul>
 
 <p>
     An authenticated session in Appwrite lasts for 1 year and is then automatically expired.
