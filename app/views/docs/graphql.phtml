@@ -403,8 +403,8 @@ final client = Client()
 final graphql = Graphql(client);
 
 Future mutation = graphql.mutate({
-    'query': '''mutation CreateAccount($email: String!, $password: String!, $name: String) {
-        accountCreate(email: $email, password: $password, name: $name) {
+    'query': '''mutation CreateAccount(\$email: String!, \$password: String!, \$name: String) {
+        accountCreate(email: \$email, password: \$password, name: \$name) {
             _id
         }
     }''',
@@ -436,8 +436,8 @@ val graphql = Graphql(client)
 
 try {
     val response = graphql.mutation(mapOf(
-        "query" to """mutation CreateAccount($email: String!, $password: String!, $name: String) {
-            accountCreate(email: $email, password: $password, name: $name) {
+        "query" to """mutation CreateAccount(${'$'}email: String!, ${'$'}password: String!, ${'$'}name: String) {
+            accountCreate(email: ${'$'}email, password: ${'$'}password, name: ${'$'}name) {
                 _id
             }
         }""",
@@ -467,11 +467,13 @@ let graphql = Graphql(client)
 
 do {
     let response = try await graphql.mutation([
-        "query": """mutation CreateAccount($email: String!, $password: String!, $name: String) {
-            accountCreate(email: $email, password: $password, name: $name) {
-                _id
+        "query": """
+            mutation CreateAccount($email: String!, $password: String!, $name: String) {
+                accountCreate(email: $email, password: $password, name: $name) {
+                    _id
+                }
             }
-        }""",
+        """,
         "variables": [
             "email": "...",
             "password": "...",
