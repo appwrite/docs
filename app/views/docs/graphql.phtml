@@ -1,8 +1,4 @@
-<?php
-
-?>
-
-<p>The GraphQL API allows you to query and mutate any resource type on your Appwrite server through a single endpoint. Every endpoint available via REST is available via a corresponding GraphQL field. Additionally, GraphQL provides direct integration with your database's collections.</p>
+<p>The GraphQL API allows you to query and mutate any resource type on your Appwrite server through a single endpoint. Every endpoint available via REST is available via a corresponding GraphQL field.</p>
 
 <h2><a href="/docs/graphql#requests" id="requests">Requests</a></h2>
 
@@ -65,15 +61,15 @@
 
 <h3><a href="/docs/graphql#get-requests" id="get-requests">GET Requests</a></h3>
 
-<p>You can execute a GraphQL query via a GET request, passing a query and optionally an operationName and variables as query parameters.</p>
+<p>You can execute a GraphQL query via a GET request, passing a <b>query</b> and optionally an <b>operationName</b> and <b>variables</b> as query parameters.</p>
 
 <h3><a href="/docs/graphql#post-requests" id="post-requests">POST Requests</a></h3>
 
-<p>The multiple ways to make a POST request first break down by content type.</p>
+<p>The multiple ways to make a GraphQL POST request first break down by content type.</p>
 
 <h4>JSON</h4>
 
-<p>There are two ways to make requests with the <b>application/json</b> content type. You can send a JSON object containing a query and optionally an operationName and variables, or an array of objects of the same shape.</p>
+<p>There are two ways to make requests with the <b>application/json</b> content type. You can send a JSON object containing a query and optionally an operationName and variables, or an array of objects with the same structure.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -150,7 +146,7 @@
             string
         </td>
         <td data-title="Description: ">
-            JSON encoded map of form-data filenames to the operations dot-path to inject the file to. E.g. "variables.file"
+            JSON encoded map of form-data filenames to the operations dot-path to inject the file to, e.g. "variables.file"
         </td>
     </tr>
     </tbody>
@@ -206,7 +202,7 @@
 
 <p>Selection sets can be used to tell a GraphQL API exactly which fields of a particular resource you would like to receive in the response. The server will respond with only those fields, nothing more, nothing less. This gives you full control over what data comes into your application.</p>
 
-<p>For example, to retrieve only the email of a currently authenticated user, you could query the <b>accountGet</b> field, passing only email as the <b>child field selection set</b>.</p>
+<p>For example, to retrieve only the email of a currently authenticated user, you could query the <b>accountGet</b> field, passing only email as the <b>field selection set</b>.</p>
 
 <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
     <pre class="line-numbers"><code class="prism language-graphql" data-prism>query GetAccount {
@@ -226,7 +222,7 @@
     }
 }</code></pre></div>
 
-<p>This can be an extremely useful feature for performance and app responsiveness. As the processing happens on the server, the bandwidth consumed for the request can be dramatically reduced.</p>
+<p>This can be an extremely useful feature for performance, network efficiency, and app responsiveness. As the processing happens on the server, the bandwidth consumed for the request can be dramatically reduced.</p>
 
 <h3><a href="/docs/graphql#query-batching" id="query-batching">Query Batching</a></h3>
 
@@ -242,7 +238,7 @@
     }
 }</code></pre></div>
 
-<p>If both field executions succeed, the response will contain a data key for each field, containing the values of the selected child fields.</p>
+<p>If both field executions succeed, the response will contain a data key for each field, containing the values of the selected fields.</p>
 
 <div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
     <pre class="line-numbers"><code class="prism language-json" data-prism>{
@@ -275,11 +271,11 @@
     ]
 }</code></pre></div>
 
-<p>Batching with a single query or mutation has some caveats. You can not mix and match queries and mutations within the same object, unless you provide an operationName. In which case you can only execute one query per request.</p>
+<p>Batching with a single query or mutation has some down-sides. You can not mix and match queries and mutations within the same request unless you provide an operationName, in which case you can only execute one query per request.</p>
 
 <p>Additionally, all <b>variables</b> must be passed in the same object, which can be cumbersome and hard to maintain.</p>
 
-<p>The second way is to pass an array of queries or mutations in the request. In this way, you can execute queries <b>and</b> mutations and keep variables separated for each.</p>
+<p>The second way to batch is to pass an array of queries or mutations in the request. In this way, you can execute queries <b>and</b> mutations and keep variables separated for each.</p>
 
 <div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
     <pre class="line-numbers"><code class="prism language-json" data-prism>[
@@ -306,70 +302,70 @@
 
 <p>This can be extremely powerful as it allows you to execute complex actions in a single network request.</p>
 
-<h3><a href="/docs/graphql#databases-integration" id="query-batching">Databases Integration</a></h3>
-
-<p>The Appwrite GraphQL API integrates directly into your project's database's collections, providing a more convenient way to manipulate your collections.</p>
-
-<p>For example, given a project with a collection with ID <b>movies</b>, with attributes <b>name</b> and <b>length</b>, of types <b>string</b> and <b>integer</b> respectively; the following queries could be executed:</p>
-
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Create</h3>
-        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation CreateMovie($name: String!, $length: Int!) {
-    moviesCreate(name: $name, length: $length) {
-        _id
-        name
-        length
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>List</h3>
-        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query ListMovies($limit: Int, $offset: Int, cursor: String, cursorDirection: String, orderAttributes: [String!], orderTypes: [String!]) {
-    moviesList(limit: $limit, offset: $offset, cursor: $cursor, cursorDirection: $cursorDirection, orderAttributes: $orderAttributes, orderTypes: $orderType) {
-        _id
-        name
-        length
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Get</h3>
-        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query GetMovie($id: String!) {
-    moviesGet(id: $id) {
-        _id
-        name
-        length
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Update</h3>
-        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation UpdateMovie {
-    moviesUpdate(name: $name, length: $length) {
-        _id
-        name
-        length
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Delete</h3>
-        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation DeleteMovie($id: String!) {
-    moviesDelete(id: $id)
-}</code></pre>
-        </div>
-    </li>
-</ul>
+<!--<h3><a href="/docs/graphql#databases-integration" id="query-batching">Databases Integration</a></h3>-->
+<!---->
+<!--<p>The Appwrite GraphQL API integrates directly into your project's database's collections, providing a more convenient way to manipulate your collections.</p>-->
+<!---->
+<!--<p>For example, given a project with a collection with ID <b>movies</b>, with attributes <b>name</b> and <b>length</b>, of types <b>string</b> and <b>integer</b> respectively; the following queries could be executed:</p>-->
+<!---->
+<!--<ul class="phases clear" data-ui-phases>-->
+<!--    <li>-->
+<!--        <h3>Create</h3>-->
+<!--        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">-->
+<!--            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation CreateMovie($name: String!, $length: Int!) {-->
+<!--    moviesCreate(name: $name, length: $length) {-->
+<!--        _id-->
+<!--        name-->
+<!--        length-->
+<!--    }-->
+<!--}</code></pre>-->
+<!--        </div>-->
+<!--    </li>-->
+<!--    <li>-->
+<!--        <h3>List</h3>-->
+<!--        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">-->
+<!--            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query ListMovies($limit: Int, $offset: Int, cursor: String, cursorDirection: String, orderAttributes: [String!], orderTypes: [String!]) {-->
+<!--    moviesList(limit: $limit, offset: $offset, cursor: $cursor, cursorDirection: $cursorDirection, orderAttributes: $orderAttributes, orderTypes: $orderType) {-->
+<!--        _id-->
+<!--        name-->
+<!--        length-->
+<!--    }-->
+<!--}</code></pre>-->
+<!--        </div>-->
+<!--    </li>-->
+<!--    <li>-->
+<!--        <h3>Get</h3>-->
+<!--        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">-->
+<!--            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query GetMovie($id: String!) {-->
+<!--    moviesGet(id: $id) {-->
+<!--        _id-->
+<!--        name-->
+<!--        length-->
+<!--    }-->
+<!--}</code></pre>-->
+<!--        </div>-->
+<!--    </li>-->
+<!--    <li>-->
+<!--        <h3>Update</h3>-->
+<!--        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">-->
+<!--            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation UpdateMovie {-->
+<!--    moviesUpdate(name: $name, length: $length) {-->
+<!--        _id-->
+<!--        name-->
+<!--        length-->
+<!--    }-->
+<!--}</code></pre>-->
+<!--        </div>-->
+<!--    </li>-->
+<!--    <li>-->
+<!--        <h3>Delete</h3>-->
+<!--        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">-->
+<!--            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation DeleteMovie($id: String!) {-->
+<!--    moviesDelete(id: $id)-->
+<!--}</code></pre>-->
+<!--        </div>-->
+<!--    </li>-->
+<!--</ul>-->
 
 <h3><a href="/docs/graphql#sdk-usage" id="sdk-usage">SDK Usage</a></h3>
 
