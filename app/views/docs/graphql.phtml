@@ -280,23 +280,10 @@
 <div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
     <pre class="line-numbers"><code class="prism language-json" data-prism>[
     {
-        "query": "mutation CreateAccount($email: String!, $password: String!, $name: String) {
-            accountCreate(email: $email, password: $password, name: $name) {
-                email
-            }
-        }",
-        "variables": {
-            "email": "",
-            "password": "",
-            "name": ""
-        }
+        "query": "query GetAccount { accountGet{ email } }",
     },
     {
-        "query": "query GetAccount {
-            accountGet {
-                _id
-            }
-        }"
+        "query": "query GetLocale { localeGet { ip } }"
     }
 ]</code></pre></div>
 
