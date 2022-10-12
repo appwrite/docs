@@ -362,25 +362,13 @@
     <li>
         <h3>Web</h3>
         <div class="ide margin-bottom" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Graphql } from "appwrite";
 
-const client = new Client();
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your Appwrite Endpoint
+    .setProject('[PROJECT_ID]');                // Your project ID
 
 const graphql = new Graphql(client);
-
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
-    .setProject('[PROJECT_ID]');
-
-const query = graphql.query({
-    query: `query GetAccount {
-        accountGet {
-            _id
-            email
-            name
-        }
-    }`
-});
 
 const mutation = graphql.mutate({
     query: `mutation CreateAccount($email: String!, $password: String!, $name: String) {
@@ -389,65 +377,30 @@ const mutation = graphql.mutate({
         }
     }`,
     variables: {
-        email: '',
-        password: '',
-        name: ''
+        email: '...',
+        password: '...',
+        name: '...'
     }
 });
 
-const batch = graphql.mutate([
-    {
-        query: `query GetAccount {
-            accountGet {
-                _id
-            }
-        }`
-    },
-    {
-        query: `mutation CreateAccount($email: String!, $password: String!, $name: String) {
-            accountCreate(email: $email, password: $password, name: $name) {
-                _id
-            }
-        }`,
-        variables: {
-            email: '',
-            password: '',
-            name: ''
-        }
-    }
-]);
-
-Promise.all([query, mutation, batch])
-    .then(responses => {
-        console.log(responses);
-    })
-    .catch(error => {
-        console.log(error);
-    });</code></pre>
+mutation.then(response => {
+    console.log(response);
+}).catch(error => {
+    console.log(error);
+});</code></pre>
         </div>
     </li>
     <li>
         <h3>Flutter</h3>
 
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-client
+final client = Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your Appwrite Endpoint
-    .setProject('5e8cf4f46b5e8') // Your project ID
-;
+    .setProject('5e8cf4f46b5e8');               // Your project ID
 
 final graphql = Graphql(client);
-
-Future query = graphql.query({
-    'query': '''query GetAccount {
-        accountGet {
-            _id
-            email
-            name
-        }
-    }'''
-});
 
 Future mutation = graphql.mutate({
     'query': '''mutation CreateAccount($email: String!, $password: String!, $name: String) {
@@ -456,172 +409,78 @@ Future mutation = graphql.mutate({
         }
     }''',
     'variables': {
-        'email': '',
-        'password': '',
-        'name': ''
+        'email': '...',
+        'password': '...',
+        'name': '...'
     }
 });
 
-Future batch = graphql.mutate([
-    {
-        'query': '''query GetAccount {
-            accountGet {
-                _id
-            }
-        }'''
-    },
-    {
-        'query': '''mutation CreateAccount($email: String!, $password: String!, $name: String) {
-            accountCreate(email: $email, password: $password, name: $name) {
-                _id
-            }
-        }''',
-        'variables': {
-            'email': '',
-            'password': '',
-            'name': ''
-        }
-    }
-]);
-
-Future.wait([query, mutation, batch])
-    .then((responses) {
-        print(responses);
-    })
-    .catchError((error) {
-        print(error.message);
-    });</code></pre>
+mutation.then((response) {
+    print(response);
+}).catchError((error) {
+    print(error.message);
+});</code></pre>
         </div>
     </li>
     <li>
         <h3>Android</h3>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Graphql
 
-client
+val client = Client(context)
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
+    .setProject("5df5acd0d48c2")                // Your project ID
 
 val graphql = Graphql(client)
 
-launch {
-    try {
-        val query = graphql.query(mapOf(
-            "query" to """query GetAccount {
-                accountGet {
-                    _id
-                    email
-                    name
-                }
-            }"""
-        ))
-
-    val mutation = graphql.mutation(mapOf(
+try {
+    val response = graphql.mutation(mapOf(
         "query" to """mutation CreateAccount($email: String!, $password: String!, $name: String) {
             accountCreate(email: $email, password: $password, name: $name) {
                 _id
             }
         }""",
         "variables" to mapOf(
-            "email" to "",
-            "password" to "",
-            "name" to ""
+            "email" to "...",
+            "password" to "...",
+            "name" to "..."
         )
     ))
 
-    val batch = graphql.mutation(listOf(
-        mapOf(
-            "query" to """query GetAccount {
-                accountGet {
-                    _id
-                }
-            }"""
-        ),
-        mapOf(
-            "query" to """mutation CreateAccount($email: String!, $password: String!, $name: String) {
-                accountCreate(email: $email, password: $password, name: $name) {
-                    _id
-                }
-            }""",
-            "variables" to mapOf(
-                "email" to "",
-                "password" to "",
-                "name" to ""
-            )
-        )
-    ))
-
-    } catch (ex: AppwriteException) {
-        Log.e(javaClass.name, ex.message)
-    }
-
-    Log.d(javaClass.name, query)
-    Log.d(javaClass.name, mutation)
-    Log.d(javaClass.name, batch)
+    Log.d(javaClass.name, response)
+} catch (ex: AppwriteException) {
+    ex.printStackTrace()
 }</code></pre>
         </div>
     </li>
     <li>
         <h3>Apple</h3>
         <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-client
+let client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
+    .setProject("5df5acd0d48c2")                // Your project ID
 
-let graphql = Graphql(client: client)
+let graphql = Graphql(client)
 
 do {
-    let query = try await graphql.query([
-        "query": """query GetAccount {
-            accountGet {
-                _id
-                email
-                name
-            }
-        }"""
-    ])
-
-    let mutation = try await graphql.mutation([
+    let response = try await graphql.mutation([
         "query": """mutation CreateAccount($email: String!, $password: String!, $name: String) {
             accountCreate(email: $email, password: $password, name: $name) {
                 _id
             }
         }""",
         "variables": [
-            "email": "",
-            "password": "",
-            "name": ""
+            "email": "...",
+            "password": "...",
+            "name": "..."
         ]
     ])
 
-    let batch = try await graphql.mutation([
-        [
-            "query": """query GetAccount {
-                accountGet {
-                    _id
-                }
-            }"""
-        ],
-        [
-            "query": """mutation CreateAccount($email: String!, $password: String!, $name: String) {
-                accountCreate(email: $email, password: $password, name: $name) {
-                    _id
-                }
-            }""",
-            "variables": [
-                "email": "",
-                "password": "",
-                "name": ""
-            ]
-        ]
-    ])
-
-    print(String(describing: query))
-    print(String(describing: mutation))
-    print(String(describing: batch))
-} catch let error {
+    print(String(describing: response))
+} catch {
     print(error.localizedDescription)
 }</code></pre>
         </div>
