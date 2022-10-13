@@ -1,10 +1,19 @@
 <?php
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
+use League\CommonMark\MarkdownConverter;
+
 $models = $this->getParam('models', []);
 $model = $this->getParam('model', null);
 $rules = $model['properties'] ?? [];
 
-$markdown = new \Parsedown();
-$markdown->setSafeMode(true);
+$environment = new Environment(['html_input' => 'escape']);
+
+$environment->addExtension(new CommonMarkCoreExtension());
+$environment->addExtension(new GithubFlavoredMarkdownExtension());
+
+$markdown = new MarkdownConverter($environment);
 
 $example = function ($model, $models) use (&$example)
 {
@@ -126,7 +135,7 @@ $example = function ($model, $models) use (&$example)
                     <?php endif; ?>
                 <?php endif; ?>
             </td>
-            <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>"><?php echo $markdown->text($description); ?></td>
+            <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>"><?php echo $markdown->convert($description); ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

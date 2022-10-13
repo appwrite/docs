@@ -15,8 +15,8 @@
         "ext-imagick": "*",
         "ext-mbstring": "*",
         "ext-json": "*",
-        "erusev/parsedown": "1.7.4",
-        "utopia-php/framework": "0.*.*"
+        "utopia-php/framework": "0.*.*",
+        "league/commonmark": "2.4.x-dev"
     },
     "require-dev": {
         "vimeo/psalm": "4.1.1"
