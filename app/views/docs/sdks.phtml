@@ -4,6 +4,8 @@ use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\MarkdownConverter;
 
+$platforms = $this->getParam('platforms', []);
+
 $environment = new Environment(['html_input' => 'escape']);
 
 $environment->addExtension(new CommonMarkCoreExtension());
