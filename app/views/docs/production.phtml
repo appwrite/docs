@@ -52,7 +52,7 @@
     <li>Create a script to backups and restore your MariaDB Appwrite schema and data. It is recommended to use MariaDB or MySQL built-in tools for this.</li>
     <li>Create a script to backups and restore your InfluxDB stats. If you don't care much about your server stats, you can skip this.</li>
     <li>Create a script to backup Appwrite storage volume. There are many online resources explaining different ways to backup a docker volume. When running on multiple servers, it is very recommended to use an attachable storage point. Some cloud providers offer integrated backups to such attachable mount like GCP, AWS, DigitalOcean, and the list continues.</li>
-    <li>Create a script to backup <code>.env</code> and <code>docker-compose.yml</code>.</li>
+    <li>Create a script to backup <code>.env</code> and <code>docker-compose.yml</code>, which holds secrets and server configuration information.</li>
 </ol>
 
 <div class="notice">
