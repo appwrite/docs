@@ -216,11 +216,10 @@ let client = Client()
 </ul>
 
 <div class="notice">
-    <h3>A Note About API Keys & Admin Mode</h3>
+    <h3>API Key Authentication</h3>
+    <p>When using Server SDKs, you authenticate with API keys. API keys are not restricted by account-based permissions but have restrictions to types of resources that can be accessed. This means API keys can access all resources of specified types, regardless of which account can access them.</p>
 
-    <p>When using Appwrite API from your server-side with an API Key, you automatically run in <b>admin mode</b>. Admin mode disables the default user <a href="/docs/permissions">permission access control</a> restrictions and allows you to access all the resources available on your project. This is very useful when you want to manipulate your users' data like files and documents or even if you want to get a list of your users.</p>
-
-    <p>Please note it is <b>highly</b> not recommended to run the admin mode from your client-side as it may lead to huge privacy and security issues. Check the <a href="/docs/admin">Admin Mode</a> documentation to learn more</p>
+    <p><a href="/docs/keys">Learn more about API keys</a></p>
 </div>
 
 <h3><a href="/docs/getting-started-for-server#jwt" id="jwt">JSON Web Token (JWT) &nbsp;<span class="text-size-small text-fade">version >= 0.8</span></a></h3>
