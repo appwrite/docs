@@ -1,3 +1,5 @@
+<p>Appwrite supports multiple protocols for accessing the server, including <a href="/docs/rest">REST</a>, <a href="/docs/graphql">GraphQL</a>, and <a href="/docs/realtime">Realtime</a>.</p>
+
 <p>The GraphQL API allows you to query and mutate any resource type on your Appwrite server through a single endpoint. Every endpoint available via REST is available via a corresponding GraphQL field.</p>
 
 <h2><a href="/docs/graphql#requests" id="requests">Requests</a></h2>
@@ -370,7 +372,7 @@ const client = new Client()
 
 const graphql = new Graphql(client);
 
-const mutation = graphql.mutate({
+const mutation = graphql.post({
     query: `mutation CreateAccount($email: String!, $password: String!, $name: String) {
         accountCreate(email: $email, password: $password, name: $name) {
             _id
@@ -402,7 +404,7 @@ final client = Client()
 
 final graphql = Graphql(client);
 
-Future mutation = graphql.mutate({
+Future mutation = graphql.post({
     'query': '''mutation CreateAccount(\$email: String!, \$password: String!, \$name: String) {
         accountCreate(email: \$email, password: \$password, name: \$name) {
             _id
@@ -435,7 +437,7 @@ val client = Client(context)
 val graphql = Graphql(client)
 
 try {
-    val response = graphql.mutation(mapOf(
+    val response = graphql.post(mapOf(
         "query" to """mutation CreateAccount(${'$'}email: String!, ${'$'}password: String!, ${'$'}name: String) {
             accountCreate(email: ${'$'}email, password: ${'$'}password, name: ${'$'}name) {
                 _id
@@ -466,7 +468,7 @@ let client = Client()
 let graphql = Graphql(client)
 
 do {
-    let response = try await graphql.mutation([
+    let response = try await graphql.post([
         "query": """
             mutation CreateAccount($email: String!, $password: String!, $name: String) {
                 accountCreate(email: $email, password: $password, name: $name) {
