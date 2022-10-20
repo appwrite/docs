@@ -497,7 +497,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 }
                                 ?>
                                 <li class="example-in-<?php echo $language['key']; ?>-<?php echo strtolower($docDirectoryKey); ?>">
-                                    <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?> SDK">
+                                    <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?><?php if ($language['isSDK']): ?> SDK<?php endif ?>">
                                         <pre class="line-numbers"><code class="prism language-<?php echo $language['prism']; ?>" data-prism><?php echo $this->escape(file_get_contents($example)); ?></code></pre>
                                     </div>
                                 </li>
