@@ -165,7 +165,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 ?>
                                 <?php foreach ($docDirectories as $docDirectoryKey => $docDirectory): ?>
                                 <option value="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>-<?php echo $this->escape(strtolower($docDirectoryKey)); ?>"<?php echo (($key . '-' . strtolower($docDirectoryKey)) === $sdk) ? ' selected' : ''; ?>>
-                                    <?php echo $this->escape($name); ?><?php if ($isSDK): ?>SDK<?php endif ?> <?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?> examples)<?php endif; ?>
+                                    <?php echo $this->escape($name); ?><?php if ($isSDK): ?> SDK <?php endif ?><?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?> examples)<?php endif; ?>
                                 </option>
                             <?php endforeach; ?>
                             <?php endforeach; ?>
@@ -497,7 +497,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 }
                                 ?>
                                 <li class="example-in-<?php echo $language['key']; ?>-<?php echo strtolower($docDirectoryKey); ?>">
-                                    <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?><?php if ($language['isSDK']): ?> SDK<?php endif ?>">
+                                    <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?><?php if ($language['isSDK'] ?? true): ?> SDK<?php endif ?>">
                                         <pre class="line-numbers"><code class="prism language-<?php echo $language['prism']; ?>" data-prism><?php echo $this->escape(file_get_contents($example)); ?></code></pre>
                                     </div>
                                 </li>
