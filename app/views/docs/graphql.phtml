@@ -196,6 +196,11 @@
 
 <p>The errors array will contain error objects, each with their own <b>message</b> and <b>path</b>. The path will contain the field key that is null due to the error. If no errors occur, the array will not be present in the response.</p>
 
+<h2><a href="/docs/realtime#authentication" id="authentication">Authentication</a></h2>
+<p>GraphQL authenticates using Appwrite accounts and sessions. Both accounts and sessions can be created with GraphQL using the <b>accountCreate</b>, <b>accountCreateEmailSession</b>, <b>accountCreateAnonymousSession</b>, or <b>accountCreatePhoneSession</b> mutations.</p>
+
+<p>More information on authenticating users can be found in the dedicated <a href="/docs/authentication">authentication guide</a>.</p>
+
 <h2><a href="/docs/graphql#graphql-vs-rest" id="graphql-vs-rest">GraphQL vs REST</a></h2>
 
 <p>There are two main features that make GraphQL appealing when compared to the REST API: <b>selection sets</b> and <b>query batching.</b></p>

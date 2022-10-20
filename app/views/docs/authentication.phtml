@@ -114,6 +114,19 @@ val user = account.create(
 )</code></pre>
         </div>
     </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
+mutation {
+    accountCreate(userId: "unique()", email: "team@appwrite.io", password: "password") {
+        _id
+        email
+        name
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>
@@ -188,6 +201,20 @@ val client = Client()
 val account = Account(client)
 
 val user = account.createAnonymousSession()</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
+mutation {
+    accountCreateAnonymousSession {
+        _id
+        userId
+        provider
+        expire
+    }
+}</code></pre>
         </div>
     </li>
 </ul>
@@ -364,6 +391,20 @@ val session = account.createPhoneSession(
     phone = "+16171234567"
 )</code></pre>
     </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
+mutation {
+    accountCreatePhoneSession(userId: "unique()", phone: "+16171234567") {
+        _id
+        userId
+        secret
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>
@@ -383,7 +424,7 @@ const client = new Client()
 const account = new Account(client);
 
 const promise = account.updatePhoneSession(
-    ID.unique(),
+    '[USER_ID]',
     '[SECRET]'
 );
 
@@ -406,7 +447,7 @@ final client = Client()
 final account = Account(client);
 
 final session = await account.updatePhoneSession(
-    userId: ID.unique(),
+    userId: '[USER_ID]',
     secret: '[SECRET]'
 );</code></pre>
     </li>
@@ -422,7 +463,7 @@ let client = Client()
 let account = Account(client)
 
 let session = try await account.updatePhoneSession(
-    userId: ID.unique(),
+    userId: "[USER_ID]",
     secret: "[SECRET]"
 )</code></pre>
     </li>
@@ -440,9 +481,23 @@ val client = Client()
 val account = Account(client)
 
 val session = account.updatePhoneSession(
-    userId = ID.unique(),
+    userId = "[USER_ID]",
     secret = "[SECRET]"
 )</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
+mutation {
+    accountUpdatePhoneSession(userId: "[USER_ID]", secret: "[SECRET]") {
+        _id
+        userId
+        provider
+        expire
+    }
+}</code></pre>
+        </div>
     </li>
 </ul>
 
@@ -533,6 +588,20 @@ val session = account.createEmailSession(
     password = "password"
 )</code></pre>
     </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
+mutation {
+    accountCreateEmailSession(userId: "unique()", email: "team@appwrite.io", password: "password") {
+        _id
+        userId
+        provider
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>
@@ -603,6 +672,20 @@ val client = Client()
 val account = Account(client)
 
 val session = account.get()</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
+query {
+    accountGet {
+        _id
+        email
+        name
+        status
+    }
+}</code></pre>
+        </div>
     </li>
 </ul>
 
