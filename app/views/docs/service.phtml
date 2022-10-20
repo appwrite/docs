@@ -158,13 +158,14 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 $key = (isset($language['key'])) ? $language['key'] : '';
                                 $name = (isset($language['name'])) ? $language['name'] : '';
                                 $beta = (isset($language['beta'])) ? $language['beta'] : false;
+                                $isSDK = (isset($language['isSDK'])) ? $language['isSDK'] : true;
                                 $docDirectories = (isset($language['docDirectories']))
                                     ? $language['docDirectories']
                                     : ['Default' => 'examples'];
                                 ?>
                                 <?php foreach ($docDirectories as $docDirectoryKey => $docDirectory): ?>
                                 <option value="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>-<?php echo $this->escape(strtolower($docDirectoryKey)); ?>"<?php echo (($key . '-' . strtolower($docDirectoryKey)) === $sdk) ? ' selected' : ''; ?>>
-                                    <?php echo $this->escape($name); ?> SDK <?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?> examples)<?php endif; ?>
+                                    <?php echo $this->escape($name); ?><?php if ($isSDK): ?>SDK<?php endif ?> <?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?> examples)<?php endif; ?>
                                 </option>
                             <?php endforeach; ?>
                             <?php endforeach; ?>
