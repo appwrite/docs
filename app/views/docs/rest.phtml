@@ -1,1 +1,12 @@
 <p>Appwrite supports multiple protocols for accessing the server, including <a href="/docs/rest">REST</a>, <a href="/docs/graphql">GraphQL</a>, and <a href="/docs/realtime">Realtime</a>.</p>
+
+<p>The REST API allows you to manipulate your Appwrite server through many endpoints, each representing a specific method of modification to a specific resource type.</p>
+
+<p>Requests and responses through the REST API follow a rigid structure - that is, they always expect the same structure for requests to a specific endpoint, and responses from that endpoint will also always have the same structure. </p>
+
+<p>The specific structures used for Appwrite resources and their related endpoints can be found in the <b>References</b> section for each service.</p>
+
+<h2><a href="/docs/realtime#authentication" id="authentication">Authentication</a></h2>
+<p>The REST API authenticates using Appwrite accounts and sessions. Both accounts and sessions can be created with REST using the <b>POST</b> <b>/v1/account</b>, <b>/v1/account/sessions/email</b>, <b>/v1/account/sessions/anonymous</b>, or <b>/v1/account/sessions/phone</b> endpoints.</p>
+
+<p>More information and examples of authenticating users can be found in the dedicated <a href="/docs/authentication">authentication guide</a>.</p>
