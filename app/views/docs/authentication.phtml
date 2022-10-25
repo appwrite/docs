@@ -77,24 +77,6 @@ final user = await account.create(
 );</code></pre>
     </li>
     <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-let account = Account(client)
-
-let user = try await account.create(
-    userId: ID.unique(),
-    email: "team@appwrite.io",
-    password: "password"
-)</code></pre>
-        </div>
-    </li>
-    <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
@@ -111,6 +93,24 @@ val user = account.create(
     userId = ID.unique(),
     email = "team@appwrite.io",
     password = "password"
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let user = try await account.create(
+    userId: ID.unique(),
+    email: "team@appwrite.io",
+    password: "password"
 )</code></pre>
         </div>
     </li>
@@ -175,20 +175,6 @@ final user = await account.createAnonymousSession();</code></pre>
         </div>
     </li>
     <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-let account = Account(client)
-
-let user = try await account.createAnonymousSession()</code></pre>
-        </div>
-    </li>
-    <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
@@ -201,6 +187,20 @@ val client = Client()
 val account = Account(client)
 
 val user = account.createAnonymousSession()</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let user = try await account.createAnonymousSession()</code></pre>
         </div>
     </li>
     <li>
@@ -265,21 +265,6 @@ await account.createOAuth2Session(provider: 'amazon');</code></pre>
         </div>
     </li>
     <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-let account = Account(client)
-
-// Go to OAuth provider login page
-try await account.createOAuth2Session(provider: "amazon")</code></pre>
-        </div>
-    </li>
-    <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
@@ -293,6 +278,21 @@ val account = Account(client)
 
 // Go to OAuth provider login page
 account.createOAuth2Session(provider = "amazon")</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+// Go to OAuth provider login page
+try await account.createOAuth2Session(provider: "amazon")</code></pre>
         </div>
     </li>
 </ul>
@@ -358,22 +358,6 @@ final session = await account.createPhoneSession(
 );</code></pre>
     </li>
     <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-let account = Account(client)
-
-let session = try await account.createPhoneSession(
-    userId: ID.unique(),
-    phone: "+16171234567"
-)</code></pre>
-    </li>
-    <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
@@ -389,6 +373,22 @@ val account = Account(client)
 val session = account.createPhoneSession(
     userId = ID.unique(),
     phone = "+16171234567"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.createPhoneSession(
+    userId: ID.unique(),
+    phone: "+16171234567"
 )</code></pre>
     </li>
     <li>
@@ -452,22 +452,6 @@ final session = await account.updatePhoneSession(
 );</code></pre>
     </li>
     <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-let account = Account(client)
-
-let session = try await account.updatePhoneSession(
-    userId: "[USER_ID]",
-    secret: "[SECRET]"
-)</code></pre>
-    </li>
-    <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
@@ -483,6 +467,22 @@ val account = Account(client)
 val session = account.updatePhoneSession(
     userId = "[USER_ID]",
     secret = "[SECRET]"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.updatePhoneSession(
+    userId: "[USER_ID]",
+    secret: "[SECRET]"
 )</code></pre>
     </li>
     <li>
@@ -556,22 +556,6 @@ final session = await account.createEmailSession(
 );</code></pre>
     </li>
     <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-let account = Account(client)
-
-let session = try await account.createEmailSession(
-    email: "team@appwrite.io",
-    password: "password"
-)</code></pre>
-    </li>
-    <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
@@ -586,6 +570,22 @@ val account = Account(client)
 val session = account.createEmailSession(
     email = "team@appwrite.io",
     password = "password"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.createEmailSession(
+    email: "team@appwrite.io",
+    password: "password"
 )</code></pre>
     </li>
     <li>
@@ -647,19 +647,6 @@ final account = Account(client);
 final session = await account.get();</code></pre>
     </li>
     <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-let account = Account(client)
-
-let session = try await account.get()</code></pre>
-    </li>
-    <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
@@ -672,6 +659,19 @@ val client = Client()
 val account = Account(client)
 
 val session = account.get()</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.get()</code></pre>
     </li>
     <li>
         <h3>GraphQL</h3>

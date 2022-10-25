@@ -154,6 +154,26 @@ func main() async throws {
 }</code></pre>
         </div>
     </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="http" data-lang-label="HTTP">
+            <pre class="line-numbers"><code class="prism language-http" data-prism>--------------------------cec8e8123c05ba25
+Content-Disposition: form-data; name="operations"
+
+{ "query": "mutation { storageCreateFile(bucketId: $bucketId, fileId: $fileId, file: $file) { id }" }, "variables": { "bucketId": "[BUCKET_ID]", "fileId": "[FILE_ID]", "file": null } }
+--------------------------cec8e8123c05ba25
+Content-Disposition: form-data; name="map"
+
+{ "0": ["variables.file"] }
+--------------------------cec8e8123c05ba25
+Content-Disposition: form-data; name="0"; filename="a.txt"
+Content-Type: text/plain
+
+Alpha file content.
+
+--------------------------cec8e8123c05ba25--</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>When you are trying to upload any files above 5MB, you will need to upload them in chunks. Don't worry; if you are using Appwrite's console or any of our SDKs, we handle that internally, so it will work no matter what file size you try to upload.

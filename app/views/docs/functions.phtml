@@ -576,6 +576,26 @@ void main() async {
         </div>
     </li>
     <li>
+        <h3>Android</h3>
+
+        <div class="ide margin-bottom" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Functions
+
+suspend fun main() {
+    val client = Client(applicationContext)
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")
+
+    val functions = Functions(client)
+
+    val execution = functions.createExecution(
+        functionId = "[FUNCTION_ID]"
+    )
+}</code></pre>
+        </div>
+    </li>
+    <li>
         <h3>Apple</h3>
 
         <div class="ide margin-bottom" data-lang="swift" data-lang-label="Apple SDK">
@@ -595,22 +615,18 @@ func main() async throws {
         </div>
     </li>
     <li>
-        <h3>Android</h3>
+        <h3>GraphQL</h3>
 
-        <div class="ide margin-bottom" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
-import io.appwrite.services.Functions
-
-suspend fun main() {
-    val client = Client(applicationContext)
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-        .setProject("[PROJECT_ID]")
-
-    val functions = Functions(client)
-
-    val execution = functions.createExecution(
-        functionId = "[FUNCTION_ID]"
-    )
+        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    functionsCreateExecution(functionId: "[FUNCTION_ID]") {
+        id
+        statusCode
+        response
+        stdout
+        stderr
+        duration
+    }
 }</code></pre>
         </div>
     </li>
