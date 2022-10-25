@@ -163,7 +163,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                     : ['Default' => 'examples'];
                                 ?>
                                 <?php foreach ($docDirectories as $docDirectoryKey => $docDirectory): ?>
-                                <option value="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>-<?php echo $this->escape(strtolower($docDirectoryKey)); ?>"<?php echo (($key . '-' . strtolower($docDirectoryKey)) === $sdk) ? ' selected' : ''; ?>>
+                                <option data-ls-attrs="value=/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>-<?php echo $this->escape(strtolower($docDirectoryKey)); ?>{{router.hash}}" <?php echo (($key . '-' . strtolower($docDirectoryKey)) === $sdk) ? ' selected' : ''; ?>>
                                     <?php echo $this->escape($name); ?> SDK <?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?> examples)<?php endif; ?>
                                 </option>
                             <?php endforeach; ?>
@@ -174,7 +174,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
             </div>
             <div class="col span-4 clear">
                 <form class="pull-end desktops-only" onchange="this.submit()"
-                      method="get" action="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>">
+                      method="get" data-ls-attrs="action=/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>{{router.hash}}">
 
                     <input type="hidden" name="sdk" value="<?php echo $this->escape($sdk); ?>" />
 
@@ -293,7 +293,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
             <div class="row responsive">
                 <div class="col span-7">
                     <h2 class="margin-bottom">
-                        <a href="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($sdk); ?>&v=<?php echo $this->escape($version); ?>#<?php echo $operation['operationId']; ?>" id="<?php echo $operation['operationId']; ?>" class="references"><?php echo $this->escape($title); ?></a>
+                        <a href="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($sdk); ?>#<?php echo $operation['operationId']; ?>" id="<?php echo $operation['operationId']; ?>" class="references"><?php echo $this->escape($title); ?></a>
                     </h2>
 
                     <div>
