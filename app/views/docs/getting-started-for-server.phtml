@@ -17,7 +17,7 @@ $swiftVersion = $versions['swift'] ?? '';
 
 <p>Appwrite is a development platform that provides a powerful API and management console to get your next project up and running quickly.</p>
 
-<p>This tutorial helps you start using Appwrite with your project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
+<p>[Cloud Signup CTA]</p>
 
 <h2><a href="/docs/getting-started-for-server#getSDK" id="getSDK">Get the Appwrite SDK for Your Platform</a></h2>
 
@@ -122,7 +122,7 @@ $swiftVersion = $versions['swift'] ?? '';
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client } = require('node-appwrite');
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
     .setProject('5df5acd0d48c2')                // Your project ID
     .setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
 </code></pre>
@@ -135,7 +135,7 @@ const client = new Client()
             <pre class="line-numbers"><code class="prism language-php" data-prism>use Appwrite\Client;
 
 $client = (new Client())
-    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    ->setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
     ->setProject('5df5acd0d48c2')                // Your project ID
     ->setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
 </code></pre>
@@ -146,8 +146,8 @@ $client = (new Client())
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 
-client = (Client()
-    .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
+client = Client()
+    .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
     .set_project('5df5acd0d48c2')                # Your project ID
     .set_key('919c2db5d4...a2a3346ad2'))          # Your secret API key
 </code></pre>
@@ -159,7 +159,7 @@ client = (Client()
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
 
 client = Appwrite::Client.new()
-    .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
+    .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
     .set_project('5df5acd0d48c2')                # Your project ID
     .set_key('919c2db5d4...a2a3346ad2')          # Your secret API key
 </code></pre>
@@ -171,7 +171,7 @@ client = Appwrite::Client.new()
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client } from "https://deno.land/x/appwrite/mod.ts";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
     .setProject('5df5acd0d48c2')                // Your project ID
     .setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
 </code></pre>
@@ -183,7 +183,7 @@ const client = new Client()
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
 Client client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
     .setProject('5df5acd0d48c2')                // Your project ID
     .setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
 </code></pre>
@@ -195,7 +195,7 @@ Client client = Client()
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your Appwrite Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
     .setKey("919c2db5d4...a2a3346ad2")          // Your secret API key
 </code></pre>
@@ -207,7 +207,7 @@ val client = Client()
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your Appwrite Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
     .setKey("919c2db5d4...a2a3346ad2")          // Your secret API key
 </code></pre>
@@ -279,7 +279,7 @@ let response = try await account.createJWT()</code></pre>
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client } = require('node-appwrite');
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
     .setProject('5df5acd0d48c2')                // Your project ID
     .setJWT('919c2db5d4...a2a3346ad2');         // Your secret JWT
 </code></pre>
@@ -292,7 +292,7 @@ const client = new Client()
             <pre class="line-numbers"><code class="prism language-php" data-prism>use Appwrite\Client;
 
 $client = (new Client())
-    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    ->setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
     ->setProject('5df5acd0d48c2')                // Your project ID
     ->setJWT('919c2db5d4...a2a3346ad2');         // Your secret JWT
 </code></pre>
@@ -303,7 +303,7 @@ $client = (new Client())
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 
-client = (Client()
+client = Client()
   .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
   .set_project('5df5acd0d48c2')                # Your project ID
   .set_key('919c2db5d4...a2a3346ad2')          # Your secret JWT
@@ -317,7 +317,7 @@ client = (Client()
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
 
 client = Client.new()
-    .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
+    .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
     .set_project('5df5acd0d48c2')                # Your project ID
     .set_key('919c2db5d4...a2a3346ad2')          # Your secret JWT
 </code></pre>
@@ -329,7 +329,7 @@ client = Client.new()
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client } from "https://deno.land/x/appwrite/mod.ts";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
     .setProject('5df5acd0d48c2')                // Your project ID
     .setJWT('919c2db5d4...a2a3346ad2');         // Your secret JWT
 </code></pre>
@@ -341,7 +341,7 @@ const client = new Client()
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
 Client client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
     .setProject('5df5acd0d48c2')                // Your project ID
     .setJWT('919c2db5d4...a2a3346ad2');         // Your secret JWT
 </code></pre>
@@ -353,7 +353,7 @@ Client client = Client()
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your Appwrite Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
     .setJWT("919c2db5d4...a2a3346ad2")          // Your secret JWT
 </code></pre>
@@ -365,7 +365,7 @@ val client = Client()
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your Appwrite Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
     .setJWT("919c2db5d4...a2a3346ad2")          // Your secret JWT
 </code></pre>
@@ -527,7 +527,7 @@ let user = try await users.create(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, ID, Users } = require('node-appwrite');
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
     .setProject('5df5acd0d48c2')                // Your project ID
     .setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
 
@@ -556,7 +556,7 @@ use Appwrite\ID;
 use Appwrite\Services\Users;
 
 $client = (new Client())
-    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    ->setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
     ->setProject('5df5acd0d48c2')                // Your project ID
     ->setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
 
@@ -577,7 +577,7 @@ $user = $users->create(
 from appwrite.id import ID
 from appwrite.services.users import Users
 
-client = (Client()
+client = Client()
   .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
   .set_project('5df5acd0d48c2')                # Your project ID
   .set_key('919c2db5d4...a2a3346ad2'))          # Your secret API key
@@ -600,7 +600,7 @@ user = users.create(
 include Appwrite
 
 client = Client.new()
-    .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
+    .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
     .set_project('5df5acd0d48c2')                # Your project ID
     .set_key('919c2db5d4...a2a3346ad2')          # Your secret API key
 
@@ -620,7 +620,7 @@ user = users.create(
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, ID, Users } from "https://deno.land/x/appwrite/mod.ts";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
     .setProject('5df5acd0d48c2')                // Your project ID
     .setKey('919c2db5d4...a2a3346ad2')          // Your secret API key
 
@@ -646,7 +646,7 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
     .setProject('5df5acd0d48c2')                // Your project ID
     .setKey('919c2db5d4...a2a3346ad2');         // Your secret API key
 
@@ -668,7 +668,7 @@ import io.appwrite.ID
 import io.appwrite.services.Users
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your Appwrite Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
     .setKey("919c2db5d4...a2a3346ad2")          // Your secret API key
 
@@ -689,7 +689,7 @@ val user = users.create(
 import AppwriteModels
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your Appwrite Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
     .setKey("919c2db5d4...a2a3346ad2")          // Your secret API key
 

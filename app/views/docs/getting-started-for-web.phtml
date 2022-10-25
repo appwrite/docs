@@ -17,7 +17,7 @@ $demos = $platform['demos'] ?? [];
 ?>
 <p>Appwrite is a development platform that provides a powerful API and management console to get your next project up and running quickly.</p>
 
-<p>This tutorial helps you start using Appwrite with your project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
+<p>[Cloud Signup CTA]</p>
 
 <h2><a href="/docs/getting-started-for-web#createProject" id="createProject">Create Your First Appwrite Project</a></h2>
 
@@ -67,7 +67,7 @@ $demos = $platform['demos'] ?? [];
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
     .setProject('5df5acd0d48c2');               // Your project ID
 </code></pre>
 </div>
@@ -111,7 +111,7 @@ client.subscribe('files', response => {
                     <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
     .setProject('5df5acd0d48c2');               // Your project ID
 
 const account = new Account(client);

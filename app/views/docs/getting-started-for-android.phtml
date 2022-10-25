@@ -15,7 +15,7 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 ?>
 <p>Appwrite is a development platform that provides a powerful API and management console to get your next project up and running quickly.</p>
 
-<p>This tutorial helps you start using Appwrite with your project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
+<p>[Cloud Signup CTA]</p>
 
 <h2><a href="/docs/getting-started-for-android#createYourProject" id="createYourProject">Create Your First Appwrite Project</a></h2>
 
@@ -74,14 +74,16 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 import io.appwrite.services.Account
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your Appwrite Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
-    .setSelfSigned(status: true)                // For self signed certificates, only use for development</code></pre>
 </div>
 
 <p>Before sending any API calls to your new Appwrite project, make sure your Android device or emulator has network access to your Appwrite project's hostname or IP address.</p>
 
-<p>When connecting to a local self-hosted Appwrite project from an emulator or a mobile device, you should use the private IP of the device running your Appwrite project as the hostname of the endpoint instead of localhost. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite server.</p>
+<div class="notice margin-top-large margin-bottom-large">
+    <h3>Self-Hosting</h3>
+    <p>When connecting to a local self-hosted Appwrite project from an emulator or a mobile device, you should use the private IP of the machine running your Appwrite project as the hostname of the endpoint instead of localhost. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite instance.</p>
+</div>
 
 <h2><a href="/docs/getting-started-for-android#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
@@ -121,9 +123,8 @@ val subscription = realtime.subscribe("files") {
 import io.appwrite.services.Account
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your Appwrite Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
-    .setSelfSigned(status: true)                // For self signed certificates, only use for development
 
 val account = Account(client)
 
