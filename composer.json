@@ -16,7 +16,7 @@
         "ext-mbstring": "*",
         "ext-json": "*",
         "utopia-php/framework": "0.*.*",
-        "league/commonmark": "2.4.x-dev"
+        "league/commonmark": "2.3.5"
     },
     "require-dev": {
         "vimeo/psalm": "4.1.1"
