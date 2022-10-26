@@ -1,14 +1,10 @@
 <?php
-use League\CommonMark\Environment\Environment;
-use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
-use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
-use League\CommonMark\MarkdownConverter;
-
 $serviceName    = $this->getParam('name', '');
 $service        = $this->getParam('service', []);
 $blacklist      = $this->getParam('blacklist', []);
 $description    = $this->getParam('description', '');
 $spec           = $this->getParam('spec', []);
+$markdown       = $this->getParam('markdown', false);
 $host           = (isset($spec['host'])) ? $spec['host'] : '';
 $base           = (isset($spec['basePath'])) ? $spec['basePath'] : '';
 $endpoint       = $this->getParam('protocol', 'https') . '://' . $host . $base;
@@ -36,13 +32,6 @@ $codes          = [
         'class' => 'text-success'
     ],
 ];
-
-$environment = new Environment(['html_input' => 'escape']);
-
-$environment->addExtension(new CommonMarkCoreExtension());
-$environment->addExtension(new GithubFlavoredMarkdownExtension());
-
-$markdown = new MarkdownConverter($environment);
 
 $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
 ?>

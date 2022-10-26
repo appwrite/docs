@@ -1,17 +1,7 @@
 <?php
-use League\CommonMark\Environment\Environment;
-use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
-use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
-use League\CommonMark\MarkdownConverter;
 
 $variables = $this->getParam('variables', []);
-
-$environment = new Environment(['html_input' => 'escape']);
-
-$environment->addExtension(new CommonMarkCoreExtension());
-$environment->addExtension(new GithubFlavoredMarkdownExtension());
-
-$markdown = new MarkdownConverter($environment);
+$markdown = $this->getParam('markdown', false);
 ?>
 
 <p>Appwrite environment variables allow you to edit your server setup configuration and customize it. You can easily change the environment variables by changing them when running Appwrite using Docker CLI or Docker Compose.</p>
