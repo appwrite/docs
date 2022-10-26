@@ -1,7 +1,13 @@
-<p>The Appwrite API has two different modes it can use, the first mode is the client mode, which is the <b>default</b> mode, and the second one is the <b>admin</b> or server mode.</p>
+<p>You can use Appwrite to build both client and server integrations. Client integrations are for frontend and mobile applications, which use Appwrite's Client APIs and <a href="/docs/sdks#client">Client SDKs</a>. Server integrations, including the Appwrite CLI, are for backend and CLI applications which use Appwrite's Server APIs and <a href="/docs/sdks#server">Server SDKs.</a></p>
 
-<p>When using Appwrite from the client-side, you should go with the normal default mode. This mode allows every user of your project to access only resources they have been granted access to. When running in admin mode, you remove Appwrite default access restriction and ultimately allow access to any of the resources available on your Appwrite project (files, documents, or collections).</p>
+<p>When building client integrations with the Client SDKs, you authenticate with an account and operate in the scope of the account. This means Client SDKs can only access resources that your account has been granted permission to access.</p>
 
-<p>For security reasons, the admin mode only works in combination with an API key. You can create an API key from the Appwrite console, and you can choose what scopes of access you are willing to grant your SDK.</p>
+<ul>
+    <li class="margin-bottom"><a href="/docs/permissions" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Learn more about permissions</a></li>
+</ul>
 
-<p>Please note: passing an API key from a client SDK is a <strong>major</strong> security issue. Use your API key only from a server-side integration and make sure you store them securely and privately. There are many sources online that advise what the best practices regarding the storing of secrets and API keys on your server are.</p>
+<p>When building server integrations with the Server SDKs, you operate in the scope of an API key instead of an account. API keys are created with scopes that specify the type of resources they can access and the type of operations they can perform on those resources. API keys bypass permissions and can access all resources belonging to any account.</p>
+
+<ul>
+    <li class="margin-bottom"><a href="/docs/keys" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Learn more about API keys</a></li>
+</ul>
