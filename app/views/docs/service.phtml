@@ -36,6 +36,22 @@ $markdown = new \Parsedown();
 $markdown->setSafeMode(true);
 
 $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
+
+function skipLanguage($language, $family): bool {
+    if(!$language['enabled']) {
+        return true;
+    }
+
+    if(!isset($language['family']) || $language['family'] !== $family) {
+        return true;
+    }
+
+    if($language['dev']) {
+        return true;
+    }
+
+    return false;
+}
 ?>
 
 <div data-ls-attrs="class=language-<?php echo $this->escape($sdk); ?> platform-<?php echo $this->escape($family); ?> examples-in-<?php echo $this->escape($sdk); ?>">
@@ -149,22 +165,6 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 $exampleLanguages = \array_filter($platform['languages'], function ($language) use ($family) {
                                     return !($language['isSDK'] ?? true);
                                 });
-
-                                function skipLanguage($language, $family): bool {
-                                    if(!$language['enabled']) {
-                                        return true;
-                                    }
-
-                                    if(!isset($language['family']) || $language['family'] !== $family) {
-                                        return true;
-                                    }
-
-                                    if($language['dev']) {
-                                        return true;
-                                    }
-
-                                    return false;
-                                }
                             ?>
                             <?php foreach ($sdkLanguages as $language):
                                 if (skipLanguage($language, $family)) {
