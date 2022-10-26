@@ -547,6 +547,8 @@ const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
+const functions = new Functions(client);
+
 let promise = functions.createExecution('[FUNCTION_ID]');
 
 promise.then(function (response) {

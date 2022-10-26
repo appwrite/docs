@@ -164,7 +164,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                     : ['Default' => 'examples'];
                                 ?>
                                 <?php foreach ($docDirectories as $docDirectoryKey => $docDirectory): ?>
-                                <option value="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>-<?php echo $this->escape(strtolower($docDirectoryKey)); ?>"<?php echo (($key . '-' . strtolower($docDirectoryKey)) === $sdk) ? ' selected' : ''; ?>>
+                                <option data-ls-attrs="value=/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>-<?php echo $this->escape(strtolower($docDirectoryKey)); ?>{{router.hash}}" <?php echo (($key . '-' . strtolower($docDirectoryKey)) === $sdk) ? ' selected' : ''; ?>>
                                     <?php echo $this->escape($name); ?><?php if ($isSDK): ?> SDK <?php endif ?><?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?> examples)<?php endif; ?>
                                 </option>
                             <?php endforeach; ?>
@@ -175,7 +175,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
             </div>
             <div class="col span-4 clear">
                 <form class="pull-end desktops-only" onchange="this.submit()"
-                      method="get" action="/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>">
+                      method="get" data-ls-attrs="action=/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>{{router.hash}}">
 
                     <input type="hidden" name="sdk" value="<?php echo $this->escape($sdk); ?>" />
 
