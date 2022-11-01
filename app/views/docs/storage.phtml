@@ -3,7 +3,7 @@
 
 <h2><a href="/docs/storage#bucket" id="bucket">Buckets</a></h2>
 
-<p>With version 0.13 of Appwrite, we also have introduced storage buckets. Storage buckets are similar to collections we have in our <a href="/docs/databases">Databases</a> service. The difference is buckets also provide more power to decide what kinds of files, what sizes you want to allow in that bucket, whether or not to encrypt the files, scan with antivirus, and more. Let's look at how we can create a bucket and configure it to your needs.</p>
+<p>Storage buckets are similar to collections in the <a href="/docs/databases">Databases</a> service. The difference is buckets also provide more power to decide what kinds of files, what sizes you want to allow in that bucket, whether or not to encrypt the files, scan with antivirus, and more. Let's look at how we can create a bucket and configure it to your needs.</p>
 
 <h3><a href="/docs/storage#createBucket" id="createBucket">Create Bucket</a></h3>
 
@@ -71,7 +71,7 @@
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Storage } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 const storage = new Storage(client);
@@ -97,7 +97,7 @@ promise.then(function (response) {
 
 void main() { // Init SDK
   final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
   final storage = Storage(client);
@@ -118,7 +118,7 @@ import io.appwrite.services.Storage
 
 suspend fun main() {
     val client = Client(applicationContext)
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+        .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
         .setProject("5df5acd0d48c2") // Your project ID
 
     val storage = Storage(client)
@@ -138,7 +138,7 @@ suspend fun main() {
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+      .setEndpoint("https://cloud.appwrite.io/v1")
       .setProject("[PROJECT_ID]")
 
     let storage = Storage(client)
@@ -587,4 +587,4 @@ File content.
 
 <h2><a href="/docs/storage#streaming" id="streaming">Downloading and Streaming with Range</a></h2>
 
-<p>Apart from previewing files and images, downloading is another important feature. With 0.13 we also support streamed download using the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range" target="_blank">HTTP range header</a>. If you are using our SDKs or console, nothing is different. Even if you want to download the whole file at once, even if you use the REST endpoint directly, there isn't any difference. However, if you want to get only a part of a file from storage, you can supply the range header and the server will respond with an appropriate chunk of the file.</p>
+<p>Appwrite supports streamed downloads using the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range" target="_blank">HTTP range header</a> to gracefully handle large files. If you are using our SDKs or console, nothing is different. Even if you want to download the whole file at once, even if you use the REST endpoint directly, there isn't any difference. However, if you want to get only a part of a file from storage, you can supply the range header and the server will respond with an appropriate chunk of the file.</p>
