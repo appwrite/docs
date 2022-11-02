@@ -1,12 +1,81 @@
 <p>Appwrite supports multiple protocols for accessing the server, including <a href="/docs/rest">REST</a>, <a href="/docs/graphql">GraphQL</a>, and <a href="/docs/realtime">Realtime</a>.</p>
 
-<p>The REST API allows you to manipulate your Appwrite server through many endpoints, each representing a specific method of modification to a specific resource type.</p>
+<p>The REST API allows you to access your Appwrite server through HTTP requests, without the need for an SDK. Each endpoint in the API represents a specific operation on a specific resource.</p>
 
-<p>Requests and responses through the REST API follow a rigid structure - that is, they always expect the same structure for requests to a specific endpoint, and responses from that endpoint will also always have the same structure. </p>
+<h2><a href="/docs/rest#headers" id="headers">Headers</a></h2>
+<p>Appwrite's REST APIs expect certain headers to be attached to each request </p>
 
-<p>The specific structures used for Appwrite resources and their related endpoints can be found in the <b>References</b> section for each service.</p>
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 180px">Header</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>X-Appwrite-Project: [PROJECT-ID]</code></td>
+        <td>Required, provides the ID of your Appwrite Project to the REST API.</td>
+    </tr>
+    <tr>
+        <td><code>Content-type: application/json</code></td>
+        <td>Required, declares content type of the HTTP request.</td>
+    </tr>
+    <tr>
+        <td><code>X-Appwrite-key: [API-KEY]</code></td>
+        <td>Optional, used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
+    </tr>
+    </tbody>
+</table>
 
-<h2><a href="/docs/realtime#authentication" id="authentication">Authentication</a></h2>
-<p>The REST API authenticates using Appwrite accounts and sessions. Both accounts and sessions can be created with REST using the <b>POST</b> <b>/v1/account</b>, <b>/v1/account/sessions/email</b>, <b>/v1/account/sessions/anonymous</b>, or <b>/v1/account/sessions/phone</b> endpoints.</p>
+<h2><a href="/docs/rest#getting-started" id="getting-started">Getting Started With REST</a></h2>
+<p>You can use Appwrite's REST API for both client and server applications.</p>
 
-<p>More information and examples of authenticating users can be found in the dedicated <a href="/docs/authentication">authentication guide</a>.</p>
+<h3>Authentication</h3>
+<p>You can create account sessions with POST requests to the <a href="docs/client/account">Account API</a>. Sessions are persisted using cookies like any other REST API. You can learn more about session persistence in the <a href="/docs/authentication#persistence">Authentication Guide</a>.</p>
+<p>The example below shows creating an account session with the <a href="/docs/client/account?sdk=web-default#accountCreateEmailSession">Create Account Session with Email</a> endpoint.</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>cURL</h3>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>curl 'https://[HOSTNAME_OR_IP]/v1/account/sessions/email' \
+  -H 'content-type: application/json' \
+  -H 'x-appwrite-project: 6062f9c2c09ce' \
+  -d '{"email":"<fill>","password":"<fill>"}'</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Fetch</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>fetch("https://[HOSTNAME_OR_IP]/v1/account/sessions/email", {
+  "headers": {
+    "content-type": "application/json",
+    "x-appwrite-project": "6318f4f66a3bb5b4d525"
+  },
+  "body": "{\"email\":\"vincent123456@appwrite.io\",\"password\":\"vincent123456\"}",
+  "method": "POST",
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>PowerShell</h3>
+        <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
+            <pre class="line-numbers"><code class="prism language-powershell" data-prism>$session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+Invoke-WebRequest -UseBasicParsing -Uri "https://[HOSTNAME_OR_IP]/v1/account/sessions/email" `
+-Method "POST" `
+-WebSession $session `
+-Headers @{
+  "method"="POST"
+  "path"="/v1/account/sessions/email"
+  "scheme"="https"
+  "x-appwrite-project"="6062f9c2c09ce"
+} `
+-ContentType "application/json" `
+-Body "{`"email`":`"vincent123456@appwrite.io`",`"password`":`"vincent123456`"}"</code></pre>
+        </div>
+    </li>
+</ul>
+
+<h3>Server Authentication</h3>
+<p>Server integrations use API keys to authenticate and are typically used for backend appications.</p>
+<p>You don't need to create an account session before making requests to Server APIs. Simply pass an <a href="/docs/keys">API key</a> in the <code>X-Appwrite-key: [API-KEY]</code> header with the appropriate scopes.</p>
