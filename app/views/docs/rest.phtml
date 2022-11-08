@@ -28,22 +28,10 @@
     </tbody>
 </table>
 
-<h2><a href="/docs/rest#getting-started" id="getting-started">Getting Started With REST</a></h2>
-<p>You can use Appwrite's REST API for both client and server applications.</p>
-
-<h3>Authentication</h3>
+<h3>Client Authentication</h3>
 <p>You can create account sessions with POST requests to the <a href="docs/client/account">Account API</a>. Sessions are persisted using cookies like any other REST API. You can learn more about session persistence in the <a href="/docs/authentication#persistence">Authentication Guide</a>.</p>
 <p>The example below shows creating an account session with the <a href="/docs/client/account?sdk=web-default#accountCreateEmailSession">Create Account Session with Email</a> endpoint.</p>
 <ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>cURL</h3>
-        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>curl 'https://[HOSTNAME_OR_IP]/v1/account/sessions/email' \
-  -H 'content-type: application/json' \
-  -H 'x-appwrite-project: 6062f9c2c09ce' \
-  -d '{"email":"<fill>","password":"<fill>"}'</code></pre>
-        </div>
-    </li>
     <li>
         <h3>Fetch</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
@@ -55,6 +43,15 @@
   "body": "{\"email\":\"vincent123456@appwrite.io\",\"password\":\"vincent123456\"}",
   "method": "POST",
 });</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>cURL</h3>
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>curl 'https://[HOSTNAME_OR_IP]/v1/account/sessions/email' \
+  -H 'content-type: application/json' \
+  -H 'x-appwrite-project: 6062f9c2c09ce' \
+  -d '{"email":"<fill>","password":"<fill>"}'</code></pre>
         </div>
     </li>
     <li>
@@ -76,6 +73,64 @@ Invoke-WebRequest -UseBasicParsing -Uri "https://[HOSTNAME_OR_IP]/v1/account/ses
     </li>
 </ul>
 
-<h3>Server Authentication</h3>
+<h2>Server Authentication</h2>
 <p>Server integrations use API keys to authenticate and are typically used for backend appications.</p>
 <p>You don't need to create an account session before making requests to Server APIs. Simply pass an <a href="/docs/keys">API key</a> in the <code>X-Appwrite-key: [API-KEY]</code> header with the appropriate scopes.</p>
+
+<h2>File Handling</h2>
+<p>Appwrite implements resumable, chunked uploads for files larger than 5MB. Chunked uploads send files in chunks of 5MB to reduce memory footprint and increase resilience when handling large files. Appwrite SDKs will automatically handle chunked uploads but it is possible to implement this with the REST API directly.</p>
+
+<p>Upload endpoints in Appwrite such as Create File and Create Deployment are different from other endpoints. These endpoints take multipart form data instead of JSON data. To implement chunked uploads, you will need to implement the following headers</p>
+
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 180px">Header</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>X-Appwrite-Project: [PROJECT-ID]</code></td>
+        <td>Required, provides the ID of your Appwrite Project to the REST API.</td>
+    </tr>
+    <tr>
+        <td><code>Content-type: multipart/form-data; boundary=[Generated Form Boundry]'</code></td>
+        <td>Required, declares content type of the HTTP request and provides a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">boundry</a> which is used to parse the form data.</td>
+    </tr>
+    <tr>
+        <td><code>x-appwrite-id: [FILE-ID]</code></td>
+        <td>Required, declares which file this chunk belongs to.</td>
+    </tr>
+    <tr>
+        <td><code>X-Appwrite-key: [API-KEY]</code></td>
+        <td>Optional, used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
+    </tr>
+    </tbody>
+</table>
+
+<p>While cURL and fetch are great tools to explore other REST endpoints, it's impractical to use for chunked file uploads because you need to split files into chunks.</p>
+
+
+curl 'https://[HOSTNAME_OR_IP]/v1//storage/buckets/default/files' \
+  -H 'Content-Type: multipart/form-data; boundary=------WebKitFormBoundarye0m6iNBQNHlzTpVM' \
+  -H 'X-Appwrite-Project: Transcriptions' \
+  -H 'content-range: bytes 10485760-12582912/12582912' \
+  -H 'x-appwrite-id: 6369b0bc1dcf4ff59051' \
+  --data-raw   $'------WebKitFormBoundarye0m6iNBQNHlzTpVM
+                Content-Disposition: form-data; name="fileId"
+
+                unique()
+                ------WebKitFormBoundarye0m6iNBQNHlzTpVM
+                Content-Disposition: form-data; name="file"; filename="file.txt"
+                Content-Type: application/octet-stream
+
+                [Chunked Data]
+                ------WebKitFormBoundarye0m6iNBQNHlzTpVM
+                Content-Disposition: form-data; name="permissions"
+
+                [Permissions]
+                ------WebKitFormBoundarye0m6iNBQNHlzTpVM--
+                ' \
+  --compressed \
+  --insecure
