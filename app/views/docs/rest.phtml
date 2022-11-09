@@ -3,7 +3,7 @@
 <p>The REST API allows you to access your Appwrite server through HTTP requests, without the need for an SDK. Each endpoint in the API represents a specific operation on a specific resource.</p>
 
 <h2><a href="/docs/rest#headers" id="headers">Headers</a></h2>
-<p>Appwrite's REST APIs expect certain headers to be attached to each request </p>
+<p>Appwrite's REST APIs expect certain headers to be attached to each request:</p>
 
 <table class="full text-size-small">
     <thead>
@@ -80,7 +80,7 @@ Invoke-WebRequest -UseBasicParsing -Uri "https://[HOSTNAME_OR_IP]/v1/account/ses
 <h2>File Handling</h2>
 <p>Appwrite implements resumable, chunked uploads for files larger than 5MB. Chunked uploads send files in chunks of 5MB to reduce memory footprint and increase resilience when handling large files. Appwrite SDKs will automatically handle chunked uploads but it is possible to implement this with the REST API directly.</p>
 
-<p>Upload endpoints in Appwrite such as Create File and Create Deployment are different from other endpoints. These endpoints take multipart form data instead of JSON data. To implement chunked uploads, you will need to implement the following headers</p>
+<p>Upload endpoints in Appwrite such as Create File and Create Deployment are different from other endpoints. These endpoints take multipart form data instead of JSON data. To implement chunked uploads, you will need to implement the following headers:</p>
 
 <table class="full text-size-small">
     <thead>
@@ -92,15 +92,19 @@ Invoke-WebRequest -UseBasicParsing -Uri "https://[HOSTNAME_OR_IP]/v1/account/ses
     <tbody>
     <tr>
         <td><code>X-Appwrite-Project: [PROJECT-ID]</code></td>
-        <td>Required, provides the ID of your Appwrite Project to the REST API.</td>
+        <td>Required, contains the ID of your Appwrite Project to the REST API.</td>
     </tr>
     <tr>
-        <td><code>Content-type: multipart/form-data; boundary=[Generated Form Boundry]'</code></td>
-        <td>Required, declares content type of the HTTP request and provides a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">boundry</a> which is used to parse the form data.</td>
+        <td><code>Content-type: multipart/form-data; boundary=[FORM-BOUNDRY]</code></td>
+        <td>Required, contains the content type of the HTTP request and provides a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">boundry</a> which is used to parse the form data.</td>
+    </tr>
+    <tr>
+        <td><code>content-range: bytes [BYTE-RANGE]</code></td>
+        <td>Required, contains information about which bytes are being transmitted in the format <code>[FIRST-BYTE]-[LAST-BYTE]/[TOTAL-BYTES]</code>.</td>
     </tr>
     <tr>
         <td><code>x-appwrite-id: [FILE-ID]</code></td>
-        <td>Required, declares which file this chunk belongs to.</td>
+        <td>Required, contains which file this chunk belongs to.</td>
     </tr>
     <tr>
         <td><code>X-Appwrite-key: [API-KEY]</code></td>
@@ -109,24 +113,34 @@ Invoke-WebRequest -UseBasicParsing -Uri "https://[HOSTNAME_OR_IP]/v1/account/ses
     </tbody>
 </table>
 
+<p>The multipart form data is structured as follows:</p>
+
 <table class="full text-size-small">
     <thead>
     <tr>
-        <td style="width: 180px">Key:Value</td>
+    <td style="width: 180px">Key</td>
+        <td>Value</td>
+        <td>File Name</td>
         <td>Description</td>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td><code>fileId:[FILE-ID]</code></td>
+        <td><code>fileId</code></td>
+        <td><code>[FILE-ID]</code></td>
+        <td></td>
         <td>Required, contains the file ID of the new file. Use <code>"unique()"</code> as the file ID when uploading the first chunk to obtain a generated UUID. Be sure to use the ID returned from the first request in all following requests.</td>
     </tr>
     <tr>
-        <td><code>file:[CHUNK-DATA]; filename=[FILE-NAME]</code></td>
+        <td><code>file</code></td>
+        <td><code>[CHUNK-DATA]</code></td>
+        <td><code>[FILE-NAME]</code></td>
         <td>Required, contains file chunk data.</td>
     </tr>
     <tr>
-        <td><code>permissions:[PERMISSION ARRAY]</code></td>
+        <td><code>permissions</code></td>
+        <td><code>[PERMISSION ARRAY]</code></td>
+        <td></td>
         <td>Required, declares which file this chunk belongs to.</td>
     </tr>
     </tbody>
@@ -136,12 +150,11 @@ Invoke-WebRequest -UseBasicParsing -Uri "https://[HOSTNAME_OR_IP]/v1/account/ses
 
 <p>The multipart form data posted to file upload endpoints has the following format:</p>
 
-
-<!-- Example request -->
-POST /v1//storage/buckets/default/files HTTP/1.1
+<div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
+    <pre class="line-numbers"><code class="prism language-http" data-prism>POST /v1//storage/buckets/default/files HTTP/1.1
 Host: [HOSTNAME_OR_IP]
 Content-Type: multipart/form-data; boundary=---WD9146A
-X-Appwrite-Project: Transcriptions
+X-Appwrite-Project: demo-project
 content-range: bytes 10485760-12582912/12582912
 x-appwrite-id: 6369b0bc1dcf4ff59051
 
@@ -153,34 +166,59 @@ unique()
 Content-Disposition: form-data; name="file"; filename="file.txt"
 Content-Type: application/octet-stream
 
-[Chunked Data]
+[CHUNKED-DATA]
 ------WebKitFormBoundarye0m6iNBQNHlzTpVM
 Content-Disposition: form-data; name="permissions"
 
 ["read(\"user:627a958ded6424a98a9f\")"]
-------WebKitFormBoundarye0m6iNBQNHlzTpVM--
+------WebKitFormBoundarye0m6iNBQNHlzTpVM--</code></pre>
+</div>
 
+<p></p>
 
-<!-- curl 'https://[HOSTNAME_OR_IP]/v1//storage/buckets/default/files' \
-  -H 'Content-Type: multipart/form-data; boundary=------WebKitFormBoundarye0m6iNBQNHlzTpVM' \
-  -H 'X-Appwrite-Project: Transcriptions' \
-  -H 'content-range: bytes 10485760-12582912/12582912' \
-  -H 'x-appwrite-id: 6369b0bc1dcf4ff59051' \
-  --data-raw   $'------WebKitFormBoundarye0m6iNBQNHlzTpVM
-                Content-Disposition: form-data; name="fileId"
+<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// 5MB Chunks.
+const CHUNK_SIZE = 1024 * 1024 * 5;
 
-                unique()
-                ------WebKitFormBoundarye0m6iNBQNHlzTpVM
-                Content-Disposition: form-data; name="file"; filename="file.txt"
-                Content-Type: application/octet-stream
+// Form Data for the first chunk.
+var form1 = new FormData();
+form1.append('fileId', "unique()");
+form1.append('filename', 'exampleFile.txt');
+form1.append('file', dataChunks[0], { filename:  'exampleFile.txt'});
 
-                [Chunked Data]
-                ------WebKitFormBoundarye0m6iNBQNHlzTpVM
-                Content-Disposition: form-data; name="permissions"
+// Upload the first chunk.
+const request1 = await fetch("http://[HOSTNAME_OR_IP]/v1/storage/buckets/default/files", {
+  "headers": {
+    "content-range": "bytes 0-5242879/6000000",
+    "content-type": `multipart/form-data; boundary=${form1.getBoundary()}`,
+    "x-appwrite-project": "demo-project",
+    "X-Appwrite-key":APPWRITE_KEY,
+  },
+  "body": form1,
+  "method": "POST"
+});
 
-                ["read(\"user:627a958ded6424a98a9f\")"]
-                ------WebKitFormBoundarye0m6iNBQNHlzTpVM--
-                ' \
-  --compressed \
-  --insecure
- -->
+// Save the generated file ID returned by Appwrite.
+const response1 = await request1.json();
+const generatedFileId = response1['$id'];
+
+// Form Data for the second chunk.
+var form2 = new FormData();
+form2.append('fileId', generatedFileId);
+form2.append('filename', 'exampleFile.txt');
+form2.append('file', dataChunks[1], { filename:  'exampleFile.txt'});
+
+// Upload the second chunk
+const request2 = await fetch("http://[HOSTNAME_OR_IP]/v1/storage/buckets/default/files", {
+  "headers": {
+    "content-range": "bytes 5242890-6000000/6000000",
+    "content-type": `multipart/form-data; boundary=${form2.getBoundary()}`,
+    "x-appwrite-project": "demo-project",
+    "x-appwrite-id": generatedFileId, // File ID from the first chunk.
+    "X-Appwrite-key":APPWRITE_KEY,
+  },
+  "body": form2,
+  "method": "POST"
+});
+
+const response2 = await request2.json();</div>
