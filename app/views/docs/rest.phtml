@@ -31,51 +31,28 @@
 <h3>Client Authentication</h3>
 <p>You can create account sessions with POST requests to the <a href="docs/client/account">Account API</a>. Sessions are persisted using cookies like any other REST API. You can learn more about session persistence in the <a href="/docs/authentication#persistence">Authentication Guide</a>.</p>
 <p>The example below shows creating an account session with the <a href="/docs/client/account?sdk=web-default#accountCreateEmailSession">Create Account Session with Email</a> endpoint.</p>
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Fetch</h3>
-        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>fetch("https://[HOSTNAME_OR_IP]/v1/account/sessions/email", {
-  "headers": {
-    "content-type": "application/json",
-    "x-appwrite-project": "6318f4f66a3bb5b4d525"
-  },
-  "body": "{\"email\":\"vincent123456@appwrite.io\",\"password\":\"vincent123456\"}",
-  "method": "POST",
-});</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>cURL</h3>
-        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>curl 'https://[HOSTNAME_OR_IP]/v1/account/sessions/email' \
-  -H 'content-type: application/json' \
-  -H 'x-appwrite-project: 6062f9c2c09ce' \
-  -d '{"email":"<fill>","password":"<fill>"}'</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>PowerShell</h3>
-        <div class="ide margin-bottom" data-lang="powershell" data-lang-label="PowerShell">
-            <pre class="line-numbers"><code class="prism language-powershell" data-prism>$session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
-Invoke-WebRequest -UseBasicParsing -Uri "https://[HOSTNAME_OR_IP]/v1/account/sessions/email" `
--Method "POST" `
--WebSession $session `
--Headers @{
-  "method"="POST"
-  "path"="/v1/account/sessions/email"
-  "scheme"="https"
-  "x-appwrite-project"="6062f9c2c09ce"
-} `
--ContentType "application/json" `
--Body "{`"email`":`"vincent123456@appwrite.io`",`"password`":`"vincent123456`"}"</code></pre>
-        </div>
-    </li>
-</ul>
+<div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
+    <pre class="line-numbers"><code class="prism language-http" data-prism>POST /v1/account/sessions/email  HTTP/1.1
+Host: [HOSTNAME_OR_IP]
+Content-Type: application/json
+X-Appwrite-Project: 5df5acd0d48c2
+X-Appwrite-Response-Format: 1.0.0
+
+{"email":"example@email.com","password":"password"}</code></pre>
+</div>
 
 <h2>Server Authentication</h2>
 <p>Server integrations use API keys to authenticate and are typically used for backend appications.</p>
 <p>You don't need to create an account session before making requests to Server APIs. Simply pass an <a href="/docs/keys">API key</a> in the <code>X-Appwrite-key: [API-KEY]</code> header with the appropriate scopes.</p>
+
+<div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
+    <pre class="line-numbers"><code class="prism language-http" data-prism>GET /databases/{databaseId}/collections/{collectionId}/documents HTTP/1.1
+Host: [HOSTNAME_OR_IP]
+Content-Type: application/json
+X-Appwrite-Project: [PROJECT_ID]
+X-Appwrite-key: [API_KEY]
+X-Appwrite-Response-Format: 1.0.0</code></pre>
+</div>
 
 <h2>File Handling</h2>
 <p>Appwrite implements resumable, chunked uploads for files larger than 5MB. Chunked uploads send files in chunks of 5MB to reduce memory footprint and increase resilience when handling large files. Appwrite SDKs will automatically handle chunked uploads but it is possible to implement this with the REST API directly.</p>
@@ -151,7 +128,7 @@ Invoke-WebRequest -UseBasicParsing -Uri "https://[HOSTNAME_OR_IP]/v1/account/ses
 <p>The multipart form data posted to file upload endpoints has the following format:</p>
 
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
-    <pre class="line-numbers"><code class="prism language-http" data-prism>POST /v1//storage/buckets/default/files HTTP/1.1
+    <pre class="line-numbers"><code class="prism language-http" data-prism>POST /v1/storage/buckets/default/files HTTP/1.1
 Host: [HOSTNAME_OR_IP]
 Content-Type: multipart/form-data; boundary=---WD9146A
 X-Appwrite-Project: demo-project
@@ -173,52 +150,3 @@ Content-Disposition: form-data; name="permissions"
 ["read(\"user:627a958ded6424a98a9f\")"]
 ------WebKitFormBoundarye0m6iNBQNHlzTpVM--</code></pre>
 </div>
-
-<p></p>
-
-<div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-    <pre class="line-numbers"><code class="prism language-javascript" data-prism>// 5MB Chunks.
-const CHUNK_SIZE = 1024 * 1024 * 5;
-
-// Form Data for the first chunk.
-var form1 = new FormData();
-form1.append('fileId', "unique()");
-form1.append('filename', 'exampleFile.txt');
-form1.append('file', dataChunks[0], { filename:  'exampleFile.txt'});
-
-// Upload the first chunk.
-const request1 = await fetch("http://[HOSTNAME_OR_IP]/v1/storage/buckets/default/files", {
-  "headers": {
-    "content-range": "bytes 0-5242879/6000000",
-    "content-type": `multipart/form-data; boundary=${form1.getBoundary()}`,
-    "x-appwrite-project": "demo-project",
-    "X-Appwrite-key":APPWRITE_KEY,
-  },
-  "body": form1,
-  "method": "POST"
-});
-
-// Save the generated file ID returned by Appwrite.
-const response1 = await request1.json();
-const generatedFileId = response1['$id'];
-
-// Form Data for the second chunk.
-var form2 = new FormData();
-form2.append('fileId', generatedFileId);
-form2.append('filename', 'exampleFile.txt');
-form2.append('file', dataChunks[1], { filename:  'exampleFile.txt'});
-
-// Upload the second chunk
-const request2 = await fetch("http://[HOSTNAME_OR_IP]/v1/storage/buckets/default/files", {
-  "headers": {
-    "content-range": "bytes 5242890-6000000/6000000",
-    "content-type": `multipart/form-data; boundary=${form2.getBoundary()}`,
-    "x-appwrite-project": "demo-project",
-    "x-appwrite-id": generatedFileId, // File ID from the first chunk.
-    "X-Appwrite-key":APPWRITE_KEY,
-  },
-  "body": form2,
-  "method": "POST"
-});
-
-const response2 = await request2.json();</div>
