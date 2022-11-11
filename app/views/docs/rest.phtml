@@ -150,3 +150,42 @@ Content-Disposition: form-data; name="permissions"
 ["read(\"user:627a958ded6424a98a9f\")"]
 ------WebKitFormBoundarye0m6iNBQNHlzTpVM--</code></pre>
 </div>
+
+<h2>Permissions</h2>
+
+<p>Appwrite SDKs have helpers to generate permission strings, but when using Appwrite without SDKs, you'd need to create the strings yourself.</p>
+
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 180px">SDK</td>
+        <td>Permission String</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>Role.any()</code></td>
+        <td><code>"any"</code></td>
+    </tr>
+    <tr>
+        <td><code>Role.guests()</code></td>
+        <td><code>"user:[ID]"</code></td>
+    </tr>
+    <tr>
+        <td><code>Role.users([STATUS])</code></td>
+        <td><code>"users/[STATUS]"</code></td>
+    </tr>
+    <tr>
+        <td><code>Role.user([USER_ID], [STATUS])</td>
+        <td><code>"user:[USER_ID]/[STATUS]"</code></td>
+    </tr>
+    <tr>
+        <td><code>Role.team([TEAM_ID])</td>
+        <td><code>"team:[TEAM_ID]"</code></td>
+    </tr>
+    <tr>
+        <td><code>Role.team([TEAM_ID], [ROLE])</td>
+        <td><code>"team:[TEAM_ID]/[ROLE]"</code></td>
+    </tr>
+    </tbody>
+</table>
