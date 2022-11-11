@@ -155,11 +155,46 @@ Content-Disposition: form-data; name="permissions"
 
 <p>Appwrite SDKs have helpers to generate permission strings, but when using Appwrite without SDKs, you'd need to create the strings yourself.</p>
 
+<h3>Permission Types</h3>
+
 <table class="full text-size-small">
     <thead>
     <tr>
         <td style="width: 180px">SDK</td>
         <td>Permission String</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>Permission.read()	</code></td>
+        <td><code>"read(\"[PERMISSION_ROLE]\")"</code></td>
+    </tr>
+    <tr>
+        <td><code>Permission.create()</code></td>
+        <td><code>"create(\"[PERMISSION_ROLE]\")"</code></td>
+    </tr>
+    <tr>
+        <td><code>Permission.update()</code></td>
+        <td><code>"update(\"[PERMISSION_ROLE]\")"</code></td>
+    </tr>
+    <tr>
+        <td><code>Permission.delete()</td>
+        <td><code>"delete(\"[PERMISSION_ROLE]\")"</code></td>
+    </tr>
+    <tr>
+        <td><code>Permission.write()</td>
+        <td><code>"write(\"[PERMISSION_ROLE]\")"</code></td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Permission Roles</h3>
+
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 180px">SDK</td>
+        <td>Role String</td>
     </tr>
     </thead>
     <tbody>
@@ -189,3 +224,78 @@ Content-Disposition: form-data; name="permissions"
     </tr>
     </tbody>
 </table>
+
+<ul>
+    <li class="margin-bottom"><a href="/docs/permissions" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Learn more about permissions</a></li>
+</ul>
+
+<h2>Unique ID</h2>
+Appwrite's SDKs have a helper <code>ID.unqiue()</code> to generate unique IDs. When using Appwrite without an SDK, pass the string <code>"unique()"</code> into the ID parameter.
+
+<h2>Query Methods</h2>
+Appwrite's SDKs provides a <code>Query</code> class to generate query strings. When using Appwrite without an SDK, you can template your own strings with the format below.
+
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Query Method</th>
+            <th>Query String</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>equal</td>
+            <td><code>"equal(\"attribute\", [\"value1\", ...])"</code></td>
+        </tr>
+        <tr>
+            <td>notEqual</td>
+            <td><code>"notEqual(\"attribute\", [\"value1\", ...])"</code></td>
+        </tr>
+        <tr>
+            <td>lessThan</td>
+            <td><code>"lessThan(\"attribute\", [\"value1\", ...])"</code></td>
+        </tr>
+        <tr>
+            <td>lessThanEqual</td>
+            <td><code>"lessThanEqual(\"attribute\", [\"value1\", ...])"</code></td>
+        </tr>
+        <tr>
+            <td>greaterThan</td>
+            <td><code>"greaterThan(\"attribute\", [\"value1\", ...])"</code></td>
+        </tr>
+        <tr>
+            <td>greaterThanEqual</td>
+            <td><code>"greaterThanEqual(\"attribute\", [\"value1\", ...])"</code></td>
+        </tr>
+        <tr>
+            <td>search</td>
+            <td><code>"search(\"attribute\", [\"value1\", ...])"</code></td>
+        </tr>
+        <tr>
+            <td>orderDesc</td>
+            <td><code>"orderDesc(\"attribute\")"</code></td>
+        </tr>
+        <tr>
+            <td>orderAsc</td>
+            <td><code>"orderAsc(\"attribute\")"</code></td>
+        </tr>
+        <tr>
+            <td>cursorAfter</td>
+            <td><code>"cursorAfter(\"documentId\")"</code></td>
+        </tr>
+        <tr>
+            <td>cursorBefore</td>
+            <td><code>"cursorBefore(\"documentId\")"</code></td>
+        </tr>
+        <tr>
+            <td>limit</td>
+            <td><code>"limit(0)"</code></td>
+        </tr>
+        <tr>
+        <td>offset</td>
+            <td><code>"offset(0)"</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Full REST API docs</h2>
