@@ -8,7 +8,7 @@
 <table class="full text-size-small">
     <thead>
     <tr>
-        <td style="width: 180px">Header</td>
+        <td style="width: 300px">Header</td>
         <td>Description</td>
     </tr>
     </thead>
@@ -62,7 +62,7 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
 <table class="full text-size-small">
     <thead>
     <tr>
-        <td style="width: 180px">Header</td>
+        <td style="width: 300px">Header</td>
         <td>Description</td>
     </tr>
     </thead>
@@ -95,27 +95,27 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
 <table class="full text-size-small">
     <thead>
     <tr>
-    <td style="width: 180px">Key</td>
-        <td>Value</td>
-        <td>File Name</td>
-        <td>Description</td>
+        <td style="width: 100px">Key</td>
+        <td style="width: 150px">Value</td>
+        <td style="width: 100px">File Name</td>
+        <td >Description</td>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td><code>fileId</code></td>
+        <td>fileId</td>
         <td><code>[FILE-ID]</code></td>
         <td></td>
-        <td>Required, contains the file ID of the new file. Use <code>"unique()"</code> as the file ID when uploading the first chunk to obtain a generated UUID. Be sure to use the ID returned from the first request in all following requests.</td>
+        <td>Required, contains the file ID of the new file. Use <code>"unique()"</code> for a UUID</td>
     </tr>
     <tr>
-        <td><code>file</code></td>
+        <td>file</td>
         <td><code>[CHUNK-DATA]</code></td>
         <td><code>[FILE-NAME]</code></td>
         <td>Required, contains file chunk data.</td>
     </tr>
     <tr>
-        <td><code>permissions</code></td>
+        <td>permissions</td>
         <td><code>[PERMISSION ARRAY]</code></td>
         <td></td>
         <td>Required, declares which file this chunk belongs to.</td>
@@ -160,7 +160,7 @@ Content-Disposition: form-data; name="permissions"
 <table class="full text-size-small">
     <thead>
     <tr>
-        <td style="width: 180px">SDK</td>
+        <td style="width: 250px">SDK</td>
         <td>Permission String</td>
     </tr>
     </thead>
@@ -193,7 +193,7 @@ Content-Disposition: form-data; name="permissions"
 <table class="full text-size-small">
     <thead>
     <tr>
-        <td style="width: 180px">SDK</td>
+        <td style="width: 250px">SDK</td>
         <td>Role String</td>
     </tr>
     </thead>
@@ -230,15 +230,18 @@ Content-Disposition: form-data; name="permissions"
 </ul>
 
 <h2>Unique ID</h2>
+<p>
 Appwrite's SDKs have a helper <code>ID.unqiue()</code> to generate unique IDs. When using Appwrite without an SDK, pass the string <code>"unique()"</code> into the ID parameter.
+</p>
 
 <h2>Query Methods</h2>
+<p>
 Appwrite's SDKs provides a <code>Query</code> class to generate query strings. When using Appwrite without an SDK, you can template your own strings with the format below.
-
+</p>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
         <tr>
-            <th style="width: 250px">Query Method</th>
+            <th style="width: 150px">Query Method</th>
             <th>Query String</th>
         </tr>
     </thead>
@@ -299,8 +302,9 @@ Appwrite's SDKs provides a <code>Query</code> class to generate query strings. W
 </table>
 
 <h2>OpenAPI and Swagger Specs</h2>
+<p>
 Appwrite provides full REST API specs in the OpenAPI 3 and Swagger format every release. These can be accessed through Appwrites GitHub repository and rendered using a variety of parsers and tools.
-
+</p>
 <ul>
     <li class="margin-bottom"><a href="https://github.com/appwrite/appwrite/tree/master/app/config/specs" target="_blank" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Find REST API specs for your Appwrite version</a></li>
 </ul>
