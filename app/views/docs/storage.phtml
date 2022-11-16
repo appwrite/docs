@@ -13,24 +13,18 @@
 
 <h4><a href="/docs/storage#permission" id="permission">Permissions</a></h4>
 
-<p>As buckets are very similar to collections we have in the database, we have a similar permission model. Buckets support either bucket level permission or file level permission to allow different ways to manage access to your buckets and files. Check out the <a href="/docs/permissions">Permissions</a>  documentation to learn more about the permissions types available.</p>
+<p>The Storage Service allows you to configure permissions at both the bucket level and the file level. When a user has the appropriate type of <a href="/docs/permissions/">access permissions</a> granted at <b>either</b> the bucket or the file level, they will be able to access the file. If the permission field is left empty, no one can access the file.</p>
 
-<h4>File-Level Permissions</h4>
-<p>With this permission model, you have granular access control over every file, and users will only be able to access files for which they have explicit permissions. This permission model requires file permissions, and bucket permissions are optional.
+<h5>File Level Permissions</h5>
+<p>File level permissions grant access to individual files. File level permissions are only enabled if File Security is enabled in the settings of your bucket.
 </p>
 
-<h4>Bucket-Level Permissions</h4>
-<p>With bucket-level permissions, you assign permissions once for every file in the buckets' settings - users with "read" access to the bucket can see all files in that bucket. This permission model requires you to set bucket permissions on the bucket settings page. File permissions are optional and will not be evaluated even when set.</p>
-
-<div class="notice margin-top-large margin-bottom-large">
-    <h5>Active Session Required</h5>
-
-    <p>For security purposes, an active Account session is required to create resources. So, even if wildcard write permissions are set, only logged-in users can create files in a bucket. If you require this behavior for your app, create an <a href="/docs/client/account?sdk=web-default#accountCreateAnonymousSession" target="_blank">anonymous session</a> first. An active session helps Appwrite enforce rate-control limits and protect your projects from intensive write operations.</p>
-</div>
+<h5>Bucket Level Permissions</h5>
+<p>Bucket level permissions apply to every file in the bucket.</p>
 
 <h4><a href="/docs/storage#bucketConfig" id="bucketConfig">More Bucket Configurations</a></h4>
 
-<p>Unlike collections, storage buckets have more configuration options regarding the type and size of the files in the bucket, encryption, and anti-virus scanning. If you look at the bucket settings or the REST API example above, you can find these configurations. Let's look at what those are:</p>
+<p>Storage buckets have many configuration options, including the type and maximum size of files in the bucket, whether encryption or anti-virus is enabled,  and the compression algorithm to use. If you look at the bucket settings or the REST API example above, you can find these configurations. Let's look at what those are:</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -63,9 +57,9 @@
 
 <h2><a href="/docs/storage#createFile" id="createFile">Create File</a></h2>
 
-<p>After you create a bucket or have navigated to bucket details, you can access the `Files` tab so you can upload, view, delete and update files in the bucket using the Appwrite project's dashboard. You can also perform all those operations from Appwrite's client SDK, server SDKs, and REST APIs as long as you have the proper permission.</p>
+<p>After you create a bucket or have navigated to bucket details, you can access the <b>Files</b> tab so you can upload, view, delete and update files in the bucket using the Appwrite project's dashboard. You can also perform all those operations from Appwrite's client SDK, server SDKs, and REST APIs as long as you have the proper permission.</p>
 
-<p>When you are in the `Files` tab, you can click <b>Add File</b> and select a file to upload. If the bucket is configured to accept the file type and size you are uploading, your file will be uploaded, and you will see the file in the list of files.
+<p>When you are in the <b>Files</b> tab, you can click <b>Add File</b> and select a file to upload. If the bucket is configured to accept the file type and size you are uploading, your file will be uploaded, and you will see the file in the list of files.
 </p>
 
 <p>You can also upload files programmatically using our SDKs</p>
@@ -74,17 +68,19 @@
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Storge } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Storage } from "appwrite";
 
-const client = new Client();
-
-client
+const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
 const storage = new Storage(client);
 
-const promise = storage.createFile('[BUCKET_ID]', 'unique()', document.getElementById('uploader').files[0]);
+const promise = storage.createFile(
+    '[BUCKET_ID]',
+    ID.unique(),
+    document.getElementById('uploader').files[0]
+);
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -100,58 +96,38 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 void main() { // Init SDK
-  Client client = Client();
-  Storage storage = Storage(client);
+  final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
-  client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-  ;
-  Future result = storage.createFile(
+  final storage = Storage(client);
+
+  final file = await storage.createFile(
     bucketId: '[BUCKET_ID]',
-    fileId: '[FILE_ID]',
+    fileId: ID.unique(),
     file: InputFile(path: './path-to-files/image.jpg', filename: 'image.jpg'),
   );
-
-  result
-    .then((response) {
-      print(response);
-    }).catchError((error) {
-      print(error.response);
-  });
 }</code></pre>
         </div>
     </li>
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import io.appwrite.Client
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Storage
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+suspend fun main() {
+    val client = Client(applicationContext)
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+        .setProject("5df5acd0d48c2") // Your project ID
 
-        val client = Client(applicationContext)
-            .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-            .setProject("5df5acd0d48c2") // Your project ID
+    val storage = Storage(client)
 
-        val storage = Storage(client)
-
-        GlobalScope.launch {
-            val response = storage.createFile(
-                bucketId = "[BUCKET_ID]",
-                fileId = "[FILE_ID]",
-                file = File("./path-to-files/image.jpg"),
-            )
-            val json = response.body?.string()        
-        }
-    }
+    val file = storage.createFile(
+        bucketId = "[BUCKET_ID]",
+        fileId = ID.unique(),
+        file = File("./path-to-files/image.jpg"),
+    )
 }</code></pre>
         </div>
     </li>
@@ -162,16 +138,19 @@ class MainActivity : AppCompatActivity() {
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-      .setProject("5df5acd0d48c2") // Your project ID
+      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+      .setProject("[PROJECT_ID]")
 
     let storage = Storage(client)
+
     let file = try await storage.createFile(
         bucketId: "[BUCKET_ID]",
-        fileId: "[FILE_ID]",
-        file: File(name: "image.jpg", buffer: yourByteBuffer)
+        fileId: ID.unique(),
+        file: InputFile.fromBuffer(yourByteBuffer,
+            filename: "image.jpg",
+            mimeType: "image/jpeg"
+        )
     )
-    print(file.toMap())
 }</code></pre>
         </div>
     </li>

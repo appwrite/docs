@@ -1,14 +1,15 @@
-<p>Appwrite is a self-hosted backend server packaged as a set of Docker containers. You can install and run Appwrite on any operating system that can run a <a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">Docker CLI</a>. You can use Appwrite on your local desktop or cloud provider of your choice.</p>
+<p>Appwrite is a self-hosted backend server, packaged as a set of Docker containers. You can install and run Appwrite on any operating system that can run a <a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">Docker CLI</a>. You can use Appwrite on your local machine or a cloud provider of your choice.</p>
 
 <h2><a href="/docs/installation#systemRequirements" id="systemRequirements">System Requirements</a></h2>
 
-<p>Appwrite was designed to run well on both small and large deployment. The minimum requirements to run Appwrite is as little as <b>1 CPU core</b> and <b>2GB of RAM</b>, and an operating system that supports Docker.</p>
+<p>Appwrite is designed to run well on both small and large deployments. The minimum requirements to run Appwrite are as little as <b>1 CPU core</b> and <b>2GB of RAM</b>, and an operating system that supports Docker.</p>
+
 
 <p>Appwrite requires <a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">Docker Compose Version 2</a>. To install Appwrite, make sure your Docker installation is updated to support Composer V2.</p>
 
 <div class="notice margin-bottom">
     <h3>Upgrading From Older Versions</h3>
-    <p>If you are migrating from an older version of Appwrite, you need to follow the <a href="/docs/upgrade">migration instructions</a></p>
+    <p>If you are migrating from an older version of Appwrite, you need to follow the <a href="/docs/upgrade">migration instructions</a>.</p>
 </div>
 
 <h2><a href="/docs/installation#installWithDocker" id="installWithDocker">Install with Docker</a></h2>
@@ -27,7 +28,7 @@
 
 <h3><a href="/docs/installation#windows" id="windows">Windows</a></h3>
 
-<p>Hyper-V and Containers Windows features must be enabled to run Appwrite on Windows with Docker. If you don't have these features available, you can install <a href="https://docs.docker.com/desktop/windows/install/" target="_blank" rel="noopener">Docker Desktop</a> that uses Virtualbox to run Appwrite on a Virtual Machine.</p>
+<p>Hyper-V and Containers Windows features must be enabled to run Appwrite on Windows with Docker. If you don't have these features available, you can install <a href="https://docs.docker.com/desktop/windows/install/" target="_blank" rel="noopener">Docker Desktop</a> which uses Virtualbox to run Appwrite on a Virtual Machine.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -102,25 +103,25 @@
 
 <h3><a href="/docs/installation#manual" id="manual">Manual (using docker-compose.yml)</a></h3>
 
-<p>For advanced Docker users, the manual installation might seem more familiar. To setup Appwrite manually, download the Appwrite base <a href="/install/compose" target="_blank">docker-compose.yml</a> and <a href="/install/env" target="_blank">.env</a> files, then move them inside a directory named 'appwrite'. After the download completes, update the different environment variables as you wish in the .env file and start the Appwrite stack using the following Docker command:</p>
+<p>For advanced Docker users, the manual installation might seem more familiar. To set up Appwrite manually, download the Appwrite base <a href="/install/compose" target="_blank">docker-compose.yml</a> and <a href="/install/env" target="_blank">.env</a> files, then move them inside a directory named <code>appwrite</code>. After the download completes, update the different environment variables as you wish in the <code>.env</code> file and start the Appwrite stack using the following Docker command:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose up -d --remove-orphans</code></pre>
 </div>
 
-<p>Once the Docker installation completes, go to your machine hostname or IP address on your browser to access the Appwrite console. Please notice that on non-linux native hosts the server might take a few minutes to start after installation completes.</p>
+<p>Once the Docker installation completes, go to your machine's hostname or IP address on your browser to access the Appwrite console. Please note that on hosts that are not Linux-native, the server might take a few minutes to start after installation completes.</p>
 
-<h3><a href="/docs/installation#stop" id="manual">Stop</a></h3>
+<h3><a href="/docs/installation#stop" id="stop">Stop</a></h3>
 
-<p>You can stop your Appwrite containers by using the following command executed from the same directory as your docker-compose.yml file.</p>
+<p>You can stop your Appwrite containers by using the following command executed from the same directory as your <code>docker-compose.yml</code> file.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose stop</code></pre>
 </div>
 
-<h3><a href="/docs/installation#uninstall" id="manual">Uninstall</a></h3>
+<h3><a href="/docs/installation#uninstall" id="uninstall">Uninstall</a></h3>
 
-<p>To stop and remove your Appwrite containers you can use the following command executed from the same directory as your docker-compose.yml file.</p>
+<p>To stop and remove your Appwrite containers, you can use the following command executed from the same directory as your <code>docker-compose.yml</code> file.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose down -v</code></pre>
@@ -128,7 +129,7 @@
 
 <h2><a href="/docs/installation#learnMore" id="learnMore">Learn More</a></h2>
 
-<ul>
+<ul class="margin-top margin-bottom-large text-size-normal">
     <li class="margin-bottom-tiny"><a href="/docs/production" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Running Appwrite in production</a></li>
     <li class="margin-bottom-tiny"><a href="/docs/environment-variables" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Appwrite server environment variables</a></li>
     <li class="margin-bottom-tiny"><a href="/docs/email-delivery" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Appwrite setting a custom SMTP server</a></li>

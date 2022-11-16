@@ -136,7 +136,7 @@ client
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2") // Your project ID
 
-let realtime = Realtime(client: client)
+let realtime = Realtime(client)
 
 // Subscribe to files channel
 let subscription = realtime.subscribe(channels: ["files"]) { message in

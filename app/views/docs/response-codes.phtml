@@ -26,6 +26,12 @@ $errorTypes = $this->getParam('errors', []);
         </tr>
 
         <tr>
+            <td data-title="Code: ">202</td>
+            <td data-title="Text: ">Accepted</td>
+            <td data-title="Description: ">The requested change has been accepted for processing but has not been completed.</td>
+        </tr>
+
+        <tr>
             <td data-title="Code: ">204</td>
             <td data-title="Text: ">No Content</td>
             <td data-title="Description: ">The server has successfully fulfilled the request and that there is no additional content to send in the response payload body. This status will usually return on successful delete operations.</td>
@@ -74,6 +80,12 @@ $errorTypes = $this->getParam('errors', []);
         </tr>
 
         <tr>
+            <td data-title="Code: ">413</td>
+            <td data-title="Text: ">Payload Too Large</td>
+            <td data-title="Description: ">This indicates that the request entity is larger than limits defined by server. This status code will usually appear happen when uploading a file or function that is too large</td>
+        </tr>
+
+        <tr>
             <td data-title="Code: ">416</td>
             <td data-title="Text: ">Invalid Range</td>
             <td data-title="Description: ">Invalid value in the range or content-range headers. Usually returned while uploading or downloading files using range header but the provided range value is not valid.</td>
@@ -112,7 +124,7 @@ $errorTypes = $this->getParam('errors', []);
     </tbody>
 </table>
 
-<h2><a href="/docs/error-codes#errorMessages" id="errorMessages">Error Messages</a></h2>
+<h2><a href="/docs/response-codes#errorMessages" id="errorMessages">Error Messages</a></h2>
 
 <p>When the Appwrite APIs return error messages, it does so in JSON format. For example, an error might look like this:</p>
 
@@ -125,9 +137,9 @@ $errorTypes = $this->getParam('errors', []);
 </code></pre>
 </div>
 
-<h2><a href="/docs/error-codes#errorTypes" id="errorTypes">Error Types</a></h2>
+<h2><a href="/docs/response-codes#errorTypes" id="errorTypes">Error Types</a></h2>
 
-<p> Appwrite also passes convenient error types in addition to the HTTP response codes to help you get more fine grained control over what went wrong and allowing you to display relevant error messages in your applications. Error types are are convenient to identify the type of error that occurred. </p>
+<p> Appwrite also passes convenient error types in addition to the HTTP response codes to help you get more fine grained control over what went wrong and allowing you to display relevant error messages in your applications. Error types are convenient to identify the type of error that occurred. </p>
 
 <p> For eg: A <span class="tag">400</span> HTTP response code could indicate a Bad Request due to a variety of reasons and error types can help you pinpoint the exact <span class="tag">400</span> error. Appwrite currently supports the following error types:</p>
 

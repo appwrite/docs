@@ -7,8 +7,6 @@
 
     <p>At present, we support migrations only to the <b>immediately higher versions</b>, i.e from 0.6 to 0.7 and 0.7 to 0.8 and so on. So if you're trying to migrate from 0.6 to 0.8, you will first need to migrate to 0.7 and then to 0.8</p>
 
-    <p>You do not need to run migration when upgrading to a minor version. For example, going from 0.13.0 to 0.13.2 would not require running migration.</p>
-
     <p>It is highly recommended to <a href="https://gist.github.com/Meldiron/47b5851663668102a676aff43c6341f7" target="_blank" rel="noopener">backup your server</a> data before running the migration. It is recommended to run the migration process on a dev instance and make sure your application is working well and that you have checked for any breaking changes in the new version <a href="https://github.com/appwrite/appwrite/tags" target="_blank" rel="noopener">changelog.</a></p>
 </div>
 
@@ -69,7 +67,10 @@
 <p>Verify that the <b>STATUS</b> doesn't have any errors and all the <b>appwrite/appwrite</b> containers have version : <?php echo APP_VERSION_STABLE; ?></p>
 
 <h3><a href="/docs/upgrade#run-the-migration" id="migration">Running the Migration</a></h3>
-
+<div class="notice margin-bottom">
+    <h3>Upgrading to a minor version</h3>
+    <p>You do not need to run migration when upgrading to a minor version. For example, going from 0.13.0 to 0.13.2 would not require running migration.</p>
+</div>    
 <p>We can now start the migration. Navigate to the <b>appwrite</b> directory where your <b>docker-compose.yml</b> is present and run the following command</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
@@ -79,4 +80,4 @@ docker compose exec appwrite migrate</code></pre>
 
 <p>The data migration can take longer depending on the amount of data your Appwrite instance contains. The Appwrite migration command uses multi-threading to speed up the process, meaning that adding more CPU cores can help speed up the process.</p>
 
-<p>Once the migration process has completed successfully, you're all set to use the latest version of Appwrite!</p>
+<p>Once the migration process has been completed successfully, you're all set to use the latest version of Appwrite!</p>
