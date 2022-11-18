@@ -7,7 +7,7 @@ $runtimes = $this->getParam('runtimes', []);
 
 ?>
 
-<p>Appwrite Functions allow you to extend and customize your Appwrite server functionality by executing your custom code. Appwrite can execute your custom code in response to any <a href="/docs/webhooks#events">Appwrite system event</a> like account creation, user login, or document update. You can also schedule your functions to run according to a CRON schedule or start them manually by triggering your function from an HTTP endpoint using the Appwrite client or server APIs.</p>
+<p>Appwrite Functions allow you to extend and customize your Appwrite server functionality by executing your custom code. Appwrite can execute your custom code in response to any <a href="/docs/events" target="_blank">Appwrite system event</a> like account creation, user login, or document update. You can also schedule your functions to run according to a CRON schedule or start them manually by triggering your function from an HTTP endpoint using the Appwrite client or server APIs.</p>
 
 <p>Appwrite Functions run in a secure, isolated Docker container. By default, Appwrite supports multiple runtimes for different languages that you can use to run your code.</p>
 
@@ -547,6 +547,8 @@ const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
     .setProject('[PROJECT_ID]');
 
+const functions = new Functions(client);
+
 let promise = functions.createExecution('[FUNCTION_ID]');
 
 promise.then(function (response) {
@@ -576,7 +578,7 @@ void main() async {
         </div>
     </li>
     <li>
-        <h3>iOS</h3>
+        <h3>Apple</h3>
 
         <div class="ide margin-bottom" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
@@ -737,7 +739,7 @@ suspend fun main() {
             <td>
                 APPWRITE_FUNCTION_EVENT
             </td>
-            <td>Your function event name. This value is available only when your function trigger is 'event.' This variable value can be any of Appwrite <a href="/docs/webhooks#events">system events</a>.</td>
+            <td>Your function event name. This value is available only when your function trigger is 'event.' This variable value can be any of Appwrite <a href="/docs/events">system events</a>.</td>
         </tr>
         <tr>
             <td>
