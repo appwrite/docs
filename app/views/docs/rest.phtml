@@ -181,23 +181,23 @@ read("user:627a958ded6424a98a9f")
     <tbody>
     <tr>
         <td><code>Permission.read()</code></td>
-        <td><code>"read(\"[PERMISSION_ROLE]\")"</code></td>
+        <td><code>read("[PERMISSION_ROLE]")</code></td>
     </tr>
     <tr>
         <td><code>Permission.create()</code></td>
-        <td><code>"create(\"[PERMISSION_ROLE]\")"</code></td>
+        <td><code>create("[PERMISSION_ROLE]")</code></td>
     </tr>
     <tr>
         <td><code>Permission.update()</code></td>
-        <td><code>"update(\"[PERMISSION_ROLE]\")"</code></td>
+        <td><code>update("[PERMISSION_ROLE]")</code></td>
     </tr>
     <tr>
         <td><code>Permission.delete()</td>
-        <td><code>"delete(\"[PERMISSION_ROLE]\")"</code></td>
+        <td><code>delete("[PERMISSION_ROLE]")</code></td>
     </tr>
     <tr>
         <td><code>Permission.write()</td>
-        <td><code>"write(\"[PERMISSION_ROLE]\")"</code></td>
+        <td><code>write("[PERMISSION_ROLE]")</code></td>
     </tr>
     </tbody>
 </table>
@@ -269,27 +269,27 @@ Appwrite's SDKs provides a <code>Query</code> class to generate query strings. W
     <tbody>
         <tr>
             <td>equal</td>
-            <td><code>equal("attribute", ["value1", ...])</code></td>
+            <td><code>equal("attribute", [value1, ...])</code></td>
         </tr>
         <tr>
             <td>notEqual</td>
-            <td><code>notEqual("attribute", ["value1", ...])</code></td>
+            <td><code>notEqual("attribute", [value1, ...])</code></td>
         </tr>
         <tr>
             <td>lessThan</td>
-            <td><code>lessThan("attribute", [value1, ...])</code></td>
+            <td><code>lessThan("attribute", [value])</code></td>
         </tr>
         <tr>
             <td>lessThanEqual</td>
-            <td><code>lessThanEqual("attribute", [value1, ...])</code></td>
+            <td><code>lessThanEqual("attribute", [value])</code></td>
         </tr>
         <tr>
             <td>greaterThan</td>
-            <td><code>greaterThan("attribute", [value1, ...])</code></td>
+            <td><code>greaterThan("attribute", [value])</code></td>
         </tr>
         <tr>
             <td>greaterThanEqual</td>
-            <td><code>greaterThanEqual("attribute", [value1, ...])</code></td>
+            <td><code>greaterThanEqual("attribute", [value])</code></td>
         </tr>
         <tr>
             <td>search</td>
@@ -321,6 +321,12 @@ Appwrite's SDKs provides a <code>Query</code> class to generate query strings. W
         </tr>
     </tbody>
 </table>
+
+<div class="notice margin-bottom">
+    <h3>Best Practice</h3>
+    <p>When using greater than, greater than and equal to, less than, and less than and equal to, it is not recommended to pass in multiple values. While the API will accept multiple values and return results with <b>or logic</b>, it's best practice to pass in only one value for performance reasons.</p>
+</div>
+
 
 <h2>OpenAPI and Swagger Specs</h2>
 <p>
