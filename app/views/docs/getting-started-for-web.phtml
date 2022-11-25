@@ -54,7 +54,11 @@ $demos = $platform['demos'] ?? [];
 <p>To install with a CDN (content delivery network) add the following scripts to the bottom of your tag, but before you use any Appwrite services:</p>
 
 <div class="ide" data-lang="html" data-lang-label="HTML">
-    <pre class="line-numbers"><code class="prism language-markup" data-prism><?php echo htmlentities('<script src="https://cdn.jsdelivr.net/npm/appwrite@'.$this->escape($version).'"></script>'); ?></code></pre>
+    <pre class="line-numbers"><code class="prism language-markup" data-prism><?php echo htmlentities('<script src="https://cdn.jsdelivr.net/npm/appwrite@'.$this->escape($version).'"></script>
+<script>
+    const { Client, Account, ID } = Appwrite;
+    // Your code below...
+</script>'); ?></code></pre>
 </div>
 
 <h2><a href="/docs/getting-started-for-web#initSDK" id="initSDK">Init your SDK</a></h2>
