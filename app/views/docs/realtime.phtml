@@ -114,7 +114,7 @@ let subscription = realtime.subscribe(channels: ["files"]) { response in
 
 <p>If you subscribe to a channel, you will receive callbacks for a variety of events related to the channel. The <b>events</b> attribute in the callback can be used to filter and respond to specific events in a channel.</p>
 
-<p>All possible events can be found <a href="/docs/webhooks#events">here</a>.</p>
+<p>All possible events can be found <a href="/docs/events">here</a>.</p>
 
 <div class="notice margin-top-large margin-bottom-large">
     <h3>Permissions</h3>
@@ -392,7 +392,7 @@ subscription.close()</code></pre>
                 string[]
             </td>
             <td data-title="Description: ">
-                The <a href="/docs/webhooks#events">system events</a> that triggered this update.
+                The <a href="/docs/events">system events</a> that triggered this update.
             </td>
         </tr>
         <tr>

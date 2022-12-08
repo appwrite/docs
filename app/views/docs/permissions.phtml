@@ -31,7 +31,7 @@
 <table class="full text-size-small">
     <thead>
     <tr>
-        <td style="width: 180px">Type</td>
+        <td style="width: 200px">Type</td>
         <td>Description</td>
     </tr>
     </thead>
@@ -65,7 +65,7 @@
 <table class="full text-size-small">
     <thead>
     <tr>
-        <td style="width: 180px">Type</td>
+        <td style="width: 200px">Type</td>
         <td>Description</td>
     </tr>
     </thead>
@@ -93,6 +93,10 @@
     <tr>
         <td>Role.team([TEAM_ID], [ROLE])</td>
         <td>Grants access to any member who possesses a specific role in a team. To gain access to this permission, the user must be a member of the specific team and have the given role assigned to them. Team roles can be assigned when inviting a user to become a team member.</td>
+    </tr>
+    <tr>
+        <td>Role.member([MEMBERSHIP_ID])</td>
+        <td>Grants access to a specific member of a team. When the member is removed from the team, they will no longer have access.</td>
     </tr>
     </tbody>
 </table>
