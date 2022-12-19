@@ -15,23 +15,23 @@
     <tbody>
     <tr>
         <td><code>X-Appwrite-Project: [PROJECT-ID]</code></td>
-        <td>Required, provides the ID of your Appwrite Project to the REST API.</td>
+        <td><span class="tag red">required</span> Provides the ID of your Appwrite Project to the REST API.</td>
     </tr>
     <tr>
         <td><code>Content-Type: application/json</code></td>
-        <td>Required, declares content type of the HTTP request.</td>
+        <td><span class="tag red">required</span> Declares content type of the HTTP request.</td>
     </tr>
     <tr>
         <td><code>X-Appwrite-Key: [API-KEY]</code></td>
-        <td>Optional, used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
+        <td><span class="tag red">optional</span> Used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
     </tr>
     <tr>
         <td><code>X-Appwrite-Response-Format: [VERSION-NUMBER]</code></td>
-        <td>Optional, used for backwards compatibility. The response will be formatted to be compatible the provided version number.</td>
+        <td><span class="tag red">optional</span> Used for backwards compatibility. The response will be formatted to be compatible the provided version number.</td>
     </tr>
     <tr>
         <td><code>X-Fallback-Cookies: [FALLBACK-COOKIES]</code></td>
-        <td>Optional, used in scenarios where browsers do not allow third-party cookies. Often used when there is no <a href="/docs/custom-domains">Custom Domain</a>.</td>
+        <td><span class="tag red">optional</span> Used in scenarios where browsers do not allow third-party cookies. Often used when there is no <a href="/docs/custom-domains">Custom Domain</a>.</td>
     </tr>
     </tbody>
 </table>
@@ -53,6 +53,22 @@ X-Appwrite-Project: 5df5acd0d48c2
 X-Appwrite-Response-Format: 1.0.0
 
 {"email":"example@email.com","password":"password"}</code></pre>
+</div>
+
+<p>The cookies used to persist the session can be found in the response headers.</p>
+<div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
+    <pre class="line-numbers"><code class="prism language-http" data-prism>set-cookie: a_session_61e71ec784ab035f7259_legacy=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.demo.appwrite.io; secure; httponly
+set-cookie: a_session_61e71ec784ab035f7259=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.demo.appwrite.io; secure; httponly; samesite=None</code></pre>
+</div>
+
+<p>You will see these cookies included in subsequent requests for authentication.</p>
+<div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
+    <pre class="line-numbers"><code class="prism language-http" data-prism> GET /v1/account/ HTTP/1.1
+Host: demo.appwrite.io
+Cookie: a_session_61e71ec784ab035f7259_legacy=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9; a_session_61e71ec784ab035f7259=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9
+Content-Type: application/json
+X-Appwrite-Project: 5df5acd0d48c2
+X-Appwrite-Response-Format: 1.0.0</code></pre>
 </div>
 
 <h2>Server Authentication</h2>
@@ -83,23 +99,23 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
     <tbody>
     <tr>
         <td><code>X-Appwrite-Project: [PROJECT-ID]</code></td>
-        <td>Required, contains the ID of your Appwrite Project to the REST API.</td>
+        <td><span class="tag red">required</span> Contains the ID of your Appwrite Project to the REST API.</td>
     </tr>
     <tr>
         <td><code>Content-Type: multipart/form-data; boundary=[FORM-BOUNDRY]</code></td>
-        <td>Required, contains the content type of the HTTP request and provides a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">boundry</a> which is used to parse the form data.</td>
+        <td><span class="tag red">required</span> Contains the content type of the HTTP request and provides a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">boundry</a> which is used to parse the form data.</td>
     </tr>
     <tr>
         <td><code>Content-Range: bytes [BYTE-RANGE]</code></td>
-        <td>Required, contains information about which bytes are being transmitted in this chunk, with the format <code>[FIRST-BYTE]-[LAST-BYTE]/[TOTAL-BYTES]</code>.</td>
+        <td><span class="tag red">required</span> Contains information about which bytes are being transmitted in this chunk, with the format <code>[FIRST-BYTE]-[LAST-BYTE]/[TOTAL-BYTES]</code>.</td>
     </tr>
     <tr>
         <td><code>X-Appwrite-ID: [FILE-ID]</code></td>
-        <td>Optional, only needed in chunks following the initial. Contains ID of the file this chunk belongs to.</td>
+        <td><span class="tag red">optional</span> Only needed in chunks following the initial. Contains ID of the file this chunk belongs to.</td>
     </tr>
     <tr>
         <td><code>X-Appwrite-Key: [API-KEY]</code></td>
-        <td>Optional, used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
+        <td><span class="tag red">optional</span> Used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
     </tr>
     </tbody>
 </table>
@@ -117,22 +133,22 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
     </thead>
     <tbody>
     <tr>
-        <td><span class="tag red">required</span> fileId</td>
+        <td>fileId</td>
         <td><code>[FILE-ID]</code></td>
         <td>n/a</td>
-        <td>Required, contains the file ID of the new file. Use <code>"unique()"</code> for a random ID.</td>
+        <td><span class="tag red">required</span> Contains the file ID of the new file. Use <code>"unique()"</code> for a random ID.</td>
     </tr>
     <tr>
         <td>file</td>
         <td><code>[CHUNK-DATA]</code></td>
         <td><code>[FILE-NAME]</code></td>
-        <td>Required, contains file chunk data.</td>
+        <td><span class="tag red">required</span> Contains file chunk data.</td>
     </tr>
     <tr>
         <td>permissions</td>
         <td><code>[PERMISSION ARRAY]</code></td>
         <td>n/a</td>
-        <td>Required, contains an array of permission strings about who can access the new file.</td>
+        <td><span class="tag red">required</span> Contains an array of permission strings about who can access the new file.</td>
     </tr>
     </tbody>
 </table>
