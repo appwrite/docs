@@ -39,11 +39,11 @@
 <h3><a href="/docs/rest#no-headers" id="no-headers">Using Appwrite Without Headers</a></h3>
 <p>Some use cases do not allow the use of custom headers, such as when embedding images from Appwrite in HTML. In these cases, you can provide the Appwrite project ID using the query parameter <code>project</code>.</p>
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
-    <pre class="line-numbers"><code class="prism language-http" data-prism><img src="https://[HOSTNAME_OR_IP]/v1/storage/buckets/[BUCKET_ID]/files/[FILE_ID]/preview?project=[PROJECT_ID]"></code></pre>
+    <pre class="line-numbers"><code class="prism language-http" data-prism><?php echo htmlentities('<img src="https://[HOSTNAME_OR_IP]/v1/storage/buckets/[BUCKET_ID]/files/[FILE_ID]/preview?project=[PROJECT_ID]">'); ?></code></pre>
 </div>
 
 <h3>Client Authentication</h3>
-<p>You can create account sessions with POST requests to the <a href="docs/client/account">Account API</a>. Sessions are persisted using cookies like any other REST API. You can learn more about session persistence in the <a href="/docs/authentication#persistence">Authentication Guide</a>.</p>
+<p>You can create account sessions with POST requests to the <a href="docs/client/account">Account API</a>. Sessions are persisted using cookies. You can learn more about session persistence in the <a href="/docs/authentication#persistence">Authentication Guide</a>.</p>
 <p>The example below shows creating an account session with the <a href="/docs/client/account#accountCreateEmailSession">Create Account Session with Email</a> endpoint.</p>
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
     <pre class="line-numbers"><code class="prism language-http" data-prism>POST /v1/account/sessions/email  HTTP/1.1
@@ -57,7 +57,7 @@ X-Appwrite-Response-Format: 1.0.0
 
 <h2>Server Authentication</h2>
 <p>Server integrations use API keys to authenticate and are typically used for backend applications.</p>
-<p>You don't need to create an account session before making requests to Server APIs. Simply pass an <a href="/docs/keys">API key</a> in the <code>X-Appwrite-Key: [API-KEY]</code> header with the appropriate scopes.</p>
+<p>Server APIs are authenticated with API keys instead of account sessions. Simply pass an <a href="/docs/keys">API key</a> in the <code>X-Appwrite-key: [API-KEY]</code> header with the appropriate scopes.</p>
 
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
     <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/databases/{databaseId}/collections/{collectionId}/documents  HTTP/1.1
@@ -95,7 +95,7 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
     </tr>
     <tr>
         <td><code>X-Appwrite-ID: [FILE-ID]</code></td>
-        <td>Required, contains which file this chunk belongs to.</td>
+        <td>Optional, only needed in chunks following the initial. Contains ID of the file this chunk belongs to.</td>
     </tr>
     <tr>
         <td><code>X-Appwrite-Key: [API-KEY]</code></td>
@@ -117,7 +117,7 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
     </thead>
     <tbody>
     <tr>
-        <td>fileId</td>
+        <td><span class="tag red">required</span> fileId</td>
         <td><code>[FILE-ID]</code></td>
         <td>n/a</td>
         <td>Required, contains the file ID of the new file. Use <code>"unique()"</code> for a random ID.</td>
@@ -214,31 +214,39 @@ read("user:627a958ded6424a98a9f")
     <tbody>
     <tr>
         <td><code>Role.any()</code></td>
-        <td><code>"any"</code></td>
+        <td><code>any</code></td>
     </tr>
     <tr>
         <td><code>Role.guests()</code></td>
-        <td><code>"guests"</code></td>
+        <td><code>guests</code></td>
+    </tr>
+    <tr>
+        <td><code>Role.users()</code></td>
+        <td><code>users</code></td>
     </tr>
     <tr>
         <td><code>Role.users([STATUS])</code></td>
-        <td><code>"users/[STATUS]"</code></td>
+        <td><code>users/[STATUS]</code></td>
+    </tr>
+    <tr>
+        <td><code>Role.user([USER_ID])</td>
+        <td><code>user:[USER_ID]</code></td>
     </tr>
     <tr>
         <td><code>Role.user([USER_ID], [STATUS])</td>
-        <td><code>"user:[USER_ID]/[STATUS]"</code></td>
+        <td><code>user:[USER_ID]/[STATUS]</code></td>
     </tr>
     <tr>
         <td><code>Role.team([TEAM_ID])</td>
-        <td><code>"team:[TEAM_ID]"</code></td>
+        <td><code>team:[TEAM_ID]</code></td>
     </tr>
     <tr>
         <td><code>Role.team([TEAM_ID], [ROLE])</td>
-        <td><code>"team:[TEAM_ID]/[ROLE]"</code></td>
+        <td><code>team:[TEAM_ID]/[ROLE]</code></td>
     </tr>
     <tr>
         <td><code>Role.member([MEMBERSHIP_ID])</td>
-        <td><code>"member:[MEMBERSHIP_ID]"</code></td>
+        <td><code>member:[MEMBERSHIP_ID]</code></td>
     </tr>
     </tbody>
 </table>
@@ -269,11 +277,11 @@ Appwrite's SDKs provides a <code>Query</code> class to generate query strings. W
     <tbody>
         <tr>
             <td>equal</td>
-            <td><code>equal("attribute", [value1, ...])</code></td>
+            <td><code>equal("attribute", [value])</code></td>
         </tr>
         <tr>
             <td>notEqual</td>
-            <td><code>notEqual("attribute", [value1, ...])</code></td>
+            <td><code>notEqual("attribute", [value])</code></td>
         </tr>
         <tr>
             <td>lessThan</td>
@@ -293,7 +301,7 @@ Appwrite's SDKs provides a <code>Query</code> class to generate query strings. W
         </tr>
         <tr>
             <td>search</td>
-            <td><code>search("attribute", [value1, ...])</code></td>
+            <td><code>search("attribute", [value1])</code></td>
         </tr>
         <tr>
             <td>orderDesc</td>
