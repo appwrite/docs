@@ -92,30 +92,36 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
 <table class="full text-size-small">
     <thead>
     <tr>
-        <td style="width: 300px">Header</td>
+        <td style="width: 280px">Header</td>
+        <td style="width: 90px"></td>
         <td>Description</td>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td><code>X-Appwrite-Project: [PROJECT-ID]</code></td>
-        <td><span class="tag red">required</span> Contains the ID of your Appwrite Project to the REST API.</td>
+        <td><span class="tag red">required</span></td>
+        <td>Contains the ID of your Appwrite Project to the REST API.</td>
     </tr>
     <tr>
         <td><code>Content-Type: multipart/form-data; boundary=[FORM-BOUNDRY]</code></td>
-        <td><span class="tag red">required</span> Contains the content type of the HTTP request and provides a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">boundry</a> which is used to parse the form data.</td>
+        <td><span class="tag red">required</span></td>
+        <td>Contains the content type of the HTTP request and provides a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">boundry</a> which is used to parse the form data.</td>
     </tr>
     <tr>
         <td><code>Content-Range: bytes [BYTE-RANGE]</code></td>
-        <td><span class="tag red">required</span> Contains information about which bytes are being transmitted in this chunk, with the format <code>[FIRST-BYTE]-[LAST-BYTE]/[TOTAL-BYTES]</code>.</td>
+        <td><span class="tag red">required</span></td>
+        <td>Contains information about which bytes are being transmitted in this chunk, with the format <code>[FIRST-BYTE]-[LAST-BYTE]/[TOTAL-BYTES]</code>.</td>
     </tr>
     <tr>
         <td><code>X-Appwrite-ID: [FILE-ID]</code></td>
-        <td><span class="tag red">optional</span> Only needed in chunks following the initial. Contains ID of the file this chunk belongs to.</td>
+        <td><span class="tag red">optional</span></td>
+        <td>Only needed in chunks following the initial. Contains ID of the file this chunk belongs to.</td>
     </tr>
     <tr>
         <td><code>X-Appwrite-Key: [API-KEY]</code></td>
-        <td><span class="tag red">optional</span> Used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
+        <td><span class="tag red">optional</span></td>
+        <td>Used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
     </tr>
     </tbody>
 </table>
