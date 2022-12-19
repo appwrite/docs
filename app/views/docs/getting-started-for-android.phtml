@@ -107,7 +107,7 @@ val user = account.create(
 val realtime = Realtime(client)
 
 val subscription = realtime.subscribe("files") {
-    if(it.events.contains("buckets.*.files.*.create")) {
+    if (it.events.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(it.payload.toString());
     }
@@ -137,7 +137,7 @@ val user = account.create(
 val realtime = Realtime(client)
 
 val subscription = realtime.subscribe("files") {
-    if(it.events.contains("buckets.*.files.*.create")) {
+    if (it.events.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(it.payload.toString());
     }

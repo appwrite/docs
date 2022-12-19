@@ -93,7 +93,7 @@
 </p>
 <p>
     When adding or removing attributes, your requests are processed in the background, indicated by the attribute's <span class="tag">status</span>.
-    Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. You are able to create a document while your attributes are still being processed, however you are not able to use the attributes on the documents until they are <span class="tag">available</span>
+    Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. You are able to create a document while your attributes are still being processed, however you are not able to use the attributes on the documents until they are <span class="tag">available</span>.
 </p>
 
 <h3><a href="/docs/databases#create-documents" id="create-documents">Create Documents</a></h3>
@@ -413,8 +413,8 @@ func main() async throws{
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
 
 const client = new Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-    .setProject("[PROJECT_ID]");
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
 const databases = new Databases(client);
 
@@ -464,8 +464,8 @@ import io.appwrite.services.Databases
 
 suspend fun main() {
     val client = Client(applicationContext)
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-        .setProject("[PROJECT_ID]")
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
     val databases = Databases(client)
 
@@ -559,8 +559,8 @@ func main() async throws {
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
 
 const client = new Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-    .setProject("[PROJECT_ID]");
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
 const databases = new Databases(client);
 
@@ -580,8 +580,8 @@ databases.listDocuments(
 
 void main() async {
     final client = Client()
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-        .setProject("[PROJECT_ID]");
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
     final databases = Databases(client);
 
@@ -608,8 +608,8 @@ import io.appwrite.services.Databases
 
 suspend fun main() {
     val client = Client(applicationContext)
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-        .setProject("[PROJECT_ID]")
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
     val databases = Databases(client)
 
@@ -635,8 +635,8 @@ import AppwriteModels
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-      .setProject("[PROJECT_ID]")
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
     let databases = Databases(client)
 
@@ -665,8 +665,8 @@ func main() async throws {
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
 
 const client = new Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-    .setProject("[PROJECT_ID]");
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
 const databases = new Databases(client);
 
