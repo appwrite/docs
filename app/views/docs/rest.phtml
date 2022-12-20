@@ -30,6 +30,11 @@
         <td>Used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
     </tr>
     <tr>
+        <td><code>X-Appwrite-JWT: [TOKEN]</code></td>
+        <td><span class="tag">optional</span></td>
+        <td>Used for JWT authentication, tokens can be generated using the <a href="docs/client/account#accountCreateJWT">Create JWT</a> endpoint.</b></td>
+    </tr>
+    <tr>
         <td><code>X-Appwrite-Response-Format: [VERSION-NUMBER]</code></td>
         <td><span class="tag">optional</span></td>
         <td>Used for backwards compatibility. The response will be formatted to be compatible the provided version number.</td>
@@ -87,6 +92,18 @@ Host: [HOSTNAME_OR_IP]
 Content-Type: application/json
 X-Appwrite-Project: [PROJECT_ID]
 X-Appwrite-Key: [API_KEY]
+X-Appwrite-Response-Format: 1.0.0</code></pre>
+</div>
+
+<h2><a href="/docs/rest#server-auth" id="server-auth">JWT Authentication</a></h2>
+<p>JWT authentication is frequently used by server applications to act on behalf of a user. Users generate tokens using the <a href="docs/client/account#accountCreateJWT">Create JWT</a> endpoint. When issuing requests authenticated with a JWT, Appwrite will treat the request like it is from the authenticated user.</p>
+
+<div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
+    <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/account  HTTP/1.1
+Host: [HOSTNAME_OR_IP]
+Content-Type: application/json
+X-Appwrite-Project: [PROJECT_ID]
+X-Appwrite-JWT: [TOKEN]
 X-Appwrite-Response-Format: 1.0.0</code></pre>
 </div>
 
