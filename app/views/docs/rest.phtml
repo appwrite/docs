@@ -44,8 +44,8 @@
 
 <h3><a href="/docs/rest#no-headers" id="no-headers">Using Appwrite Without Headers</a></h3>
 <p>Some use cases do not allow the use of custom headers, such as when embedding images from Appwrite in HTML. In these cases, you can provide the Appwrite project ID using the query parameter <code>project</code>.</p>
-<div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
-    <pre class="line-numbers"><code class="prism language-http" data-prism><?php echo htmlentities('<img src="https://[HOSTNAME_OR_IP]/v1/storage/buckets/[BUCKET_ID]/files/[FILE_ID]/preview?project=[PROJECT_ID]">'); ?></code></pre>
+<div class="ide margin-bottom" data-lang="html" data-lang-label="HTML">
+    <pre class="line-numbers"><code class="prism language-html" data-prism><?php echo htmlentities('<img src="https://[HOSTNAME_OR_IP]/v1/storage/buckets/[BUCKET_ID]/files/[FILE_ID]/preview?project=[PROJECT_ID]">'); ?></code></pre>
 </div>
 
 <h3>Client Authentication</h3>
