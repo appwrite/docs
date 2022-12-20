@@ -3,47 +3,53 @@
 <p>The REST API allows you to access your Appwrite server through HTTP requests, without the need for an SDK. Each endpoint in the API represents a specific operation on a specific resource.</p>
 
 <h2><a href="/docs/rest#headers" id="headers">Headers</a></h2>
-<p>Appwrite's REST APIs expect certain headers to be attached to each request:</p>
+<p>Appwrite's REST APIs expect certain headers to be included with each request:</p>
 
 <table class="full text-size-small">
     <thead>
     <tr>
         <td style="width: 300px">Header</td>
+        <td style="width: 80px"></td>
         <td>Description</td>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td><code>X-Appwrite-Project: [PROJECT-ID]</code></td>
-        <td>Required, provides the ID of your Appwrite Project to the REST API.</td>
+        <td><span class="tag red">required</span></td>
+        <td>Provides the ID of your Appwrite Project to the REST API.</td>
     </tr>
     <tr>
-        <td><code>Content-type: application/json</code></td>
-        <td>Required, declares content type of the HTTP request.</td>
+        <td><code>Content-Type: application/json</code></td>
+        <td><span class="tag red">required</span></td>
+        <td>Declares content type of the HTTP request.</td>
     </tr>
     <tr>
         <td><code>X-Appwrite-Key: [API-KEY]</code></td>
-        <td>Optional, used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
+        <td><span class="tag red">optional</span></td>
+        <td>Used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
     </tr>
     <tr>
         <td><code>X-Appwrite-Response-Format: [VERSION-NUMBER]</code></td>
-        <td>Optional, used for backwards compatibility. The response will be formatted to be compatible the provided version number.</td>
+        <td><span class="tag red">optional</span></td>
+        <td>Used for backwards compatibility. The response will be formatted to be compatible the provided version number.</td>
     </tr>
     <tr>
         <td><code>X-Fallback-Cookies: [FALLBACK-COOKIES]</code></td>
-        <td>Optional, used in scenarios where browsers do not allow third-party cookies. Often used when there is no <a href="/docs/custom-domains">Custom Domain</a>.</td>
+        <td><span class="tag red">optional</span></td>
+        <td>Used in scenarios where browsers do not allow third-party cookies. Often used when there is no <a href="/docs/custom-domains">Custom Domain</a>.</td>
     </tr>
     </tbody>
 </table>
 
 <h3><a href="/docs/rest#no-headers" id="no-headers">Using Appwrite Without Headers</a></h3>
 <p>Some use cases do not allow the use of custom headers, such as when embedding images from Appwrite in HTML. In these cases, you can provide the Appwrite project ID using the query parameter <code>project</code>.</p>
-<div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
-    <pre class="line-numbers"><code class="prism language-http" data-prism><img src="https://[HOSTNAME_OR_IP]/v1/storage/buckets/[BUCKET_ID]/files/[FILE_ID]/preview?project=[PROJECT_ID]"></code></pre>
+<div class="ide margin-bottom" data-lang="html" data-lang-label="HTML">
+    <pre class="line-numbers"><code class="prism language-html" data-prism><?php echo htmlentities('<img src="https://[HOSTNAME_OR_IP]/v1/storage/buckets/[BUCKET_ID]/files/[FILE_ID]/preview?project=[PROJECT_ID]">'); ?></code></pre>
 </div>
 
 <h3>Client Authentication</h3>
-<p>You can create account sessions with POST requests to the <a href="docs/client/account">Account API</a>. Sessions are persisted using cookies like any other REST API. You can learn more about session persistence in the <a href="/docs/authentication#persistence">Authentication Guide</a>.</p>
+<p>You can create account sessions with POST requests to the <a href="docs/client/account">Account API</a>. Sessions are persisted using cookies. You can learn more about session persistence in the <a href="/docs/authentication#persistence">Authentication Guide</a>.</p>
 <p>The example below shows creating an account session with the <a href="/docs/client/account#accountCreateEmailSession">Create Account Session with Email</a> endpoint.</p>
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
     <pre class="line-numbers"><code class="prism language-http" data-prism>POST /v1/account/sessions/email  HTTP/1.1
@@ -55,9 +61,25 @@ X-Appwrite-Response-Format: 1.0.0
 {"email":"example@email.com","password":"password"}</code></pre>
 </div>
 
+<p>The cookies used to persist the session can be found in the response headers.</p>
+<div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
+    <pre class="line-numbers"><code class="prism language-http" data-prism>set-cookie: a_session_61e71ec784ab035f7259_legacy=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.demo.appwrite.io; secure; httponly
+set-cookie: a_session_61e71ec784ab035f7259=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.demo.appwrite.io; secure; httponly; samesite=None</code></pre>
+</div>
+
+<p>You will see these cookies included in subsequent requests for authentication.</p>
+<div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
+    <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/account/ HTTP/1.1
+Host: demo.appwrite.io
+Cookie: a_session_61e71ec784ab035f7259_legacy=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9; a_session_61e71ec784ab035f7259=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9
+Content-Type: application/json
+X-Appwrite-Project: 5df5acd0d48c2
+X-Appwrite-Response-Format: 1.0.0</code></pre>
+</div>
+
 <h2>Server Authentication</h2>
-<p>Server integrations use API keys to authenticate and are typically used for backend appications.</p>
-<p>You don't need to create an account session before making requests to Server APIs. Simply pass an <a href="/docs/keys">API key</a> in the <code>X-Appwrite-key: [API-KEY]</code> header with the appropriate scopes.</p>
+<p>Server integrations use API keys to authenticate and are typically used for backend applications.</p>
+<p>Server APIs are authenticated with API keys instead of account sessions. Simply pass an <a href="/docs/keys">API key</a> in the <code>X-Appwrite-key: [API-KEY]</code> header with the appropriate scopes.</p>
 
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
     <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/databases/{databaseId}/collections/{collectionId}/documents  HTTP/1.1
@@ -76,30 +98,36 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
 <table class="full text-size-small">
     <thead>
     <tr>
-        <td style="width: 300px">Header</td>
+        <td style="width: 280px">Header</td>
+        <td style="width: 80px"></td>
         <td>Description</td>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td><code>X-Appwrite-Project: [PROJECT-ID]</code></td>
-        <td>Required, contains the ID of your Appwrite Project to the REST API.</td>
+        <td><span class="tag red">required</span></td>
+        <td>Contains the ID of your Appwrite Project to the REST API.</td>
     </tr>
     <tr>
-        <td><code>Content-type: multipart/form-data; boundary=[FORM-BOUNDRY]</code></td>
-        <td>Required, contains the content type of the HTTP request and provides a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">boundry</a> which is used to parse the form data.</td>
+        <td><code>Content-Type: multipart/form-data; boundary=[FORM-BOUNDRY]</code></td>
+        <td><span class="tag red">required</span></td>
+        <td>Contains the content type of the HTTP request and provides a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">boundry</a> which is used to parse the form data.</td>
     </tr>
     <tr>
-        <td><code>content-range: bytes [BYTE-RANGE]</code></td>
-        <td>Required, contains information about which bytes are being transmitted in the format <code>[FIRST-BYTE]-[LAST-BYTE]/[TOTAL-BYTES]</code>.</td>
+        <td><code>Content-Range: bytes [BYTE-RANGE]</code></td>
+        <td><span class="tag red">required</span></td>
+        <td>Contains information about which bytes are being transmitted in this chunk, with the format <code>[FIRST-BYTE]-[LAST-BYTE]/[TOTAL-BYTES]</code>.</td>
     </tr>
     <tr>
-        <td><code>x-appwrite-id: [FILE-ID]</code></td>
-        <td>Required, contains which file this chunk belongs to.</td>
+        <td><code>X-Appwrite-ID: [FILE-ID]</code></td>
+        <td><span class="tag red">required</span></td>
+        <td>Contains ID of the file this chunk belongs to.</td>
     </tr>
     <tr>
-        <td><code>X-Appwrite-key: [API-KEY]</code></td>
-        <td>Optional, used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
+        <td><code>X-Appwrite-Key: [API-KEY]</code></td>
+        <td><span class="tag red">optional</span></td>
+        <td>Used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
     </tr>
     </tbody>
 </table>
@@ -110,6 +138,7 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
     <thead>
     <tr>
         <td style="width: 100px">Key</td>
+        <td style="width: 80px"></td>
         <td style="width: 150px">Value</td>
         <td style="width: 100px">File Name</td>
         <td>Description</td>
@@ -118,21 +147,24 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
     <tbody>
     <tr>
         <td>fileId</td>
+        <td><span class="tag red">optional</span></td>
         <td><code>[FILE-ID]</code></td>
         <td>n/a</td>
-        <td>Required, contains the file ID of the new file. Use <code>"unique()"</code> for a UUID.</td>
+        <td>Contains the file ID of the new file. Only used by file chunks following the first chunk uploaded.</td>
     </tr>
     <tr>
         <td>file</td>
+        <td><span class="tag red">required</span></td>
         <td><code>[CHUNK-DATA]</code></td>
         <td><code>[FILE-NAME]</code></td>
-        <td>Required, contains file chunk data.</td>
+        <td>Contains file chunk data.</td>
     </tr>
     <tr>
         <td>permissions</td>
+        <td><span class="tag red">required</span></td>
         <td><code>[PERMISSION ARRAY]</code></td>
         <td>n/a</td>
-        <td>Required, contains an array of permission strings about who can access the new file.</td>
+        <td>Contains an array of permission strings about who can access the new file.</td>
     </tr>
     </tbody>
 </table>
@@ -144,10 +176,10 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
     <pre class="line-numbers"><code class="prism language-http" data-prism>POST /v1/storage/buckets/default/files  HTTP/1.1
 Host: [HOSTNAME_OR_IP]
-Content-Type: multipart/form-data; boundary=---WD9146A
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundarye0m6iNBQNHlzTpVM
 X-Appwrite-Project: demo-project
-content-range: bytes 10485760-12582912/12582912
-x-appwrite-id: 6369b0bc1dcf4ff59051
+Content-Range: bytes 10485760-12582912/12582912
+X-Appwrite-ID: 6369b0bc1dcf4ff59051
 
 ------WebKitFormBoundarye0m6iNBQNHlzTpVM
 Content-Disposition: form-data; name="fileId"
@@ -214,31 +246,39 @@ read("user:627a958ded6424a98a9f")
     <tbody>
     <tr>
         <td><code>Role.any()</code></td>
-        <td><code>"any"</code></td>
+        <td><code>any</code></td>
     </tr>
     <tr>
         <td><code>Role.guests()</code></td>
-        <td><code>"guests"</code></td>
+        <td><code>guests</code></td>
+    </tr>
+    <tr>
+        <td><code>Role.users()</code></td>
+        <td><code>users</code></td>
     </tr>
     <tr>
         <td><code>Role.users([STATUS])</code></td>
-        <td><code>"users/[STATUS]"</code></td>
+        <td><code>users/[STATUS]</code></td>
+    </tr>
+    <tr>
+        <td><code>Role.user([USER_ID])</td>
+        <td><code>user:[USER_ID]</code></td>
     </tr>
     <tr>
         <td><code>Role.user([USER_ID], [STATUS])</td>
-        <td><code>"user:[USER_ID]/[STATUS]"</code></td>
+        <td><code>user:[USER_ID]/[STATUS]</code></td>
     </tr>
     <tr>
         <td><code>Role.team([TEAM_ID])</td>
-        <td><code>"team:[TEAM_ID]"</code></td>
+        <td><code>team:[TEAM_ID]</code></td>
     </tr>
     <tr>
         <td><code>Role.team([TEAM_ID], [ROLE])</td>
-        <td><code>"team:[TEAM_ID]/[ROLE]"</code></td>
+        <td><code>team:[TEAM_ID]/[ROLE]</code></td>
     </tr>
     <tr>
         <td><code>Role.member([MEMBERSHIP_ID])</td>
-        <td><code>"member:[MEMBERSHIP_ID]"</code></td>
+        <td><code>member:[MEMBERSHIP_ID]</code></td>
     </tr>
     </tbody>
 </table>
@@ -257,7 +297,7 @@ Appwrite's SDKs have a helper <code>ID.unqiue()</code> to generate unique IDs. W
 Appwrite's SDKs provides a <code>Query</code> class to generate query strings. When using Appwrite without an SDK, you can template your own strings with the format below.
 </p>
 
-<p>Query strings are passed to Appwrite using the <code>queries</code> query parameters. You can attach multiple query strings under the <code>queries</code> query parameter.</p>
+<p>Query strings are passed to Appwrite using the <code>queries</code> parameter. You can attach multiple query strings by including the array parameter multiple times in the query string: <code>queries[]="..."&queries[]="..."</code></p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -269,11 +309,11 @@ Appwrite's SDKs provides a <code>Query</code> class to generate query strings. W
     <tbody>
         <tr>
             <td>equal</td>
-            <td><code>equal("attribute", [value1, ...])</code></td>
+            <td><code>equal("attribute", [value])</code></td>
         </tr>
         <tr>
             <td>notEqual</td>
-            <td><code>notEqual("attribute", [value1, ...])</code></td>
+            <td><code>notEqual("attribute", [value])</code></td>
         </tr>
         <tr>
             <td>lessThan</td>
@@ -293,7 +333,7 @@ Appwrite's SDKs provides a <code>Query</code> class to generate query strings. W
         </tr>
         <tr>
             <td>search</td>
-            <td><code>search("attribute", [value1, ...])</code></td>
+            <td><code>search("attribute", [value1])</code></td>
         </tr>
         <tr>
             <td>orderDesc</td>
@@ -324,14 +364,14 @@ Appwrite's SDKs provides a <code>Query</code> class to generate query strings. W
 
 <div class="notice margin-bottom">
     <h3>Best Practice</h3>
-    <p>When using greater than, greater than and equal to, less than, and less than and equal to, it is not recommended to pass in multiple values. While the API will accept multiple values and return results with <b>or logic</b>, it's best practice to pass in only one value for performance reasons.</p>
+    <p>When using greater than, greater than or equal to, less than, or less than or equal to, it is not recommended to pass in multiple values. While the API will accept multiple values and return results with <b>or logic</b>, it's best practice to pass in only one value for performance reasons.</p>
 </div>
 
 
 <h2>OpenAPI and Swagger Specs</h2>
 <p>
-Appwrite provides full REST API specs in the OpenAPI 3 and Swagger formats every release. These can be accessed through Appwrite's GitHub repository and rendered using a variety of parsers and tools.
+Appwrite provides a full REST API specification in the OpenAPI 3 and Swagger 2 formats every release. These can be accessed through Appwrite's GitHub repository and rendered using a variety of parsers and tools.
 </p>
 <ul>
-    <li class="margin-bottom"><a href="https://github.com/appwrite/appwrite/tree/master/app/config/specs" target="_blank" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Find REST API specs for your Appwrite version</a></li>
+    <li class="margin-bottom"><a href="https://github.com/appwrite/appwrite/tree/master/app/config/specs" target="_blank" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Find the REST API specification for your Appwrite version</a></li>
 </ul>
