@@ -1,6 +1,6 @@
 <p>Appwrite supports multiple protocols for accessing the server, including <a href="/docs/rest">REST</a>, <a href="/docs/graphql">GraphQL</a>, and <a href="/docs/realtime">Realtime</a>.</p>
 
-<p>The REST API allows you to access your Appwrite server through HTTP requests, without the need for an SDK. Each endpoint in the API represents a specific operation on a specific resource.</p>
+<p>The REST API allows you to access your Appwrite server through HTTP requests without the needing an SDK. Each endpoint in the API represents a specific operation on a specific resource.</p>
 
 <h2><a href="/docs/rest#headers" id="headers">Headers</a></h2>
 <p>Appwrite's REST APIs expect certain headers to be included with each request:</p>
@@ -17,38 +17,38 @@
     <tr>
         <td><code>X-Appwrite-Project: [PROJECT-ID]</code></td>
         <td><span class="tag red">required</span></td>
-        <td>Provides the ID of your Appwrite Project to the REST API.</td>
+        <td>The ID of your Appwrite Project to the REST API.</td>
     </tr>
     <tr>
         <td><code>Content-Type: application/json</code></td>
         <td><span class="tag red">required</span></td>
-        <td>Declares content type of the HTTP request.</td>
+        <td>Content type of the HTTP request.</td>
     </tr>
     <tr>
         <td><code>X-Appwrite-Key: [API-KEY]</code></td>
         <td><span class="tag">optional</span></td>
-        <td>Used for authentication in server integrations. <b>Do not use API keys in client applications.</b></td>
+        <td>API key used for server authentication. <b>Do not use API keys in client applications.</b></td>
     </tr>
     <tr>
         <td><code>X-Appwrite-JWT: [TOKEN]</code></td>
         <td><span class="tag">optional</span></td>
-        <td>Used for JWT authentication, tokens can be generated using the <a href="docs/client/account#accountCreateJWT">Create JWT</a> endpoint.</b></td>
+        <td>Token used for JWT authentication, tokens can be generated using the <a href="docs/client/account#accountCreateJWT">Create JWT</a> endpoint.</b></td>
     </tr>
     <tr>
         <td><code>X-Appwrite-Response-Format: [VERSION-NUMBER]</code></td>
         <td><span class="tag">optional</span></td>
-        <td>Used for backwards compatibility. The response will be formatted to be compatible the provided version number.</td>
+        <td>Version number used for backward compatibility. The response will be formatted to be compatible with the provided version number.</td>
     </tr>
     <tr>
         <td><code>X-Fallback-Cookies: [FALLBACK-COOKIES]</code></td>
         <td><span class="tag">optional</span></td>
-        <td>Used in scenarios where browsers do not allow third-party cookies. Often used when there is no <a href="/docs/custom-domains">Custom Domain</a>.</td>
+        <td>Fallback cookies used in scenarios where browsers do not allow third-party cookies. Often used when there is no <a href="/docs/custom-domains">Custom Domain</a>.</td>
     </tr>
     </tbody>
 </table>
 
 <h2><a href="/docs/rest#no-headers" id="no-headers">Using Appwrite Without Headers</a></h2>
-<p>Some use cases do not allow the use of custom headers, such as when embedding images from Appwrite in HTML. In these cases, you can provide the Appwrite project ID using the query parameter <code>project</code>.</p>
+<p>Some use cases do not allow custom headers, such as embedding images from Appwrite in HTML. In these cases, you can provide the Appwrite project ID using the query parameter <code>project</code>.</p>
 <div class="ide margin-bottom" data-lang="html" data-lang-label="HTML">
     <pre class="line-numbers"><code class="prism language-html" data-prism><?php echo htmlentities('<img src="https://[HOSTNAME_OR_IP]/v1/storage/buckets/[BUCKET_ID]/files/[FILE_ID]/preview?project=[PROJECT_ID]">'); ?></code></pre>
 </div>
@@ -66,13 +66,13 @@ X-Appwrite-Response-Format: 1.0.0
 {"email":"example@email.com","password":"password"}</code></pre>
 </div>
 
-<p>The cookies used to persist the session can be found in the response headers.</p>
+<p> You can find the cookies used to persist the new session in the response headers.</p>
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
     <pre class="line-numbers"><code class="prism language-http" data-prism>set-cookie: a_session_61e71ec784ab035f7259_legacy=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.demo.appwrite.io; secure; httponly
 set-cookie: a_session_61e71ec784ab035f7259=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.demo.appwrite.io; secure; httponly; samesite=None</code></pre>
 </div>
 
-<p>You will see these cookies included in subsequent requests for authentication.</p>
+<p>These cookies are used in subsequent requests to authenticate the user.</p>
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
     <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/account HTTP/1.1
 Host: demo.appwrite.io
@@ -108,9 +108,9 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
 </div>
 
 <h2><a href="/docs/rest#file-handling" id="file-handling">File Handling</a></h2>
-<p>Appwrite implements resumable, chunked uploads for files larger than 5MB. Chunked uploads send files in chunks of 5MB to reduce memory footprint and increase resilience when handling large files. Appwrite SDKs will automatically handle chunked uploads but it is possible to implement this with the REST API directly.</p>
+<p>Appwrite implements resumable, chunked uploads for files larger than 5MB. Chunked uploads send files in chunks of 5MB to reduce memory footprint and increase resilience when handling large files. Appwrite SDKs will automatically handle chunked uploads, but it is possible to implement this with the REST API directly.</p>
 
-<p>Upload endpoints in Appwrite such as Create File and Create Deployment are different from other endpoints. These endpoints take multipart form data instead of JSON data. To implement chunked uploads, you will need to implement the following headers:</p>
+<p>Upload endpoints in Appwrite, such as <a href="/docs/client/storage#storageCreateFile">Create File</a> and <a href="/docs/client/functions#functionsCreateDeployment">Create Deployment</a>, are different from other endpoints. These endpoints take multipart form data instead of JSON data. To implement chunked uploads, you will need to implement the following headers:</p>
 
 <table class="full text-size-small">
     <thead>
