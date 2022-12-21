@@ -37,17 +37,20 @@ $markdown->setSafeMode(true);
 
 $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
 
-function skipLanguage($language, $family): bool {
-    if(!$language['enabled']) {
-        return true;
+if (!\function_exists('skipLanguage')) {
+    function skipLanguage($language, $family): bool
+    {
+        if (!$language['enabled']) {
+            return true;
+        }
+        if (!isset($language['family']) || $language['family'] !== $family) {
+            return true;
+        }
+        if ($language['dev']) {
+            return true;
+        }
+        return false;
     }
-    if(!isset($language['family']) || $language['family'] !== $family) {
-        return true;
-    }
-    if($language['dev']) {
-        return true;
-    }
-    return false;
 }
 ?>
 
