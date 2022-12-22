@@ -57,7 +57,7 @@
 <p>You can create account sessions with POST requests to the <a href="docs/client/account">Account API</a>. Sessions are persisted using cookies. You can learn more about session persistence in the <a href="/docs/authentication#persistence">Authentication Guide</a>.</p>
 <p>The example below shows creating an account session with the <a href="/docs/client/account#accountCreateEmailSession">Create Account Session with Email</a> endpoint.</p>
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
-    <pre class="line-numbers"><code class="prism language-http" data-prism>POST /v1/account/sessions/email  HTTP/1.1
+    <pre class="line-numbers"><code class="prism language-http" data-prism>POST /v1/account/sessions/email HTTP/1.1
 Host: [HOSTNAME_OR_IP]
 Content-Type: application/json
 X-Appwrite-Project: 5df5acd0d48c2
@@ -77,7 +77,7 @@ set-cookie: a_session_61e71ec784ab035f7259=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3I
 
 <p>These cookies are used in subsequent requests to authenticate the user.</p>
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
-    <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/account  HTTP/1.1
+    <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/account HTTP/1.1
 Host: demo.appwrite.io
 Cookie: a_session_61e71ec784ab035f7259_legacy=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9; a_session_61e71ec784ab035f7259=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9
 Content-Type: application/json
@@ -90,7 +90,7 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
 <p>Server APIs are authenticated with API keys instead of account sessions. Simply pass an <a href="/docs/keys">API key</a> in the <code>X-Appwrite-key: [API-KEY]</code> header with the appropriate scopes.</p>
 
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
-    <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/databases/{databaseId}/collections/{collectionId}/documents  HTTP/1.1
+    <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/databases/{databaseId}/collections/{collectionId}/documents HTTP/1.1
 Host: [HOSTNAME_OR_IP]
 Content-Type: application/json
 X-Appwrite-Project: [PROJECT_ID]
@@ -102,7 +102,7 @@ X-Appwrite-Response-Format: 1.0.0</code></pre>
 <p>JWT authentication is frequently used by server applications to act on behalf of a user. Users generate tokens using the <a href="docs/client/account#accountCreateJWT">Create JWT</a> endpoint. When issuing requests authenticated with a JWT, Appwrite will treat the request like it is from the authenticated user.</p>
 
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
-    <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/account  HTTP/1.1
+    <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/account HTTP/1.1
 Host: [HOSTNAME_OR_IP]
 Content-Type: application/json
 X-Appwrite-Project: [PROJECT_ID]
