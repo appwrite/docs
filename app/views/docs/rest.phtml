@@ -71,15 +71,15 @@ X-Appwrite-Response-Format: 1.0.0
 
 <p> You can find the cookies used to persist the new session in the response headers.</p>
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
-    <pre class="line-numbers"><code class="prism language-http" data-prism>set-cookie: a_session_61e71ec784ab035f7259_legacy=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.demo.appwrite.io; secure; httponly
-set-cookie: a_session_61e71ec784ab035f7259=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.demo.appwrite.io; secure; httponly; samesite=None</code></pre>
+    <pre class="line-numbers"><code class="prism language-http" data-prism>Set-Cookie: a_session_61e71ec784ab035f7259_legacy=eyJ0...aSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.demo.appwrite.io; secure; httponly
+Set-Cookie: a_session_61e71ec784ab035f7259=eyJ0...aSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.demo.appwrite.io; secure; httponly; samesite=None</code></pre>
 </div>
 
 <p>These cookies are used in subsequent requests to authenticate the user.</p>
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
     <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/account HTTP/1.1
 Host: demo.appwrite.io
-Cookie: a_session_61e71ec784ab035f7259_legacy=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9; a_session_61e71ec784ab035f7259=eyJpZCI6IjYzYTBkM2E1MWQ3ZGQ0NzQxOGY3Iiwic2VjcmV0IjoiYmZmN2ExZGIwYmQ3MjcyZGI5Yjg3ZmMwOGY3MzQ3MDZhYmJlYTE1ZGIzN2ViOThlZmRkMmE1OWU4NTNkODRmOGViYTAwY2E4ZjcxYzgzZTUyNDU1OTA3NDhlNTRkMDEwOTcxOTcyNTg1NWNmNDFlODg4MDg3NmI4OTk3NDJkZGFiMGQzODM1MDY0NGJlYzJkYWFiZGUyYjYyY2M1NDIwMTNjYzE0MDFhYjhiYjI2ZDdlM2E1MDgxNGVjMTc4ZDhjNTE4N2YzYzYxNWJhNTBiYWI2MjQxYTRiZjFiODA4ZDhjNGUwMTFhN2NlMzJkODRlYTI4MTU2MDVmYzkxZjg0MSJ9
+Cookie: a_session_61e71ec784ab035f7259_legacy=eyJ0...aSJ9; a_session_61e71ec784ab035f7259=eyJ0...aSJ9
 Content-Type: application/json
 X-Appwrite-Project: 5df5acd0d48c2
 X-Appwrite-Response-Format: 1.0.0</code></pre>
