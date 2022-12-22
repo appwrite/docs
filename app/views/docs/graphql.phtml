@@ -378,8 +378,16 @@ const client = new Client()
 const graphql = new Graphql(client);
 
 const mutation = graphql.post({
-    query: `mutation CreateAccount($email: String!, $password: String!, $name: String) {
-        accountCreate(email: $email, password: $password, name: $name) {
+    query: `mutation CreateAccount(
+        $email: String!,
+        $password: String!,
+        $name: String
+    ) {
+        accountCreate(
+            email: $email,
+            password: $password,
+            name: $name
+        ) {
             _id
         }
     }`,
@@ -410,8 +418,16 @@ final client = Client()
 final graphql = Graphql(client);
 
 Future mutation = graphql.post({
-    'query': '''mutation CreateAccount(\$email: String!, \$password: String!, \$name: String) {
-        accountCreate(email: \$email, password: \$password, name: \$name) {
+    'query': '''mutation CreateAccount(
+        \$email: String!,
+        \$password: String!,
+        \$name: String
+    ) {
+        accountCreate(
+            email: \$email,
+            password: \$password,
+            name: \$name
+        ) {
             _id
         }
     }''',
@@ -443,8 +459,16 @@ val graphql = Graphql(client)
 
 try {
     val response = graphql.post(mapOf(
-        "query" to """mutation CreateAccount(${'$'}email: String!, ${'$'}password: String!, ${'$'}name: String) {
-            accountCreate(email: ${'$'}email, password: ${'$'}password, name: ${'$'}name) {
+        "query" to """mutation CreateAccount(
+            ${'$'}email: String!,
+            ${'$'}password: String!,
+            ${'$'}name: String
+        ) {
+            accountCreate(
+                email: ${'$'}email,
+                password: ${'$'}password,
+                name: ${'$'}name
+            ) {
                 _id
             }
         }""",
@@ -475,8 +499,16 @@ let graphql = Graphql(client)
 do {
     let response = try await graphql.post([
         "query": """
-            mutation CreateAccount($email: String!, $password: String!, $name: String) {
-                accountCreate(email: $email, password: $password, name: $name) {
+            mutation CreateAccount(
+                $email: String!,
+                $password: String!,
+                $name: String
+            ) {
+                accountCreate(
+                    email: $email,
+                    password: $password,
+                    name: $name
+                ) {
                     _id
                 }
             }
