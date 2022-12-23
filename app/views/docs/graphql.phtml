@@ -1,6 +1,6 @@
 <p>Appwrite supports multiple protocols for accessing the server, including <a href="/docs/rest">REST</a>, <a href="/docs/graphql">GraphQL</a>, and <a href="/docs/realtime">Realtime</a>.</p>
 
-<p>The GraphQL API allows you to query and mutate any resource type on your Appwrite server through a single endpoint. Every endpoint available via REST is available via a corresponding GraphQL field.</p>
+<p>The GraphQL API allows you to query and mutate any resource type on your Appwrite server through a single endpoint. Every endpoint available though REST is available though GraphQL, except for OAuth.</p>
 
 <h2><a href="/docs/graphql#requests" id="requests">Requests</a></h2>
 
@@ -63,7 +63,7 @@
 
 <h3><a href="/docs/graphql#get-requests" id="get-requests">GET Requests</a></h3>
 
-<p>You can execute a GraphQL query via a GET request, passing a <code>query</code> and optionally an <code>operationName</code> and <code>variables</code> as query parameters.</p>
+<p>You can execute a GraphQL query via a GET request, passing a <code>query</code> and optionally <code>operationName</code> and <code>variables</code> as query parameters.</p>
 
 <h3><a href="/docs/graphql#post-requests" id="post-requests">POST Requests</a></h3>
 
@@ -71,7 +71,7 @@
 
 <h4>JSON</h4>
 
-<p>There are two ways to make requests with the <code>application/json</code> content type. You can send a JSON object containing a <code>query</code> and optionally an <code>operationName</code> and <code>variables</code>, or an array of objects with the same structure.</p>
+<p>There are two ways to make requests with the <code>application/json</code> content type. You can send a JSON object containing a <code>query</code> and optionally <code>operationName</code> and <code>variables</code>, or an array of objects with the same structure.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
