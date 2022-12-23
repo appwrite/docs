@@ -63,7 +63,7 @@
 
 <h3><a href="/docs/graphql#get-requests" id="get-requests">GET Requests</a></h3>
 
-<p>You can execute a GraphQL query via a GET request, passing a <b>query</b> and optionally an <b>operationName</b> and <b>variables</b> as query parameters.</p>
+<p>You can execute a GraphQL query via a GET request, passing a <code>query</code> and optionally an <code>operationName</code> and <code>variables</code> as query parameters.</p>
 
 <h3><a href="/docs/graphql#post-requests" id="post-requests">POST Requests</a></h3>
 
@@ -71,7 +71,7 @@
 
 <h4>JSON</h4>
 
-<p>There are two ways to make requests with the <b>application/json</b> content type. You can send a JSON object containing a <b>query</b> and optionally an <b>operationName</b> and <b>variables</b>, or an array of objects with the same structure.</p>
+<p>There are two ways to make requests with the <code>application/json</code> content type. You can send a JSON object containing a <code>query</code> and optionally an <code>operationName</code> and <code>variables</code>, or an array of objects with the same structure.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -100,7 +100,7 @@
 
 <h4>GraphQL</h4>
 
-<p>The <b>application/graphql</b> content type can be used to send a query as the raw POST body.</p>
+<p>The <code>application/graphql</code> content type can be used to send a query as the raw POST body.</p>
 
 <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
     <pre class="line-numbers"><code class="prism language-graphql" data-prism>query GetAccount {
@@ -197,7 +197,7 @@
 <p>The errors array will contain error objects, each with their own <b>message</b> and <b>path</b>. The path will contain the field key that is null due to the error. If no errors occur, the array will not be present in the response.</p>
 
 <h2><a href="/docs/realtime#authentication" id="authentication">Authentication</a></h2>
-<p>GraphQL authenticates using Appwrite accounts and sessions. Both accounts and sessions can be created with GraphQL using the <b>accountCreate</b>, <b>accountCreateEmailSession</b>, <b>accountCreateAnonymousSession</b>, or <b>accountCreatePhoneSession</b> mutations.</p>
+<p>GraphQL authenticates using Appwrite accounts and sessions. Both accounts and sessions can be created with GraphQL using the <code>accountCreate</code>, <code>accountCreateEmailSession</code>, <code>accountCreateAnonymousSession</code>, or <code>accountCreatePhoneSession</code> mutations.</p>
 
 <p>More information and examples of authenticating users can be found in the dedicated <a href="/docs/authentication">authentication guide</a>.</p>
 
@@ -209,7 +209,7 @@
 
 <p>Selection sets can be used to tell a GraphQL API exactly which fields of a particular resource you would like to receive in the response. The server will respond with only those fields, nothing more, nothing less. This gives you full control over what data comes into your application.</p>
 
-<p>For example, to retrieve only the email of a currently authenticated user, you could query the <b>accountGet</b> field, passing only email as the <b>field selection set</b>.</p>
+<p>For example, to retrieve only the email of a currently authenticated user, you could query the <code>accountGet</code> field, passing only email as the <b>field selection set</b>.</p>
 
 <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
     <pre class="line-numbers"><code class="prism language-graphql" data-prism>query GetAccount {
@@ -259,7 +259,7 @@
     }
 }</code></pre></div>
 
-<p>If there was no authenticated user, the <b>accountGet</b> field would fail to resolve. In such a case the value of the data key for that field will be null, and an object will be added to the errors array instead.</p>
+<p>If there was no authenticated user, the <code>accountGet</code> field would fail to resolve. In such a case the value of the data key for that field will be null, and an object will be added to the errors array instead.</p>
 
 <div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
     <pre class="line-numbers"><code class="prism language-json" data-prism>{
