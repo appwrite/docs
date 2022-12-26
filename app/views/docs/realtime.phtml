@@ -123,7 +123,7 @@ let subscription = realtime.subscribe(channels: ["files"]) { response in
 </div>
 
 <h2><a href="/docs/realtime#authentication" id="authentication">Authentication</a></h2>
-<p>Realtime authenticates using an existing user session. If you authenticate <i>after</i> creating a subscription, the subscription will not receive updates for the newly authenticated user. You will need to re-create the subscription so that it will work with the new user.</p>
+<p>Realtime authenticates using an existing user session. If you authenticate <b>after</b> creating a subscription, the subscription will not receive updates for the newly authenticated user. You will need to re-create the subscription to work with the new user.</p>
 
 <p>More information and examples of authenticating users can be found in the dedicated <a href="/docs/authentication">authentication guide</a>.</p>
 
