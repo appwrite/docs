@@ -184,6 +184,13 @@ if (!\function_exists('skipLanguage')) {
                                     </option>
                                 <?php endforeach; ?>
                             <?php endforeach; ?>
+                            
+                            <?php 
+                                // if version is lower than 1.2.x, don't show GraphQL and REST as selectable SDKs
+                                if (strcmp($version, "1.2.x") < 0) {
+                                    continue;
+                                }   
+                            ?>
 
                             <?php if (!skipLanguage($language, $family)): ?>
                                 <option disabled>──────────</option>
@@ -222,7 +229,9 @@ if (!\function_exists('skipLanguage')) {
                             $name = (isset($value['name'])) ? $value['name'] : '';
                             $selected = ($key === $version) ? ' selected' : '';
                             ?>
-                            <option value="<?php echo $this->escape($key); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?><?php echo $selected; ?>>Version <?php echo $this->escape($key); ?></option>
+                            <?php if(!in_array($sdk, ['rest-default', 'graphql-default']) || strcmp($key, "1.2.x") >= 0): ?>
+                                <option value="<?php echo $this->escape($key); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?><?php echo $selected; ?>>Version <?php echo $this->escape($key); ?></option>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
                 </form>
