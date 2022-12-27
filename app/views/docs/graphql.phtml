@@ -61,6 +61,16 @@
     </tbody>
 </table>
 
+<div class="notice">
+  <h2>GraphQL Model Parameters</h2>
+
+  <p>In Appwrite's GraphQL API, all internal model parameters are prefixed with <code>_</code> instead of <code>$</code> because <code>$</code> is reserved by GraphQL.</p>
+
+  <p>For example, <code>$collectionId</code> in the REST API would be referenced as <code>_collectionId</code> in the GraphQL API.</p>
+
+</div>
+
+
 <h3><a href="/docs/graphql#get-requests" id="get-requests">GET Requests</a></h3>
 
 <p>You can execute a GraphQL query via a GET request, passing a <code>query</code> and optionally <code>operationName</code> and <code>variables</code> as query parameters.</p>
@@ -105,6 +115,7 @@
 <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
     <pre class="line-numbers"><code class="prism language-graphql" data-prism>query GetAccount {
     accountGet {
+        _id
         email
     }
 }</code></pre></div>
@@ -214,6 +225,7 @@
 <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
     <pre class="line-numbers"><code class="prism language-graphql" data-prism>query GetAccount {
     accountGet {
+        _id
         email
     }
 }</code></pre></div>
@@ -224,6 +236,7 @@
     <pre class="line-numbers"><code class="prism language-json" data-prism>{
     "data": {
         "accountGet": {
+            "_id": "...",
             "email": "..."
         }
     }
@@ -238,6 +251,7 @@
 <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">
     <pre class="line-numbers"><code class="prism language-graphql" data-prism>query GetAccountAndLocale {
     accountGet {
+        _id
         email
     }
     localeGet {
@@ -251,6 +265,7 @@
     <pre class="line-numbers"><code class="prism language-json" data-prism>{
     "data": {
         "accountGet": {
+            "_id": "...",
             "email": "..."
         },
         "localeGet": {
@@ -295,71 +310,6 @@
 ]</code></pre></div>
 
 <p>This allows you to execute complex actions in a single network request.</p>
-
-<!--<h3><a href="/docs/graphql#databases-integration" id="query-batching">Databases Integration</a></h3>-->
-<!---->
-<!--<p>The Appwrite GraphQL API integrates directly into your project's database's collections, providing a more convenient way to manipulate your collections.</p>-->
-<!---->
-<!--<p>For example, given a project with a collection with ID <b>movies</b>, with attributes <b>name</b> and <b>length</b>, of types <b>string</b> and <b>integer</b> respectively; the following queries could be executed:</p>-->
-<!---->
-<!--<ul class="phases clear" data-ui-phases>-->
-<!--    <li>-->
-<!--        <h3>Create</h3>-->
-<!--        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">-->
-<!--            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation CreateMovie($name: String!, $length: Int!) {-->
-<!--    moviesCreate(name: $name, length: $length) {-->
-<!--        _id-->
-<!--        name-->
-<!--        length-->
-<!--    }-->
-<!--}</code></pre>-->
-<!--        </div>-->
-<!--    </li>-->
-<!--    <li>-->
-<!--        <h3>List</h3>-->
-<!--        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">-->
-<!--            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query ListMovies($limit: Int, $offset: Int, cursor: String, cursorDirection: String, orderAttributes: [String!], orderTypes: [String!]) {-->
-<!--    moviesList(limit: $limit, offset: $offset, cursor: $cursor, cursorDirection: $cursorDirection, orderAttributes: $orderAttributes, orderTypes: $orderType) {-->
-<!--        _id-->
-<!--        name-->
-<!--        length-->
-<!--    }-->
-<!--}</code></pre>-->
-<!--        </div>-->
-<!--    </li>-->
-<!--    <li>-->
-<!--        <h3>Get</h3>-->
-<!--        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">-->
-<!--            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query GetMovie($id: String!) {-->
-<!--    moviesGet(id: $id) {-->
-<!--        _id-->
-<!--        name-->
-<!--        length-->
-<!--    }-->
-<!--}</code></pre>-->
-<!--        </div>-->
-<!--    </li>-->
-<!--    <li>-->
-<!--        <h3>Update</h3>-->
-<!--        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">-->
-<!--            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation UpdateMovie {-->
-<!--    moviesUpdate(name: $name, length: $length) {-->
-<!--        _id-->
-<!--        name-->
-<!--        length-->
-<!--    }-->
-<!--}</code></pre>-->
-<!--        </div>-->
-<!--    </li>-->
-<!--    <li>-->
-<!--        <h3>Delete</h3>-->
-<!--        <div class="ide margin-bottom" data-lang="graphql" data-lang-label="GraphQL">-->
-<!--            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation DeleteMovie($id: String!) {-->
-<!--    moviesDelete(id: $id)-->
-<!--}</code></pre>-->
-<!--        </div>-->
-<!--    </li>-->
-<!--</ul>-->
 
 <h3><a href="/docs/graphql#sdk-usage" id="sdk-usage">SDK Usage</a></h3>
 

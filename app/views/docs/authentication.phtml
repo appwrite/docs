@@ -591,9 +591,8 @@ let session = try await account.createEmailSession(
     <li>
         <h3>GraphQL</h3>
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
-mutation {
-    accountCreateEmailSession(userId: "unique()", email: "team@appwrite.io", password: "password") {
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreateEmailSession(email: "team@appwrite.io", password: "password") {
         _id
         userId
         provider
@@ -676,8 +675,7 @@ let session = try await account.get()</code></pre>
     <li>
         <h3>GraphQL</h3>
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
-query {
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
     accountGet {
         _id
         email
