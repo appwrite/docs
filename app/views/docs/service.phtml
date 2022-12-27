@@ -36,6 +36,22 @@ $markdown = new \Parsedown();
 $markdown->setSafeMode(true);
 
 $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
+
+if (!\function_exists('skipLanguage')) {
+    function skipLanguage($language, $family): bool
+    {
+        if (!$language['enabled']) {
+            return true;
+        }
+        if (!isset($language['family']) || $language['family'] !== $family) {
+            return true;
+        }
+        if ($language['dev']) {
+            return true;
+        }
+        return false;
+    }
+}
 ?>
 
 <div data-ls-attrs="class=language-<?php echo $this->escape($sdk); ?> platform-<?php echo $this->escape($family); ?> examples-in-<?php echo $this->escape($sdk); ?>">
@@ -142,16 +158,46 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                     <?php echo $this->escape(ucfirst($family)); ?> integration with &nbsp;
                     <select class="choose-platform" name="URL">
                         <?php foreach ($platforms as $key => $platform): ?>
-                            <?php foreach ($platform['languages'] as $language):
-                                if(!$language['enabled']) {
+                            <?php
+                                $sdkLanguages = \array_filter($platform['languages'], function ($language) use ($family) {
+                                    return $language['isSDK'] ?? true;
+                                });
+                                $exampleLanguages = \array_filter($platform['languages'], function ($language) use ($family) {
+                                    return !($language['isSDK'] ?? true);
+                                });
+                            ?>
+                            <?php foreach ($sdkLanguages as $language):
+                                if (skipLanguage($language, $family)) {
                                     continue;
                                 }
 
-                                if(!isset($language['family']) || $language['family'] !== $family) {
+                                $key = (isset($language['key'])) ? $language['key'] : '';
+                                $name = (isset($language['name'])) ? $language['name'] : '';
+                                $beta = (isset($language['beta'])) ? $language['beta'] : false;
+                                $docDirectories = (isset($language['docDirectories']))
+                                    ? $language['docDirectories']
+                                    : ['Default' => 'examples'];
+                                ?>
+                                <?php foreach ($docDirectories as $docDirectoryKey => $docDirectory): ?>
+                                    <option data-ls-attrs="value=/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>-<?php echo $this->escape(strtolower($docDirectoryKey)); ?>{{router.hash}}" <?php echo (($key . '-' . strtolower($docDirectoryKey)) === $sdk) ? ' selected' : ''; ?>>
+                                        <?php echo $this->escape($name); ?> SDK <?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?> examples)<?php endif; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            <?php endforeach; ?>
+                            
+                            <?php 
+                                // if version is lower than 1.2.x, don't show GraphQL and REST as selectable SDKs
+                                if (strcmp($version, "1.2.x") < 0) {
                                     continue;
-                                }
+                                }   
+                            ?>
 
-                                if($language['dev']) {
+                            <?php if (!skipLanguage($language, $family)): ?>
+                                <option disabled>──────────</option>
+                            <?php endif; ?>
+
+                            <?php foreach ($exampleLanguages as $language):
+                                if (skipLanguage($language, $family)) {
                                     continue;
                                 }
 
@@ -164,7 +210,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 ?>
                                 <?php foreach ($docDirectories as $docDirectoryKey => $docDirectory): ?>
                                 <option data-ls-attrs="value=/docs/<?php echo $this->escape($family); ?>/<?php echo $serviceName; ?>?sdk=<?php echo $this->escape($key); ?>-<?php echo $this->escape(strtolower($docDirectoryKey)); ?>{{router.hash}}" <?php echo (($key . '-' . strtolower($docDirectoryKey)) === $sdk) ? ' selected' : ''; ?>>
-                                    <?php echo $this->escape($name); ?> SDK <?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?> examples)<?php endif; ?>
+                                    <?php echo $this->escape($name); ?> <?php if(count($docDirectories) > 1): ?>(<?php echo $docDirectoryKey; ?> examples)<?php endif; ?>
                                 </option>
                             <?php endforeach; ?>
                             <?php endforeach; ?>
@@ -183,7 +229,9 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                             $name = (isset($value['name'])) ? $value['name'] : '';
                             $selected = ($key === $version) ? ' selected' : '';
                             ?>
-                            <option value="<?php echo $this->escape($key); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?><?php echo $selected; ?>>Version <?php echo $this->escape($key); ?></option>
+                            <?php if(!in_array($sdk, ['rest-default', 'graphql-default']) || strcmp($key, "1.2.x") >= 0): ?>
+                                <option value="<?php echo $this->escape($key); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?><?php echo $selected; ?>>Version <?php echo $this->escape($key); ?></option>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
                 </form>
@@ -297,7 +345,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                     </h2>
 
                     <div>
-                        <div class="url margin-bottom">
+                        <div class="route margin-bottom">
                             <span class="method <?php echo $this->escape($method); ?>"><?php echo strtoupper($this->escape($method)); ?></span><span class="endpoint"><?php //echo $this->escape($endpoint); ?></span><span class="path">/v1<?php echo $this->escape($url); ?></span>
                         </div>
 
@@ -496,7 +544,7 @@ $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
                                 }
                                 ?>
                                 <li class="example-in-<?php echo $language['key']; ?>-<?php echo strtolower($docDirectoryKey); ?>">
-                                    <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?> SDK">
+                                    <div class="ide" data-lang="<?php echo $language['key']; ?>" data-lang-label="<?php echo $language['name']; ?><?php if ($language['isSDK'] ?? true): ?> SDK<?php endif ?>">
                                         <pre class="line-numbers"><code class="prism language-<?php echo $language['prism']; ?>" data-prism><?php echo $this->escape(file_get_contents($example)); ?></code></pre>
                                     </div>
                                 </li>

@@ -203,6 +203,27 @@ func main() async throws {
 }</code></pre>
         </div>
     </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    databasesCreateDocument(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]",
+        documentId: "[DOCUMENT_ID]",
+        data: "{}"
+    ) {
+        id
+        collectionId
+        databaseId
+        createdAt
+        updatedAt
+        permissions
+        data
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 
@@ -321,6 +342,24 @@ func main() async throws{
         )
     } catch {
         print(error.localizedDescription)
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    databasesListDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]"
+        queries: ["equal(\"title\", [\"Avatar\"])"]
+    ) {
+        total
+        documents {
+            id
+            data
+        }
     }
 }</code></pre>
         </div>
@@ -512,6 +551,24 @@ func main() async throws {
 }</code></pre>
         </div>
     </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    databasesListDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]"
+        queries: ["equal(\"title\", [\"Avatar\", \"Lord of the Rings\"])", "greaterThan(\"year\", 1999)"]
+    ) {
+        total
+        documents {
+            id
+            data
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>When performing a query against multiple attributes, a single index with all query attributes is required. In the example above, a single index with <b>both</b> <span class="tag">title</span> and <span class="tag">year</span> is required.</p>
@@ -654,6 +711,24 @@ func main() async throws {
 }</code></pre>
         </div>
     </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    databasesListDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]"
+        queries: ["orderAsc(\"title\")"]
+    ) {
+        total
+        documents {
+            id
+            data
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>To sort based on multiple attributes, simply provide multiple query methods.</p>
@@ -759,6 +834,24 @@ func main() async throws {
         )
     } catch {
         print(error.localizedDescription)
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    databasesListDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]"
+        queries: ["orderAsc(\"title\")", "orderDesc(\"year\")"]
+    ) {
+        total
+        documents {
+            id
+            data
+        }
     }
 }</code></pre>
         </div>
