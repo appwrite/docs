@@ -764,6 +764,13 @@ query {
     </tbody>
 </table>
 
+<h2><a href="/docs/authentication#limits" id="limits">Session Limits</a></h2>
+<p class="margin-top-small text-fade">version >= 1.2</p>
+
+<p>You can limit the number of active sessions created per user to prevent accumulation of unused but active sessions. New sessions created by the same user past the session limit will cause the oldest session to be deleted.</p>
+
+<p>To change the session limit per user in the <b>Security<b> tab of the Auth Service in your Appwrite Console. The default session limit is 10.</p> 
+
 <h2><a href="/docs/authentication#security" id="security">Security</a></h2>
 
 <p>
