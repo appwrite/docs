@@ -55,7 +55,7 @@ $example = function ($model, $models) use (&$example)
         }
 
         if($type === 'array') {
-            $output[$key] = (\is_array($output[$key])) ? $output[$key] : [$output[$key]];
+            $output[$key] = (array_keys($output[$key]) === range(0, count($output[$key]) - 1)) ? $output[$key] : [$output[$key]];
         }
     }
 
