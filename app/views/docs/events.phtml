@@ -89,7 +89,7 @@ $events = $this->getParam('events', []);
         $description = $event['description'] ?? '';
         $model = $event['model'] ?? '';
     ?>
-    <?php if(str_starts_with($pattern, 'bucket')): ?>
+    <?php if(str_starts_with($pattern, 'functions')): ?>
     <tr>
         <td>
             <code><?php echo $this->escape($pattern); ?></code>
