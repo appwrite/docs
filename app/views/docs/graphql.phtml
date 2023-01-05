@@ -377,7 +377,7 @@ Future mutation = graphql.mutation({
         accountCreate(
             email: \$email,
             password: \$password,
-            name: \$name
+            name: \$name,
             userId: "unique()"
         ) {
             _id
