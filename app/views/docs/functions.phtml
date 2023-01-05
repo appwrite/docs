@@ -503,6 +503,57 @@ static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
 
 <p><a href="/docs/server/functions#functionsCreateDeployment" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> You can also create new code deployments using the Appwrite server API</a></p>
 
+<h3>Manual Deployment</h3>
+<p>You can also manually package your functions to be deployed using the Appwrite console.</p>
+
+<p>First, zip your code files into the <code>.tar.gz</code> format. Take the following folder structure for example.</p>
+
+<div class="ide margin-bottom">
+    <pre class="line-numbers"><code class="prism" data-prism>.
+├── package.json
+└── src
+    └── main.js
+</code></pre>
+</div>
+
+<p>You can zip your code files with the tar command:</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Unix</h3>
+
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>tar -zcvf code.tar.gz src package.json</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>CMD</h3>
+
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="CMD">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>tar -zcvf code.tar.gz src package.json</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>PowerShell</h3>
+
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="PowerShell">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>tar -zcvf code.tar.gz src package.json</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>Next, navigate to your Appwrite console.</p>
+
+<ol class="margin-top margin-bottom-large">
+  <li class="margin-bottom-small">Navigate to the function you want to deploy.</li>
+  <li class="margin-bottom-small">Click <i class="icon-plus"></i> <b>Create deployment</b>.</li>
+  <li class="margin-bottom-small">Select the <b>Manual</b> tab.</li>
+  <li class="margin-bottom-small">Input the entry point of your function under <b>Entrypoint</b>. For the example above, it would be <code>src/main.js</code>.</li>
+  <li class="margin-bottom-small">Upload <code> code.tar.gz</code>.</li>
+  <li class="margin-bottom-small">Click <b>Create</b> to deploy your function.</li>
+</ol>
+
+
 <h2><a href="/docs/functions#build" id="build">Builds</a></h2>
 <p>Deployments needs to be built before they can be activated. This is automatically done after creating a deployment and the time taken can vary depending on the runtime.</p>
 
