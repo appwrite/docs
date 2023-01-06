@@ -53,10 +53,6 @@ $example = function ($model, $models) use (&$example)
         else {
             $output[$key] = $value;
         }
-
-        if($type === 'array') {
-            $output[$key] = (\is_array($output[$key])) ? $output[$key] : [$output[$key]];
-        }
     }
 
     return $output;
