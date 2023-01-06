@@ -526,23 +526,71 @@ mutation {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.createMagicURLSession(ID.unique(), 'email@example.com');
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
         </div>
     </li>
     <li>
         <h3>Flutter</h3>
         <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final user = await account.createMagicURLSession(
+    userId: ID.unique(),
+    email: 'email@example.com',
+);</code></pre>
     </li>
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val user = account.createMagicURLSession(
+    userId = ID.unique(),
+    email = "email@example.com"
+)</code></pre>
     </li>
     <li>
         <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let user = try await account.createMagicURLSession(
+    userId: ID.unique(),
+    email: "email@example.com"
+)</code></pre>
     </li>
     <li>
         <h3>GraphQL</h3>
@@ -556,27 +604,76 @@ mutation {
     After receiving your sercret from an email, you can create a new Magic URL session like this:
 </p>
 
+
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.updateMagicURLSession('[USER_ID]', 'secret');
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
         </div>
     </li>
     <li>
         <h3>Flutter</h3>
         <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final user = await account.updateMagicURLSession(
+    userId: '[USER_ID]',
+    secret: '[secret]',
+);</code></pre>
     </li>
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val user = account.updateMagicURLSession(
+    userId = '[USER_ID]',
+    secret = 'secret'
+)</code></pre>
     </li>
     <li>
         <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let user = try await account.updateMagicURLSession(
+    userId: '[USER_ID]',
+    secret: "secret"
+)</code></pre>
     </li>
     <li>
         <h3>GraphQL</h3>
