@@ -581,7 +581,7 @@ $image = new View(__DIR__.'/../general/image.phtml');
         ->render();
 ?>
 
-<p>To execute a function from the Appwrite console, click the 'Execute Now' button on your function's overview page. To execute a function from the API, send a POST request to the <a href="/docs/client/functions#functionsCreateExecution">function execution endpoint</a>.</p>
+<p>To execute a function from the Appwrite console, click the <b>Execute Now<b> button on your function's overview page. To execute a function from the API, send a POST request to the <a href="/docs/client/functions#functionsCreateExecution">function execution endpoint</a>.</p>
 
 <p>The function execution endpoint is available from both Appwrite client and server APIs. To execute your function from the <b>server API</b>, you need an API key with 'execution.write' scope.</p>
 
@@ -720,7 +720,7 @@ func main() async throws {
 
 <p>The example configuration above would not deploy the folder <code>node_modules</code> and the file <code>.env</code>.</p>
 
-<p>Alternatively, you can add a <code>.gitignore</code> file into your function folder and Appwrite CLI will ignore files specified in there. Keep in mind that if present, the <b>ignore</b> configuration in <code>appwrite.json</code> will nullify the <code>.gitignore</code> file configuration.</p>
+<p>Alternatively, you can add a <code>.gitignore</code> file into your function folder and Appwrite CLI will ignore files specified in there. Keep in mind that if present, the <b>ignore</b> configuration in <code>appwrite.json</code> will nullify your ignore file.</p>
 
 <p>If you need to use a <code>.gitignore</code> file for your version control but don't want the Appwrite CLI to use it, you can specify the <b>ignore</b> key in <code>appwrite.json</code> to be an empty array.</p>
 
