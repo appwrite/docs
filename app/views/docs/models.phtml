@@ -36,7 +36,8 @@ $example = function ($model, $models) use (&$example)
         }
 
         if(!empty($child) && \array_key_exists($child, $models)) {
-            $output[$key] = $example($models[$child], $models);
+            $childExample = $example($models[$child], $models);
+            $output[$key] = $isArray ? [$childExample] : $childExample;
         }
         else if($isXOf) {
             if($isArray) {
