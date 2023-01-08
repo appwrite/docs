@@ -876,26 +876,74 @@ let session = try await account.get()</code></pre>
 </p>
 
 <ul class="phases clear" data-ui-phases>
-    <li>
+<li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.createPasswordRecovery('email@example.com', 'https://example.com');
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
         </div>
     </li>
     <li>
         <h3>Flutter</h3>
         <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final user = await account.createMagicURLSession(
+    email: 'email@example.com',
+    url: 'https://example.com',
+);</code></pre>
     </li>
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val user = account.createMagicURLSession(
+    email = "email@example.com",
+    url = "https://example.com"
+)</code></pre>
     </li>
     <li>
         <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let user = try await account.createMagicURLSession(
+    email: "email@example.com",
+    url: "https://example.com"
+)</code></pre>
     </li>
     <li>
         <h3>GraphQL</h3>
@@ -910,26 +958,80 @@ After receiving a email with the secret attached to a redirect link, submit a re
 </p>
 
 <ul class="phases clear" data-ui-phases>
-    <li>
+<li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.updateRecovery('[USER_ID]', '[SECRET]', 'password', 'password');
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
         </div>
     </li>
     <li>
         <h3>Flutter</h3>
         <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final user = await account.updateRecovery(
+    userId: '[USER_ID]',
+    secret: '[SECRET]',
+    password: 'password'
+    passwordAgain: 'password'
+);</code></pre>
     </li>
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val token = account.updateRecovery(
+    userId = "[USER_ID]",
+    secret = "[SECRET]",
+    password = "password",
+    passwordAgain = "password"
+)</code></pre>
     </li>
     <li>
         <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let token = try await account.updateRecovery(
+    userId: "[USER_ID]",
+    secret: "[SECRET]",
+    password: "password",
+    passwordAgain: "password"
+)</code></pre>
     </li>
     <li>
         <h3>GraphQL</h3>
@@ -1019,26 +1121,74 @@ After receiving a email with the secret attached to a redirect link, submit a re
 <p>You can store user preferences on a user's account using Appwrite's <a href="/docs/client/account#accountUpdatePrefs">Update Preferences</a> endpoint. You can store user preferences such as theme selected, notification settings, or language selected so they can be synced across multiple devices.</p>
 <p>Preferences are stored as a key-value JSON object. The maximum allowed prefs size is 64kB and throws error if exceeded.</p> 
 <ul class="phases clear" data-ui-phases>
-    <li>
+<li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.updatePrefs({dartTheme: true, language: 'en'});
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
         </div>
     </li>
     <li>
         <h3>Flutter</h3>
         <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final user = await account.updatePrefs(
+    pref: {
+        "darkTheme": true,
+        "language": "en",
+    }
+);</code></pre>
     </li>
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val user = account.updatePrefs(
+    prefs = mapOf("darkTheme" to true, "language" to "en")
+)</code></pre>
     </li>
     <li>
         <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let user = try await account.updatePrefs(
+    prefs: ["darkTheme": true, "language": "en"]
+)</code></pre>
     </li>
     <li>
         <h3>GraphQL</h3>
@@ -1051,26 +1201,65 @@ After receiving a email with the secret attached to a redirect link, submit a re
 <p>After a user's preferences are updated, they can be retrieved using the <a href="/docs/client/account#accountGetPrefs">Get Preferences</a> endpoint.</p> 
 
 <ul class="phases clear" data-ui-phases>
-    <li>
+<li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.getPrefs();
+
+promise.then(function (prefs) {
+    console.log(prefs);
+}, function (error) {
+    console.log(error);
+});</code></pre>
         </div>
     </li>
     <li>
         <h3>Flutter</h3>
         <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final prefs = await account.getPrefs();</code></pre>
     </li>
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val prefs = account.getPrefs()</code></pre>
     </li>
     <li>
         <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let prefs = try await account.getPrefs()</code></pre>
     </li>
     <li>
         <h3>GraphQL</h3>
