@@ -509,13 +509,16 @@ mutation {
 <p>
     Magic URL authentication allows a user to sign in without a password. Magic URL authentication sends the user an email with a secret key for creating a new session. If the provided user ID has not be registered, a new user will be created. 
 </p>
+
+<p>
+    Only redirect URLs to domains added as a <a href="/docs/getting-started-for-web#addPlatform">platform</a> on your Appwrite console will be accepted. URLs not added as a platform are rejected to protect against <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md" target="_blank" rel="noopener">redirect attacks</a>.
+</p>
+
 <div class="notice">
     <h2>SMTP Required</h2>
     <p>Magic URL authentication requires <a href="/docs/email-delivery">SMTP</a> to be configured on your Appwrite instance to deliver emails.</p>
 </div>
-<p>
-    Only redirect URLs to domains added as a <a href="/docs/getting-started-for-web#addPlatform">platform</a> on your Appwrite console will be accepted. URLs not added as a platform are rejected to protect against <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md" target="_blank" rel="noopener">redirect attacks</a>.
-</p>
+
 <p>
     Magic URL authentication can be initiated like this: 
 </p>
@@ -594,7 +597,18 @@ let user = try await account.createMagicURLSession(
     <li>
         <h3>GraphQL</h3>
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreateMagicURLSession(
+        userId: "unique()",
+        email: "email@example.com"
+    ) {
+        _id
+        _createdAt
+        userId
+        secret
+        expire
+    }
+}</code></pre>
         </div>
     </li>
 </ul>
@@ -616,7 +630,7 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.updateMagicURLSession('[USER_ID]', 'secret');
+const promise = account.updateMagicURLSession('[USER_ID]', [SECRET]);
 
 promise.then(function (response) {
     console.log(response);
@@ -638,7 +652,7 @@ final account = Account(client);
 
 final user = await account.updateMagicURLSession(
     userId: '[USER_ID]',
-    secret: '[secret]',
+    secret: '[SECRET]',
 );</code></pre>
     </li>
     <li>
@@ -655,7 +669,7 @@ val account = Account(client)
 
 val user = account.updateMagicURLSession(
     userId = '[USER_ID]',
-    secret = 'secret'
+    secret = '[SECRET]'
 )</code></pre>
     </li>
     <li>
@@ -671,13 +685,44 @@ let account = Account(client)
 
 let user = try await account.updateMagicURLSession(
     userId: '[USER_ID]',
-    secret: "secret"
+    secret: "[SECRET]"
 )</code></pre>
     </li>
     <li>
         <h3>GraphQL</h3>
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountUpdateMagicURLSession(
+        userId: "[USER_ID]",
+        secret: "[SECRET]"
+    ) {
+        _id
+        _createdAt
+        userId
+        expire
+        provider
+        providerUid
+        providerAccessToken
+        providerAccessTokenExpiry
+        providerRefreshToken
+        ip
+        osCode
+        osName
+        osVersion
+        clientType
+        clientCode
+        clientName
+        clientVersion
+        clientEngine
+        clientEngineVersion
+        deviceName
+        deviceBrand
+        deviceModel
+        countryCode
+        countryName
+        current
+    }
+}</code></pre>
         </div>
     </li>
 </ul>
@@ -874,6 +919,10 @@ let session = try await account.get()</code></pre>
     If a user forgets their password, they can initiate a password recovery flow to recover their password. The <a href="/docs/client/account#accountCreateRecovery">Create Password Recovery</a> endpont sends the user an email with a temporary secret key for password reset. When the user clicks the confirmation link he is redirected back to your app password reset URL with the secret key and email address values attached to the URL query string. 
 </p>
 
+<p>
+    Only redirect URLs to domains added as a <a href="/docs/getting-started-for-web#addPlatform">platform</a> on your Appwrite console will be accepted. URLs not added as a platform are rejected to protect against <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md" target="_blank" rel="noopener">redirect attacks</a>.
+</p>
+
 <ul class="phases clear" data-ui-phases>
 <li>
         <h3>Web</h3>
@@ -906,7 +955,7 @@ final client = Client()
 
 final account = Account(client);
 
-final user = await account.createMagicURLSession(
+final user = account.createRecovery(
     email: 'email@example.com',
     url: 'https://example.com',
 );</code></pre>
@@ -923,7 +972,7 @@ val client = Client()
 
 val account = Account(client)
 
-val user = account.createMagicURLSession(
+val response = account.createRecovery(
     email = "email@example.com",
     url = "https://example.com"
 )</code></pre>
@@ -939,7 +988,7 @@ let client = Client()
 
 let account = Account(client)
 
-let user = try await account.createMagicURLSession(
+let token = try await account.createRecovery(
     email: "email@example.com",
     url: "https://example.com"
 )</code></pre>
@@ -947,7 +996,18 @@ let user = try await account.createMagicURLSession(
     <li>
         <h3>GraphQL</h3>
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreateRecovery(
+        email: "email@example.com",
+        url: "https://example.com"
+    ) {
+        _id
+        _createdAt
+        userId
+        secret
+        expire
+    }
+}</code></pre>
         </div>
     </li>
 </ul>
@@ -1035,7 +1095,20 @@ let token = try await account.updateRecovery(
     <li>
         <h3>GraphQL</h3>
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountUpdateRecovery(
+        userId: "[USER_ID]",
+        secret: "[SECRET]",
+        password: "password",
+        passwordAgain: "password"
+    ) {
+        _id
+        _createdAt
+        userId
+        secret
+        expire
+    }
+}</code></pre>
         </div>
     </li>
 </ul>
