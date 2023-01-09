@@ -509,33 +509,32 @@ static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
 <div class="ide margin-bottom">
     <pre class="line-numbers"><code class="prism" data-prism>.
 ├── package.json
-└── src
-    └── main.js
+└── index.js
 </code></pre>
 </div>
 
-<p>First, package your code files into the <code>.tar.gz</code> format with the tar command:</p>
+<p>First, navigate inside the folder that contains your dependency file. Package your code files into the <code>.tar.gz</code> format with this tar command:</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Unix</h3>
 
         <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>tar -zcvf code.tar.gz src package.json</code></pre>
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>tar -czf code.tar.gz --exclude code.tar.gz .</code></pre>
         </div>
     </li>
     <li>
         <h3>CMD</h3>
 
         <div class="ide margin-bottom" data-lang="bash" data-lang-label="CMD">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>tar -zcvf code.tar.gz src package.json</code></pre>
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>tar -czf code.tar.gz --exclude code.tar.gz .</code></pre>
         </div>
     </li>
     <li>
         <h3>PowerShell</h3>
 
         <div class="ide margin-bottom" data-lang="bash" data-lang-label="PowerShell">
-            <pre class="line-numbers"><code class="prism language-bash" data-prism>tar -zcvf code.tar.gz src package.json</code></pre>
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>tar -czf code.tar.gz --exclude code.tar.gz .</code></pre>
         </div>
     </li>
 </ul>
@@ -546,7 +545,7 @@ static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
   <li class="margin-bottom-small">Navigate to the function you want to deploy.</li>
   <li class="margin-bottom-small">Click <i class="icon-plus"></i> <b>Create deployment</b>.</li>
   <li class="margin-bottom-small">Select the <b>Manual</b> tab.</li>
-  <li class="margin-bottom-small">Input the entry point of your function under <b>Entrypoint</b>. For the example above, it would be <code>src/main.js</code>.</li>
+  <li class="margin-bottom-small">Input the entry point of your function under <b>Entrypoint</b>. For the example above, it would be <code>index.js</code>.</li>
   <li class="margin-bottom-small">Upload <code> code.tar.gz</code>.</li>
   <li class="margin-bottom-small">Select <b>Activate deployment after build</b> to use your new function.</li>
   <li class="margin-bottom-small">Click <b>Create</b> to deploy your function.</li>
