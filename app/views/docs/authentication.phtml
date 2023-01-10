@@ -701,26 +701,6 @@ let user = try await account.updateMagicURLSession(
         userId
         expire
         provider
-        providerUid
-        providerAccessToken
-        providerAccessTokenExpiry
-        providerRefreshToken
-        ip
-        osCode
-        osName
-        osVersion
-        clientType
-        clientCode
-        clientName
-        clientVersion
-        clientEngine
-        clientEngineVersion
-        deviceName
-        deviceBrand
-        deviceModel
-        countryCode
-        countryName
-        current
     }
 }</code></pre>
         </div>
@@ -1117,7 +1097,7 @@ let token = try await account.updateRecovery(
 <h2><a href="/docs/authentication#jwt" id="jwt">JWT Authentication</a></h2>
 <p>If you're building server applications using Appwrite's Server SDKs, you can use JWTs for authentication between your client and server applications.</p>
 
-<p>You need to create a session using the Client SDKs <b>before</b> generating a JWT. The JWT will be a stateless proof of claim for the identity of the authenticated user and can be used by client or server SDKs to act on behalf of a user. Each JWT expires after 15 minutes.</p>
+<p>You need to create a session using the Client SDKs <b>before</b> generating a JWT. The JWT will be a stateless proof of claim for the identity of the authenticated user and can be used by client or server SDKs to act on behalf of a user. JWTs become invalid after 15 minutes or when the session is deleted.</p>
 
 <p>You can generate a JWT like this:</p>
 
@@ -1127,21 +1107,18 @@ let token = try await account.updateRecovery(
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
-const client = new Client();
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
 
 const account = new Account(client);
-
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-;
 
 const promise = account.createJWT();
 
 promise.then(function (response) {
-    console.log(response); // Success
+    console.log(response);
 }, function (error) {
-    console.log(error); // Failure
+    console.log(error);
 });</code></pre>
         </div>
     </li>
@@ -1150,23 +1127,15 @@ promise.then(function (response) {
         <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-void main() { // Init SDK
-  Client client = Client();
-  Account account = Account(client);
-
-  client
+final client = Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-  ;
-  Future result = account.createJWT();
+    .setProject('5df5acd0d48c2');               // Your project ID
 
-  result
-    .then((response) {
-      print(response);
-    }).catchError((error) {
-      print(error.response);
-  });
-}</code></pre>
+final account = Account(client);
+
+final jwt = await account.createJWT();
+
+ </code></pre>
     </li>
     <li>
         <h3>Android</h3>
@@ -1176,7 +1145,7 @@ import io.appwrite.services.Account
 
 val client = Client(context)
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
+    .setProject("5df5acd0d48c2")                // Your project ID
 
 val account = Account(client)
 
@@ -1189,7 +1158,7 @@ val response = account.createJWT()</code></pre>
 
 let client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
+    .setProject("5df5acd0d48c2")                // Your project ID
 
 let account = Account(client)
 
@@ -1213,15 +1182,14 @@ let jwt = try await account.createJWT()</code></pre>
     <li>
         <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client } = require('node-appwrite');
 
-const client = new sdk.Client();
+const client = new Client();
 
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setJWT('eyJJ9.eyJ...') // Your secret JSON Web Token
-;</code></pre>
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setJWT('eyJJ9.eyJ...');                    // Your secret JSON Web Token</code></pre>
         </div>
     </li>
     <li>
@@ -1233,10 +1201,9 @@ client
 $client = new Client();
 
 $client
-    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    ->setProject('5df5acd0d48c2') // Your project ID
-    ->setJWT('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ...') // Your secret JSON Web Token
-;</code></pre>
+    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1')             // Your API Endpoint
+    ->setProject('5df5acd0d48c2')                            // Your project ID
+    ->setJWT('eyJ9.eyJ...'); // Your secret JSON Web Token</code></pre>
         </div>
     </li>
     <li>
@@ -1247,9 +1214,9 @@ $client
 client = Client()
 
 (client
-  .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
-  .set_project('5df5acd0d48c2') # Your project ID
-  .set_jwt('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ...') # Your secret JSON Web Token
+  .set_endpoint('https://[HOSTNAME_OR_IP]/v1')              # Your API Endpoint
+  .set_project('5df5acd0d48c2')                             # Your project ID
+  .set_jwt('eyJ9.eyJ...')   # Your secret JSON Web Token
 )</code></pre>
         </div>
     </li>
@@ -1261,9 +1228,9 @@ client = Client()
 include Appwrite
 
 client = Client.new
-    .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
-    .set_project('5df5acd0d48c2') # Your project ID
-    .set_jwt('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ...') # Your secret JSON Web Token</code></pre>
+    .set_endpoint('https://[HOSTNAME_OR_IP]/v1')            # Your API Endpoint
+    .set_project('5df5acd0d48c2')                           # Your project ID
+    .set_jwt('eyJ9.eyJ...') # Your secret JSON Web Token</code></pre>
         </div>
     </li>
     <li>
@@ -1274,10 +1241,9 @@ client = Client.new
 let client = new sdk.Client();
 
 client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setJWT('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ...') // Your secret JSON Web Token
-;</code></pre>
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')             // Your API Endpoint
+    .setProject('5df5acd0d48c2')                            // Your project ID
+    .setJWT('eyJ9.eyJ...'); // Your secret JSON Web Token</code></pre>
         </div>
     </li>
     <li>
@@ -1290,8 +1256,7 @@ final client = Client();
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
     .setProject('5df5acd0d48c2')                // Your project ID
-    .setJWT('eyJ9.eyJ...');                     // Your secret JSON Web Token
-</code></pre>
+    .setJWT('eyJ9.eyJ...');                     // Your secret JSON Web Token</code></pre>
         </div>
     </li>
     <li>
@@ -1302,7 +1267,7 @@ client
 val client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2") // Your project ID
-    .setJWT("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ...") // Your secret JSON Web Token</code></pre>
+    .setJWT("eyJ9.eyJ...") // Your secret JSON Web Token</code></pre>
         </div>
     </li>
     <li>
@@ -1313,7 +1278,7 @@ val client = Client()
 let client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2") // Your project ID
-    .setJWT("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ...") // Your secret JSON Web Token</code></pre>
+    .setJWT("eyJ9.eyJ...") // Your secret JSON Web Token</code></pre>
         </div>
     </li>
 </ul>
@@ -1406,7 +1371,7 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.updatePrefs({dartTheme: true, language: 'en'});
+const promise = account.updatePrefs({darkTheme: true, language: 'en'});
 
 promise.then(function (response) {
     console.log(response);
@@ -1467,7 +1432,29 @@ let user = try await account.updatePrefs(
     <li>
         <h3>GraphQL</h3>
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountUpdatePrefs(
+        prefs: "{
+        \"darkTheme\": true,
+        \"language\": \"en\",
+    }"
+    ) {
+        _id
+        _createdAt
+        _updatedAt
+        name
+        registration
+        status
+        passwordUpdate
+        email
+        phone
+        emailVerification
+        phoneVerification
+        prefs {
+            data
+        }
+    }
+}</code></pre>
         </div>
     </li>
 </ul>
@@ -1514,7 +1501,7 @@ final prefs = await account.getPrefs();</code></pre>
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
 
-val client = Client()
+val client = Client(context)
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2")                // Your project ID
 
@@ -1538,7 +1525,11 @@ let prefs = try await account.getPrefs()</code></pre>
     <li>
         <h3>GraphQL</h3>
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    accountGetPrefs {
+        data
+    }
+}</code></pre>
         </div>
     </li>
 </ul>
