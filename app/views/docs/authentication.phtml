@@ -1434,10 +1434,7 @@ let user = try await account.updatePrefs(
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
             <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
     accountUpdatePrefs(
-        prefs: "{
-        \"darkTheme\": true,
-        \"language\": \"en\",
-    }"
+        prefs: "{\"darkTheme\": true, \"language\": \"en\"}"
     ) {
         _id
         _createdAt
