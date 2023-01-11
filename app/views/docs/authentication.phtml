@@ -1201,9 +1201,9 @@ client
 $client = new Client();
 
 $client
-    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1')             // Your API Endpoint
-    ->setProject('5df5acd0d48c2')                            // Your project ID
-    ->setJWT('eyJ9.eyJ...'); // Your secret JSON Web Token</code></pre>
+    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1')            // Your API Endpoint
+    ->setProject('5df5acd0d48c2')                           // Your project ID
+    ->setJWT('eyJ9.eyJ...');                                // Your secret JSON Web Token</code></pre>
         </div>
     </li>
     <li>
@@ -1216,7 +1216,7 @@ client = Client()
 (client
   .set_endpoint('https://[HOSTNAME_OR_IP]/v1')              # Your API Endpoint
   .set_project('5df5acd0d48c2')                             # Your project ID
-  .set_jwt('eyJ9.eyJ...')   # Your secret JSON Web Token
+  .set_jwt('eyJ9.eyJ...')                                   # Your secret JSON Web Token
 )</code></pre>
         </div>
     </li>
@@ -1227,10 +1227,12 @@ client = Client()
 
 include Appwrite
 
-client = Client.new
+client = Client
+
+client.new
     .set_endpoint('https://[HOSTNAME_OR_IP]/v1')            # Your API Endpoint
     .set_project('5df5acd0d48c2')                           # Your project ID
-    .set_jwt('eyJ9.eyJ...') # Your secret JSON Web Token</code></pre>
+    .set_jwt('eyJ9.eyJ...')                                 # Your secret JSON Web Token</code></pre>
         </div>
     </li>
     <li>
@@ -1243,7 +1245,7 @@ let client = new Client();
 client
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')             // Your API Endpoint
     .setProject('5df5acd0d48c2')                            // Your project ID
-    .setJWT('eyJ9.eyJ...'); // Your secret JSON Web Token</code></pre>
+    .setJWT('eyJ9.eyJ...');                                 // Your secret JSON Web Token</code></pre>
         </div>
     </li>
     <li>
@@ -1266,8 +1268,8 @@ client
 
 val client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
-    .setJWT("eyJ9.eyJ...") // Your secret JSON Web Token</code></pre>
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setJWT("eyJ9.eyJ...")                      // Your secret JSON Web Token</code></pre>
         </div>
     </li>
     <li>
@@ -1277,8 +1279,8 @@ val client = Client()
 
 let client = Client()
     .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
-    .setJWT("eyJ9.eyJ...") // Your secret JSON Web Token</code></pre>
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setJWT("eyJ9.eyJ...")                      // Your secret JSON Web Token</code></pre>
         </div>
     </li>
 </ul>
