@@ -98,3 +98,58 @@
         </tr>
     </tbody>
 </table>
+
+
+
+<h3><a href="/docs/config/functions" id="functions">Collections</a></h3>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 150px">Option</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>$id</td>
+            <td>string</td>
+            <td>Collection ID.</td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>string</td>
+            <td>Collection Name.</td>
+        </tr>
+        <tr>
+            <td>databaseId</td>
+            <td>string</td>
+            <td>ID of the database to which this collection belongs.</td>
+        </tr>
+        <tr>
+            <td>enabled</td>
+            <td>bool</td>
+            <td>If the collection is enabled.</td>
+        </tr>
+        <tr>
+            <td>documentSecurity</td>
+            <td>bool</td>
+            <td>If access permissions can be defined at the document level.</td>
+        </tr>
+        <tr>
+            <td>permissions</td>
+            <td>Array of strings</td>
+            <td>Grants access permissions to users at the collection level. <a href="docs/rest#permissions">Learn more about permissions</a>.</td>
+        </tr>
+        <tr>
+            <td>attributes</td>
+            <td>Array of objects</td>
+            <td>Defines a list of attributes in the collection. <a href="docs/models/attributeList">Learn more about the Attributes List Object</a>.</td>
+        </tr>
+        <tr>
+            <td>indexes</td>
+            <td>Array of objects</td>
+            <td>Defines a list of indexes in the collection. <a href="docs/models/indexList">Learn more about the Indexes List Object</a>.</td>
+        </tr>
+    </tbody>
+</table>
