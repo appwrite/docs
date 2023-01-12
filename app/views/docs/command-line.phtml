@@ -122,38 +122,6 @@ brew install --HEAD appwrite</code></pre>
 
 <p>An <b>appwrite.json</b> file is created by the CLI when you initialize your project. It stores all the configuration for the CLI to be able to interact with your Appwrite project. The file has a structure as depicted below. When using the <b>appwrite deploy</b> command, the CLI uses information from <b>appwrite.json</b> to deploy your functions and collections.</p>
 
-<div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
-    <pre class="line-numbers"><code class="prism language-json" data-prism>{
-    "projectId": "6213b54f2e76a06f2ec6",
-    "projectName": "My Awesome Project",
-    "functions": [
-        {
-            "$id": "6213b58cb21dda6c3263",
-            "name": "My Awesome Function",
-            "runtime": "node-17.0",
-            "path": "My Awesome Function",
-            "entrypoint": "src/index.js"
-        }
-    ],
-    "collections": [
-        {
-            "$id": "6213bb2d567d8a206614",
-            "$permissions": [
-                "read(\"any\")",
-                "create(\"team:admin\")",
-                "update(\"team:admin\")",
-                "delete(\"team:admin\")",
-            ],
-            "name": "Millenium Problems",
-            "enabled": true,
-            "documentSecurity": false,
-            "attributes": [],
-            "indexes": []
-        }
-    ]
-}</code></pre>
-</div>
-
 <p>The <b>appwrite.json</b> file does the following things </p>
 
 <ol class="margin-top margin-bottom-large">
@@ -162,6 +130,160 @@ brew install --HEAD appwrite</code></pre>
   <li class="margin-bottom-small">Keeps track of all your project's collections</li>
   <li class="margin-bottom-small">Helps you deploy your Appwrite project to production and more</li>
 </ol>
+
+<h3><a href="/docs/config/configurable-options" id="configurable-options">Configurable Options</a></h3>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 150px">Option</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>projectId</td>
+            <td>string</td>
+            <td>ID of your Appwrite Project.</td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>string</td>
+            <td>Name of your Appwrite Project.</td>
+        </tr>
+        <tr>
+            <td>functions</td>
+            <td>Array of <a href="/docs/config/functions">functions</a></td>
+            <td>Configuration of functions in your project.</td>
+        </tr>
+        <tr>
+            <td>collections</td>
+            <td>Array of <a href="/docs/config/collections">collections</a></td>
+            <td>Configuration of collections in your project.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4><a href="/docs/config/functions" id="functions">Functions</a></h4>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 150px">Option</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>$id</td>
+            <td>string</td>
+            <td>Function ID.</td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>string</td>
+            <td>Function Name.</td>
+        </tr>
+        <tr>
+            <td>runtime</td>
+            <td>string</td>
+            <td>Function runtime, must be enabled. <a href="docs/functions#supportedRuntimes">Learn more about runtimes</a>.</td>
+        </tr>
+        <tr>
+            <td>path</td>
+            <td>string</td>
+            <td>Path to folder containing the function's source code.</td>
+        </tr>
+        <tr>
+            <td>entrypoint</td>
+            <td>string</td>
+            <td>Entry point of the function relative to the folder specified in path.</td>
+        </tr>
+        <tr>
+            <td>ignore</td>
+            <td>Array of strings</td>
+            <td>Files to ignore inside the function. <a href="docs/functions#ignoreFiles">Learn more about ignoring files</a>.</td>
+        </tr>
+        <tr>
+            <td>execute</td>
+            <td>Array of strings</td>
+            <td>Grants execute permissions to users. <a href="docs/rest#permissions">Learn more about permission strings</a>.</td>
+        </tr>
+        <tr>
+            <td>events</td>
+            <td>Array of strings</td>
+            <td>Events that trigger the function to execute. <a href="docs/events">Learn more about events</a>.</td>
+        </tr>
+        <tr>
+            <td>schedule</td>
+            <td>string</td>
+            <td>Execution schedule for the function as a <a href="https://en.wikipedia.org/wiki/Cron" target="_blank" rel="noopener">cron expression</a>.</td>
+        </tr>
+        <tr>
+            <td>timeout</td>
+            <td>int</td>
+            <td>Execution timeout of the function in seconds, with a maximum configurable limit of 900 seconds.</td>
+        </tr>
+        <tr>
+            <td>variables</td>
+            <td>JSON object</td>
+            <td>Variables provided to the function on execution stored as a key-value JSON object.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4><a href="/docs/config/functions" id="functions">Collections</a></h4>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 150px">Option</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>$id</td>
+            <td>string</td>
+            <td>Collection ID.</td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>string</td>
+            <td>Collection Name.</td>
+        </tr>
+        <tr>
+            <td>databaseId</td>
+            <td>string</td>
+            <td>ID of the database to which this collection belongs.</td>
+        </tr>
+        <tr>
+            <td>enabled</td>
+            <td>bool</td>
+            <td>If the collection is enabled.</td>
+        </tr>
+        <tr>
+            <td>documentSecurity</td>
+            <td>bool</td>
+            <td>If access permissions can be defined at the document level.</td>
+        </tr>
+        <tr>
+            <td>permissions</td>
+            <td>Array of strings</td>
+            <td>Grants access permissions to users at the collection level. <a href="docs/rest#permissions">Learn more about permissions</a>.</td>
+        </tr>
+        <tr>
+            <td>attributes</td>
+            <td>Array of objects</td>
+            <td>Defines a list of attributes in the collection. <a href="docs/models/attributeList">Learn more about the Attributes List Object</a>.</td>
+        </tr>
+        <tr>
+            <td>indexes</td>
+            <td>Array of objects</td>
+            <td>Defines a list of indexes in the collection. <a href="docs/models/indexList">Learn more about the Indexes List Object</a>.</td>
+        </tr>
+    </tbody>
+</table>
 
 <h3><a href="/docs/command-line#usageExamples" id="usageExamples">Usage Examples</a></h3>
 
