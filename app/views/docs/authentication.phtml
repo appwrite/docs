@@ -319,35 +319,35 @@ try await account.createOAuth2Session(provider: "amazon")</code></pre>
     <thead>
     <tr>
         <td style="width: 80px">Provider</td>
-        <td style="width: 120px">_APP_SMS_PROVIDER</td>
+        <td>_APP_SMS_PROVIDER</td>
         <td>_APP_SMS_FROM</td>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td>Twilio</td>
-        <td><code>sms://[Account SID]:[Auth Token]@twilio</code></td>
+        <td><code>sms://[ACCOUNT SID]:[AUTH TOKEN]@twilio</code></td>
         <td><code>[TWILIO PHONE NUMBER]</code></td>
     </tr>
     <tr>
         <td>TextMagic</td>
-        <td></td>
-        <td></td>
+        <td><code>sms://[USERNAME]:[API KEY]@text-magic</code></td>
+        <td><code>[TEXT MAGIC PHONE NUMBER OR SENDER ID]</code></td>
     </tr>
     <tr>
         <td>TeleSign</td>
-        <td></td>
-        <td></td>
+        <td><code>sms://[CUSTOMER ID]:[API KEY]:telesign</code></td>
+        <td><code>[TELESIGN PHONE NUMBER]</code></td>
     </tr>
     <tr>
         <td>MSG91</td>
-        <td></td>
-        <td></td>
+        <td><code>sms://[SENDER ID]:[AUTH KEY]@MSG91</code></td>
+        <td><code>[FLOW ID]</code></td>
     </tr>
     <tr>
         <td>Vonage</td>
-        <td></td>
-        <td></td>
+        <td><code>sms://[API KEY]:[API SECRET]@vonage</code></td>
+        <td><code>[VONAGE PHONE NUMBER OR BRAND NAME]</code></td>
     </tr>
     </tbody>
 </table>
