@@ -66,6 +66,14 @@ brew install --HEAD appwrite</code></pre>
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite login</code></pre>
 </div>
 
+<div class="notice margin-bottom"> 
+    <h3>Self-Signed Certificates</h3> 
+    <p>By default, requests to domains with self-signed SSL certificates (or no certificates) are disabled. If you trust the domain, you can bypass the certificate validation using</p>
+    <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --selfSigned true</code></pre>
+    </div>
+</div>
+
 <h3><a href="/docs/command-line#initializeProject" id="initializeProject">Initializing Your Project</a></h3>
 
 <p>After you're logged in, the CLI needs to be initialized with your Appwrite project. You can initialize the CLI using:</p>
@@ -74,7 +82,7 @@ brew install --HEAD appwrite</code></pre>
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init project</code></pre>
 </div>
 
-<p>The following prompts will guide you through the setup process. The init command also creates an <b>appwrite.json</b> file representing your Appwrite project.
+<p>The following prompts will guide you through the setup process. The init command also creates an <a href="/docs/command-line#appwriteJSON">appwrite.json</a> file representing your Appwrite project.
 
 <p>You can also fetch all the collections in your current project using</p>
 
@@ -104,25 +112,17 @@ brew install --HEAD appwrite</code></pre>
 
 <h3><a href="/docs/command-line#deployCollections" id="deployCollections">Deploying collections</a></h3>
 
-<p>The Appwrite CLI also helps you migrate your project's collections from a development server to a production server. You can deploy all the collections in your <b>appwrite.json</b> file using:</p>
+<p>The Appwrite CLI also helps you migrate your project's collections from a development server to a production server. You can deploy all the collections in your <a href="/docs/command-line#appwriteJSON">appwrite.json</a> file using:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collections</code></pre>
 </div>
 
-<div class="notice margin-bottom"> 
-    <h3>Self-Signed Certificates</h3> 
-    <p>By default, requests to domains with self-signed SSL certificates (or no certificates) are disabled. If you trust the domain, you can bypass the certificate validation using</p>
-    <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-        <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --selfSigned true</code></pre>
-    </div>
-</div>
+<h2><a href="/docs/command-line#appwriteJSON" id="appwriteJSON">The appwrite.json File</a></h2>
 
-<h3><a href="/docs/command-line#appwriteJSON" id="appwriteJSON">The appwrite.json File</a></h3>
+<p>An <code>appwrite.json</code> file is created by the CLI when you initialize your project. It stores all the configuration for the CLI to be able to interact with your Appwrite project in JSON format. When using the <code>appwrite deploy</code> command, the CLI uses information from <code>appwrite.json</code> to deploy your functions and collections.</p>
 
-<p>An <b>appwrite.json</b> file is created by the CLI when you initialize your project. It stores all the configuration for the CLI to be able to interact with your Appwrite project. The file has a structure as depicted below. When using the <b>appwrite deploy</b> command, the CLI uses information from <b>appwrite.json</b> to deploy your functions and collections.</p>
-
-<p>The <b>appwrite.json</b> file does the following things </p>
+<p>The <code>appwrite.json</code> file does the following things </p>
 
 <ol class="margin-top margin-bottom-large">
   <li class="margin-bottom-small">Provides context to the CLI</li>
@@ -142,29 +142,29 @@ brew install --HEAD appwrite</code></pre>
     </thead>
     <tbody>
         <tr>
-            <td>projectId</td>
+            <td><code>projectId</code></td>
             <td>string</td>
             <td>ID of your Appwrite Project.</td>
         </tr>
         <tr>
-            <td>name</td>
+            <td><code>name</code></td>
             <td>string</td>
             <td>Name of your Appwrite Project.</td>
         </tr>
         <tr>
-            <td>functions</td>
+            <td><code>functions</code></td>
             <td>Array of <a href="/docs/command-line#function-options">functions</a></td>
             <td>Configuration of functions in your project.</td>
         </tr>
         <tr>
-            <td>collections</td>
+            <td><code>collections</code></td>
             <td>Array of <a href="/docs/command-line#collection-options">collections</a></td>
             <td>Configuration of collections in your project.</td>
         </tr>
     </tbody>
 </table>
 
-<h4><a href="/docs/command-line#function-options" id="function-options">Function Options</a></h4>
+<h3><a href="/docs/command-line#function-options" id="function-options">Function Options</a></h3>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
         <tr>
@@ -175,64 +175,64 @@ brew install --HEAD appwrite</code></pre>
     </thead>
     <tbody>
         <tr>
-            <td>$id</td>
+            <td><code>$id</td>
             <td>string</td>
             <td>Function ID.</td>
         </tr>
         <tr>
-            <td>name</td>
+            <td><code>name</td>
             <td>string</td>
             <td>Function Name.</td>
         </tr>
         <tr>
-            <td>runtime</td>
+            <td><code>runtime</td>
             <td>string</td>
             <td>Function runtime, must be enabled. <a href="docs/functions#supportedRuntimes">Learn more about runtimes</a>.</td>
         </tr>
         <tr>
-            <td>path</td>
+            <td><code>path</code></td>
             <td>string</td>
             <td>Path to folder containing the function's source code.</td>
         </tr>
         <tr>
-            <td>entrypoint</td>
+            <td><code>entrypoint</code></td>
             <td>string</td>
             <td>Entry point of the function relative to the folder specified in path.</td>
         </tr>
         <tr>
-            <td>ignore</td>
+            <td><code>ignore</code></td>
             <td>Array of strings</td>
             <td>Files to ignore inside the function. <a href="docs/functions#ignoreFiles">Learn more about ignoring files</a>.</td>
         </tr>
         <tr>
-            <td>execute</td>
+            <td><code>execute</code></td>
             <td>Array of strings</td>
             <td>Grants execute permissions to users. <a href="docs/rest#permissions">Learn more about permission strings</a>.</td>
         </tr>
         <tr>
-            <td>events</td>
+            <td><code>events</code></td>
             <td>Array of strings</td>
             <td>Events that trigger the function to execute. <a href="docs/events">Learn more about events</a>.</td>
         </tr>
         <tr>
-            <td>schedule</td>
+            <td><code>schedule</code></td>
             <td>string</td>
             <td>Execution schedule for the function as a <a href="https://en.wikipedia.org/wiki/Cron" target="_blank" rel="noopener">cron expression</a>.</td>
         </tr>
         <tr>
-            <td>timeout</td>
+            <td><code>timeout</code></td>
             <td>int</td>
             <td>Execution timeout of the function in seconds, with a maximum configurable limit of 900 seconds.</td>
         </tr>
         <tr>
-            <td>variables</td>
+            <td><code>variables</code></td>
             <td>JSON object</td>
             <td>Variables provided to the function on execution stored as a key-value JSON object.</td>
         </tr>
     </tbody>
 </table>
 
-<h4><a href="/docs/command-line#collection-options" id="collection-options">Collections</a></h4>
+<h3><a href="/docs/command-line#collection-options" id="collection-options">Collection Options</a></h3>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
         <tr>
@@ -243,49 +243,49 @@ brew install --HEAD appwrite</code></pre>
     </thead>
     <tbody>
         <tr>
-            <td>$id</td>
+            <td><code>$id</code></td>
             <td>string</td>
             <td>Collection ID.</td>
         </tr>
         <tr>
-            <td>name</td>
+            <td><code>name</code></td>
             <td>string</td>
             <td>Collection Name.</td>
         </tr>
         <tr>
-            <td>databaseId</td>
+            <td><code>databaseId</code></td>
             <td>string</td>
             <td>ID of the database to which this collection belongs.</td>
         </tr>
         <tr>
-            <td>enabled</td>
+            <td><code>enabled</code></td>
             <td>bool</td>
             <td>If the collection is enabled.</td>
         </tr>
         <tr>
-            <td>documentSecurity</td>
+            <td><code>documentSecurity</code></td>
             <td>bool</td>
             <td>If access permissions can be defined at the document level.</td>
         </tr>
         <tr>
-            <td>permissions</td>
+            <td><code>permissions</code></td>
             <td>Array of strings</td>
             <td>Grants access permissions to users at the collection level. <a href="docs/rest#permissions">Learn more about permissions</a>.</td>
         </tr>
         <tr>
-            <td>attributes</td>
+            <td><code>attributes</code></td>
             <td>Array of objects</td>
             <td>Defines a list of attributes in the collection. <a href="docs/models/attributeList">Learn more about the Attributes List Object</a>.</td>
         </tr>
         <tr>
-            <td>indexes</td>
+            <td><code>indexes</code></td>
             <td>Array of objects</td>
             <td>Defines a list of indexes in the collection. <a href="docs/models/indexList">Learn more about the Indexes List Object</a>.</td>
         </tr>
     </tbody>
 </table>
 
-<h3><a href="/docs/command-line#usageExamples" id="usageExamples">Usage Examples</a></h3>
+<h2><a href="/docs/command-line#usageExamples" id="usageExamples">Usage Examples</a></h2>
 
 <p>The Appwrite CLI follows the following general syntax.</p>
 
@@ -304,88 +304,87 @@ brew install --HEAD appwrite</code></pre>
     </thead>
     <tbody>
     <tr>
-        <td>login</td>
+        <td><code>login</code></td>
         <td>The login command allows you to authenticate a user into the CLI</td>
     </tr>
     <tr>
-        <td>init</td>
+        <td><code>init</code></td>
         <td>The init command helps you initialize your Appwrite project, functions and collections</td>
     </tr>
     <tr>
-        <td>deploy</td>
+        <td><code>deploy</code></td>
         <td>The deploy command provides a convenient wrapper for deploying your functions and collections</td>
     </tr>
     <tr>
-        <td>logout</td>
+        <td><code>logout</code></td>
         <td>The logout command allows you to logout from the CLI</td>
     </tr>
     <tr>
-        <td>projects</td>
+        <td><code>projects</code></td>
         <td>The projects command allows you to view, create and manage your Appwrite projects</td>
     </tr>
     <tr>
-        <td>storage</td>
+        <td><code>storage</code></td>
         <td>The storage command allows you to manage your project files</td>
     </tr>
     <tr>
-        <td>teams</td>
+        <td><code>teams</code></td>
         <td>The teams command allows you to group users of your project and to enable them to share read and write access to your project's resources</td>
     </tr>
     <tr>
-        <td>users</td>
+        <td><code>users</code></td>
         <td>The users command allows you to manage your project users</td>
     </tr>
     <tr>
-        <td>client</td>
+        <td><code>client</code></td>
         <td>The client command allows you to configure your CLI</td>
     </tr>
     <tr>
-        <td>account</td>
+        <td><code>account</code></td>
         <td>The account command allows you to authenticate and manage a user account</td>
     </tr>
     <tr>
-        <td>avatars</td>
+        <td><code>avatars</code></td>
         <td>The avatars command aims to help you complete everyday tasks related to your app image, icons, and avatars</td>
     </tr>
     <tr>
-        <td>functions</td>
+        <td><code>functions</code></td>
         <td>The functions command allows you view, create and manage your Cloud Functions</td>
     </tr>
     <tr>
-        <td>databases</td>
+        <td><code>databases</code></td>
         <td>The databases command allows you to create structured collections of documents, query and filter lists of documents</td>
     </tr>
     <tr>
-        <td>health</td>
+        <td><code>health</code></td>
         <td>The health command allows you to both validate and monitor your Appwrite server's health</td>
     </tr>
     <tr>
-        <td>locale</td>
+        <td><code>locale</code></td>
         <td>The locale command allows you to customize your app based on your users' location</td>
     </tr>
     </tbody>
 </table>
 
-<p>Here are a few sample commands to get you started</p>
-
 <p><b>Create User</b></p>
 
-<p>To create a new user in your project, you can use the `create` command. To successfully create a user, make sure your API key is granted with the scope "users.write".</p>
+<p>To create a new user in your project, you can use the <code>create</code> command. To successfully create a user, make sure your API key is granted with the scope <code>"users.write"</code>.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users create --userId "unique()" --email hello@appwrite.io --password very_strong_password</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users create --userId "unique()" \
+    --email hello@appwrite.io \
+    --password very_strong_password</code></pre>
 </div>
-<!-- Attach image of output  -->
 
 <p><b>List Users</b></p>
 
-<p>To get a list of all your project users, you can use the `list` command. To successfully view the list, make sure your API key is granted with the scope "users.read".</p>
+<p>To get a list of all your project users, you can use the <code>list</code> command. To successfully view the list, make sure your API key is granted with the scope <code>"users.read"</code>.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users list</code></pre>
 </div>
 
-<p>In case of errors with any command, you can get more information about what went wrong using the <span class="tag">--verbose</span> flag</p>
+<p>In case of errors with any command, you can get more information about what went wrong using the <code>--verbose</code> flag</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users list --verbose</code></pre>
@@ -393,13 +392,13 @@ brew install --HEAD appwrite</code></pre>
 
 <p><b>List Collections</b></p> 
 
-<p>To get a list of all your collections, you can use the `listCollections` command. To successfully view the list, make sure your API key is granted with the scope "collections.read".</p>
+<p>To get a list of all your collections, you can use the <code>listCollections</code> command. To successfully view the list, make sure your API key is granted with the scope <code>"collections.read"</code>.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases listCollections</code></pre>
 </div>
 
-<p>If you wish to parse the output from the CLI, you can request the CLI output in JSON format using the <span class="tag">--json</span> flag</p>
+<p>If you wish to parse the output from the CLI, you can request the CLI output in JSON format using the <code>--json</code> flag</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases listCollections --json</code></pre>
@@ -408,7 +407,7 @@ brew install --HEAD appwrite</code></pre>
 
 <p><b>Get a Collection</b></p>
 
-<p>To get more information on a particular collection, you can make use of the `getCollection` command and pass in the `collectionId`.  To successfully fetch the collection, make sure your API key is granted with the scope "collections.read".</p>
+<p>To get more information on a particular collection, you can make use of the <code>getCollection</code> command and pass in the <code>collectionId</code>.  To successfully fetch the collection, make sure your API key is granted with the scope <code>"collections.read"</code>.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases getCollection --collectionId 5ff468cfa32a0</code></pre>
@@ -419,15 +418,18 @@ brew install --HEAD appwrite</code></pre>
 <p>To create a new document in an existing collection, use the `createDocument` command.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-<pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases createDocument --collectionId <ID> --documentId 'unique()' --data '{ "Name": "Iron Man" }' --permissions 'read("any")' 'write("team:abc")' </code></pre>
+<pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases createDocument \
+    --collectionId [COLLECTION_ID] \
+    --documentId 'unique()' --data '{ "Name": "Iron Man" }' \
+    --permissions 'read("any")' 'write("team:abc")' </code></pre>
 </div>
 
 <h3><a href="/docs/command-line#configuration" id="configuration">Configuration</a></h3>
 
-<p>At any point, if you would like to change your server endpoint, project key, or self-signed certificate acceptance, use the <b>client</b> service.</p>
+<p>At any point, if you would like to change your server endpoint, project key, or self-signed certificate acceptance, use the <code>client</code> command.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --endpoint http://192.168.1.6/v1
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --endpoint https://[HOSTNAME_OR_IP]/v1
 appwrite client --key 23f24gwrhSDgefaY
 appwrite client --selfSigned true
 appwrite client --reset // Resets your CLI configuration
@@ -435,22 +437,25 @@ appwrite client --debug // Prints your current configuration</code></pre>
 </div>
 
 <div class="notice margin-bottom"> 
-<h3><a href="/docs/command-line#CIMode" id="CIMode">CI Mode</a></h3>
+    <h3><a href="/docs/command-line#CIMode" id="CIMode">CI Mode</a></h3>
 
-<p>The Appwrite CLI can also be used in a non-interactive mode. This is especially useful when you want to automate tasks on a CI Server. In order to enable CI mode on the CLI, you need to set your <b>project ID, endpoint and API Key</b> using</p>
+    <p>The Appwrite CLI can also be used in a non-interactive mode. This is especially useful when you want to automate tasks on a CI Server. In order to enable CI mode on the CLI, you need to set your <b>project ID, endpoint and API Key</b> using</p>
 
-<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --endpoint http://192.168.1.6/v1 --projectId YOUR_PROJECT_ID --key YOUR_API_KEY</code></pre>
-</div>
+    <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client \
+    --endpoint https://[HOSTNAME_OR_IP]/v1 \
+    --projectId [YOUR_PROJECT_ID] \
+    --key YOUR_API_KEY</code></pre>
+    </div>
 
-<p>When you set the global configuration parameters using the <b>client</b> service, they take precedence over the local configuration parameters in your <b>appwrite.json</b> thereby switching the CLI to non-interactive mode. </p> 
+    <p>When you set the global configuration parameters using the <code>client</code> command, they take precedence over the local configuration parameters in your <code>appwrite.json</code> thereby switching the CLI to non-interactive mode. </p> 
 
-<p>In this mode, the CLI can only interact with one project at a time. If you look closely, you'll also notice that we use an <b>API Key</b> to authenticate which means the CLI behaves like Appwrite's server SDK. You can learn more about API Keys in the <a href="/docs/getting-started-for-server#apiKey">Appwrite for Server</a> docs.</p>
+    <p>In this mode, the CLI can only interact with one project at a time. If you look closely, you'll also notice that we use an <b>API Key</b> to authenticate which means the CLI behaves like Appwrite's server SDK. You can learn more about API Keys in the <a href="/docs/getting-started-for-server#apiKey">Appwrite for Server</a> docs.</p>
 </div>
 
 <h3><a href="/docs/command-line#help" id="help">Help</a></h3>
 
-<p>If you get stuck anywhere, you can always use the <b>help</b> command to get the usage examples.</p>
+<p>If you get stuck anywhere, you can always use the <code>help</code> command to get the usage examples.</p>
 
 <h3><a href="/docs/command-line#uninstall" id="uninstall">Uninstall</a></h3>
 
