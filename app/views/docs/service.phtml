@@ -346,7 +346,11 @@ if (!\function_exists('skipLanguage')) {
 
                     <div>
                         <div class="route margin-bottom">
-                            <span class="method <?php echo $this->escape($method); ?>"><?php echo strtoupper($this->escape($method)); ?></span><span class="endpoint"><?php //echo $this->escape($endpoint); ?></span><span class="path">/v1<?php echo $this->escape($url); ?></span>
+                            <?php if($sdk === "graphql-default"): ?>
+                                <span class="method post">POST</span><span class="endpoint"></span><span class="path">/v1/graphql</span>
+                            <?php else: ?>
+                                <span class="method <?php echo $this->escape($method); ?>"><?php echo strtoupper($this->escape($method)); ?></span><span class="endpoint"></span><span class="path">/v1<?php echo $this->escape($url); ?></span>
+                            <?php endif; ?>
                         </div>
 
                         <?php if(!empty($description)): ?>
