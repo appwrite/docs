@@ -307,51 +307,6 @@ try await account.createOAuth2Session(provider: "amazon")</code></pre>
     Phone authentication is done using a two-step authentication process. When using phone authentication, the authentication request is initiated from the client application and an SMS is sent to the user with a secret key for creating a session. 
 </p>
 
-<p> 
-    Phone authentication requires you to set up an SMS provider to send SMS messages. You will need to configure these <a href="/docs/environment-variables#phone">environment variables</a> and restart your Appwrite containers before you can use phone authentication.
-</p>
-
-<p> 
-    Appwrite supports the following SMS Providers:
-</p>
-
-<table class="full">
-    <thead>
-    <tr>
-        <td style="width: 80px">Provider</td>
-        <td>_APP_SMS_PROVIDER</td>
-        <td style="width: 250px">_APP_SMS_FROM</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>Twilio</td>
-        <td><code>sms://[ACCOUNT SID]:[AUTH TOKEN]@twilio</code></td>
-        <td><code>[TWILIO PHONE NUMBER]</code></td>
-    </tr>
-    <tr>
-        <td>TextMagic</td>
-        <td><code>sms://[USERNAME]:[API KEY]@text-magic</code></td>
-        <td><code>[PHONE NUMBER OR SENDER ID]</code></td>
-    </tr>
-    <tr>
-        <td>TeleSign</td>
-        <td><code>sms://[CUSTOMER ID]:[API KEY]:telesign</code></td>
-        <td><code>[TELESIGN PHONE NUMBER]</code></td>
-    </tr>
-    <tr>
-        <td>MSG91</td>
-        <td><code>sms://[SENDER ID]:[AUTH KEY]@MSG91</code></td>
-        <td><code>[FLOW ID]</code></td>
-    </tr>
-    <tr>
-        <td>Vonage</td>
-        <td><code>sms://[API KEY]:[API SECRET]@vonage</code></td>
-        <td><code>[PHONE NUMBER OR BRAND NAME]</code></td>
-    </tr>
-    </tbody>
-</table>
-
 <p>
     The example below shows you how to initiate a phone authentication request.
 </p>
