@@ -19,7 +19,7 @@ $runtimes = $this->getParam('runtimes', []);
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function</code></pre>
 </div>
 
-<p>Give your function a name and choose your runtime. This will create a new starter function in the current directory and also add it to your <b>appwrite.json</b> file. Go ahead and deploy your function using :</p>
+<p>Give your function a name and choose your runtime. This will create a new starter function in the current directory and also add it to your <code>appwrite.json</code> file. Go ahead and deploy your function using :</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function</code></pre>
@@ -27,7 +27,7 @@ $runtimes = $this->getParam('runtimes', []);
 
 <p>You can now head over to your Appwrite Dashboard, navigate to the Function settings and execute your function. You can find the status of your execution under the <b>Logs</b> tab. </p>
 
-<p>Feel free to modify and play around with the starter code and use the <b>appwrite deploy</b> command to instantly deploy your changes to the Appwrite server. </p>
+<p>Feel free to modify and play around with the starter code and use the <code>appwrite deploy</code> command to instantly deploy your changes to the Appwrite server. </p>
 
 <p> The following sections will dive deeper into some more terminology and advanced concepts which can be useful when writing your function from scratch.</p>
 
@@ -63,7 +63,7 @@ $runtimes = $this->getParam('runtimes', []);
 };</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>package.json</b> file along with your function, and Appwrite handles the rest! The best practice is to make sure that the <b>node_modules</b> folder is <b>not</b> a part of your tarball.</p>
+        <p>Include a <code>package.json</code> file along with your function, and Appwrite handles the rest! The best practice is to make sure that the <code>node_modules</code> folder is <b>not</b> a part of your tarball.</p>
         </div>
     </li>
     <li>
@@ -95,7 +95,7 @@ return function ($req, $res) {
 };</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>composer.json</b> file along with your function, make sure to require autoload.php from vendor folder, and Appwrite handles the rest!. The best practice is to make sure that the <b>vendor</b> directory is <b>not</b> a part of your tarball. </p>
+        <p>Include a <code>composer.json</code> file along with your function, make sure to require autoload.php from vendor folder, and Appwrite handles the rest!. The best practice is to make sure that the <code>vendor</code> directory is <b>not</b> a part of your tarball. </p>
     </div>
     </li>
     <li>
@@ -125,7 +125,7 @@ def main(req, res):
   })</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>requirements.txt</b> file with your function- Appwrite handles the rest!</p>
+        <p>Include a <code>requirements.txt</code> file with your function, Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
@@ -155,7 +155,7 @@ def main(req, res):
 end</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>Gemfile</b> with your function- Appwrite handles the rest!</p>
+        <p>Include a <code>Gemfile</code> with your function, Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
@@ -185,7 +185,7 @@ end</code></pre>
 };</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>No special steps are required for Deno- Appwrite handles everything!</p>
+        <p>No special steps are required for Deno, Appwrite handles everything!</p>
         </div>
     </li>
     <li>
@@ -218,7 +218,7 @@ Future &lt;void&gt; start(final req, final res) async {
 }</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>pubspec.yaml</b> file with your function- Appwrite handles the rest!</p>
+        <p>Include a <code>pubspec.yaml</code> file with your function- Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
@@ -248,7 +248,7 @@ Future &lt;void&gt; start(final req, final res) async {
         </div>
         <p>With Swift, your <b>entrypoint</b> can be empty since Appwrite automatically infers it from the location of your <b>main()</b> function. Just ensure that your cloud function has a <b>single declaration of main()</b> across your source files.</p>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>Package.swift</b> file with your function- Appwrite handles the rest!</p>
+        <p>Include a <code>Package.swift</code> file with your function, Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
@@ -280,7 +280,7 @@ Future &lt;void&gt; start(final req, final res) async {
 }</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>Function.csproj</b> file with your function- Appwrite handles the rest!</p>
+        <p>Include a <code>Function.csproj</code> file with your function, Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
@@ -310,7 +310,7 @@ fun main(req: RuntimeRequest, res: RuntimeResponse): RuntimeResponse {
 }</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>deps.gradle</b> file with your function- Appwrite handles the rest!</p>
+        <p>Include a <code>deps.gradle</code> file with your function, Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
@@ -347,7 +347,7 @@ public RuntimeResponse main(RuntimeRequest req, RuntimeResponse res) throws Exce
 }</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>deps.gradle</b> file with your function- Appwrite handles the rest!</p>
+        <p>Include a <code>deps.gradle</code> file with your function, Appwrite handles the rest!</p>
         </div>
     </li>
     <li>
@@ -380,13 +380,13 @@ static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
 }</code></pre>
         </div>
         <p><b>Installing Dependencies</b></p>
-        <p>Include a <b>CMakeLists.txt</b> file with your function- Appwrite handles the rest!</p>
+        <p>Include a <code>CMakeLists.txt</code> file with your function, Appwrite handles the rest!</p>
         </div>
     </li>
 </ul>
 
 
-<p>When your function is called, you receive two parameters, a <b>request</b> and a <b>response</b> object. The request object contains all data that was sent to the function including function variables. A schema of the request object can be found below and is the same for all runtimes.</p>
+<p>When your function is called, you receive two parameters, a <code>request</code> and a <code>response</code> object. The request object contains all data that was sent to the function including function variables. A schema of the request object can be found below and is the same for all runtimes.</p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom text-size-small">
     <thead>
@@ -411,7 +411,7 @@ static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
     </tbody>
 </table>
 
-<p>The response object has two functions, <b>send()</b> and <b>json()</b> that can be used to send data back to the client. The types and implementation of these functions vary depending on runtime due to all languages being slightly different. You can check out implementation in the specific languages to learn more about them. The schema of the response object can be found below: </p>
+<p>The response object has two functions, <code>send()</code> and <code>json()</code> that can be used to send data back to the client. The types and implementation of these functions vary depending on runtime due to all languages being slightly different. You can check out implementation in the specific languages to learn more about them. The schema of the response object can be found below: </p>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom text-size-small">
     <thead>
@@ -503,14 +503,63 @@ static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
 
 <p><a href="/docs/server/functions#functionsCreateDeployment" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> You can also create new code deployments using the Appwrite server API</a></p>
 
+<h3>Manual Deployment</h3>
+<p>You can also upload your functions to be deployed using the Appwrite console. The example below shows a simple Node.JS function, but the same idea applies to any other language.</p>
+
+<div class="ide margin-bottom">
+    <pre class="line-numbers"><code class="prism" data-prism>.
+├── package.json
+└── index.js
+</code></pre>
+</div>
+
+<p>First, navigate inside the folder that contains your dependency file. Package your code files into the <code>.tar.gz</code> format with this tar command:</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Unix</h3>
+
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>tar -czf code.tar.gz --exclude code.tar.gz .</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>CMD</h3>
+
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="CMD">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>tar -czf code.tar.gz --exclude code.tar.gz .</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>PowerShell</h3>
+
+        <div class="ide margin-bottom" data-lang="bash" data-lang-label="PowerShell">
+            <pre class="line-numbers"><code class="prism language-bash" data-prism>tar -czf code.tar.gz --exclude code.tar.gz .</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>Next, navigate to your Appwrite console and upload the function.</p>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+  <li class="margin-bottom-small">Navigate to the function you want to deploy.</li>
+  <li class="margin-bottom-small">Click <i class="icon-plus"></i> <b>Create deployment</b>.</li>
+  <li class="margin-bottom-small">Select the <b>Manual</b> tab.</li>
+  <li class="margin-bottom-small">Input the entry point of your function under <b>Entrypoint</b>. For the example above, it would be <code>index.js</code>.</li>
+  <li class="margin-bottom-small">Upload <code> code.tar.gz</code>.</li>
+  <li class="margin-bottom-small">Select <b>Activate deployment after build</b> to use your new function.</li>
+  <li class="margin-bottom-small">Click <b>Create</b> to deploy your function.</li>
+</ol>
+
+
 <h2><a href="/docs/functions#build" id="build">Builds</a></h2>
 <p>Deployments needs to be built before they can be activated. This is automatically done after creating a deployment and the time taken can vary depending on the runtime.</p>
 
-<p>If a build fails for any reason, the deployment's status is set to <b>failed</b> and you won't be able to activate it. You can however retry a build if you think it was caused by an external factor using the <b>Retry Button</b> on the Appwrite Dashboard or <a href="/docs/server/functions#functionsRetryBuild">Retry Build</a> endpoint with the <b>buildId</b> from the deployment.</p>
+<p>If a build fails for any reason, the deployment's status is set to <span class="tag red">failed</span> and you won't be able to activate it. You can however retry a build if you think it was caused by an external factor using the <b>Retry Button</b> on the Appwrite Dashboard or <a href="/docs/server/functions#functionsRetryBuild">Retry Build</a> endpoint with the <code>buildId</code> from the deployment.</p>
 
-<p>To find more details about a deployment and reasons for its failure, you can use the <a href="/docs/server/functions#functionsGetDeployment">Get Deployment</a> endpoint using the <b>deploymentId</b>.</p>
+<p>To find more details about a deployment and reasons for its failure, you can use the <a href="/docs/server/functions#functionsGetDeployment">Get Deployment</a> endpoint using the <code>deploymentId</code>.</p>
 
-<p>Deployments that have been built successfully are marked as <b>ready</b> and can be activated and executed.</p>
+<p>Deployments that have been built successfully are marked as <span class="tag green">ready</span> and can be activated and executed.</p>
 
 <div class="notice">
     <h3>Build Times</h3>
@@ -519,7 +568,7 @@ static RuntimeResponse &main(const RuntimeRequest &req, RuntimeResponse &res) {
 
 <h2><a href="/docs/functions#execute" id="execute">Execute</a></h2>
 
-<p>Besides setting a schedule or allowing your function to listen to Appwrite’s system events, you can also manually execute your cloud functions from your Appwrite console or API.</p>
+<p>Besides setting a schedule or allowing your function to listen to Appwrite's system events, you can also manually execute your cloud functions from your Appwrite console or API.</p>
 
 <?php
 $image = new View(__DIR__.'/../general/image.phtml');
@@ -531,7 +580,7 @@ $image = new View(__DIR__.'/../general/image.phtml');
         ->render();
 ?>
 
-<p>To execute a function from the Appwrite console, click the 'Execute Now' button on your function's overview page. To execute a function from the API, send a POST request to the <a href="/docs/client/functions#functionsCreateExecution">function execution endpoint</a>.</p>
+<p>To execute a function from the Appwrite console, click the <b>Execute Now</b> button on your function's overview page. To execute a function from the API, send a POST request to the <a href="/docs/client/functions#functionsCreateExecution">function execution endpoint</a>.</p>
 
 <p>The function execution endpoint is available from both Appwrite client and server APIs. To execute your function from the <b>server API</b>, you need an API key with 'execution.write' scope.</p>
 
@@ -641,15 +690,15 @@ func main() async throws {
 
 <p>The Functions Service APIs are rate limited to 60 calls per minute per account when using a Client SDK. Learn more about <a href="docs/rate-limits">rate limiting</a>. The response size of a Cloud Function is limited to 1MB. Responses larger than 1MB should be handled using Appwrite's Databases or Storage service.</p>
 
-<p>Each execution has a default timeout of 15 seconds to prevent hanging functions from blocking resources. This timeout can be configured per function on a function's settings page or in <span class="tag">appwrite.json</span> for up to 900 seconds.</p>
+<p>Each execution has a default timeout of 15 seconds to prevent hanging functions from blocking resources. This timeout can be configured per function on a function's settings page or in <code>appwrite.json</code> for up to 900 seconds.</p>
 
-<p>The maximum configurable timeout can be increased by changing the <span class="tag">_APP_FUNCTIONS_TIMEOUT</span> environment variable. This environment variable changes the configurable maximum but does not alter existing individual configurations.</p>
+<p>The maximum configurable timeout can be increased by changing the <code>_APP_FUNCTIONS_TIMEOUT</code> environment variable. This environment variable changes the configurable maximum but does not alter existing individual configurations.</p>
 
 <h2><a href="/docs/functions#ignoreFiles" id="ignoreFiles">Ignore Files</a></h2>
 
-<p>Library folders such as <b>node_modules</b> or <b>vendor</b> should not be included in your tarball since these dependencies will be installed during your function's build process. Similarly, you should <b>not</b> include files containing secrets in your deployment. You can use the Appwite CLI's <b>file ignoring</b> feature to exclude specific files from a deployment.</p>
+<p>Library folders such as <code>node_modules</code> or <code>vendor</code> should not be included in your tarball since these dependencies will be installed during your function's build process. Similarly, you should <b>not</b> include files containing secrets in your deployment. You can use the Appwite CLI's <b>file ignoring</b> feature to exclude specific files from a deployment.</p>
 
-<p>You can use the <b>ignore</b> property in your <b>appwrite.json</b> file to specify which files and folders should be ignored. This value must be an array of paths, as seen in the example below:</p>
+<p>You can use the <b>ignore</b> property in your <code>appwrite.json</code> file to specify which files and folders should be ignored. This value must be an array of paths, as seen in the example below:</p>
 
 <div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
     <pre class="line-numbers"><code class="prism language-json" data-prism>{
@@ -668,11 +717,11 @@ func main() async throws {
 }</code></pre>
 </div>
 
-<p>The example configuration above would not deploy the folder <b>node_modules</b> and the file <b>.env</b>.</p>
+<p>The example configuration above would not deploy the folder <code>node_modules</code> and the file <code>.env</code>.</p>
 
-<p>Alternatively, you can add a <b>.gitignore</b> file into your function folder and Appwrite CLI will ignore files specified in there. Keep in mind that if present, the <b>ignore</b> configuration in <b>appwrite.json</b> will nullify the <b>.gitignore</b> file configuration.</p>
+<p>Alternatively, you can add a <code>.gitignore</code> file into your function folder and Appwrite CLI will ignore files specified in there. Keep in mind that if present, the <b>ignore</b> configuration in <code>appwrite.json</code> will nullify your ignore file.</p>
 
-<p>If you need to use a <b>.gitignore</b> file for your version control but don't want the Appwrite CLI to use it, you can specify the <b>ignore</b> key in <b>appwrite.json</b> to be an empty array.</p>
+<p>If you need to use a <code>.gitignore</code> file for your version control but don't want the Appwrite CLI to use it, you can specify the <b>ignore</b> key in <code>appwrite.json</code> to be an empty array.</p>
 
 <h2><a href="/docs/functions#supportedRuntimes" id="supportedRuntimes">Supported Runtimes</a></h2>
 
@@ -701,7 +750,7 @@ func main() async throws {
     </tbody>
 </table>
 
-<p>By default, the following runtimes are enabled: "node-16.0, php-8.0, python-3.9, ruby-3.0". To enable or disable runtimes, you can edit the <span class="tag">_APP_FUNCTIONS_RUNTIMES</span> <a href="docs/environment-variables#functions">environment variable</a>.</p>
+<p>By default, the following runtimes are enabled: "node-16.0, php-8.0, python-3.9, ruby-3.0". To enable or disable runtimes, you can edit the <code>_APP_FUNCTIONS_RUNTIMES</code> <a href="docs/environment-variables#functions">environment variable</a>.</p>
 
 <h2><a href="/docs/functions#functionVariables" id="functionVariables">Function Variables</a></h2>
 
@@ -817,19 +866,19 @@ func main() async throws {
 
 <div class="notice">
     <h3>Using an Appwrite SDK in Your Function</h3>
-    <p>Appwrite Server SDKs require an API key, an endpoint, and a project ID for authentication. Appwrite passes in your project ID with the function variable  <span class="tag">APPWRITE_FUNCTION_PROJECT_ID</span>, but not the endpoint and API key. If you need to use a Server SDK, you will need to add function variables for your endpoint and API key in the 'Settings' tab of your function.</p>
-    <p>If you are running a <b>local Appwrite instance</b>, you will need to pass in the machine's public IP instead of <span class="tag">'https://localhost/v1'</span>. Localhost inside the function's runtime container is not the same as localhost of your machine.</p>
+    <p>Appwrite Server SDKs require an API key, an endpoint, and a project ID for authentication. Appwrite passes in your project ID with the function variable  <code>APPWRITE_FUNCTION_PROJECT_ID</code>, but not the endpoint and API key. If you need to use a Server SDK, you will need to add function variables for your endpoint and API key in the <b>Settings</b> tab of your function.</p>
+    <p>If you are running a <b>local Appwrite instance</b>, you will need to pass in the machine's public IP instead of <code>'https://localhost/v1'</code>. Localhost inside the function's runtime container is not the same as localhost of your machine.</p>
 </div>
 
 <h2><a href="/docs/functions#appwriteSDKInFunctions" id="appwriteSDKInFunctions">Appwrite SDKs in Functions</a></h2>
 
 <p>You can integrate Appwrite Functions with other Appwrite services by using the appropriate <a href="/docs/getting-started-for-server">Server SDK</a> for your runtime. You can find starter code for your function's runtime in the <a href="https://github.com/appwrite/functions-starter" target="_blank">Appwrite Function Starter repository</a>.</p>
 
-<p>To initialize a Server SDK in a function, you need to provide your Appwrite endpoint and an <a href="/docs/keys">API key</a> in the <b>Variables</b> tab of your Function. The ID of your Appwrite project is passed in automatically as <span class="tag">APPWRITE_FUNCTION_PROJECT_ID</span>.</p>
+<p>To initialize a Server SDK in a function, you need to provide your Appwrite endpoint and an <a href="/docs/keys">API key</a> in the <b>Variables</b> tab of your Function. The ID of your Appwrite project is passed in automatically as <code>APPWRITE_FUNCTION_PROJECT_ID</code>.</p>
 
 <h2><a href="/docs/functions#monitorDebug" id="monitorDebug">Monitor & Debug</a></h2>
 
-<p>You can monitor your function execution usage stats and logs from your Appwrite console. To access your functions usage stats and logs, click the 'Usage' tab in your function dashboard.</p>
+<p>You can monitor your function execution usage stats and logs from your Appwrite console. To access your functions usage stats and logs, click the <b>Usage</b> tab in your function dashboard.</p>
 
 <p>The usage screen in your console will allow you to track the number of execution and your function CPU usage time. You can also review a detailed log of your function execution history, including the function exit code, output log, and error log.</p>
 
