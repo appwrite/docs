@@ -1,0 +1,19 @@
+<p>
+    Appwrite Offline allows your client apps to continue functioning without an internet connection. Your users' mobile devices frequently encounter situations where internet access becomes unstable or temporarily unavailable, like when going through tunnels, getting on airplanes and subways, or going in and out of WIFI range. Offline helps your app gracefully handle these real life situations and keep your users engaged.
+</p>
+
+<h2>When Should I Enable Offline?<h2>
+<p>
+    Appwrite Offline allows you to continue making requests to Appwrite APIs while offline through a cache. While offline, read requests will be fetched from the local cache data, and write requests will be queued and executed once the device is online again.
+</p>
+<p>
+    You should consider enabling Offline if you expect the user device running your application to experience short periods without a network connection, like going on an airplane to going through a tunnel. Offline can't help you if the app's data needs to remain up to date with frequent updates or if write requests need to be processed immediately. If you expect you app to be offline for days or weeks at a time, you may also need to find alternative solutions.
+</p>
+
+<h3>Tradeoffs of Enabling Offline<h3>
+<p>
+    Offline support adds a cache layer that takes up additional resources and adds overhead to your requests. This may not be desirable for some applications, especially if it's not expected to be used without a stable internet connection.
+</p>
+<p>
+    When Offline is enabled, it will <b>change how promises are resolved</b> in the Appwrite SDKs. Requests made Offline can become blocking, which means you will need to change how you handle promises in your application. This means you may need to <b>rewrite some of your code</b> when adding Offline to existing applications.
+</p>
