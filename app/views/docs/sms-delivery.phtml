@@ -1,0 +1,139 @@
+<p>Appwrite supports phone authentication, which allows users to create accounts and log in using SMS messages. Appwrite requires an SMS provider to be setup before using Phone authentication.</p>
+
+<h2><a href="/docs/sms-delivery#providers" id="providers">SMS Providers</a></h2>
+<p>Appwrite supports a growing list of SMS providers that you can choose from. Choose one from the list below and set up an account.</p>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large text-size-small vertical">
+    <thead>
+        <tr>
+            <th style="width: 60px"></th>
+            <th>SMS Provider</th>
+            <th>Create Account</th>
+            <th>Get Credentials</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <img src="/images-ee/docs/sms-delivery/twilio/logo-light.png" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
+                <img src="/images-ee/docs/sms-delivery/twilio/logo-dark.png" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
+            </td>
+            <td>
+                Twilio
+            </td>
+            <td>
+                <a href="https://www.twilio.com" target="_blank" rel="noopener">Website</a>
+            </td>
+            <td>
+                <a href="https://www.twilio.com/docs/iam/access-tokens#step-2-api-key" target="_blank" rel="noopener">Documentation</a>
+            </td>
+        </tr>        
+        <tr>
+            <td>
+                <img src="/images-ee/docs/sms-delivery/text-magic/logo-common.png" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
+                <img src="/images-ee/docs/sms-delivery/text-magic/logo-common.png" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
+            </td>
+            <td>
+                TextMagic
+            </td>
+            <td>
+                <a href="https://www.textmagic.com" target="_blank" rel="noopener">Website</a>
+            </td>
+            <td>
+                <a href="https://www.textmagic.com/docs/api/start/#How-to-obtain-the-API-credentials" target="_blank" rel="noopener">Documentation</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="/images-ee/docs/sms-delivery/telesign/logo-light.png" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
+                <img src="/images-ee/docs/sms-delivery/telesign/logo-dark.png" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
+            </td>
+            <td>
+                Telesign
+            </td>
+            <td>
+                <a href="https://www.telesign.com" target="_blank" rel="noopener">Website</a>
+            </td>
+            <td>
+                <a href="https://support.telesign.com/s/article/Find-Customer-ID-and-API-Key" target="_blank" rel="noopener">Documentation</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="/images-ee/docs/sms-delivery/msg91/logo-common.png" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
+                <img src="/images-ee/docs/sms-delivery/msg91/logo-common.png" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
+            </td>
+            <td>
+                MSG91
+            </td>
+            <td>
+                <a href="https://msg91.com" target="_blank" rel="noopener">Website</a>
+            </td>
+            <td>
+                <a href="https://msg91.com/help/where-can-i-find-my-authentication-key" target="_blank" rel="noopener">Documentation</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="/images-ee/docs/sms-delivery/vonage/logo-light.png" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
+                <img src="/images-ee/docs/sms-delivery/vonage/logo-dark.png" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
+            </td>
+            <td>
+                Vonage
+            </td>
+            <td>
+                <a href="https://www.vonage.ca/" target="_blank" rel="noopener">Website</a>
+            </td>
+            <td>
+                <a href="https://developer.vonage.com/en/account/secret-management" target="_blank" rel="noopener">Documentation</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h2><a href="/docs/sms-delivery#updateEnvFile" id="updateEnvFile">Update Your .env File</a></h2>
+<p>You will need to configure these <a href="/docs/environment-variables#phone">environment variables</a> and restart your Appwrite containers before you can use phone authentication.</p>
+
+<table class="full">
+    <thead>
+    <tr>
+        <td style="width: 80px">Provider</td>
+        <td>_APP_SMS_PROVIDER</td>
+        <td style="width: 250px">_APP_SMS_FROM</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Twilio</td>
+        <td><code>sms://[ACCOUNT SID]:[AUTH TOKEN]@twilio</code></td>
+        <td><code>[TWILIO PHONE NUMBER]</code></td>
+    </tr>
+    <tr>
+        <td>TextMagic</td>
+        <td><code>sms://[USERNAME]:[API KEY]@text-magic</code></td>
+        <td><code>[PHONE NUMBER OR SENDER ID]</code></td>
+    </tr>
+    <tr>
+        <td>TeleSign</td>
+        <td><code>sms://[CUSTOMER ID]:[API KEY]:telesign</code></td>
+        <td><code>[TELESIGN PHONE NUMBER]</code></td>
+    </tr>
+    <tr>
+        <td>MSG91</td>
+        <td><code>sms://[SENDER ID]:[AUTH KEY]@MSG91</code></td>
+        <td><code>[FLOW ID]</code></td>
+    </tr>
+    <tr>
+        <td>Vonage</td>
+        <td><code>sms://[API KEY]:[API SECRET]@vonage</code></td>
+        <td><code>[PHONE NUMBER OR BRAND NAME]</code></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2><a href="/docs/sms-delivery#restartServer" id="restartServer">Restart Your Appwrite Server</a></h2>
+
+<p>Once you've updated your .env file, you need to restart your Appwrite instance. Navigate to the directory containing the <code>docker-compose.yml</code> file of your Appwrite instance and run the following command from your terminal:</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose up -d</code></pre>
+</div>
