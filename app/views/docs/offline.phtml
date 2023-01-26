@@ -15,5 +15,5 @@
     Offline support adds a cache layer that takes up additional resources and adds overhead to your requests. This may not be desirable for some applications, especially if it's not expected to be used without a stable internet connection.
 </p>
 <p>
-    When Offline is enabled, it will <b>change how promises are resolved</b> in the Appwrite SDKs. Requests made Offline can become blocking, which means you will need to change how you handle promises in your application. This means you may need to <b>rewrite some of your code</b> when adding Offline to existing applications.
+    When Offline Support is enabled, it will <b>change how API calls are made</b> in the Appwrite SDKs. Write requests made while offline will not return until online again, which means you will need to change how you call these methods in your application. This means you may need to <b>rewrite some of your code</b> when adding Offline Support to existing applications.
 </p>
