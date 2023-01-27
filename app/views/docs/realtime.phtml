@@ -437,34 +437,57 @@ subscription.close()</code></pre>
 
 <div class="ide margin-bottom" data-lang="json" data-lang-label="JSON">
     <pre class="line-numbers"><code class="prism language-json" data-prism>{
-    "events": [
-        "collections.user.documents.627a95c0785cc5c7fff2.delete",
-        "collections.*.documents.*.delete",
-        "collections.user.documents.*.delete",
-        "collections.*.documents.627a95c0785cc5c7fff2.delete",
-        "collections.user.documents.627a95c0785cc5c7fff2",
-        "collections.*.documents.*",
-        "collections.user.documents.*",
-        "collections.*.documents.627a95c0785cc5c7fff2",
-        "collections.user",
-        "collections.*"
+  "events": [
+    "databases.default.collections.sample.documents.63c98b9baea0938e1206.update",
+    "databases.*.collections.*.documents.*.update",
+    "databases.default.collections.*.documents.63c98b9baea0938e1206.update",
+    "databases.*.collections.*.documents.63c98b9baea0938e1206.update",
+    "databases.*.collections.sample.documents.63c98b9baea0938e1206.update",
+    "databases.default.collections.sample.documents.*.update",
+    "databases.*.collections.sample.documents.*.update",
+    "databases.default.collections.*.documents.*.update",
+    "databases.default.collections.sample.documents.63c98b9baea0938e1206",
+    "databases.*.collections.*.documents.*",
+    "databases.default.collections.*.documents.63c98b9baea0938e1206",
+    "databases.*.collections.*.documents.63c98b9baea0938e1206",
+    "databases.*.collections.sample.documents.63c98b9baea0938e1206",
+    "databases.default.collections.sample.documents.*",
+    "databases.*.collections.sample.documents.*",
+    "databases.default.collections.*.documents.*",
+    "databases.default.collections.sample",
+    "databases.*.collections.*",
+    "databases.default.collections.*",
+    "databases.*.collections.sample",
+    "databases.default",
+    "databases.*"
+  ],
+  "channels": [
+    "documents",
+    "databases.default.collections.sample.documents",
+    "databases.default.collections.sample.documents.63c98b9baea0938e1206"
+  ],
+  "timestamp": "2023-01-19 18:30:04.051",
+  "payload": {
+    "ip": "127.0.0.1",
+    "stringArray": [
+      "sss"
     ],
-    "channels": [
-        "documents",
-        "collections.user.documents",
-        "collections.user.documents.627a95c0785cc5c7fff2"
-    ],
-    "timestamp": "2022-10-17T07:29:37+00:00",
-    "payload": {
-        "field1": "lorem ipsum",
-        "field2": [],
-        "$permissions": [
-            "read(\"user:627a958ded6424a98a9f\")",
-            "read(\"user:627a958ded6424a98a9f\")"
-        ],
-        "$id": "627a95c0785cc5c7fff2",
-        "$collection": "example-collection"
-    }
+    "email": "joe@example.com",
+    "stringRequired": "req",
+    "float": 3.3,
+    "boolean": false,
+    "integer": 3,
+    "enum": "apple",
+    "stringDefault": "default",
+    "datetime": "2023-01-19T10:27:09.428+00:00",
+    "url": "https://appwrite.io",
+    "$id": "63c98b9baea0938e1206",
+    "$createdAt": "2023-01-19T18:27:39.715+00:00",
+    "$updatedAt": "2023-01-19T18:30:04.040+00:00",
+    "$permissions": [],
+    "$collectionId": "sample",
+    "$databaseId": "default"
+  }
 }</code></pre>
 </div>
 
