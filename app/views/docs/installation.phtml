@@ -4,7 +4,6 @@
 
 <p>Appwrite is designed to run well on both small and large deployments. The minimum requirements to run Appwrite are as little as <b>1 CPU core</b> and <b>2GB of RAM</b>, and an operating system that supports Docker.</p>
 
-
 <p>Appwrite requires <a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">Docker Compose Version 2</a>. To install Appwrite, make sure your Docker installation is updated to support Composer V2.</p>
 
 <div class="notice margin-bottom">
@@ -15,6 +14,14 @@
 <h2><a href="/docs/installation#installWithDocker" id="installWithDocker">Install with Docker</a></h2>
 
 <p>The easiest way to start running your Appwrite server is by running our Docker installer tool from your terminal. Before running the installation command, make sure you have <a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">Docker CLI</a> installed on your host machine.</p>
+
+<p>You will be prompted to configure the following during the setup command:</p>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>Your Appwrite instance's HTTP and HTTPs ports.</li>
+    <li>Your Appwrite instance's secret key which used to encrypt sensitive data.</li>
+    <li>Your Appwrite instance's main hostname. Appwrite will generate a certificate using this hostname.</li>
+    <li>Your Appwrite instance's DNS A record hostname. Typically set to the same value as your Appwrite instance's hostname.</li>
+</ol>
 
 <h3><a href="/docs/installation#unix" id="unix">Unix</a></h3>
 
