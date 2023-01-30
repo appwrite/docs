@@ -1091,7 +1091,7 @@ let token = try await account.updateRecovery(
 
 
 <h2><a href="/docs/authentication#jwt" id="jwt">JWT Authentication</a></h2>
-<p>If you're building server applications using Appwrite's Server SDKs, you can use JWTs for authentication between your client and server applications.</p>
+<p><a href="https://jwt.io/introduction" target="_blank" rel="noopener">JSON Web Tokens</a> (JWTs) are a secure means to transfer information or claims between two parties. If you're building <a href="/docs/getting-started-for-server">server applications</a> with Appwrite, JWTs enable your client applications to authenticate with your server application.</p>
 
 <p>You need to create a session using the Client SDKs <b>before</b> generating a JWT. The JWT will be a stateless proof of claim for the identity of the authenticated user and can be used by client or server SDKs to act on behalf of a user. JWTs become invalid after 15 minutes or when the session is deleted.</p>
 
