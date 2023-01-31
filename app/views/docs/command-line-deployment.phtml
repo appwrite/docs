@@ -2,7 +2,7 @@
 The Apprite CLI allows you to create and deploy collections and functions to your Appwrite project from a configuration file. This is especially helpful if you're trying to track functions and collection schemas using version control, or if you're promoting changes from development to production environments.
 </p>
 
-<h3><a href="/docs/command-line-deployment#initializeProject" id="initializeProject">Initializing Your Project</a></h3>
+<h2><a href="/docs/command-line-deployment#initializeProject" id="initializeProject">Initializing Your Project</a></h2>
 
 <p>After you're logged in, the CLI needs to be initialized with your Appwrite project. You can initialize the CLI using:</p>
 
@@ -18,7 +18,7 @@ The Apprite CLI allows you to create and deploy collections and functions to you
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init collection</code></pre>
 </div>
 
-<h3><a href="/docs/command-line-deployment#deployFunctions" id="deployFunctions">Deploying Cloud Functions</a></h3>
+<h2><a href="/docs/command-line-deployment#deployFunctions" id="deployFunctions">Deploying Cloud Functions</a></h2>
 
 <p>The CLI also handles the creation and deployment of Appwrite Functions. You can initialize a new function using:</p>
 
@@ -38,7 +38,7 @@ The Apprite CLI allows you to create and deploy collections and functions to you
 ✓ Success Deployed Awesome Function ( 621229798628cf5bf712 )</code></pre>
 </div>
 
-<h3><a href="/docs/command-line-deployment#deployCollections" id="deployCollections">Deploying collections</a></h3>
+<h2><a href="/docs/command-line-deployment#deployCollections" id="deployCollections">Deploying collections</a></h2>
 
 <p>The Appwrite CLI also helps you migrate your project's collections from a development server to a production server. You can deploy all the collections in your <a href="/docs/command-line-deployment#appwriteJSON">appwrite.json</a> file using:</p>
 
@@ -46,7 +46,7 @@ The Apprite CLI allows you to create and deploy collections and functions to you
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collections</code></pre>
 </div>
 
-<h3><a href="/docs/command-line-deployment#avoidingConflicts" id="avoidingConflicts">Avoiding Conflicts</a></h3>
+<h2><a href="/docs/command-line-deployment#avoidingConflicts" id="avoidingConflicts">Avoiding Conflicts</a></h2>
 <p>When using <code>appwrite.json</code>, changes made in the Appwrite Console can cause conflicts with the local config. To avoid conflicts, prefer updating configuration locally and deploying instead of using the console.</p>
 
 <h2><a href="/docs/command-line-deployment#appwriteJSON" id="appwriteJSON">The appwrite.json File</a></h2>
