@@ -1,5 +1,5 @@
 <p>
-The Appwrite CLI can be used in a non-interactive and headless manner, without saving configuration or sessions. This is especially useful when you want to automate tasks on a CI Server.
+The Appwrite CLI can be used in a non-interactive and headless manner, without saving configuration or sessions. This is especially useful when you want to automate tasks on a CI server.
 </p>
 <h2><a href="/docs/commandline-ci#CIMode" id="CIMode">CI Mode</a></h2>
 
@@ -14,7 +14,10 @@ The Appwrite CLI can be used in a non-interactive and headless manner, without s
 
 <p>When you set the global configuration parameters using the <code>appwrite client</code> command, they take precedence over the local configuration parameters in your <code>appwrite.json</code> thereby switching the CLI to non-interactive mode. </p> 
 
-<p>In this mode, the CLI can only interact with one project at a time. If you look closely, you'll also notice that we use an <b>API Key</b> to authenticate which means the CLI behaves like Appwrite's server SDK. You can learn more about API Keys in the <a href="/docs/getting-started-for-server#apiKey">Appwrite for Server</a> docs.</p>
+<p>In this mode, the CLI can only interact with one project at a time.</p>
+
+<h2><a href="/docs/commandline-ci#keys" id="keys">API Keys</a></h2>
+<p>In CI mode, the CLI uses <b>API Key</b> to authenticate. Ensure the API key you use has the sufficient permissions to execute the commands you plan to use. You can learn more about <a href="/docs/keys">API Keys</a>.</p>
 
 <h2><a href="/docs/command-line-ci#configuration" id="configuration">Configuration</a></h2>
 

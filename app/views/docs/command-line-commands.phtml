@@ -1,4 +1,4 @@
-<p>Other than commands to create and deploy collections and functions, the Appwrite CLI can be used as a Server SDK. The Appwrite CLI has a command for every Server API endpoint.</p>
+<p>Other than commands to create and deploy collections and functions, the Appwrite CLI can be used as a Server SDK as well. The Appwrite CLI has a command for every Server API endpoint.</p>
 
 <p>Commands follows the following general syntax:</p>
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
@@ -18,63 +18,63 @@
     <tbody>
     <tr>
         <td><code>login</code></td>
-        <td>The login command allows you to authenticate a user into the CLI</td>
+        <td>The login command allows you to authenticate into the CLI. This command expects the <b>console account</b> that you use to log into the Appwrite Console.</td>
     </tr>
     <tr>
         <td><code>init</code></td>
-        <td>The init command helps you initialize your Appwrite project, functions and collections</td>
+        <td>The init command helps you initialize your Appwrite project, functions, and collections.</td>
     </tr>
     <tr>
         <td><code>deploy</code></td>
-        <td>The deploy command provides a convenient wrapper for deploying your functions and collections</td>
+        <td>The deploy command provides a convenient wrapper for deploying your functions and collections.</td>
     </tr>
     <tr>
         <td><code>logout</code></td>
-        <td>The logout command allows you to logout from the CLI</td>
+        <td>The logout command allows you to logout from the CLI.</td>
     </tr>
     <tr>
         <td><code>projects</code></td>
-        <td>The projects command allows you to view, create and manage your Appwrite projects</td>
+        <td>The projects command allows you to view, create, and manage your Appwrite projects.</td>
     </tr>
     <tr>
         <td><code>storage</code></td>
-        <td>The storage command allows you to manage your project files</td>
+        <td>The storage command allows you to manage your project files.</td>
     </tr>
     <tr>
         <td><code>teams</code></td>
-        <td>The teams command allows you to group users of your project and to enable them to share read and write access to your project's resources</td>
+        <td>The teams command allows you to group users of your project and to enable them to share access permissions to your project's resources.</td>
     </tr>
     <tr>
         <td><code>users</code></td>
-        <td>The users command allows you to manage your project users</td>
+        <td>The users command allows you to manage your project users.</td>
     </tr>
     <tr>
         <td><code>client</code></td>
-        <td>The client command allows you to configure your CLI</td>
+        <td>The client command allows you to configure your CLI.</td>
     </tr>
     <tr>
         <td><code>account</code></td>
-        <td>The account command allows you to authenticate and manage a user account</td>
+        <td>The account command allows you to authenticate as and manage a user account.</td>
     </tr>
     <tr>
         <td><code>avatars</code></td>
-        <td>The avatars command aims to help you complete everyday tasks related to your app image, icons, and avatars</td>
+        <td>The avatars command provides utilities to manage images, icons, and avatars.</td>
     </tr>
     <tr>
         <td><code>functions</code></td>
-        <td>The functions command allows you view, create and manage your Cloud Functions</td>
+        <td>The functions command allows you view, create and manage your Appwrite Functions.</td>
     </tr>
     <tr>
         <td><code>databases</code></td>
-        <td>The databases command allows you to create structured collections of documents, query and filter lists of documents</td>
+        <td>The databases command allows you to create structured collections of documents, query and filter lists of documents.</td>
     </tr>
     <tr>
         <td><code>health</code></td>
-        <td>The health command allows you to both validate and monitor your Appwrite server's health</td>
+        <td>The health command allows you to both validate and monitor your Appwrite project's health.</td>
     </tr>
     <tr>
         <td><code>locale</code></td>
-        <td>The locale command allows you to customize your app based on your users' location</td>
+        <td>The locale command allows you to customize your app based on your users' location.</td>
     </tr>
     </tbody>
 </table>
@@ -83,7 +83,7 @@
 <h2><a href="/docs/command-line-commands#examples" id="examples">Examples</a></h2>
 <p><b>Create User</b></p>
 
-<p>To create a new user in your project, you can use the <code>create</code> command. To successfully create a user, make sure your API key is granted with the scope <code>"users.write"</code>.</p>
+<p>To create a new user in your project, you can use the <code>create</code> command.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users create --userId "unique()" \
@@ -93,7 +93,7 @@
 
 <p><b>List Users</b></p>
 
-<p>To get a list of all your project users, you can use the <code>list</code> command. To successfully view the list, make sure your API key is granted with the scope <code>"users.read"</code>.</p>
+<p>To get a list of all your project users, you can use the <code>list</code> command.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite users list</code></pre>
@@ -107,7 +107,7 @@
 
 <p><b>List Collections</b></p> 
 
-<p>To get a list of all your collections, you can use the <code>listCollections</code> command. To successfully view the list, make sure your API key is granted with the scope <code>"collections.read"</code>.</p>
+<p>To get a list of all your collections, you can use the <code>listCollections</code> command.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases listCollections</code></pre>
@@ -121,7 +121,7 @@
 
 <p><b>Get a Collection</b></p>
 
-<p>To get more information on a particular collection, you can make use of the <code>getCollection</code> command and pass in the <code>collectionId</code>.  To successfully fetch the collection, make sure your API key is granted with the scope <code>"collections.read"</code>.</p>
+<p>To get more information on a particular collection, you can make use of the <code>getCollection</code> command and pass in the <code>collectionId</code>.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases getCollection --collectionId 5ff468cfa32a0</code></pre>
@@ -129,7 +129,7 @@
 
 <p><b>Create Document</b></p>
 
-<p>To create a new document in an existing collection, use the `createDocument` command.</p>
+<p>To create a new document in an existing collection, use the <code>createDocument</code> command.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
 <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases createDocument \
