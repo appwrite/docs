@@ -1,5 +1,5 @@
 <p>
-The Apprite CLI allows you to track and manage your collection schemas and functions from a configuration file instead of the Appwrite console. This is especially helpful if you're trying to track changing functions and collection schemas using version control, or if you're promoting changes from development to production.
+The Apprite CLI allows you to create and deploy collections and functions to your Appwrite project from a configuration file. This is especially helpful if you're trying to track functions and collection schemas using version control, or if you're promoting changes from development to production environments.
 </p>
 
 <h3><a href="/docs/command-line-deployment#initializeProject" id="initializeProject">Initializing Your Project</a></h3>
@@ -45,6 +45,9 @@ The Apprite CLI allows you to track and manage your collection schemas and funct
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collections</code></pre>
 </div>
+
+<h3><a href="/docs/command-line-deployment#avoidingConflicts" id="avoidingConflicts">Avoiding Conflicts</a></h3>
+<p>When using <code>appwrite.json</code>, changes made in the Appwrite Console can cause conflicts with the local config. To avoid conflicts, prefer updating configuration locally and deploying instead of using the console.</p>
 
 <h2><a href="/docs/command-line-deployment#appwriteJSON" id="appwriteJSON">The appwrite.json File</a></h2>
 
