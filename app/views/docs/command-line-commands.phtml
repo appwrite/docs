@@ -1,31 +1,12 @@
-<p>
-The Appwrite CLI supports commands for every Server API endpoint. This means you can use the Appwrite CLI like a Server SDK. This gives the Appwrite CLI many interesting use cases for scripting and CI/CD.
-</p>
-<h2><a href="/docs/commandline-scripting#CIMode" id="CIMode">CI Mode</a></h2>
+<p>Other than commands to create and deploy collections and functions, the Appwrite CLI can be used as a Server SDK. The Appwrite CLI has a command for every Server API endpoint.</p>
 
-<p>The Appwrite CLI can be used in a non-interactive mode. This is especially useful when you want to automate tasks on a CI Server. In order to enable CI mode on the CLI, you need to set your <b>project ID, endpoint, and API Key</b> using:</p>
-
-<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client \
---endpoint https://[HOSTNAME_OR_IP]/v1 \
---projectId [YOUR_PROJECT_ID] \
---key YOUR_API_KEY</code></pre>
-</div>
-
-<p>When you set the global configuration parameters using the <code>appwrite client</code> command, they take precedence over the local configuration parameters in your <code>appwrite.json</code> thereby switching the CLI to non-interactive mode. </p> 
-
-<p>In this mode, the CLI can only interact with one project at a time. If you look closely, you'll also notice that we use an <b>API Key</b> to authenticate which means the CLI behaves like Appwrite's server SDK. You can learn more about API Keys in the <a href="/docs/getting-started-for-server#apiKey">Appwrite for Server</a> docs.</p>
-
-
-<h2><a href="/docs/command-line-scripting#command-syntax" id="command-syntax">Command Syntax</a></h2>
-
-<p>The Appwrite CLI follows the following general syntax:</p>
-
+<p>Commands follows the following general syntax:</p>
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite [COMMAND] --[OPTIONS]</code></pre>
 </div>
 
-<p>A complete list of supported commands can be found below.</p>
+
+<h2><a href="/docs/command-line-commands#commands" id="commands">List of Commands</a></h2>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full text-size-small">
     <thead>
@@ -99,7 +80,7 @@ The Appwrite CLI supports commands for every Server API endpoint. This means you
 </table>
 
 
-<h2><a href="/docs/command-line-scripting#examples" id="examples">Examples</a></h2>
+<h2><a href="/docs/command-line-commands#examples" id="examples">Examples</a></h2>
 <p><b>Create User</b></p>
 
 <p>To create a new user in your project, you can use the <code>create</code> command. To successfully create a user, make sure your API key is granted with the scope <code>"users.write"</code>.</p>
@@ -155,16 +136,4 @@ The Appwrite CLI supports commands for every Server API endpoint. This means you
     --collectionId [COLLECTION_ID] \
     --documentId 'unique()' --data '{ "Name": "Iron Man" }' \
     --permissions 'read("any")' 'write("team:abc")' </code></pre>
-</div>
-
-<h3><a href="/docs/command-line-scripting#configuration" id="configuration">Configuration</a></h3>
-
-<p>At any point, if you would like to change your server endpoint, project key, or self-signed certificate acceptance, use the <code>client</code> command.</p>
-
-<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --endpoint https://[HOSTNAME_OR_IP]/v1
-appwrite client --key 23f24gwrhSDgefaY
-appwrite client --selfSigned true
-appwrite client --reset // Resets your CLI configuration
-appwrite client --debug // Prints your current configuration</code></pre>
 </div>
