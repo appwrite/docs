@@ -18,15 +18,3 @@ The Appwrite CLI can be used in a non-interactive and headless manner, without s
 
 <h2><a href="/docs/commandline-ci#keys" id="keys">API Keys</a></h2>
 <p>In CI mode, the CLI uses an <b>API key</b> to authenticate. Your API key must have sufficient permissions to execute the commands you plan to use. <a href="/docs/keys">Learn more about API Keys</a>.</p>
-
-<h2><a href="/docs/command-line-ci#configuration" id="configuration">Configuration</a></h2>
-
-<p>At any point, if you would like to change your server's endpoint, project ID, or self-signed certificate acceptance, use the <code>client</code> command.</p>
-
-<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --endpoint https://[HOSTNAME_OR_IP]/v1
-appwrite client --key 23f24gwrhSDgefaY
-appwrite client --selfSigned true
-appwrite client --reset // Resets your CLI configuration
-appwrite client --debug // Prints your current configuration</code></pre>
-</div>

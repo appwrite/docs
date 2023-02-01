@@ -105,6 +105,18 @@ brew install --HEAD appwrite</code></pre>
     <pre class="line-numbers"><code class="prism language-bash" data-prism>npm uninstall -g appwrite-cli</code></pre>
 </div>
 
+<h2><a href="/docs/command-line-ci#configuration" id="configuration">Configuration</a></h2>
+
+<p>At any point, if you would like to change your server's endpoint, project ID, or self-signed certificate acceptance, use the <code>client</code> command.</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client --endpoint https://[HOSTNAME_OR_IP]/v1
+appwrite client --key 23f24gwrhSDgefaY
+appwrite client --selfSigned true
+appwrite client --reset // Resets your CLI configuration
+appwrite client --debug // Prints your current configuration</code></pre>
+</div>
+
 <p>If you installed the Appwrite CLI with brew or the installation script for your operating system, use the following command to uninstall it.</p>
 
 <ul class="phases clear" data-ui-phases>
