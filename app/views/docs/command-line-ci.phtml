@@ -7,9 +7,9 @@ The Appwrite CLI can be used in a non-interactive and headless manner, without s
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client \
---endpoint https://[HOSTNAME_OR_IP]/v1 \
---projectId [YOUR_PROJECT_ID] \
---key YOUR_API_KEY</code></pre>
+    --endpoint https://[HOSTNAME_OR_IP]/v1 \
+    --projectId [YOUR_PROJECT_ID] \
+    --key YOUR_API_KEY</code></pre>
 </div>
 
 <p>When you set the global configuration parameters using the <code>appwrite client</code> command, they take precedence over the local configuration parameters in your <code>appwrite.json</code> thereby switching the CLI to non-interactive mode. </p> 
@@ -22,7 +22,7 @@ The Appwrite CLI can be used in a non-interactive and headless manner, without s
 <h2><a href="/docs/commandline-ci#non-interactive" id="non-interactive">Non-interactive Deployment</a></h2>
 <p>Appwrite's deploy commands can also be executed in a non-interactive mode. This applies to both function and collection deployment.</p>
 
-<p>You can deploy a function non-interactively by using the <code>--yes<code> option to skip all warnings and specifying which functions you want to deploy.</p>
+<p>You can deploy a function non-interactively by using the <code>--yes</code> option to skip all warnings and specifying which functions you want to deploy.</p>
 
 <p>Deploy a single function by ID:</p>
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
@@ -34,8 +34,8 @@ The Appwrite CLI can be used in a non-interactive and headless manner, without s
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function --all --yes</code></pre>
 </div>
 
-<p>You can deploy collections non-interactively in a similar way by using the <code>--yes<code> option.</p>
+<p>You can deploy collections non-interactively in a similar way by using the <code>--yes</code> option.</p>
 <p>Deploy all collections:</p>
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collections --all --yes</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collection --all --yes</code></pre>
 </div>
