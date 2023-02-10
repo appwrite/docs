@@ -8,13 +8,16 @@
 </p>
 
 <h2>Enable Offline Support</h2>
-<p>
-
-</p>
 
 <p>
     Offline Support can be enabled by setting <code>setOffilnePersistency</code> to true on your SDK's client.
 </p>
+
+<div class="notice">
+  <h2>Adding Offline Support to Existing Projects</h2>
+  <p>Enabling Offline Support introduces breaking changes to the behavior of Client SDKs. Asynchronous operations may not resolve until the device is online again. Existing projects will have to be updated.</p>
+  <p><a href="#async-operation">Learn more about asynchronous operations</a></p>
+</div>
 
 [TODO: Code Example]
 <p>
@@ -23,7 +26,7 @@
 
 [TODO: Code Example]
 
-<h2>Asynchronous Operation</h2>
+<h2 href="#async-operation" id="async-operation">Asynchronous Operation</h2>
 <p>
     When Offline Support is enabled, asynchronous operations only resolve after the request is accepted by the server. Requests made with the Client SDK may block code execution until network connection is available again.
 </p>
