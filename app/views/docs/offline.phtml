@@ -1,0 +1,20 @@
+<p>
+    The Appwrite SDKs' Offline Support allows your client apps to continue functioning without an internet connection. Your users' mobile devices frequently encounter situations where internet access becomes unstable or temporarily unavailable, like when going through tunnels, getting on airplanes and subways, or going in and out of Wi-Fi range. Offline Support helps your app gracefully handle these real-life situations and keeps your users engaged.
+</p>
+
+<h2>When Should I Enable Offline Support?</h2>
+<p>
+    With Offline Support enabled, your app can continue sending requests to Appwrite APIs while offline through a cache. While offline, read requests will be fetched from the local cached data, and write requests will be queued and executed once the device is online again.
+</p>
+<p>
+    You should consider enabling Offline Support if you expect the device running your application to experience short periods without a network connection, like going on an airplane or through a tunnel. Offline Support can't help you if the app's data needs to remain up to date with frequent updates or if write requests need to be processed immediately. If you expect your app to be offline for days or weeks at a time, you may also need to find alternative solutions.
+</p>
+
+<h3>Considerations and Tradeoffs</h3>
+<p>
+    Offline Support adds a cache layer that takes up additional resources and adds overhead to your requests. This may not be desirable for some applications, especially if it's not expected to be used without a stable internet connection.
+</p>
+<h3>Offline Support for Existing Projects</h3>
+<p>
+    Asynchronous operations may not resolve immediately when Offline Support is enabled. Existing projects will require some code to be rewritten when adopting Offline Support. <a href="TBD">Learn more about how to handle asynchronous operation</a>.  
+</p>
