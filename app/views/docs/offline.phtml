@@ -4,17 +4,54 @@
 
 <h2>When Should I Enable Offline Support?</h2>
 <p>
-    With Offline Support enabled, your app can continue sending requests to Appwrite APIs while offline through a cache. While offline, read requests will be fetched from the local cached data, and write requests will be queued and executed once the device is online again.
-</p>
-<p>
     You should consider enabling Offline Support if you expect the device running your application to experience short periods without a network connection, like going on an airplane or through a tunnel. Offline Support can't help you if the app's data needs to remain up to date with frequent updates or if write requests need to be processed immediately. If you expect your app to be offline for days or weeks at a time, you may also need to find alternative solutions.
 </p>
 
-<h3>Considerations and Tradeoffs</h3>
+<h2>Enable Offline Support</h2>
 <p>
-    Offline Support adds a cache layer that takes up additional resources and adds overhead to your requests. This may not be desirable for some applications, especially if it's not expected to be used without a stable internet connection.
+
 </p>
-<h3>Offline Support for Existing Projects</h3>
+
 <p>
-    Asynchronous operations may not resolve immediately when Offline Support is enabled. Existing projects will require some code to be rewritten when adopting Offline Support. <a href="TBD">Learn more about how to handle asynchronous operation</a>.  
+    Offline Support can be enabled by setting <code>setOffilnePersistency</code> to true on your SDK's client.
 </p>
+
+[TODO: Code Example]
+<p>
+    Offline Support will cache all read request in a <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#LRU" target="_blank" rel="noopener">Least Recently Used (LRU)</a> cache, so the information can remain available even with no internet connection. The LRU cache defaults to a size of 16KB and can be configured using the <code>setOfflineCacheSize</code> method.
+</p>
+
+[TODO: Code Example]
+
+<h2>Asynchronous Operation</h2>
+<p>
+    When Offline Support is enabled, asynchronous operations only resolve after the request is accepted by the server. Requests made with the Client SDK may block code execution until network connection is available again.
+</p>
+[TODO: Show UML diagram]
+
+<p>
+    For example, the code example below will <b>block code execution</b> when the device is offline.
+</p>
+
+[TODO: Show Example, in comments clearly mark that it's ]
+
+<p>
+    To avoid blocking code execution, asynchronous operations should be handled [TODO: fill description]
+</p>
+
+[TODO: Show correct version of example. ]
+
+<h2>Conflict Resolution</h2>
+<p>
+    With Offline Support enabled, your app can continue sending requests to Appwrite APIs while offline through a cache when offline. Read requests will be fetched from the local cached data, and write requests will be queued and executed once the device is online again. This can lead to write conflicts when the device is online again.
+</p>
+<p>
+    [TODO: Describe resolution behavior + tips if available.]
+</p>
+
+<p>
+    Additional considerations need to be considered when updating data based on the current value, such as incrementing a counter or appending values to then end of a paragraph. The default conflict resolution behavior may result in incorrect updates and writes. Consider disabling these operations while offline or use Appwrite Functions to implement logic to resolve conflicts.
+</p>
+
+
+
