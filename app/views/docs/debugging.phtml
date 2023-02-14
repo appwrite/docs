@@ -5,7 +5,7 @@
 
 <p>The doctor CLI helps you validate your server health and best practices. Using the Doctor CLI, you can verify your server configuration for best practices, validate your Appwrite stack connectivity and storage read and write access, and available storage space.</p>
 
-<p>To run the Doctor check, simply run the following command from your terminal. You might need to replace ‘appwrite’ with your  Appwrite Docker container ID. To find out what’s your container ID, you can run `docker ps` command (more on that, in the next section).</p>
+<p>To run the Doctor check, simply run the following command from your terminal. You might need to replace 'appwrite' with your  Appwrite Docker container ID. To find out what's your container ID, you can run `docker ps` command (more on that, in the next section).</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker exec appwrite doctor</code></pre>
@@ -34,9 +34,9 @@
 
 <h2><a href="/docs/debugging#devMode" id="devMode">Dev Mode</a></h2>
 
-<p>When moving to dev mode, your server will produce much more verbose error messages. Instead of getting a general 500 error, you’ll be able to view the exact error that happened on the server, debug the issue further or <a href="https://github.com/appwrite/appwrite/issues/new?body=500%20Error" target="_blank" rel="noopener">report it to the Appwrite team</a>.</p>
+<p>When moving to dev mode, your server will produce much more verbose error messages. Instead of getting a general 500 error, you'll be able to view the exact error that happened on the server, debug the issue further or <a href="https://github.com/appwrite/appwrite/issues/new?body=500%20Error" target="_blank" rel="noopener">report it to the Appwrite team</a>.</p>
 
-<p>To change your dev environment, edit your server _APP_ENV environment variable from ‘production’ to ‘development’ in your Appwrite docker-compose.yml file located in the `appwrite` directory in the location where you first installed Appwrite.</p>
+<p>To change your dev environment, edit your server _APP_ENV environment variable from 'production' to 'development' in your Appwrite docker-compose.yml file located in the `appwrite` directory in the location where you first installed Appwrite.</p>
 
 <div class="ide margin-bottom" data-lang="yaml" data-lang-label="yaml">
     <pre class="line-numbers"><code class="prism language-yaml" data-prism>...
