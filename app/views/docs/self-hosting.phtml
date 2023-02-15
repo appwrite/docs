@@ -108,7 +108,14 @@
     </tbody>
 </table>
 
-<h3><a href="/docs/installation#manual" id="manual">Manual (using docker-compose.yml)</a></h3>
+<h2><a href="/docs/installation#next-steps" id="next-steps">Next Steps</a></h2>
+<p>Appwrite's default setup is designed to empower you to start building quickly, but there are more configurable options available depending on your use case.</p>
+<p><a href="/docs/configuration">Learn about configuring your Appwrite instance</a></p>
+
+<p>If you are ready to move Appwrite to a production environment, there are some best practices you should know for performance and security.</p>
+<p><a href="/docs/configuration">Learn about Appwrite in production</a></p>
+
+<h2><a href="/docs/installation#manual" id="manual">Manual (using docker-compose.yml)</a></h2>
 
 <p>For advanced Docker users, the manual installation might seem more familiar. To set up Appwrite manually, download the Appwrite base <a href="/install/compose" target="_blank">docker-compose.yml</a> and <a href="/install/env" target="_blank">.env</a> files, then move them inside a directory named <code>appwrite</code>. After the download completes, update the different environment variables as you wish in the <code>.env</code> file and start the Appwrite stack using the following Docker command:</p>
 
@@ -118,7 +125,7 @@
 
 <p>Once the Docker installation completes, go to your machine's hostname or IP address on your browser to access the Appwrite console. Please note that on hosts that are not Linux-native, the server might take a few minutes to start after installation completes.</p>
 
-<h3><a href="/docs/installation#stop" id="stop">Stop</a></h3>
+<h2><a href="/docs/installation#stop" id="stop">Stop</a></h2>
 
 <p>You can stop your Appwrite containers by using the following command executed from the same directory as your <code>docker-compose.yml</code> file.</p>
 
@@ -126,18 +133,10 @@
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose stop</code></pre>
 </div>
 
-<h3><a href="/docs/installation#uninstall" id="uninstall">Uninstall</a></h3>
+<h2><a href="/docs/installation#uninstall" id="uninstall">Uninstall</a></h2>
 
 <p>To stop and remove your Appwrite containers, you can use the following command executed from the same directory as your <code>docker-compose.yml</code> file.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose down -v</code></pre>
 </div>
-
-<h2><a href="/docs/installation#learnMore" id="learnMore">Learn More</a></h2>
-
-<ul class="margin-top margin-bottom-large text-size-normal">
-    <li class="margin-bottom-tiny"><a href="/docs/production" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Running Appwrite in production</a></li>
-    <li class="margin-bottom-tiny"><a href="/docs/environment-variables" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Appwrite server environment variables</a></li>
-    <li class="margin-bottom-tiny"><a href="/docs/email-delivery" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Appwrite setting a custom SMTP server</a></li>
-</ul>
