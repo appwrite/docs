@@ -1,0 +1,46 @@
+<p>
+    Self-hosting Appwrite provides a great deal of flexibility by providing many configurable options. While the default installation gives you all the essentials to get started, here are some useful tips and configurable options that can accelerate your development process.
+</p>
+
+<h2><a href="/docs/configuration#localhost" id="localhost">Localhost</a></h2>
+
+[cookies?]
+[Self-signed stuff]
+[Proxy information for android]
+
+<h2><a href="/docs/configuration#delivery" id="delivery">Setup Email and SMS Delivery</a></h2>
+<p>
+    If your application will support features like password recovery, account verification, MagicURL authentication, and team invites, you will need to setup email delivery.
+</p>
+<p><a href="/docs/email-delivery">Set up email delivery</a></p>
+
+<p>
+    If your application will support phone authentication, you will need to enable SMS delivery.
+</p>
+<p><a href="/docs/email-delivery">Set up SMS delivery</a></p>
+
+<h2><a href="/docs/development#function-runtimes" id="function-runtimes">Configure Function Runtimes</a></h2>
+<p>
+    Not all function runtimes are enabled by default. Enable the runtimes that you need and disabled unused runtimes to save disk space on your server.
+    To enable a runtime, add it to the <code>_APP_FUNCTIONS_RUNTIMES</code> environment variable as a comma separated list. 
+</p>
+
+<p>
+    The example below would enable Dart 2.15, .Net 6.0, and Java 18 runtimes:
+</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>_APP_FUNCTIONS_RUNTIMES=dart-2.15, dotnet-6.0, java-18.0</code></pre>
+</div>
+
+You can find a full list of supported runtimes in the <a href="/docs/environment-variables#functions">environment variables</a> page.
+
+<h2><a href="/docs/development#function-runtimes" id="function-runtimes">Configure Function Runtimes</a></h2>
+
+[Storage providers]
+
+<h2><a href="/docs/development#function-runtimes" id="function-runtimes">Configure Root User Whitelists</a></h2>
+
+[_APP_CONSOLE_WHITELIST_ROOT]
+[Details about inviting to project]
+
