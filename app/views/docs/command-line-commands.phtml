@@ -110,13 +110,13 @@
 <p>To get a list of all your collections, you can use the <code>listCollections</code> command.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases listCollections</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases listCollections --databaseId [DATABASE_ID]</code></pre>
 </div>
 
 <p>If you wish to parse the output from the CLI, you can request the CLI output in JSON format using the <code>--json</code> flag</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases listCollections --json</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases listCollections --databaseId [DATABASE_ID]--json</code></pre>
 </div>
 
 <p><b>Get a Collection</b></p>
@@ -124,7 +124,7 @@
 <p>To get more information on a particular collection, you can make use of the <code>getCollection</code> command and pass in the <code>collectionId</code>.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases getCollection --collectionId 5ff468cfa32a0</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases getCollection --databaseId [DATABASE_ID] --collectionId [COLLECTION_ID]</code></pre>
 </div>
 
 <p><b>Create Document</b></p>
@@ -133,7 +133,7 @@
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
 <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite databases createDocument \
-    --collectionId [COLLECTION_ID] \
+    --databaseId [DATABASE_ID] --collectionId [COLLECTION_ID] \
     --documentId 'unique()' --data '{ "Name": "Iron Man" }' \
     --permissions 'read("any")' 'write("team:abc")' </code></pre>
 </div>
