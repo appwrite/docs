@@ -132,8 +132,15 @@
 
 <h2><a href="/docs/sms-delivery#restartServer" id="restartServer">Restart Your Appwrite Server</a></h2>
 
-<p>Once you've updated your .env file, you need to restart your Appwrite instance. Navigate to the directory containing the <code>docker-compose.yml</code> file of your Appwrite instance and run the following command from your terminal:</p>
+<p>Once you've updated your <code>.env</code> file, you need to restart your Appwrite instance. Navigate to the directory containing the <code>docker-compose.yml</code> file of your Appwrite instance and run the following command from your terminal:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose up -d</code></pre>
+</div>
+
+<p>
+    You can verify if the environment variables have changed by running this command:
+</p>
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose exec appwrite-worker-messaging vars</code></pre>
 </div>
