@@ -22,7 +22,7 @@
 
 <h2 id="server-integration"><a href="/docs/permissions#server-integration">Server Integration</a></h2>
 
-<p>A server or <a href="/docs/admin">admin integration</a> can be used for increased flexibility. When using a Server SDK in combination with the proper <a href="/docs/keys#scopes">API key scopes</a>, you can have any type of access to any of your project resources regardless of their permissions.</p>
+<p>Server integrations can be used for increased flexibility. When using a Server SDK in combination with the proper <a href="/docs/keys#scopes">API key scopes</a>, you can have any type of access to any of your project resources regardless of their permissions.</p>
 
 <p>Using the server integration flexibility, you can change resource permissions, share resources between different users and teams, or edit and delete them without any limitations.</p>
 
@@ -31,7 +31,7 @@
 <table class="full text-size-small">
     <thead>
     <tr>
-        <td style="width: 180px">Type</td>
+        <td style="width: 200px">Type</td>
         <td>Description</td>
     </tr>
     </thead>
@@ -65,7 +65,7 @@
 <table class="full text-size-small">
     <thead>
     <tr>
-        <td style="width: 180px">Type</td>
+        <td style="width: 200px">Type</td>
         <td>Description</td>
     </tr>
     </thead>
@@ -80,11 +80,11 @@
     </tr>
     <tr>
         <td>Role.users([STATUS])</td>
-        <td>Grants access to any authenticated or anonymous user. You can optionally pass the <span class="tag">verified</span> or <span class="tag">unverified</span> string to target specifc types of users.</td>
+        <td>Grants access to any authenticated or anonymous user. You can optionally pass the <span class="tag">verified</span> or <span class="tag">unverified</span> string to target specific types of users.</td>
     </tr>
     <tr>
         <td>Role.user([USER_ID], [STATUS])</td>
-        <td>Grants access to a specific user by user ID. You can optionally pass the <span class="tag">verified</span> or <span class="tag">unverified</span> string to target specifc types of users.</td>
+        <td>Grants access to a specific user by user ID. You can optionally pass the <span class="tag">verified</span> or <span class="tag">unverified</span> string to target specific types of users.</td>
     </tr>
     <tr>
         <td>Role.team([TEAM_ID])</td>
@@ -93,6 +93,10 @@
     <tr>
         <td>Role.team([TEAM_ID], [ROLE])</td>
         <td>Grants access to any member who possesses a specific role in a team. To gain access to this permission, the user must be a member of the specific team and have the given role assigned to them. Team roles can be assigned when inviting a user to become a team member.</td>
+    </tr>
+    <tr>
+        <td>Role.member([MEMBERSHIP_ID])</td>
+        <td>Grants access to a specific member of a team. When the member is removed from the team, they will no longer have access.</td>
     </tr>
     </tbody>
 </table>

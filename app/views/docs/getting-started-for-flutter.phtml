@@ -169,7 +169,7 @@ final realtime = Realtime(client);
 final subscription = realtime.subscribe(['files']);
 
 subscription.stream.listen((response) {
-    if(response.events.contains('buckets.*.files.*.create') {
+    if (response.events.contains('buckets.*.files.*.create') {
         // Log when a new file is uploaded
         print(response.payload);
     }
@@ -200,7 +200,7 @@ final realtime = Realtime(client);
 final subscription = realtime.subscribe(['files']);
 
 subscription.stream.listen((response) {
-    if(response.events.contains('buckets.*.files.*.create')) {
+    if (response.events.contains('buckets.*.files.*.create')) {
         // Log when a new file is uploaded
         print(response.payload);
     }

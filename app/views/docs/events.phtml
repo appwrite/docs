@@ -1,0 +1,176 @@
+<?php
+
+$events = $this->getParam('events', []);
+
+?>
+<p>Appwrite provides a variety of events that allows your application to react to changes as they happen. A event will fire when a change occurs in your Appwrite project, like when a new user registers or a new file is uploaded to Appwrite. You can subscribe to these events to with Appwrite <a href="/docs/functions">Functions</a>, <a href="/docs/realtime">Realtime</a>, or <a href="/docs/webhooks">Webhooks</a>.</p>
+
+<p>You can subscribe to events for specific resources using their ID or subscribe to changes of all resources of the same type by using a wildcard character <code>*</code> instead of an ID. You can also filter for events of specific actions like <code>create</code>, <code>update</code>, or <code>delete</code>. You can find a list of events for Storage, Databases, Functions, and Authentication services below.</p>
+
+<h2 id="storage-events"><a href="/docs/events#storage-events">Storage Service</a></h2>
+
+<table class="full text-size-small vertical">
+    <thead>
+    <tr>
+        <th style="width: 240px;">Name</th>
+        <th style="width: 140px;">Payload</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($events as $event):
+        $pattern = $event['pattern'] ?? '';
+        $description = $event['description'] ?? '';
+        $model = $event['model'] ?? '';
+    ?>
+    <?php if(str_starts_with($pattern, 'bucket')): ?>
+    <tr>
+        <td>
+            <code><?php echo $this->escape($pattern); ?></code>
+        </td>
+        <td>
+        <?php if(!empty($model)): ?>
+            <a href="/docs/models/<?php echo $this->escape($model); ?>"><?php echo $this->escape(ucfirst($model)); ?> Object</a>
+        <?php endif; ?>
+        </td>
+        <td><?php echo $this->escape($description); ?></td>
+    </tr>
+    <?php endif; ?>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+<h2 id="databases-events"><a href="/docs/events#databases-events">Databases Service</a></h2>
+
+<table class="full text-size-small vertical">
+    <thead>
+    <tr>
+        <th style="width: 240px;">Name</th>
+        <th style="width: 140px;">Payload</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($events as $event):
+        $pattern = $event['pattern'] ?? '';
+        $description = $event['description'] ?? '';
+        $model = $event['model'] ?? '';
+    ?>
+    <?php if(str_starts_with($pattern, 'databases')): ?>
+    <tr>
+        <td>
+        <code><?php echo $this->escape($pattern); ?></code>
+        </td>
+        <td>
+        <?php if(!empty($model)): ?>
+            <a href="/docs/models/<?php echo $this->escape($model); ?>"><?php echo $this->escape(ucfirst($model)); ?> Object</a>
+        <?php endif; ?>
+        </td>
+        <td><?php echo $this->escape($description); ?></td>
+    </tr>
+    <?php endif; ?>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+<h2 id="functions-events"><a href="/docs/events#functions-events">Functions Service</a></h2>
+
+<table class="full text-size-small vertical">
+    <thead>
+    <tr>
+        <th style="width: 240px;">Name</th>
+        <th style="width: 140px;">Payload</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($events as $event):
+        $pattern = $event['pattern'] ?? '';
+        $description = $event['description'] ?? '';
+        $model = $event['model'] ?? '';
+    ?>
+    <?php if(str_starts_with($pattern, 'functions')): ?>
+    <tr>
+        <td>
+            <code><?php echo $this->escape($pattern); ?></code>
+        </td>
+        <td>
+        <?php if(!empty($model)): ?>
+            <a href="/docs/models/<?php echo $this->escape($model); ?>"><?php echo $this->escape(ucfirst($model)); ?> Object</a>
+        <?php endif; ?>
+        </td>
+        <td><?php echo $this->escape($description); ?></td>
+    </tr>
+    <?php endif; ?>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+
+<h2 id="authentication-events"><a href="/docs/events#authentication-events">Authentication Service</a></h2>
+
+<table class="full text-size-small vertical">
+    <thead>
+    <tr>
+        <th style="width: 240px;">Name</th>
+        <th style="width: 140px;">Payload</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach($events as $event):
+        $pattern = $event['pattern'] ?? '';
+        $description = $event['description'] ?? '';
+        $model = $event['model'] ?? '';
+    ?>
+    <?php if(str_starts_with($pattern, 'users') || str_starts_with($pattern, 'teams')): ?>
+    <tr>
+        <td>
+            <code><?php echo $this->escape($pattern); ?></code>
+        </td>
+        <td>
+        <?php if(!empty($model)): ?>
+            <a href="/docs/models/<?php echo $this->escape($model); ?>"><?php echo $this->escape(ucfirst($model)); ?> Object</a>
+        <?php endif; ?>
+        </td>
+        <td><?php echo $this->escape($description); ?></td>
+    </tr>
+    <?php endif; ?>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+<h2 id="events-limitations"><a href="/docs/events#events-limitations">Known Limitations</a></h2>
+<p>When events fire, only existing subscriptions for that event will receive the update. If your client or server side integrations lose network connection temporarily, delivery of the event is not guaranteed.</p>
+<p>For self-hosted instances, when the Appwrite containers are shut down and restarted, events with pending webhooks and subscription updates will not be delivered.</p>
+<p>A change to a resource can cause multiple events to fire. For example adding a new document with ID <code>"lion-king"</code> to a collection with the ID <code>"movies"</code> will cause all of the below events to fire.</p>
+<div class="ide margin-top-small" data-lang="json" data-lang-label="JSON">
+    <pre class="line-numbers"><code class="prism language-json" data-prism>{
+    "events": [
+        databases.default.collections.movies.documents.lion-king.create,
+        databases.*.collections.*.documents.*.create, 
+        databases.default.collections.*.documents.lion-king.create, 
+        databases.*.collections.*.documents.lion-king.create, 
+        databases.*.collections.movies.documents.lion-king.create, 
+        databases.default.collections.movies.documents.*.create, 
+        databases.*.collections.movies.documents.*.create, 
+        databases.default.collections.*.documents.*.create, 
+        databases.default.collections.movies.documents.lion-king, 
+        databases.*.collections.*.documents.*, 
+        databases.default.collections.*.documents.lion-king, 
+        databases.*.collections.*.documents.lion-king, 
+        databases.*.collections.movies.documents.lion-king, 
+        databases.default.collections.movies.documents.*, 
+        databases.*.collections.movies.documents.*, 
+        databases.default.collections.*.documents.*, 
+        databases.default.collections.movies, 
+        databases.*.collections.*, 
+        databases.default.collections.*, 
+        databases.*.collections.movies, 
+        databases.default, 
+        databases.*
+    ]
+}</code></pre>
+</div>
+<p>When designing function triggers or webhook integrations, beware of possible overlaping events. Function execution order is not dependent on type of event.</p>
+<p>Permissions apply to Appwrite events. When subscribing to event channels using Appwrite Realtime, you will only receive updates for resources to which you have read permissions.</p>

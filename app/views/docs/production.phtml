@@ -2,7 +2,7 @@
 
 <h2><a href="/docs/production#encryption" id="encryption">Encryption</a></h2>
 
-<p>Appwrite does not generate a unique encryption key during setup by default. This key encrypts your files and sensitive data like webhook passwords or API keys to keep them secure. To take advantage of this feature, you must generate a unique key and set it as the value of the <code>_APP_OPENSSL_KEY_V1</code> environment variable.</p>
+<p>Appwrite does not generate a unique encryption key during a default setup. This key encrypts your files and sensitive data like webhook passwords or API keys to keep them secure. To take advantage of this feature, you must generate a unique key and set it as the value of the <code>_APP_OPENSSL_KEY_V1</code> environment variable.</p>
 
 <p>You <b>must</b> set <code>_APP_OPENSSL_KEY_V1</code> immediately after installation of a production Appwrite instance. Changing the <code>_APP_OPENSSL_KEY_V1</code> variable will cause existing passwords to be lost.</p>
 
@@ -41,15 +41,15 @@
 
 <h2><a href="/docs/production#emails" id="emails">Emails</a></h2>
 
-<p>Appwrite does not come with an SMTP server to send emails out of the box. Emails sent from self-hosted SMTP servers are frequently labeled as spam, so it's advised to set up your own SMTP integration.</p>
-<p>You can self-host an SMTP service or use one of the "SMTP as a service" products like Sendgrid or Mailgun. You can <a href="/docs/email-delivery">change Appwrite SMTP settings</a> and credentials to any 3rd party provider you like who support SMTP integration using our Docker environment variables. Most SMTP providers offer a decent free tier to get started with.</p>
+<p>Appwrite does not come with an SMTP server to send emails out of the box. Emails sent from self-hosted SMTP servers are frequently labeled as spam, so it's advised to set up an SMTP integration with a third-party provider.</p>
+<p>You can self-host an SMTP service or use one of the "SMTP as a service" products like Sendgrid or Mailgun. You can <a href="/docs/email-delivery">change Appwrite's SMTP configuration</a> using Docker environment variables. Most SMTP providers offer a decent free tier to get started.</p>
 
 <h2><a href="/docs/production#backups" id="backups">Backups</a></h2>
 
 <p>Backups are highly recommended for any production environment. Currently, there is no built-in script we provide to do this automatically. You must do the following to back up your Appwrite server data, stats, and files.</p>
 
 <ol class="margin-top margin-bottom-large text-size-normal">
-    <li>Create a script to backups and restore your MariaDB Appwrite schema and data. It is recommended to use MariaDB or MySQL built-in tools for this.</li>
+    <li>Create a script to backups and restore your MariaDB Appwrite schema. Note that trying to backup MariaDB using a docker volume backup can result in a corrupted copy of your data. It is recommended to use MariaDB or MySQL built-in tools for this.</li>
     <li>Create a script to backups and restore your InfluxDB stats. If you don't care much about your server stats, you can skip this.</li>
     <li>Create a script to backup Appwrite storage volume. There are many online resources explaining different ways to backup a docker volume. When running on multiple servers, it is very recommended to use an attachable storage point. Some cloud providers offer integrated backups to such attachable mount like GCP, AWS, DigitalOcean, and the list continues.</li>
     <li>Create a script to backup <code>.env</code> and <code>docker-compose.yml</code>, which holds secrets and server configuration information.</li>

@@ -116,7 +116,7 @@ let client = Client()
 </code></pre>
 </div>
 
-<p>Before sending any API calls to your new Appwrite project, make sure your device or iOS emulator has network access to your Appwrite project's hostname or IP address.</p>
+<p>Before sending any API calls to your new Appwrite project, make sure your device or emulator has network access to your Appwrite project's hostname or IP address.</p>
 
 <p>When connecting to a local self-hosted Appwrite project from an emulator or a mobile device, you should use the private IP of the device running your Appwrite project as the hostname of the endpoint instead of localhost. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite server.</p>
 
@@ -144,7 +144,7 @@ let user = try await account.create(
 let realtime = Realtime(client)
 
 let subscription = realtime.subscribe(channels: ["files"]) { message in
-    if(message.events!.contains("buckets.*.files.*.create")) {
+    if (message.events!.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(String(describing: message.payload))
     }
@@ -176,7 +176,7 @@ let user = try await account.create(
 let realtime = Realtime(client)
 
 let subscription = realtime.subscribe(channels: ["files"]) { message in
-    if(message.events!.contains("buckets.*.files.*.create")) {
+    if (message.events!.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(String(describing: message.payload))
     }

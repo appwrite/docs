@@ -17,8 +17,8 @@ $example = function ($model, $models) use (&$example)
 
     foreach($properties as $key => $property) {
         $value = $property['x-example'] ?? null;
-        $isArray = $property['array'] ?? false;
         $type = $property['type'] ?? null;
+        $isArray = $type == 'array';
         $child = str_replace('#/definitions/', '', ($property['items']['$ref'] ?? ''));
 
         // We consider anyOf and oneOf the same in docs views
@@ -36,7 +36,8 @@ $example = function ($model, $models) use (&$example)
         }
 
         if(!empty($child) && \array_key_exists($child, $models)) {
-            $output[$key] = $example($models[$child], $models);
+            $childExample = $example($models[$child], $models);
+            $output[$key] = $isArray ? [$childExample] : $childExample;
         }
         else if($isXOf) {
             if($isArray) {
@@ -52,10 +53,6 @@ $example = function ($model, $models) use (&$example)
         }
         else {
             $output[$key] = $value;
-        }
-
-        if($type === 'array') {
-            $output[$key] = (\is_array($output[$key])) ? $output[$key] : [$output[$key]];
         }
     }
 

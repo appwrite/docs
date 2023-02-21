@@ -146,10 +146,10 @@ $client = (new Client())
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 
-client = Client()
+client = (Client()
     .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
     .set_project('5df5acd0d48c2')                # Your project ID
-    .set_key('919c2db5d4...a2a3346ad2')          # Your secret API key
+    .set_key('919c2db5d4...a2a3346ad2'))          # Your secret API key
 </code></pre>
         </div>
     </li>
@@ -216,11 +216,10 @@ let client = Client()
 </ul>
 
 <div class="notice">
-    <h3>A Note About API Keys & Admin Mode</h3>
+    <h3>API Key Authentication</h3>
+    <p>When using Server SDKs, you authenticate with API keys. API keys are not restricted by account-based permissions but have restrictions on the types of resources that can be accessed. This means API keys can access all resources of specified types, regardless of which account can access them.</p>
 
-    <p>When using Appwrite API from your server-side with an API Key, you automatically run in <b>admin mode</b>. Admin mode disables the default user <a href="/docs/permissions">permission access control</a> restrictions and allows you to access all the resources available on your project. This is very useful when you want to manipulate your users' data like files and documents or even if you want to get a list of your users.</p>
-
-    <p>Please note it is <b>highly</b> not recommended to run the admin mode from your client-side as it may lead to huge privacy and security issues. Check the <a href="/docs/admin">Admin Mode</a> documentation to learn more</p>
+    <p><a href="/docs/keys">Learn more about API keys</a></p>
 </div>
 
 <h3><a href="/docs/getting-started-for-server#jwt" id="jwt">JSON Web Token (JWT) &nbsp;<span class="text-size-small text-fade">version >= 0.8</span></a></h3>
@@ -304,10 +303,11 @@ $client = (new Client())
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 
-client = Client()
+client = (Client()
   .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
   .set_project('5df5acd0d48c2')                # Your project ID
   .set_key('919c2db5d4...a2a3346ad2')          # Your secret JWT
+)
 </code></pre>
         </div>
     </li>
@@ -381,7 +381,9 @@ let client = Client()
     <li>
         <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const users = new Users(client);
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { ID, Users } = require('node-appwrite');
+
+const users = new Users(client);
 
 let promise = users.create(
     ID.unique(),
@@ -401,7 +403,10 @@ promise.then(function (response) {
         <h3>PHP</h3>
 
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>$users = new Users($client);
+            <pre class="line-numbers"><code class="prism language-php" data-prism>use Appwrite\ID;
+use Appwrite\Services\Users;
+                
+$users = new Users($client);
 
 $user = $users->create(
     userId: ID::unique(),
@@ -415,10 +420,13 @@ $user = $users->create(
     <li>
         <h3>Python</h3>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>users = Users(client)
+            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.id import ID
+from appwrite.services.users import Users
+
+users = Users(client)
 
 user = users.create(
-    userId=ID.unique(),
+    user_id=ID.unique(),
     email='email@example.com',
     phone=None,
     password='password'
@@ -428,7 +436,9 @@ user = users.create(
     <li>
         <h3>Ruby</h3>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby SDK">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>users = Appwrite::Users.new(client)
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
+
+users = Appwrite::Users.new(client)
 
 user = users.create(
     userId: ID.unique(),
@@ -441,7 +451,9 @@ user = users.create(
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>const users = new Users(client);
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { ID, Users } from "https://deno.land/x/appwrite/mod.ts";
+                
+const users = new Users(client);
 
 let promise = users.create(
     ID.unique(),
@@ -460,7 +472,9 @@ promise.then(function (response) {
     <li>
         <h3>Dart</h3>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>final users = Users(client);
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
+
+final users = Users(client);
 
 final user = await users.create(
     userId: ID.unique(),
@@ -473,7 +487,10 @@ final user = await users.create(
     <li>
         <h3>Kotlin</h3>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val users = Users(client)
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.ID
+import io.appwrite.services.Users
+
+val users = Users(client)
 
 val user = users.create(
     userId = ID.unique(),
@@ -486,7 +503,10 @@ val user = users.create(
     <li>
         <h3>Swift</h3>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>let users = Users(client)
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import AppwriteModels
+                
+let users = Users(client)
 
 let user = try await users.create(
     userId: ID.unique(),
@@ -557,15 +577,15 @@ $user = $users->create(
 from appwrite.id import ID
 from appwrite.services.users import Users
 
-client = Client()
+client = (Client()
   .set_endpoint('https://[HOSTNAME_OR_IP]/v1') # Your API Endpoint
   .set_project('5df5acd0d48c2')                # Your project ID
-  .set_key('919c2db5d4...a2a3346ad2')          # Your secret API key
+  .set_key('919c2db5d4...a2a3346ad2'))          # Your secret API key
 
 users = Users(client)
 
 user = users.create(
-    userId=ID.unique(),
+    user_id=ID.unique(),
     email='email@example.com',
     phone=None,
     password='password'

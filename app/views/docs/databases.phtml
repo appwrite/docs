@@ -21,8 +21,7 @@
 
 <h2><a href="/docs/databases#collection" id="collection">Create Your Collections</a></h2>
 <p>
-    Appwrite uses collections as containers of documents.
-    The terms collections and documents are used because the Appwrite JSON REST API resembles the API of a traditional NoSQL database. That said, internally, Appwrite can support both SQL and NoSQL database adapters like MariaDB, MySQL, or MongoDB. When working with an SQL adapter, Appwrite will treat your collections as tables and documents as rows on native SQL tables.
+    Appwrite uses collections as containers of documents. The terms collections and documents are used because the Appwrite JSON REST API resembles the API of a traditional NoSQL database. That said, internally, Appwrite will support both SQL and NoSQL database adapters like MariaDB, MySQL, or MongoDB. When working with an SQL adapter, Appwrite will treat your collections as tables and documents as rows on native SQL tables.
 </p>
 
 <p>
@@ -33,7 +32,7 @@
 
 <h3><a href="/docs/databases#permissions" id="permissions">Permissions</a></h3>
 <p>
-    Appwrite provides permissions to restrict access to documents at two levels, document and collection level. When a user has the appropriate type of <a href="/docs/permissions/">access permissions</a> granted at <b>either</b> the document or the collection level, they will be able to access or change the document. If the permission field is left empty, Client SDKs cannot access the document.
+    Appwrite provides permissions to restrict access to documents at two levels, document and collection level. When a user has the appropriate type of <a href="/docs/permissions">access permissions</a> granted at <b>either</b> the document or the collection level, they will be able to access or change the document. If the permission field is left empty, Client SDKs cannot access the document.
 </p>
 
 <h4>Document Level Permissions</h4>
@@ -94,7 +93,7 @@
 </p>
 <p>
     When adding or removing attributes, your requests are processed in the background, indicated by the attribute's <span class="tag">status</span>.
-    Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. You are able to create a document while your attributes are still being processed, however you are not able to use the attributes on the documents until they are <span class="tag">available</span>
+    Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. You are able to create a document while your attributes are still being processed, however you are not able to use the attributes on the documents until they are <span class="tag">available</span>.
 </p>
 
 <h3><a href="/docs/databases#create-documents" id="create-documents">Create Documents</a></h3>
@@ -179,7 +178,7 @@ suspend fun main() {
         </div>
     </li>
     <li>
-        <h3>iOS</h3>
+        <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 import AppwriteModels
@@ -200,6 +199,27 @@ func main() async throws {
         )
     } catch {
         print(error.localizedDescription)
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    databasesCreateDocument(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]",
+        documentId: "[DOCUMENT_ID]",
+        data: "{}"
+    ) {
+        _id
+        _collectionId
+        _databaseId
+        _createdAt
+        _updatedAt
+        _permissions
+        data
     }
 }</code></pre>
         </div>
@@ -300,7 +320,7 @@ suspend fun main() {
         </div>
     </li>
     <li>
-        <h3>iOS</h3>
+        <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 import AppwriteModels
@@ -322,6 +342,24 @@ func main() async throws{
         )
     } catch {
         print(error.localizedDescription)
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    databasesListDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]"
+        queries: ["equal(\"title\", [\"Avatar\"])"]
+    ) {
+        total
+        documents {
+            _id
+            data
+        }
     }
 }</code></pre>
         </div>
@@ -414,8 +452,8 @@ func main() async throws{
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
 
 const client = new Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-    .setProject("[PROJECT_ID]");
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
 const databases = new Databases(client);
 
@@ -465,8 +503,8 @@ import io.appwrite.services.Databases
 
 suspend fun main() {
     val client = Client(applicationContext)
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-        .setProject("[PROJECT_ID]")
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
     val databases = Databases(client)
 
@@ -486,7 +524,7 @@ suspend fun main() {
         </div>
     </li>
     <li>
-        <h3>iOS</h3>
+        <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 import AppwriteModels
@@ -509,6 +547,24 @@ func main() async throws {
         )
     } catch {
         print(error.localizedDescription)
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    databasesListDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]"
+        queries: ["equal(\"title\", [\"Avatar\", \"Lord of the Rings\"])", "greaterThan(\"year\", 1999)"]
+    ) {
+        total
+        documents {
+            _id
+            data
+        }
     }
 }</code></pre>
         </div>
@@ -541,7 +597,7 @@ func main() async throws {
         </tr>
         <tr>
             <td>unique</td>
-            <td>Unique Index which not allows duplicates.</td>
+            <td>Unique Index to disallow duplicates.</td>
         </tr>
         <tr>
             <td>fulltext</td>
@@ -560,8 +616,8 @@ func main() async throws {
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
 
 const client = new Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-    .setProject("[PROJECT_ID]");
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
 const databases = new Databases(client);
 
@@ -581,8 +637,8 @@ databases.listDocuments(
 
 void main() async {
     final client = Client()
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-        .setProject("[PROJECT_ID]");
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
     final databases = Databases(client);
 
@@ -609,8 +665,8 @@ import io.appwrite.services.Databases
 
 suspend fun main() {
     val client = Client(applicationContext)
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-        .setProject("[PROJECT_ID]")
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
     val databases = Databases(client)
 
@@ -629,15 +685,15 @@ suspend fun main() {
         </div>
     </li>
     <li>
-        <h3>iOS</h3>
+        <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 import AppwriteModels
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-      .setProject("[PROJECT_ID]")
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
     let databases = Databases(client)
 
@@ -655,6 +711,24 @@ func main() async throws {
 }</code></pre>
         </div>
     </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    databasesListDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]"
+        queries: ["orderAsc(\"title\")"]
+    ) {
+        total
+        documents {
+            _id
+            data
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>To sort based on multiple attributes, simply provide multiple query methods.</p>
@@ -666,8 +740,8 @@ func main() async throws {
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
 
 const client = new Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-    .setProject("[PROJECT_ID]");
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
 const databases = new Databases(client);
 
@@ -737,7 +811,7 @@ suspend fun main() {
         </div>
     </li>
     <li>
-        <h3>iOS</h3>
+        <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 import AppwriteModels
@@ -760,6 +834,24 @@ func main() async throws {
         )
     } catch {
         print(error.localizedDescription)
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    databasesListDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]"
+        queries: ["orderAsc(\"title\")", "orderDesc(\"year\")"]
+    ) {
+        total
+        documents {
+            _id
+            data
+        }
     }
 }</code></pre>
         </div>
