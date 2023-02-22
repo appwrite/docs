@@ -2,7 +2,7 @@
 
 <h2><a href="/docs/production#encryption" id="encryption">Encryption</a></h2>
 
-<p>By default, the Appwrite setup doesn’t come with a uniquely generated encryption key. This key is used to store your files and sensitive data like webhook passwords or API keys in a safe way. To take advantage of this feature, you must generate a unique key and set it as the value of the <b>_APP_OPENSSL_KEY_V1</b> environment variable.</p>
+<p>By default, the Appwrite setup doesn't come with a uniquely generated encryption key. This key is used to store your files and sensitive data like webhook passwords or API keys in a safe way. To take advantage of this feature, you must generate a unique key and set it as the value of the <b>_APP_OPENSSL_KEY_V1</b> environment variable.</p>
 
 <p>Make sure to keep this key in a safe place and never make it publicly accessible. There are many online resources with methods of keeping your secret keys safe in your servers.</p>
 
@@ -31,7 +31,7 @@
 
 <p>Sending emails is hard. There are a lot of SPAM rules and configurations to master in order to set a functional SMTP server. The SMTP server that comes packaged with Appwrite is great for development but needs some work done to function well against SPAM filters.</p>
 
-<p>Another easier option is to use an ‘SMTP as a service’ product like Sendgrid or Mailgun. You can <a href="/docs/email-delivery">change Appwrite SMTP settings</a> and credentials to any 3rd party provider you like who support SMTP integration using our Docker environment variables. Most SMTP providers offer a decent free tier to get started with.</p>
+<p>Another easier option is to use an 'SMTP as a service' product like Sendgrid or Mailgun. You can <a href="/docs/email-delivery">change Appwrite SMTP settings</a> and credentials to any 3rd party provider you like who support SMTP integration using our Docker environment variables. Most SMTP providers offer a decent free tier to get started with.</p>
 
 <h2><a href="/docs/production#backups" id="backups">Backups</a></h2>
 
@@ -39,7 +39,7 @@
 
 <ol>
     <li>Create a script to backups and restore your MariaDB Appwrite schema. Note that trying to backup MariaDB using a docker volume backup can result in a corrupted copy of your data. It is recommended to use MariaDB or MySQL built-in tools for this.</li>
-    <li>Create a script to backups and restore your InfluxDB stats. If you don’t care much about your server stats, you can skip this.</li>
+    <li>Create a script to backups and restore your InfluxDB stats. If you don't care much about your server stats, you can skip this.</li>
     <li>Create a script to backup Appwrite storage volume. There are many online resources explaining different ways to backup a docker volume. When running on multiple servers, it is very recommended to use an attachable storage point. Some cloud providers offer integrated backups to such attachable mount like GCP, AWS, DigitalOcean, and the list continues.</li>
 </ol>
 

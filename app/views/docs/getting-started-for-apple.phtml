@@ -144,7 +144,7 @@ let user = try await account.create(
 let realtime = Realtime(client)
 
 let subscription = realtime.subscribe(channels: ["files"]) { message in
-    if(message.events!.contains("buckets.*.files.*.create")) {
+    if (message.events!.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(String(describing: message.payload))
     }
@@ -176,7 +176,7 @@ let user = try await account.create(
 let realtime = Realtime(client)
 
 let subscription = realtime.subscribe(channels: ["files"]) { message in
-    if(message.events!.contains("buckets.*.files.*.create")) {
+    if (message.events!.contains("buckets.*.files.*.create")) {
         // Log when a new file is uploaded
         print(String(describing: message.payload))
     }

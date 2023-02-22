@@ -91,8 +91,8 @@
     If an attribute must be populated in all documents, set it as <code>required</code>. If not, a default value might be handy, but is not required. Additionally, decide if the attribute should be a primitive or an array of values.
 </p>
 <p>
-    When adding or removing attributes, your requests are processed in the background, indicated by the attribute's <code>status</code>.
-    Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. You are able to create a document while your attributes are still being processed, but you are not able to use the attributes on the documents until their <code>status</code> becomes <code>available</code>.
+    When adding or removing attributes, your requests are processed in the background, indicated by the attribute's <span class="tag">status</span>.
+    Depending on your collection's size and other factors, this could take anywhere from a few seconds to a few minutes to complete. You are able to create a document while your attributes are still being processed, however you are not able to use the attributes on the documents until they are <span class="tag">available</span>.
 </p>
 
 <h3><a href="/docs/databases#create-documents" id="create-documents">Create Documents</a></h3>
@@ -198,6 +198,27 @@ func main() async throws {
         )
     } catch {
         print(error.localizedDescription)
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    databasesCreateDocument(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]",
+        documentId: "[DOCUMENT_ID]",
+        data: "{}"
+    ) {
+        _id
+        _collectionId
+        _databaseId
+        _createdAt
+        _updatedAt
+        _permissions
+        data
     }
 }</code></pre>
         </div>
@@ -324,6 +345,24 @@ func main() async throws{
 }</code></pre>
         </div>
     </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    databasesListDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]"
+        queries: ["equal(\"title\", [\"Avatar\"])"]
+    ) {
+        total
+        documents {
+            _id
+            data
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>The following query methods are currently supported:</p>
@@ -412,8 +451,8 @@ func main() async throws{
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
 
 const client = new Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-    .setProject("[PROJECT_ID]");
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
 const databases = new Databases(client);
 
@@ -463,8 +502,8 @@ import io.appwrite.services.Databases
 
 suspend fun main() {
     val client = Client(applicationContext)
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-        .setProject("[PROJECT_ID]")
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
     val databases = Databases(client)
 
@@ -511,6 +550,24 @@ func main() async throws {
 }</code></pre>
         </div>
     </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    databasesListDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]"
+        queries: ["equal(\"title\", [\"Avatar\", \"Lord of the Rings\"])", "greaterThan(\"year\", 1999)"]
+    ) {
+        total
+        documents {
+            _id
+            data
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>When performing a query against multiple attributes, a single index with all query attributes is required. In the example above, a single index with <b>both</b> <code>title</code> and <code>year</code> is required.</p>
@@ -538,8 +595,8 @@ func main() async throws {
             <td>Plain Index to allow queries.</td>
         </tr>
         <tr>
-            <td><code>unique</code></td>
-            <td>Unique Index which not allows duplicates.</td>
+            <td>unique</td>
+            <td>Unique Index to disallow duplicates.</td>
         </tr>
         <tr>
             <td><code>fulltext</code></td>
@@ -558,8 +615,8 @@ func main() async throws {
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
 
 const client = new Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-    .setProject("[PROJECT_ID]");
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
 const databases = new Databases(client);
 
@@ -579,8 +636,8 @@ databases.listDocuments(
 
 void main() async {
     final client = Client()
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-        .setProject("[PROJECT_ID]");
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
     final databases = Databases(client);
 
@@ -607,8 +664,8 @@ import io.appwrite.services.Databases
 
 suspend fun main() {
     val client = Client(applicationContext)
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-        .setProject("[PROJECT_ID]")
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
     val databases = Databases(client)
 
@@ -634,8 +691,8 @@ import AppwriteModels
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-      .setProject("[PROJECT_ID]")
+        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setProject('[PROJECT_ID]');
 
     let databases = Databases(client)
 
@@ -653,6 +710,24 @@ func main() async throws {
 }</code></pre>
         </div>
     </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    databasesListDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]"
+        queries: ["orderAsc(\"title\")"]
+    ) {
+        total
+        documents {
+            _id
+            data
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>To sort based on multiple attributes, simply provide multiple query methods.</p>
@@ -664,8 +739,8 @@ func main() async throws {
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
 
 const client = new Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-    .setProject("[PROJECT_ID]");
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('[PROJECT_ID]');
 
 const databases = new Databases(client);
 
@@ -758,6 +833,24 @@ func main() async throws {
         )
     } catch {
         print(error.localizedDescription)
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    databasesListDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]"
+        queries: ["orderAsc(\"title\")", "orderDesc(\"year\")"]
+    ) {
+        total
+        documents {
+            _id
+            data
+        }
     }
 }</code></pre>
         </div>

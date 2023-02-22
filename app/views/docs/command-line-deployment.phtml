@@ -1,0 +1,209 @@
+<p>
+The Apprite CLI allows you to create and deploy collections and functions to your Appwrite project from a configuration file. This is especially helpful if you're trying to track functions and collection schemas using version control, or if you're promoting changes from development to production environments.
+</p>
+
+<h2><a href="/docs/command-line-deployment#initializeProject" id="initializeProject">Initializing Your Project</a></h2>
+
+<p>After you're logged in, the CLI needs to be initialized with your Appwrite project. You can initialize the CLI using:</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init project</code></pre>
+</div>
+
+<p>The following prompts will guide you through the setup process. The init command also creates an <a href="/docs/command-line-deployment#appwriteJSON">appwrite.json</a> file representing your Appwrite project.
+
+<p>You can also fetch all the collections in your current project using:</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init collection</code></pre>
+</div>
+
+<h2><a href="/docs/command-line-deployment#deployFunctions" id="deployFunctions">Deploying Cloud Functions</a></h2>
+
+<p>The CLI also handles the creation and deployment of Appwrite Functions. You can initialize a new function using:</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function
+? What would you like to name your function? My Awesome Function
+? What runtime would you like to use? Node.js (node-15.5)
+✓ Success</code></pre>
+</div>
+
+<p>This command creates a new function <b>My Awesome Function</b> in your current Appwrite project and also creates a template function for you to get started. You can now deploy this function using: </p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function
+? Which functions would you like to deploy? Awesome Function (621229798628cf5bf712)
+ℹ Info Deploying function Awesome Function ( 621229798628cf5bf712 )
+✓ Success Deployed Awesome Function ( 621229798628cf5bf712 )</code></pre>
+</div>
+
+<h2><a href="/docs/command-line-deployment#deployCollections" id="deployCollections">Deploying collections</a></h2>
+
+<p>The Appwrite CLI also helps you migrate your project's collections from a development server to a production server. You can deploy all the collections in your <a href="/docs/command-line-deployment#appwriteJSON">appwrite.json</a> file using:</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collections</code></pre>
+</div>
+
+<h2><a href="/docs/command-line-deployment#avoidingConflicts" id="avoidingConflicts">Avoiding Conflicts</a></h2>
+<p>When using <code>appwrite.json</code>, changes made in the Appwrite Console can cause conflicts with the local config. To avoid conflicts, prefer updating configuration locally and deploying instead of using the console.</p>
+
+<h2><a href="/docs/command-line-deployment#appwriteJSON" id="appwriteJSON">The appwrite.json File</a></h2>
+
+<p>An <code>appwrite.json</code> file is created by the CLI when you initialize your project. It stores all the configuration for the CLI to be able to interact with your Appwrite project in JSON format. When using the <code>appwrite deploy</code> command, the CLI uses information from <code>appwrite.json</code> to deploy your functions and collections.</p>
+
+<h3><a href="/docs/command-line-deployment#configurable-options" id="configurable-options">Configurable Options</a></h3>
+<p>Here's a complete list of all configurable options in <code>appwrite.json</code>:</p>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 150px">Option</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>projectId</code></td>
+            <td>string</td>
+            <td>ID of your Appwrite Project.</td>
+        </tr>
+        <tr>
+            <td><code>projectName</code></td>
+            <td>string</td>
+            <td>Name of your Appwrite Project.</td>
+        </tr>
+        <tr>
+            <td><code>functions</code></td>
+            <td>array of <a href="/docs/command-line-deployment#function-options">functions</a></td>
+            <td>Configuration of functions in your project.</td>
+        </tr>
+        <tr>
+            <td><code>collections</code></td>
+            <td>array of <a href="/docs/command-line-deployment#collection-options">collections</a></td>
+            <td>Configuration of collections in your project.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3><a href="/docs/command-line-deployment#function-options" id="function-options">Function Options</a></h3>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 150px">Option</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>$id</td>
+            <td>string</td>
+            <td>Function ID.</td>
+        </tr>
+        <tr>
+            <td><code>name</td>
+            <td>string</td>
+            <td>Function Name.</td>
+        </tr>
+        <tr>
+            <td><code>runtime</td>
+            <td>string</td>
+            <td>Function runtime, must be enabled. <a href="docs/functions#supportedRuntimes">Learn more about runtimes</a>.</td>
+        </tr>
+        <tr>
+            <td><code>path</code></td>
+            <td>string</td>
+            <td>Path to folder containing the function's source code.</td>
+        </tr>
+        <tr>
+            <td><code>entrypoint</code></td>
+            <td>string</td>
+            <td>Entry point of the function relative to the folder specified in path.</td>
+        </tr>
+        <tr>
+            <td><code>ignore</code></td>
+            <td>array of strings</td>
+            <td>Files to ignore inside the function. <a href="docs/functions#ignoreFiles">Learn more about ignoring files</a>.</td>
+        </tr>
+        <tr>
+            <td><code>execute</code></td>
+            <td>array of strings</td>
+            <td>Grants execute permissions to users. <a href="docs/rest#permissions">Learn more about role strings</a>.</td>
+        </tr>
+        <tr>
+            <td><code>events</code></td>
+            <td>array of strings</td>
+            <td>Events that trigger the function to execute. <a href="docs/events">Learn more about events</a>.</td>
+        </tr>
+        <tr>
+            <td><code>schedule</code></td>
+            <td>string</td>
+            <td>Execution schedule for the function as a <a href="https://en.wikipedia.org/wiki/Cron" target="_blank" rel="noopener">cron expression</a>.</td>
+        </tr>
+        <tr>
+            <td><code>timeout</code></td>
+            <td>int</td>
+            <td>Execution timeout of the function in seconds, with a maximum configurable limit of 900 seconds.</td>
+        </tr>
+        <tr>
+            <td><code>variables</code></td>
+            <td>JSON object</td>
+            <td>Variables provided to the function on execution stored as a key-value JSON object.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3><a href="/docs/command-line-deployment#collection-options" id="collection-options">Collection Options</a></h3>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 150px">Option</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>$id</code></td>
+            <td>string</td>
+            <td>Collection ID.</td>
+        </tr>
+        <tr>
+            <td><code>name</code></td>
+            <td>string</td>
+            <td>Collection Name.</td>
+        </tr>
+        <tr>
+            <td><code>databaseId</code></td>
+            <td>string</td>
+            <td>ID of the database to which this collection belongs.</td>
+        </tr>
+        <tr>
+            <td><code>enabled</code></td>
+            <td>bool</td>
+            <td>If the collection is enabled.</td>
+        </tr>
+        <tr>
+            <td><code>documentSecurity</code></td>
+            <td>bool</td>
+            <td>If access permissions can be defined at the document level.</td>
+        </tr>
+        <tr>
+            <td><code>permissions</code></td>
+            <td>array of strings</td>
+            <td>Grants access permissions to users at the collection level. <a href="docs/rest#permissions">Learn more about permissions</a>.</td>
+        </tr>
+        <tr>
+            <td><code>attributes</code></td>
+            <td>array of objects</td>
+            <td>Defines a list of attributes in the collection. <a href="docs/models/attributeList">Learn more about the Attributes List Object</a>.</td>
+        </tr>
+        <tr>
+            <td><code>indexes</code></td>
+            <td>array of objects</td>
+            <td>Defines a list of indexes in the collection. <a href="docs/models/indexList">Learn more about the Indexes List Object</a>.</td>
+        </tr>
+    </tbody>
+</table>

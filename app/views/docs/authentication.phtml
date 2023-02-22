@@ -77,6 +77,26 @@ final user = await account.create(
 );</code></pre>
     </li>
     <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+import io.appwrite.ID
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val user = account.create(
+    userId = ID.unique(),
+    email = "team@appwrite.io",
+    password = "password"
+)</code></pre>
+        </div>
+    </li>
+    <li>
         <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
@@ -95,23 +115,16 @@ let user = try await account.create(
         </div>
     </li>
     <li>
-        <h3>Android</h3>
-        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
-import io.appwrite.services.Account
-import io.appwrite.ID
-
-val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-val account = Account(client)
-
-val user = account.create(
-    userId = ID.unique(),
-    email = "team@appwrite.io",
-    password = "password"
-)</code></pre>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
+mutation {
+    accountCreate(userId: "unique()", email: "team@appwrite.io", password: "password") {
+        _id
+        email
+        name
+    }
+}</code></pre>
         </div>
     </li>
 </ul>
@@ -162,6 +175,21 @@ final user = await account.createAnonymousSession();</code></pre>
         </div>
     </li>
     <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val user = account.createAnonymousSession()</code></pre>
+        </div>
+    </li>
+    <li>
         <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
@@ -176,18 +204,17 @@ let user = try await account.createAnonymousSession()</code></pre>
         </div>
     </li>
     <li>
-        <h3>Android</h3>
-        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
-import io.appwrite.services.Account
-
-val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-val account = Account(client)
-
-val user = account.createAnonymousSession()</code></pre>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
+mutation {
+    accountCreateAnonymousSession {
+        _id
+        userId
+        provider
+        expire
+    }
+}</code></pre>
         </div>
     </li>
 </ul>
@@ -238,21 +265,6 @@ await account.createOAuth2Session(provider: 'amazon');</code></pre>
         </div>
     </li>
     <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-let account = Account(client)
-
-// Go to OAuth provider login page
-try await account.createOAuth2Session(provider: "amazon")</code></pre>
-        </div>
-    </li>
-    <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
@@ -268,6 +280,21 @@ val account = Account(client)
 account.createOAuth2Session(provider = "amazon")</code></pre>
         </div>
     </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+// Go to OAuth provider login page
+try await account.createOAuth2Session(provider: "amazon")</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>  
@@ -278,10 +305,6 @@ account.createOAuth2Session(provider = "amazon")</code></pre>
 
 <p>
     Phone authentication is done using a two-step authentication process. When using phone authentication, the authentication request is initiated from the client application and an SMS is sent to the user with a secret key for creating a session. 
-</p>
-
-<p> 
-    Phone authentication requires you to set up an SMS provider to send SMS messages. You will need to configure these <a href="/docs/environment-variables#phone">environment variables</a> and restart your Appwrite containers before you can use phone authentication.
 </p>
 
 <p>
@@ -331,22 +354,6 @@ final session = await account.createPhoneSession(
 );</code></pre>
     </li>
     <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-let account = Account(client)
-
-let session = try await account.createPhoneSession(
-    userId: ID.unique(),
-    phone: "+16171234567"
-)</code></pre>
-    </li>
-    <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
@@ -363,6 +370,35 @@ val session = account.createPhoneSession(
     userId = ID.unique(),
     phone = "+16171234567"
 )</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.createPhoneSession(
+    userId: ID.unique(),
+    phone: "+16171234567"
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreatePhoneSession(userId: "unique()", phone: "+16171234567") {
+        _id
+        userId
+        secret
+        expire
+    }
+}</code></pre>
+        </div>
     </li>
 </ul>
 
@@ -383,7 +419,7 @@ const client = new Client()
 const account = new Account(client);
 
 const promise = account.updatePhoneSession(
-    ID.unique(),
+    '[USER_ID]',
     '[SECRET]'
 );
 
@@ -406,25 +442,9 @@ final client = Client()
 final account = Account(client);
 
 final session = await account.updatePhoneSession(
-    userId: ID.unique(),
+    userId: '[USER_ID]',
     secret: '[SECRET]'
 );</code></pre>
-    </li>
-    <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-let account = Account(client)
-
-let session = try await account.updatePhoneSession(
-    userId: ID.unique(),
-    secret: "[SECRET]"
-)</code></pre>
     </li>
     <li>
         <h3>Android</h3>
@@ -440,15 +460,248 @@ val client = Client()
 val account = Account(client)
 
 val session = account.updatePhoneSession(
-    userId = ID.unique(),
+    userId = "[USER_ID]",
     secret = "[SECRET]"
 )</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.updatePhoneSession(
+    userId: "[USER_ID]",
+    secret: "[SECRET]"
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
+mutation {
+    accountUpdatePhoneSession(userId: "[USER_ID]", secret: "[SECRET]") {
+        _id
+        userId
+        provider
+        expire
+    }
+}</code></pre>
+        </div>
     </li>
 </ul>
 
 <p>
     After the secret is verified, a session will be created.
 </p>
+
+
+<h3><a href="/docs/authentication#magic-url" id="magic-url">Magic URL</a></h3>
+<p>
+    Magic URL authentication allows a user to sign in without a password. Magic URL authentication sends the user an email with a secret key for creating a new session. If the provided user ID has not be registered, a new user will be created. 
+</p>
+
+<p>
+    Only redirect URLs to domains added as a <a href="/docs/getting-started-for-web#addPlatform">platform</a> on your Appwrite console will be accepted. URLs not added as a platform are rejected to protect against <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md" target="_blank" rel="noopener">redirect attacks</a>.
+</p>
+
+<div class="notice">
+    <h2>SMTP Required</h2>
+    <p>Magic URL authentication requires <a href="/docs/email-delivery">SMTP</a> to be configured on your Appwrite instance to deliver emails.</p>
+</div>
+
+<p>
+    Magic URL authentication can be initiated like this: 
+</p>
+
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.createMagicURLSession(ID.unique(), 'email@example.com');
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final user = await account.createMagicURLSession(
+    userId: ID.unique(),
+    email: 'email@example.com',
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val user = account.createMagicURLSession(
+    userId = ID.unique(),
+    email = "email@example.com"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let user = try await account.createMagicURLSession(
+    userId: ID.unique(),
+    email: "email@example.com"
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreateMagicURLSession(
+        userId: "unique()",
+        email: "email@example.com"
+    ) {
+        _id
+        _createdAt
+        userId
+        secret
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>
+    After receiving your secret from an email, you can create a new Magic URL session like this:
+</p>
+
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.updateMagicURLSession('[USER_ID]', '[SECRET]');
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final user = await account.updateMagicURLSession(
+    userId: '[USER_ID]',
+    secret: '[SECRET]',
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val user = account.updateMagicURLSession(
+    userId = '[USER_ID]',
+    secret = '[SECRET]'
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let user = try await account.updateMagicURLSession(
+    userId: '[USER_ID]',
+    secret: "[SECRET]"
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountUpdateMagicURLSession(
+        userId: "[USER_ID]",
+        secret: "[SECRET]"
+    ) {
+        _id
+        _createdAt
+        userId
+        expire
+        provider
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
 
 <h2><a href="/docs/authentication#login" id="login">Login</a></h2>
 
@@ -501,22 +754,6 @@ final session = await account.createEmailSession(
 );</code></pre>
     </li>
     <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-let account = Account(client)
-
-let session = try await account.createEmailSession(
-    email: "team@appwrite.io",
-    password: "password"
-)</code></pre>
-    </li>
-    <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
@@ -533,10 +770,39 @@ val session = account.createEmailSession(
     password = "password"
 )</code></pre>
     </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.createEmailSession(
+    email: "team@appwrite.io",
+    password: "password"
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreateEmailSession(email: "team@appwrite.io", password: "password") {
+        _id
+        userId
+        provider
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>
-    When a user tries to access restricted resources, you can check if they have a valid, active session. The Account Service provides a <a href="/docs/account#accountGet">get()</a> method that checks whether the current user session is active and returns the account information if successful.
+    When a user tries to access restricted resources, you can check if they have a valid, active session. The Account Service provides a <a href="/docs/client/account#accountGet">get()</a> method that checks whether the current user session is active and returns the account information if successful.
 </p>
 
 <p>
@@ -578,19 +844,6 @@ final account = Account(client);
 final session = await account.get();</code></pre>
     </li>
     <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-let account = Account(client)
-
-let session = try await account.get()</code></pre>
-    </li>
-    <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
@@ -604,11 +857,434 @@ val account = Account(client)
 
 val session = account.get()</code></pre>
     </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.get()</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    accountGet {
+        _id
+        email
+        name
+        status
+    }
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>
     An authenticated session in Appwrite lasts for 1 year and is then automatically expired.
 </p>
+
+
+<h3><a href="/docs/authentication#recovery" id="recovery">Password Recovery</a></h3>
+<p>
+    If a user forgets their password, they can initiate a password recovery flow to recover their password. The <a href="/docs/client/account#accountCreateRecovery">Create Password Recovery</a> endpoint sends the user an email with a temporary secret key for password reset. When the user clicks the confirmation link, they are redirected back to the password reset URL with the secret key and email address values attached to the URL as query strings. 
+</p>
+
+<p>
+    Only redirect URLs to domains added as a <a href="/docs/getting-started-for-web#addPlatform">platform</a> on your Appwrite console will be accepted. URLs not added as a platform are rejected to protect against <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md" target="_blank" rel="noopener">redirect attacks</a>.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+<li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.createPasswordRecovery('email@example.com', 'https://example.com');
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final user = account.createRecovery(
+    email: 'email@example.com',
+    url: 'https://example.com',
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val response = account.createRecovery(
+    email = "email@example.com",
+    url = "https://example.com"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let token = try await account.createRecovery(
+    email: "email@example.com",
+    url: "https://example.com"
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreateRecovery(
+        email: "email@example.com",
+        url: "https://example.com"
+    ) {
+        _id
+        _createdAt
+        userId
+        secret
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>
+After receiving a email with the secret attached to the redirect link, submit a request to the <a href="/docs/client/account#accountUpdateRecovery">Create Password Recovery (confirmation)</a> endpoint to complete the recovery flow. The verification link sent to the user's email address is valid for 1 hour.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+<li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.updateRecovery('[USER_ID]', '[SECRET]', 'password', 'password');
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final user = await account.updateRecovery(
+    userId: '[USER_ID]',
+    secret: '[SECRET]',
+    password: 'password'
+    passwordAgain: 'password'
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val token = account.updateRecovery(
+    userId = "[USER_ID]",
+    secret = "[SECRET]",
+    password = "password",
+    passwordAgain = "password"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let token = try await account.updateRecovery(
+    userId: "[USER_ID]",
+    secret: "[SECRET]",
+    password: "password",
+    passwordAgain: "password"
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountUpdateRecovery(
+        userId: "[USER_ID]",
+        secret: "[SECRET]",
+        password: "password",
+        passwordAgain: "password"
+    ) {
+        _id
+        _createdAt
+        userId
+        secret
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+
+<h2><a href="/docs/authentication#jwt" id="jwt">JWT Authentication</a></h2>
+<p><a href="https://jwt.io/introduction" target="_blank" rel="noopener">JSON Web Tokens</a> (JWTs) are a secure means to transfer information or claims between two parties. If you're building <a href="/docs/getting-started-for-server">server applications</a> with Appwrite, JWTs enable your client applications to authenticate with your server application.</p>
+
+<p>You need to create a session using the Client SDKs <b>before</b> generating a JWT. The JWT will be a stateless proof of claim for the identity of the authenticated user and can be used by client or server SDKs to act on behalf of a user. JWTs become invalid after 15 minutes or when the session is deleted.</p>
+
+<p>You can generate a JWT like this:</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.createJWT();
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final jwt = await account.createJWT();
+
+ </code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val jwt = account.createJWT()</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let jwt = try await account.createJWT()</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreateJWT {
+        jwt
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>Your server application can use the JWT to act on behalf of the user by creating a <code>Client</code> instance with the JWT for each request it receives with a JWT.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client } = require('node-appwrite');
+
+const client = new Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setJWT('eyJJ9.eyJ...');                    // Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>use Appwrite\Client;
+
+$client = new Client();
+
+$client
+    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1')            // Your API Endpoint
+    ->setProject('5df5acd0d48c2')                           // Your project ID
+    ->setJWT('eyJ9.eyJ...');                                // Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+
+client = Client()
+
+(client
+  .set_endpoint('https://[HOSTNAME_OR_IP]/v1')              # Your API Endpoint
+  .set_project('5df5acd0d48c2')                             # Your project ID
+  .set_jwt('eyJ9.eyJ...')                                   # Your secret JSON Web Token
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby SDK">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
+
+include Appwrite
+
+client = Client
+
+client.new
+    .set_endpoint('https://[HOSTNAME_OR_IP]/v1')            # Your API Endpoint
+    .set_project('5df5acd0d48c2')                           # Your project ID
+    .set_jwt('eyJ9.eyJ...')                                 # Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client } from "https://deno.land/x/appwrite/mod.ts";
+
+let client = new Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')             // Your API Endpoint
+    .setProject('5df5acd0d48c2')                            // Your project ID
+    .setJWT('eyJ9.eyJ...');                                 // Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
+
+final client = Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setJWT('eyJ9.eyJ...');                     // Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+
+val client = Client()
+
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setJWT("eyJ9.eyJ...")                      // Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setJWT("eyJ9.eyJ...")                      // Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+</ul>
+
 
 <h2><a href="/docs/authentication#persistence" id="persistence">Persistence</a></h2>
 
@@ -680,6 +1356,187 @@ val session = account.get()</code></pre>
         </tr>
     </tbody>
 </table>
+
+
+<h2><a href="/docs/authentication#preferences" id="preferences">User Preferences</a></h2>
+<p>You can store user preferences on a user's account using Appwrite's <a href="/docs/client/account#accountUpdatePrefs">Update Preferences</a> endpoint. You can store user preferences such as theme, notification settings, or preferred language so they can be synced across multiple devices.</p>
+<p>Preferences are stored as a key-value JSON object. The maximum allowed prefs size is 64kB and throws an error if exceeded.</p> 
+<ul class="phases clear" data-ui-phases>
+<li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.updatePrefs({darkTheme: true, language: 'en'});
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final user = await account.updatePrefs(
+    prefs: {
+        "darkTheme": true,
+        "language": "en",
+    }
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val user = account.updatePrefs(
+    prefs = mapOf("darkTheme" to true, "language" to "en")
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let user = try await account.updatePrefs(
+    prefs: ["darkTheme": true, "language": "en"]
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountUpdatePrefs(
+        prefs: "{\"darkTheme\": true, \"language\": \"en\"}"
+    ) {
+        _id
+        _createdAt
+        _updatedAt
+        name
+        registration
+        status
+        passwordUpdate
+        email
+        phone
+        emailVerification
+        phoneVerification
+        prefs {
+            data
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>After a user's preferences are updated, they can be retrieved using the <a href="/docs/client/account#accountGetPrefs">Get Preferences</a> endpoint.</p> 
+
+<ul class="phases clear" data-ui-phases>
+<li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.getPrefs();
+
+promise.then(function (prefs) {
+    console.log(prefs);
+}, function (error) {
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final prefs = await account.getPrefs();</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val prefs = account.getPrefs()</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let prefs = try await account.getPrefs()</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    accountGetPrefs {
+        data
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="/docs/authentication#limits" id="limits">Session Limits</a></h2>
+<p>In Appwrite versions 1.2 and above, you can limit the number of active sessions created per user to prevent the accumulation of unused but active sessions. New sessions created by the same user past the session limit deletes the oldest session.</p>
+
+<p>You can change the session limit in the <b>Security</b> tab of the Auth Service in your Appwrite Console. The default session limit is 10 with a maximum configurable limit of 100.</p> 
 
 <h2><a href="/docs/authentication#security" id="security">Security</a></h2>
 
