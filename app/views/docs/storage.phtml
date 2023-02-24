@@ -213,6 +213,27 @@ File content.
 </li>
 <li>
     <h3>Flutter</h3>
+    <p>
+        The Appwrite Flutter SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile(path: [PATH], filename: [NAME])</code></td>
+            <td>Used to upload files from a provided path. Used for Flutter apps on mobile and desktop.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile(filename: [NAME], contentType: [MIME TYPE], bytes: [BYTE LIST])</code></td>
+            <td>Used to upload files from a byte list, specify the file's MIME type using <code>contentType</code>. Used for Flutter apps on mobile and desktop.</td>
+        </tr>
+        </tbody>
+    </table>
 </li>
 <li>
     <h3>Android</h3>
@@ -228,15 +249,15 @@ File content.
         </thead>
         <tbody>
         <tr>
-            <td><code>InputFile.fromPath(path: String)<code></td>
+            <td><code>InputFile.fromPath(path: String)</code></td>
             <td>Used to upload files from a provided path.</td>
         </tr>
         <tr>
-            <td><code>InputFile.fromFile(file: File)<code></td>
+            <td><code>InputFile.fromFile(file: File)</code></td>
             <td>Used to upload files from a <a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html" target="_blank" rel="noopener">File</a> object.</td>
         </tr>
         <tr>
-            <td><code>InputFile.fromBytes(bytes: ByteArray, filename: String, mimeType: String)<code></td>
+            <td><code>InputFile.fromBytes(bytes: ByteArray, filename: String, mimeType: String)</code></td>
             <td>Used to upload files from a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/" target="_blank" rel="noopener">ByteArray</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
         </tr>
         </tbody>
@@ -256,15 +277,15 @@ File content.
         </thead>
         <tbody>
         <tr>
-            <td><code>InputFile.fromPath(_ path: String)<code></td>
+            <td><code>InputFile.fromPath(_ path: String)</code></td>
             <td>Used to upload files from a provided path.</td>
         </tr>
         <tr>
-            <td><code>InputFile.fromData(_ data: Data, filename: String, mimeType: String)<code></td>
+            <td><code>InputFile.fromData(_ data: Data, filename: String, mimeType: String)</code></td>
             <td>Used to upload files from a <a href="https://developer.apple.com/documentation/foundation/data" target="_blank" rel="noopener">Data</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
         </tr>
         <tr>
-            <td><code>InputFile.fromBuffer(_ buffer: ByteBuffer, filename: String, mimeType: String)<code></td>
+            <td><code>InputFile.fromBuffer(_ buffer: ByteBuffer, filename: String, mimeType: String)</code></td>
             <td>Used to upload files from a <a href="https://swiftinit.org/reference/swift-nio/niocore/bytebuffer" target="_blank" rel="noopener">NIO Buffer</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
         </tr>
         </tbody>
@@ -289,23 +310,23 @@ File content.
         </thead>
         <tbody>
         <tr>
-            <td><code>InputFile.fromPath(filePath, filename)<code></td>
+            <td><code>InputFile.fromPath(filePath, filename)</code></td>
             <td>Used to upload files from a provided path.</td>
         </tr>
         <tr>
-            <td><code>InputFile.fromBuffer(buffer, filename)<code></td>
+            <td><code>InputFile.fromBuffer(buffer, filename)</code></td>
             <td>Used to upload files from a <a href="https://nodejs.org/api/buffer.html#buffer" target="_blank" rel="noopener">Buffer</a> object.</td>
         </tr>
         <tr>
-            <td><code>InputFile.fromBlob(blob, filename)<code></td>
+            <td><code>InputFile.fromBlob(blob, filename)</code></td>
             <td>Used to upload files from a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob" target="_blank" rel="noopener">Blob</a> object.</td>
         </tr>
         <tr>
-            <td><code>InputFile.fromStream(stream, filename, size)<code></td>
+            <td><code>InputFile.fromStream(stream, filename, size)</code></td>
             <td>Used to upload files from a <a href="https://nodejs.org/api/stream.html#readable-streams" target="_blank" rel="noopener">Readable Stream</a> object.</td>
         </tr>
         <tr>
-            <td><code>InputFile.fromPlainText(content, filename)<code></td>
+            <td><code>InputFile.fromPlainText(content, filename)</code></td>
             <td>Used to upload files in plain text. Expects a string encoded in UTF-8.</td>
         </tr>
         </tbody>
@@ -313,7 +334,27 @@ File content.
 </li>
 <li>
     <h3>PHP</h3>
-    
+    <p>
+        The Appwrite PHP SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.withPath(string $path, ?string $mimeType = null, ?string $filename = null)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.withData(string $data, ?string $mimeType = null, ?string $filename = null)</code></td>
+            <td>Used to upload files from a string.</td>
+        </tr>
+        </tbody>
+    </table>
 </li>
 <li>
     <h3>Python</h3>
@@ -329,11 +370,11 @@ File content.
         </thead>
         <tbody>
         <tr>
-            <td><code>InputFile.from_path(path)<code></td>
+            <td><code>InputFile.from_path(path)</code></td>
             <td>Used to upload files from a provided path.</td>
         </tr>
         <tr>
-            <td><code>InputFile.from_bytes(bytes)<code></td>
+            <td><code>InputFile.from_bytes(bytes)</code></td>
             <td>Used to upload files from an array of bytes.</td>
         </tr>
         </tbody>
@@ -353,30 +394,99 @@ File content.
         </thead>
         <tbody>
         <tr>
-            <td><code>InputFile.from_path(path)<code></td>
+            <td><code>InputFile.from_path(path)</code></td>
             <td>Used to upload files from a provided path.</td>
         </tr>
         <tr>
-            <td><code>InputFile.from_string(string)<code></td>
+            <td><code>InputFile.from_string(string)</code></td>
             <td>Used to upload files from a String.</td>
         </tr>
         <tr>
-            <td><code>InputFile.from_bytes(bytes)<code></td>
+            <td><code>InputFile.from_bytes(bytes)</code></td>
             <td>Used to upload files from an array of bytes.</td>
         </tr>
         </tbody>
     </table>
 </li>
 <li>
-    <h3>Deno</h3>
-    
+    <h3>Deno</h3>    
+    <p>
+        The Appwrite Deno SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.fromPath(filePath, filename)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromBuffer(buffer, filename)</code></td>
+            <td>Used to upload files from a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array" target="_blank" rel="noopener">Uint8Array</a> object.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromPlainText(content, filename)</code></td>
+            <td>Used to upload files in plain text. Expects a string encoded in UTF-8.</td>
+        </tr>
+        </tbody>
+    </table>
 </li>
 <li>
     <h3>Dart</h3>
-    
+    <p>
+        The Appwrite Dart SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile(path: [PATH], filename: [NAME])</code></td>
+            <td>Used to upload files from a provided path. Used for Flutter apps on mobile and desktop.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile(filename: [NAME], contentType: [MIME TYPE], bytes: [BYTE LIST])</code></td>
+            <td>Used to upload files from a byte list, specify the file's MIME type using <code>contentType</code>. Used for Flutter apps on mobile and desktop.</td>
+        </tr>
+        </tbody>
+    </table>
 </li>
 <li>
     <h3>Kotlin</h3>
+    <p>
+        The Appwrite Kotlin SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.fromPath(path: String)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromFile(file: File)</code></td>
+            <td>Used to upload files from a <a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html" target="_blank" rel="noopener">File</a> object.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromBytes(bytes: ByteArray, filename: String, mimeType: String)</code></td>
+            <td>Used to upload files from a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/" target="_blank" rel="noopener">ByteArray</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
+        </tr>
+        </tbody>
+    </table>
     
 </li>
 <li>
@@ -393,15 +503,15 @@ File content.
         </thead>
         <tbody>
         <tr>
-            <td><code>InputFile.fromPath(_ path: String)<code></td>
+            <td><code>InputFile.fromPath(_ path: String)</code></td>
             <td>Used to upload files from a provided path.</td>
         </tr>
         <tr>
-            <td><code>InputFile.fromData(_ data: Data, filename: String, mimeType: String)<code></td>
+            <td><code>InputFile.fromData(_ data: Data, filename: String, mimeType: String)</code></td>
             <td>Used to upload files from a <a href="https://developer.apple.com/documentation/foundation/data" target="_blank" rel="noopener">Data</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
         </tr>
         <tr>
-            <td><code>InputFile.fromBuffer(_ buffer: ByteBuffer, filename: String, mimeType: String)<code></td>
+            <td><code>InputFile.fromBuffer(_ buffer: ByteBuffer, filename: String, mimeType: String)</code></td>
             <td>Used to upload files from a <a href="https://swiftinit.org/reference/swift-nio/niocore/bytebuffer" target="_blank" rel="noopener">NIO Buffer</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
         </tr>
         </tbody>
