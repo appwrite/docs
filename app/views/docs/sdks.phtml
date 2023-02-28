@@ -35,7 +35,7 @@ $markdown->setSafeMode(true);
         </tr>
         </thead>
         <tbody>
-        <?php foreach($platform['languages'] as $language): ?>
+        <?php foreach($platform['sdks'] as $language): ?>
             <?php if(!$language['enabled']) { continue; } ?>
             <?php if($language['dev']) { continue; } ?>
             <?php if($language['hidden']) { continue; } ?>

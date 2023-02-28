@@ -2,7 +2,7 @@
 $platforms = $this->getParam('platforms');
 $versions = [];
 
-foreach($platforms['server']['languages'] ?? [] as $lang) {
+foreach($platforms['server']['sdks'] ?? [] as $lang) {
     $key = $lang['key'] ?? '';
     $version = $lang['version'] ?? '';
 
