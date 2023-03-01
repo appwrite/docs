@@ -1,0 +1,83 @@
+<p>Many list endpoints in Appwrite support queries to filter results. Appwrite provides query methods to filter, sort, and paginate results.</p>
+
+<h2><a href="/docs/queries#filterable-fields" id="filterable-fields">Filterable Results</a></h2>
+<p>Each list endpoint has a different set of filterable fields. In Appwrite Databases, filtering documents by attributes require an <a href="/docs/databases#indexes">index</a> on the attributes. In other services, only certain attributes can be filtered. You can find the supported query methods and filterable attributes in each service's API documentation under <b>References</b>.</p>
+
+<h2><a href="/docs/queries#query-class" id="query-class">Query Class</a></h2>
+<p>Appwrite SDKs provide a <code>Query</code> class to help you build queries. The <code>Query</code> class has a method for each type of supported query.</p>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 100px">Query Method</th>
+            <th>SDK Method Example</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Equal</td>
+            <td><code>Query.equal("title", ["Iron Man"])</code></td>
+            <td>Returns document if attribute is equal to any value in the provided array. Applies to any indexed attribute.</td>
+        </tr>
+        <tr>
+            <td>Not Equal</td>
+            <td><code>Query.notEqual("title", ["Iron Man"])</code></td>
+            <td>Returns document if attribute is not equal to any value in the provided array. Applies to any indexed attribute.</td>
+        </tr>
+        <tr>
+            <td>Less Than</td>
+            <td><code>Query.lessThan("score", 10)</code></td>
+            <td>Returns document if attribute is less than the provided value. Applies to any indexed attribute.</td>
+        </tr>
+        <tr>
+            <td>Less Than or Equal</td>
+            <td><code>Query.lessThanEqual("score", 10)</code></td>
+            <td>Returns document if attribute is less than or equal to the provided value. Applies to any indexed attribute.</td>
+        </tr>
+        <tr>
+            <td>Greater Than</td>
+            <td><code>Query.greaterThan("score", 10)</code></td>
+            <td>Returns document if attribute is greater than the provided value. Applies to any indexed attribute.</td>
+        </tr>
+        <tr>
+            <td>Greater Than or Equal</td>
+            <td><code>Query.greaterThanEqual("score", 10)</code></td>
+            <td>Returns document if attribute is greater than or equal to the provided value. Applies to any indexed attribute.</td>
+        </tr>
+        <tr>
+            <td>Search</td>
+            <td><code>Query.search("text", "key words")</code></td>
+            <td>Searches string attributes for provided keywords. Applies to any string attribute with a full-text index.</td>
+        </tr>
+        <tr>
+            <td>Order Descending</td>
+            <td><code>Query.orderDesc("attribute")</code></td>
+            <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+        </tr>
+        <tr>
+            <td>Order Ascending</td>
+            <td><code>Query.orderAsc("attribute")</code></td>
+            <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+        </tr>
+        <tr>
+            <td>Limit</td>
+            <td><code>Query.limit(25)</code></td>
+            <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+        </tr>
+        <tr>
+            <td>Offset</td>
+            <td><code>Query.offset(0)</code></td>
+            <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+        </tr>
+        <tr>
+            <td>Cursor After</td>
+            <td><code>Query.cursorAfter("62a7...f620")</code></td>
+            <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+        </tr>
+        <tr>
+            <td>Cursor Before</td>
+            <td><code>Query.cursorBefore("62a7...a600")</code></td>
+            <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+        </tr>
+    </tbody>
+</table>
