@@ -19,12 +19,16 @@
   <p><a href="#async-operation">Learn more about asynchronous operations</a></p>
 </div>
 
-[TODO: Code Example]
+<div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>client.setOfflinePersistency(status: true);</code></pre>
+</div>
 <p>
     Offline Support will cache all read request in a <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#LRU" target="_blank" rel="noopener">Least Recently Used (LRU)</a> cache, so the information can remain available even with no internet connection. The LRU cache defaults to a size of 16MB and can be configured using the <code>setOfflineCacheSize</code> method.
 </p>
 
-[TODO: Code Example]
+<div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>client.setOfflineCacheSize(40000);</code></pre>
+</div>
 
 <h2 href="#async-operation" id="async-operation">Asynchronous Operation</h2>
 <p>
@@ -35,14 +39,28 @@
 <p>
     For example, the code example below will <b>block code execution</b> when the device is offline.
 </p>
-
-[TODO: Show Example, in comments clearly mark that it's ]
+<div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>// This await will not resolve until your device is online
+final document = await databases.createDocument(
+    databaseId: '[DATABASE_ID]',
+    collectionId: '[COLLECTION_ID]',
+    documentId: ID.unique(),
+    data: {},
+);</code></pre>
+</div>
 
 <p>
-    To avoid blocking code execution, asynchronous operations should be handled [TODO: fill description]
+    To avoid blocking code execution, update local states and UI optimisitically instead of waiting for awaiting asynchronous operations.
 </p>
 
-[TODO: Show correct version of example. ]
+<div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>final document = databases.createDocument(
+    databaseId: '[DATABASE_ID]',
+    collectionId: '[COLLECTION_ID]',
+    documentId: ID.unique(),
+    data: {},
+);</code></pre>
+</div>
 
 <h2>Conflict Resolution</h2>
 <p>
