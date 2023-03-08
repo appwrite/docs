@@ -151,8 +151,7 @@ func main() async throws {
 
 <h2><a href="/docs/pagination#cursor-pagination" id="cursor-pagination">Cursor Pagination</a></h2>
 <p>
-    The <span class="tag">cursor</span> is a unique identifier for a specific record, which acts as a pointer to the next record we want to start querying from to get the next page of results.
-    Additionally to the <span class="tag">cursor</span> you can pass the cursor position as the <span class="tag">cursorDirection</span> before and after allowing you to get paginate back and forth.
+    The cursor is a unique identifier for a specific record, which acts as a pointer to the next record we want to start querying from to get the next page of results. After reading a page of documents, pass the last document's ID into the <code>Query.cursorAfter(lastId)</code> query method to get the next page of documents. Pass the first document's ID into the <code>Query.cursorBefore(lastId)</code> query method to retrieve the previous page.
 </p>
 
 <ul class="phases clear" data-ui-phases>
