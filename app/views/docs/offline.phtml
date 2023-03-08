@@ -67,7 +67,7 @@ final document = await databases.createDocument(
     With Offline Support enabled, your app can continue sending requests to Appwrite APIs while offline through a cache when offline. Read requests will be fetched from the local cached data, and write requests will be queued and executed once the device is online again. This can lead to write conflicts when the device is online again.
 </p>
 <p>
-    [TODO: Describe resolution behavior + tips if available.]
+    Document updates made while your device is offline will be queued locally with a timestamp. When your device comes online, Appwrite will compare the timestamps of local updates with the timestamp of the remote document, accepting the <b>latest version</b>. Appwrite will reject a document update if the remote document been updated later than the locally queued update. 
 </p>
 
 <p>
