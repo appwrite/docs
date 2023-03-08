@@ -40,13 +40,34 @@
     For example, the code example below will <b>block code execution</b> when the device is offline.
 </p>
 <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-  <pre class="line-numbers"><code class="prism language-dart" data-prism>// This await will not resolve until your device is online
-final document = await databases.createDocument(
-    databaseId: '[DATABASE_ID]',
-    collectionId: '[COLLECTION_ID]',
-    documentId: ID.unique(),
-    data: {},
-);</code></pre>
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>  void blockingSubmitTodo() async {
+    if (inputController.text.isEmpty || isLoading) return;
+    final messenger = ScaffoldMessenger.of(context);
+    final newTodo = Todo(
+      content: inputController.text,
+      id: ID.unique(),
+    );
+
+    try {
+      await _databases.createDocument(
+        databaseId: '[DATABASE_ID]',
+        collectionId: '[COLLECTION_ID]',
+        documentId: newTodo.id,
+        data: {
+          "content": newTodo.content,
+          "isComplete": newTodo.isComplete,
+        },
+      );
+      inputController.text = '';
+      todos.add(newTodo);
+    } catch (e) {
+      messenger.showSnackBar(createErrorSnackBar(e.toString()));
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+  }</code></pre>
 </div>
 
 <p>
@@ -54,12 +75,33 @@ final document = await databases.createDocument(
 </p>
 
 <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-  <pre class="line-numbers"><code class="prism language-dart" data-prism>final document = databases.createDocument(
-    databaseId: '[DATABASE_ID]',
-    collectionId: '[COLLECTION_ID]',
-    documentId: ID.unique(),
-    data: {},
-);</code></pre>
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>  void nonBlockingSubmitTodo() async {
+    if (inputController.text.isEmpty || isLoading) return;
+    final messenger = ScaffoldMessenger.of(context);
+    final newTodo = Todo(
+      content: inputController.text,
+      id: ID.unique(),
+    );
+
+    _databases.createDocument(
+      databaseId: '[DATABASE_ID]',
+      collectionId: '[COLLECTION_ID]',
+      documentId: newTodo.id,
+      data: {
+        "content": newTodo.content,
+        "isComplete": newTodo.isComplete,
+      },
+    ).catchError((e) {
+      messenger.showSnackBar(createErrorSnackBar(e.toString()));
+      todos.remove(newTodo);
+    });
+
+    setState(() {
+      inputController.text = '';
+      todos.add(newTodo);
+      isLoading = false;
+    });
+  }</code></pre>
 </div>
 
 <h2>Conflict Resolution</h2>
