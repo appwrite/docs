@@ -105,7 +105,7 @@ void main() { // Init SDK
   final file = await storage.createFile(
     bucketId: '[BUCKET_ID]',
     fileId: ID.unique(),
-    file: InputFile(path: './path-to-files/image.jpg', filename: 'image.jpg'),
+    file: InputFile.fromPath(path: './path-to-files/image.jpg', filename: 'image.jpg'),
   );
 }</code></pre>
         </div>
@@ -225,11 +225,11 @@ File content.
         </thead>
         <tbody>
         <tr>
-            <td><code>InputFile(path: [PATH], filename: [NAME])</code></td>
+            <td><code>InputFile.fromPath(path: [PATH], filename: [NAME], contentType: [MIME TYPE])</code></td>
             <td>Used to upload files from a provided path. Used for Flutter apps on mobile and desktop.</td>
         </tr>
         <tr>
-            <td><code>InputFile(filename: [NAME], contentType: [MIME TYPE], bytes: [BYTE LIST])</code></td>
+            <td><code>InputFile.fromBytes(filename: [NAME], contentType: [MIME TYPE], bytes: [BYTE LIST])</code></td>
             <td>Used to upload files from a byte list, specify the file's MIME type using <code>contentType</code>. Used for Flutter apps on mobile and desktop.</td>
         </tr>
         </tbody>
@@ -450,12 +450,12 @@ File content.
         </thead>
         <tbody>
         <tr>
-            <td><code>InputFile(path: [PATH], filename: [NAME])</code></td>
+            <td><code>InputFile.fromPath(path: [PATH], filename: [NAME], contentType: [MIME TYPE])</code></td>
             <td>Used to upload files from a provided path. Used for Flutter apps on mobile and desktop.</td>
         </tr>
         <tr>
-            <td><code>InputFile(filename: [NAME], contentType: [MIME TYPE], bytes: [BYTE LIST])</code></td>
-            <td>Used to upload files from a byte list, specify the file's MIME type using <code>contentType</code>. Used for Flutter apps on mobile and desktop.</td>
+            <td><code>InputFile.fromBytes(filename: [NAME], contentType: [MIME TYPE], bytes: [BYTE LIST])</code></td>
+            <td>Used to upload files from a byte list, specify the file's MIME type using <code>contentType</code>.</td>
         </tr>
         </tbody>
     </table>
