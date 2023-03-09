@@ -226,11 +226,11 @@ File content.
         <tbody>
         <tr>
             <td><code>InputFile.fromPath(path: [PATH], filename: [NAME], contentType: [MIME TYPE])</code></td>
-            <td>Used to upload files from a provided path. Used for Flutter apps on mobile and desktop.</td>
+            <td>Used to upload files from a provided path, <code>filename</code> and <code>contentType</code> are optional. Used for Flutter apps on mobile and desktop.</td>
         </tr>
         <tr>
-            <td><code>InputFile.fromBytes(filename: [NAME], contentType: [MIME TYPE], bytes: [BYTE LIST])</code></td>
-            <td>Used to upload files from a byte list, specify the file's MIME type using <code>contentType</code>. Used for Flutter apps on mobile and desktop.</td>
+            <td><code>InputFile.fromBytes(bytes: [BYTE LIST], filename: [NAME], contentType: [MIME TYPE])</code></td>
+            <td>Used to upload files from a byte list, <code>contentType</code> is optional. Used for Flutter apps on web</td>
         </tr>
         </tbody>
     </table>
@@ -451,11 +451,11 @@ File content.
         <tbody>
         <tr>
             <td><code>InputFile.fromPath(path: [PATH], filename: [NAME], contentType: [MIME TYPE])</code></td>
-            <td>Used to upload files from a provided path. Used for Flutter apps on mobile and desktop.</td>
+            <td>Used to upload files from a provided path, <code>filename</code> and <code>contentType</code> are optional.</td>
         </tr>
         <tr>
-            <td><code>InputFile.fromBytes(filename: [NAME], contentType: [MIME TYPE], bytes: [BYTE LIST])</code></td>
-            <td>Used to upload files from a byte list, specify the file's MIME type using <code>contentType</code>.</td>
+            <td><code>InputFile.fromBytes(bytes: [BYTE LIST], filename: [NAME], contentType: [MIME TYPE])</code></td>
+            <td>Used to upload files from a byte list, <code>contentType</code> is optional.</td>
         </tr>
         </tbody>
     </table>
