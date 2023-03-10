@@ -225,15 +225,13 @@ func main() async throws {
     </li>
 </ul>
 
-<p>All Appwrite list endpoints support the same set of query methods. A full list can be found in the <a href="/docs/queries">Queries Guide</a>.</p>
-
 <h2><a href="/docs/databases#indexes" id="indexes">Indexes</a></h2>
 <p>
     Databases use indexes to quickly locate data without having to search through every document for matches.
     To ensure the best performance, Appwrite requires an index for every query.
     You can create an index by navigating to your collection's <b>Indexes</b> tab or by using your favorite Server SDK. If you plan to query multiple attributes in a single query, you will need an index with <b>all</b> queried attributes.
 </p>
-<p>It should be noted that Appwrite's Databases Service is designed to protect your queries from performing a full-table scan, as this could cause catastrophic performance degradation as you scale up your Appwrite project.</p>
+
 <p>
     The following indexes are currently supported:
 </p>
@@ -260,5 +258,140 @@ func main() async throws {
     </tbody>
 </table>
 
-<h3><a href="/docs/databases#pagination" id="pagination">Pagination</a></h3>
-<p>Appwrite has full support for pagination to better optimize and scale up your applications built on Appwrite. Detailed documentation on pagination and how to implement it can be found on the <a href="/docs/pagination">pagination guide.</a></p>
+<h2><a href="/docs/databases#retrieve" id="retrieve">Retrieving Documents</a></h2>
+<p>Documents can be retrieved using the <a href="/docs/client/databases#databasesListDocument">List Document</a> endpoint. Results can be filtered, sorted, and paginated using Appwrite's shared set of query methods. You can find a full guide on querying in the <a href="/docs/queries">Queries Guide</a>.</p>
+
+<div class="notice margin-top-large margin-bottom-large">
+    <h4>Indexes Required</h4>
+    <p>You can only query indexed attributes. You can easily add new indexes from both the Appwrite Console or any of the <a href="/docs/sdks#server">Server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it in the <a href="/docs/databases#indexes">Indexes</a> section.</p>
+</div>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
+
+const client = new Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("[PROJECT_ID]")")
+
+const databases = new Databases(client);
+
+let promise = databases.listDocuments(
+    "[DATABASE_ID]"
+    "[COLLECTION_ID]",
+    [
+        Query.equal('title', 'Avatar')
+    ]
+);
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});
+</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+void main() async {
+    final client = Client()
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")")
+
+    final databases = Databases(client);
+
+    try {
+        final documents = await databases.listDocuments(
+            databaseId: '[DATABASE_ID]',
+            collectionId: '[COLLECTION_ID]',
+            queries: [
+                Query.equal('title', 'Avatar')
+            ]
+        );
+    } on AppwriteException catch(e) {
+        print(e);
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>
+import io.appwrite.Client
+import io.appwrite.Query
+import io.appwrite.services.Databases
+
+suspend fun main() {
+    val client = Client(applicationContext)
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")
+
+    val databases = Databases(client)
+
+    try {
+        val documents = databases.listDocuments(
+            databaseId = "[DATABASE_ID]",
+            collectionId = "[COLLECTION_ID]",
+            queries = listOf(
+                Query.equal("title", "Avatar")
+            )
+        )
+    } catch (e: AppwriteException) {
+        Log.e("Appwrite", "Error: " + e.message)
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import AppwriteModels
+
+func main() async throws{
+    let client = Client()
+        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setProject("[PROJECT_ID]")
+
+    let databases = Databases(client)
+
+    do {
+        let documents = try await databases.listDocuments(
+            databaseId: "[DATABASE_ID]",
+            collectionId: "[COLLECTION_ID]",
+            queries: [
+                Query.equal("title", "Avatar")
+            ]
+        )
+    } catch {
+        print(error.localizedDescription)
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    databasesListDocuments(
+        databaseId: "[DATABASE_ID]",
+        collectionId: "[COLLECTION_ID]"
+        queries: ["equal(\"title\", [\"Avatar\"])"]
+    ) {
+        total
+        documents {
+            _id
+            data
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
