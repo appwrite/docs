@@ -1,12 +1,85 @@
-<p>Entities in real-life often associate with each other in an organic and logical way, like a person and their dog, an album and its songs, or friends in a social network. These types of association between entities can be modeled in Appwrite using relationships. Relationships allow describe how collections are associated, so related documents can be read, updated, or deleted together.</p>
+<p>Relationships describe how documents in different collections are associated, so related documents can be read, updated, or deleted together. Entities in real-life often associate with each other in an organic and logical way, like a person and their dog, an album and its songs, or friends in a social network. These types of association between entities can be modeled in Appwrite using relationships.</p>
 
 <h2><a href="/docs/databases-relations#when-to-use-relationships" id="when-to-use-relationships">When to Use a Relationship</a></h2>
-[TODO: quickly describe how to tell if you need a relationship, trade offs, caveates, performance, etc.]
+<p>Relationships help reduce redundant information. For example, a user can create many posts in your app. You can model this without relationships by keeping a copy of the user's information in all the documents representing posts, but this creates a lot of duplicate information in your database about the user.</p>
 
-<h2><a href="/docs/databases-relations#types" id="types">Types of relationships</a></h2>
-[TODO: Table of Types]
-[TODO: Table of directionality]
-[TODO: Describe Behavior on update, delete, etc]
+<p>Duplicated records waste storage, but more importantly, makes the database much harder to maintain. If the user changes their user name, you will have to update dozens or hundreds of records. You can avoid duplicate information by storing users and posts in separate collections, and relating a user and their posts through a relationship.</p>
+
+<p>Consider using relationships when the same information is found in multiple places to avoid duplicates. However, relationships come with the tradeoff of slowing down queries. For applications where the best read and write performance is important, it may be acceptable to tolerate duplicate data.</p>
+
+<h2><a href="/docs/databases-relations#types" id="types">Types of Relationships</a></h2>
+<p>Appwrite provides four different relationship types to enforce different associative rules between documents.</p>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>One to one</code></td>
+            <td>A document can only be related with one and only one document. For example, each user has only one profile.</td>
+        </tr>
+        <tr>
+            <td><code>One to many</code></td>
+            <td>A document can be related to many other documents. For example, a user can create many posts.</td>
+        </tr>
+        <tr>
+            <td><code>Many to one</code></td>
+            <td>Many documents can be related to a single document. For example, many posts can share the same author.</td>
+        </tr>
+        <tr>
+            <td><code>Many to many</code></td>
+            <td>A document can be related to many other documents. For example, a user can have many friends and many users can share the same friend.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Appwrite relationships can be directional or two-way. This helps [TODO: @jake why did we make these directional?].</p>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>Directional</code></td>
+            <td>[@jake can you elaborate on the practical impact of this? Maybe example on use case]</td>
+        </tr>
+        <tr>
+            <td><code>Two-way</code></td>
+            <td>[@jake can you elaborate on the practical impact of this? Maybe example on use case]</td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    Appwrite also allows you to define the behavior of a relationship when a document is updated or deleted.
+</p>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>Restrict</code></td>
+            <td>[@jake can you elaborate on the practical impact of this? Maybe example on use case]</td>
+        </tr>
+        <tr>
+            <td><code>Cascade</code></td>
+            <td>[@jake can you elaborate on the practical impact of this? Maybe example on use case]</td>
+        </tr>
+        <tr>
+            <td><code>Set null</code></td>
+            <td>[@jake can you elaborate on the practical impact of this? Maybe example on use case]</td>
+        </tr>
+    </tbody>
+</table>
 
 <h2><a href="/docs/databases-relations#create-in-console" id="create-in-console">Creating Relationships in the Appwrite Console</a></h2>
 [TODO: Steps to create relationships]
