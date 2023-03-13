@@ -4,17 +4,117 @@
 
 <h2>When Should I Enable Offline Support?</h2>
 <p>
-    With Offline Support enabled, your app can continue sending requests to Appwrite APIs while offline through a cache. While offline, read requests will be fetched from the local cached data, and write requests will be queued and executed once the device is online again.
-</p>
-<p>
     You should consider enabling Offline Support if you expect the device running your application to experience short periods without a network connection, like going on an airplane or through a tunnel. Offline Support can't help you if the app's data needs to remain up to date with frequent updates or if write requests need to be processed immediately. If you expect your app to be offline for days or weeks at a time, you may also need to find alternative solutions.
 </p>
 
-<h3>Considerations and Tradeoffs</h3>
+<h2>Enable Offline Support</h2>
+
 <p>
-    Offline Support adds a cache layer that takes up additional resources and adds overhead to your requests. This may not be desirable for some applications, especially if it's not expected to be used without a stable internet connection.
+    Offline Support can be enabled by setting <code>setOffilnePersistency</code> to true on your SDK's client.
 </p>
-<h3>Offline Support for Existing Projects</h3>
+
+<div class="notice">
+  <h2>Adding Offline Support to Existing Projects</h2>
+  <p>Enabling Offline Support introduces breaking changes to the behavior of Client SDKs. Asynchronous operations may not resolve until the device is online again. Existing projects will have to be updated.</p>
+  <p><a href="#async-operation">Learn more about asynchronous operations</a></p>
+</div>
+
+<div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>client.setOfflinePersistency(status: true);</code></pre>
+</div>
 <p>
-    Asynchronous operations may not resolve immediately when Offline Support is enabled. Existing projects will require some code to be rewritten when adopting Offline Support. <a href="TBD">Learn more about how to handle asynchronous operation</a>.  
+    Offline Support will cache all read request in a <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#LRU" target="_blank" rel="noopener">Least Recently Used (LRU)</a> cache, so the information can remain available even with no internet connection. The LRU cache defaults to a size of 16MB and can be configured using the <code>setOfflineCacheSize</code> method.
 </p>
+
+<div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>client.setOfflineCacheSize(40000);</code></pre>
+</div>
+
+<h2 href="#async-operation" id="async-operation">Asynchronous Operation</h2>
+<p>
+    When Offline Support is enabled, asynchronous write operations only resolve after the server accepts the request. Requests made with the Client SDK may block code execution until network connection is available again.
+</p>
+[TODO: Show UML diagram]
+
+<p>
+    For example, the code example below will <b>block code execution</b> when the device is offline.
+</p>
+<div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>  void blockingSubmitTodo() async {
+    if (inputController.text.isEmpty || isLoading) return;
+    final messenger = ScaffoldMessenger.of(context);
+    final newTodo = Todo(
+      content: inputController.text,
+      id: ID.unique(),
+    );
+
+    try {
+      await _databases.createDocument(
+        databaseId: '[DATABASE_ID]',
+        collectionId: '[COLLECTION_ID]',
+        documentId: newTodo.id,
+        data: {
+          "content": newTodo.content,
+          "isComplete": newTodo.isComplete,
+        },
+      );
+      inputController.text = '';
+      todos.add(newTodo);
+    } catch (e) {
+      messenger.showSnackBar(createErrorSnackBar(e.toString()));
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+  }</code></pre>
+</div>
+
+<p>
+    To avoid blocking code execution, update local states and UI optimisitically instead of waiting for awaiting asynchronous operations.
+</p>
+
+<div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>  void nonBlockingSubmitTodo() async {
+    if (inputController.text.isEmpty || isLoading) return;
+    final messenger = ScaffoldMessenger.of(context);
+    final newTodo = Todo(
+      content: inputController.text,
+      id: ID.unique(),
+    );
+
+    _databases.createDocument(
+      databaseId: '[DATABASE_ID]',
+      collectionId: '[COLLECTION_ID]',
+      documentId: newTodo.id,
+      data: {
+        "content": newTodo.content,
+        "isComplete": newTodo.isComplete,
+      },
+    ).catchError((e) {
+      messenger.showSnackBar(createErrorSnackBar(e.toString()));
+      todos.remove(newTodo);
+    });
+
+    setState(() {
+      inputController.text = '';
+      todos.add(newTodo);
+      isLoading = false;
+    });
+  }</code></pre>
+</div>
+
+<h2>Conflict Resolution</h2>
+<p>
+    With Offline Support enabled, your app can continue sending requests to Appwrite APIs while offline through a cache when offline. Read requests will be fetched from the local cached data, and write requests will be queued and executed once the device is online again. This can lead to write conflicts when the device is online again.
+</p>
+<p>
+    Document updates made while your device is offline will be queued locally with a timestamp. When your device comes online, Appwrite will compare the timestamps of local updates with the timestamp of the remote document, accepting the <b>latest version</b>. Appwrite will reject a document update if the remote document been updated later than the locally queued update. 
+</p>
+
+<p>
+    Additional considerations need to be considered when updating data based on the current value, such as incrementing a counter or appending values to then end of a paragraph. The default conflict resolution behavior may result in incorrect updates and writes. Consider disabling these operations while offline or use Appwrite Functions to implement logic to resolve conflicts.
+</p>
+
+
+
