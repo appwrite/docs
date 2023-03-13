@@ -67,13 +67,7 @@ $image = new View(__DIR__.'/../general/image.phtml');
     For example, the code example below will <b>block code execution</b> when the device is offline.
 </p>
 <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-  <pre class="line-numbers"><code class="prism language-dart" data-prism>void blockingSubmitTodo() async {
-  if (inputController.text.isEmpty || isLoading) return;
-  final messenger = ScaffoldMessenger.of(context);
-  final newTodo = Todo(
-    content: inputController.text,
-    id: ID.unique(),
-  );
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>void blockingSubmitTodo(Map todo) async {
 
   try {
     // THIS BLOCKS EXECUTION WHEN OFFLINE
@@ -81,12 +75,8 @@ $image = new View(__DIR__.'/../general/image.phtml');
       databaseId: '[DATABASE_ID]',
       collectionId: '[COLLECTION_ID]',
       documentId: newTodo.id,
-      data: {
-        "content": newTodo.content,
-        "isComplete": newTodo.isComplete,
-      },
+      data: todo,
     );
-    inputController.text = '';
     todos.add(newTodo);
   } catch (e) {
     // ... handle errors
@@ -103,29 +93,19 @@ $image = new View(__DIR__.'/../general/image.phtml');
 </p>
 
 <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-  <pre class="line-numbers"><code class="prism language-dart" data-prism>  void nonBlockingSubmitTodo() async {
-    if (inputController.text.isEmpty || isLoading) return;
-    final messenger = ScaffoldMessenger.of(context);
-    final newTodo = Todo(
-      content: inputController.text,
-      id: ID.unique(),
-    );
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>  void nonBlockingSubmitTodo(Map todo) async {
 
     // This won't block execution, but will still allow error handling.
     _databases.createDocument(
       databaseId: '[DATABASE_ID]',
       collectionId: '[COLLECTION_ID]',
       documentId: newTodo.id,
-      data: {
-        "content": newTodo.content,
-        "isComplete": newTodo.isComplete,
-      },
+      data: todo,
     ).catchError((e) {
       // ... handle errors
     });
 
     setState(() {
-      inputController.text = '';
       todos.add(newTodo);
       isLoading = false;
     });
