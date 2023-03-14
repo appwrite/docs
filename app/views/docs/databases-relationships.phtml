@@ -92,9 +92,19 @@
 
 <h2><a href="/docs/databases-relations#query" id="query">Queryings</a></h2>
 [TODO: how to query relationships, indexes, etc.]
+<p>You can query documents in a relation by referencing child documents using dot-notation. For example, querying for the <code>name</code> attribute from the user collection would look like <code>Query.equal('user.name', ['John'])</code>.</p>
+
+<h2><a href="/docs/databases-relations#query" id="query">Updaing and Deleting Documents</a></h2>
+[TODO: how to query relationships, indexes, etc.]
 
 <h2><a href="/docs/databases-relations#permissions" id="permissions">Permissions</a></h2>
-[TODO: describe permissions]
+<p>To access documents in a relationship, you must have permission to acecss both the parent and child document.</p>
+
+<p>When creating both the parent and child documents, the child document will inheret permissions from its parent.</p>
+[Code example]
+
+<p>When creating the parent document and linking to a child document, or updating a relationship you must have permission to access both documents. If the user does not have read permission, an exception will be thrown.</p>
+[Code example]
 
 <h2><a href="/docs/databases-relations#limitations" id="limitations">Limitations</a></h2>
 [TODO: describe limitations]
