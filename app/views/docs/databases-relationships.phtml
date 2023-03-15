@@ -88,12 +88,24 @@
 [TODO: Steps to create relationships in code]
 
 <h2><a href="/docs/databases-relations#create-documents" id="create-documents">Creating Documents</a></h2>
-[TODO: how to create documents in relationships, indexes, etc.]
+<p>If a collection has relationship attributes, you can create documents in two ways.</p>
+
+<h3>Created Child Documents</h3>
+<p>You can create both the <b>parent</b> and <b>child</b> at once in a relationship by nesting data.</p>
+[CODE EXAMPLES]
+
+<p>If a nested document is included and <b>no conflicting document ID</b> exists, the child document will be <b>created</b>.</p>
+<p>If a nested document is included and the <b>document ID already exists</b>, the child document will be <b>updated</b>.</p>
+
+<h3>Reference Child Documents</h3>
+<p>You can create the parent and <b>reference the child documents</b> using their IDs.</p>
+[CODE EXAMPLES]
 
 <h2><a href="/docs/databases-relations#query" id="query">Queryings</a></h2>
 [TODO: how to query relationships, indexes, etc.]
 <p>You can query documents in a relation by referencing child documents using dot-notation. For example, querying for the <code>name</code> attribute from the user collection would look like <code>Query.equal('user.name', ['John'])</code>.</p>
 
+[CODE EXAMPLES]
 <h2><a href="/docs/databases-relations#query" id="query">Updaing and Deleting Documents</a></h2>
 [TODO: how to query relationships, indexes, etc.]
 
