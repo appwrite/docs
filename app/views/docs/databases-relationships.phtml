@@ -18,25 +18,25 @@
     </thead>
     <tbody>
         <tr>
-            <td><code>One to one</code></td>
-            <td>A document can only be related with one and only one document. For example, each user has only one profile.</td>
+            <td><code>One-to-one</code></td>
+            <td>A document can only be related with one and <b>only</b> one document. If you try to relate multiple documents in a one-to-one relationship, Appwrite throws an error. For example, each user has only one profile.</td>
         </tr>
         <tr>
-            <td><code>One to many</code></td>
+            <td><code>One-to-many</code></td>
             <td>A document can be related to many other documents. For example, a user can create many posts.</td>
         </tr>
         <tr>
-            <td><code>Many to one</code></td>
+            <td><code>Many-to-one</code></td>
             <td>Many documents can be related to a single document. For example, many posts can share the same author.</td>
         </tr>
         <tr>
-            <td><code>Many to many</code></td>
+            <td><code>Many-to-many</code></td>
             <td>A document can be related to many other documents. For example, a user can have many friends and many users can share the same friend.</td>
         </tr>
     </tbody>
 </table>
 
-<p>Appwrite relationships can be directional or two-way. This helps [TODO: @jake why did we make these directional?].</p>
+<p>Appwrite relationships can be one-way or two-way.</p>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
         <tr>
@@ -46,17 +46,17 @@
     </thead>
     <tbody>
         <tr>
-            <td><code>Directional</code></td>
-            <td>[@jake can you elaborate on the practical impact of this? Maybe example on use case]</td>
+            <td><code>One-way</code></td>
+            <td>The relationship is only visible to one side of the relation. For example, subscribers on YouTube is one-way. If you subscribe to a channel, they don't automatically subscribe back.</td>
         </tr>
         <tr>
             <td><code>Two-way</code></td>
-            <td>[@jake can you elaborate on the practical impact of this? Maybe example on use case]</td>
+            <td>The relationship is visible to both sides of the realtion. For example, friends on social media is two-way. If you're someone's friend, they're automatically your friend as well.</td>
         </tr>
     </tbody>
 </table>
 <p>
-    Appwrite also allows you to define the behavior of a relationship when a document is updated or deleted.
+    Appwrite also allows you to define the behavior of a relationship when a document is deleted.
 </p>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -68,15 +68,15 @@
     <tbody>
         <tr>
             <td><code>Restrict</code></td>
-            <td>[@jake can you elaborate on the practical impact of this? Maybe example on use case]</td>
+            <td>If a document has at least one related document, it cannot be deleted.</td>
         </tr>
         <tr>
             <td><code>Cascade</code></td>
-            <td>[@jake can you elaborate on the practical impact of this? Maybe example on use case]</td>
+            <td>If a document has related documents, when it is deleted, the related documents are <b>also</b> deleted.</td>
         </tr>
         <tr>
             <td><code>Set null</code></td>
-            <td>[@jake can you elaborate on the practical impact of this? Maybe example on use case]</td>
+            <td>If a document has related documents, when it is deleted, the related documents are kept with their relationship attribute set to <b>null</b>.</td>
         </tr>
     </tbody>
 </table>
@@ -112,7 +112,7 @@
 <h2><a href="/docs/databases-relations#permissions" id="permissions">Permissions</a></h2>
 <p>To access documents in a relationship, you must have permission to acecss both the parent and child document.</p>
 
-<p>When creating both the parent and child documents, the child document will inheret permissions from its parent.</p>
+<p>When creating both the parent and child documents, the child document will inheret permissions from its parent. You can also provide explicit permissions to the child document if you need them to be different from the parent.</p>
 [Code example]
 
 <p>When creating the parent document and linking to a child document, or updating a relationship you must have permission to access both documents. If the user does not have read permission, an exception will be thrown.</p>
