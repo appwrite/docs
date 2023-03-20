@@ -42,25 +42,39 @@ use Appwrite\Utopia\View;
   <pre class="line-numbers"><code class="prism language-dart" data-prism>client.setOfflineCacheSize(40000);</code></pre>
 </div>
 
+<h2><a href="/docs/offline#cache" id="cache">Offline Support Cache</a></h2>
+<p>
+When Offline Support is enabled, Appwrite allows you to query and write data by adding a cache layer.
+</p>
+
+<h3>Reading Data Offline</h3>
+<p>
+  Queries will fetch data from Appwrite and update the cache while the device is online. If the device is not connected to the internet, the query fetches data from the local cache.
+</p>
+
+<figure>
+    <img style="width: 60%; border-radius: 10px;" src="/images-ee/docs/offline-read-uml-light.png" />
+</figure>
+
+<h3>Writing Data Offline</h3>
+<p>
+  Writes will update the local cache first. If the device is online, the changes will be sent to Appwrite immediately. If the device is not connected to the internet, the operation will be queued and synced to Appwrite when internet is available again.
+</p>
+
+<figure>
+    <img style="width: 60%; border-radius: 10px;" src="/images-ee/docs/offline-writes-uml-light.png" />
+</figure>
+
 <h2><a href="/docs/offline#async-operation" id="async-operation">Asynchronous Operation</a></h2>
 <p>
     When Offline Support is enabled, write operations only resolve after the server accepts the request. Requests made with the Client SDK may block code execution until network connection is available again.
 </p>
-
+<figure>
+    <img style="width: 100%; border-radius: 10px;" src="/images-ee/docs/offline-writes-async-uml-light.png" />
+</figure>
 <p>
     You should optimistically update your app's local state after a write operation. Once you're online again, the write will be synced with your Appwrite project, which will be fetched when you app restarts in the future.
 </p>
-
-<?php
-$image = new View(__DIR__.'/../general/image.phtml');
-    echo $image
-        ->setParam('srcLight', '/images-ee/docs/offline-writes-uml-light.png')
-        ->setParam('srcDark', '/images-ee/docs/offline-writes-uml-light.png')
-        ->setParam('alt', 'Function settings page.')
-        ->setParam('description', 'Function settings page.')
-        ->render();
-?>
-[TODO: Show UML diagram]
 
 <h3>Example</h3>
 <p>
@@ -74,10 +88,10 @@ $image = new View(__DIR__.'/../general/image.phtml');
     await _databases.createDocument(
       databaseId: '[DATABASE_ID]',
       collectionId: '[COLLECTION_ID]',
-      documentId: newTodo.id,
+      documentId: todo.id,
       data: todo,
     );
-    todos.add(newTodo);
+    todos.add(todo);
   } catch (e) {
     // ... handle errors
   }
@@ -99,14 +113,14 @@ $image = new View(__DIR__.'/../general/image.phtml');
     _databases.createDocument(
       databaseId: '[DATABASE_ID]',
       collectionId: '[COLLECTION_ID]',
-      documentId: newTodo.id,
+      documentId: todo.id,
       data: todo,
     ).catchError((e) {
       // ... handle errors
     });
 
     setState(() {
-      todos.add(newTodo);
+      todos.add(todo);
       isLoading = false;
     });
   }</code></pre>
