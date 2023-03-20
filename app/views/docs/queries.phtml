@@ -1,7 +1,7 @@
-<p>Many list endpoints in Appwrite allow you to filter results using queries. Appwrite provides a shared set of query syntax to allow filtering, pagination, and sorting of results. When using an Appwrite SDK, a <code>Query</code> class is provided to help you build queries.</p>
+<p>Many list endpoints in Appwrite allow you to filter results using queries. Appwrite provides a shared set of query syntax to allow filtering, pagination, and sorting of results.</p>
 
 <h2><a href="/docs/queries#query-compatibility" id="queryable-compatibility">Query compatibility</a></h2>
-<p>Each list endpoint supports different query operations. In Appwrite Databases, querying documents by attributes require an <a href="/docs/databases#indexes">index</a> on the attributes. In other services, only certain attributes are indexed and can be queried. You can find the supported query methods and attributes in the <b>References</b> section of the Appwrite documentation.</p>
+<p>Each list endpoint supports different query operations. You can find the supported query methods and attributes in the <b>References</b> section of the Appwrite documentation.</p>
 
 <h2><a href="/docs/queries#query-class" id="query-class">Query Class</a></h2>
 <p>Appwrite SDKs provide a <code>Query</code> class to help you build queries. The <code>Query</code> class has a method for each type of supported query.</p>
@@ -45,9 +45,39 @@
             <td>Returns document if attribute is greater than or equal to the provided value. Applies to any indexed attribute.</td>
         </tr>
         <tr>
+            <td>Between</td>
+            <td><code>Query.between("price", 5, 10)</code></td>
+            <td>Returns document if attribute value falls between a range.</td>
+        </tr>
+        <tr>
+            <td>Is Null</td>
+            <td><code>Query.isNull("name")</code></td>
+            <td>Returns documents where attribute value is null.</td>
+        </tr>
+        <tr>
+            <td>Is Not Null</td>
+            <td><code>Query.isNotNull("name")</code></td>
+            <td>Returns documents where attribute value is <b>not</b> null.</td>
+        </tr>
+        <tr>
+            <td>Starts With</td>
+            <td><code>Query.startsWith("name", ["Once upon a time"])</code></td>
+            <td>Returns documents if a string attributes starts with a substring.</td>
+        </tr>
+        <tr>
+            <td>Ends With</td>
+            <td><code>Query.endsWith("name", ["happily ever after."])</code></td>
+            <td>Returns documents if a string attributes ends with a substring.</td>
+        </tr>
+        <tr>
             <td>Search</td>
             <td><code>Query.search("text", "key words")</code></td>
             <td>Searches string attributes for provided keywords. Applies to any string attribute with a full-text index.</td>
+        </tr>
+        <tr>
+            <td>Select</td>
+            <td><code>Query.select(["name", "title"])</code></td>
+            <td>Fetch only a specific subset of attributes of a document.</td>
         </tr>
         <tr>
             <td>Order Descending</td>
@@ -477,7 +507,7 @@ func main() async throws {
 <h3><a href="/docs/queries#offset-pagination" id="offset-pagination">Offset Pagination</a></h3>
 <p>
     Using <code>Query.limit()</code> and <code>Query.offset()</code> you can achieve one of the most common approaches to pagination.
-    With <code>Query.limit()</code> you can define to how many documents that can be returned from one request, which can be up to a maximum of 100 documents.
+    With <code>Query.limit()</code> you can define to how many documents that can be returned from one request.
     The <code>Query.offset()</code> is simply the number of records you wish to skip before selecting records.
 </p>
 

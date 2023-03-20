@@ -84,6 +84,10 @@
             <td><code>url</code></td>
             <td>URL attribute.</td>
         </tr>
+        <tr>
+            <td><code>relationship</code></td>
+            <td>Relationship attribute relates one collection to another. <a href=/docs/databases-relations">Learn more about collections.</a></td>
+        </tr>
     </tbody>
 </table>
 
@@ -228,7 +232,7 @@ func main() async throws {
 <h2><a href="/docs/databases#indexes" id="indexes">Indexes</a></h2>
 <p>
     Databases use indexes to quickly locate data without having to search through every document for matches.
-    To ensure the best performance, Appwrite requires an index for every query.
+    To ensure the best performance, Appwrite recommends an index for every attribute queried.
     You can create an index by navigating to your collection's <b>Indexes</b> tab or by using your favorite Server SDK. If you plan to query multiple attributes in a single query, you will need an index with <b>all</b> queried attributes.
 </p>
 
@@ -260,11 +264,6 @@ func main() async throws {
 
 <h2><a href="/docs/databases#retrieve" id="retrieve">Retrieving Documents</a></h2>
 <p>Documents can be retrieved using the <a href="/docs/client/databases#databasesListDocument">List Document</a> endpoint. Results can be filtered, sorted, and paginated using Appwrite's shared set of query methods. You can find a full guide on querying in the <a href="/docs/queries">Queries Guide</a>.</p>
-
-<div class="notice margin-top-large margin-bottom-large">
-    <h4>Indexes Required</h4>
-    <p>You can only query indexed attributes. You can easily add new indexes from both the Appwrite Console or any of the <a href="/docs/sdks#server">Server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it in the <a href="/docs/databases#indexes">Indexes</a> section.</p>
-</div>
 
 <ul class="phases clear" data-ui-phases>
     <li>
