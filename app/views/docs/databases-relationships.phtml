@@ -8,6 +8,26 @@
 <p>Consider using relationships when the same information is found in multiple places to avoid duplicates. However, relationships come with the tradeoff of slowing down queries. For applications where the best read and write performance is important, it may be acceptable to tolerate duplicate data.</p>
 
 <h2><a href="/docs/databases-relations#types" id="types">Types of Relationships</a></h2>
+<p>Appwrite relationships can be one-way or two-way.</p>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>One-way</code></td>
+            <td>The relationship is only visible to one side of the relation. For example, subscribers on YouTube is one-way. If you subscribe to a channel, they don't automatically subscribe back.</td>
+        </tr>
+        <tr>
+            <td><code>Two-way</code></td>
+            <td>The relationship is visible to both sides of the realtion. For example, friends on social media is two-way. If you're someone's friend, they're automatically your friend as well.</td>
+        </tr>
+    </tbody>
+</table>
+
 <p>Appwrite provides four different relationship types to enforce different associative rules between documents.</p>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -36,25 +56,7 @@
     </tbody>
 </table>
 
-<p>Appwrite relationships can be one-way or two-way.</p>
-<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
-    <thead>
-        <tr>
-            <th style="width: 250px">Type</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>One-way</code></td>
-            <td>The relationship is only visible to one side of the relation. For example, subscribers on YouTube is one-way. If you subscribe to a channel, they don't automatically subscribe back.</td>
-        </tr>
-        <tr>
-            <td><code>Two-way</code></td>
-            <td>The relationship is visible to both sides of the realtion. For example, friends on social media is two-way. If you're someone's friend, they're automatically your friend as well.</td>
-        </tr>
-    </tbody>
-</table>
+<h2><a href="/docs/databases-relations#on-delete" id="on-delete">On Delete Behavior</a></h2>
 <p>
     Appwrite also allows you to define the behavior of a relationship when a document is deleted.
 </p>
@@ -82,9 +84,17 @@
 </table>
 
 <h2><a href="/docs/databases-relations#create-in-console" id="create-in-console">Creating Relationships in the Appwrite Console</a></h2>
-[TODO: Steps to create relationships]
+<p>You can create relationships in the Appwrite Console by adding a relationship attribute.</p>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>In your project, navigate to <b>Databases</b> > <b>Select your database</b> > <b>Select your collection</b> > <b>Attributes</b> > <b>Create attribute</b>.</li>
+    <li>Select <b>Relationship</b> as the attribute type.</li>
+    <li>In the <b>Relationship</b> modal, select the <a href="/docs/databases-relations#types">relationship type</a> and pick the related collection and attributes.</li>
+    <li>Pick attribute key(s) to represent the relationship. Attribute keys are used to reference a relationship in queries, so pick something that's intuitive and easy to remember.</li>
+    <li>Select desired behavior <a href="/docs/databases-relations#on-delete">on delete</a>.</li>
+    <li>Click the <b>Create</b> button to create the relationship.</li>
+</ol>
 
-<h2><a href="/docs/databases-relations#create-in-console" id="create-in-console">Creating Relationships Programmatically</a></h2>
+<h2><a href="/docs/databases-relations#create-in-code" id="create-in-code">Creating Relationships Programmatically</a></h2>
 [TODO: Steps to create relationships in code]
 
 <h2><a href="/docs/databases-relations#create-documents" id="create-documents">Creating Documents</a></h2>
@@ -103,10 +113,10 @@
 
 <h2><a href="/docs/databases-relations#query" id="query">Queryings</a></h2>
 [TODO: how to query relationships, indexes, etc.]
-<p>You can query documents in a relation by referencing child documents using dot-notation. For example, querying for the <code>name</code> attribute from the user collection would look like <code>Query.equal('user.name', ['John'])</code>.</p>
+<p>You can query documents in a relation by referencing the relationship attribute key using dot-notation. For example, querying for the <code>name</code> <code>customer</code> relationship would look like <code>Query.equal('customer.name', ['John'])</code>.</p>
 
 [CODE EXAMPLES]
-<h2><a href="/docs/databases-relations#query" id="query">Updaing and Deleting Documents</a></h2>
+<h2><a href="/docs/databases-relations#update-and-delete" id="update-and-delete">Updaing and Deleting Documents</a></h2>
 [TODO: how to query relationships, indexes, etc.]
 
 <h2><a href="/docs/databases-relations#permissions" id="permissions">Permissions</a></h2>
