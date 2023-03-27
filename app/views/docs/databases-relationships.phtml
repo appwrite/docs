@@ -3,11 +3,15 @@
 <h2><a href="/docs/databases-relations#when-to-use-relationships" id="when-to-use-relationships">When to Use a Relationship</a></h2>
 <p>Relationships help reduce redundant information. For example, a user can create many posts in your app. You can model this without relationships by keeping a copy of the user's information in all the documents representing posts, but this creates a lot of duplicate information in your database about the user.</p>
 
+<h3>Benefits of Relationships</h3>
 <p>Duplicated records waste storage, but more importantly, makes the database much harder to maintain. If the user changes their user name, you will have to update dozens or hundreds of records. You can avoid duplicate information by storing users and posts in separate collections, and relating a user and their posts through a relationship.</p>
 
+<h3>Tradeoff</h3>
 <p>Consider using relationships when the same information is found in multiple places to avoid duplicates. However, relationships come with the tradeoff of slowing down queries. For applications where the best read and write performance is important, it may be acceptable to tolerate duplicate data.</p>
 
-<h2><a href="/docs/databases-relations#types" id="types">Types of Relationships</a></h2>
+<h2><a href="/docs/databases-relations#configurable-options" id="configurable-options">Configurable Options</a></h2>
+
+<h3><a href="/docs/databases-relations#directionality" id="directionality">Directionality</a></h3>
 <p>Appwrite relationships can be one-way or two-way.</p>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -28,6 +32,7 @@
     </tbody>
 </table>
 
+<h3><a href="/docs/databases-relations#cardinality" id="cardinality">Cardinality</a></h3>
 <p>Appwrite provides four different relationship types to enforce different associative rules between documents.</p>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -56,7 +61,7 @@
     </tbody>
 </table>
 
-<h2><a href="/docs/databases-relations#on-delete" id="on-delete">On Delete Behavior</a></h2>
+<h3><a href="/docs/databases-relations#on-delete" id="on-delete">On Delete Behavior</a></h3>
 <p>
     Appwrite also allows you to define the behavior of a relationship when a document is deleted.
 </p>
