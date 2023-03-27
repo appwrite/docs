@@ -1,5 +1,5 @@
 <p>
-The Apprite CLI allows you to create and deploy databases, collections, and functions to your Appwrite project from a configuration file. This is especially helpful if you're trying to track functions and collection schemas using version control, or if you're promoting changes from development to production environments.
+The Apprite CLI allows you to create and deploy databases, collections, buckets, teams and functions to your Appwrite project from a configuration file. This is especially helpful if you're trying to track project setup using version control.
 </p>
 
 <h2><a href="/docs/command-line-deployment#initializeProject" id="initializeProject">Initializing Your Project</a></h2>
@@ -52,6 +52,15 @@ The Apprite CLI allows you to create and deploy databases, collections, and func
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collections</code></pre>
 </div>
+
+<h2><a href="/docs/command-line-deployment#teams" id="teams">Deploying Teams</a></h2>
+
+<p>The Appwrite CLI can create teams to organize users. Teams can be used to grant access permissions to a group of users. <a href="/docs/permissions#permission-roles">Learn more about permissions</a>.</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy teams</code></pre>
+</div>
+
 
 <h2><a href="/docs/command-line-deployment#deployBucket" id="deployBucket">Deploying Storage Buckets</a></h2>
 
