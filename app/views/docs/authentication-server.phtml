@@ -1,0 +1,203 @@
+<p>
+You can exand Appwrite's APIs by building backend apps using <a href="/docs/command-line">Server SDKs</a>. Appwrite enables you to authenticate your Web, Flutter, Android, or Apple application directly with your backend apps using JWT authentication.
+</p>
+
+<h2><a href="/docs/authentication-server#proof-of-identity" id="proof-of-identity">Proof of Identity</a></h2>
+<p>Before making and requests to your backend APIs, your client application needs to first create a session <b>directly with Appwrite</b> using the account service. This session will act like an ID card for the user and can be used to access resources in Appwrite. The client will <b>only receive information accessible to the user</b> based on the resources's <a href="/docs/permissions">permissions</a>.</p>
+
+<p>When you build backend APIs to expand Appwrite's functionality, these APIs should still <b>respect access permissions</b> to keep user data secure. Appwrite's backend SDKs allows you to securely act on behalf of a user with the same permissions by using JWT authentication.</p>
+
+<h2><a href="/docs/authentication-server#jwt" id="jwt">JWT Authentication</a></h2>
+<p><a href="https://jwt.io/introduction" target="_blank" rel="noopener">JSON Web Tokens</a> (JWTs) are a secure means to transfer information or claims between two parties. JWT act like temporary copies of the user's ID card that allow Appwrite's Server SDKs to access information oh behalf of a user.</p>
+
+<p>You need to create a session using the Client SDKs <b>before</b> generating a JWT. The JWT will be a stateless proof of claim for the identity of the authenticated user and expire after 15 minutes or when the session is deleted.</p>
+
+<p>You can generate a JWT like this:</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.createJWT();
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final account = Account(client);
+
+final jwt = await account.createJWT();
+
+ </code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val account = Account(client)
+
+val jwt = account.createJWT()</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let account = Account(client)
+
+let jwt = try await account.createJWT()</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreateJWT {
+        jwt
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>Your server application can use the JWT to act on behalf of the user by creating a <code>Client</code> instance with the JWT for <b>each request it receives</b>. To keep your API secure, <b>discard the client object</b> after each request.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client } = require('node-appwrite');
+
+const client = new Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setJWT('eyJJ9.eyJ...');                    // Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>use Appwrite\Client;
+
+$client = new Client();
+
+$client
+    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1')            // Your API Endpoint
+    ->setProject('5df5acd0d48c2')                           // Your project ID
+    ->setJWT('eyJ9.eyJ...');                                // Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+
+client = Client()
+
+(client
+  .set_endpoint('https://[HOSTNAME_OR_IP]/v1')              # Your API Endpoint
+  .set_project('5df5acd0d48c2')                             # Your project ID
+  .set_jwt('eyJ9.eyJ...')                                   # Your secret JSON Web Token
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby SDK">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
+
+include Appwrite
+
+client = Client
+
+client.new
+    .set_endpoint('https://[HOSTNAME_OR_IP]/v1')            # Your API Endpoint
+    .set_project('5df5acd0d48c2')                           # Your project ID
+    .set_jwt('eyJ9.eyJ...')                                 # Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client } from "https://deno.land/x/appwrite/mod.ts";
+
+let client = new Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')             // Your API Endpoint
+    .setProject('5df5acd0d48c2')                            // Your project ID
+    .setJWT('eyJ9.eyJ...');                                 // Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
+
+final client = Client();
+
+client
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                // Your project ID
+    .setJWT('eyJ9.eyJ...');                     // Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+
+val client = Client()
+
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setJWT("eyJ9.eyJ...")                      // Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+
+client
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+    .setJWT("eyJ9.eyJ...")                      // Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
+</ul>
