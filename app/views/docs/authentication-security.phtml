@@ -88,4 +88,4 @@
 Once enabled you will be able to set the number of old password hashes is saved for the user. That way, whenever your user changes password, x number of past password hashes are saved and new password is compared against those in the history. If the new password matches any in history, your users will not be allowed to set that password.
 
 <h2><a href="/docs/authentication-security#password-dictionary" id="password-dictionary">Password Dictionary</a></h2>
-[TODO: @dlohani please offer some detailed explanation here]
+Password dictionary once enabled, will compare the user's password against the dictionary (https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/10k-most-common.txt). Whenever new user is created or user is trying to change the password, they will not be allowed to set password that matches any in the dictionary.
