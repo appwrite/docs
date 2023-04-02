@@ -1,6 +1,6 @@
 <p>
     The Databases Service allows you to store your application and users' data and fetch it using different supported queries.
-    Using the Databases Service, you can create multiple databases and organize your data into collections and documents using Appwrite's REST API. You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your collections and documents.
+    Using the Databases Service, you can create multiple databases and organize your data into collections of documents using Appwrite's REST API. You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your database.
     In addition, the Databases Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance, and a flexible permissions mechanism to easily segment data between different users, teams, and roles.
 </p>
 
@@ -233,7 +233,7 @@ func main() async throws {
 <p>
     Databases use indexes to quickly locate data without having to search through every document for matches.
     To ensure the best performance, Appwrite recommends an index for every attribute queried.
-    You can create an index by navigating to your collection's <b>Indexes</b> tab or by using your favorite Server SDK. If you plan to query multiple attributes in a single query, you will need an index with <b>all</b> queried attributes.
+    You can create an index by navigating to your collection's <b>Indexes</b> tab or by using your favorite Server SDK. If you plan to query multiple attributes in a single query, creating an index with <b>all</b> queried attributes will yield optimal performance.
 </p>
 
 <p>

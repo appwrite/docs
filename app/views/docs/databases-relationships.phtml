@@ -22,17 +22,17 @@
     </thead>
     <tbody>
         <tr>
-            <td><code>One-way</code></td>
+            <td>One-way</td>
             <td>The relationship is only visible to one side of the relation. For example, subscribers on YouTube is one-way. If you subscribe to a channel, they don't automatically subscribe back.</td>
         </tr>
         <tr>
-            <td><code>Two-way</code></td>
+            <td>Two-way</td>
             <td>The relationship is visible to both sides of the realtion. For example, friends on social media is two-way. If you're someone's friend, they're automatically your friend as well.</td>
         </tr>
     </tbody>
 </table>
 
-<h3><a href="/docs/databases-relations#cardinality" id="cardinality">Cardinality</a></h3>
+<h3><a href="/docs/databases-relations#types" id="types">Types</a></h3>
 <p>Appwrite provides four different relationship types to enforce different associative rules between documents.</p>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -43,19 +43,19 @@
     </thead>
     <tbody>
         <tr>
-            <td><code>One-to-one</code></td>
+            <td>One-to-one</td>
             <td>A document can only be related with one and <b>only</b> one document. If you try to relate multiple documents in a one-to-one relationship, Appwrite throws an error. For example, each user has only one profile.</td>
         </tr>
         <tr>
-            <td><code>One-to-many</code></td>
+            <td>One-to-many</td>
             <td>A document can be related to many other documents. For example, a user can create many posts.</td>
         </tr>
         <tr>
-            <td><code>Many-to-one</code></td>
+            <td>Many-to-one</td>
             <td>Many documents can be related to a single document. For example, many posts can share the same author.</td>
         </tr>
         <tr>
-            <td><code>Many-to-many</code></td>
+            <td>Many-to-many</td>
             <td>A document can be related to many other documents. For example, a user can have many friends and many users can share the same friend.</td>
         </tr>
     </tbody>
