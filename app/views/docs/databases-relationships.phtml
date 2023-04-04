@@ -537,36 +537,8 @@ databases.createDocument(
 <h2><a href="/docs/databases-relations#query" id="query">Querying</a></h2>
 
 <p>Querying is currently not available in the beta version of Appwrite Relationships, but will be added in a later version.</p>
-<!-- <p>You can query documents in a relation by referencing the relationship attribute key using dot-notation. For example, querying for the <code>name</code> <code>customer</code> relationship would look like <code>Query.equal('customer.name', ['John'])</code>.</p>
 
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Web</h3>
-        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism></code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Flutter</h3>
-        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism></code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism></code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Android</h3>
-        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism></code></pre>
-        </div>
-    </li>
-</ul> -->
-
-<h2><a href="/docs/databases-relations#update-and-delete" id="update-and-delete">Updaing and Deleting Documents</a></h2>
+<h2><a href="/docs/databases-relations#update" id="update">Updating Relationships</a></h2>
 
 <p>Relationships can be updated by updating the relationship attribute.</p>
 <ul class="phases clear" data-ui-phases>
@@ -677,16 +649,20 @@ databases.updateDocument(
     </li>
 </ul>
 
-<p>Relationships between documents can be deleted by <b>updating the relationship attribute</b> and removing the ID of the related document. If a relationship is two-way, documents in both of the related collections need to be updated. This approach <b>retains the documents</b> but deletes the link between them.</p>
+<h2><a href="/docs/databases-relations#deleting" id="deleting">Deleting Relationships</a></h2>
+<h3><a href="/docs/databases-relations#unlink" id="unlink">Unlink Relationship, Retain Documents</a></h3>
+<p>If you need to unlink documents in a relationship but retain the documents, you can do this by <b>updating the relationship attribute</b> and removing the ID of the related document.</p>
+<p>If a document can be related to <b>only one document</b>, you can delete the relationship by setting the relationship attribute to <code>null</code>.</p>
+<p>If a document can be related to <b>more than one document</b>, you can delete the relationship by setting the relationship attribute to an empty list.</p>
 
-<p>If you need to delete the documents as well as the link between them, the approach depends on the <a href="/docs/databases-relations#on-delete">on-delete behavior</a> of a relationship.</p>
+<h3><a href="/docs/databases-relations#unlink" id="unlink">Deleting Relationship and Documents</a></h3>
+<p>If you need to delete the documents as well as unlink the relationship, the approach depends on the <a href="/docs/databases-relations#on-delete">on-delete behavior</a> of a relationship.</p>
 
 <p>If the on-delete behavior is <b>restrict</b>, the link between the documents need to be deleted first before the documents can be deleted <b>individually</b>.</p>
 
-<p>If the on-delete behavior is <b>set null</b>, documents must be deleted <b>individually</b>. Before deleting a document, store the IDs in the relationship attribute so you don't lose track of related documents.</p>
+<p>If the on-delete behavior is <b>set null</b>, deleting a document will leave related documents in place with their relationship attribute <b> set to null</b>. If you wish to also delete related documents, they must be deleted <b>individually</b>. Before deleting a document, store the IDs in the relationship attribute so you don't lose track of related documents.</p>
 
 <p>If the on-delete behavior is <b>cascade</b>, deleting the parent documents also deletes <b>related child documents</b>.</p>
-
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
@@ -764,7 +740,7 @@ databases.deleteDocument(
 </ul>
 
 <h2><a href="/docs/databases-relations#permissions" id="permissions">Permissions</a></h2>
-<p>To access documents in a relationship, you must have permission to acecss both the parent and child document.</p>
+<p>To access documents in a relationship, you must have permission to access both the parent and child document.</p>
 
 <p>When creating both the parent and child documents, the child document will <b>inheret permissions</b> from its parent.</p>
 
@@ -896,7 +872,7 @@ databases.createDocument(
     </li>
 </ul>
 
-<p>When creating the parent document and linking to a child document, or updating a relationship you must have permission to access both documents. If the user does not have read permission, an exception will be thrown.</p>
+<p>When creating, updating, or deleting in a relationship you must have permission to access all documents referenced. If the user does not have read permission to any document, an exception will be thrown.</p>
 
 <h2><a href="/docs/databases-relations#limitations" id="limitations">Limitations</a></h2>
-<p>Relationships can be nested between collections, but are restricted to a <b>max depth of three levels</b>. Relationship attribute key, type, and directionality can't be updated. On-deleted behavior is the only option that can be updated for relationship attributes.</p>
+<p>Relationships can be nested between collections, but are restricted to a <b>max depth of three levels</b>. Relationship attribute key, type, and directionality can't be updated. On-delete behavior is the only option that can be updated for relationship attributes.</p>
