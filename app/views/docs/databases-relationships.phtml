@@ -1,5 +1,10 @@
 <p>Relationships describe how documents in different collections are associated, so related documents can be read, updated, or deleted together. Entities in real-life often associate with each other in an organic and logical way, like a person and their dog, an album and its songs, or friends in a social network. These types of association between entities can be modeled in Appwrite using relationships.</p>
 
+<div class="notice">
+    <h2>Beta Feature</h2>
+    <p>Appwrite Relationships is a beta feature. The API and behavior is subject to change in future versions.</p>
+</div>
+
 <h2><a href="/docs/databases-relations#when-to-use-relationships" id="when-to-use-relationships">When to Use a Relationship</a></h2>
 <p>Relationships help reduce redundant information. For example, a user can create many posts in your app. You can model this without relationships by keeping a copy of the user's information in all the documents representing posts, but this creates a lot of duplicate information in your database about the user.</p>
 
@@ -23,11 +28,11 @@
     <tbody>
         <tr>
             <td>One-way</td>
-            <td>The relationship is only visible to one side of the relation. For example, subscribers on YouTube is one-way. If you subscribe to a channel, they don't automatically subscribe back.</td>
+            <td>The relationship is only visible to one side of the relation. This is similar to a tree data structure, where a tree has a reference to all of its leaves, but each leaf does not have a reference to its tree root.</td>
         </tr>
         <tr>
             <td>Two-way</td>
-            <td>The relationship is visible to both sides of the realtion. For example, friends on social media is two-way. If you're someone's friend, they're automatically your friend as well.</td>
+            <td>The relationship is visible to both sides of the relation. This is similar to a graph data structure, where each node has references to all its edges, and all its edges can reference the nodes it connects.</td>
         </tr>
     </tbody>
 </table>
@@ -44,24 +49,24 @@
     <tbody>
         <tr>
             <td>One-to-one</td>
-            <td>A document can only be related with one and <b>only</b> one document. If you try to relate multiple documents in a one-to-one relationship, Appwrite throws an error. For example, each user has only one profile.</td>
+            <td>A document can only be related with one and <b>only</b> one document. If you try to relate multiple documents in a one-to-one relationship, Appwrite throws an error. For example, <b>one</b> user has <b>one</b> profile.</td>
         </tr>
         <tr>
             <td>One-to-many</td>
-            <td>A document can be related to many other documents. For example, a user can create many posts.</td>
+            <td>A document can be related to many other documents. For example, <b>one</b> user can create <b>many</b> posts.</td>
         </tr>
         <tr>
             <td>Many-to-one</td>
-            <td>Many documents can be related to a single document. For example, many posts can share the same author.</td>
+            <td>Many documents can be related to a single document. For example, <b>many</b> posts can share <b>one</b> author.</td>
         </tr>
         <tr>
             <td>Many-to-many</td>
-            <td>A document can be related to many other documents. For example, a user can have many friends and many users can share the same friend.</td>
+            <td>A document can be related to many other documents. For example, a user can have <b>many</b> friends and <b>many</b> users can share the same friend.</td>
         </tr>
     </tbody>
 </table>
 
-<h3><a href="/docs/databases-relations#on-delete" id="on-delete">On Delete Behavior</a></h3>
+<h3><a href="/docs/databases-relations#on-delete" id="on-delete">On-Delete Behavior</a></h3>
 <p>
     Appwrite also allows you to define the behavior of a relationship when a document is deleted.
 </p>
@@ -83,55 +88,815 @@
         </tr>
         <tr>
             <td><code>Set null</code></td>
-            <td>If a document has related documents, when it is deleted, the related documents are kept with their relationship attribute set to <b>null</b>.</td>
+            <td>If a document has related documents, when it is deleted, the related documents are kept with their <b>relationship attribute</b> set to <b>null</b>.</td>
         </tr>
     </tbody>
 </table>
 
+<h2><a href="/docs/databases-relations#relationship-attributes" id="relationship-attributes">Relationship Attributes</a></h2>
+<p>Relationships are represented in a collection using <b>relationship attributes</b>. The relationship attribute contains the ID of related documents, which it references during read, update, and delete operations. This attribute is <b>null</b> if a document has no related documents.</p>
+
 <h2><a href="/docs/databases-relations#create-in-console" id="create-in-console">Creating Relationships in the Appwrite Console</a></h2>
-<p>You can create relationships in the Appwrite Console by adding a relationship attribute.</p>
+<p>You can create relationships in the Appwrite Console by adding a relationship attribute to a collection.</p>
 <ol class="margin-top margin-bottom-large text-size-normal">
     <li>In your project, navigate to <b>Databases</b> > <b>Select your database</b> > <b>Select your collection</b> > <b>Attributes</b> > <b>Create attribute</b>.</li>
     <li>Select <b>Relationship</b> as the attribute type.</li>
     <li>In the <b>Relationship</b> modal, select the <a href="/docs/databases-relations#types">relationship type</a> and pick the related collection and attributes.</li>
-    <li>Pick attribute key(s) to represent the relationship. Attribute keys are used to reference a relationship in queries, so pick something that's intuitive and easy to remember.</li>
-    <li>Select desired behavior <a href="/docs/databases-relations#on-delete">on delete</a>.</li>
+    <li>Pick relationship attribute key(s) to represent the related collection. Relationship attribute keys are used to reference the related collection in queries, so pick something that's intuitive and easy to remember.</li>
+    <li>Select desired <a href="/docs/databases-relations#on-delete">on delete</a> behavior.</li>
     <li>Click the <b>Create</b> button to create the relationship.</li>
 </ol>
 
 <h2><a href="/docs/databases-relations#create-in-code" id="create-in-code">Creating Relationships Programmatically</a></h2>
-[TODO: Steps to create relationships in code]
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, Databases } = require('node-appwrite');
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+const databases = new Databases(client);
+
+databases.createRelationshipAttribute(
+    'marvel',     // Database ID
+    'movies',     // Collection ID
+    'reviews',    // Related collection ID
+    'oneToMany',  // Relationship type
+    true,         // Is two-way
+    'reviews',    // Attribute key 
+    'movie',      // Two-way attribute key
+    'cascade'     // On delete action
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>use \Appwrite\Client;
+use \Appwrite\Services\Databases;
+
+$client = (new Client())
+    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    ->setProject('5df5acd0d48c2');               // Your project ID
+
+$databases = new Databases($client);
+
+$databases->createRelationshipAttribute(
+    databaseId: 'marvel',           // Database ID
+    collectionId: 'movies',         // Collection ID
+    relatedCollectionId: 'reviews', // Related collection ID
+    type: 'oneToMany',              // Relationship type
+    twoWay: true,                   // Is two-way
+    key: 'reviews',                 // Attribute key 
+    twoWayKey: 'movie',             // Two-way attribute key
+    onDelete: 'cascade'             // On delete action
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>
+            from appwrite.client import Client
+from appwrite.services.databases import Databases
+
+client = Client() \
+    .set_endpoint('https://[HOSTNAME_OR_IP]/v1') \  # Your API Endpoint
+    .set_project('5df5acd0d48c2')                   # Your project ID
+
+databases = Databases(client)
+
+databases.create_relationship_attribute(
+    database_id='marvel',             # Database ID               
+    collection_id='movies',           # Collection ID
+    related_collection_id='reviews',  # Related collection ID            
+    type='oneToMany',                 # Relationship type
+    two_way=True,                     # Is two-way
+    key='reviews',                    # Attribute key 
+    two_way_key='movie',              # Two-way attribute key
+    on_delete='cascade'               # On delete action
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby SDK">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
+
+include Appwrite
+
+client = Client.new
+    .set_endpoint('https://[HOSTNAME_OR_IP]/v1')# Your API Endpoint
+    .set_project('5df5acd0d48c2')               # Your project ID
+
+databases = Databases.new(client)
+
+databases.create_relationship_attribute(
+    database_id: 'marvel',             # Database ID               
+    collection_id: 'movies',           # Collection ID    
+    related_collection_id: 'reviews',  # Related collection ID 
+    type: 'oneToMany',                 # Relationship type
+    two_way: true,                     # Is two-way
+    key: 'reviews',                    # Attribute key 
+    two_way_key: 'movie',              # Two-way attribute key     
+    on_delete: 'cascade'               # On delete action
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases } from "https://deno.land/x/appwrite/mod.ts";
+
+const client = new Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2");               // Your project ID
+
+const databases = new Databases(client);
+
+databases.createRelationshipAttribute(
+    "marvel",    // Database ID         
+    "movies",    // Collection ID           
+    "reviews",   // Related collection ID       
+    "oneToMany", // Relationship type           
+    true,        // Is two-way          
+    "reviews",   // Attribute key           
+    "movie",     // Two-way attribute key           
+    "cascade"    // On delete action            
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');               // Your project ID
+
+final databases = Databases(client);
+
+await databases.createRelationshipAttribute(
+    databaseId: 'marvel',           // Database ID                     
+    collectionId: 'movies',         // Collection ID                        
+    relatedCollectionId: 'reviews', // Related collection ID                    
+    type: 'oneToMany',              // Relationship type            
+    twoWay: true,                   // Is two-way               
+    key: 'reviews',                 // Attribute key                    
+    twoWayKey: 'movie',             // Two-way attribute key            
+    onDelete: 'cascade',            // On delete action                 
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Databases
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val databases = Databases(client)
+
+databases.createRelationshipAttribute(
+    databaseId = "marvel",           // Database ID                 
+    collectionId = "movies",         // Collection ID                      
+    relatedCollectionId = "reviews", // Related collection ID               
+    type = "oneToMany",              // Relationship type           
+    twoWay = true,                   // Is two-way              
+    key = "reviews",                 // Attribute key           
+    twoWayKey = "movie",             // Two-way attribute key       
+    onDelete = "cascade"             // On delete action        
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let databases = Databases(client)
+
+databases.createRelationshipAttribute(
+    databaseId: "marvel",           // Database ID              
+    collectionId: "movies",         // Collection ID            
+    relatedCollectionId: "reviews", // Related collection ID    
+    type: "oneToMany",              // Relationship type        
+    twoWay: true,                   // Is two-way               
+    key: "reviews",                 // Attribute key            
+    twoWayKey: "movie",             // Two-way attribute key        
+    onDelete: "cascade"             // On delete action         
+)</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>The above example adds a relationship between the collections <b>movies</b> and <b>reviews</b>. A relationship attribute with the key <code>reviews</code> is added to the movies collection and another relationship attribute with the key <code>movies</code> is added to the reviews collection.</p>
+
+<p>Relationship attribute keys are used to reference the related collection in queries, so pick something that's intuitive and easy to remember.</p>
 
 <h2><a href="/docs/databases-relations#create-documents" id="create-documents">Creating Documents</a></h2>
 <p>If a collection has relationship attributes, you can create documents in two ways.</p>
 
 <h3>Created Child Documents</h3>
 <p>You can create both the <b>parent</b> and <b>child</b> at once in a relationship by nesting data.</p>
-[CODE EXAMPLES]
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, Databases, ID } = require('node-appwrite');
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');c              // Your project ID
+
+const databases = new Databases(client);
+
+await databases.createDocument(
+    'marvel',
+    'movies',
+    ID.unique(),
+    {
+        title: 'Spiderman',
+        year: 2002,
+        reviews: [
+            { author: 'Bob', text: 'Great movie!' },
+            { author: 'Alice', text: 'Loved it!' }
+        ]
+    }
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')  // Your API Endpoint
+    .setProject('5df5acd0d48c2');                // Your project ID
+
+final databases = Databases(client);
+
+await databases.createDocument(
+  databaseId: 'marvel',
+  collectionId: 'movies',
+  documentId: ID.unique(),
+  data: {
+    'title': 'Spiderman',
+    'year': 2002,
+    'reviews': [
+      { 'author': 'Bob', 'text': 'Great movie!' },
+      { 'author': 'Alice', 'text': 'Loved it!' }
+    ]
+  },
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+let databases = Database(client: client)
+
+databases.createDocument(
+    databaseId: "marvel",
+    collectionId: "movies",
+    documentId: ID.unique(),
+    data: [
+        "title": "Spiderman",
+        "year": 2002,
+        "reviews": [
+            [ "author": "Bob", "text": "Great movie!" ],
+            [ "author": "Alice", "text": "Loved it!" ]
+        ]
+    ]
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Database
+import io.appwrite.ID
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                // Your project ID
+
+val databases = Database(client)
+
+databases.createDocument(
+    databaseId = "marvel",
+    collectionId = "movies",
+    documentId = ID.unique(),
+    data = mapOf(
+        "title" to "Spiderman",
+        "year" to 2002,
+        "reviews" to listOf(
+            mapOf("author" to "Bob", "text" to "Great movie!"),
+            mapOf("author" to "Alice", "text" to "Loved it!")
+        )
+    )
+)</code></pre>
+        </div>
+    </li>
+</ul>
 
 <p>If a nested document is included and <b>no conflicting document ID</b> exists, the child document will be <b>created</b>.</p>
 <p>If a nested document is included and the <b>document ID already exists</b>, the child document will be <b>updated</b>.</p>
 
 <h3>Reference Child Documents</h3>
 <p>You can create the parent and <b>reference the child documents</b> using their IDs.</p>
-[CODE EXAMPLES]
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, Databases, ID } = require('node-appwrite');
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');c              // Your project ID
+
+const databases = new Databases(client);
+
+await databases.createDocument(
+    'marvel',
+    'movies',
+    ID.unique(),
+    {
+        title: 'Spiderman',
+        year: 2002,
+        reviews: [
+            'review1',
+            'review2'
+        ]
+    }
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint    
+    .setProject('5df5acd0d48c2');               // Your project ID  
+
+final databases = Databases(client);
+
+await databases.createDocument(
+  databaseId: 'marvel',
+  collectionId: 'movies',
+  documentId: ID.unique(),
+  data: {
+    'title': 'Spiderman',
+    'year': 2002,
+    'reviews': [
+        'review1',
+        'review2'
+    ]
+  },
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint        
+    .setProject("5df5acd0d48c2")                // Your project ID      
+
+let databases = Database(client: client)
+
+databases.createDocument(
+    databaseId: "marvel",
+    collectionId: "movies",
+    documentId: ID.unique(),
+    data: [
+        "title": "Spiderman",
+        "year": 2002,
+        "reviews": [
+            "review1",
+            "review2"
+        ]
+    ]
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Database
+import io.appwrite.ID
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint    
+    .setProject("5df5acd0d48c2")                // Your project ID  
+
+val databases = Database(client)
+
+databases.createDocument(
+    databaseId = "marvel",
+    collectionId = "movies",
+    documentId = ID.unique(),
+    data = mapOf(
+        "title" to "Spiderman",
+        "year" to 2002,
+        "reviews" to listOf(
+            "review1",
+            "review2"
+        )
+    )
+)</code></pre>
+        </div>
+    </li>
+</ul>
 
 <h2><a href="/docs/databases-relations#query" id="query">Querying</a></h2>
-[TODO: how to query relationships, indexes, etc.]
-<p>You can query documents in a relation by referencing the relationship attribute key using dot-notation. For example, querying for the <code>name</code> <code>customer</code> relationship would look like <code>Query.equal('customer.name', ['John'])</code>.</p>
 
-[CODE EXAMPLES]
+<p>Querying is currently not available in the beta version of Appwrite Relationships, but will be added in a later version.</p>
+<!-- <p>You can query documents in a relation by referencing the relationship attribute key using dot-notation. For example, querying for the <code>name</code> <code>customer</code> relationship would look like <code>Query.equal('customer.name', ['John'])</code>.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism></code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism></code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism></code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism></code></pre>
+        </div>
+    </li>
+</ul> -->
+
 <h2><a href="/docs/databases-relations#update-and-delete" id="update-and-delete">Updaing and Deleting Documents</a></h2>
-[TODO: how to query relationships, indexes, etc.]
+
+<p>Relationships can be updated by updating the relationship attribute.</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, Databases } = require('node-appwrite');
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');c              // Your project ID
+
+const databases = new Databases(client);
+
+await databases.updateDocument(
+    'marvel',
+    'movies',
+    'spiderman',
+    {
+        title: 'Spiderman',
+        year: 2002,
+        reviews: [
+            'review4',
+            'review5'
+        ]
+    }
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('5df5acd0d48c2');
+
+final databases = Databases(client);
+
+await databases.updateDocument(
+  databaseId: 'marvel',
+  collectionId: 'movies',
+  documentId: 'spiderman',
+  data: {
+    'title': 'Spiderman',
+    'year': 2002,
+    'reviews': [
+        'review4',
+        'review5'
+    ]
+  },
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("5df5acd0d48c2")
+
+let databases = Database(client: client)
+
+databases.updateDocument(
+    databaseId: "marvel",
+    collectionId: "movies",
+    documentId: "spiderman",
+    data: [
+        "title": "Spiderman",
+        "year": 2002,
+        "reviews": [
+            "review4",
+            "review5"
+        ]
+    ]
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Database
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("5df5acd0d48c2")
+
+val databases = Database(client)
+
+databases.updateDocument(
+    databaseId = "marvel",
+    collectionId = "movies",
+    documentId = "spiderman",
+    data = mapOf(
+        "title" to "Spiderman",
+        "year" to 2002,
+        "reviews" to listOf(
+            "review4",
+            "review5"
+        )
+    )
+)</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>Relationships between documents can be deleted by <b>updating the relationship attribute</b> and removing the ID of the related document. If a relationship is two-way, documents in both of the related collections need to be updated. This approach <b>retains the documents</b> but deletes the link between them.</p>
+
+<p>If you need to delete the documents as well as the link between them, the approach depends on the <a href="/docs/databases-relations#on-delete">on-delete behavior</a> of a relationship.</p>
+
+<p>If the on-delete behavior is <b>restrict</b>, the link between the documents need to be deleted first before the documents can be deleted <b>individually</b>.</p>
+
+<p>If the on-delete behavior is <b>set null</b>, documents must be deleted <b>individually</b>. Before deleting a document, store the IDs in the relationship attribute so you don't lose track of related documents.</p>
+
+<p>If the on-delete behavior is <b>cascade</b>, deleting the parent documents also deletes <b>related child documents</b>.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, Databases } = require('node-appwrite');
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');c              // Your project ID
+
+const databases = new Databases(client);
+
+await databases.deleteDocument(
+    'marvel',
+    'movies',
+    'spiderman'
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('5df5acd0d48c2');
+
+final databases = Databases(client);
+
+await databases.deleteDocument(
+  databaseId: 'marvel',
+  collectionId: 'movies',
+  documentId: 'spiderman'
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("5df5acd0d48c2")
+
+let databases = Database(client: client)
+
+databases.deleteDocument(
+    databaseId: "marvel",
+    collectionId: "movies",
+    documentId: "spiderman"
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Database
+
+val client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("5df5acd0d48c2")
+
+val databases = Database(client)
+
+databases.deleteDocument(
+    databaseId = "marvel",
+    collectionId = "movies",
+    documentId = "spiderman"
+)</code></pre>
+        </div>
+    </li>
+</ul>
 
 <h2><a href="/docs/databases-relations#permissions" id="permissions">Permissions</a></h2>
 <p>To access documents in a relationship, you must have permission to acecss both the parent and child document.</p>
 
-<p>When creating both the parent and child documents, the child document will inheret permissions from its parent. You can also provide explicit permissions to the child document if you need them to be different from the parent.</p>
-[Code example]
+<p>When creating both the parent and child documents, the child document will <b>inheret permissions</b> from its parent.</p>
+
+<p>You can also provide explicit permissions to the child document if they should be <b>different from their parent</b>.</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, Databases, ID } = require('node-appwrite');
+
+const client = new Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');c              // Your project ID
+
+const databases = new Databases(client);
+
+await databases.createDocument(
+    'marvel',
+    'movies',
+    ID.unique(),
+    {
+        title: 'Spiderman',
+        year: 2002,
+        reviews: [
+            { 
+                author: 'Bob', 
+                text: 'Great movie!',
+                $permissions: [
+                    Permission.read(Role.any())
+                ]
+            },
+        ]
+    }
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setProject('5df5acd0d48c2');
+
+final databases = Databases(client);
+
+await databases.createDocument(
+  databaseId: 'marvel',
+  collectionId: 'movies',
+  documentId: ID.unique(),
+  data: {
+    'title': 'Spiderman',
+    'year': 2002,
+    'reviews': [
+      { 
+         'author': 'Bob', 
+         'text:' 'Great movie!',
+         '\$permissions': [
+           Permission.read(Role.any())
+         ]
+       },
+    ]
+  },
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("5df5acd0d48c2")
+
+let databases = Database(client: client)
+
+databases.createDocument(
+    databaseId: "marvel",
+    collectionId: "movies",
+    documentId: ID.unique(),
+    data: [
+        "title": "Spiderman",
+        "year": 2002,
+        "reviews": [
+            [ 
+                "author": "Bob",
+                "text": "Great movie!",
+                "$permissions": [
+                    Permission.read(Role.any())
+                ]
+            ],
+        ]
+    ]
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setProject("5df5acd0d48c2")
+
+let databases = Database(client: client)
+
+databases.createDocument(
+    databaseId: "marvel",
+    collectionId: "movies",
+    documentId: ID.unique(),
+    data: [
+        "title": "Spiderman",
+        "year": 2002,
+        "reviews": [
+            [ 
+                "author": "Bob",
+                "text": "Great movie!",
+                "$permissions": [
+                    Permission.read(Role.any())
+                ]
+            ],
+        ]
+    ]
+)</code></pre>
+        </div>
+    </li>
+</ul>
 
 <p>When creating the parent document and linking to a child document, or updating a relationship you must have permission to access both documents. If the user does not have read permission, an exception will be thrown.</p>
-[Code example]
 
 <h2><a href="/docs/databases-relations#limitations" id="limitations">Limitations</a></h2>
-[TODO: describe limitations]
+<p>Relationships can be nested between collections, but are restricted to a <b>max depth of three levels</b>. Relationship attribute key, type, and directionality can't be updated. On-deleted behavior is the only option that can be updated for relationship attributes.</p>
