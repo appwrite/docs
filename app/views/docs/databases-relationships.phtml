@@ -1,15 +1,15 @@
-<p>Relationships describe how documents in different collections are associated, so related documents can be read, updated, or deleted together. Entities in real-life often associate with each other in an organic and logical way, like a person and their dog, an album and its songs, or friends in a social network. These types of association between entities can be modeled in Appwrite using relationships.</p>
+<p>Relationships describe how documents in different collections are associated, so that related documents can be read, updated, or deleted together. Entities in real-life often associate with each other in an organic and logical way, like a person and their dog, an album and its songs, or friends in a social network. These types of association between entities can be modeled in Appwrite using relationships.</p>
 
 <div class="notice">
     <h2>Beta Feature</h2>
-    <p>Appwrite Relationships is a beta feature. The API and behavior is subject to change in future versions.</p>
+    <p>Appwrite Relationships is a beta feature. The API and behavior are subject to change in future versions.</p>
 </div>
 
 <h2><a href="/docs/databases-relations#when-to-use-relationships" id="when-to-use-relationships">When to Use a Relationship</a></h2>
 <p>Relationships help reduce redundant information. For example, a user can create many posts in your app. You can model this without relationships by keeping a copy of the user's information in all the documents representing posts, but this creates a lot of duplicate information in your database about the user.</p>
 
 <h3>Benefits of Relationships</h3>
-<p>Duplicated records waste storage, but more importantly, makes the database much harder to maintain. If the user changes their user name, you will have to update dozens or hundreds of records. You can avoid duplicate information by storing users and posts in separate collections, and relating a user and their posts through a relationship.</p>
+<p>Duplicated records waste storage, but more importantly, makes the database much harder to maintain. If the user changes their user name, you will have to update dozens or hundreds of records. You can avoid duplicate information by storing users and posts in separate collections and relating a user and their posts through a relationship.</p>
 
 <h3>Tradeoff</h3>
 <p>Consider using relationships when the same information is found in multiple places to avoid duplicates. However, relationships come with the tradeoff of slowing down queries. For applications where the best read and write performance is important, it may be acceptable to tolerate duplicate data.</p>
@@ -32,7 +32,7 @@
         </tr>
         <tr>
             <td>Two-way</td>
-            <td>The relationship is visible to both sides of the relation. This is similar to a graph data structure, where each node has references to all its edges, and all its edges can reference the nodes it connects.</td>
+            <td>The relationship is visible to both sides of the relationship. This is similar to a graph data structure, where each node has references to all its edges, and all its edges can reference the nodes it connects.</td>
         </tr>
     </tbody>
 </table>
@@ -49,7 +49,7 @@
     <tbody>
         <tr>
             <td>One-to-one</td>
-            <td>A document can only be related with one and <b>only</b> one document. If you try to relate multiple documents in a one-to-one relationship, Appwrite throws an error. For example, <b>one</b> user has <b>one</b> profile.</td>
+            <td>A document can only be related to one and <b>only</b> one document. If you try to relate multiple documents in a one-to-one relationship, Appwrite throws an error. For example, <b>one</b> user has <b>one</b> profile.</td>
         </tr>
         <tr>
             <td>One-to-many</td>
@@ -61,7 +61,7 @@
         </tr>
         <tr>
             <td>Many-to-many</td>
-            <td>A document can be related to many other documents. For example, a user can have <b>many</b> friends and <b>many</b> users can share the same friend.</td>
+            <td>A document can be related to many other documents. For example, a user can have <b>many</b> friends, and <b>many</b> users can share the same friend.</td>
         </tr>
     </tbody>
 </table>
@@ -309,7 +309,7 @@ databases.createRelationshipAttribute(
 <h2><a href="/docs/databases-relations#create-documents" id="create-documents">Creating Documents</a></h2>
 <p>If a collection has relationship attributes, you can create documents in two ways.</p>
 
-<h3>Created Child Documents</h3>
+<h3><a href="/docs/databases-relations#create-nested" id="create-nested">Created Child Documents</a></h3>
 <p>You can create both the <b>parent</b> and <b>child</b> at once in a relationship by nesting data.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -423,7 +423,8 @@ databases.createDocument(
 <p>If a nested document is included and <b>no conflicting document ID</b> exists, the child document will be <b>created</b>.</p>
 <p>If a nested document is included and the <b>document ID already exists</b>, the child document will be <b>updated</b>.</p>
 
-<h3>Reference Child Documents</h3>
+<h3><a href="/docs/databases-relations#create-reference" id="create-reference">Reference Child Documents</a></h3>
+
 <p>You can create the parent and <b>reference the child documents</b> using their IDs.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -536,7 +537,7 @@ databases.createDocument(
 
 <h2><a href="/docs/databases-relations#query" id="query">Querying</a></h2>
 
-<p>Querying is currently not available in the beta version of Appwrite Relationships, but will be added in a later version.</p>
+<p>Querying is currently not available in the beta version of Appwrite Relationships but will be added in a later version.</p>
 
 <h2><a href="/docs/databases-relations#update" id="update">Updating Relationships</a></h2>
 
@@ -650,15 +651,15 @@ databases.updateDocument(
 </ul>
 
 <h2><a href="/docs/databases-relations#deleting" id="deleting">Deleting Relationships</a></h2>
-<h3><a href="/docs/databases-relations#unlink" id="unlink">Unlink Relationship, Retain Documents</a></h3>
+<h3><a href="/docs/databases-relations#unlink" id="unlink">Unlink Relationships, Retain Documents</a></h3>
 <p>If you need to unlink documents in a relationship but retain the documents, you can do this by <b>updating the relationship attribute</b> and removing the ID of the related document.</p>
 <p>If a document can be related to <b>only one document</b>, you can delete the relationship by setting the relationship attribute to <code>null</code>.</p>
 <p>If a document can be related to <b>more than one document</b>, you can delete the relationship by setting the relationship attribute to an empty list.</p>
 
-<h3><a href="/docs/databases-relations#unlink" id="unlink">Deleting Relationship and Documents</a></h3>
+<h3><a href="/docs/databases-relations#unlink" id="unlink">Deleting Relationships and Documents</a></h3>
 <p>If you need to delete the documents as well as unlink the relationship, the approach depends on the <a href="/docs/databases-relations#on-delete">on-delete behavior</a> of a relationship.</p>
 
-<p>If the on-delete behavior is <b>restrict</b>, the link between the documents need to be deleted first before the documents can be deleted <b>individually</b>.</p>
+<p>If the on-delete behavior is <b>restrict</b>, the link between the documents needs to be deleted first before the documents can be deleted <b>individually</b>.</p>
 
 <p>If the on-delete behavior is <b>set null</b>, deleting a document will leave related documents in place with their relationship attribute <b> set to null</b>. If you wish to also delete related documents, they must be deleted <b>individually</b>. Before deleting a document, store the IDs in the relationship attribute so you don't lose track of related documents.</p>
 
@@ -740,9 +741,9 @@ databases.deleteDocument(
 </ul>
 
 <h2><a href="/docs/databases-relations#permissions" id="permissions">Permissions</a></h2>
-<p>To access documents in a relationship, you must have permission to access both the parent and child document.</p>
+<p>To access documents in a relationship, you must have permission to access both the parent and child documents.</p>
 
-<p>When creating both the parent and child documents, the child document will <b>inheret permissions</b> from its parent.</p>
+<p>When creating both the parent and child documents, the child document will <b>inherit permissions</b> from its parent.</p>
 
 <p>You can also provide explicit permissions to the child document if they should be <b>different from their parent</b>.</p>
 <ul class="phases clear" data-ui-phases>
@@ -872,7 +873,7 @@ databases.createDocument(
     </li>
 </ul>
 
-<p>When creating, updating, or deleting in a relationship you must have permission to access all documents referenced. If the user does not have read permission to any document, an exception will be thrown.</p>
+<p>When creating, updating, or deleting in a relationship, you must have permission to access all documents referenced. If the user does not have read permission to any document, an exception will be thrown.</p>
 
 <h2><a href="/docs/databases-relations#limitations" id="limitations">Limitations</a></h2>
 <p>Relationships can be nested between collections, but are restricted to a <b>max depth of three levels</b>. Relationship attribute key, type, and directionality can't be updated. On-delete behavior is the only option that can be updated for relationship attributes.</p>
