@@ -5,7 +5,7 @@
     <p>Appwrite Relationships is a beta feature. The API and behavior are subject to change in future versions.</p>
 </div>
 
-<h2><a href="/docs/databases-relations#when-to-use-relationships" id="when-to-use-relationships">When to Use a Relationship</a></h2>
+<h2><a href="#when-to-use-relationships" id="when-to-use-relationships">When to Use a Relationship</a></h2>
 <p>Relationships help reduce redundant information. For example, a user can create many posts in your app. You can model this without relationships by keeping a copy of the user's information in all the documents representing posts, but this creates a lot of duplicate information in your database about the user.</p>
 
 <h3>Benefits of Relationships</h3>
@@ -14,9 +14,9 @@
 <h3>Tradeoff</h3>
 <p>Consider using relationships when the same information is found in multiple places to avoid duplicates. However, relationships come with the tradeoff of slowing down queries. For applications where the best read and write performance is important, it may be acceptable to tolerate duplicate data.</p>
 
-<h2><a href="/docs/databases-relations#configurable-options" id="configurable-options">Configurable Options</a></h2>
+<h2><a href="#configurable-options" id="configurable-options">Configurable Options</a></h2>
 
-<h3><a href="/docs/databases-relations#directionality" id="directionality">Directionality</a></h3>
+<h3><a href="#directionality" id="directionality">Directionality</a></h3>
 <p>Appwrite relationships can be one-way or two-way.</p>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -37,7 +37,7 @@
     </tbody>
 </table>
 
-<h3><a href="/docs/databases-relations#types" id="types">Types</a></h3>
+<h3><a href="#types" id="types">Types</a></h3>
 <p>Appwrite provides four different relationship types to enforce different associative rules between documents.</p>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -66,7 +66,7 @@
     </tbody>
 </table>
 
-<h3><a href="/docs/databases-relations#on-delete" id="on-delete">On-Delete Behavior</a></h3>
+<h3><a href="#on-delete" id="on-delete">On-Delete Behavior</a></h3>
 <p>
     Appwrite also allows you to define the behavior of a relationship when a document is deleted.
 </p>
@@ -93,21 +93,21 @@
     </tbody>
 </table>
 
-<h2><a href="/docs/databases-relations#relationship-attributes" id="relationship-attributes">Relationship Attributes</a></h2>
+<h2><a href="#relationship-attributes" id="relationship-attributes">Relationship Attributes</a></h2>
 <p>Relationships are represented in a collection using <b>relationship attributes</b>. The relationship attribute contains the ID of related documents, which it references during read, update, and delete operations. This attribute is <b>null</b> if a document has no related documents.</p>
 
-<h2><a href="/docs/databases-relations#create-in-console" id="create-in-console">Creating Relationships in the Appwrite Console</a></h2>
+<h2><a href="#create-in-console" id="create-in-console">Creating Relationships in the Appwrite Console</a></h2>
 <p>You can create relationships in the Appwrite Console by adding a relationship attribute to a collection.</p>
 <ol class="margin-top margin-bottom-large text-size-normal">
     <li>In your project, navigate to <b>Databases</b> > <b>Select your database</b> > <b>Select your collection</b> > <b>Attributes</b> > <b>Create attribute</b>.</li>
     <li>Select <b>Relationship</b> as the attribute type.</li>
-    <li>In the <b>Relationship</b> modal, select the <a href="/docs/databases-relations#types">relationship type</a> and pick the related collection and attributes.</li>
+    <li>In the <b>Relationship</b> modal, select the <a href="#types">relationship type</a> and pick the related collection and attributes.</li>
     <li>Pick relationship attribute key(s) to represent the related collection. Relationship attribute keys are used to reference the related collection in queries, so pick something that's intuitive and easy to remember.</li>
-    <li>Select desired <a href="/docs/databases-relations#on-delete">on delete</a> behavior.</li>
+    <li>Select desired <a href="#on-delete">on delete</a> behavior.</li>
     <li>Click the <b>Create</b> button to create the relationship.</li>
 </ol>
 
-<h2><a href="/docs/databases-relations#create-in-code" id="create-in-code">Creating Relationships Programmatically</a></h2>
+<h2><a href="#create-in-code" id="create-in-code">Creating Relationships Programmatically</a></h2>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
@@ -305,10 +305,10 @@ databases.createRelationshipAttribute(
 
 <p>Relationship attribute keys are used to reference the related collection in queries, so pick something that's intuitive and easy to remember.</p>
 
-<h2><a href="/docs/databases-relations#create-documents" id="create-documents">Creating Documents</a></h2>
+<h2><a href="#create-documents" id="create-documents">Creating Documents</a></h2>
 <p>If a collection has relationship attributes, you can create documents in two ways.</p>
 
-<h3><a href="/docs/databases-relations#create-nested" id="create-nested">Created Child Documents</a></h3>
+<h3><a href="#create-nested" id="create-nested">Created Child Documents</a></h3>
 <p>You can create both the <b>parent</b> and <b>child</b> at once in a relationship by nesting data.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -422,7 +422,7 @@ databases.createDocument(
 <p>If a nested document is included and <b>no conflicting document ID</b> exists, the child document will be <b>created</b>.</p>
 <p>If a nested document is included and the <b>document ID already exists</b>, the child document will be <b>updated</b>.</p>
 
-<h3><a href="/docs/databases-relations#create-reference" id="create-reference">Reference Child Documents</a></h3>
+<h3><a href="#create-reference" id="create-reference">Reference Child Documents</a></h3>
 
 <p>You can create the parent and <b>reference the child documents</b> using their IDs.</p>
 <ul class="phases clear" data-ui-phases>
@@ -534,11 +534,11 @@ databases.createDocument(
     </li>
 </ul>
 
-<h2><a href="/docs/databases-relations#query" id="query">Querying</a></h2>
+<h2><a href="#query" id="query">Querying</a></h2>
 
 <p>Querying is currently not available in the beta version of Appwrite Relationships but will be added in a later version.</p>
 
-<h2><a href="/docs/databases-relations#update" id="update">Updating Relationships</a></h2>
+<h2><a href="#update" id="update">Updating Relationships</a></h2>
 
 <p>Relationships can be updated by updating the relationship attribute.</p>
 <ul class="phases clear" data-ui-phases>
@@ -649,14 +649,14 @@ databases.updateDocument(
     </li>
 </ul>
 
-<h2><a href="/docs/databases-relations#deleting" id="deleting">Deleting Relationships</a></h2>
-<h3><a href="/docs/databases-relations#unlink" id="unlink">Unlink Relationships, Retain Documents</a></h3>
+<h2><a href="#deleting" id="deleting">Deleting Relationships</a></h2>
+<h3><a href="#unlink" id="unlink">Unlink Relationships, Retain Documents</a></h3>
 <p>If you need to unlink documents in a relationship but retain the documents, you can do this by <b>updating the relationship attribute</b> and removing the ID of the related document.</p>
 <p>If a document can be related to <b>only one document</b>, you can delete the relationship by setting the relationship attribute to <code>null</code>.</p>
 <p>If a document can be related to <b>more than one document</b>, you can delete the relationship by setting the relationship attribute to an empty list.</p>
 
-<h3><a href="/docs/databases-relations#unlink" id="unlink">Deleting Relationships and Documents</a></h3>
-<p>If you need to delete the documents as well as unlink the relationship, the approach depends on the <a href="/docs/databases-relations#on-delete">on-delete behavior</a> of a relationship.</p>
+<h3><a href="#unlink" id="unlink">Deleting Relationships and Documents</a></h3>
+<p>If you need to delete the documents as well as unlink the relationship, the approach depends on the <a href="#on-delete">on-delete behavior</a> of a relationship.</p>
 
 <p>If the on-delete behavior is <b>restrict</b>, the link between the documents needs to be deleted first before the documents can be deleted <b>individually</b>.</p>
 
@@ -739,7 +739,7 @@ databases.deleteDocument(
     </li>
 </ul>
 
-<h2><a href="/docs/databases-relations#permissions" id="permissions">Permissions</a></h2>
+<h2><a href="#permissions" id="permissions">Permissions</a></h2>
 <p>To access documents in a relationship, you must have permission to access both the parent and child documents.</p>
 
 <p>When creating both the parent and child documents, the child document will <b>inherit permissions</b> from its parent.</p>
@@ -874,6 +874,6 @@ databases.createDocument(
 
 <p>When creating, updating, or deleting in a relationship, you must have permission to access all documents referenced. If the user does not have read permission to any document, an exception will be thrown.</p>
 
-<h2><a href="/docs/databases-relations#limitations" id="limitations">Limitations</a></h2>
+<h2><a href="#limitations" id="limitations">Limitations</a></h2>
 <p>Relationships can be nested between collections, but are restricted to a <b>max depth of three levels</b>. Relationship attribute key, type, and directionality can't be updated. On-delete behavior is the only option that can be updated for relationship attributes.</p>
  
