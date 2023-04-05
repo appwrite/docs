@@ -1,7 +1,12 @@
 <p>
     The Databases Service allows you to store your application and users' data and fetch it using different supported queries.
-    Using the Databases Service, you can create multiple databases and organize your data into collections of documents using Appwrite's REST API. You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your database.
-    In addition, the Databases Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance, and a flexible permissions mechanism to easily segment data between different users, teams, and roles.
+    You can organize your data into a three-level hierarchy, which are databases, collections, and documents. 
+    Each database is a group of collections, each collection is a group of documents that share the same schema, and each document contains a set of data.
+</p>
+
+<p>    
+    In addition, the Databases Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance, relationships to link data, and a flexible permissions mechanism to easily segment data between different users, teams, and roles.
+    You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your database.
 </p>
 
 <h2><a href="/docs/databases#databases" id="databases">Create Your Databases</a></h2>
@@ -11,7 +16,7 @@
 
 <p>
     You can create your database by adding it to your Appwrite project's dashboard. Access the Databases Service settings from your project's left-hand navigation panel.
-    To create a new database, click the <b>Add Database</b> button. Name your new database, and optionally provide a custom database ID.
+    To create a new database, click the <b>Create Database</b> button. Name your new database, and optionally provide a custom database ID.
 </p>
 
 <p>
@@ -86,13 +91,13 @@
         </tr>
         <tr>
             <td><code>relationship</code></td>
-            <td>Relationship attribute relates one collection to another. <a href="/docs/databases-relations">Learn more about collections.</a></td>
+            <td>Relationship attribute relates one collection to another. <a href="/docs/databases-relations">Learn more about relationships.</a></td>
         </tr>
     </tbody>
 </table>
 
 <p>
-    If an attribute must be populated in all documents, set it as <code>required</code>. If not, a default value might be handy, but is not required. Additionally, decide if the attribute should be a primitive or an array of values.
+    If an attribute must be populated in all documents, set it as <code>required</code>. If not, you may optionally set a default value. Additionally, decide if the attribute should be a single value or an array of values.
 </p>
 <p>
     When adding or removing attributes, your requests are processed in the background, indicated by the attribute's <span class="tag">status</span>.
@@ -107,7 +112,7 @@
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, ID } from "appwrite";
 
 const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
@@ -257,7 +262,7 @@ func main() async throws {
         </tr>
         <tr>
             <td><code>fulltext</code></td>
-            <td>For searching within string attributes</td>
+            <td>For searching within string attributes. Required for the <a href="/docs/queries#query-class">search</a> query method.</td>
         </tr>
     </tbody>
 </table>

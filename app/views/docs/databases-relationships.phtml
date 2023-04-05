@@ -79,15 +79,15 @@
     </thead>
     <tbody>
         <tr>
-            <td><code>Restrict</code></td>
+            <td>Restrict</td>
             <td>If a document has at least one related document, it cannot be deleted.</td>
         </tr>
         <tr>
-            <td><code>Cascade</code></td>
+            <td>Cascade</td>
             <td>If a document has related documents, when it is deleted, the related documents are <b>also</b> deleted.</td>
         </tr>
         <tr>
-            <td><code>Set null</code></td>
+            <td>Set null</td>
             <td>If a document has related documents, when it is deleted, the related documents are kept with their <b>relationship attribute</b> set to <b>null</b>.</td>
         </tr>
     </tbody>
@@ -160,13 +160,12 @@ $databases->createRelationshipAttribute(
     <li>
         <h3>Python</h3>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>
-            from appwrite.client import Client
+            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 from appwrite.services.databases import Databases
 
-client = Client() \
-    .set_endpoint('https://[HOSTNAME_OR_IP]/v1') \  # Your API Endpoint
-    .set_project('5df5acd0d48c2')                   # Your project ID
+client = (Client()
+    .set_endpoint('https://[HOSTNAME_OR_IP]/v1')     # Your API Endpoint
+    .set_project('5df5acd0d48c2'))                   # Your project ID
 
 databases = Databases(client)
 
@@ -661,7 +660,7 @@ databases.updateDocument(
 
 <p>If the on-delete behavior is <b>restrict</b>, the link between the documents needs to be deleted first before the documents can be deleted <b>individually</b>.</p>
 
-<p>If the on-delete behavior is <b>set null</b>, deleting a document will leave related documents in place with their relationship attribute <b> set to null</b>. If you wish to also delete related documents, they must be deleted <b>individually</b>. Before deleting a document, store the IDs in the relationship attribute so you don't lose track of related documents.</p>
+<p>If the on-delete behavior is <b>set null</b>, deleting a document will leave related documents in place with their relationship attribute <b> set to null</b>. If you wish to also delete related documents, they must be deleted <b>individually</b>.</p>
 
 <p>If the on-delete behavior is <b>cascade</b>, deleting the parent documents also deletes <b>related child documents</b>.</p>
 <ul class="phases clear" data-ui-phases>
