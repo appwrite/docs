@@ -1,6 +1,6 @@
 <p>Many list endpoints in Appwrite allow you to filter, sort, and paginate results using queries. Appwrite provides a common set of syntax to build queries.</p>
 
-<h2><a href="/docs/queries#query-compatibility" id="queryable-compatibility">Query compatibility</a></h2>
+<h2><a href="/docs/queries#query-compatibility" id="queryable-compatibility">Query Compatibility</a></h2>
 <p>Each list endpoint supports different query operations. You can find the supported query methods and attributes in the <b>References</b> section of the Appwrite documentation.</p>
 
 <h2><a href="/docs/queries#query-class" id="query-class">Query Class</a></h2>
@@ -14,6 +14,11 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>Select</td>
+            <td><code>Query.select(["name", "title"])</code></td>
+            <td>Select which attributes should be returned from a document.</td>
+        </tr>
         <tr>
             <td>Equal</td>
             <td><code>Query.equal("title", ["Iron Man"])</code></td>
@@ -73,11 +78,6 @@
             <td>Search</td>
             <td><code>Query.search("text", "key words")</code></td>
             <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
-        </tr>
-        <tr>
-            <td>Select</td>
-            <td><code>Query.select(["name", "title"])</code></td>
-            <td>Fetch only a specific subset of attributes of a document.</td>
         </tr>
         <tr>
             <td>Order Descending</td>
