@@ -303,8 +303,6 @@ databases.createRelationshipAttribute(
 
 <p>The above example adds a relationship between the collections <b>movies</b> and <b>reviews</b>. A relationship attribute with the key <code>reviews</code> is added to the movies collection and another relationship attribute with the key <code>movie</code> is added to the reviews collection.</p>
 
-<p>Relationship attribute keys are used to reference the related collection in queries, so pick something that's intuitive and easy to remember.</p>
-
 <h2><a href="#create-documents" id="create-documents">Creating Documents</a></h2>
 <p>If a collection has relationship attributes, you can create documents in two ways.</p>
 
@@ -419,8 +417,9 @@ databases.createDocument(
     </li>
 </ul>
 
-<p>If a nested document is included and <b>no conflicting document ID</b> exists, the child document will be <b>created</b>.</p>
-<p>If a nested document is included and the <b>document ID already exists</b>, the child document will be <b>updated</b>.</p>
+<p>If a nested child document is included and <b>no child document ID</b> is provided, the child document will be given a unique ID.</p>
+<p>If a nested child document is included and <b>no conflicting child document ID</b> exists, the child document will be <b>created</b>.</p>
+<p>If a nested child document is included and the <b>child document ID already exists</b>, the child document will be <b>updated</b>.</p>
 
 <h3><a href="#create-reference" id="create-reference">Reference Child Documents</a></h3>
 
