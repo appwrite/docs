@@ -1,5 +1,5 @@
 <p>
-    You can exand Appwrite's APIs by building backend apps using <a href="/docs/command-line">Server SDKs</a>. Appwrite enables you to authenticate your Web, Flutter, Android, or Apple application directly with your backend apps using JWT authentication.
+    You can extend Appwrite's APIs by building backend apps using <a href="/docs/getting-started-for-server">Server SDKs</a>. To secure your backend app's APIs, client apps must prove their identity against your backend app before accessing sensitive information. You can secure these APIs and enforce access permissions in your backend app by using JWT authentication.
 </p>
 
 <p>
@@ -9,7 +9,7 @@
 <h2><a href="/docs/authentication-server#proof-of-identity" id="proof-of-identity">Proof of Identity</a></h2>
 <p>Before making requests to your backend APIs, your client application needs to first create a session <b>directly with Appwrite</b> using the account service. This session will act like an ID card for the user and can be used to access resources in Appwrite. The client will <b>only receive information accessible to the user</b> based on the resources's <a href="/docs/permissions">permissions</a>.</p>
 
-<p>When you build backend APIs to expand Appwrite's functionality, these APIs should still <b>respect access permissions</b> to keep user data secure. Appwrite's backend SDKs allows you to securely act on behalf of a user with the same permissions by using JWT authentication.</p>
+<p>When you build backend APIs to extend Appwrite's functionality, these APIs should still <b>respect access permissions</b> to keep user data secure. Appwrite's backend SDKs allows you to securely act on behalf of a user with the same permissions by using JWT authentication.</p>
 
 <h2><a href="/docs/authentication-server#jwt" id="jwt">JWT Authentication</a></h2>
 <p><a href="https://jwt.io/introduction" target="_blank" rel="noopener">JSON Web Tokens</a> (JWTs) are a secure means to transfer information or claims between two parties. JWT act like temporary copies of the user's ID card that allow Appwrite's Server SDKs to access information oh behalf of a user.</p>
