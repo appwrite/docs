@@ -12,11 +12,18 @@ The Apprite CLI allows you to create and deploy collections and functions to you
 
 <p>The following prompts will guide you through the setup process. The init command also creates an <a href="/docs/command-line-deployment#appwriteJSON">appwrite.json</a> file representing your Appwrite project.
 
-<p>You can also fetch all the collections in your current project using:</p>
+<p>You can fetch all the existing collections in your current project using:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init collection</code></pre>
 </div>
+
+<p>You can fetch all the existing teams in your current project using:</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init team</code></pre>
+</div>
+
 
 <h2><a href="/docs/command-line-deployment#deployFunctions" id="deployFunctions">Deploying Cloud Functions</a></h2>
 
@@ -84,6 +91,11 @@ The Apprite CLI allows you to create and deploy collections and functions to you
             <td>array of <a href="/docs/command-line-deployment#collection-options">collections</a></td>
             <td>Configuration of collections in your project.</td>
         </tr>
+        <tr>
+            <td><code>teams</code></td>
+            <td>array of <a href="/docs/command-line-deployment#teams-options">teams</a></td>
+            <td>Configuration of teams in your project.</td>
+        </tr>
     </tbody>
 </table>
 
@@ -110,7 +122,7 @@ The Apprite CLI allows you to create and deploy collections and functions to you
         <tr>
             <td><code>runtime</td>
             <td>string</td>
-            <td>Function runtime, must be enabled. <a href="docs/functions#supportedRuntimes">Learn more about runtimes</a>.</td>
+            <td>Function runtime, must be enabled. <a href="/docs/functions#supportedRuntimes">Learn more about runtimes</a>.</td>
         </tr>
         <tr>
             <td><code>path</code></td>
@@ -125,17 +137,17 @@ The Apprite CLI allows you to create and deploy collections and functions to you
         <tr>
             <td><code>ignore</code></td>
             <td>array of strings</td>
-            <td>Files to ignore inside the function. <a href="docs/functions#ignoreFiles">Learn more about ignoring files</a>.</td>
+            <td>Files to ignore inside the function. <a href="/docs/functions#ignoreFiles">Learn more about ignoring files</a>.</td>
         </tr>
         <tr>
             <td><code>execute</code></td>
             <td>array of strings</td>
-            <td>Grants execute permissions to users. <a href="docs/rest#permissions">Learn more about role strings</a>.</td>
+            <td>Grants execute permissions to users. <a href="/docs/rest#permissions">Learn more about role strings</a>.</td>
         </tr>
         <tr>
             <td><code>events</code></td>
             <td>array of strings</td>
-            <td>Events that trigger the function to execute. <a href="docs/events">Learn more about events</a>.</td>
+            <td>Events that trigger the function to execute. <a href="/docs/events">Learn more about events</a>.</td>
         </tr>
         <tr>
             <td><code>schedule</code></td>
@@ -193,17 +205,41 @@ The Apprite CLI allows you to create and deploy collections and functions to you
         <tr>
             <td><code>permissions</code></td>
             <td>array of strings</td>
-            <td>Grants access permissions to users at the collection level. <a href="docs/rest#permissions">Learn more about permissions</a>.</td>
+            <td>Grants access permissions to users at the collection level. <a href="/docs/rest#permissions">Learn more about permissions</a>.</td>
         </tr>
         <tr>
             <td><code>attributes</code></td>
             <td>array of objects</td>
-            <td>Defines a list of attributes in the collection. <a href="docs/models/attributeList">Learn more about the Attributes List Object</a>.</td>
+            <td>Defines a list of attributes in the collection. <a href="/docs/models/attributeList">Learn more about the Attributes List Object</a>.</td>
         </tr>
         <tr>
             <td><code>indexes</code></td>
             <td>array of objects</td>
-            <td>Defines a list of indexes in the collection. <a href="docs/models/indexList">Learn more about the Indexes List Object</a>.</td>
+            <td>Defines a list of indexes in the collection. <a href="/docs/models/indexList">Learn more about the Indexes List Object</a>.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3><a href="/docs/command-line-deployment#teams-options" id="teams-options">Teams Options</a></h3>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 150px">Option</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>$id</code></td>
+            <td>string</td>
+            <td>Team ID.</td>
+        </tr>
+        <tr>
+            <td><code>name</code></td>
+            <td>string</td>
+            <td>Team Name.</td>
         </tr>
     </tbody>
 </table>

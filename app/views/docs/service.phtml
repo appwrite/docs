@@ -100,7 +100,7 @@ if (!\function_exists('skipLanguage')) {
             }
             ?>
 
-        <?php foreach ($platform['languages'] as $language):
+        <?php foreach ($platform['sdks'] as $language):
             if(!$language['enabled']) {
                continue;
             }
@@ -159,10 +159,10 @@ if (!\function_exists('skipLanguage')) {
                     <select class="choose-platform" name="URL">
                         <?php foreach ($platforms as $key => $platform): ?>
                             <?php
-                                $sdkLanguages = \array_filter($platform['languages'], function ($language) use ($family) {
+                                $sdkLanguages = \array_filter($platform['sdks'], function ($language) use ($family) {
                                     return $language['isSDK'] ?? true;
                                 });
-                                $exampleLanguages = \array_filter($platform['languages'], function ($language) use ($family) {
+                                $exampleLanguages = \array_filter($platform['sdks'], function ($language) use ($family) {
                                     return !($language['isSDK'] ?? true);
                                 });
                             ?>
@@ -525,7 +525,7 @@ if (!\function_exists('skipLanguage')) {
                                 continue;
                             }
 
-                            foreach ($platform['languages'] as $language):
+                            foreach ($platform['sdks'] as $language):
                                 if(!$language['enabled']) {
                                     continue;
                                 }

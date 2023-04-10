@@ -4,9 +4,9 @@
 
 <h2><a href="/docs/pagination#offset-pagination" id="offset-pagination">Offset Pagination</a></h2>
 <p>
-    Using <span class="tag">limit</span> and <span class="tag">offset</span> you can achieve one of the most common approaches to pagination.
-    With <span class="tag">limit</span> you can define to how many documents that can be returned from one request, which can be up to a maximum of 100 documents.
-    The <span class="tag">offset</span> is simply the number of records you wish to skip before selecting records.
+    Using <code>Query.limit()</code> and <code>Query.offset()</code> you can achieve one of the most common approaches to pagination.
+    With <code>Query.limit()</code> you can define to how many documents that can be returned from one request, which can be up to a maximum of 100 documents.
+    The <code>Query.offset()</code> is simply the number of records you wish to skip before selecting records.
 </p>
 
 <ul class="phases clear" data-ui-phases>
@@ -151,8 +151,7 @@ func main() async throws {
 
 <h2><a href="/docs/pagination#cursor-pagination" id="cursor-pagination">Cursor Pagination</a></h2>
 <p>
-    The <span class="tag">cursor</span> is a unique identifier for a specific record, which acts as a pointer to the next record we want to start querying from to get the next page of results.
-    Additionally to the <span class="tag">cursor</span> you can pass the cursor position as the <span class="tag">cursorDirection</span> before and after allowing you to get paginate back and forth.
+    The cursor is a unique identifier for a document that points to where the next page should start. After reading a page of documents, pass the last document's ID into the <code>Query.cursorAfter(lastId)</code> query method to get the next page of documents. Pass the first document's ID into the <code>Query.cursorBefore(firstId)</code> query method to retrieve the previous page.
 </p>
 
 <ul class="phases clear" data-ui-phases>
