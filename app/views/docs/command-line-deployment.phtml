@@ -1,5 +1,5 @@
 <p>
-The Apprite CLI allows you to create and deploy collections and functions to your Appwrite project from a configuration file. This is especially helpful if you're trying to track functions and collection schemas using version control, or if you're promoting changes from development to production environments.
+The Apprite CLI allows you to create and deploy databases, collections, buckets, teams and functions to your Appwrite project from a configuration file. This is especially helpful if you're trying to track project setup using version control.
 </p>
 
 <h2><a href="/docs/command-line-deployment#initializeProject" id="initializeProject">Initializing Your Project</a></h2>
@@ -12,7 +12,7 @@ The Apprite CLI allows you to create and deploy collections and functions to you
 
 <p>The following prompts will guide you through the setup process. The init command also creates an <a href="/docs/command-line-deployment#appwriteJSON">appwrite.json</a> file representing your Appwrite project.
 
-<p>You can fetch all the existing collections in your current project using:</p>
+<p>You can fetch all the existing databases and collections in your current project using:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init collection</code></pre>
@@ -25,7 +25,7 @@ The Apprite CLI allows you to create and deploy collections and functions to you
 </div>
 
 
-<h2><a href="/docs/command-line-deployment#deployFunctions" id="deployFunctions">Deploying Cloud Functions</a></h2>
+<h2><a href="/docs/command-line-deployment#deployFunctions" id="deployFunctions">Deploying Appwrite Functions</a></h2>
 
 <p>The CLI also handles the creation and deployment of Appwrite Functions. You can initialize a new function using:</p>
 
@@ -45,12 +45,29 @@ The Apprite CLI allows you to create and deploy collections and functions to you
 ✓ Success Deployed Awesome Function ( 621229798628cf5bf712 )</code></pre>
 </div>
 
-<h2><a href="/docs/command-line-deployment#deployCollections" id="deployCollections">Deploying collections</a></h2>
+<h2><a href="/docs/command-line-deployment#deployCollections" id="deployCollections">Deploying Databases and Collections</a></h2>
 
-<p>The Appwrite CLI also helps you migrate your project's collections from a development server to a production server. You can deploy all the collections in your <a href="/docs/command-line-deployment#appwriteJSON">appwrite.json</a> file using:</p>
+<p>The Appwrite CLI also helps you migrate your project's databases and collections from a development server to a production server. You can deploy all the databases and collections in your <a href="/docs/command-line-deployment#appwriteJSON">appwrite.json</a> file using:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collections</code></pre>
+</div>
+
+<h2><a href="/docs/command-line-deployment#teams" id="teams">Deploying Teams</a></h2>
+
+<p>The Appwrite CLI can create teams to organize users. Teams can be used to grant access permissions to a group of users. <a href="/docs/permissions#permission-roles">Learn more about permissions</a>.</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy teams</code></pre>
+</div>
+
+
+<h2><a href="/docs/command-line-deployment#deployBucket" id="deployBucket">Deploying Storage Buckets</a></h2>
+
+<p>The Appwrite CLI allows you to configure and deploy buckets across projects. All the bucket's settings are available through the <a href="/docs/command-line-deployment#appwriteJSON">appwrite.json</a> file.</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy buckets</code></pre>
 </div>
 
 <h2><a href="/docs/command-line-deployment#avoidingConflicts" id="avoidingConflicts">Avoiding Conflicts</a></h2>
@@ -87,6 +104,11 @@ The Apprite CLI allows you to create and deploy collections and functions to you
             <td>Configuration of functions in your project.</td>
         </tr>
         <tr>
+            <td><code>databases</code></td>
+            <td>array of <a href="/docs/command-line-deployment#databases-options">databases</a></td>
+            <td>Configuration of databases in your project.</td>
+        </tr>
+        <tr>
             <td><code>collections</code></td>
             <td>array of <a href="/docs/command-line-deployment#collection-options">collections</a></td>
             <td>Configuration of collections in your project.</td>
@@ -94,6 +116,11 @@ The Apprite CLI allows you to create and deploy collections and functions to you
         <tr>
             <td><code>teams</code></td>
             <td>array of <a href="/docs/command-line-deployment#teams-options">teams</a></td>
+            <td>Configuration of teams in your project.</td>
+        </tr>
+        <tr>
+            <td><code>buckets</code></td>
+            <td>array of <a href="/docs/command-line-deployment#buckets-options">buckets</a></td>
             <td>Configuration of teams in your project.</td>
         </tr>
     </tbody>
@@ -167,6 +194,29 @@ The Apprite CLI allows you to create and deploy collections and functions to you
     </tbody>
 </table>
 
+<h3><a href="/docs/command-line-deployment#databases-options" id="databases-options">Databases Options</a></h3>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 150px">Option</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>$id</code></td>
+            <td>string</td>
+            <td>Database ID.</td>
+        </tr>
+        <tr>
+            <td><code>name</code></td>
+            <td>string</td>
+            <td>Database Name.</td>
+        </tr>
+    </tbody>
+</table>
+
 <h3><a href="/docs/command-line-deployment#collection-options" id="collection-options">Collection Options</a></h3>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
@@ -220,6 +270,68 @@ The Apprite CLI allows you to create and deploy collections and functions to you
     </tbody>
 </table>
 
+<h3><a href="/docs/command-line-deployment#buckets-options" id="buckets-options">Buckets Options</a></h3>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 150px">Option</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>$id</code></td>
+            <td>string</td>
+            <td>Bucket ID.</td>
+        </tr>
+        <tr>
+            <td><code>name</code></td>
+            <td>string</td>
+            <td>Bucket Name.</td>
+        </tr>
+        <tr>
+            <td><code>$permissions</code></td>
+            <td>array of strings</td>
+            <td>Grants access permissions to users at the bucket level. <a href="/docs/rest#permissions">Learn more about permissions</a>.</td>
+        </tr>
+        <tr>
+            <td><code>fileSecurity</code></td>
+            <td>boolean</td>
+            <td>Whether file-level security is enabled. <a href="/docs/rest#permissions">Learn more about permissions</a>.</td>
+        </tr>
+        <tr>
+            <td><code>enabled</code></td>
+            <td>boolean</td>
+            <td>Whether the bucket is enabled or disabled.</td>
+        </tr>
+        <tr>
+            <td><code>maximumFileSize</code></td>
+            <td>integer</td>
+            <td>Maximum file size supported.</td>
+        </tr>
+        <tr>
+            <td><code>allowedFileExtensions</code></td>
+            <td>string[]</td>
+            <td>List of allowed file extensions.</td>
+        </tr>
+        <tr>
+            <td><code>compression</code></td>
+            <td>string</td>
+            <td>Preferred algorithm for compression. Will be one of <code>none</code>, <code>gzip</code>, or <code>zstd</code>.</td>
+        </tr>
+        <tr>
+            <td><code>encryption</code></td>
+            <td>boolean</td>
+            <td>Whether the bucket's content is encrypted.</td>
+        </tr>
+        <tr>
+            <td><code>antivirus</code></td>
+            <td>boolean</td>
+            <td>Whether virus scanning is enabled for the bucket's content.</td>
+        </tr>
+    </tbody>
+</table>
 
 <h3><a href="/docs/command-line-deployment#teams-options" id="teams-options">Teams Options</a></h3>
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
