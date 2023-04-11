@@ -81,7 +81,7 @@
 <h2><a href="/docs/authentication-security#security" id="security">Security</a></h2>
 
 <p>
-    Security is very important to protect users' data and privacy. Appwrite uses a <a href="/docs/permissions">permissions model</a> coupled with user sessions to ensure users need correct permissions to access resources.With all Appwrite services, including databases and storage, access is granted at the collection, bucket, document, or file level. These permissions are consistently enforced regardless of which SDK or API is used to access a resource.
+    Security is very important to protect users' data and privacy. Appwrite uses a <a href="/docs/permissions">permissions model</a> coupled with user sessions to ensure users need correct permissions to access resources. With all Appwrite services, including databases and storage, access is granted at the collection, bucket, document, or file level. These permissions are enforced for client SDKs and server SDKs when using JWT, but are ignored when using a server SDK with an API key.
 </p>
 
 <h2><a href="/docs/authentication-security#password-history" id="password-history">Password History</a></h2>
