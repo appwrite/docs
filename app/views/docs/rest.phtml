@@ -321,6 +321,10 @@ Appwrite's SDKs provide a <code>Query</code> class to generate query strings. Wh
     </thead>
     <tbody>
         <tr>
+            <td>select</td>
+            <td><code>select([attribute])</code></td>
+        </tr>
+        <tr>
             <td>equal</td>
             <td><code>equal("attribute", [value])</code></td>
         </tr>
@@ -345,8 +349,28 @@ Appwrite's SDKs provide a <code>Query</code> class to generate query strings. Wh
             <td><code>greaterThanEqual("attribute", [value])</code></td>
         </tr>
         <tr>
+            <td>between</td>
+            <td><code>between("attribute", lowerBound, upperBound)</code></td>
+        </tr>
+        <tr>
+            <td>isNull</td>
+            <td><code>isNull("attribute")</code></td>
+        </tr>
+        <tr>
+            <td>isNotNull</td>
+            <td><code>isNotNull("attribute")</code></td>
+        </tr>
+        <tr>
+            <td>startsWith</td>
+            <td><code>startsWith("attribute", [value])</code></td>
+        </tr>
+        <tr>
+            <td>endsWith</td>
+            <td><code>endsWith("attribute", [value])</code></td>
+        </tr>
+        <tr>
             <td>search</td>
-            <td><code>search("attribute", [value1])</code></td>
+            <td><code>search("attribute", [value])</code></td>
         </tr>
         <tr>
             <td>orderDesc</td>
