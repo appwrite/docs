@@ -7,7 +7,7 @@ $runtimes = $this->getParam('runtimes', []);
 
 ?>
 
-<p>Appwrite Functions allow you to extend and customize your Appwrite server functionality by executing your custom code. Appwrite can execute your custom code in response to any <a href="/docs/events" target="_blank">Appwrite system event</a> like account creation, user login, or document update. You can also schedule your functions to run according to a CRON schedule or start them manually by triggering your function from an HTTP endpoint using the Appwrite client or server APIs.</p>
+<p>Appwrite Functions allow you to extend and customize your Appwrite server functionality by executing your custom code. Appwrite can execute your custom code in response to any <a href="/docs/events" target="_blank">Appwrite system event</a> like account creation, user login, or document update. You can also <a href="/docs/functions#scheduled-execution">schedule your functions</a> or start them manually by triggering your function from an HTTP endpoint using the Appwrite client or server APIs.</p>
 
 <p>Appwrite Functions run in a secure, isolated Docker container. By default, Appwrite supports multiple runtimes for different languages that you can use to run your code.</p>
 
@@ -683,6 +683,37 @@ func main() async throws {
     </li>
 </ul>
 
+<h2><a href="/docs/functions#scheduled-execution" id="scheduled-execution">Scheduled Execution</a></h2>
+<p>Appwrite supports scheduled function executions. You can schedule executions using <a href="https://en.wikipedia.org/wiki/Cron" target="_blank" rel="noopener">cron expressions</a> in the settings of your function. Cron supports recurring executions as frequently as <b>every minute</b>.</p>
+
+<p>Here are some cron expressions for common intervals.</p>
+
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td>Cron Expression</td>
+        <td>Schedule</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>*/15 * * * *</td>
+        <td>Every 15 minutes</td>
+    </tr>
+    <tr>
+        <td>0 * * * *</td>
+        <td>Every Hour</td>
+    </tr>
+    <tr>
+        <td>0 0 * * *</td>
+        <td>Every day at 00:00</td>
+    </tr>
+    <tr>
+        <td>0 0 * * 1</td>
+        <td>Every monday at 00:00</td>
+    </tr>
+    </tbody>
+</table>
 
 <h3><a href="/docs/functions#abuseLimits" id="abuseLimits">Abuse and Limits</a></h3>
 

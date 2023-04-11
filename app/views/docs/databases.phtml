@@ -1,8 +1,12 @@
 <p>
     The Databases Service allows you to store your application and users' data and fetch it using different supported queries.
-    Using your Appwrite Databases, you can create multiple databases, organize your data into collections and documents using the Appwrite REST API. You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your collections and documents.
-    In addition, the Databases Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance,
-    as well as a flexible permissions mechanism to allow you to easily segment data between different users, teams, and roles.
+    You can organize your data into a three-level hierarchy, which are databases, collections, and documents. 
+    Each database is a group of collections, each collection is a group of documents that share the same schema, and each document contains a set of data.
+</p>
+
+<p>    
+    In addition, the Databases Service provides built-in validation to check the integrity of your incoming data, custom indexing for query performance, relationships to link data, and a flexible permissions mechanism to easily segment data between different users, teams, and roles.
+    You can also use the Appwrite <a href="/docs/realtime">Realtime API</a> to subscribe to live changes in your database.
 </p>
 
 <h2><a href="/docs/databases#databases" id="databases">Create Your Databases</a></h2>
@@ -12,7 +16,7 @@
 
 <p>
     You can create your database by adding it to your Appwrite project's dashboard. Access the Databases Service settings from your project's left-hand navigation panel.
-    To create a new database, click the <b>Add Database</b> button. Name your new database, and optionally provide a custom database ID.
+    To create a new database, click the <b>Create Database</b> button. Name your new database, and optionally provide a custom database ID.
 </p>
 
 <p>
@@ -54,42 +58,46 @@
     </thead>
     <tbody>
         <tr>
-            <td>string</td>
+            <td><code>string</code></td>
             <td>String attribute.</td>
         </tr>
         <tr>
-            <td>integer</td>
+            <td><code>integer</code></td>
             <td>Integer attribute.</td>
         </tr>
         <tr>
-            <td>float</td>
+            <td><code>float</code></td>
             <td>Float attribute.</td>
         </tr>
         <tr>
-            <td>boolean</td>
+            <td><code>boolean</code></td>
             <td>Boolean attribute.</td>
         </tr>
         <tr>
-            <td>enum</td>
+            <td><code>enum</code></td>
             <td>Enum attribute.</td>
         </tr>
         <tr>
-            <td>ip</td>
+            <td><code>ip</code></td>
             <td>IP address attribute for IPv4 and IPv6.</td>
         </tr>
         <tr>
-            <td>email</td>
+            <td><code>email</code></td>
             <td>Email address attribute.</td>
         </tr>
         <tr>
-            <td>url</td>
+            <td><code>url</code></td>
             <td>URL attribute.</td>
+        </tr>
+        <tr>
+            <td><code>relationship</code></td>
+            <td>Relationship attribute relates one collection to another. <a href="/docs/databases-relations">Learn more about relationships.</a></td>
         </tr>
     </tbody>
 </table>
 
 <p>
-    If an attribute must be present in all documents, set it as <span class="tag">required</span>. If not, a <span class="tag">default</span> value might be handy. Additionally, decide if the attribute should be a primitive or array of values.
+    If an attribute must be populated in all documents, set it as <code>required</code>. If not, you may optionally set a default value. Additionally, decide if the attribute should be a single value or an array of values.
 </p>
 <p>
     When adding or removing attributes, your requests are processed in the background, indicated by the attribute's <span class="tag">status</span>.
@@ -104,7 +112,7 @@
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, ID } from "appwrite";
 
 const client = new Client()
     .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
@@ -226,16 +234,42 @@ func main() async throws {
     </li>
 </ul>
 
-
-<h3><a href="/docs/databases#querying-documents" id="querying-documents">Querying Documents</a></h3>
-
-<div class="notice margin-top-large margin-bottom-large">
-    <h4>Indexes Required</h4>
-    <p>You can only query indexed attributes. You can easily add new indexes from both the Appwrite console or any of the <a href="/docs/sdks#server">server SDKs</a>. Appwrite uses this limitation to enforce optimized queries for maximum performance and scalability of your collection. You can learn more about it in the <a href="/docs/databases#indexes">Appwrite Indexes</a> section.</p>
-</div>
+<h2><a href="/docs/databases#indexes" id="indexes">Indexes</a></h2>
 <p>
-    To find specific documents in a collection, pass an array of query strings as a parameter to the <a href="/docs/server/databases#databasesListDocuments">listDocuments</a> endpoint. The SDKs provide a <b>Query</b> class to make query building simpler:
+    Databases use indexes to quickly locate data without having to search through every document for matches.
+    To ensure the best performance, Appwrite recommends an index for every attribute queried.
+    You can create an index by navigating to your collection's <b>Indexes</b> tab or by using your favorite Server SDK. If you plan to query multiple attributes in a single query, creating an index with <b>all</b> queried attributes will yield optimal performance.
 </p>
+
+<p>
+    The following indexes are currently supported:
+</p>
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>key</code></td>
+            <td>Plain Index to allow queries.</td>
+        </tr>
+        <tr>
+            <td><code>unique</code></td>
+            <td>Unique Index to disallow duplicates.</td>
+        </tr>
+        <tr>
+            <td><code>fulltext</code></td>
+            <td>For searching within string attributes. Required for the <a href="/docs/queries#query-class">search</a> query method.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2><a href="/docs/databases#retrieve" id="retrieve">Retrieving Documents</a></h2>
+<p>Documents can be retrieved using the <a href="/docs/client/databases#databasesListDocument">List Document</a> endpoint. Results can be filtered, sorted, and paginated using Appwrite's shared set of query methods. You can find a full guide on querying in the <a href="/docs/queries">Queries Guide</a>.</p>
+
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
@@ -365,500 +399,3 @@ func main() async throws{
         </div>
     </li>
 </ul>
-
-<p>The following query methods are currently supported:</p>
-<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
-    <thead>
-        <tr>
-            <th style="width: 150px">Query Method</th>
-            <th>SDK Method Example</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>equal</td>
-            <td>Query.equal("title", ["Iron Man"])</td>
-            <td>Returns document if attribute is equal to any value in the provided array. Applies to any indexed attribute.</td>
-        </tr>
-        <tr>
-            <td>notEqual</td>
-            <td>Query.notEqual("title", ["Iron Man"])</td>
-            <td>Returns document if attribute is not equal to any value in the provided array. Applies to any indexed attribute.</td>
-        </tr>
-        <tr>
-            <td>lessThan</td>
-            <td>Query.lessThan("score", 10)</td>
-            <td>Returns document if attribute is less than the provided value. Applies to any indexed attribute.</td>
-        </tr>
-        <tr>
-            <td>lessThanEqual</td>
-            <td>Query.lessThanEqual("score", 10)</td>
-            <td>Returns document if attribute is less than or equal to the provided value. Applies to any indexed attribute.</td>
-        </tr>
-        <tr>
-            <td>greaterThan</td>
-            <td>Query.greaterThan("score", 10)</td>
-            <td>Returns document if attribute is greater than the provided value. Applies to any indexed attribute.</td>
-        </tr>
-        <tr>
-            <td>greaterThanEqual</td>
-            <td>Query.greaterThanEqual("score", 10)</td>
-            <td>Returns document if attribute is greater than or equal to the provided value. Applies to any indexed attribute.</td>
-        </tr>
-        <tr>
-            <td>search</td>
-            <td>Query.search("text", "key words")</td>
-            <td>Searches string attributes for provided keywords. Applies to any string attribute with a full-text index.</td>
-        </tr>
-        <tr>
-            <td>orderDesc</td>
-            <td>Query.orderDesc("attribute")</td>
-            <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
-        </tr>
-        <tr>
-            <td>orderAsc</td>
-            <td>Query.orderAsc("attribute")</td>
-            <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
-        </tr>
-        <tr>
-            <td>limit</td>
-            <td>Query.limit(25)</td>
-            <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
-        </tr>
-        <tr>
-            <td>offset</td>
-            <td>Query.offset(0)</td>
-            <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
-        </tr>
-        <tr>
-            <td>cursorAfter</td>
-            <td>Query.cursorAfter("62a7...f620")</td>
-            <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
-        </tr>
-        <tr>
-            <td>cursorBefore</td>
-            <td>Query.cursorBefore("62a7...a600")</td>
-            <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
-        </tr>
-    </tbody>
-</table>
-
-<p>Each query string is logically separated via AND. For OR logic, pass multiple values, separated by commas:</p>
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Web</h3>
-        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
-
-const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
-    .setProject('[PROJECT_ID]');
-
-const databases = new Databases(client);
-
-databases.listDocuments(
-    '[DATABASE_ID]',
-    '[COLLECTION_ID]',
-    [
-        Query.equal('title', ['Avatar', 'Lord of the Rings']),
-        Query.greaterThan('year', 1999)
-    ]
-);</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Flutter</h3>
-        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
-
-void main() async {
-    final client = Client()
-        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
-        .setProject('[PROJECT_ID]');
-
-    final databases = Databases(client);
-
-    try {
-        final documents = await databases.listDocuments(
-            '[DATABASE_ID]',
-            '[COLLECTION_ID]',
-            [
-                Query.equal('title', ['Avatar', 'Lord of the Rings']),
-                Query.greaterThan('year', 1999)
-            ]
-        );
-    } on AppwriteException catch(e) {
-        print(e);
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Android</h3>
-        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
-import io.appwrite.Query
-import io.appwrite.services.Databases
-
-suspend fun main() {
-    val client = Client(applicationContext)
-        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
-        .setProject('[PROJECT_ID]');
-
-    val databases = Databases(client)
-
-    try {
-        val documents = databases.listDocuments(
-            databaseId = "[DATABASE_ID]",
-            collectionId = "[COLLECTION_ID]",
-            queries = listOf(
-                Query.equal("title", listOf("Avatar", "Lord of the Rings")),
-                Query.greaterThan("year", 1999)
-            )
-        )
-    } catch (e: AppwriteException) {
-        Log.e("Appwrite", e.message)
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-import AppwriteModels
-
-func main() async throws {
-    let client = Client()
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-        .setProject("[PROJECT_ID]")
-
-    let databases = Databases(client)
-
-    do {
-        let documents = try await databases.listDocuments(
-            databaseId: "[DATABASE_ID]",
-            collectionId: "[COLLECTION_ID]",
-            queries: [
-                Query.equal("title", ["Avatar", "Lord of the Rings"]),
-                Query.greaterThan("year", 1999)
-            ]
-        )
-    } catch {
-        print(error.localizedDescription)
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>GraphQL</h3>
-        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
-    databasesListDocuments(
-        databaseId: "[DATABASE_ID]",
-        collectionId: "[COLLECTION_ID]"
-        queries: ["equal(\"title\", [\"Avatar\", \"Lord of the Rings\"])", "greaterThan(\"year\", 1999)"]
-    ) {
-        total
-        documents {
-            _id
-            data
-        }
-    }
-}</code></pre>
-        </div>
-    </li>
-</ul>
-
-<p>When performing a query against multiple attributes, a single index with all query attributes is required. In the example above, a single index with <b>both</b> <span class="tag">title</span> and <span class="tag">year</span> is required.</p>
-
-<h2><a href="/docs/databases#indexes" id="indexes">Indexes</a></h2>
-<p>
-    Indexes are used by Databases to quickly locate data without having to search through every document for results.
-    To ensure the best performance, Appwrite requires an index for every query.
-    You can create an index by navigating to the <b>Indexes</b> tab of your collection or by using your favorite Server SDK. If you plan to query multiple attributes in a single query, you will need an index with <b>all</b> queried attributes.
-</p>
-<p>It should be noted that Appwrite's database was designed to protect your queries from performing a full-table scan as this is a footgun and could cause catastrophic performance degradation as you scale up your Appwrite project.</p>
-<p>
-    The following indexes are currently supported:
-</p>
-<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
-    <thead>
-        <tr>
-            <th style="width: 250px">Type</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>key</td>
-            <td>Plain Index to allow queries.</td>
-        </tr>
-        <tr>
-            <td>unique</td>
-            <td>Unique Index to disallow duplicates.</td>
-        </tr>
-        <tr>
-            <td>fulltext</td>
-            <td>For searching within string attributes</td>
-        </tr>
-    </tbody>
-</table>
-
-<h3><a href="/docs/databases#ordering" id="ordering">Ordering Results</a></h3>
-<p>When querying using the <a href="/docs/server/databases#databasesListDocuments">listDocuments</a> endpoint, you can specify the order of the documents returned using the <code>Query.orderAsc()</code> and <code>Query.orderDesc()</code> query methods.</p>
-
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Web</h3>
-        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
-
-const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
-    .setProject('[PROJECT_ID]');
-
-const databases = new Databases(client);
-
-databases.listDocuments(
-    '[DATABASE_ID]',
-    '[COLLECTION_ID]',
-    [
-        Query.orderAsc('title'),
-    ]
-);</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Flutter</h3>
-        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
-
-void main() async {
-    final client = Client()
-        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
-        .setProject('[PROJECT_ID]');
-
-    final databases = Databases(client);
-
-    try {
-        final documents = await databases.listDocuments(
-            databaseId: '[DATABASE_ID]',
-            collectionId: '[COLLECTION_ID]',
-            queries: [
-                Query.orderAsc('title')
-            ]
-        );
-    } on AppwriteException catch(e) {
-        print(e);
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Android</h3>
-        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
-import io.appwrite.Query
-import io.appwrite.services.Databases
-
-suspend fun main() {
-    val client = Client(applicationContext)
-        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
-        .setProject('[PROJECT_ID]');
-
-    val databases = Databases(client)
-
-    try {
-        val documents = databases.listDocuments(
-            databaseId = "[DATABASE_ID]",
-            collectionId = "[COLLECTION_ID]",
-            queries = [
-                Query.orderAsc("title")
-            ]
-        )
-    } catch (e: AppwriteException) {
-        Log.e("Appwrite", e.message)
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-import AppwriteModels
-
-func main() async throws {
-    let client = Client()
-        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
-        .setProject('[PROJECT_ID]');
-
-    let databases = Databases(client)
-
-    do {
-        let documents = try await databases.listDocuments(
-            databaseId: "[DATABASE_ID]",
-            collectionId: "[COLLECTION_ID]",
-            queries: [
-                Query.orderAsc("title")
-            ]
-        )
-    } catch {
-        print(error.localizedDescription)
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>GraphQL</h3>
-        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
-    databasesListDocuments(
-        databaseId: "[DATABASE_ID]",
-        collectionId: "[COLLECTION_ID]"
-        queries: ["orderAsc(\"title\")"]
-    ) {
-        total
-        documents {
-            _id
-            data
-        }
-    }
-}</code></pre>
-        </div>
-    </li>
-</ul>
-
-<p>To sort based on multiple attributes, simply provide multiple query methods.</p>
-
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Web</h3>
-        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Databases, Query } from "appwrite";
-
-const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
-    .setProject('[PROJECT_ID]');
-
-const databases = new Databases(client);
-
-databases.listDocuments(
-    '[DATABASE_ID]',
-    '[COLLECTION_ID]',
-    [
-        Query.orderAsc('title'), // Order by title in ascending order
-        Query.orderDesc('year'), // Order by year in descending order
-    ]
-);</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Flutter</h3>
-        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
-
-void main() async {
-    final client = Client()
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-        .setProject("[PROJECT_ID]");
-
-    final databases = Databases(client);
-    try {
-        final documents = await databases.listDocuments(
-            databaseId: '[DATABASE_ID]',
-            collectionId: '[COLLECTION_ID]',
-            queries: [
-                Query.orderAsc('title'), // Order by title in ascending order
-                Query.orderDesc('year')  // Order by year in descending order
-            ]
-        );
-    } on AppwriteException catch(e) {
-        print(e);
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Android</h3>
-        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
-import io.appwrite.Query
-import io.appwrite.services.Databases
-
-suspend fun main() {
-    val client = Client(applicationContext)
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-        .setProject("[PROJECT_ID]")
-
-    val databases = Databases(client)
-
-    try {
-        val documents = databases.listDocuments(
-            databaseId = "[DATABASE_ID]",
-            collectionId = "[COLLECTION_ID]",
-            queries = [
-                Query.orderAsc("title"), // Order by title in ascending order
-                Query.orderDesc("year")  // Order by year in descending order
-            ]
-        )
-    } catch (e: AppwriteException) {
-        Log.e("Appwrite", e.message)
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-import AppwriteModels
-
-func main() async throws {
-    let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
-      .setProject("[PROJECT_ID]")
-
-    let databases = Databases(client)
-
-    do {
-        let documents = try await databases.listDocuments(
-            databaseId: "[DATABASE_ID]",
-            collectionId: "[COLLECTION_ID]",
-            queries: [
-                Query.orderAsc("title"), // Order by title in ascending order
-                Query.orderDesc("year")  // Order by year in descending order
-            ]
-        )
-    } catch {
-        print(error.localizedDescription)
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>GraphQL</h3>
-        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
-    databasesListDocuments(
-        databaseId: "[DATABASE_ID]",
-        collectionId: "[COLLECTION_ID]"
-        queries: ["orderAsc(\"title\")", "orderDesc(\"year\")"]
-    ) {
-        total
-        documents {
-            _id
-            data
-        }
-    }
-}</code></pre>
-        </div>
-    </li>
-</ul>
-
-<p>In the example above, the movies returned will be first sorted by title in ascending order, then sorted by year in descending order.</p>
-
-<h3><a href="/docs/databases#pagination" id="pagination">Pagination</a></h3>
-<p>Appwrite has full support for pagination to better optimize and scale up your applications built on Appwrite. Detailed documentation on pagination and how to implement it can be found on the <a href="/docs/pagination">pagination guide.</a></p>
