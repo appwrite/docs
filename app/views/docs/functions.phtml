@@ -719,7 +719,7 @@ func main() async throws {
 
 <p>Appwrite Functions can be executed using Client or Server SDKs. Client SDKs must be authenticated with an account that has been granted execution <a href="/docs/permissions">permissions</a> on the function's settings page. Server SDKs require an API key with the correct scopes.</p>
 
-<p>The Functions Service APIs are rate limited to 60 calls per minute per account when using a Client SDK. Learn more about <a href="docs/rate-limits">rate limiting</a>. The response size of a Cloud Function is limited to 1MB. Responses larger than 1MB should be handled using Appwrite's Databases or Storage service.</p>
+<p>The Functions Service APIs are rate limited to 60 calls per minute per account when using a Client SDK. Learn more about <a href="/docs/rate-limits">rate limiting</a>. The response size of a Cloud Function is limited to 1MB. Responses larger than 1MB should be handled using Appwrite's Databases or Storage service.</p>
 
 <p>Each execution has a default timeout of 15 seconds to prevent hanging functions from blocking resources. This timeout can be configured per function on a function's settings page or in <code>appwrite.json</code> for up to 900 seconds.</p>
 
@@ -781,7 +781,7 @@ func main() async throws {
     </tbody>
 </table>
 
-<p>By default, the following runtimes are enabled: "node-16.0, php-8.0, python-3.9, ruby-3.0". To enable or disable runtimes, you can edit the <code>_APP_FUNCTIONS_RUNTIMES</code> <a href="docs/environment-variables#functions">environment variable</a>.</p>
+<p>By default, the following runtimes are enabled: <code>node-16.0</code>, <code>php-8.0</code>, <code>python-3.9</code>, <code>ruby-3.0</code>. To enable or disable runtimes, you can edit the <code>_APP_FUNCTIONS_RUNTIMES</code> <a href="/docs/environment-variables#functions">environment variable</a>.</p>
 
 <h2><a href="/docs/functions#functionVariables" id="functionVariables">Function Variables</a></h2>
 
