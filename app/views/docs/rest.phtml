@@ -50,7 +50,7 @@
 <h2><a href="/docs/rest#no-headers" id="no-headers">Using Appwrite Without Headers</a></h2>
 <p>Some use cases do not allow custom headers, such as embedding images from Appwrite in HTML. In these cases, you can provide the Appwrite project ID using the query parameter <code>project</code>.</p>
 <div class="ide margin-bottom" data-lang="html" data-lang-label="HTML">
-    <pre class="line-numbers"><code class="prism language-html" data-prism><?php echo htmlentities('<img src="https://[HOSTNAME_OR_IP]/v1/storage/buckets/[BUCKET_ID]/files/[FILE_ID]/preview?project=[PROJECT_ID]">'); ?></code></pre>
+    <pre class="line-numbers"><code class="prism language-html" data-prism><?php echo htmlentities('<img src="https://cloud.appwrite.io/v1/storage/buckets/[BUCKET_ID]/files/[FILE_ID]/preview?project=[PROJECT_ID]">'); ?></code></pre>
 </div>
 
 <h2><a href="/docs/rest#client-auth" id="client-auth">Client Authentication</a></h2>
@@ -59,7 +59,7 @@
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
     <pre class="line-numbers"><code class="prism language-http" data-prism>POST /v1/account/sessions/email HTTP/1.1
 Content-Type: application/json
-X-Appwrite-Project: 5df5acd0d48c2
+X-Appwrite-Project: [PROJECT_ID]
 
 {
   "email": "example@email.com",
@@ -78,7 +78,7 @@ Set-Cookie: a_session_61e71ec784ab035f7259=eyJ0...aSJ9; expires=Tue, 19-Dec-2023
     <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/account HTTP/1.1
 Cookie: a_session_61e71ec784ab035f7259_legacy=eyJ0...aSJ9; a_session_61e71ec784ab035f7259=eyJ0...aSJ9
 Content-Type: application/json
-X-Appwrite-Project: 5df5acd0d48c2</code></pre>
+X-Appwrite-Project: [PROJECT_ID]</code></pre>
 </div>
 
 <h2><a href="/docs/rest#server-auth" id="server-auth">Server Authentication</a></h2>
