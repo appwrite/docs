@@ -723,8 +723,6 @@ func main() async throws {
 
 <p>Each execution has a default timeout of 15 seconds to prevent hanging functions from blocking resources. This timeout can be configured per function on a function's settings page or in <code>appwrite.json</code> for up to 900 seconds.</p>
 
-<p>The maximum configurable timeout can be increased by changing the <code>_APP_FUNCTIONS_TIMEOUT</code> environment variable. This environment variable changes the configurable maximum but does not alter existing individual configurations.</p>
-
 <h2><a href="/docs/functions#ignoreFiles" id="ignoreFiles">Ignore Files</a></h2>
 
 <p>Library folders such as <code>node_modules</code> or <code>vendor</code> should not be included in your tarball since these dependencies will be installed during your function's build process. Similarly, you should <b>not</b> include files containing secrets in your deployment. You can use the Appwite CLI's <b>file ignoring</b> feature to exclude specific files from a deployment.</p>
@@ -781,7 +779,7 @@ func main() async throws {
     </tbody>
 </table>
 
-<p>By default, the following runtimes are enabled: <code>node-16.0</code>, <code>php-8.0</code>, <code>python-3.9</code>, <code>ruby-3.0</code>. To enable or disable runtimes, you can edit the <code>_APP_FUNCTIONS_RUNTIMES</code> <a href="/docs/environment-variables#functions">environment variable</a>.</p>
+<p>By default, the following runtimes are enabled: <code>node-16.0</code>, <code>php-8.0</code>, <code>python-3.9</code>, <code>ruby-3.0</code>.</p>
 
 <h2><a href="/docs/functions#functionVariables" id="functionVariables">Function Variables</a></h2>
 
