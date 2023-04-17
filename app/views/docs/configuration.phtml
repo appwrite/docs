@@ -44,6 +44,8 @@ You can find a full list of supported runtimes in the <a href="/docs/environment
 
 <p>You can select which storage adaptor to use by setting the <code>_APP_STORAGE_DEVICE</code> environment variable. Valid values are 'local', 's3', 'dospaces', 'backblaze', 'linode' and 'wasabi'. Each storage adaptor requires their own set of environment variables to configure.</p>
 
+<p>The maximum file size allowed for file upload is controlled by the <code>_APP_STORAGE_LIMIT</code> environment variable, which defaults to 30 MB. See [Environment Variables](/docs/environment-variables#storage) for more information.</p>
+
 <a href="/docs/environment-variables#storage">Configure storage adaptors</a>
 
 <h2><a href="#apply-changes" id="apply-changes">Applying Changes</a></h2>
