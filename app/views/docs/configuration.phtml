@@ -1,21 +1,23 @@
 <p>
-    Self-hosting Appwrite provides a great deal of flexibility by providing many configurable options. While the default installation gives you all the essentials to get started, here are some useful tips and configurable options that can accelerate your development process.
+    Self-hosting allows you to customize Appwrite to meet your needs and preferences. Here's a list of things you will need to setup before developing with Appwrite. Before you start, backup your <code>.env</code> and <code>docker-compose.yml</code> files.
 </p>
 
-<h2><a href="#localhost" id="localhost">Localhost</a></h2>
+<h2><a href="#localhost" id="localhost">Localhost Development</a></h2>
+<p>Self-hosting Appwrite for development lets you quickly prototype on your local machine. Since localhost is only a loopback address that points back at your development machine, there are some caveats you should be aware of when working with localhost.</p>
 
-[cookies?]
-[Self-signed stuff]
-[Proxy information for android]
+[Self-signed stuff. Describe what the selfsigned method does, why you need it, and when to use it.]
+[Proxy information for android: What should they know? How do they access local host on android?]
+<p>If you're testing your Flutter, Android, or iOS app on a mobile device, you will not be able to access the localhost of your PC or Mac. When testing with a physical device, you may use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite instance.</p>
+[cookies? What's weird about cookies while developing on local host?]
 
 <h2><a href="#delivery" id="delivery">Setup Email and SMS Delivery</a></h2>
 <p>
-    If your application will support features like password recovery, account verification, MagicURL authentication, and team invites, you will need to setup email delivery.
+    Appwrite requires an SMTP service to deliver emails. Email delivery is required for features like password recovery, account verification, MagicURL authentication, and team invites. You can choose to a third-party SMTP service or hosting your own SMTP server.
 </p>
 <p><a href="/docs/email-delivery">Set up email delivery</a></p>
 
 <p>
-    If your application will support phone authentication, you will need to enable SMS delivery.
+    Appwrite requires a third-party SMS delivery service to send SMS messages. SMS delivery is required for phone authentication.
 </p>
 <p><a href="/docs/email-delivery">Set up SMS delivery</a></p>
 
@@ -26,7 +28,7 @@
 </p>
 
 <p>
-    The example below would enable Dart 2.15, .Net 6.0, and Java 18 runtimes:
+    The example below would enable Dart 2.15, .Net 6.0, and Java 18 runtimes.
 </p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
@@ -35,9 +37,30 @@
 
 You can find a full list of supported runtimes in the <a href="/docs/environment-variables#functions">environment variables</a> page.
 
+<p>You can also configure the maximum timeout that can be set on individual Appwrite functions. The maximum configurable timeout can be increased by changing the <code>_APP_FUNCTIONS_TIMEOUT</code> environment variable. This environment variable changes the configurable maximum but does not alter existing individual configurations.</p>
 
 <h2><a href="#storage" id="storage">Storage Adaptors</a></h2>
+<p>Appwrite's Storage Service can be configured to store files locally, or self-hosted and cloud storage services. By default, Appwrite's Storage Service <b>stores files on your server's local storage</b>. If you expect large volumes of data or the need to have scalable data storage, you may choose to use a separate storage service.</p>
 
-[Storage providers]
+<p>Appwrite supports AWS S3, Digital Ocean Spaces, Backblazk, Linode, and Wasabi as storage adaptors. Some of these services can be self-hosted, just like Appwrite.</p>
 
+<p>You can select which storage adaptor to use by setting the <code>_APP_STORAGE_DEVICE</code> environment variable. Valid values are 'local', 's3', 'dospaces', 'backblaze', 'linode' and 'wasabi'. Each storage adaptor requires their own set of environment variables to configure.</p>
+
+<a href="/docs/environment-variables#storage">Configure storage adaptors</a>
+
+<h2><a href="#apply-changes" id="apply-changes">Applying Changes</a></h2>
+<p>After editing your <code>docker-compose.yml</code> or <code>.env</code> files, you will need to recreate your Appwrite stack by running the following compose command in your terminal.</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose up -d</code></pre>
+</div>
+
+<p>You can verify if the changes have been successfully applied by running this command:</p>
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose exec appwrite vars</code></pre>
+</div>
+
+<h2><a href="#more-configs" id="more-configs">More Configurable Options</a></h2>
+<p>If you don't see something you'd like to configure on this page, try searching the full list of environment variables.</p>
+<a href="/docs/environment-variables">Learn more about environment variables</a>
 
