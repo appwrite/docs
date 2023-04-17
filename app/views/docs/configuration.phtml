@@ -4,11 +4,9 @@
 
 <h2><a href="#localhost" id="localhost">Localhost Development</a></h2>
 <p>Self-hosting Appwrite for development lets you quickly prototype on your local machine. Since localhost is only a loopback address that points back at your development machine, there are some caveats you should be aware of when working with localhost.</p>
-
-[Self-signed stuff. Describe what the selfsigned method does, why you need it, and when to use it.]
-[Proxy information for android: What should they know? How do they access local host on android?]
+<p>Appwrite generates a self-signed certificate for iOS and Android development on localhost, as they don't allow unsecure HTTP by default. If you're developing Android or iOS apps on localhost, set <code>setSelfSigned(true)</code> while initializing your Appwrite client.</p>
+<p>If you're using an Android emulator to test your Flutter or Android apps, you can access localhost of your machine using the special alias IP <code>10.0.2.2</code>.</p>
 <p>If you're testing your Flutter, Android, or iOS app on a mobile device, you will not be able to access the localhost of your PC or Mac. When testing with a physical device, you may use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite instance.</p>
-[cookies? What's weird about cookies while developing on local host?]
 
 <h2><a href="#delivery" id="delivery">Setup Email and SMS Delivery</a></h2>
 <p>
