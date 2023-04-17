@@ -129,9 +129,7 @@ close the window.
 
 Client client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
-    .setProject('[PROJECT_ID]')         // Your project ID
-    .setSelfSigned(status: true);        // For self signed certificates, only use for development
-</code></pre>
+    .setProject('[PROJECT_ID]');         // Your project ID</code></pre>
 </div>
 
 <p>Before sending any API calls to your new Appwrite project, make sure your mobile device or emulator has network access to your Appwrite project's hostname or IP address.</p>
@@ -177,8 +175,7 @@ subscription.stream.listen((response) {
 
 Client client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1')  // Your Appwrite Endpoint
-    .setProject('[PROJECT_ID]')          // Your project ID
-    .setSelfSigned(status: true);         // For self signed certificates, only use for development
+    .setProject('[PROJECT_ID]');          // Your project ID
 
 Account account = Account(client);
 
