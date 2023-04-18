@@ -2,7 +2,7 @@
     Self-hosting allows you to customize Appwrite to meet your needs and preferences. Here's a list of things you will need to setup before developing with Appwrite. Before you start, backup your <code>.env</code> and <code>docker-compose.yml</code> files.
 </p>
 
-<h2><a href="#localhost" id="localhost">Localhost Development</a></h2>
+<h2><a href="#local-development" id="local-development">Local Development</a></h2>
 <p>Self-hosting Appwrite for development lets you quickly prototype on your local machine. Since localhost is only a loopback address that points back at your development machine, there are some caveats you should be aware of when working with localhost.</p>
 <p>Appwrite generates a self-signed certificate for iOS and Android development on localhost, as they don't allow unsecure HTTP by default. If you're developing Android or iOS apps on localhost, set <code>setSelfSigned(true)</code> while initializing your Appwrite client.</p>
 <p>If you're using an Android emulator to test your Flutter or Android apps, you can access localhost of your machine using the special alias IP <code>10.0.2.2</code>.</p>
@@ -17,7 +17,7 @@
 <p>
     Appwrite requires a third-party SMS delivery service to send SMS messages. SMS delivery is required for phone authentication.
 </p>
-<p><a href="/docs/email-delivery">Set up SMS delivery</a></p>
+<p><a href="/docs/sms-delivery">Set up SMS delivery</a></p>
 
 <h2><a href="#functions" id="functions">Configure Function Runtimes</a></h2>
 <p>
@@ -44,7 +44,7 @@ You can find a full list of supported runtimes in the <a href="/docs/environment
 
 <p>You can select which storage adaptor to use by setting the <code>_APP_STORAGE_DEVICE</code> environment variable. Valid values are 'local', 's3', 'dospaces', 'backblaze', 'linode' and 'wasabi'. Each storage adaptor requires their own set of environment variables to configure.</p>
 
-<p>The maximum file size allowed for file upload is controlled by the <code>_APP_STORAGE_LIMIT</code> environment variable, which defaults to 30 MB. See [Environment Variables](/docs/environment-variables#storage) for more information.</p>
+<p>The maximum file size allowed for file upload is controlled by the <code>_APP_STORAGE_LIMIT</code> environment variable, which defaults to 30 MB. See <a href="/docs/environment-variables#storage">Environment Variables</a> for more information.</p>
 
 <a href="/docs/environment-variables#storage">Configure storage adaptors</a>
 
