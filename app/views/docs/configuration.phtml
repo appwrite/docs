@@ -4,7 +4,7 @@
 
 <h2><a href="#local-development" id="local-development">Local Development</a></h2>
 <p>Self-hosting Appwrite for development lets you quickly prototype on your local machine. Since localhost is only a loopback address that points back at your development machine, there are some caveats you should be aware of when working with localhost.</p>
-<p>Appwrite generates a self-signed certificate for iOS and Android development on localhost, as they don't allow unsecured HTTP by default. If you're developing Android or iOS apps on localhost, set <code>setSelfSigned(true)</code> while initializing your Appwrite client.</p>
+<p>Appwrite generates a self-signed certificate for development on localhost, as connecting to unsecured HTTP is not allowed by default. If you're developing client apps on localhost, set <code>setSelfSigned(true)</code> while initializing your Appwrite client.</p>
 <p>If you're using an Android emulator to test your Flutter or Android apps, you can access localhost of your machine using the special alias IP <code>10.0.2.2</code>.</p>
 <p>If you're testing your Flutter, Android, or iOS app on a mobile device, you will not be able to access the localhost of your PC or Mac. When testing with a physical device, you may use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite instance.</p>
 
@@ -15,7 +15,7 @@
 <p><a href="/docs/email-delivery">Set up email delivery</a></p>
 
 <p>
-    Appwrite requires a third-party SMS delivery service to send SMS messages. SMS delivery is required for phone authentication.
+    Appwrite supports multiple third-party SMS delivery providers. SMS delivery is required for phone authentication.
 </p>
 <p><a href="/docs/sms-delivery">Set up SMS delivery</a></p>
 
@@ -26,7 +26,7 @@
 </p>
 
 <p>
-    The example below would enable Dart 2.15, .Net 6.0, and Java 18 runtimes.
+    The example below would enable Dart 2.15, .NET 6.0, and Java 18 runtimes.
 </p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
@@ -42,9 +42,9 @@ You can find a full list of supported runtimes on the <a href="/docs/environment
 
 <p>Appwrite supports AWS S3, Digital Ocean Spaces, Backblaze, Linode, and Wasabi as storage adaptors. Some of these services can be self-hosted, just like Appwrite.</p>
 
-<p>You can select which storage adaptor to use by setting the <code>_APP_STORAGE_DEVICE</code> environment variable. Valid values are <code>local</code>, <code>s3</code>, <code></code>, <code>backblaze</code>, <code>linode</code> and <code></code>. Each storage adaptor requires its own set of environment variables to configure.</p>
+<p>You can select which storage adaptor to use by setting the <code>_APP_STORAGE_DEVICE</code> environment variable. Valid values are <code>local</code>, <code>s3</code>, <code>dospaces/code>, <code>backblaze</code>, <code>linode</code> and <code>wasabi</code>. Each storage adaptor requires its own set of environment variables to configure.</p>
 
-<p>The maximum file size allowed for file upload is controlled by the <code>_APP_STORAGE_LIMIT</code> environment variable, which defaults to 30 MB. See <a href="/docs/environment-variables#storage">Environment Variables</a> for more information.</p>
+<p>The maximum size for individual file uploads is controlled by the <code>_APP_STORAGE_LIMIT</code> environment variable, which defaults to 30 MB. See <a href="/docs/environment-variables#storage">Environment Variables</a> for more information.</p>
 
 <p><a href="/docs/environment-variables#storage">Configure storage adaptors</a></p>
 
