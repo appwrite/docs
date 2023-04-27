@@ -661,7 +661,7 @@ databases.updateDocument(
 
 <p>If the on-delete behavior is <b>set null</b>, deleting a document will leave related documents in place with their relationship attribute <b> set to null</b>. If you wish to also delete related documents, they must be deleted <b>individually</b>.</p>
 
-<p>If the on-delete behavior is <b>cascade</b>, deleting the parent documents also deletes <b>related child documents</b>.</p>
+<p>If the on-delete behavior is <b>cascade</b>, deleting the parent documents also deletes <b>related child documents</b>, except for many-to-one relationships. In many-to-one relationships, there are multiple parent documents related to a single child document, and when the child document is deleted, the parents are deleted in cascade.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
