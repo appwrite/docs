@@ -115,7 +115,7 @@
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, Databases } = require('node-appwrite');
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
     .setProject('[PROJECT_ID]');               // Your project ID
 
 const databases = new Databases(client);
@@ -140,7 +140,7 @@ databases.createRelationshipAttribute(
 use \Appwrite\Services\Databases;
 
 $client = (new Client())
-    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    ->setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
     ->setProject('[PROJECT_ID]');               // Your project ID
 
 $databases = new Databases($client);
@@ -164,7 +164,7 @@ $databases->createRelationshipAttribute(
 from appwrite.services.databases import Databases
 
 client = (Client()
-    .set_endpoint('https://[HOSTNAME_OR_IP]/v1')     # Your API Endpoint
+    .set_endpoint('https://cloud.appwrite.io/v1')     # Your API Endpoint
     .set_project('[PROJECT_ID]'))                   # Your project ID
 
 databases = Databases(client)
@@ -189,7 +189,7 @@ databases.create_relationship_attribute(
 include Appwrite
 
 client = Client.new
-    .set_endpoint('https://[HOSTNAME_OR_IP]/v1')# Your API Endpoint
+    .set_endpoint('https://cloud.appwrite.io/v1')# Your API Endpoint
     .set_project('[PROJECT_ID]')               # Your project ID
 
 databases = Databases.new(client)
@@ -212,7 +212,7 @@ databases.create_relationship_attribute(
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases } from "https://deno.land/x/appwrite/mod.ts";
 
 const client = new Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("[PROJECT_ID]");               // Your project ID
 
 const databases = new Databases(client);
@@ -235,7 +235,7 @@ databases.createRelationshipAttribute(
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
     .setProject('[PROJECT_ID]');               // Your project ID
 
 final databases = Databases(client);
@@ -259,7 +259,7 @@ await databases.createRelationshipAttribute(
 import io.appwrite.services.Databases
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("[PROJECT_ID]")                // Your project ID
 
 val databases = Databases(client)
@@ -282,7 +282,7 @@ databases.createRelationshipAttribute(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("[PROJECT_ID]")                // Your project ID
 
 let databases = Databases(client)
@@ -315,7 +315,7 @@ databases.createRelationshipAttribute(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, Databases, ID } = require('node-appwrite');
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
     .setProject('[PROJECT_ID]');               // Your project ID
 
 const databases = new Databases(client);
@@ -341,7 +341,7 @@ await databases.createDocument(
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')  // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1')  // Your API Endpoint
     .setProject('[PROJECT_ID]');                // Your project ID
 
 final databases = Databases(client);
@@ -367,7 +367,7 @@ await databases.createDocument(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("[PROJECT_ID]")                // Your project ID
 
 let databases = Database(client: client)
@@ -395,7 +395,7 @@ import io.appwrite.services.Database
 import io.appwrite.ID
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("[PROJECT_ID]")                // Your project ID
 
 val databases = Database(client)
@@ -431,7 +431,7 @@ databases.createDocument(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, Databases, ID } = require('node-appwrite');
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
     .setProject('[PROJECT_ID]');               // Your project ID
 
 const databases = new Databases(client);
@@ -457,7 +457,7 @@ await databases.createDocument(
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint    
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint    
     .setProject('[PROJECT_ID]');               // Your project ID  
 
 final databases = Databases(client);
@@ -483,7 +483,7 @@ await databases.createDocument(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint        
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint        
     .setProject("[PROJECT_ID]")                // Your project ID      
 
 let databases = Database(client: client)
@@ -511,7 +511,7 @@ import io.appwrite.services.Database
 import io.appwrite.ID
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint    
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint    
     .setProject("[PROJECT_ID]")                // Your project ID  
 
 val databases = Database(client)
@@ -547,7 +547,7 @@ databases.createDocument(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, Databases } = require('node-appwrite');
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
     .setProject('[PROJECT_ID]');               // Your project ID
 
 const databases = new Databases(client);
@@ -573,7 +573,7 @@ await databases.updateDocument(
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 final databases = Databases(client);
@@ -599,7 +599,7 @@ await databases.updateDocument(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 
 let databases = Database(client: client)
@@ -626,7 +626,7 @@ databases.updateDocument(
 import io.appwrite.services.Database
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 
 val databases = Database(client)
@@ -669,7 +669,7 @@ databases.updateDocument(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, Databases } = require('node-appwrite');
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
     .setProject('[PROJECT_ID]');               // Your project ID
 
 const databases = new Databases(client);
@@ -687,7 +687,7 @@ await databases.deleteDocument(
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 final databases = Databases(client);
@@ -705,7 +705,7 @@ await databases.deleteDocument(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 
 let databases = Database(client: client)
@@ -724,7 +724,7 @@ databases.deleteDocument(
 import io.appwrite.services.Database
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 
 val databases = Database(client)
@@ -751,7 +751,7 @@ databases.deleteDocument(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client, Databases, ID } = require('node-appwrite');
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
     .setProject('[PROJECT_ID]');               // Your project ID
 
 const databases = new Databases(client);
@@ -782,7 +782,7 @@ await databases.createDocument(
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 final databases = Databases(client);
@@ -813,7 +813,7 @@ await databases.createDocument(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 
 let databases = Database(client: client)
@@ -844,7 +844,7 @@ databases.createDocument(
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 
 let databases = Database(client: client)

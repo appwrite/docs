@@ -1,4 +1,4 @@
-<p>Appwrite is a self-hosted backend server, packaged as a set of Docker containers. You can install and run Appwrite on any operating system that can run a <a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">Docker CLI</a>. You can use Appwrite on your local machine or a cloud provider of your choice.</p>
+<p>Appwrite was designed from the ground up with self-hosting in mind. You can install and run Appwrite on any operating system that can run a <a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">Docker CLI</a>. Self-hosted Appwrite instances can be configured flexibly with access to the same features found on Appwrite Cloud.</p>
 
 <h2><a href="/docs/installation#systemRequirements" id="systemRequirements">System Requirements</a></h2>
 
@@ -17,7 +17,7 @@
 
 <p>You will be prompted to configure the following during the setup command:</p>
 <ol class="margin-top margin-bottom-large text-size-normal">
-    <li>Your Appwrite instance's HTTP and HTTPs ports.</li>
+    <li>Your Appwrite instance's HTTP and HTTPS ports.</li>
     <li>Your Appwrite instance's secret key which used to encrypt sensitive data.</li>
     <li>Your Appwrite instance's main hostname. Appwrite will generate a certificate using this hostname.</li>
     <li>Your Appwrite instance's DNS A record hostname. Typically set to the same value as your Appwrite instance's hostname.</li>
@@ -108,7 +108,14 @@
     </tbody>
 </table>
 
-<h3><a href="/docs/installation#manual" id="manual">Manual (using docker-compose.yml)</a></h3>
+<h2><a href="/docs/installation#next-steps" id="next-steps">Next Steps</a></h2>
+<p>Self-hosting Appwrite gives you more configurable options. You can customize Appwrite with your choice of S3 compatible storage adaptors, email and SMS providers, functions runtimes, and more.</p>
+<p><a href="/docs/configuration">Learn about configuring Appwrite</a></p>
+
+<p>Self-hosted Appwrite instances can be made production ready. To run Appwrite successfully in a production environment, you should follow a few basic concepts and best practices.</p>
+<p><a href="/docs/production">Learn about Appwrite in production</a></p>
+
+<h2><a href="/docs/installation#manual" id="manual">Manual (using docker-compose.yml)</a></h2>
 
 <p>For advanced Docker users, the manual installation might seem more familiar. To set up Appwrite manually, download the Appwrite base <a href="/install/compose" target="_blank">docker-compose.yml</a> and <a href="/install/env" target="_blank">.env</a> files, then move them inside a directory named <code>appwrite</code>. After the download completes, update the different environment variables as you wish in the <code>.env</code> file and start the Appwrite stack using the following Docker command:</p>
 
@@ -118,7 +125,7 @@
 
 <p>Once the Docker installation completes, go to your machine's hostname or IP address on your browser to access the Appwrite console. Please note that on hosts that are not Linux-native, the server might take a few minutes to start after installation completes.</p>
 
-<h3><a href="/docs/installation#stop" id="stop">Stop</a></h3>
+<h2><a href="/docs/installation#stop" id="stop">Stop</a></h2>
 
 <p>You can stop your Appwrite containers by using the following command executed from the same directory as your <code>docker-compose.yml</code> file.</p>
 
@@ -126,18 +133,10 @@
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose stop</code></pre>
 </div>
 
-<h3><a href="/docs/installation#uninstall" id="uninstall">Uninstall</a></h3>
+<h2><a href="/docs/installation#uninstall" id="uninstall">Uninstall</a></h2>
 
 <p>To stop and remove your Appwrite containers, you can use the following command executed from the same directory as your <code>docker-compose.yml</code> file.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>docker compose down -v</code></pre>
 </div>
-
-<h2><a href="/docs/installation#learnMore" id="learnMore">Learn More</a></h2>
-
-<ul class="margin-top margin-bottom-large text-size-normal">
-    <li class="margin-bottom-tiny"><a href="/docs/production" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Running Appwrite in production</a></li>
-    <li class="margin-bottom-tiny"><a href="/docs/environment-variables" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Appwrite server environment variables</a></li>
-    <li class="margin-bottom-tiny"><a href="/docs/email-delivery" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Appwrite setting a custom SMTP server</a></li>
-</ul>

@@ -25,8 +25,8 @@
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -45,8 +45,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -61,8 +61,8 @@ final jwt = await account.createJWT();
 import io.appwrite.services.Account
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -74,8 +74,8 @@ val jwt = account.createJWT()</code></pre>
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -104,8 +104,8 @@ let jwt = try await account.createJWT()</code></pre>
 const client = new Client();
 
 client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2')                // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]')                // Your project ID
     .setJWT('eyJJ9.eyJ...886ca');               // Your secret JSON Web Token</code></pre>
         </div>
     </li>
@@ -118,8 +118,8 @@ client
 $client = new Client();
 
 $client
-    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1')            // Your API Endpoint
-    ->setProject('5df5acd0d48c2')                           // Your project ID
+    ->setEndpoint('https://cloud.appwrite.io/v1')            // Your API Endpoint
+    ->setProject('[PROJECT_ID]')                           // Your project ID
     ->setJWT('eyJJ9.eyJ...886ca');                          // Your secret JSON Web Token</code></pre>
         </div>
     </li>
@@ -131,8 +131,8 @@ $client
 client = Client()
 
 (client
-  .set_endpoint('https://[HOSTNAME_OR_IP]/v1')              # Your API Endpoint
-  .set_project('5df5acd0d48c2')                             # Your project ID
+  .set_endpoint('https://cloud.appwrite.io/v1')              # Your API Endpoint
+  .set_project('[PROJECT_ID]')                             # Your project ID
   .set_jwt('eyJJ9.eyJ...886ca')                             # Your secret JSON Web Token
 )</code></pre>
         </div>
@@ -147,8 +147,8 @@ include Appwrite
 client = Client.new
 
 client
-    .set_endpoint('https://[HOSTNAME_OR_IP]/v1')            # Your API Endpoint
-    .set_project('5df5acd0d48c2')                           # Your project ID
+    .set_endpoint('https://cloud.appwrite.io/v1')            # Your API Endpoint
+    .set_project('[PROJECT_ID]')                           # Your project ID
     .set_jwt('eyJJ9.eyJ...886ca')                           # Your secret JSON Web Token</code></pre>
         </div>
     </li>
@@ -160,8 +160,8 @@ client
 let client = new Client();
 
 client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')             // Your API Endpoint
-    .setProject('5df5acd0d48c2')                            // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1')             // Your API Endpoint
+    .setProject('[PROJECT_ID]')                            // Your project ID
     .setJWT('eyJJ9.eyJ...886ca');                           // Your secret JSON Web Token</code></pre>
         </div>
     </li>
@@ -173,8 +173,8 @@ client
 final client = Client();
 
 client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2')                // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]')                // Your project ID
     .setJWT('eyJJ9.eyJ...886ca');               // Your secret JSON Web Token</code></pre>
         </div>
     </li>
@@ -186,8 +186,8 @@ client
 val client = Client()
 
 client
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
     .setJWT("eyJJ9.eyJ...886ca")                // Your secret JSON Web Token</code></pre>
         </div>
     </li>
@@ -199,8 +199,8 @@ client
 let client = Client()
 
 client
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
     .setJWT("eyJJ9.eyJ...886ca")                // Your secret JSON Web Token</code></pre>
         </div>
     </li>
@@ -259,8 +259,8 @@ client
 const client = new Client();
 
 client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2')                // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]')                // Your project ID
     .setJWT('eyJJ9.eyJ...886ca');               // Your secret JSON Web Token
 
 const databases = new sdk.Databases(client);
@@ -278,8 +278,8 @@ const birthday = await databases.listDocuments('642f358bf4084c662590', '642f3592
 $client = new Client();
 
 $client
-    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1')            // Your API Endpoint
-    ->setProject('5df5acd0d48c2')                           // Your project ID
+    ->setEndpoint('https://cloud.appwrite.io/v1')            // Your API Endpoint
+    ->setProject('[PROJECT_ID]')                           // Your project ID
     ->setJWT('eyJJ9.eyJ...886ca');                          // Your secret JSON Web Tokens
 
 $databases = new Databases($client);
@@ -296,8 +296,8 @@ $result = $databases->listDocuments('642f358bf4084c662590', '642f3592aa5fc856ad1
 client = Client()
 
 (client
-  .set_endpoint('https://[HOSTNAME_OR_IP]/v1')              # Your API Endpoint
-  .set_project('5df5acd0d48c2')                             # Your project ID
+  .set_endpoint('https://cloud.appwrite.io/v1')              # Your API Endpoint
+  .set_project('[PROJECT_ID]')                             # Your project ID
   .set_jwt('eyJJ9.eyJ...886ca')                             # Your secret JSON Web Token
 )
 
@@ -318,8 +318,8 @@ include Appwrite
 client = Client
 
 client.new
-    .set_endpoint('https://[HOSTNAME_OR_IP]/v1')            # Your API Endpoint
-    .set_project('5df5acd0d48c2')                           # Your project ID
+    .set_endpoint('https://cloud.appwrite.io/v1')            # Your API Endpoint
+    .set_project('[PROJECT_ID]')                           # Your project ID
     .set_jwt('eyJJ9.eyJ...886ca')                           # Your secret JSON Web Token
 
 databases = Databases.new(client)
@@ -336,8 +336,8 @@ response = databases.list_documents(database_id: '642f358bf4084c662590', '642f35
 let client = new Client();
 
 client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')             // Your API Endpoint
-    .setProject('5df5acd0d48c2')                            // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1')             // Your API Endpoint
+    .setProject('[PROJECT_ID]')                            // Your project ID
     .setJWT('eyJJ9.eyJ...886ca');                           // Your secret JSON Web Token
 
 let databases = new sdk.Databases(client);
@@ -354,8 +354,8 @@ let promise = databases.listDocuments('642f358bf4084c662590', '642f3592aa5fc856a
 final client = Client();
 
 client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2')                // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]')                // Your project ID
     .setJWT('eyJJ9.eyJ...886ca');               // Your secret JSON Web Token
 
 Databases databases = Databases(client);
@@ -375,8 +375,8 @@ Future result = databases.listDocuments(
 val client = Client()
 
 client
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
     .setJWT("eyJJ9.eyJ...886ca")                // Your secret JSON Web Token
 
 val databases = Databases(client)
@@ -396,8 +396,8 @@ val response = databases.listDocuments(
 let client = Client()
 
 client
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
     .setJWT("eyJJ9.eyJ...886ca")                // Your secret JSON Web Token
     
 let databases = Databases(client)
@@ -441,8 +441,8 @@ let documentList = try await databases.listDocuments(
 const client = new Client();
 
 client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2')                // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]')                // Your project ID
     .setKey('919c2d18fb5d4...a2ae413da83346ad2')// Your secret API key
 
 const databases = new sdk.Databases(client);
@@ -460,8 +460,8 @@ const birthday = await databases.listDocuments('642f358bf4084c662590', '642f3592
 $client = new Client();
 
 $client
-    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1')            // Your API Endpoint
-    ->setProject('5df5acd0d48c2')                           // Your project ID
+    ->setEndpoint('https://cloud.appwrite.io/v1')            // Your API Endpoint
+    ->setProject('[PROJECT_ID]')                           // Your project ID
     ->setKey('919c2d18fb5d4...a2ae413da83346ad2')           // Your secret API key
 
 $databases = new Databases($client);
@@ -478,8 +478,8 @@ $result = $databases->listDocuments('642f358bf4084c662590', '642f3592aa5fc856ad1
 client = Client()
 
 (client
-  .set_endpoint('https://[HOSTNAME_OR_IP]/v1')              # Your API Endpoint
-  .set_project('5df5acd0d48c2')                             # Your project ID
+  .set_endpoint('https://cloud.appwrite.io/v1')              # Your API Endpoint
+  .set_project('[PROJECT_ID]')                             # Your project ID
   .setKey('919c2d18fb5d4...a2ae413da83346ad2')              # Your secret API key</code></pre>
 )
 
@@ -499,8 +499,8 @@ include Appwrite
 client = Client
 
 client.new
-    .set_endpoint('https://[HOSTNAME_OR_IP]/v1')            # Your API Endpoint
-    .set_project('5df5acd0d48c2')                           # Your project ID
+    .set_endpoint('https://cloud.appwrite.io/v1')            # Your API Endpoint
+    .set_project('[PROJECT_ID]')                           # Your project ID
     .setKey('919c2d18fb5d4...a2ae413da83346ad2')            # Your secret API key
 
 databases = Databases.new(client)
@@ -517,8 +517,8 @@ response = databases.list_documents(database_id: '642f358bf4084c662590', '642f35
 let client = new Client();
 
 client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')             // Your API Endpoint
-    .setProject('5df5acd0d48c2')                            // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1')             // Your API Endpoint
+    .setProject('[PROJECT_ID]')                            // Your project ID
     .setKey('919c2d18fb5d4...a2ae413da83346ad2')            // Your secret API key
 
 let databases = new sdk.Databases(client);
@@ -535,8 +535,8 @@ let promise = databases.listDocuments('642f358bf4084c662590', '642f3592aa5fc856a
 final client = Client();
 
 client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2')                // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]')                // Your project ID
     .setKey('919c2d18fb5d4...a2ae413da83346ad2')// Your secret API key
 
 Databases databases = Databases(client);
@@ -556,8 +556,8 @@ Future result = databases.listDocuments(
 val client = Client()
 
 client
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
     .setKey("919c2d18fb5d4...a2ae413da83346ad2")// Your secret API key
 
 val databases = Databases(client)
@@ -577,8 +577,8 @@ val response = databases.listDocuments(
 let client = Client()
 
 client
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
     .setKey("919c2d18fb5d4...a2ae413da83346ad2")// Your secret API key
     
     let databases = Databases(client)

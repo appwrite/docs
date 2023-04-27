@@ -27,11 +27,15 @@
 
 <p>There are three Appwrite containers that do keep their state. MariaDB, Redis, and InfluxDB containers are used for storing data, cache and pub/sub messaging, and usage stats (in this order). To scale them out, all you need to do is set up a standard cluster (same as you would with any other app using these technologies) according to your needs and performance.</p>
 
+<h2><a href="/docs/production#disable-limits" id="disable-limits">Enable Rate Limits</a></h2>
+<p>If you disabled rate limits during development, make sure you re-enable them when moving to production environments. Rate limiting can be enabled by setting the <span class="tag">_APP_OPTIONS_ABUSE</span> environment variable to <code>enabled</code>.</p>
+<p>
+<a href="/docs/environment-variables"><i class="icon-angle-circled-right"></i>Learn more about environment variables</a>
+</p>
+
 <h2><a href="/docs/production#emails" id="emails">Emails</a></h2>
-
-<p>Sending emails is hard. There are a lot of SPAM rules and configurations to master in order to set a functional SMTP server. The SMTP server that comes packaged with Appwrite is great for development but needs some work done to function well against SPAM filters.</p>
-
-<p>Another easier option is to use an 'SMTP as a service' product like Sendgrid or Mailgun. You can <a href="/docs/email-delivery">change Appwrite SMTP settings</a> and credentials to any 3rd party provider you like who support SMTP integration using our Docker environment variables. Most SMTP providers offer a decent free tier to get started with.</p>
+<p>Sending emails is hard. There are a lot of spam rules and configurations to master in order to set up a functional SMTP server. While it is okay to use a self-hosted SMTP server during development, you should use a third-party SMTP provider for production so your email doesn't get labeled as spam.</p>
+<p>You can <a href="/docs/email-delivery">change Appwrite's SMTP settings</a> and credentials to any 3rd party provider you like that supports SMTP integration using our Docker environment variables. Most SMTP providers offer a decent free tier to get started with.</p>
 
 <h2><a href="/docs/production#backups" id="backups">Backups</a></h2>
 
@@ -47,4 +51,4 @@
 
 <p>By default, your Appwrite installation comes with error reporting turned off. You can <a href="/docs/debugging#devMode">turn it on in dev mode</a> to try and debug issues or report problems.</p>
 
-<p>In production, it is highly recommended to turn error reporting off. To do so, make sure the Appwrite container environment variable <b>_APP_ENV</b> value from is set to <b>production</b> and not <b>development</b>.</p>
+<p>In production, it is highly recommended to turn error reporting off. To do so, make sure the Appwrite container environment variable <b>_APP_ENV</b> is set to <b>production</b> and not <b>development</b>.</p>

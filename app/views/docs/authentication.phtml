@@ -41,8 +41,8 @@
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -65,8 +65,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -84,8 +84,8 @@ import io.appwrite.services.Account
 import io.appwrite.ID
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -102,8 +102,8 @@ val user = account.create(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -146,8 +146,8 @@ Anonymous authentication allows users of your application to create a temporary 
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -166,8 +166,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -181,8 +181,8 @@ final user = await account.createAnonymousSession();</code></pre>
 import io.appwrite.services.Account
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -195,8 +195,8 @@ val user = account.createAnonymousSession()</code></pre>
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -240,8 +240,8 @@ mutation {
         <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client();
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -255,8 +255,8 @@ account.createOAuth2Session('amazon');</code></pre>
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -271,8 +271,8 @@ await account.createOAuth2Session(provider: 'amazon');</code></pre>
 import io.appwrite.services.Account
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -286,8 +286,8 @@ account.createOAuth2Session(provider = "amazon")</code></pre>
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -324,8 +324,8 @@ try await account.createOAuth2Session(provider: "amazon")</code></pre>
         <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -349,8 +349,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -367,8 +367,8 @@ import io.appwrite.services.Account
 import io.appwrite.ID
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -383,8 +383,8 @@ val session = account.createPhoneSession(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -419,8 +419,8 @@ let session = try await account.createPhoneSession(
         <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -442,8 +442,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -460,8 +460,8 @@ import io.appwrite.services.Account
 import io.appwrite.ID
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -476,8 +476,8 @@ val session = account.updatePhoneSession(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -516,10 +516,6 @@ mutation {
     Only redirect URLs to domains added as a <a href="/docs/getting-started-for-web#addPlatform">platform</a> on your Appwrite console will be accepted. URLs not added as a platform are rejected to protect against <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md" target="_blank" rel="noopener">redirect attacks</a>.
 </p>
 
-<div class="notice">
-    <h2>SMTP Required</h2>
-    <p>Magic URL authentication requires <a href="/docs/email-delivery">SMTP</a> to be configured on your Appwrite instance to deliver emails.</p>
-</div>
 
 <p>
     Magic URL authentication can be initiated like this: 
@@ -533,8 +529,8 @@ mutation {
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -553,8 +549,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -570,8 +566,8 @@ final user = await account.createMagicURLSession(
 import io.appwrite.services.Account
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -586,8 +582,8 @@ val user = account.createMagicURLSession(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -627,8 +623,8 @@ let user = try await account.createMagicURLSession(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -647,8 +643,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -664,8 +660,8 @@ final user = await account.updateMagicURLSession(
 import io.appwrite.services.Account
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -680,8 +676,8 @@ val user = account.updateMagicURLSession(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -726,8 +722,8 @@ let user = try await account.updateMagicURLSession(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -749,8 +745,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -766,8 +762,8 @@ final session = await account.createEmailSession(
 import io.appwrite.services.Account
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -782,8 +778,8 @@ val session = account.createEmailSession(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -822,8 +818,8 @@ let session = try await account.createEmailSession(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -842,8 +838,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -856,8 +852,8 @@ final session = await account.get();</code></pre>
 import io.appwrite.services.Account
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -869,8 +865,8 @@ val session = account.get()</code></pre>
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -912,8 +908,8 @@ let session = try await account.get()</code></pre>
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -932,8 +928,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -949,8 +945,8 @@ final user = account.createRecovery(
 import io.appwrite.services.Account
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -965,8 +961,8 @@ val response = account.createRecovery(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -1005,8 +1001,8 @@ After receiving a email with the secret attached to the redirect link, submit a 
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -1025,8 +1021,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -1044,8 +1040,8 @@ final user = await account.updateRecovery(
 import io.appwrite.services.Account
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -1062,8 +1058,8 @@ val token = account.updateRecovery(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -1106,8 +1102,8 @@ let token = try await account.updateRecovery(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -1126,8 +1122,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -1145,8 +1141,8 @@ final user = await account.updatePrefs(
 import io.appwrite.services.Account
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -1160,8 +1156,8 @@ val user = account.updatePrefs(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -1205,8 +1201,8 @@ let user = try await account.updatePrefs(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -1225,8 +1221,8 @@ promise.then(function (prefs) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -1239,8 +1235,8 @@ final prefs = await account.getPrefs();</code></pre>
 import io.appwrite.services.Account
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -1252,8 +1248,8 @@ val prefs = account.getPrefs()</code></pre>
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 

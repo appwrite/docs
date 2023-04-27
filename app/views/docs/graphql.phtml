@@ -322,7 +322,7 @@
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Graphql } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your Appwrite Endpoint
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
     .setProject('[PROJECT_ID]');                // Your project ID
 
 const graphql = new Graphql(client);
@@ -363,8 +363,8 @@ mutation.then(response => {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your Appwrite Endpoint
-    .setProject('5e8cf4f46b5e8');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final graphql = Graphql(client);
 
@@ -404,8 +404,8 @@ mutation.then((response) {
 import io.appwrite.services.Graphql
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val graphql = Graphql(client)
 
@@ -444,8 +444,8 @@ try {
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let graphql = Graphql(client)
 
