@@ -12,12 +12,12 @@
 <p>
     Appwrite requires an SMTP service to deliver emails. Email delivery is required for features like password recovery, account verification, MagicURL authentication, and team invites. You can use a third-party SMTP service or host your own SMTP server.
 </p>
-<p><a href="/docs/email-delivery">Set up email delivery</a></p>
+<p><a href="/docs/email-delivery"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Set up email delivery</a></p>
 
 <p>
     Appwrite supports multiple third-party SMS delivery providers. SMS delivery is required for phone authentication.
 </p>
-<p><a href="/docs/sms-delivery">Set up SMS delivery</a></p>
+<p><a href="/docs/sms-delivery"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Set up SMS delivery</a></p>
 
 <h2><a href="#functions" id="functions">Configure Function Runtimes</a></h2>
 <p>
@@ -33,7 +33,7 @@
     <pre class="line-numbers"><code class="prism language-bash" data-prism>_APP_FUNCTIONS_RUNTIMES=dart-2.15, dotnet-6.0, java-18.0</code></pre>
 </div>
 
-You can find a full list of supported runtimes on the <a href="/docs/environment-variables#functions">environment variables</a> page.
+<p>You can find a full list of supported runtimes on the <a href="/docs/environment-variables#functions">environment variables</a> page.</p>
 
 <p>You can also configure the maximum timeout that can be set on individual Appwrite functions. The maximum configurable timeout can be increased by changing the <code>_APP_FUNCTIONS_TIMEOUT</code> environment variable. This environment variable changes the configurable maximum but does not alter existing individual configurations.</p>
 
@@ -42,11 +42,11 @@ You can find a full list of supported runtimes on the <a href="/docs/environment
 
 <p>Appwrite supports AWS S3, Digital Ocean Spaces, Backblaze, Linode, and Wasabi as storage adaptors. Some of these services can be self-hosted, just like Appwrite.</p>
 
-<p>You can select which storage adaptor to use by setting the <code>_APP_STORAGE_DEVICE</code> environment variable. Valid values are <code>local</code>, <code>s3</code>, <code>dospaces</code>, <code>backblaze</code>, <code>linode</code> and <code>wasabi</code>. Each storage adaptor requires its own set of environment variables to configure.</p>
+<p>You can select which storage adaptor to use by setting the <code>_APP_STORAGE_DEVICE</code> environment variable. Valid values are <code>local</code>, <code>s3</code>, <code>dospaces</code>, <code>backblaze</code>, <code>linode</code> and <code>wasabi</code>. Each storage adaptor requires its own set of additional environment variables to configure.</p>
 
 <p>The maximum size for individual file uploads is controlled by the <code>_APP_STORAGE_LIMIT</code> environment variable, which defaults to 30 MB. See <a href="/docs/environment-variables#storage">Environment Variables</a> for more information.</p>
 
-<p><a href="/docs/environment-variables#storage">Configure storage adaptors</a></p>
+<p><a href="/docs/environment-variables#storage"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Configure storage adaptors</a></p>
 
 <h2><a href="#apply-changes" id="apply-changes">Applying Changes</a></h2>
 <p>After editing your <code>docker-compose.yml</code> or <code>.env</code> files, you will need to recreate your Appwrite stack by running the following compose command in your terminal.</p>
@@ -62,4 +62,4 @@ You can find a full list of supported runtimes on the <a href="/docs/environment
 
 <h2><a href="#more-configs" id="more-configs">More Configurable Options</a></h2>
 <p>If you don't see something you'd like to configure on this page, try searching the complete list of environment variables.</p>
-<p><a href="/docs/environment-variables">Learn more about environment variables</a></p>
+<p><a href="/docs/environment-variables"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Learn more about environment variables</a></p>
