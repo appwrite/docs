@@ -1,22 +1,76 @@
-<p>Appwrite uses emails and SMS messages to perform user invite, user verification, login, and reset password. Emails and SMS messages can be customized to fit your app's design and voice.</p>
+<p>Appwrite uses emails messages to perform user invite, user verification, login, and reset password. Emails messages can be customized to fit your app's design and voice.</p>
 
 <h2><a href="#customize" id="customize">Customize Templates</a></h2>
-<p>You can customize email and SMS templates in the Appwrite console.</p>
+<p>You can customize email templates in the Appwrite console.</p>
 <div class="notice">
     <h2>Custom SMTP Server Required</h2>
     <p>The built-in email service does not support custom email templates. Configure a <a href="#smtp">custom SMTP server</a> to enable custom email templates.</p>
 </div>
 <ol class="margin-top margin-bottom-large text-size-normal">
-    <li>In your project, navigate to <b>Auth</b> > <b>Templates</b>.</li>
-    [STEPS AFTER FINALIZED DESIGN]
+    <li>In your project, navigate to the <b>Auth</b> service.</li>
+    <li>Under the <b>Auth</b> service, navigate to the <b>Templates</b> tab.</li>
+    <li>Expand the email template you want to edit.</li>
+    <li>Select the <b>Template language</b> [TODO: @damodar is this used for localization? Can you configure a different template for each language?].</li>
+    <li>Update the email template fields and click **Update** to save your changes.</li>
 </ol>
 <h2><a href="#email-templates" id="email-templates">Email Templates</a></h2>
-<h2><a href="#smtp" id="smtp">Add a SMTP provider</a></h2>
-<h2><a href="#email-template-syntax" id="email-template-syntax">Email Template Syntax</a></h2>
-<h2><a href="#email-template-components" id="email-template-components">Email Template Components</a></h2>
+<p>You can customize the email emplates for account verification, magic-url authentication, password resets, and user invites.</p>
+<h3><a href="#email-template-components" id="email-template-components">Email Template Components</a></h3>
+<p>Each email templates has the following components that you can customize.</p>
+<h2 id="permission-types"><a href="/docs/permissions#permission-types">Permission Types</a></h2>
+<p>In Client and Server SDKs, you will find a <b>Permission</b> class with helper methods for each role described below.</p>
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 200px">Component</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Sender name</td>
+        <td>[TODO: @damodar where is this used?].</td>
+    </tr>
+    <tr>
+        <td>Sender email</td>
+        <td>[TODO: @damodar which part of this can be configured? Does it have to do with the SMTP configuration?].</td>
+    </tr>
+    <tr>
+        <td>Reply to</td>
+        <td>[TODO: @damodar Where is this displayed, if empty is no reply?].</td>
+    </tr>
+    <tr>
+        <td>Subject</td>
+        <td>The title of the email.</td>
+    </tr>
+    <tr>
+        <td>Message</td>
+        <td>The body of the email. You can find the variables available in the <a href="#email-template-syntax">Email Template Syntax</a> section.</td>
+    </tr>
+    </tbody>
+</table>
+<h3><a href="#email-template-syntax" id="email-template-syntax">Email Template Syntax</a></h3>
+<p>[TODO: @damodar are these variables accessible only in the Message tempalte or also the other components?]</p>
 
-
-<h2><a href="#sms-templates" id="sms-templates">SMS Templates</a></h2>
-
-<h2><a href="#sms-template-syntax" id="sms-template-syntax">SMS Template Syntax</a></h2>
-<h2><a href="#sms-template-components" id="sms-template-components">SMS Template Components</a></h2>
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 200px">Component</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>{{project}}</code></td>
+        <td>The project name.</td>
+    </tr>
+    <tr>
+        <td><code>{{team}}</code></td>
+        <td>Thee project team's name.</td>
+    </tr>
+    <tr>
+        <td><code>{{user}}</code></td>
+        <td>The name of the uer receiving the email.</td>
+    </tr>
+    </tbody>
+</table>
