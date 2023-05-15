@@ -52,8 +52,8 @@ When Offline Support is enabled, Appwrite allows you to query and write data by 
   Queries will fetch data from Appwrite and update the cache while the device is online. If the device is not connected to the internet, the query fetches data from the local cache.
 </p>
 
-<img src="/images-ee/docs/offline-read-uml-light.png" alt="UML diagram depicting offline read operations." width: "100%" class="force-light" loading="lazy"/>
-<img src="/images-ee/docs/offline-read-uml-dark.png" alt="UML diagram depicting offline read operations." width: "100%" class="force-dark" loading="lazy"/>
+<img src="/images-ee/docs/offline-read-uml-light.png" alt="UML diagram depicting offline read operations." width="100%" class="force-light" loading="lazy"/>
+<img src="/images-ee/docs/offline-read-uml-dark.png" alt="UML diagram depicting offline read operations." width="100%" class="force-dark" loading="lazy"/>
 
 
 <h3>Writing Data Offline</h3>
@@ -61,15 +61,15 @@ When Offline Support is enabled, Appwrite allows you to query and write data by 
   Writes will update the local cache first. If the device is online, the changes will be sent to Appwrite immediately. If the device is not connected to the internet, the operation will be queued and synced to Appwrite when internet is available again.
 </p>
 
-<img src="/images-ee/docs/offline-write-uml-light.png" alt="UML diagram depicting offline write operations." width: "100%" class="force-light" loading="lazy"/>
-<img src="/images-ee/docs/offline-write-uml-dark.png" alt="UML diagram depicting offline write operations." width: "100%" class="force-dark" loading="lazy"/>
+<img src="/images-ee/docs/offline-write-uml-light.png" alt="UML diagram depicting offline write operations." width="100%" class="force-light" loading="lazy"/>
+<img src="/images-ee/docs/offline-write-uml-dark.png" alt="UML diagram depicting offline write operations." width="100%" class="force-dark" loading="lazy"/>
 
 <h2><a href="#async-operation" id="async-operation">Asynchronous Operation</a></h2>
 <p>
     When Offline Support is enabled, write operations only resolve after the server accepts the request. Requests made with the Client SDK may block code execution until network connection is available again.
 </p>
-<img src="/images-ee/docs/offline-async-uml-light.png" alt="UML diagram depicting offline cache in async operations." width: "100%" class="force-light" loading="lazy"/>
-<img src="/images-ee/docs/offline-async-uml-dark.png" alt="UML diagram depicting offline cache in async operations." width: "100%" class="force-dark" loading="lazy"/>
+<img src="/images-ee/docs/offline-async-uml-light.png" alt="UML diagram depicting offline cache in async operations." width="100%" class="force-light" loading="lazy"/>
+<img src="/images-ee/docs/offline-async-uml-dark.png" alt="UML diagram depicting offline cache in async operations." width="100%" class="force-dark" loading="lazy"/>
 
 <p>
     You should optimistically update your app's local state after a write operation. Once you're online again, the write will be synced with your Appwrite project, which will be fetched when you app restarts in the future.
