@@ -8,7 +8,7 @@ use Appwrite\Utopia\View;
     Offline Support allows your client apps to continue functioning without an internet connection. Mobile devices frequently encounter situations where internet access becomes unstable or temporarily unavailable, like going through tunnels, getting on airplanes and subways, or going in and out of Wi-Fi range. Offline Support keeps your users engaged when transitioning through these real-life situations.
 </p>
 
-<h2><a href="/docs/offline#when-should-i-enable-offline" id="when-should-i-enable-offline">When Should I Enable Offline Support?</a></h2>
+<h2><a href="#when-should-i-enable-offline" id="when-should-i-enable-offline">When Should I Enable Offline Support?</a></h2>
 <p>
     You should consider enabling Offline Support if you expect the device running your application to experience short periods without a network connection, like going on an airplane or through a tunnel.
 </p>
@@ -16,12 +16,12 @@ use Appwrite\Utopia\View;
   Offline Support can't help you if the app's data needs to remain up to date with frequent updates or if write requests need to be processed immediately. If you expect your app to be offline for days or weeks, you may need to find alternative solutions.
 </p>
 
-<h2><a href="/docs/offline#enable-offline" id="enable-offline">Enable Offline Support</a></h2>
+<h2><a href="#enable-offline" id="enable-offline">Enable Offline Support</a></h2>
 
 <div class="notice">
 <h3>Breaking Changes</h3>
 <p>Enabling Offline Support introduces breaking changes to the asynchronous operation behavior of Client SDKs. <b>Existing projects must be updated.</b></p>
-<p><a href="docs/offline#async-operation">Learn more about asynchronous operations</a></p>
+<p><a href="#async-operation">Learn more about asynchronous operations</a></p>
 </div>
 
 <h3>Toggle Persistency</h3>
@@ -42,7 +42,7 @@ use Appwrite\Utopia\View;
   <pre class="line-numbers"><code class="prism language-dart" data-prism>client.setOfflineCacheSize(40000);</code></pre>
 </div>
 
-<h2><a href="/docs/offline#cache" id="cache">Offline Support Cache</a></h2>
+<h2><a href="#cache" id="cache">Offline Support Cache</a></h2>
 <p>
 When Offline Support is enabled, Appwrite allows you to query and write data by adding a cache layer.
 </p>
@@ -65,7 +65,7 @@ When Offline Support is enabled, Appwrite allows you to query and write data by 
     <img style="width: 60%; border-radius: 10px;" src="/images-ee/docs/offline-writes-uml-light.png" />
 </figure>
 
-<h2><a href="/docs/offline#async-operation" id="async-operation">Asynchronous Operation</a></h2>
+<h2><a href="#async-operation" id="async-operation">Asynchronous Operation</a></h2>
 <p>
     When Offline Support is enabled, write operations only resolve after the server accepts the request. Requests made with the Client SDK may block code execution until network connection is available again.
 </p>
@@ -126,7 +126,7 @@ When Offline Support is enabled, Appwrite allows you to query and write data by 
   }</code></pre>
 </div>
 
-<h2><a href="/docs/offline#conflict-resolution" id="conflict-resolution">Conflict Resolution</a></h2>
+<h2><a href="#conflict-resolution" id="conflict-resolution">Conflict Resolution</a></h2>
 <p>
   With Offline Support enabled, your app can continue sending requests to Appwrite APIs while offline through a cache when offline. Read requests will be fetched from the locally cached data. Write requests will be queued and executed once the device is online again. This can lead to conflicts if another device makes a different change.
 </p>
