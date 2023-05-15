@@ -52,9 +52,15 @@ When Offline Support is enabled, Appwrite allows you to query and write data by 
   Queries will fetch data from Appwrite and update the cache while the device is online. If the device is not connected to the internet, the query fetches data from the local cache.
 </p>
 
-<figure>
-    <img style="width: 60%; border-radius: 10px;" src="/images-ee/docs/offline-read-uml-light.png" />
-</figure>
+<?php
+$image = new View(__DIR__.'/../general/image.phtml');
+    echo $image
+        ->setParam('srcLight', '/images-ee/docs/offline-read-uml-light.png')
+        ->setParam('srcDark', '/images-ee/docs/offline-read-uml-dark.png')
+        ->setParam('alt', 'Function settings page.')
+        ->setParam('description', 'Function settings page.')
+        ->render();
+?>
 
 <h3>Writing Data Offline</h3>
 <p>
