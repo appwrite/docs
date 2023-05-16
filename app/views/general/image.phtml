@@ -1,13 +1,22 @@
 <?php
 $srcLight = $this->getParam('srcLight', '');
 $srcDark = $this->getParam('srcDark', $srcLight);
-$alt = $this->getParam('alt', 'Screenshot');
+$description = $this->getParam('description', '');
+$width = $this->getParam('width', '');
 $description = $this->getParam('description', '');
 ?>
 <figure>
     <picture>
-        <img class="force-light" alt="<?php echo $this->escape($alt); ?>" src="<?php echo $this->escape($srcLight); ?>?v=<?php echo APP_CACHE_BUSTER; ?>" loading="lazy">
-        <img class="force-dark" alt="<?php echo $this->escape($alt); ?>" src="<?php echo $this->escape($srcDark); ?>?v=<?php echo APP_CACHE_BUSTER; ?>" loading="lazy">
+        <img class="force-light" 
+            alt="<?php echo $this->escape($alt); ?>" 
+            src="<?php echo $this->escape($srcLight); ?>?v=<?php echo APP_CACHE_BUSTER; ?>" 
+            width="<?php echo $this->escape($width); ?>"
+            loading="lazy">
+        <img class="force-dark" 
+            alt="<?php echo $this->escape($alt); ?>" 
+            src="<?php echo $this->escape($srcDark); ?>?v=<?php echo APP_CACHE_BUSTER; ?>" 
+            width="<?php echo $this->escape($width); ?>"
+            loading="lazy">
     </picture>
     
     <?php if(!empty($description)): ?>
