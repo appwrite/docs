@@ -10,7 +10,7 @@
     <li>In your project, navigate to the <b>Auth</b> service.</li>
     <li>Under the <b>Auth</b> service, navigate to the <b>Templates</b> tab.</li>
     <li>Expand the email template you want to edit.</li>
-    <li>Select the <b>Template language</b> [TODO: @damodar is this used for localization? Can you configure a different template for each language?].</li>
+    <li>Select the <b>Template language</b>. You can have a different template for each language your app supports.</li>
     <li>Update the email template fields and click **Update** to save your changes.</li>
 </ol>
 <h2><a href="#email-templates" id="email-templates">Email Templates</a></h2>
@@ -29,15 +29,15 @@
     <tbody>
     <tr>
         <td>Sender name</td>
-        <td>[TODO: @damodar where is this used?].</td>
+        <td>Readers will see this as display name of the sender.</td>
     </tr>
     <tr>
         <td>Sender email</td>
-        <td>[TODO: @damodar which part of this can be configured? Does it have to do with the SMTP configuration?].</td>
+        <td>Readers will see this as the displayed email of the sender. This must be a valid email for the SMTP provider your configured.</td>
     </tr>
     <tr>
         <td>Reply to</td>
-        <td>[TODO: @damodar Where is this displayed, if empty is no reply?].</td>
+        <td>Readers will reply to this email adress instead of the sender address. You can leave this field empty if unused.</td>
     </tr>
     <tr>
         <td>Subject</td>
@@ -50,7 +50,7 @@
     </tbody>
 </table>
 <h3><a href="#email-template-syntax" id="email-template-syntax">Email Template Syntax</a></h3>
-<p>[TODO: @damodar are these variables accessible only in the Message tempalte or also the other components?]</p>
+<p>Variables can be used in email templates to dynamically format unique emails for each reader. These variables can only be accessed in the <b>Message</b> field of the email template.</p>
 
 <table class="full text-size-small">
     <thead>
