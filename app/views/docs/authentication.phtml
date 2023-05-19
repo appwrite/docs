@@ -309,7 +309,7 @@ try await account.createOAuth2Session(provider: "amazon")</code></pre>
 
 <div class="notice">
     <h3>Note</h3>
-    <p>While you setup OAuth2 providers, you need to enter App ID and App Secret in your Appwrite console. You need to choose a web application in your respective 3rd party OAuth2 provider (Ex: Google) irrespective of the target platform you are building for. This is beacuse the communication is between Appwrite (Web App) and the OAuth2 provider</p>
+    <p>You should select <b>web application</b> as the application type in your OAuth2 provider, even if you're building a mobile or flutter application. The OAuth2 provider will communicate with Appwrite directly, which is a web application.</p>
 </div>
 
 <h3><a href="/docs/authentication#phone" id="phone">Phone</a></h3>
