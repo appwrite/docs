@@ -70,6 +70,7 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 <h3><a href="/docs/getting-started-for-flutter#macOS" id="macOS">Mac OS</a></h3>
 
 <p>For <b>Mac OS</b> add your app name and Bundle ID, You can find your Bundle Identifier in the General tab for your app's primary target in Xcode.</p>
+<p>The Appwrite SDK uses ASWebAuthenticationSession on macOS 10.15+ to allow OAuth authentication. You have to change your macOS Deployment Target in Xcode to be macOS >= 10.15 to be able to build your app for macOS.</p>
 
 <h3><a href="/docs/getting-started-for-flutter#web" id="web">Web</a></h3>
 
