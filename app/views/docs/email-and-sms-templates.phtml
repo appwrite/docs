@@ -74,3 +74,51 @@
     </tr>
     </tbody>
 </table>
+
+<h2><a href="#sms-templates" id="sms-templates">SMS Templates</a></h2>
+<p>You can customize the SMS emplates used for phone verification and login.</p>
+<h3><a href="#sms-template-components" id="sms-template-components">SMS Template Components</a></h3>
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 200px">Component</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Message</td>
+        <td>The body of the SMS message. You can find the variables available in the <a href="#sms-template-syntax">SMS Template Syntax</a> section.</td>
+    </tr>
+    </tbody>
+</table>
+
+<h3><a href="#sms-template-syntax" id="sms-template-syntax">SMS Template Syntax</a></h3>
+<p>Variables can be used in SMS templates to dynamically format unique messages for each reader.</p>
+
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 200px">Component</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>{{project}}</code></td>
+        <td>The project name.</td>
+    </tr>
+    <tr>
+        <td><code>{{team}}</code></td>
+        <td>Thee project team's name.</td>
+    </tr>
+    <tr>
+        <td><code>{{user}}</code></td>
+        <td>The name of the uer receiving the email.</td>
+    </tr>
+    <tr>
+        <td><code>{{passcode}}</code></td>
+        <td>The secret code sent to users for phone verification or authentication.</td>
+    </tr>
+    </tbody>
+</table>
