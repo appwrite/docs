@@ -147,9 +147,12 @@ $client = (new Client())
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 
 client = Client()
+
+client = (client
     .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
     .set_project('[PROJECT_ID]')                # Your project ID
-    .set_key('919c2db5d4...a2a3346ad2'))          # Your secret API key
+    .set_key('919c2db5d4...a2a3346ad2')          # Your secret API key
+)
 </code></pre>
         </div>
     </li>
@@ -304,9 +307,11 @@ $client = (new Client())
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 
 client = Client()
-  .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
-  .set_project('[PROJECT_ID]')                # Your project ID
-  .set_key('919c2db5d4...a2a3346ad2')          # Your secret JWT
+
+client = (client
+    .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
+    .set_project('[PROJECT_ID]')                # Your project ID
+    .set_key('919c2db5d4...a2a3346ad2')          # Your secret API key
 )
 </code></pre>
         </div>
@@ -578,9 +583,12 @@ from appwrite.id import ID
 from appwrite.services.users import Users
 
 client = Client()
-  .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
-  .set_project('[PROJECT_ID]')                # Your project ID
-  .set_key('919c2db5d4...a2a3346ad2'))          # Your secret API key
+
+client = (client
+    .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
+    .set_project('[PROJECT_ID]')                # Your project ID
+    .set_key('919c2db5d4...a2a3346ad2')          # Your secret API key
+)
 
 users = Users(client)
 
