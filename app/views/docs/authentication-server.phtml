@@ -209,7 +209,7 @@ client
 <h2><a href="/docs/authentication-server#when-to-use" id="when-to-use">When Should I Use JWT Auth?</a></h2>
 <p>JWT auth is useful when you need your backend app's Server SDK to be restricted by the same set of permissions.</p>
 
-<p>If your backend app's Server SDK is using an <a href="/docs/keys">API key</a>, it will fetch <b>all resources</b> reguardless of permissions. This means the Server SDK might fetch files and documents your user should not be able to see, which is not helpful when you need to act on behalf of a user.</p>
+<p>If your backend app's Server SDK is using an <a href="/docs/keys">API key</a>, it will fetch <b>all resources</b> regardless of permissions. This means the Server SDK might fetch files and documents your user should not be able to see, which is not helpful when you need to act on behalf of a user.</p>
 
 <p>If your backend app's Server SDK is using a <b>JWT</b>, it will only fetch resources your user has permissions to access.</p>
 
@@ -592,7 +592,7 @@ client
     </li>
 </ul>
 
-<p>This will return every document reguardless of permissions, which could lead to privacy and security problems.</p>
+<p>This will return every document regardless of permissions, which could lead to privacy and security problems.</p>
 
 <div class="ide">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>{
