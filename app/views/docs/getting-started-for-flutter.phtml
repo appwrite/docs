@@ -67,9 +67,10 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 
 <p>For <b?>Linux</b> add your app <u>name</u> and <u>package name</u>, Your package name is generally the <b>name</b> in your <a href="https://github.com/appwrite/playground-for-flutter/blob/master/pubspec.yaml#L1" target="_blank" rel="noopener">pubspec.yaml</a> file. If you cannot find the correct package name, run the application in linux, and make any request with proper exception handling, you should get the application id needed to add in the received error message.</p>
 
-<h3><a href="/docs/getting-started-for-flutter#macOS" id="macOS">Mac OS</a></h3>
+<h3><a href="/docs/getting-started-for-flutter#macOS" id="macOS">macOS</a></h3>
 
-<p>For <b>Mac OS</b> add your app name and Bundle ID, You can find your Bundle Identifier in the General tab for your app's primary target in Xcode.</p>
+<p>For <b>macOS</b> add your app name and Bundle ID, You can find your Bundle Identifier in the General tab for your app's primary target in Xcode.</p>
+<p>The Appwrite SDK uses ASWebAuthenticationSession on macOS 10.15+ to allow OAuth authentication. You have to change your macOS Deployment Target in Xcode to be macOS >= 10.15 to be able to build your app for macOS.</p>
 
 <h3><a href="/docs/getting-started-for-flutter#web" id="web">Web</a></h3>
 
