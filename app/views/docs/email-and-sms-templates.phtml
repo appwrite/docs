@@ -1,7 +1,16 @@
-<p>Appwrite uses emails messages to perform user invite, user verification, login, and reset password. Emails messages can be customized to fit your app's design and voice.</p>
+<p>Appwrite uses email and SMS messages to communicate with users to perform authentication actions. Emails and SMS messages can be customized to fit your app's design and voice.</p>
+
+<p>Each Appwrite project can have its own set of unique templates. Templates also support localization, every template can be written in multiple languages and served depending on the [TODO: @dlohani]</p>
+
+<p>
+<a href="#email-templates"><i class="icon-angle-circled-right"></i>Email Templates</a>
+</p>
+<p>
+<a href="#sms-templates"><i class="icon-angle-circled-right"></i>SMS Templates</a>
+</p>
 
 <h2><a href="#customize" id="customize">Customize Templates</a></h2>
-<p>You can customize email templates in the Appwrite console.</p>
+<p>You can customize email templates for each of your projects in the Appwrite console. </p>
 <div class="notice">
     <h2>Custom SMTP Server Required</h2>
     <p>The built-in email service does not support custom email templates. Configure a <a href="#smtp">custom SMTP server</a> to enable custom email templates.</p>
@@ -17,8 +26,6 @@
 <p>You can customize the email emplates for account verification, magic-url authentication, password resets, and user invites.</p>
 <h3><a href="#email-template-components" id="email-template-components">Email Template Components</a></h3>
 <p>Each email templates has the following components that you can customize.</p>
-<h2 id="permission-types"><a href="/docs/permissions#permission-types">Permission Types</a></h2>
-<p>In Client and Server SDKs, you will find a <b>Permission</b> class with helper methods for each role described below.</p>
 <table class="full text-size-small">
     <thead>
     <tr>
@@ -79,6 +86,9 @@
     </tbody>
 </table>
 
+<h3><a href="#email-template-examples" id="email-template-components">Email Template Components</a></h3>
+[TODO: @dlohani once we're ready, let's do examples for each type of template (maybe also what it would look like rendered)]
+
 <h2><a href="#sms-templates" id="sms-templates">SMS Templates</a></h2>
 <p>You can customize the SMS emplates used for phone verification and login.</p>
 <h3><a href="#sms-template-components" id="sms-template-components">SMS Template Components</a></h3>
@@ -126,3 +136,10 @@
     </tr>
     </tbody>
 </table>
+
+<h3><a href="#sms-template-examples" id="sms-template-components">SMS Template Components</a></h3>
+[TODO: @dlohani once we're ready, let's do examples for each type of template (maybe also what it would look like rendered)]
+
+<h2>Localization</h2>
+[TODO: @dlohani short description of how it's decided which language's template is sent]
+[TODO: @dlohani Maybe example of a template in two languages? (maybe also what it would look like rendered)]
