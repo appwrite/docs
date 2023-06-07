@@ -39,10 +39,15 @@
 
 <p>Three Appwrite containers are stateful. The MariaDB, Redis, and InfluxDB containers are used for storing data, cache and pub/sub messaging, and usage stats, respectively. To scale these containers, set up a standard cluster (same as you would with any other app using these technologies) according to your needs and performance.</p>
 
-<h2><a href="/docs/production#emails" id="emails">Emails</a></h2>
+<h2><a href="/docs/production#disable-limits" id="disable-limits">Enable Rate Limits</a></h2>
+<p>If you disabled rate limits during development, make sure you re-enable them when moving to production environments. Rate limiting can be enabled by setting the <span class="tag">_APP_OPTIONS_ABUSE</span> environment variable to <code>enabled</code>.</p>
+<p>
+<a href="/docs/environment-variables"><i class="icon-angle-circled-right"></i>Learn more about environment variables</a>
+</p>
 
-<p>Appwrite does not come with an SMTP server to send emails out of the box. Emails sent from self-hosted SMTP servers are frequently labeled as spam, so it's advised to set up an SMTP integration with a third-party provider.</p>
-<p>You can self-host an SMTP service or use one of the "SMTP as a service" products like Sendgrid or Mailgun. You can <a href="/docs/email-delivery">change Appwrite's SMTP configuration</a> using Docker environment variables. Most SMTP providers offer a decent free tier to get started.</p>
+<h2><a href="/docs/production#emails" id="emails">Emails</a></h2>
+<p>Sending emails is hard. There are a lot of spam rules and configurations to master in order to set up a functional SMTP server. While it is okay to use a self-hosted SMTP server during development, you should use a third-party SMTP provider for production so your email doesn't get labeled as spam.</p>
+<p>You can <a href="/docs/email-delivery">change Appwrite's SMTP settings</a> and credentials to any 3rd party provider you like that supports SMTP integration using our Docker environment variables. Most SMTP providers offer a decent free tier to get started with.</p>
 
 <h2><a href="/docs/production#backups" id="backups">Backups</a></h2>
 
@@ -67,6 +72,8 @@
 <p>In production, it is highly recommended to turn error reporting off. To do so, make sure the Appwrite container environment variable <code>_APP_ENV</code> value from is set to <code>production</code> and not <code>development</code>.</p>
 
 <p>To monitor errors in production, add a third party monitoring service by setting the <code>_APP_LOGGING_PROVIDER</code> and <code>_APP_LOGGING_CONFIG</code>.
+
+<p>In production, it is highly recommended to turn error reporting off. To do so, make sure the Appwrite container environment variable <b>_APP_ENV</b> is set to <b>production</b> and not <b>development</b>.</p>
 
 <p>
 <a href="/docs/environment-variables"><i class="icon-angle-circled-right"></i>Learn more about environment variables</a>

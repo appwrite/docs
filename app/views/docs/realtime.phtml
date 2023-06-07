@@ -31,7 +31,7 @@ $channels = [
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 // Subscribe to files channel
@@ -50,7 +50,7 @@ client.subscribe('files', response => {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 final realtime = Realtime(client);
@@ -73,7 +73,7 @@ subscription.stream.listen((response) {
 import io.appwrite.services.Realtime
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 
 val realtime = Realtime(client)
@@ -94,7 +94,7 @@ let subscription = realtime.subscribe("files") {
 import AppwriteModels
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 
 let realtime = Realtime(client)
@@ -141,7 +141,7 @@ let subscription = realtime.subscribe(channels: ["files"]) { response in
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 client.subscribe('account', response => {
@@ -157,7 +157,7 @@ client.subscribe('account', response => {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 final realtime = Realtime(client);
@@ -177,7 +177,7 @@ subscription.stream.listen((response) {
 import io.appwrite.services.Realtime
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 
 val realtime = Realtime(client)
@@ -195,7 +195,7 @@ val subscription = realtime.subscribe("account") {
 import AppwriteModels
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 
 let realtime = Realtime(client)
@@ -220,7 +220,7 @@ let subscription = realtime.subscribe(channel: "account", callback: { response i
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 client.subscribe(['collections.A.documents.A', 'files'], response => {
@@ -236,7 +236,7 @@ client.subscribe(['collections.A.documents.A', 'files'], response => {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 final realtime = Realtime(client);
@@ -256,7 +256,7 @@ subscription.stream.listen((response) {
 import io.appwrite.services.Realtime
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 val realtime = Realtime(client)
 
@@ -273,7 +273,7 @@ realtime.subscribe("databases.A.collections.A.documents.A", "files") {
 import AppwriteModels
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 
 let realtime = Realtime(client)
@@ -297,7 +297,7 @@ realtime.subscribe(channels: ["databases.A.collections.A.documents.A", "files"])
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 const unsubscribe = client.subscribe('files', response => {
@@ -316,7 +316,7 @@ unsubscribe();</code></pre>
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 final realtime = Realtime(client);
@@ -339,7 +339,7 @@ subscription.close();</code></pre>
 import io.appwrite.services.Realtime
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 
 val realtime = Realtime(client)
@@ -516,7 +516,7 @@ subscription.close()</code></pre>
 
 <p>The SDK will guess the endpoint of the Realtime API when setting the endpoint of your Appwrite instance. If you are running Appwrite with a custom proxy and changed the route of the Realtime API, you can call the <b>setEndpointRealtime</b> method on the Client SDK and set your new endpoint value.</p>
 
-<p>By default the endpoint is <b>wss://[HOSTNAME_OR_IP]/v1/realtime</b>.</p>
+<p>By default the endpoint is <b>wss://cloud.appwrite.io/v1/realtime</b>.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -525,7 +525,7 @@ subscription.close()</code></pre>
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client } from "appwrite";
 const client = new Client();
 
-client.setEndpointRealtime('[HOSTNAME_OR_IP]');</code></pre>
+client.setEndpointRealtime('cloud.appwrite.io');</code></pre>
         </div>
     </li>
     <li>
@@ -533,21 +533,21 @@ client.setEndpointRealtime('[HOSTNAME_OR_IP]');</code></pre>
 
         <div class="ide margin-bottom" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>final client = Client();
-client.setEndpointRealtime('[HOSTNAME_OR_IP]');</code></pre>
+client.setEndpointRealtime('cloud.appwrite.io');</code></pre>
         </div>
     </li>
     <li>
         <h3>Android</h3>
         <div class="ide margin-bottom" data-lang="android" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
-client.setEndpointRealtime("[HOSTNAME_OR_IP]")</code></pre>
+client.setEndpointRealtime("cloud.appwrite.io")</code></pre>
         </div>
     </li>
     <li>
         <h3>Apple</h3>
         <div class="ide margin-bottom" data-lang="apple" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
-client.setEndpointRealtime("[HOSTNAME_OR_IP]")</code></pre>
+client.setEndpointRealtime("cloud.appwrite.io")</code></pre>
         </div>
     </li>
 </ul>

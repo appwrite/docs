@@ -2,7 +2,7 @@
 $platforms = $this->getParam('platforms');
 $versions = [];
 
-foreach($platforms['client']['languages'] as $lang) {
+foreach($platforms['client']['sdks'] as $lang) {
     $key = $lang['key'] ?? '';
     $version = $lang['version'] ?? '';
 
@@ -15,11 +15,7 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 ?>
 <p>Appwrite is a development platform that provides a powerful API and management console to get your next project up and running quickly.</p>
 
-<p>This tutorial helps you start using Appwrite with your project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
-
-<h2><a href="/docs/getting-started-for-flutter#createYourProject" id="createYourProject">Create Your First Appwrite Project</a></h2>
-
-<p>Go to your new Appwrite console, and click the <i class="icon-plus"></i> icon in the top navigation header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create to get started.</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.appwrite.io/">Create your first project now</a> and start building on Appwrite Cloud.</p>
 
 <h2><a href="/docs/getting-started-for-flutter#addYourPlatform" id="addYourPlatform">Add your Flutter Platform</a></h2>
 
@@ -71,13 +67,14 @@ $version = (isset($versions['flutter'])) ? $versions['flutter'] : '';
 
 <p>For <b?>Linux</b> add your app <u>name</u> and <u>package name</u>, Your package name is generally the <b>name</b> in your <a href="https://github.com/appwrite/playground-for-flutter/blob/master/pubspec.yaml#L1" target="_blank" rel="noopener">pubspec.yaml</a> file. If you cannot find the correct package name, run the application in linux, and make any request with proper exception handling, you should get the application id needed to add in the received error message.</p>
 
-<h3><a href="/docs/getting-started-for-flutter#macOS" id="macOS">Mac OS</a></h3>
+<h3><a href="/docs/getting-started-for-flutter#macOS" id="macOS">macOS</a></h3>
 
-<p>For <b>Mac OS</b> add your app name and Bundle ID, You can find your Bundle Identifier in the General tab for your app's primary target in Xcode.</p>
+<p>For <b>macOS</b> add your app name and Bundle ID, You can find your Bundle Identifier in the General tab for your app's primary target in Xcode.</p>
+<p>The Appwrite SDK uses ASWebAuthenticationSession on macOS 10.15+ to allow OAuth authentication. You have to change your macOS Deployment Target in Xcode to be macOS >= 10.15 to be able to build your app for macOS.</p>
 
 <h3><a href="/docs/getting-started-for-flutter#web" id="web">Web</a></h3>
 
-<p>Appwrite 0.7 and the Appwrite Flutter SDK 0.3.0 have added support for Flutter Web. To build web apps that integrate with Appwrite successfully, you must add a web platform on your Appwrite project's dashboard and list the domain your website uses to allow communication to the Appwrite API.</p>
+<p>To build web apps that integrate with Appwrite successfully, you must add a web platform on your Appwrite project's dashboard and list the domain your website uses to allow communication to the Appwrite API. The process is similar to the <a href="/docs/getting-started-for-web#addPlatform">adding a web platform</a> in the web guide.</p>
 
 <p>For web in order to capture the OAuth2 callback URL and send it to the application using JavaScript <code>postMessage()</code>, you need to create an html file inside <code>./web</code> folder of your Flutter project. For example <code>auth.html</code> with the following content.</p>
 
@@ -121,7 +118,7 @@ close the window.
 <p>You can also install the SDK using the <a href="https://pub.dev/" target="_blank" rel="noopener">Dart package manager</a> from your terminal:</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-  <pre class="line-numbers"><code class="prism language-bash" data-prism>pub get appwrite</code></pre>
+  <pre class="line-numbers"><code class="prism language-bash" data-prism>flutter pub add appwrite</code></pre>
 </div>
 
 <h2><a href="/docs/getting-started-for-flutter#initSDK" id="initSDK">Init your SDK</a></h2>
@@ -132,15 +129,11 @@ close the window.
   <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 Client client = Client()
-    .setEndpoint('https://localhost/v1') // Your Appwrite Endpoint
-    .setProject('5e8cf4f46b5e8')         // Your project ID
-    .setSelfSigned(status: true);        // For self signed certificates, only use for development
-</code></pre>
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
+    .setProject('[PROJECT_ID]');         // Your project ID</code></pre>
 </div>
 
 <p>Before sending any API calls to your new Appwrite project, make sure your mobile device or emulator has network access to your Appwrite project's hostname or IP address.</p>
-
-<p>When connecting to a local self-hosted Appwrite project from an emulator or a mobile device, you should use the private IP of the device running your Appwrite project as the hostname of the endpoint instead of localhost. You can also use a service like <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a> to proxy the Appwrite server.</p>
 
 <h2><a href="/docs/getting-started-for-flutter#makeRequest" id="makeRequest">Make Your First Request</a></h2>
 
@@ -182,9 +175,8 @@ subscription.stream.listen((response) {
   <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 Client client = Client()
-    .setEndpoint('https://localhost/v1')  // Your Appwrite Endpoint
-    .setProject('5e8cf4f46b5e8')          // Your project ID
-    .setSelfSigned(status: true);         // For self signed certificates, only use for development
+    .setEndpoint('https://cloud.appwrite.io/v1')  // Your Appwrite Endpoint
+    .setProject('[PROJECT_ID]');          // Your project ID
 
 Account account = Account(client);
 

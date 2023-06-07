@@ -113,8 +113,8 @@ if ($token != $payload.headers['x-appwrite-webhook-signature']) {
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>val client = Client(context)
 
 client
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]") // Your project ID
 
 val realtime = Realtime(client)
 
@@ -133,8 +133,8 @@ realtime.subscribe("files", callback = { response ->
             <pre class="line-numbers"><code class="prism language-swift" data-prism>let client = Client()
 
 client
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]") // Your project ID
 
 let realtime = Realtime(client)
 

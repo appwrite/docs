@@ -41,8 +41,8 @@
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -65,8 +65,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -84,8 +84,8 @@ import io.appwrite.services.Account
 import io.appwrite.ID
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -102,8 +102,8 @@ val user = account.create(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -146,8 +146,8 @@ Anonymous authentication allows users of your application to create a temporary 
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -166,8 +166,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -181,8 +181,8 @@ final user = await account.createAnonymousSession();</code></pre>
 import io.appwrite.services.Account
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -195,8 +195,8 @@ val user = account.createAnonymousSession()</code></pre>
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -239,9 +239,9 @@ mutation {
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
         <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
-const client = new Client();
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -255,8 +255,8 @@ account.createOAuth2Session('amazon');</code></pre>
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -271,8 +271,8 @@ await account.createOAuth2Session(provider: 'amazon');</code></pre>
 import io.appwrite.services.Account
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -286,13 +286,19 @@ account.createOAuth2Session(provider = "amazon")</code></pre>
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
 // Go to OAuth provider login page
 try await account.createOAuth2Session(provider: "amazon")</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="notice">
+            <p>OAuth is not available through the GraphQL API. You can use the REST API or any Client SDK instead.</p>
         </div>
     </li>
 </ul>
@@ -318,8 +324,8 @@ try await account.createOAuth2Session(provider: "amazon")</code></pre>
         <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -343,8 +349,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -361,8 +367,8 @@ import io.appwrite.services.Account
 import io.appwrite.ID
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -377,8 +383,8 @@ val session = account.createPhoneSession(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -413,8 +419,8 @@ let session = try await account.createPhoneSession(
         <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -436,8 +442,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -454,8 +460,8 @@ import io.appwrite.services.Account
 import io.appwrite.ID
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -470,8 +476,8 @@ val session = account.updatePhoneSession(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -503,17 +509,13 @@ mutation {
 
 <h3><a href="/docs/authentication#magic-url" id="magic-url">Magic URL</a></h3>
 <p>
-    Magic URL authentication allows a user to sign in without a password. Magic URL authentication sends the user an email with a secret key for creating a new session. If the provided user ID has not be registered, a new user will be created. 
+    Magic URL authentication allows a user to sign in without a password. Magic URL authentication sends the user an email with a secret key for creating a new session. If the provided email does not belong to an existing user, the provided user ID is used to create a new user. If the account already exists, the provided user ID is ignored 
 </p>
 
 <p>
     Only redirect URLs to domains added as a <a href="/docs/getting-started-for-web#addPlatform">platform</a> on your Appwrite console will be accepted. URLs not added as a platform are rejected to protect against <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md" target="_blank" rel="noopener">redirect attacks</a>.
 </p>
 
-<div class="notice">
-    <h2>SMTP Required</h2>
-    <p>Magic URL authentication requires <a href="/docs/email-delivery">SMTP</a> to be configured on your Appwrite instance to deliver emails.</p>
-</div>
 
 <p>
     Magic URL authentication can be initiated like this: 
@@ -524,11 +526,11 @@ mutation {
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -547,8 +549,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -564,8 +566,8 @@ final user = await account.createMagicURLSession(
 import io.appwrite.services.Account
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -580,8 +582,8 @@ val user = account.createMagicURLSession(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -621,8 +623,8 @@ let user = try await account.createMagicURLSession(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -641,8 +643,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -658,8 +660,8 @@ final user = await account.updateMagicURLSession(
 import io.appwrite.services.Account
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -674,8 +676,8 @@ val user = account.updateMagicURLSession(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -720,8 +722,8 @@ let user = try await account.updateMagicURLSession(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -743,8 +745,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -760,8 +762,8 @@ final session = await account.createEmailSession(
 import io.appwrite.services.Account
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -776,8 +778,8 @@ val session = account.createEmailSession(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -816,8 +818,8 @@ let session = try await account.createEmailSession(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -836,8 +838,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -850,8 +852,8 @@ final session = await account.get();</code></pre>
 import io.appwrite.services.Account
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -863,8 +865,8 @@ val session = account.get()</code></pre>
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -906,8 +908,8 @@ let session = try await account.get()</code></pre>
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -926,8 +928,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -943,8 +945,8 @@ final user = account.createRecovery(
 import io.appwrite.services.Account
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -959,8 +961,8 @@ val response = account.createRecovery(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -999,8 +1001,8 @@ After receiving a email with the secret attached to the redirect link, submit a 
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -1019,8 +1021,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -1038,8 +1040,8 @@ final user = await account.updateRecovery(
 import io.appwrite.services.Account
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -1056,8 +1058,8 @@ val token = account.updateRecovery(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -1090,274 +1092,6 @@ let token = try await account.updateRecovery(
 </ul>
 
 
-<h2><a href="/docs/authentication#jwt" id="jwt">JWT Authentication</a></h2>
-<p><a href="https://jwt.io/introduction" target="_blank" rel="noopener">JSON Web Tokens</a> (JWTs) are a secure means to transfer information or claims between two parties. If you're building <a href="/docs/getting-started-for-server">server applications</a> with Appwrite, JWTs enable your client applications to authenticate with your server application.</p>
-
-<p>You need to create a session using the Client SDKs <b>before</b> generating a JWT. The JWT will be a stateless proof of claim for the identity of the authenticated user and can be used by client or server SDKs to act on behalf of a user. JWTs become invalid after 15 minutes or when the session is deleted.</p>
-
-<p>You can generate a JWT like this:</p>
-
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Web</h3>
-        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
-
-const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
-
-const account = new Account(client);
-
-const promise = account.createJWT();
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Flutter</h3>
-        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
-
-final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
-
-final account = Account(client);
-
-final jwt = await account.createJWT();
-
- </code></pre>
-    </li>
-    <li>
-        <h3>Android</h3>
-        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
-import io.appwrite.services.Account
-
-val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-val account = Account(client)
-
-val jwt = account.createJWT()</code></pre>
-    </li>
-    <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-
-let account = Account(client)
-
-let jwt = try await account.createJWT()</code></pre>
-    </li>
-    <li>
-        <h3>GraphQL</h3>
-        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
-    accountCreateJWT {
-        jwt
-    }
-}</code></pre>
-        </div>
-    </li>
-</ul>
-
-<p>Your server application can use the JWT to act on behalf of the user by creating a <code>Client</code> instance with the JWT for each request it receives with a JWT.</p>
-
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Node.js</h3>
-        <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client } = require('node-appwrite');
-
-const client = new Client();
-
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2')                // Your project ID
-    .setJWT('eyJJ9.eyJ...');                    // Your secret JSON Web Token</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>PHP</h3>
-
-        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>use Appwrite\Client;
-
-$client = new Client();
-
-$client
-    ->setEndpoint('https://[HOSTNAME_OR_IP]/v1')            // Your API Endpoint
-    ->setProject('5df5acd0d48c2')                           // Your project ID
-    ->setJWT('eyJ9.eyJ...');                                // Your secret JSON Web Token</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Python</h3>
-        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
-
-client = Client()
-
-(client
-  .set_endpoint('https://[HOSTNAME_OR_IP]/v1')              # Your API Endpoint
-  .set_project('5df5acd0d48c2')                             # Your project ID
-  .set_jwt('eyJ9.eyJ...')                                   # Your secret JSON Web Token
-)</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Ruby</h3>
-        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby SDK">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
-
-include Appwrite
-
-client = Client
-
-client.new
-    .set_endpoint('https://[HOSTNAME_OR_IP]/v1')            # Your API Endpoint
-    .set_project('5df5acd0d48c2')                           # Your project ID
-    .set_jwt('eyJ9.eyJ...')                                 # Your secret JSON Web Token</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Deno</h3>
-        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client } from "https://deno.land/x/appwrite/mod.ts";
-
-let client = new Client();
-
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')             // Your API Endpoint
-    .setProject('5df5acd0d48c2')                            // Your project ID
-    .setJWT('eyJ9.eyJ...');                                 // Your secret JSON Web Token</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Dart</h3>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
-
-final client = Client();
-
-client
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2')                // Your project ID
-    .setJWT('eyJ9.eyJ...');                     // Your secret JSON Web Token</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Kotlin</h3>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
-
-val client = Client()
-
-client
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-    .setJWT("eyJ9.eyJ...")                      // Your secret JSON Web Token</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Swift</h3>
-        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-
-client
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
-    .setJWT("eyJ9.eyJ...")                      // Your secret JSON Web Token</code></pre>
-        </div>
-    </li>
-</ul>
-
-
-<h2><a href="/docs/authentication#persistence" id="persistence">Persistence</a></h2>
-
-<p>
-    Appwrite handles the persistence of the session in a consistent way across SDKs. After authenticating with an SDK, the SDK will persist the session so that the user will not need to log in again the next time they open the app. The mechanism for persistence depends on the SDK.
-</p>
-
-<div class="notice">
-  <h2>Best Practice</h2>
-  <p>Only keep user sessions active as long as needed and only maintain <b>one</b> instance of the Client SDK in your app to avoid conflicting session data.</p>
-</div>
-
-<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large text-size-small vertical">
-    <thead>
-        <tr>
-            <th style="width: 80px"></th>
-            <th style="width: 120px">SDK</th>
-            <th>Persistence Method</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <img src="/images-ee/platforms/web.svg" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
-                <img src="/images-ee/platforms/dark/web.svg" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
-            </td>
-            <td>
-                Web
-            </td>
-            <td>
-                Uses a session secure cookie and falls back to local storage when a session cookie is not available.
-            </td>
-        </tr>        
-        <tr>
-            <td>
-                <img src="/images-ee/platforms/flutter.svg" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
-                <img src="/images-ee/platforms/dark/flutter.svg" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
-            </td>
-            <td>
-                Flutter
-            </td>
-            <td>
-                Uses a session cookie stored in Application Documents through the <b>path_provider</b> package.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img src="/images-ee/platforms/apple.svg" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
-                <img src="/images-ee/platforms/dark/apple.svg" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
-            </td>
-            <td>
-                Apple
-            </td>
-            <td>
-                Uses a session cookie stored in <b>UserDefaults</b>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img src="/images-ee/platforms/android.svg" alt="Logo" height="30" class="force-light sdk-logo margin-start margin-end" />
-                <img src="/images-ee/platforms/dark/android.svg" alt="Logo" height="30" class="force-dark sdk-logo margin-start margin-end" />
-            </td>
-            <td>
-                Android
-            </td>
-            <td>
-                Uses a session cookie stored in <b>SharedPreferences</b>.
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-
 <h2><a href="/docs/authentication#preferences" id="preferences">User Preferences</a></h2>
 <p>You can store user preferences on a user's account using Appwrite's <a href="/docs/client/account#accountUpdatePrefs">Update Preferences</a> endpoint. You can store user preferences such as theme, notification settings, or preferred language so they can be synced across multiple devices.</p>
 <p>Preferences are stored as a key-value JSON object. The maximum allowed prefs size is 64kB and throws an error if exceeded.</p> 
@@ -1368,8 +1102,8 @@ client
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -1388,8 +1122,8 @@ promise.then(function (response) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -1407,8 +1141,8 @@ final user = await account.updatePrefs(
 import io.appwrite.services.Account
 
 val client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -1422,8 +1156,8 @@ val user = account.updatePrefs(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -1467,8 +1201,8 @@ let user = try await account.updatePrefs(
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 
@@ -1487,8 +1221,8 @@ promise.then(function (prefs) {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
 final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 final account = Account(client);
 
@@ -1501,8 +1235,8 @@ final prefs = await account.getPrefs();</code></pre>
 import io.appwrite.services.Account
 
 val client = Client(context)
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
@@ -1514,8 +1248,8 @@ val prefs = account.getPrefs()</code></pre>
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2")                // Your project ID
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
 
 let account = Account(client)
 
@@ -1532,14 +1266,3 @@ let prefs = try await account.getPrefs()</code></pre>
         </div>
     </li>
 </ul>
-
-<h2><a href="/docs/authentication#limits" id="limits">Session Limits</a></h2>
-<p>In Appwrite versions 1.2 and above, you can limit the number of active sessions created per user to prevent the accumulation of unused but active sessions. New sessions created by the same user past the session limit deletes the oldest session.</p>
-
-<p>You can change the session limit in the <b>Security</b> tab of the Auth Service in your Appwrite Console. The default session limit is 10 with a maximum configurable limit of 100.</p> 
-
-<h2><a href="/docs/authentication#security" id="security">Security</a></h2>
-
-<p>
-    Security is very important to protect users' data and privacy. Appwrite uses a <a href="/docs/permissions">permissions model</a> coupled with user sessions to ensure users only have access to certain information based on the permissions. With Appwrite services, including databases and storage, access is granted at the collection, bucket, document, or file level. This access is consistent across access to these items in relation to document access, file access, and real-time events.
-</p>

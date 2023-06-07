@@ -7,7 +7,7 @@ The Appwrite CLI can be used in a non-interactive and headless manner, without s
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite client \
-    --endpoint https://[HOSTNAME_OR_IP]/v1 \
+    --endpoint https://cloud.appwrite.io/v1 \
     --projectId [YOUR_PROJECT_ID] \
     --key YOUR_API_KEY</code></pre>
 </div>
@@ -34,8 +34,19 @@ The Appwrite CLI can be used in a non-interactive and headless manner, without s
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function --all --yes</code></pre>
 </div>
 
-<p>You can deploy collections non-interactively in a similar way by using the <code>--yes</code> option.</p>
-<p>Deploy all collections:</p>
+<p>You can deploy databases, collections, teams, and buckets non-interactively in a similar way by using the <code>--all</code> and <code>--yes</code> option.</p>
+<p>Deploy all databases and collections:</p>
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collection --all --yes</code></pre>
 </div>
+
+<p>Deploy all teams:</p>
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy team --all --yes</code></pre>
+</div>
+
+<p>Deploy all buckets:</p>
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy buckets --all --yes</code></pre>
+</div>
+

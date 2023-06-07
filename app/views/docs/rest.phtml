@@ -32,7 +32,7 @@
     <tr>
         <td><code>X-Appwrite-JWT: [TOKEN]</code></td>
         <td><span class="tag">optional</span></td>
-        <td>Token used for JWT authentication, tokens can be generated using the <a href="docs/client/account#accountCreateJWT">Create JWT</a> endpoint.</b></td>
+        <td>Token used for JWT authentication, tokens can be generated using the <a href="/docs/client/account#accountCreateJWT">Create JWT</a> endpoint.</b></td>
     </tr>
     <tr>
         <td><code>X-Appwrite-Response-Format: [VERSION-NUMBER]</code></td>
@@ -50,16 +50,16 @@
 <h2><a href="/docs/rest#no-headers" id="no-headers">Using Appwrite Without Headers</a></h2>
 <p>Some use cases do not allow custom headers, such as embedding images from Appwrite in HTML. In these cases, you can provide the Appwrite project ID using the query parameter <code>project</code>.</p>
 <div class="ide margin-bottom" data-lang="html" data-lang-label="HTML">
-    <pre class="line-numbers"><code class="prism language-html" data-prism><?php echo htmlentities('<img src="https://[HOSTNAME_OR_IP]/v1/storage/buckets/[BUCKET_ID]/files/[FILE_ID]/preview?project=[PROJECT_ID]">'); ?></code></pre>
+    <pre class="line-numbers"><code class="prism language-html" data-prism><?php echo htmlentities('<img src="https://cloud.appwrite.io/v1/storage/buckets/[BUCKET_ID]/files/[FILE_ID]/preview?project=[PROJECT_ID]">'); ?></code></pre>
 </div>
 
 <h2><a href="/docs/rest#client-auth" id="client-auth">Client Authentication</a></h2>
-<p>You can create account sessions with POST requests to the <a href="docs/client/account">Account API</a>. Sessions are persisted using secured cookies. You can learn more about session persistence in the <a href="/docs/authentication#persistence">Authentication Guide</a>.</p>
+<p>You can create account sessions with POST requests to the <a href="/docs/client/account">Account API</a>. Sessions are persisted using secured cookies. You can learn more about session persistence in the <a href="/docs/authentication#persistence">Authentication Guide</a>.</p>
 <p>The example below shows creating an account session with the <a href="/docs/client/account#accountCreateEmailSession">Create Account Session with Email</a> endpoint.</p>
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
     <pre class="line-numbers"><code class="prism language-http" data-prism>POST /v1/account/sessions/email HTTP/1.1
 Content-Type: application/json
-X-Appwrite-Project: 5df5acd0d48c2
+X-Appwrite-Project: [PROJECT_ID]
 
 {
   "email": "example@email.com",
@@ -69,8 +69,8 @@ X-Appwrite-Project: 5df5acd0d48c2
 
 <p> You can find the cookies used to persist the new session in the response headers.</p>
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
-    <pre class="line-numbers"><code class="prism language-http" data-prism>Set-Cookie: a_session_61e71ec784ab035f7259_legacy=eyJ0...aSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.demo.appwrite.io; secure; httponly
-Set-Cookie: a_session_61e71ec784ab035f7259=eyJ0...aSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.demo.appwrite.io; secure; httponly; samesite=None</code></pre>
+    <pre class="line-numbers"><code class="prism language-http" data-prism>Set-Cookie: a_session_61e71ec784ab035f7259_legacy=eyJ0...aSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.cloud.appwrite.io; secure; httponly
+Set-Cookie: a_session_61e71ec784ab035f7259=eyJ0...aSJ9; expires=Tue, 19-Dec-2023 21:26:51 GMT; path=/; domain=.cloud.appwrite.io; secure; httponly; samesite=None</code></pre>
 </div>
 
 <p>These cookies are used in subsequent requests to authenticate the user.</p>
@@ -78,7 +78,7 @@ Set-Cookie: a_session_61e71ec784ab035f7259=eyJ0...aSJ9; expires=Tue, 19-Dec-2023
     <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/account HTTP/1.1
 Cookie: a_session_61e71ec784ab035f7259_legacy=eyJ0...aSJ9; a_session_61e71ec784ab035f7259=eyJ0...aSJ9
 Content-Type: application/json
-X-Appwrite-Project: 5df5acd0d48c2</code></pre>
+X-Appwrite-Project: [PROJECT_ID]</code></pre>
 </div>
 
 <h2><a href="/docs/rest#server-auth" id="server-auth">Server Authentication</a></h2>
@@ -93,7 +93,7 @@ X-Appwrite-Key: [API_KEY]</code></pre>
 </div>
 
 <h2><a href="/docs/rest#server-auth" id="server-auth">JWT Authentication</a></h2>
-<p>JWT authentication is frequently used by server applications to act on behalf of a user. Users generate tokens using the <a href="docs/client/account#accountCreateJWT">Create JWT</a> endpoint. When issuing requests authenticated with a JWT, Appwrite will treat the request like it is from the authenticated user.</p>
+<p>JWT authentication is frequently used by server applications to act on behalf of a user. Users generate tokens using the <a href="/docs/client/account#accountCreateJWT">Create JWT</a> endpoint. When issuing requests authenticated with a JWT, Appwrite will treat the request like it is from the authenticated user.</p>
 
 <div class="ide margin-bottom" data-lang="http" data-lang-label="HTTP">
     <pre class="line-numbers"><code class="prism language-http" data-prism>GET /v1/account HTTP/1.1
@@ -301,7 +301,7 @@ read("user:627a958ded6424a98a9f")
 <h2><a href="/docs/rest#unique-id" id="unique-id">Unique ID</a></h2>
 
 <p>
-Appwrite's SDKs have a helper <code>ID.unqiue()</code> to generate unique IDs. When using Appwrite without an SDK, pass the string <code>"unique()"</code> into the ID parameter.
+Appwrite's SDKs have a helper <code>ID.unique()</code> to generate unique IDs. When using Appwrite without an SDK, pass the string <code>"unique()"</code> into the ID parameter.
 </p>
 
 <h2><a href="/docs/rest#query" id="query">Query Methods</a></h2>
@@ -320,6 +320,10 @@ Appwrite's SDKs provide a <code>Query</code> class to generate query strings. Wh
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>select</td>
+            <td><code>select([attribute])</code></td>
+        </tr>
         <tr>
             <td>equal</td>
             <td><code>equal("attribute", [value])</code></td>
@@ -345,8 +349,28 @@ Appwrite's SDKs provide a <code>Query</code> class to generate query strings. Wh
             <td><code>greaterThanEqual("attribute", [value])</code></td>
         </tr>
         <tr>
+            <td>between</td>
+            <td><code>between("attribute", lowerBound, upperBound)</code></td>
+        </tr>
+        <tr>
+            <td>isNull</td>
+            <td><code>isNull("attribute")</code></td>
+        </tr>
+        <tr>
+            <td>isNotNull</td>
+            <td><code>isNotNull("attribute")</code></td>
+        </tr>
+        <tr>
+            <td>startsWith</td>
+            <td><code>startsWith("attribute", [value])</code></td>
+        </tr>
+        <tr>
+            <td>endsWith</td>
+            <td><code>endsWith("attribute", [value])</code></td>
+        </tr>
+        <tr>
             <td>search</td>
-            <td><code>search("attribute", [value1])</code></td>
+            <td><code>search("attribute", [value])</code></td>
         </tr>
         <tr>
             <td>orderDesc</td>
