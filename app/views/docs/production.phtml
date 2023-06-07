@@ -40,7 +40,7 @@
 <p>Three Appwrite containers are stateful. The MariaDB, Redis, and InfluxDB containers are used for storing data, cache and pub/sub messaging, and usage stats, respectively. To scale these containers, set up a standard cluster (same as you would with any other app using these technologies) according to your needs and performance.</p>
 
 <h2><a href="/docs/production#disable-limits" id="disable-limits">Enable Rate Limits</a></h2>
-<p>If you disabled rate limits during development, make sure you re-enable them when moving to production environments. Rate limiting can be enabled by setting the <span class="tag">_APP_OPTIONS_ABUSE</span> environment variable to <code>enabled</code>.</p>
+<p>If you disabled rate limits during development, make sure you re-enable them when moving to production environments. Rate limiting can be enabled by setting the <code>_APP_OPTIONS_ABUSE</code> environment variable to <code>enabled</code>.</p>
 <p>
 <a href="/docs/environment-variables"><i class="icon-angle-circled-right"></i>Learn more about environment variables</a>
 </p>
@@ -73,7 +73,7 @@
 
 <p>To monitor errors in production, add a third party monitoring service by setting the <code>_APP_LOGGING_PROVIDER</code> and <code>_APP_LOGGING_CONFIG</code>.
 
-<p>In production, it is highly recommended to turn error reporting off. To do so, make sure the Appwrite container environment variable <b>_APP_ENV</b> is set to <b>production</b> and not <b>development</b>.</p>
+<p>In production, it is highly recommended to turn error reporting off. To do so, make sure the Appwrite container environment variable <code>_APP_ENV</code> is set to <code>production</code> and not <code>development</code>.</p>
 
 <p>
 <a href="/docs/environment-variables"><i class="icon-angle-circled-right"></i>Learn more about environment variables</a>
