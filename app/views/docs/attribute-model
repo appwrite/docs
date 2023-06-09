@@ -1,0 +1,70 @@
+<h2>Properties</h2>
+
+<table class="vertical full args">
+    <thead>
+    <tr>
+        <td style="width: 140px">Name</td>
+        <td style="width: 120px">Type</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+        <td>key</td>
+        <td>string</td>
+        <td>Attribute key.</td>
+    </tbody>
+    <tbody>
+        <td>type</td>
+        <td>string</td>
+        <td>Attribute type.</td>
+    </tbody>
+    <tbody>
+        <td>status</td>
+        <td>string</td>
+        <td>Attribute status. Possible values: <code>available</code>, <code>processing</code>, <code>deleting</code>, <code>stuck</code>, or <code>failed</code></td>
+    </tbody>
+    <tbody>
+        <td>required</td>
+        <td>boolean</td>
+        <td>Is attribute required?</td>
+    </tbody>
+    <tbody>
+        <td>array</td>
+        <td>boolean</td>
+        <td>Is attribute an array?</td>
+    </tbody>
+</table>
+
+<h2>Examples</h2>
+
+<p>This is a generic attribute model that specific attribute types implement. For examples, view a specific attribute models.</p>
+<p>
+<a href="/docs/models/attributeBoolean"><i class="icon-angle-circled-right"></i>attributeBoolean</a>
+</p>
+<p>
+<a href="/docs/models/attributeInteger"><i class="icon-angle-circled-right"></i>attributeInteger</a>
+</p>
+<p>
+<a href="/docs/models/attributeFloat"><i class="icon-angle-circled-right"></i>attributeFloat</a>
+</p>
+<p>
+<a href="/docs/models/attributeEmail"><i class="icon-angle-circled-right"></i>attributeEmail</a>
+</p>
+<p>
+<a href="/docs/models/attributeEnum"><i class="icon-angle-circled-right"></i>attributeEnum</a>
+</p>
+<p>
+<a href="/docs/models/attributeUrl"><i class="icon-angle-circled-right"></i>attributeUrl</a>
+</p>
+<p>
+<a href="/docs/models/attributeIp"><i class="icon-angle-circled-right"></i>attributeIp</a>
+</p>
+<p>
+<a href="/docs/models/attributeDatetime"><i class="icon-angle-circled-right"></i>attributeDatetime</a>
+</p>
+<p>
+<a href="/docs/models/attributeRelationship"><i class="icon-angle-circled-right"></i>attributeRelationship</a>
+</p>
+<p>
+<a href="/docs/models/attributeString"><i class="icon-angle-circled-right"></i>attributeString</a> 
+</p>
