@@ -61,7 +61,7 @@ void main() async {
     
     // OAuth Login, for simplest implementation you can leave both success and
     // failure link empty so that Appwrite handles everything.
-    account.createOAuth2Session('github');
+    await account.createOAuth2Session('github');
         
 }
 ```
@@ -99,6 +99,29 @@ promise.then(function (response) {
 ```
 
 ### Flutter
+
+```dart
+import 'package:appwrite/appwrite.dart';
+
+void main() async {
+    final client = new Client();
+    final account = new Account(client);
+    
+    client
+        .setEndpoint('https://cloud.appwrite.io/v1') // YOUR API Endpoint
+        .setProject('[PROJECT_ID]') // YOUR PROJECT ID
+    ;
+    
+    // OAuth Login, for simplest implementation you can leave both success and
+    // failure link empty so that Appwrite handles everything.
+    final future = account.updateSession('current');
+    future.then(function (response) {
+        console.log(response); // Success
+    }, function (error) {
+        console.log(error); // Failure
+    }); 
+}
+```
 
 ### Android (Kotlin)
 
