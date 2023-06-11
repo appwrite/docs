@@ -45,6 +45,27 @@ account.createOAuth2Session('github', '[LINK_ON_SUCCESS]', '[LINK_ON_FAILURE]');
 
 ### Flutter
 
+For Flutter make sure to follow [getting started for Flutter](https://appwrite.io/docs/getting-started-for-flutter) and setup configuration required for each platform to successfully authenticate user with OAuth2 providers.
+
+```dart
+import 'package:appwrite/appwrite.dart';
+
+void main() async {
+    final client = new Client();
+    final account = new Account(client);
+    
+    client
+        .setEndpoint('https://cloud.appwrite.io/v1') // YOUR API Endpoint
+        .setProject('[PROJECT_ID]') // YOUR PROJECT ID
+    ;
+    
+    // OAuth Login, for simplest implementation you can leave both success and
+    // failure link empty so that Appwrite handles everything.
+    account.createOAuth2Session('github');
+        
+}
+```
+
 ### Android (Kotlin)
 
 ### Android (Java)
