@@ -45,7 +45,7 @@ account.createOAuth2Session('github', '[LINK_ON_SUCCESS]', '[LINK_ON_FAILURE]');
 
 ### Flutter
 
-For Flutter make sure to follow [getting started for Flutter](https://appwrite.io/docs/getting-started-for-flutter) and setup configuration required for each platform to successfully authenticate user with OAuth2 providers.
+For Flutter make sure to follow [getting started for Flutter](https://appwrite.io/docs/getting-started-for-flutter#addYourPlatform) and setup configuration required for each platform to successfully authenticate user with OAuth2 providers.
 
 ```dart
 import 'package:appwrite/appwrite.dart';
