@@ -44,8 +44,49 @@ account.createOAuth2Session('github', '[LINK_ON_SUCCESS]', '[LINK_ON_FAILURE]');
 ```
 
 ### Flutter
+You can use OAuth in your Flutter application, but some platforms like Android and Apple requires additional configuration to enable the OAuth callback, so the your users can be redirected back to your app..
 
-For Flutter make sure to follow [getting started for Flutter](https://appwrite.io/docs/getting-started-for-flutter#addYourPlatform) and setup configuration required for each platform to successfully authenticate user with OAuth2 providers.
+#### Android OAuth callback
+
+In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `<application>` tag, along side the existing `<activity>` tags in your `AndroidManifest.xml`. Be sure to replace the `[PROJECT_ID]` string with your actual Appwrite project ID. You can find your Appwrite project ID in your project settings screen in your Appwrite console.
+
+```xml
+<manifest ...>
+  ...
+  <application ...>
+    ...
+    <!-- Add this inside the `<application>` tag, along side the existing `<activity>` tags -->
+    <activity android:name="io.appwrite.views.CallbackActivity" android:exported="true">
+      <intent-filter android:label="android_web_auth">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="appwrite-callback-[PROJECT_ID]" />
+      </intent-filter>
+    </activity>
+  </application>
+</manifest>
+```
+
+#### Apple
+In order to capture the Appwrite OAuth callback url, the following URL scheme needs to added to your `Info.plist`
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+<dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLName</key>
+    <string>io.appwrite</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+        <string>appwrite-callback-[PROJECT_ID]</string>
+    </array>
+</dict>
+</array>
+```
+
+To authenticate a user in your Flutter application, use the [Create OAuth2 Session](https://appwrite.io/docs/client/account?sdk=flutter-default#accountCreateOAuth2Session) endpoint.
 
 ```dart
 import 'package:appwrite/appwrite.dart';
@@ -67,10 +108,140 @@ void main() async {
 ```
 
 ### Android (Kotlin)
+Before you can add OAuth to your Android app, you need to setup a callback for your OAuth flow.
+
+In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `<application>` tag, along side the existing `<activity>` tags in your `AndroidManifest.xml`. Be sure to replace the `[PROJECT_ID]` string with your actual Appwrite project ID. You can find your Appwrite project ID in your project settings screen in your Appwrite console.
+
+```xml
+<manifest ...>
+  ...
+  <application ...>
+    ...
+    <!-- Add this inside the `<application>` tag, along side the existing `<activity>` tags -->
+    <activity android:name="io.appwrite.views.CallbackActivity" android:exported="true">
+      <intent-filter android:label="android_web_auth">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="appwrite-callback-[PROJECT_ID]" />
+      </intent-filter>
+    </activity>
+  </application>
+</manifest>
+```
+
+To authenticate a user in your Android application, use the [Create OAuth2 Session](https://appwrite.io/docs/client/account?sdk=android-kotlin#accountCreateOAuth2Session) endpoint.
+
+```kotlin
+import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]") // Your project ID
+
+val account = Account(client)
+
+account.createOAuth2Session(
+    provider = "github",
+)
+```
 
 ### Android (Java)
+Before you can add OAuth to your Android app, you need to setup a callback for your OAuth flow.
+
+In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `<application>` tag, along side the existing `<activity>` tags in your `AndroidManifest.xml`. Be sure to replace the `[PROJECT_ID]` string with your actual Appwrite project ID. You can find your Appwrite project ID in your project settings screen in your Appwrite console.
+
+```xml
+<manifest ...>
+  ...
+  <application ...>
+    ...
+    <!-- Add this inside the `<application>` tag, along side the existing `<activity>` tags -->
+    <activity android:name="io.appwrite.views.CallbackActivity" android:exported="true">
+      <intent-filter android:label="android_web_auth">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="appwrite-callback-[PROJECT_ID]" />
+      </intent-filter>
+    </activity>
+  </application>
+</manifest>
+```
+
+To authenticate a user in your Android application, use the [Create OAuth2 Session](https://appwrite.io/docs/client/account?sdk=android-java#accountCreateOAuth2Session) endpoint.
+
+```java
+import io.appwrite.Client;
+import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.services.Account;
+
+Client client = new Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]"); // Your project ID
+
+Account account = new Account(client);
+
+account.createOAuth2Session(
+    "github",
+    new CoroutineCallback<>((result, error) -> {
+        if (error != null) {
+            error.printStackTrace();
+            return;
+        }
+
+        Log.d("Appwrite", result.toString());
+    })
+);
+```
 
 ### iOS (Swift)
+
+In order to capture the Appwrite OAuth callback url, the following URL scheme needs to added to your `Info.plist`
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+<dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLName</key>
+    <string>io.appwrite</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+        <string>appwrite-callback-[PROJECT_ID]</string>
+    </array>
+</dict>
+</array>
+```
+
+If you're using UIKit, you'll also need to add a hook to your `SceneDelegate.swift` file to ensure cookies work correctly.
+```swift
+func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    guard let url = URLContexts.first?.url,
+        url.absoluteString.contains("appwrite-callback") else {
+        return
+    }
+    WebAuthComponent.handleIncomingCookie(from: url)
+}
+```
+
+To authenticate a user in your Android application, use the [Create OAuth2 Session](https://appwrite.io/docs/client/account?sdk=apple-default#accountCreateOAuth2Session) endpoint.
+
+```swift
+import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]") // Your project ID
+
+let account = Account(client)
+
+let success = try await account.createOAuth2Session(
+    provider: "github"
+)
+
+```
 
 ## Refreshing the OAuth2 session
 OAuth2 sessions expire to protect from security risks. This means, OAuth2 sessions should be refreshed to keep the user authenticated. You can do this by calling the [Update OAuth Session](https://appwrite.io/docs/client/account#accountUpdateSession) endpoint when ever your user visits your app.
@@ -124,7 +295,55 @@ void main() async {
 ```
 
 ### Android (Kotlin)
+```kotlin
+import io.appwrite.Client
+import io.appwrite.services.Account
 
+val client = Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]") // Your project ID
+
+val account = Account(client)
+
+val response = account.updateSession(
+    sessionId = "current"
+)
+```
 ### Android (Java)
+```java
+import io.appwrite.Client;
+import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.services.Account;
 
+Client client = new Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]"); // Your project ID
+
+Account account = new Account(client);
+
+account.updateSession(
+    "current"
+    new CoroutineCallback<>((result, error) -> {
+        if (error != null) {
+            error.printStackTrace();
+            return;
+        }
+
+        Log.d("Appwrite", result.toString());
+    })
+);
+```
 ### iOS (Swift)
+``` swift
+import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]") // Your project ID
+
+let account = Account(client)
+
+let session = try await account.updateSession(
+    sessionId: "current"
+)
+```
