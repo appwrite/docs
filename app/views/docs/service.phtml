@@ -230,7 +230,7 @@ if (!\function_exists('skipLanguage')) {
                             $selected = ($key === $version) ? ' selected' : '';
                             ?>
                             <?php if(!in_array($sdk, ['rest-default', 'graphql-default']) || strcmp($key, "1.2.x") >= 0): ?>
-                                <option value="<?php echo $this->escape($key); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?><?php echo $selected; ?>>Version <?php echo $this->escape($key); ?></option>
+                                <option value="<?php echo $this->escape($key); ?>"<?php echo ($key === $sdk) ? ' selected' : ''; ?><?php echo $selected; ?>><?php echo $this->escape($name); ?></option>
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
