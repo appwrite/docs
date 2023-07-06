@@ -18,7 +18,7 @@
 
 <h2 id="default-values"><a href="/docs/permissions#default-values">Default Values</a></h2>
 
-<p>When not providing a resource with read or write permissions, the default value will be empty. When a read or write permissions is missing, no one will be granted access control to the resource.</p>
+<p>If you create a resource using a Server SDK or the Appwrite console without explicit permissions, no one can access it by default because the permissions will be empty. If you create a resource using a Client SDK without explicit permissions, the creator will be granted read, update, delete, and create permissions on that resource by default.</p>
 
 <h2 id="server-integration"><a href="/docs/permissions#server-integration">Server Integration</a></h2>
 
