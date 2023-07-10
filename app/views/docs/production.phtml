@@ -4,13 +4,13 @@
 
 <p>Appwrite does not generate a unique encryption key during a default setup. This key encrypts your files and sensitive data like webhook passwords or API keys to keep them secure. To take advantage of this feature, you must generate a unique key and set it as the value of the <code>_APP_OPENSSL_KEY_V1</code> environment variable.</p>
 
-<p>You <b>must</b> set <code>_APP_OPENSSL_KEY_V1</code> immediately after installation of a production Appwrite instance. Changing the <code>_APP_OPENSSL_KEY_V1</code> variable will cause existing passwords to be lost.</p>
+<p>You <b>must</b> set <code>_APP_OPENSSL_KEY_V1</code> immediately after installation of a production Appwrite instance. Changing the <code>_APP_OPENSSL_KEY_V1</code> variable will cause existing passwords, OAuth secrets, and API keys to be lost.</p>
 
 <p>Make sure to keep this key in a safe place and never make it publicly accessible.</p>
 
 <div class="notice">
   <h2>Best Practice</h2>
-  <p>You should always prefer <b>HTTPS</b> over HTTP in production environments. This keeps your APIs secure and prevents any redirects from interfering with your requests.</p>
+  <p>You should always prefer <b>HTTPS</b> over HTTP in production environments. This keeps your APIs secure and prevents any redirects from interfering with your requests. You can force the use of HTTPS with the <a href="/docs/environment-variables#general">_APP_OPTIONS_FORCE_HTTPS</a> environment variable.</p>
 </div>
 
 <h2><a href="/docs/production#limitConsoleAccess" id="limitConsoleAccess">Limit Console Access</a></h2>
@@ -41,6 +41,9 @@
 
 <h2><a href="/docs/production#disable-limits" id="disable-limits">Enable Rate Limits</a></h2>
 <p>If you disabled rate limits during development, make sure you re-enable them when moving to production environments. Rate limiting can be enabled by setting the <code>_APP_OPTIONS_ABUSE</code> environment variable to <code>enabled</code>.</p>
+
+<p>Rate limits are an important mechanism to protect your app. Without rate limits, malicious actors can spam your APIs to perform <a href="https://en.wikipedia.org/wiki/Denial-of-service_attack" target="_blank" rel="noopener">denial-of-service type attacks</a> or brute-force user passwords.</p>
+
 <p>
 <a href="/docs/environment-variables"><i class="icon-angle-circled-right"></i>Learn more about environment variables</a>
 </p>
