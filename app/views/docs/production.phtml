@@ -4,7 +4,7 @@
 
 <p>Appwrite does not generate a unique encryption key during a default setup. This key encrypts your files and sensitive data like webhook passwords or API keys to keep them secure. To take advantage of this feature, you must generate a unique key and set it as the value of the <code>_APP_OPENSSL_KEY_V1</code> environment variable.</p>
 
-<p>You <b>must</b> set <code>_APP_OPENSSL_KEY_V1</code> immediately after installation of a production Appwrite instance. Changing the <code>_APP_OPENSSL_KEY_V1</code> variable will cause existing passwords, OAuth secrets, and API keys to be lost.</p>
+<p>You <b>must</b> set <code>_APP_OPENSSL_KEY_V1</code> immediately after installation of a production Appwrite instance. Changing the <code>_APP_OPENSSL_KEY_V1</code> variable will cause the loss of existing passwords, OAuth secrets, and API keys.</p>
 
 <p>Make sure to keep this key in a safe place and never make it publicly accessible.</p>
 
