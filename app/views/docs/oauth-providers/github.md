@@ -347,3 +347,6 @@ let session = try await account.updateSession(
     sessionId: "current"
 )
 ```
+## Accessing the Provider Access Token
+
+After the user has been authorized and redirected back to your app, you can find their GitHub provider access token in the [session object](https://appwrite.io/docs/models/session) by accessing the `providerAccessToken` property. This access token can be used to authenticate the user and make API requests on their behalf.
