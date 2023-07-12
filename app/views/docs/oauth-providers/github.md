@@ -280,17 +280,15 @@ void main() async {
     
     client
         .setEndpoint('https://cloud.appwrite.io/v1') // YOUR API Endpoint
-        .setProject('[PROJECT_ID]') // YOUR PROJECT ID
-    ;
+        .setProject('[PROJECT_ID]'); // YOUR PROJECT ID
     
-    // OAuth Login, for simplest implementation you can leave both success and
-    // failure link empty so that Appwrite handles everything.
-    final future = account.updateSession('current');
-    future.then(function (response) {
-        console.log(response); // Success
-    }, function (error) {
-        console.log(error); // Failure
-    }); 
+    
+    try {
+      final future = await account.updateSession(sessionId: 'current');
+      print(future.toMap()); // Success
+    } on AppwriteException catch(e){
+      print(e.message); // Failure
+    }
 }
 ```
 
