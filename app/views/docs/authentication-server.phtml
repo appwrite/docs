@@ -204,6 +204,19 @@ client
     .setJWT("eyJJ9.eyJ...886ca")                // Your secret JSON Web Token</code></pre>
         </div>
     </li>
+    <li>
+        <h3>.NET</h3>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
+
+var client = new Client();
+
+client
+    .SetEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .SetProject("[PROJECT_ID]")                // Your project ID
+    .SetJWT("eyJJ9.eyJ...886ca");               // Your secret JSON Web Token</code></pre>
+        </div>
+    </li>
 </ul>
 
 <h2><a href="/docs/authentication-server#when-to-use" id="when-to-use">When Should I Use JWT Auth?</a></h2>
@@ -409,6 +422,29 @@ let documentList = try await databases.listDocuments(
 / ... More code to manipulate the results</code></pre>
         </div>
     </li>
+    <li>
+        <h3>.NET</h3>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
+using Appwrite.Services;
+using Appwrite.Models;
+
+var client = new Client();
+
+client
+    .SetEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .SetProject("[PROJECT_ID]")                // Your project ID
+    .SetJWT("eyJJ9.eyJ...886ca");               // Your secret JSON Web Token
+
+var databases = new Databases(client);
+
+var documentList = await databases.ListDocuments(
+    databaseId: "642f358bf4084c662590",
+    collectionId: "642f3592aa5fc856ad1e");
+
+// ... More code to manipulate the results</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>Only the birthday of Kevin is returned and documents where <code>user-A</code> has no permissions to access are not returned.</p>
@@ -588,6 +624,29 @@ client
         collectionId: "642f3592aa5fc856ad1e"
     )
     / ... More code to manipulate the results</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
+using Appwrite.Services;
+using Appwrite.Models;
+
+var client = new Client();
+
+client
+    .SetEndpoint("https://cloud.appwrite.io/v1")   // Your API Endpoint
+    .SetProject("[PROJECT_ID]")                  // Your project ID
+    .SetKey("919c2d18fb5d4...a2ae413da83346ad2");  // Your secret API key
+
+var databases = new Databases(client);
+
+var documentList = await databases.ListDocuments(
+    databaseId: "642f358bf4084c662590",
+    collectionId: "642f3592aa5fc856ad1e");
+
+// ... More code to manipulate the results</code></pre>
         </div>
     </li>
 </ul>
