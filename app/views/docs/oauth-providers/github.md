@@ -282,7 +282,7 @@ void main() async {
         .setEndpoint('https://cloud.appwrite.io/v1') // YOUR API Endpoint
         .setProject('[PROJECT_ID]'); // YOUR PROJECT ID
     
-    // Simplest implementation of updating auth session
+    // Simplest implementation of updating an OAuth2 session
     // prints Session Object value on success and error message on failure
     try {
       final future = await account.updateSession(sessionId: 'current');
