@@ -99,6 +99,12 @@ $swiftVersion = $versions['swift'] ?? '';
 ]</code></pre>
         </div>
     </li>
+    <li>
+        <h3>.NET</h3>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>dotnet add package Appwrite</code></pre>
+        </div>
+    </li>
 </ul>
 
 <h2><a href="/docs/getting-started-for-server#createProject" id="createProject">Create Your First Appwrite Project</a></h2>
@@ -213,6 +219,18 @@ let client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your Appwrite Endpoint
     .setProject("[PROJECT_ID]")                // Your project ID
     .setKey("919c2db5d4...a2a3346ad2")          // Your secret API key
+</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
+
+var client = new Client()
+  .SetEndpoint("http://cloud.appwrite.io/v1")  // Your Appwrite Endpoint
+  .SetProject("[PROJECT_ID]")               // Your project ID
+  .SetKey("919c2db5d4...a2a3346ad2");                        // Your secret API Key
 </code></pre>
         </div>
     </li>
@@ -376,6 +394,18 @@ let client = Client()
 </code></pre>
         </div>
     </li>
+    <li>
+        <h3>.NET</h3>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
+
+var client = new Client()
+  .SetEndpoint("http://cloud.appwrite.io/v1")  // Your Appwrite Endpoint
+  .SetProject("[PROJECT_ID]")               // Your project ID
+  .SetJWT("919c2db5d4...a2a3346ad2");                        // Your secret JWT
+</code></pre>
+        </div>
+    </li>
 </ul>
 
 <h2><a href="/docs/getting-started-for-server#makeRequest" id="makeRequest">Make Your First Request</a></h2>
@@ -519,6 +549,22 @@ let user = try await users.create(
     phone: nil,
     password: "password"
 )</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite.Services;
+using Appwrite.Models;
+
+var users = new Users(client);
+
+var user = await users.Create(
+    userId: ID.Unique(),
+    email: "email@example.com",
+    phone: null,
+    password: "password");
+</code></pre>
         </div>
     </li>
 </ul>
@@ -709,6 +755,28 @@ let user = try await users.create(
     phone: nil,
     password: "password"
 )</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
+using Appwrite.Services;
+using Appwrite.Models;
+
+var client = new Client()
+  .SetEndpoint("http://cloud.appwrite.io/v1")    // Your Appwrite Endpoint
+  .SetProject("[PROJECT_ID]")                 // Your project ID
+  .SetKey("cd868db89");                         // Your secret API key
+
+var users = new Users(client);
+
+var user = await users.Create(
+    userId: ID.Unique(),
+    email: "email@example.com",
+    phone: null,
+    password: "password");
+</code></pre>
         </div>
     </li>
 </ul>
