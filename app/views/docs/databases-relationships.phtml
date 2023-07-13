@@ -299,6 +299,29 @@ databases.createRelationshipAttribute(
 )</code></pre>
         </div>
     </li>
+    <li>
+        <h3>.NET</h3>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
+using Appwrite.Services;
+
+var client = new Client()
+    .SetEndpoint("https://cloud.appwrite.io/v1")
+    .SetProject("[PROJECT_ID]");
+
+var databases = new Databases(client);
+
+await databases.CreateRelationshipAttribute(
+    databaseId: "marvel",
+    collectionId: "movies",
+    relatedCollectionId: "reviews",
+    type: "oneToMany",
+    twoWay: true,
+    key: "reviews",
+    twoWayKey: "movie",
+    onDelete: "cascade");</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>The above example adds a relationship between the collections <b>movies</b> and <b>reviews</b>. A relationship attribute with the key <code>reviews</code> is added to the movies collection and another relationship attribute with the key <code>movie</code> is added to the reviews collection.</p>
