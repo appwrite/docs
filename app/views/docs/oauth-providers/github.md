@@ -226,7 +226,7 @@ func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
 }
 ```
 
-To authenticate a user in your Android application, use the [Create OAuth2 Session](https://appwrite.io/docs/client/account?sdk=apple-default#accountCreateOAuth2Session) endpoint.
+To authenticate a user in your Apple application, use the [Create OAuth2 Session](https://appwrite.io/docs/client/account?sdk=apple-default#accountCreateOAuth2Session) endpoint.
 
 ```swift
 import Appwrite
@@ -347,6 +347,219 @@ let session = try await account.updateSession(
     sessionId: "current"
 )
 ```
-## Accessing the Provider Access Token
+## Provider Access Token
 
-After the user has been authorized and redirected back to your app, you can find their GitHub provider access token in the [session object](https://appwrite.io/docs/models/session) by accessing the `providerAccessToken` property. This access token can be used to make requests to the GitHub API on their behalf.
+Provider access token is an authentication credential issued by GitHub once the user is successfully authenticated with GitHub. This access token allows you to make requests to the [GitHub API](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps#3-use-the-access-token-to-access-the-api) on behalf of the user.
+
+You can easily retrieve the provider access token of the authenticated user, by accessing the `providerAccessToken` property within the [session object](https://appwrite.io/docs/models/session).
+
+### Web
+To get this access token in your web application, use the [`account.getSession()`](https://appwrite.io/docs/client/account?sdk=web-default#accountGetSession) endpoint.
+```javascript
+import { Client, Account } from "appwrite";
+
+const client = new Client();
+
+const account = new Account(client);
+
+client
+  .setEndpoint("https://cloud.appwrite.io/v1") // Replace with your API endpoint
+  .setProject("[PROJECT_ID]"); // Replace with your project ID
+
+const promise = account.getSession("current");
+
+promise.then(
+  function (response) {
+    const providerAccessToken = response.providerAccessToken;
+
+    // Example Request to GitHub API
+    fetch("https://api.github.com/user", {
+      headers: {
+        Authorization: `Bearer ${providerAccessToken}`,
+      },
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);  // GitHub API response data
+      })
+      .catch(function (error) {
+        console.error(error);  // Error occurred while calling GitHub API
+      });
+  }
+);
+```
+### Flutter (Dart)
+To get this access token in your flutter application, use the [`account.getSession()`](https://appwrite.io/docs/client/account?sdk=flutter-default#accountGetSession) endpoint.
+```dart
+import 'package:appwrite/appwrite.dart';
+import 'package:http/http.dart' as http;
+
+void main() async {
+  var client = Client();
+  var account = Account(client);
+
+  client
+      .setEndpoint('https://cloud.appwrite.io/v1') // Replace with your API endpoint
+      .setProject('[PROJECT_ID]') // Replace with your project ID
+  ;
+
+  Future result = account.getSession(
+    sessionId: 'current',
+  );
+
+  result.then((response) {
+    var providerAccessToken = response.providerAccessToken;
+
+    // Example Request to GitHub API
+    http.get(Uri.parse('https://api.github.com/user'), headers: {
+      'Authorization': 'Bearer $providerAccessToken',
+    }).then((response) {
+      print(response.body); // GitHub API response data
+    }).catchError((error) {
+      print(error); // Error occurred while calling GitHub API
+    });
+  });
+}
+```
+
+### Android (Kotlin)
+
+If you are using `OkHttp` library for making HTTP requests,  you need to add the necessary dependencies in your project's `build.gradle` file. Here's an example of how to add the `OkHttp` dependency:
+
+```groovy
+dependencies {
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+}
+```
+To get this access token in your Android application, use the [`account.getSession()`](https://appwrite.io/docs/client/account?sdk=android-kotlin#accountGetSession) endpoint.
+```kotlin
+import io.appwrite.Client
+import io.appwrite.services.Account
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import java.io.IOException
+
+val client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Replace with your API endpoint
+    .setProject("[PROJECT_ID]") // Replace with your project ID
+
+val account = Account(client)
+
+val response = account.getSession("current")
+val providerAccessToken = response.body?.providerAccessToken ?: ""
+
+// Example Request to GitHub API
+val httpClient = OkHttpClient()
+val request = Request.Builder()
+    .url("https://api.github.com/user") // GitHub API endpoint
+    .header("Authorization", "Bearer $providerAccessToken")
+    .build()
+
+httpClient.newCall(request).execute().use { response ->
+    if (!response.isSuccessful) {
+        throw IOException("Unexpected code $response") // Error occurred while calling GitHub API
+    }
+    println(response.body?.string()) // GitHub API response data
+}
+```
+
+### Android (Java)
+
+
+If you are using `OkHttp` library for making HTTP requests,  you need to add the necessary dependencies in your project's `build.gradle` file. Here's an example of how to add the `OkHttp` dependency:
+
+```groovy
+dependencies {
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+}
+```
+To get this access token in your Android application, use the [`account.getSession()`](https://appwrite.io/docs/client/account?sdk=android-java#accountGetSession) endpoint.
+```java
+import io.appwrite.Client;
+import io.appwrite.services.Account;
+import io.appwrite.coroutines.CoroutineCallback;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import java.io.IOException;
+
+Client client = new Client(getApplicationContext())
+    .setEndpoint("https://cloud.appwrite.io/v1") // Replace with your API endpoint
+    .setProject("[PROJECT_ID]"); // Replace with your project ID
+
+Account account = new Account(client);
+
+account.getSession(
+    "current",
+    new CoroutineCallback<>((result, error) -> {
+        if (error != null) {
+            error.printStackTrace();
+            return;
+        }
+        
+        String providerAccessToken = result.getProviderAccessToken();
+
+        // Example Request to GitHub API
+        OkHttpClient httpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+            .url("https://api.github.com/user")
+            .header("Authorization", "Bearer " + providerAccessToken)
+            .build();
+
+        httpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseBody = response.body().string();
+                Log.d("Appwrite", responseBody); // GitHub API response data
+            }
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+        });
+    })
+);
+```
+
+
+### iOS (Swift)
+To get this access token in your Apple application, use the [`account.getSession()`](https://appwrite.io/docs/client/account?sdk=apple-default#accountGetSession) endpoint.
+```swift
+import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Replace with your API endpoint
+    .setProject("[PROJECT_ID]") // Replace with your project ID
+
+let account = Account(client)
+
+async {
+    do {
+        let session = try await account.getSession(
+            sessionId: "current"
+        )
+        
+        let providerAccessToken = session.providerAccessToken
+
+        // Example Request to GitHub API
+        let url = URL(string: "https://api.github.com/user")!
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(providerAccessToken)", forHTTPHeaderField: "Authorization")
+
+        let (data, _) = try await URLSession.shared.data(for: request)
+        
+        if let data = data {
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                print(json) // GitHub API response data
+            }
+        }
+    } catch {
+        print(error) // Error occurred while calling GitHub API
+    }
+}
+```
