@@ -305,13 +305,6 @@ if (!\function_exists('skipLanguage')) {
         $security = $operation['security'][0] ?? '';
         $platformsList = (isset($operation['platforms'])) ? array_map(function($node) {return 'example-for-'.$node;}, $operation['platforms']) : [];
 
-        usort($parameters, function ($a, $b) {
-            $x = (isset($a['required'])) ? $a['required'] : false;
-            $y = (isset($b['required'])) ? $b['required'] : false;
-
-            return $y - $x;
-        });
-
         $rateKey = (is_array($rateKey)) ? implode(',', $rateKey) : $rateKey;
 
         $rateKey = array_map(function($element)
@@ -335,6 +328,13 @@ if (!\function_exists('skipLanguage')) {
                 }
             }
         }
+
+        usort($parameters, function ($a, $b) {
+            $x = (isset($a['required'])) ? $a['required'] : false;
+            $y = (isset($b['required'])) ? $b['required'] : false;
+
+            return $y - $x;
+        });
 
         ?>
         <div class="margin-bottom-large x-function" data-ls-attrs="class=margin-bottom-large x-function <?php echo implode(' ', $platformsList); ?>">
