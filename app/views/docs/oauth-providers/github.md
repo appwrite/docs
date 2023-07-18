@@ -102,7 +102,7 @@ void main() async {
     
     // OAuth Login, for simplest implementation you can leave both success and
     // failure link empty so that Appwrite handles everything.
-    await account.createOAuth2Session('github');
+    await account.createOAuth2Session(provider: 'github');
         
 }
 ```
@@ -370,6 +370,7 @@ const promise = account.getSession("current");
 
 promise.then(
   function (response) {
+    // Get the provider access token
     const providerAccessToken = response.providerAccessToken;
 
     // Example Request to GitHub API
@@ -410,6 +411,7 @@ void main() async {
   );
 
   result.then((response) {
+    // Get the provider access token
     var providerAccessToken = response.providerAccessToken;
 
     // Example Request to GitHub API
@@ -434,39 +436,54 @@ dependencies {
 }
 ```
 To get this access token in your Android application, use the [`account.getSession()`](https://appwrite.io/docs/client/account?sdk=android-kotlin#accountGetSession) endpoint.
+
 ```kotlin
+import android.os.Bundle
+import androidx.activity.ComponentActivity
 import io.appwrite.Client
 import io.appwrite.services.Account
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
 
-val client = Client()
-    .setEndpoint("https://cloud.appwrite.io/v1") // Replace with your API endpoint
-    .setProject("[PROJECT_ID]") // Replace with your project ID
+class MainActivity : ComponentActivity() {
+    private lateinit var client: Client
 
-val account = Account(client)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        client = Client(applicationContext)
+            .setEndpoint("https://cloud.appwrite.io/v1") // Replace with your API endpoint
+            .setProject("[PROJECT_ID]") // Replace with your project ID
+        val account = Account(client)
 
-val response = account.getSession("current")
-val providerAccessToken = response.body?.providerAccessToken ?: ""
+        val myScope = CoroutineScope(Dispatchers.Main)
 
-// Example Request to GitHub API
-val httpClient = OkHttpClient()
-val request = Request.Builder()
-    .url("https://api.github.com/user") // GitHub API endpoint
-    .header("Authorization", "Bearer $providerAccessToken")
-    .build()
+        myScope.launch {
+            val response = account.getSession("current")
+            // Get the provider access token
+            val providerAccessToken = response.providerAccessToken
 
-httpClient.newCall(request).execute().use { response ->
-    if (!response.isSuccessful) {
-        throw IOException("Unexpected code $response") // Error occurred while calling GitHub API
+            val httpClient = OkHttpClient()
+            val request = Request.Builder()
+                .url("https://api.github.com/user") // GitHub API endpoint
+                .header("Authorization", "Bearer $providerAccessToken")
+                .build()
+
+            httpClient.newCall(request).execute().use {
+                if (!it.isSuccessful) {
+                    throw IOException("Unexpected code $it") //Error occurred while calling GitHub API
+                }
+                println(it.body?.string()) // GitHub API response data
+            }
+        }
     }
-    println(response.body?.string()) // GitHub API response data
 }
 ```
 
 ### Android (Java)
-
 
 If you are using `OkHttp` library for making HTTP requests,  you need to add the necessary dependencies in your project's `build.gradle` file. Here's an example of how to add the `OkHttp` dependency:
 
@@ -476,10 +493,15 @@ dependencies {
 }
 ```
 To get this access token in your Android application, use the [`account.getSession()`](https://appwrite.io/docs/client/account?sdk=android-java#accountGetSession) endpoint.
+
 ```java
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
 import io.appwrite.Client;
 import io.appwrite.services.Account;
-import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
+import io.appwrite.models.Session;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -487,43 +509,53 @@ import okhttp3.Request;
 import okhttp3.Response;
 import java.io.IOException;
 
-Client client = new Client(getApplicationContext())
-    .setEndpoint("https://cloud.appwrite.io/v1") // Replace with your API endpoint
-    .setProject("[PROJECT_ID]"); // Replace with your project ID
+public class MainActivity extends AppCompatActivity {
 
-Account account = new Account(client);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-account.getSession(
-    "current",
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
-        
-        String providerAccessToken = result.getProviderAccessToken();
+        Client client = new Client(getApplicationContext())
+                .setEndpoint("https://cloud.appwrite.io/v1") // Replace with your API endpoint
+                .setProject("[PROJECT_ID]"); // Replace with your project ID
 
-        // Example Request to GitHub API
-        OkHttpClient httpClient = new OkHttpClient();
-        Request request = new Request.Builder()
-            .url("https://api.github.com/user")
-            .header("Authorization", "Bearer " + providerAccessToken)
-            .build();
+        Account account = new Account(client);
 
-        httpClient.newCall(request).enqueue(new Callback() {
+        account.getSession(new CoroutineCallback<>(new CoroutineCallback.Callback<Session>() {
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String responseBody = response.body().string();
-                Log.d("Appwrite", responseBody); // GitHub API response data
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(AppwriteException e) {
                 e.printStackTrace();
             }
-        });
-    })
-);
+
+            @Override
+            public void onCompleted(Session result) {
+                // Get the provider access token
+                String providerAccessToken = result.getProviderAccessToken();
+
+                // Example Request to GitHub API
+                OkHttpClient httpClient = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url("https://api.github.com/user")
+                        .header("Authorization", "Bearer " + providerAccessToken)
+                        .build();
+
+                httpClient.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String responseBody = response.body().string();
+                        Log.d("Appwrite", responseBody); // GitHub API response data
+                    }
+
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        }));
+    }
+}
 ```
 
 
