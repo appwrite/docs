@@ -563,35 +563,27 @@ public class MainActivity extends AppCompatActivity {
 To get this access token in your Apple application, use the [`account.getSession()`](https://appwrite.io/docs/client/account?sdk=apple-default#accountGetSession) endpoint.
 ```swift
 import Appwrite
+import Foundation
 
-let client = Client()
-    .setEndpoint("https://cloud.appwrite.io/v1") // Replace with your API endpoint
-    .setProject("[PROJECT_ID]") // Replace with your project ID
+func main() async throws {
+    let client = Client()
+        .setEndpoint("https://cloud.appwrite.io/v1") // Replace with your API endpoint
+        .setProject("[PROJECT_ID]") // Replace with your project ID
 
-let account = Account(client)
+    let account = Account(client)
 
-async {
-    do {
-        let session = try await account.getSession(
-            sessionId: "current"
-        )
-        
-        let providerAccessToken = session.providerAccessToken
+    let session = try await account.getSession(sessionId: "current")
+    // Get the provider access token
+    let providerAccessToken = session.providerAccessToken
 
-        // Example Request to GitHub API
-        let url = URL(string: "https://api.github.com/user")!
-        var request = URLRequest(url: url)
-        request.setValue("Bearer \(providerAccessToken)", forHTTPHeaderField: "Authorization")
+    let url = URL(string: "https://api.github.com/user")!
+    var request = URLRequest(url: url)
+    request.setValue("Bearer \(providerAccessToken)", forHTTPHeaderField: "Authorization")
 
-        let (data, _) = try await URLSession.shared.data(for: request)
-        
-        if let data = data {
-            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                print(json) // GitHub API response data
-            }
-        }
-    } catch {
-        print(error) // Error occurred while calling GitHub API
+    let (data, _) = try await URLSession.shared.data(for: request)
+
+    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+        print(json) // GitHub API response data
     }
 }
 ```
