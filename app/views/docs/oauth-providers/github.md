@@ -394,7 +394,7 @@ promise.then(
 );
 ```
 ### Flutter (Dart)
-To get this access token in your flutter application, use the [`account.getSession()`](https://appwrite.io/docs/client/account?sdk=flutter-default#accountGetSession) endpoint.
+To get this access token in your Flutter application, use the [`account.getSession()`](https://appwrite.io/docs/client/account?sdk=flutter-default#accountGetSession) endpoint.
 ```dart
 import 'package:appwrite/appwrite.dart';
 import 'package:http/http.dart' as http;
