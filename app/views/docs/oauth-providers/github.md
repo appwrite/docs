@@ -102,7 +102,9 @@ void main() async {
     
     // OAuth Login, for simplest implementation you can leave both success and
     // failure link empty so that Appwrite handles everything.
-    await account.createOAuth2Session(provider: 'github');
+    await account.createOAuth2Session(
+    provider: "github"
+    );
         
 }
 ```
@@ -576,6 +578,7 @@ func main() async throws {
     // Get the provider access token
     let providerAccessToken = session.providerAccessToken
 
+    // Example Request to GitHub API
     let url = URL(string: "https://api.github.com/user")!
     var request = URLRequest(url: url)
     request.setValue("Bearer \(providerAccessToken)", forHTTPHeaderField: "Authorization")
