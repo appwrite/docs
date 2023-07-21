@@ -24,9 +24,11 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>Node.js</h3>
         <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>
-
-            </code></pre>
+            <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ res }) => {
+   return res.json({
+    motto: 'Build Fast. Scale Big. All in One Place.'
+  });
+};</code></pre>
         </div>
         </div>
     </li>
@@ -150,7 +152,7 @@ $runtimes = $this->getParam('runtimes', []);
 <a href="/docs/[TODO]"><i class="icon-angle-circled-right"></i>Learn more about using function templates</a>
 </p>
 
-<h3><a href="#syntax" id="syntax">Syntax</a></h3>
+<h3><a href="#develop" id="develop">Develop</a></h3>
 <p>
 Writing Appwrite Functions should feel familiar to writing controllers in an HTTP server.
 In your function, you'll receive a request object, add transformations and logic, then return a response.
