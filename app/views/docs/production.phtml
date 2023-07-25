@@ -57,10 +57,10 @@
 <p>Backups are highly recommended for any production environment. Currently, there is no built-in script we provide to do this automatically. You must do the following to back up your Appwrite server data, stats, and files.</p>
 
 <ol class="margin-top margin-bottom-large text-size-normal">
-    <li>Create a script to backups and restore your MariaDB Appwrite schema. Note that trying to backup MariaDB using a docker volume backup can result in a corrupted copy of your data. It is recommended to use MariaDB or MySQL built-in tools for this.</li>
-    <li>Create a script to backups and restore your InfluxDB stats. If you don't care much about your server stats, you can skip this.</li>
-    <li>Create a script to backup Appwrite storage volume. There are many online resources explaining different ways to backup a docker volume. When running on multiple servers, it is very recommended to use an attachable storage point. Some cloud providers offer integrated backups to such attachable mount like GCP, AWS, DigitalOcean, and the list continues.</li>
-    <li>Create a script to backup <code>.env</code> and <code>docker-compose.yml</code>, which holds secrets and server configuration information.</li>
+    <li>Create a script to back up and restore the databases holding your Appwrite schemas. Note that trying to back up the database containers using a docker volume backup can result in a corrupted copy of your data. We recommend using the databases' built-in tools for this.</li>
+    <li>Create a script to back up and restore your InfluxDB stats. If you don't care much about your server stats, you can skip this.</li>
+    <li>Create a script to back up Appwrite storage volume. There are many online resources explaining different ways to backup a docker volume. When running on multiple servers, it is very recommended to use an attachable storage point. Some cloud providers offer integrated backups to such attachable mount like GCP, AWS, DigitalOcean, and the list continues.</li>
+    <li>Create a script to back up <code>.env</code> and <code>docker-compose.yml</code>, which holds secrets and server configuration information.</li>
 </ol>
 
 <div class="notice">
