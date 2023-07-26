@@ -1,5 +1,43 @@
+<?php
+
+use Appwrite\Utopia\View;
+
+$events = $this->getParam('events', []);
+$runtimes = $this->getParam('runtimes', []);
+
+?>
+
+
 <p>
     Appwrite Functions supports ...
     wait. wut we do with runtimes not yet on cloud???
 </p>
 
+<h2><a href="/docs/functions#supportedRuntimes" id="supportedRuntimes">Supported Runtimes</a></h2>
+
+<p>Appwrite provides multiple code runtimes to execute your custom functions. Each runtime uses a Docker image tied to a specific language version to provide a safe, isolated playground to run your team's code.</p>
+
+<p>Below is a list of supported Cloud Functions runtimes. The Appwrite team continually adds support for new runtimes.</p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 50px"></th>
+            <th style="width: 120px">Name</th>
+            <th>Image</th>
+            <th>Architectures</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($runtimes as $key => $runtime): ?>
+        <tr>
+            <td><img src="" data-ls-attrs="src=/images/runtimes/<?php echo $this->escape($runtime['logo'] ?? ''); ?>" alt="Function Env." class="avatar xxs" /></td>
+            <td><span data-general-copy><?php echo $this->escape($key); ?> </span></td>
+            <td><a href="https://hub.docker.com/r/<?php echo $this->escape(strtok($runtime['image'], ':')); ?>" target="_blank" rel="noopener"><?php echo $this->escape($runtime['image'] ?? ''); ?> <i class="icon-link-ext"></i></a></td>
+            <td><?php echo $this->escape(implode(' / ', $runtime['supports'] ?? [])); ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+[TODO: Label which ones are cloud only]

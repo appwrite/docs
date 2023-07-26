@@ -37,15 +37,31 @@
 - Make repository
 
 <h2><a href="#cli" id="cli">CLI</a></h2>
-[TODO]
+- Setup cli
+<p>
+    To deploy with the Appwrite CLI, your function's folder structure must be configured in a specific way. 
+    The folder path is then added to a config file called <code>appwrite.json</code> that tells the CLI where each function is stored.
+    To ensure the folder structure is setup correctly and <code>appwrite.json</code> is configured correctly, use the appwrite init function method to create a shell function.
+</p>
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function</code></pre>
+</div>
+
+<p>
+    Give your function a name and choose your runtime. 
+    This will create a new starter function in the current directory and also add it to your <code>appwrite.json</code> file.
+</p>
+
+<p>
+    Edit the automatically generated code and add dependencies to the dependency files of your language or framework.
+    Then, deploy the function using the following command.
+</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function</code></pre>
+</div>
 
 <h2><a href="#manual" id="manual">Manual</a></h2>
 [TODO]
 
 [tar --exclude code.tar.gz -czf code.tar.gz .]
-
-<h2><a href="#life-cycle" id="life-cycle">Deployment Life Cycle</a></h2>
-<p>Deployments will go through the following states throughout their life cycle.</p>
-[TODO: @matej, describe the life cycle of a deployment (like being uploaded, built, build steps, etc.)]
-
-[TODO: @matej What else?]

@@ -12,27 +12,61 @@
     This unlocks interesting ways to integrate other apps and backends to your Appwrite project.
 </p>
 
-DOMAIN IGNORE PERMISSIONS AOSDHFGAKSHDJG
 
 <h2><a href="#sdk" id="sdk">SDK</a></h2>
-- two examples
-    -> sync
-    -> async
-    -> pass body
+TODO: two examples running the function sync and async form the SDK
 <p>
    
 </p>
 
 <h2><a href="#events" id="events">Events</a></h2>
 <p>
-   
+   TODO: Describe steps to navigate the UI
 </p>
 
 
 <h2><a href="#schedule" id="schedule">Schedule</a></h2>
-<p> 
-   
+<p>Appwrite supports scheduled function executions. You can schedule executions using <a href="https://en.wikipedia.org/wiki/Cron" target="_blank" rel="noopener">cron expressions</a> in the settings of your function. Cron supports recurring executions as frequently as <b>every minute</b>.</p>
+
+<p>Here are some cron expressions for common intervals.</p>
+
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td>Cron Expression</td>
+        <td>Schedule</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>*/15 * * * *</td>
+        <td>Every 15 minutes</td>
+    </tr>
+    <tr>
+        <td>0 * * * *</td>
+        <td>Every Hour</td>
+    </tr>
+    <tr>
+        <td>0 0 * * *</td>
+        <td>Every day at 00:00</td>
+    </tr>
+    <tr>
+        <td>0 0 * * 1</td>
+        <td>Every monday at 00:00</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Permissions</h2>
+<p>
+    Appwrite Functions can be executed using Client or Server SDKs. 
+    Client SDKs must be authenticated with an account that has been granted execution <a href="/docs/permissions">permissions</a> on the function's settings page. 
+    Server SDKs require an API key with the correct scopes.
+</p>
+<p>
+    If your function with a generated or custom domain, permissions are disabled for this function.
+    Anyone visiting this domain will be able to execute the function.
+    If you need to enforce permissions for functions with a domain, use authentication methods like JWT.
 </p>
 
-[TODO: EXECUTION ARTIFACTS/LOGS/STUFF]
-
+<h2>Logs and results</h2>

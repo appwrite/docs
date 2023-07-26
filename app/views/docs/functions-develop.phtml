@@ -9,6 +9,20 @@
   <p>If you prefer to learn through examples, explore the <a href="#recipes">recipes section</a>.</p>
 </div>
 
+<h2>Function Flow</h2>
+<p>
+    There is a clear flow for all Appwrite Functions, from beginning to end.
+    Here's everything that happens during a function execution.
+</p>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+	<li>Invokation, where Appwrite receives a event to execute a Function. This event could be a request from an SDK, a request to the function's domain, a scheduled execution, or an execution triggered by an event within your Appwrite project.</li>
+	<li>After a function is invoked, Appwrite passes request information to your function's executor.</li>
+	<li>The executor runs the function code you deployed and waits for it to return.</li>
+	<li>Function terminates either when the user returns with a method from <code>context.res</code>, when the user code throws an exception, or times out.</li>
+</ol>
+
+
 <h2><a href="#context" id="context">The Context Object</a></h2>
 <p>
     Context is an object passed into every function to handle communication to both the end users, and logging to the Appwrite console.
@@ -25,19 +39,19 @@
     </thead>
     <tbody>
     <tr>
-        <td>context.req</td>
+        <td><code>context.req</code></td>
         <td>Contains request information like method, body, and headers. See full examples <a href="#context-req">here</a>.</td>
     </tr>
     <tr>
-        <td>context.res</td>
+        <td><code>context.res</code></td>
         <td>Contains methods to build a response and return information. See full examples <a href="#context-res">here</a>.</td>
     </tr>
     <tr>
-        <td>context.log</td>
+        <td><code>context.log</code></td>
         <td>Logs information to the Appwrite Console, end users will not be able to see these logs. See full examples <a href="#context-log">here</a>.</td>
     </tr>
     <tr>
-        <td>context.error</td>
+        <td><code>context.error</code></td>
         <td>Logs errors to the Appwrite Console, end users will not be able to see these errors. See full examples <a href="#context-error">here</a>.</td>
         <td></td>
     </tr>
@@ -450,7 +464,122 @@
 </p>
 
 <p>Here's an example of using logs and errors.</p>
-[TODO]
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+            <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ res, log, error }) => {
+    log("This is a log, use for logging information to console");
+    error("This is an error, use for logging errors to console")
+
+    return res.send("Check the Appwrite Console to see logs and errors!");
+};</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>
+
+            </code></pre>
+        </div>
+
+        </div>
+    </li>
+    <li>
+        <h3>Java</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+            <pre class="line-numbers"><code class="prism language-java" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>C++</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+</ul>
 <p>You can access these logs through the following steps.</p>
 [TODO]
 <h2><a href="#environment-variables" id="environment-variables">Accessing Environment Variables</a></h2>
@@ -468,8 +597,133 @@
 <h2><a href="#appwrite" id="appwrite">Using Appwrite in a Function</a></h2>
 [TODO: 2 examples -> JWT and API keys]
 
+<h2><a href="#dependencies" id="dependencies">Quick Example</a></h2>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+            <pre class="line-numbers"><code class="prism language-js" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>
+
+            </code></pre>
+        </div>
+
+        </div>
+    </li>
+    <li>
+        <h3>Java</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+            <pre class="line-numbers"><code class="prism language-java" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>C++</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
+
+            </code></pre>
+        </div>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="#multi-file" id="multi-file">Using Multiple Files</a></h2>
+
+
 <h2><a href="#recipes" id="recipes">Recipes</a></h2>
-[TODO: Matej and Luke write examples]
+<p>
+    We have a dedicated page of recipes to implement common functionalities in Appwrite Functions, like parsing request path and params, or making requests to third party APIs.
+</p>
+
+<p>
+<a href="/docs/command-line-ci"><i class="icon-angle-circled-right"></i>Explore examples and recipes</a>
+</p>
+
 
 <h2><a href="#limitations" id="limitations">Limitations</a></h2>
-<!-- <p>Libraries dependent on</p> -->
+<p>Libraries dependent on compiled binaries not available on the executors cannot be installed.</p>
