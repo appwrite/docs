@@ -1,34 +1,49 @@
-<p>Appwrite default setup is designed to help you get started quickly with using the Appwrite server. To run Appwrite successfully in a production environment, you should follow a few basic concepts and best practices. This document assumes you have some very basic understanding of Docker and Docker Compose command-line tools.</p>
+<p>Appwrite's default setup is designed to help you start building with Appwrite quickly. To succeed with Appwrite in a production environment, you should follow a few basic concepts and best practices. This document assumes you have some basic understanding of Docker and Docker Compose command-line tools.</p>
 
 <h2><a href="/docs/production#encryption" id="encryption">Encryption</a></h2>
 
-<p>By default, the Appwrite setup doesn't come with a uniquely generated encryption key. This key is used to store your files and sensitive data like webhook passwords or API keys in a safe way. To take advantage of this feature, you must generate a unique key and set it as the value of the <b>_APP_OPENSSL_KEY_V1</b> environment variable.</p>
+<p>Appwrite does not generate a unique encryption key during a default setup. This key encrypts your files and sensitive data like webhook passwords or API keys to keep them secure. To take advantage of this feature, you must generate a unique key and set it as the value of the <code>_APP_OPENSSL_KEY_V1</code> environment variable.</p>
 
-<p>Make sure to keep this key in a safe place and never make it publicly accessible. There are many online resources with methods of keeping your secret keys safe in your servers.</p>
+<p>You <b>must</b> set <code>_APP_OPENSSL_KEY_V1</code> immediately after installation of a production Appwrite instance. Changing the <code>_APP_OPENSSL_KEY_V1</code> variable will cause the loss of existing passwords, OAuth secrets, and API keys.</p>
+
+<p>Make sure to keep this key in a safe place and never make it publicly accessible.</p>
 
 <div class="notice">
   <h2>Best Practice</h2>
-  <p>You should always prefer <b>https</b> over http in production environments. This keeps your APIs secure and prevents any redirects from interfering with your requests.</p>
+  <p>You should always prefer <b>HTTPS</b> over HTTP in production environments. This keeps your APIs secure and prevents any redirects from interfering with your requests. You can force the use of HTTPS with the <a href="/docs/environment-variables#general">_APP_OPTIONS_FORCE_HTTPS</a> environment variable.</p>
 </div>
 
 <h2><a href="/docs/production#limitConsoleAccess" id="limitConsoleAccess">Limit Console Access</a></h2>
 
-<p>By default, anyone can signup for your Appwrite server, create projects, and use your computing power. While this is great for testing around or running your Appwrite service in a network isolated environment, it is highly not recommended for public production use.</p>
+<p>Appwrite provides three different methods to limit access to your Appwrite console.</p>
 
-<p>We are providing three different methods to limit access to your Appwrite console. You can either set a list of IPs or email address which users are allowed to signup from. You can choose one or multiple restriction methods to apply.</p>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>Whitelist a group of developers by IP using the <code>_APP_CONSOLE_WHITELIST_IPS</code> environment variable.</li>
+    <li>Whitelist a group of developers by email using the <code>_APP_CONSOLE_WHITELIST_EMAILS</code> environment variable.</li>
+    <li>Only the root user can signup. All other developers must be added through invitations. This is configured using the <code>_APP_CONSOLE_WHITELIST_ROOT</code> environment variable.</li>
+</ol>
+
+<p>By default, only the first user can sign up on the Appwrite instance's dashboard. All other users must be added to the dashboard through invitation.</p>
+
+<p>
+<a href="/docs/environment-variables"><i class="icon-angle-circled-right"></i>Learn more about environment variables</a>
+</p>
 
 <h2><a href="/docs/production#scaling" id="scaling">Scaling</a></h2>
 
-<p>Appwrite was built with scalability in mind. Appwrite can scale both horizontally and vertically.</p>
+<p>Appwrite is built with scalability in mind. Appwrite can scale both horizontally and vertically.</p>
 
-<p>Appwrite uses a few containers to run, where each container has its job. Most of the Appwrite containers are stateless, and in order to scale them, all you need is to replicate them and setup a load balancer to distribute their load.</p>
+<p>Each Appwrite instance is composed of many containers, each with its unique job. Appwrite's functions and worker containers are stateless. To scale them, all you need is to replicate them and set up a load balancer to distribute their load.</p>
 
-<p>If you decide to set up a load balancer for a specific container, make sure that the containers that are trying to communicate with it are accessing it through a load balancer and not directly. All connections between Appwrite different containers are set using Docker environment variables.</p>
+<p>If you decide to set up a load balancer to scale a container, make sure <b>all</b> communication are routed through the load balancer and not directly to the replicated containers. You can configure communicating between Appwrite containers using Docker environment variables.</p>
 
-<p>There are three Appwrite containers that do keep their state. MariaDB, Redis, and InfluxDB containers are used for storing data, cache and pub/sub messaging, and usage stats (in this order). To scale them out, all you need to do is set up a standard cluster (same as you would with any other app using these technologies) according to your needs and performance.</p>
+<p>Three Appwrite containers are stateful. The MariaDB, Redis, and InfluxDB containers are used for storing data, cache and pub/sub messaging, and usage stats, respectively. To scale these containers, set up a standard cluster (same as you would with any other app using these technologies) according to your needs and performance.</p>
 
 <h2><a href="/docs/production#disable-limits" id="disable-limits">Enable Rate Limits</a></h2>
-<p>If you disabled rate limits during development, make sure you re-enable them when moving to production environments. Rate limiting can be enabled by setting the <span class="tag">_APP_OPTIONS_ABUSE</span> environment variable to <code>enabled</code>.</p>
+<p>If you disabled rate limits during development, make sure you re-enable them when moving to production environments. Rate limiting can be enabled by setting the <code>_APP_OPTIONS_ABUSE</code> environment variable to <code>enabled</code>.</p>
+
+<p>Rate limits are an important mechanism to protect your app. Without rate limits, malicious actors can spam your APIs to perform <a href="https://en.wikipedia.org/wiki/Denial-of-service_attack" target="_blank" rel="noopener">denial-of-service type attacks</a> or brute-force user passwords.</p>
+
 <p>
 <a href="/docs/environment-variables"><i class="icon-angle-circled-right"></i>Learn more about environment variables</a>
 </p>
@@ -39,16 +54,30 @@
 
 <h2><a href="/docs/production#backups" id="backups">Backups</a></h2>
 
-<p>Backups are highly recommended for any production environment. Currently, there is no built-in script we provide to do this automatically. To be able to backup your Appwrite server data, stats, and files, you will need to do the following.</p>
+<p>Backups are highly recommended for any production environment. Currently, there is no built-in script we provide to do this automatically. You must do the following to back up your Appwrite server data, stats, and files.</p>
 
-<ol>
-    <li>Create a script to backups and restore your MariaDB Appwrite schema. Note that trying to backup MariaDB using a docker volume backup can result in a corrupted copy of your data. It is recommended to use MariaDB or MySQL built-in tools for this.</li>
-    <li>Create a script to backups and restore your InfluxDB stats. If you don't care much about your server stats, you can skip this.</li>
-    <li>Create a script to backup Appwrite storage volume. There are many online resources explaining different ways to backup a docker volume. When running on multiple servers, it is very recommended to use an attachable storage point. Some cloud providers offer integrated backups to such attachable mount like GCP, AWS, DigitalOcean, and the list continues.</li>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>Create a script to back up and restore the databases holding your Appwrite schemas. Note that trying to back up the database containers using a docker volume backup can result in a corrupted copy of your data. We recommend using the databases' built-in tools for this.</li>
+    <li>Create a script to back up and restore your InfluxDB stats. If you don't care much about your server stats, you can skip this.</li>
+    <li>Create a script to back up Appwrite storage volume. There are many online resources explaining different ways to backup a docker volume. When running on multiple servers, it is very recommended to use an attachable storage point. Some cloud providers offer integrated backups to such attachable mount like GCP, AWS, DigitalOcean, and the list continues.</li>
+    <li>Create a script to back up <code>.env</code> and <code>docker-compose.yml</code>, which holds secrets and server configuration information.</li>
 </ol>
+
+<div class="notice">
+  <h2>Docker Volume Backups</h2>
+  <p>Do not back up any stateful container using a docker volume backup, such as databases, Redis, or InfluxDB containers. This can result in corruption and <b>permanent data loss</b>.</p>
+</div>
 
 <h2><a href="/docs/production#errorReporting" id="errorReporting">Error Reporting</a></h2>
 
-<p>By default, your Appwrite installation comes with error reporting turned off. You can <a href="/docs/debugging#devMode">turn it on in dev mode</a> to try and debug issues or report problems.</p>
+<p>By default, your Appwrite installation comes with error reporting turned off. You can <a href="/docs/debugging#devMode">enable dev mode</a> to get access to more verbose error logs and stack traces.</p>
 
-<p>In production, it is highly recommended to turn error reporting off. To do so, make sure the Appwrite container environment variable <b>_APP_ENV</b> is set to <b>production</b> and not <b>development</b>.</p>
+<p>In production, it is highly recommended to turn error reporting off. To do so, make sure the Appwrite container environment variable <code>_APP_ENV</code> value from is set to <code>production</code> and not <code>development</code>.</p>
+
+<p>To monitor errors in production, add a third party monitoring service by setting the <code>_APP_LOGGING_PROVIDER</code> and <code>_APP_LOGGING_CONFIG</code>.
+
+<p>In production, it is highly recommended to turn error reporting off. To do so, make sure the Appwrite container environment variable <code>_APP_ENV</code> is set to <code>production</code> and not <code>development</code>.</p>
+
+<p>
+<a href="/docs/environment-variables"><i class="icon-angle-circled-right"></i>Learn more about environment variables</a>
+</p>
