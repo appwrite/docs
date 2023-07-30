@@ -4,7 +4,7 @@
 </p>
 
 <p>
-    Functions can be deployed in different ways to meet your unique development habbits.
+    Functions can be created and deployed in different ways to meet your unique development habits.
     You can automatically deploy Appwrite Functions from source control, build your own deployment pipelines using the Appwrite CLI, or upload code files manually.
     Here's everything you need to know to deploy your first Appwrite Function.
 </p>
@@ -15,26 +15,59 @@
     This offers simple versioning and collaboration that will easily fit into the rest of your development workflow.
 </p>
 
-[TODO: Describe how to create a GitHub deployment]
+<h3>Create Funcion</h3>
+<p>Before deploying your function with Git, create a new function attached to your Git repo.</p>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>
+        Navigate to <b>Functions</b> from the side bar of the Appwrite Console.
+    </li>
+    <li>
+        Click <b>Create function</b>.
+    </li>
+    <li>
+        When asked to <b>Choose your source</b>, under <b>Connect Git repository</b>, select your provider.
+    </li>
+    <li>
+        Search for the Git repository that hold your function and click <b>connect</b>.
+    </li>
+    <li>
+        Select a production branch. New commits made to the production branch will be <b>automatically deployed and activated</b>.
+    </li>
+    <li>
+        Input the root directory of the function inside the repository. 
+    </li>
+    <li>
+        If you don't want deploy comments to be made on your PRs, select <b>Silent mode</b>.
+    </li>
+    <li>
+        Name your function, select a runtime that matches your function, and enter an entry point path, relative to the root directory from the previous step.
+    </li>
+    <li>
+        If you have build steps, like installing dependencies, input the commands into the <b>Build settings</b> heading's <b>Command</b> field.
+    </li>
+    <li>
+        Finally, configure the execute permissions of the function. For security, only provide execute permissions to the necessary roles.
+    </li>
+</ol>
 
-<h3>Create</h3>
-- Install Appwrite on your GitHub account/organization 
-- Select a repository
-- Select a production branch
-- Define root directory
-- Silent mode -> No comments on PRs
-- Build commands 
 <h3>Deploy</h3>
-- Prod branch is automatically deployed on push and activated
-    - Non prod branches are also built but not activated automatically
-- Push to branch
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>
+        Checkout your prodction branch in Git. 
+    </li>
+    <li>
+        Create a new commit.
+    </li>
+    <li>
+        Push your new commit.
+    </li>
+    <li>
+        A new deployment will be automatically created. Deployments will be automatically activated when new commits are added to the production branch.
+    </li>
+</ol>
 <h3>Debugging Builds</h3>
 - Check logs and errors
 - Redeploy button for non-code issues [TODO: @matej write an example]
-
-<h3><a href="#templates" id="templates">Templates</a></h3>
-- Select repo -> Specify path
-- Make repository
 
 <h2><a href="#cli" id="cli">CLI</a></h2>
 - Setup cli
