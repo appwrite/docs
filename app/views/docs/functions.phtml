@@ -25,9 +25,9 @@ $runtimes = $this->getParam('runtimes', []);
         <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ res }) => {
-   return res.json({
-    motto: 'Build Fast. Scale Big. All in One Place.'
-  });
+    return res.json({
+        motto: 'Build Fast. Scale Big. All in One Place.'
+    });
 };</code></pre>
         </div>
         </div>
@@ -36,9 +36,11 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>PHP</h3>
         <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>
-
-            </code></pre>
+            <pre class="line-numbers"><code class="prism language-php" data-prism>return function ($context) {
+    return $context->res->json([
+        'motto' => 'Build Fast. Scale Big. All in One Place.'
+    ]);
+}</code></pre>
         </div>
         </div>
     </li>
@@ -46,9 +48,10 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>Python</h3>
         <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>
-
-            </code></pre>
+            <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
+    return context.res.json({
+        "motto": "Build Fast. Scale Big. All in One Place.",
+})</code></pre>
         </div>
         </div>
     </li>
@@ -56,9 +59,13 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>Ruby</h3>
         <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>
-
-            </code></pre>
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
+    return context.res.json(
+        {
+            "motto": "Build Fast. Scale Big. All in One Place."
+        }
+    )
+end</code></pre>
         </div>
         </div>
     </li>
@@ -66,9 +73,11 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>Deno</h3>
         <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>
-
-            </code></pre>
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default ({ req, res, log, error }: any) => {
+  return res.json({
+    motto: "Build Fast. Scale Big. All in One Place."
+  });
+};</code></pre>
         </div>
         </div>
     </li>
@@ -76,9 +85,13 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>Dart</h3>
         <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 
-            </code></pre>
+Future<dynamic> main(final context) async {
+    return context.res.json({
+        'motto': 'Build Fast. Scale Big. All in One Place.',
+    });
+}</code></pre>
         </div>
         </div>
     </li>
@@ -86,9 +99,13 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>Swift</h3>
         <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
 
-            </code></pre>
+            func main(context: RuntimeContext) async throws -> RuntimeOutput {
+    return try context.res.json([
+        "motto": "Build Fast. Scale Big. All in One Place."
+    ])
+}</code></pre>
         </div>
         </div>
     </li>
@@ -96,9 +113,16 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>.NET</h3>
         <div>
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
-
-            </code></pre>
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
+public class Handler {
+    public async Task<RuntimeOutput> Main(RuntimeContext Context) 
+    {
+        return Context.Res.Json(new Dictionary<string, object?>()
+        {
+            { "motto", "Build Fast. Scale Big. All in One Place." }
+        });
+    }
+}</code></pre>
         </div>
         </div>
     </li>
@@ -106,9 +130,21 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>Kotlin</h3>
         <div>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
 
-            </code></pre>
+import io.openruntimes.kotlin.RuntimeContext
+import io.openruntimes.kotlin.RuntimeOutput
+
+class Main {
+    fun main(context: RuntimeContext): RuntimeOutput {
+        return context.res.json(mutableMapOf(
+            "motto" to "Build Fast. Scale Big. All in One Place.",
+            "learn" to "https://appwrite.io/docs",
+            "connect" to "https://appwrite.io/discord",
+            "getInspired" to "https://builtwith.appwrite.io"
+        ))
+    }
+}</code></pre>
         </div>
 
         </div>
@@ -117,9 +153,19 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>Java</h3>
         <div>
         <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>
+            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
 
-            </code></pre>
+import io.openruntimes.java.RuntimeContext;
+import io.openruntimes.java.RuntimeOutput;
+import java.util.HashMap;
+
+public class Main {
+    public RuntimeOutput main(RuntimeContext context) throws Exception {
+        Map<String, Object> json = new HashMap<>();
+        json.put("motto", "Build Fast. Scale Big. All in One Place.");
+        return context.getRes().json(json);
+    }
+}</code></pre>
         </div>
         </div>
     </li>
@@ -127,9 +173,21 @@ $runtimes = $this->getParam('runtimes', []);
         <h3>C++</h3>
         <div>
         <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include "../RuntimeResponse.h"
+#include "../RuntimeRequest.h"
+#include "../RuntimeOutput.h"
+#include "../RuntimeContext.h"
 
-            </code></pre>
+namespace runtime {
+  class Handler {
+    public:
+      static RuntimeOutput main(RuntimeContext &context) {
+        Json::Value response;
+        response["motto"] = "Build Fast. Scale Big. All in One Place.";
+        return context.res.json(response);
+      }
+  };
+}</code></pre>
         </div>
         </div>
     </li>
