@@ -1,6 +1,10 @@
 <p>Appwrite uses email and SMS messages to communicate with users to perform authentication actions. Emails and SMS messages can be customized to fit your app's design and voice.</p>
 
-<p>Each Appwrite project can have its own set of unique templates. Templates also support localization, every template can be written in multiple languages and served depending on the [TODO: @dlohani]</p>
+<p>
+    Each Appwrite project can have its own set of unique templates. 
+    Templates also support localization, every template can be written in multiple languages and served 
+    depending on the configured locale.
+</p>
 
 <p>
 <a href="#email-templates"><i class="icon-angle-circled-right"></i>Email Templates</a>
@@ -141,5 +145,5 @@
 [TODO: @dlohani once we're ready, let's do examples for each type of template (maybe also what it would look like rendered)]
 
 <h2>Localization</h2>
-[TODO: @dlohani short description of how it's decided which language's template is sent]
+<p>You can configure localization by settling locale with <code>client.setLocale</code> in the SDKs or the <code>X-Appwrite-Locale</code> HTTP header.</p>
 [TODO: @dlohani Maybe example of a template in two languages? (maybe also what it would look like rendered)]
