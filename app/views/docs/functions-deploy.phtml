@@ -66,11 +66,19 @@
     </li>
 </ol>
 <h3>Debugging Builds</h3>
-- Check logs and errors
-- Redeploy button for non-code issues [TODO: @matej write an example]
+<p>After deploying a function, you can find the status of the deployment and build logs in the Appwrite Console.</p>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
+    <li>Click to open a function you wish to inspect.</li>
+    <li>Under the <b>Deployments</b> tab, you'll find the status of the current active deployment and previous inactive deployments.</li>
+    <li>You can access build logs for the active deployment by clicking the <b>Build logs</b> button. You can click on an inactive function's three dots button to find their build logs.</li>
+</ol>
 
 <h2><a href="#cli" id="cli">CLI</a></h2>
-- Setup cli
+<div class="notice">
+  <h2>CLI Setup</h2>
+  <p>Before you can deploy with the Appwrite CLI, make sure you've <a href="docs/command-line">installed and initialized</a> the CLI</p>
+</div>
 <p>
     To deploy with the Appwrite CLI, your function's folder structure must be configured in a specific way. 
     The folder path is then added to a config file called <code>appwrite.json</code> that tells the CLI where each function is stored.
