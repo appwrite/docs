@@ -1,0 +1,33 @@
+<p>
+    Want to leave the cloud and move your stuff to a Self Hosted instance? We're sorry to see you go, but we've got your back.
+    Migrations makes it easy as easy as a couple clicks to move all of your cloud data to a Self Hosted instance.
+</p>
+
+<h2><a href="#notices" id="notices">Things to keep in mind</a></h2>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>Data transferred by migrations will reset `$createdAt` and `$updatedAt` timestamps to the date of the migration.</li>
+    <li>Your Appwrite Instace must be accessible from the internet for the migration to work.</li>
+</ol>
+
+<h2><a href="#migration-process" id="migration-process">Migrating to Self Hosted from Cloud</a></h2>
+
+<p>
+    To begin migrating to Appwrite Self Hosted make sure to read the <a href="/docs/migration">migration overview</a>
+    and <a href="#notices">things to keep in mind</a> sections above.
+</p>
+
+<p>
+    Navigate to your Appwrite Cloud and click on the <b>Migrations</b> tab.
+
+    From there you can click on the <b>Export to Self Hosted</b> button, you will then be asked to input the URL of your Self Hosted instance
+    aswell as an optional feedback question asking why Self Hosted is a better fit for you. Once done you can click on the <b>Continue</b> button and you will be
+    redirected to your Self Hosted instance to continue the migration process.
+
+    Once your at Self Hosted instance you will be prompted to select the organization aswell as the option to either create a new project
+    or select an existing project to migrate to.
+
+    After you have selected the project you want to migrate to you will be asked what data you want to migrate. You can select
+    to migrate users, databases, documents, files and functions. Once you have selected what data you want to migrate you can
+    click on the <b>Start Migration</b> button to begin the migration process.
+</p>
