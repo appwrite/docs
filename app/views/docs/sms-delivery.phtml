@@ -93,6 +93,10 @@
 <h2><a href="/docs/sms-delivery#updateEnvFile" id="updateEnvFile">Update Your .env File</a></h2>
 <p>You will need to configure these <a href="/docs/environment-variables#phone">environment variables</a> and restart your Appwrite containers before you can use phone authentication.</p>
 
+<div class="notice">
+    <p>Ensure the values you insert in the <code>_APP_SMS_PROVIDER</code> placeholders are <a href="https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding" target="_blank" rel="noopener">URL encoded</a> if they contain any non-alphanumeric characters.</p>
+</div>
+
 <table class="full">
     <thead>
     <tr>
