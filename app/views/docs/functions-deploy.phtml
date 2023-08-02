@@ -80,9 +80,12 @@
   <p>Before you can deploy with the Appwrite CLI, make sure you've <a href="docs/command-line">installed and initialized</a> the CLI</p>
 </div>
 <p>
-    To deploy with the Appwrite CLI, your function's folder structure must be configured in a specific way. 
-    The folder path is then added to a config file called <code>appwrite.json</code> that tells the CLI where each function is stored.
-    To ensure the folder structure is setup correctly and <code>appwrite.json</code> is configured correctly, use the appwrite init function method to create a shell function.
+    To deploy with the Appwrite CLI, your function must be added to <code>appwrite.json</code> that tells the CLI where each function is stored.
+    To ensure the folder structure is setup correctly and <code>appwrite.json</code> is configured correctly, use the appwrite init function method to create a shell function, then paste in your function code.
+</p>
+
+<p>
+    Run the following command in the folder holding the <code>appwrite.json</code> file. 
 </p>
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function</code></pre>
