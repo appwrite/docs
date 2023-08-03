@@ -12,11 +12,11 @@ Before you can use Spotify to authenticate users, you need to enable the provide
 Don't close this modal, we'll need to create a Spotify app to complete this form.
 
 ## Creating a Spotify app for OAuth
-To use Spotify OAuth with Appwrite, you need to create a Spotify app using a Spotify developer account. You can do this by following the [Creating Spotify App](https://developer.spotify.com/documentation/web-api/concepts/apps) guide, in the [Spotify Dashboard](https://developer.spotify.com/dashboard). While creating a new Spotify app in the **Redirect URI** filed, provide the **URI** found in the **Spotify OAuth2 Settings** modal from your Appwrite console.
+To use Spotify OAuth with Appwrite, you need to create a Spotify app using a Spotify developer account. You can do this by following the [Creating Spotify App](https://developer.spotify.com/documentation/web-api/concepts/apps) guide, in the [Spotify Dashboard](https://developer.spotify.com/dashboard). When prompted to provide a **Redirect URI**, provide the **URI** found in the **Spotify OAuth2 Settings** modal from your Appwrite console.
 
 After you've created your Spotify app, you can head back to your Appwrite console to complete the form in the **Spotify OAuth2 Settings** modal.
 - You can find the **Client ID** in your Spotify app settings menu and provide this in the **App ID** field in the **Spotify OAuth2 Settings** modal from the Appwrite console.
-- In the settings menu click on the **View client secret** button to get your apps client secret.
+- In the settings for your Spotify app, click on **View client secret** to get your app's client secret.
 - Copy the client secret and provide this in the **App Secret** field in the **Spotify OAuth2 Settings** modal from the Appwrite console.
 
 ## Authenticating
