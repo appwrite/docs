@@ -93,7 +93,7 @@
     Explore the request object with the following function, which logs all request params to the Appwrite Console.
 </p>
 
-[TODO: @luke Let's make sure we show an example for evert runtime with good string manip methods.]
+[TODO: @luke Let's make sure we show an example for event runtime with good string manip methods.]
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -101,7 +101,7 @@
         <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
-    log(req.bodyString);  // Raw request body, contains request data
+    log(req.bodyRaw);     // Raw request body, contains request data
     log(req.body);        // Body parsed on content-type, only supports JSON
     log(req.headers);     // Request headers
     log(req.scheme);      // Value of the x-forwarded-proto header, usually http or https
@@ -538,7 +538,97 @@
     You can access the environment variables through the systems library of each language.
 </p>
 
-[TODO: @luke show how you access environment varibles for every language (sorry for the pain!)]
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+            <pre class="line-numbers"><code class="prism language-js" data-prism>process.env.MY_VAR</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>getenv('MY_VAR')</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>os.environ['MY_VAR']</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>ENV['MY_VAR']</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>Deno.env.get('MY_VAR')</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>Platform.environment['MY_VAR']</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>ProcessInfo.processInfo.environment["MY_VAR"]</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>Environment.GetEnvironmentVariable("MY_VAR")</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>System.getenv("MY_VAR")</code></pre>
+        </div>
+
+        </div>
+    </li>
+    <li>
+        <h3>Java</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+            <pre class="line-numbers"><code class="prism language-java" data-prism>System.getenv("MY_VAR")</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>C++</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>std::getenv("MY_VAR")</code></pre>
+        </div>
+        </div>
+    </li>
+</ul>
 
 <h2><a href="#dependencies" id="dependencies">Depencies</a></h2>
 
