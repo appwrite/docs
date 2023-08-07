@@ -58,46 +58,17 @@
     </tbody>
 </table>
 
-<p>Some lamguages support unpacking. You'll see us use unpacking in examples, which has the following syntax.</p>
-[TODO: @luke for languages that have unpacking, let's add unpacking examples!]
+<p>Some languages support destructuring. You'll see us use destructing in examples, which has the following syntax.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
         <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>
-
-            </code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>PHP</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>
-
-            </code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Python</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>
-
-            </code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Ruby</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>
-
-            </code></pre>
+            <pre class="line-numbers"><code class="prism language-js" data-prism>export default async function ({ req, res, log, error }) {
+    log('This is a log!');
+    error('This is an error!');
+    return res.send(`This function was called with ${req.method} method!`)
+}</code></pre>
         </div>
         </div>
     </li>
@@ -105,70 +76,11 @@
         <h3>Deno</h3>
         <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>
-
-            </code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Dart</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>
-
-            </code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Swift</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>
-
-            </code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>.NET</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
-
-            </code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Kotlin</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>
-
-            </code></pre>
-        </div>
-
-        </div>
-    </li>
-    <li>
-        <h3>Java</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>
-
-            </code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>C++</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
-
-            </code></pre>
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async function ({ req, res, log, error }: any) {
+    log('This is a log!');
+    error('This is an error!');
+    return res.send(`This function was called with ${req.method} method!`)
+}</code></pre>
         </div>
         </div>
     </li>
