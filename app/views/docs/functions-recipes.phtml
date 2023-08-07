@@ -113,6 +113,46 @@ return function ($context) {
       </div>
     </div>
   </li>
+  <li>
+    <h3>Python</h3>
+    <div>
+      <p>Update `index.py` to use `context.req.query['amount']` to access the `amount` parameter, and return the conversion result.</p>
+      <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+        <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
+  amountInEuros = context.req.query['amount']
+  amountInDollars = amountInEuros * 1.13
+  return context.res.send(amountInDollars)</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Dart</h3>
+    <div>
+      <p>Update `index.dart` to use `context.req.query['amount']` to access the `amount` parameter, and return the conversion result.</p>
+      <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+
+Future&lt;dynamic&gt; main(final context) async {
+  final amountInEuros = context.req.query['amount'];
+  final amountInDollars = amountInEuros * 1.13;
+  return context.res.send(amountInDollars);
+}</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Ruby</h3>
+    <div>
+      <p>Update `index.rb` to use `context.req.query['amount']` to access the `amount` parameter, and return the conversion result.</p>
+      <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+        <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
+  amountInEuros = context.req.query['amount']
+  amountInDollars = amountInEuros * 1.13
+  return context.res.send(amountInDollars)
+end</code></pre>
+      </div>
+    </div>
+  </li>
 </ul>
 
 <p>Commit your changes and push them to your Git repository.</p>
@@ -141,7 +181,89 @@ return function ($context) {
       <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
         <pre class="line-numbers"><code class="prism language-bash" data-prism>npm install undici</code></pre>
       </div>
-      <p>Finally, we need to add `npm install` to your function's build commands in the Appwrite console.</p>
+      <p>Finally, add `npm install` to your function's build commands in the Appwrite console.</p>
+    </div>
+  </li>
+  <li>
+    <h3>PHP</h3>
+    <div>
+      <p>You can use Composer to manage your PHP project's dependencies. Install it from <a href="https://getcomposer.org/download/" target="_blank">getcomposer.org/download</a>.</p>
+      <p>Run the following bash command to create a `composer.json` file. This file is used to manage your PHP project's dependencies.</p>
+      <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>composer init -y</code></pre>
+      </div>
+      <p>Install the `guzzlehttp/guzzle` library. This library includes a `get` function that you can use to make HTTP requests.</p>
+      <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>composer require guzzlehttp/guzzle</code></pre>
+      </div>
+      <p>Finally, add `composer install` to your function's build commands in the Appwrite console.</p>
+    </div>
+  </li>
+  <li>
+    <h3>Python</h3>
+    <div>
+      <p>Run the following bash command to create a `requirements.txt` file. This file is used to manage your Python project's dependencies.</p>
+      <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>touch requirements.txt</code></pre>
+      </div>
+      <p>Install the `requests` library. This library includes a `get` function that you can use to make HTTP requests.</p>
+      <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>echo "requests" &gt;&gt; requirements.txt
+pip -r requirements.txt</code></pre>
+      </div>
+      <p>Finally, add `pip install -r requirements.txt` to your function's build commands in the Appwrite console.</p>
+    </div>
+  </li>
+  <li>
+    <h3>
+      Dart
+    </h3>
+    <div>
+      <p>
+        Create a `pubspec.yaml` file with the following contents. This file is used to manage your Dart project's dependencies.
+      </p>
+      <div class="ide margin-top-small" data-lang="yaml" data-lang-label="YAML">
+        <pre class="line-numbers"><code class="prism language-yaml" data-prism>name: appwrite_function
+description: Appwrite Function
+version: 1.0.0
+environment:
+  sdk: '&gt;=2.12.0 &lt;3.0.0'
+</code></pre>
+      </div>
+      <p>
+        Install the `http` library. This library includes a `get` function that you can use to make HTTP requests.
+      </p>
+      <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>
+          pub install http
+      </div>
+      <p>
+        Finally, add `pub get` to your function's build commands in the Appwrite console.
+      </p>
+    </div>
+  </li>
+  <li>
+    <h3>
+      Ruby
+    </h3>
+    <div>
+      <p>
+        Create a `Gemfile` file with the following contents. This file is used to manage your Ruby project's dependencies.
+      </p>
+      <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+        <pre class="line-numbers"><code class="prism language-ruby" data-prism>source 'https://rubygems.org'
+        </code></pre>
+      </div>
+      <p>
+        Install the `httparty` library. This library includes a `get` function that you can use to make HTTP requests.
+      </p>
+      <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>echo "gem 'httparty'" &gt;&gt; Gemfile
+bundle install</code></pre>
+      </div>
+      <p>
+        Finally, add `bundle install` to your function's build commands in the Appwrite console.
+      </p>
     </div>
   </li>
 </ul>
@@ -163,6 +285,79 @@ export default async function ({ req, res }) {
   const amountInDollars = amountInEuros * data.rates.USD;
   return res.send(amountInDollars.toString());
 };</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>PHP</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+        <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+
+require(__DIR__ . '/../vendor/autoload.php');
+
+use GuzzleHttp\Client;
+
+return function (&#36;context) {
+  &#36;amountInEuros = &#36;context-&gt;getRequest()-&gt;getQuery('amount');
+  &#36;client = new Client();
+  &#36;response = &#36;client-&gt;get('https://api.exchangerate.host/latest?base=EUR&amp;symbols=USD');
+  &#36;data = json_decode(&#36;response-&gt;getBody(), true);
+  &#36;amountInDollars = &#36;amountInEuros * &#36;data['rates']['USD'];
+  return &#36;context-&gt;res-&gt;send(strval(&#36;amountInDollars));
+};</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Python</h3>
+    <div>
+      <p>Use `get` from `requests` to get the current conversion rate. This API call will return the current conversion rate between Euros and Dollars.</p>
+      <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+        <pre class="line-numbers"><code class="prism language-python" data-prism>import requests
+
+def main(context):
+  amount_in_euros = float(context.req.query['amount'])
+  response = requests.get('https://api.exchangerate.host/latest?base=EUR&symbols=USD')
+  data = response.json()
+  amount_in_dollars = amount_in_euros * data['rates']['USD']
+  return context.res.send(str(amount_in_dollars))</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Dart</h3>
+    <div>
+      <p>Use `get` from `http` to get the current conversion rate. This API call will return the current conversion rate between Euros and Dollars.</p>
+      <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+import 'package:http/http.dart' as http;
+
+Future&lt;dynamic&gt; main(final context) async {
+  final amountInEuros = double.parse(context.req.query['amount'])
+  final response = await http.get(Uri.parse('https://api.exchangerate.host/latest?base=EUR&symbols=USD'));
+  final data = json.decode(response.body);
+  final amountInDollars = amountInEuros * data['rates']['USD'];
+  return context.res.send(amountInDollars.toString());
+}</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Ruby</h3>
+    <div>
+      <p>Use `get` from `httparty` to get the current conversion rate. This API call will return the current conversion rate between Euros and Dollars.</p>
+      <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+        <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'httparty'
+
+def main(context)
+  amount_in_euros = context.req.query['amount'].to_f
+  response = HTTParty.get('https://api.exchangerate.host/latest?base=EUR&symbols=USD')
+  data = JSON.parse(response.body)
+  amount_in_dollars = amount_in_euros * data['rates']['USD']
+  return context.res.send(amount_in_dollars.to_s)
+end</code></pre>
       </div>
     </div>
   </li>
@@ -205,6 +400,92 @@ export default async function ({ req, res }) {
       </div>
     </div>
   </li>
+  <li>
+    <h3>Python</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+        <pre class="line-numbers"><code class="prism language-python" data-prism>import requests
+
+def main(context):
+  if context.req.path == '/eur':
+    amount_in_euros = float(context.req.query['amount'])
+    response = requests.get('https://api.exchangerate.host/latest?base=EUR&symbols=USD')
+    data = response.json()
+    amount_in_dollars = amount_in_euros * data['rates']['USD']
+    return context.res.send(str(amount_in_dollars))
+
+  if context.req.path == '/inr':
+    amount_in_rupees = float(context.req.query['amount'])
+    response = requests.get('https://api.exchangerate.host/latest?base=INR&symbols=USD')
+    data = response.json()
+    amount_in_dollars = amount_in_rupees * data['rates']['USD']
+    return context.res.send(str(amount_in_dollars))
+
+  return 'Invalid path'</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Dart</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+import 'package:http/http.dart' as http;
+
+Future&lt;dynamic&gt; main(final context) async {
+  if (context.req.path == '/eur') {
+    final amountInEuros = double.parse(context.req.query['amount'])
+    final response = await http.get(Uri.parse('https://api.exchangerate.host/latest?base=EUR&symbols=USD'));
+    final data = json.decode(response.body);
+    final amountInDollars = amountInEuros * data['rates']['USD'];
+    return context.res.send(amountInDollars.toString());
+  }
+
+  if (context.req.path == '/inr') {
+    final amountInRupees = double.parse(context.req.query['amount'])
+    final response = await http.get(Uri.parse('https://api.exchangerate.host/latest?base=INR&symbols=USD'));
+    final data = json.decode(response.body);
+    final amountInDollars = amountInRupees * data['rates']['USD'];
+    return context.res.send(amountInDollars.toString());
+  }
+
+  return 'Invalid path';
+}</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Ruby</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+        <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'httparty'
+
+def main(context)
+  if context.request.path == '/eur'
+    amount_in_euros = context.request.query['amount'].to_f
+    response = HTTParty.get('https://api.exchangerate.host/latest?base=EUR&symbols=USD')
+    data = JSON.parse(response.body)
+    amount_in_dollars = amount_in_euros * data['rates']['USD']
+    return context.response.send(amount_in_dollars.to_s)
+  end
+
+  if context.request.path == '/inr'
+    amount_in_rupees = context.request.query['amount'].to_f
+    response = HTTParty.get('https://api.exchangerate.host/latest?base=INR&symbols=USD')
+    data = JSON.parse(response.body)
+    amount_in_dollars = amount_in_rupees * data['rates']['USD']
+    return context.response.send(amount_in_dollars.to_s)
+  end
+
+  return 'Invalid path'
+end</code></pre>
+      </div>
+    </div>
+  </li>
+
 </ul>
 
 <p>After your function has updated, you can try out the new paths. For example, `ghrfu9ewji.functions.appwrite.app/eur?amount=5` should convert Euros to Dollars, while `ghrfu9ewji.functions.appwrite.app/inr?amount=100` should convert Indian Rupees to Dollars.</p>
