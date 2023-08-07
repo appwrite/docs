@@ -59,7 +59,7 @@
 </table>
 
 <p>Some lamguages support unpacking. You'll see us use unpacking in examples, which has the following syntax.</p>
-[TODO: Example below for relevant languages.]
+[TODO: @luke for languages that have unpacking, let's add unpacking examples!]
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
@@ -180,6 +180,8 @@
     This includes all invokation methods, such as data from Appwrite SDKs, HTTP calls, Appwrite events, and browsers visiting the configured domain.
     Explore the request object with the following function, which logs all request params to the Appwrite Console.
 </p>
+
+[TODO: @luke Let's make sure we show an example for evert runtime with good string manip methods.]
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -313,6 +315,8 @@
     The response information <b>will not be logged</b> to the Appwrite Console.
     There are several possible ways to send a response, explore them in the following Appwrite Function.
 </p>
+
+[TODO: @luke Let's make sure we show an example for evert runtime with good string manip methods.]
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
@@ -464,6 +468,7 @@
 </p>
 
 <p>Here's an example of using logs and errors.</p>
+[TODO: @luke Let's make sure we show an example for evert runtime with good string manip methods.]
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
@@ -581,21 +586,54 @@
     </li>
 </ul>
 <p>You can access these logs through the following steps.</p>
-[TODO]
+<ol class="margin-top margin-bottom-large text-size-normal">
+	<li>In Appwrite Console, navigate to <b>Functions</b>.</li>
+    <li>Click to open a function you wish to inspect.</li>
+    <li>Under the <b>Executions</b> tab, click on an execution.</li>
+    <li>In the <b>Response</b> section, you'll be able to view logs under the <b>Logs</b> and <b>Errors</b> tabs.</li>
+</ol>
+
 <h2><a href="#environment-variables" id="environment-variables">Accessing Environment Variables</a></h2>
 <p>
     If you need to pass constants or secrets to Appwrite Functions, you can use environment variables.
+    Environmental variables can be global, or function specific.
 </p>
-[TODO: ways to setup environment variables (link to deployment docs?)]
+
+<h3>Local Environment Variables</h3>
+<p>
+    Local variables will only be accessible in the function they belong to. 
+    Local variables will override global variables when they have conflicting names.
+</p>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
+    <li>Click to open a function you wish to add variables to.</li>
+	<li>Under the <b>Settings</b> tab, navigate to <b>Environment variables</b>.</li>
+    <li>Create an environment variable by clicking <b>Create variable</b>, using the <b>Editor</b>, or import new variables through a <code>.env</code> file.</li>
+</ol>
+
+<h3>Global Variables</h3>
+<p>
+    Global variables are accessible to all Appwrite Functions. 
+    Local variables will override global variables when they have conflicting names.
+</p>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>In Appwrite Console, navigate to your project's <b>Settings</b> page.</li>
+	<li>Navigate to <b>Global variables</b> section.</li>
+    <li>Create an environment variable by clicking <b>Create variable</b>, using the <b>Editor</b>, or import new variables through a <code>.env</code> file.</li>
+</ol>
 
 <p>
     You can access the environment variables through the systems library of each language.
 </p>
 
+[TODO: @luke show how you access environment varibles for every language (sorry for the pain!)]
+
 <h2><a href="#dependencies" id="dependencies">Depencies</a></h2>
 
+[TODO: @luke is this different for every language? Idk what to put here, do we need to also @matej?]
+
 <h2><a href="#appwrite" id="appwrite">Using Appwrite in a Function</a></h2>
-[TODO: 2 examples -> JWT and API keys]
+[TODO: @luke @matej 2 examples -> JWT and API keys]
 
 <h2><a href="#dependencies" id="dependencies">Quick Example</a></h2>
 <ul class="phases clear" data-ui-phases>
@@ -713,6 +751,7 @@
 </ul>
 
 <h2><a href="#multi-file" id="multi-file">Using Multiple Files</a></h2>
+[TODO: @luke show how you can use multiple files in the same project]
 
 
 <h2><a href="#recipes" id="recipes">Recipes</a></h2>
@@ -723,7 +762,3 @@
 <p>
 <a href="/docs/command-line-ci"><i class="icon-angle-circled-right"></i>Explore examples and recipes</a>
 </p>
-
-
-<h2><a href="#limitations" id="limitations">Limitations</a></h2>
-<p>Libraries dependent on compiled binaries not available on the executors cannot be installed.</p>

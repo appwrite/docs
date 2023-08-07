@@ -27,7 +27,7 @@ The Apprite CLI allows you to create and deploy databases, collections, buckets,
 
 <h2><a href="/docs/command-line-deployment#deployFunctions" id="deployFunctions">Deploying Appwrite Functions</a></h2>
 
-<p>The CLI also handles the creation and deployment of Appwrite Functions. You can initialize a new function using:</p>
+<p>The CLI also handles the creation and deployment of Appwrite Functions. Run this command in the folder holding your <code>appwrite.json</code> file.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite init function
@@ -36,7 +36,9 @@ The Apprite CLI allows you to create and deploy databases, collections, buckets,
 ✓ Success</code></pre>
 </div>
 
-<p>This command creates a new function <b>My Awesome Function</b> in your current Appwrite project and also creates a template function for you to get started. You can now deploy this function using: </p>
+<p>This command creates a new function <b>My Awesome Function</b> in your current Appwrite project and also creates a template function for you to get started.</p>
+
+<p>You can now deploy this function by running this command in the folder holding your <code>appwrite.json</code> file.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function
@@ -47,7 +49,9 @@ The Apprite CLI allows you to create and deploy databases, collections, buckets,
 
 <h2><a href="/docs/command-line-deployment#deployCollections" id="deployCollections">Deploying Databases and Collections</a></h2>
 
-<p>The Appwrite CLI also helps you migrate your project's databases and collections from a development server to a production server. You can deploy all the databases and collections in your <a href="/docs/command-line-deployment#appwriteJSON">appwrite.json</a> file using:</p>
+<p>The Appwrite CLI also helps you migrate your project's databases and collections from a development server to a production server.</p>
+
+<p>You can deploy all the databases and collections in your <a href="/docs/command-line-deployment#appwriteJSON">appwrite.json</a> file by running this command in the folder holding your <code>appwrite.json</code> file.</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collection</code></pre>
@@ -57,14 +61,16 @@ The Apprite CLI allows you to create and deploy databases, collections, buckets,
 
 <p>The Appwrite CLI can create teams to organize users. Teams can be used to grant access permissions to a group of users. <a href="/docs/permissions#permission-roles">Learn more about permissions</a>.</p>
 
+<p>Deploy teams by running this command in the folder holding your <code>appwrite.json</code> file. </p>
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy team</code></pre>
 </div>
 
-
 <h2><a href="/docs/command-line-deployment#deployBucket" id="deployBucket">Deploying Storage Buckets</a></h2>
 
 <p>The Appwrite CLI allows you to configure and deploy buckets across projects. All the bucket's settings are available through the <a href="/docs/command-line-deployment#appwriteJSON">appwrite.json</a> file.</p>
+
+<p>Deploy storage buckets by running this command in the folder holding your <code>appwrite.json</code> file. </p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy bucket</code></pre>

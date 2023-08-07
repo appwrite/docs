@@ -14,15 +14,26 @@
 
 
 <h2><a href="#sdk" id="sdk">SDK</a></h2>
-TODO: two examples running the function sync and async form the SDK
+[TODO: @luke @matej, two examples running the function sync and async form the SDK]
 <p>
    
 </p>
 
 <h2><a href="#events" id="events">Events</a></h2>
 <p>
-   TODO: Describe steps to navigate the UI
+    Changes in Appwrite emit events. 
+    You can configure Functions to be executed in response to these events.
 </p>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
+    <li>Click to open a function you wish to add variables to.</li>
+	<li>Under the <b>Settings</b> tab, navigate to <b>Events</b>.</li>
+    <li>Add one or multiple events as triggers for the function.</li>
+    <li>
+        Be careful to avoid selecting events that can be caused by the function itself. 
+        This can cause the function to trigger it's own execution, resulting in infinite recursions.
+    </li>
+</ol>
 
 
 <h2><a href="#schedule" id="schedule">Schedule</a></h2>
@@ -70,3 +81,4 @@ TODO: two examples running the function sync and async form the SDK
 </p>
 
 <h2>Logs and results</h2>
+[TODO: @matej, decide what needs to go here.]
