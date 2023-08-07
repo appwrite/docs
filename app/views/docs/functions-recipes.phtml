@@ -1,111 +1,213 @@
 <p>
-    Appwrite Functions is all about flexibility.
-    Behind the simple workflow hides some useful recipes that can help you accomplish your goals faster.
-    Take a look at the following.
+  Appwrite Functions is all about flexibility.
+  Behind the simple workflow hides some useful recipes that can help you accomplish your goals faster.
+  Take a look at the following.
 </p>
 [TODO: @matej @luke -> Let's have some simple recipes here for common actions]
 
-<h3>Section 1: My First Function</h3>
+<h4>Getting Started</h4>
 
-<h4>Creating the function</h4>
+<p>
+  In this recipe, we'll build a simple function for currency conversion.
+</p>
 
-<ol>
-  <li>Create a new file, `index.js`.</li>
-  <li>Add the following code to `index.js`. This code will return 1.13 when the function is called, because 1€ equals approximately 1.13$.
-
-<div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-<pre class="line-numbers"><code class="prism language-js" data-prism>module.exports = async function ({ res }) {
-  return res.end('1.13');
+<ul class="phases clear" data-ui-phases>
+  <li>
+    <h3>Node.js</h3>
+    <div>
+      <p>Create a new file, `index.js`.</p>
+      <p>Add the following code to `index.js`.</p>
+      <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+        <pre class="line-numbers"><code class="prism language-js" data-prism>export default async function ({ res }) {
+  return res.send('1.13');
 };</code></pre>
-</div>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>PHP</h3>
+    <div>
+      <p>Create a new file, `index.php`.</p>
+      <p>Add the following code to `index.php`.</p>
+      <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+        <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+return function ($context) {
+  return $context-&gt;res-&gt;send('1.13');
+};</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Python</h3>
+    <div>
+      <p>Create a new file, `index.py`.</p>
+      <p>Add the following code to `index.py`.</p>
+      <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+        <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
+  return context.res.send('1.13')</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Dart</h3>
+    <div>
+      <p>Create a new file, `index.dart`.</p>
+      <p>Add the following code to `index.dart`.</p>
+      <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 
-  <li>Initialize a Git repository and add `index.js` to it with the following Bash commands:
+Future&lt;dynamic&gt; main(final context) async {
+  return context.res.send('1.13');
+}</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Ruby</h3>
+    <div>
+      <p>Create a new file, `index.rb`.</p>
+      <p>Add the following code to `index.rb`.</p>
+      <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+        <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
+  return context.res.send('1.13')
+end</code></pre>
+      </div>
+    </div>
+  </li>
+</ul>
 
-<div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-<pre class="line-numbers"><code class="prism language-bash" data-prism>git init
-git add index.js
-git commit -m "Initial commit"
-</code></pre>
-</div>
+<p>This code will return `1.13` when the function is called, because 1€ equals approximately 1.13$.</p>
+<p>Now, create a function in the Appwrite console, adding your Git repository as the remote source and using the path file you created as the entry point.</p>
+<li>Finally, execute the function and visit the URL (like `ghrfu9ewji.functions.appwrite.app`) to see the response.</li>
 
-  <li>Then, create a function in the Appwrite console and add your Git repository as the remote source.</li>
-  <li>Finally, execute the function and visit the URL (like `ghrfu9ewji.functions.appwrite.app`) to see the response.</li>
-</ol>
+<h4>Currency Conversion</h4>
 
-<h3>Section 2: Let's Use Payload</h3>
+<p>Now, let's update the function to use the request payload.</p>
+<p>You can use a query string to pass data to your function. For example, `ghrfu9ewji.functions.appwrite.app?amount=5` will pass `5` as the `amount` parameter.</p>
 
-<h4>Updating the function</h4>
-
-<ol>
-  <li>Update `index.js` to use `req.query.amount` to calculate the conversion. The following code takes the amount in Euros from the URL and converts it to Dollars using a static conversion rate.
-
-<div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-<pre class="line-numbers"><code class="prism language-js" data-prism>module.exports = async function ({ req, res }) {
+<ul class="phases clear" data-ui-phases>
+  <li>
+    <h3>Node.js</h3>
+    <div>
+      <p>Update `index.js` to use `req.query.amount` to access the `amount` parameter, and return the conversion result.</p>
+      <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+        <pre class="line-numbers"><code class="prism language-js" data-prism>export default async function ({ req, res }) {
   const amountInEuros = Number(req.query.amount);
   const amountInDollars = amountInEuros * 1.13;
-  return res.end(amountInDollars.toString());
+  return res.send(amountInDollars.toString());
 };</code></pre>
-</div>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>PHP</h3>
+    <div>
+      <p>Update `index.php` to use `$context->req->query['amount']` to access the `amount` parameter, and return the conversion result.</p>
+      <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+        <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+return function ($context) {
+  $amountInEuros = $context-&gt;req-&gt;query['amount'];
+  $amountInDollars = $amountInEuros * 1.13;
+  return $context-&gt;res-&gt;send($amountInDollars);
+};</code></pre>
+      </div>
+    </div>
+  </li>
+</ul>
 
-  <li>Commit your changes and push them to your Git repository.</li>
-</ol>
+<p>Commit your changes and push them to your Git repository.</p>
+
 
 <h4>Testing the function</h4>
 
-<ol start="3">
-  <li>Once the function is updated, you can test it by visiting the URL and providing different amounts to convert in the query string. For example, `ghrfu9ewji.functions.appwrite.app?amount=5` should return `5.65`.</li>
-</ol>
+<p>
+  Execute the function and visit the URL (like `ghrfu9ewji.functions.appwrite.app?amount=5`) to see the response.
+</p>
+<p>
+  You should see the result of the conversion, like `5.65`.
+</p>
 
-<h3>Section 3: Installing Dependencies</h3>
+<h4>Adding Dependencies</h4>
 
-<h4>Preparing for dependencies</h4>
+<ul class="phases clear" data-ui-phases>
+  <li>
+    <h3>Node.js</h3>
+    <div>
+      <p>Run the following bash command to create a `package.json` file. This file is used to manage your Node.js project's dependencies.</p>
+      <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>npm init -y</code></pre>
+      </div>
+      <p>Install the `undici` library. This library includes a `fetch` function that you can use to make HTTP requests.</p>
+      <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>npm install undici</code></pre>
+      </div>
+      <p>Finally, we need to add `npm install` to your function's build commands in the Appwrite console.</p>
+    </div>
+  </li>
+</ul>
 
-<ol>
-  <li>Run `npm init --yes` to create a `package.json` file. This file is used to manage your Node.js project's dependencies.</li>
-  <li>Install the `undici` library with `npm install undici`. This library includes a `fetch` function that you can use to make HTTP requests.</li>
-</ol>
+<h4>Using Dependencies</h4>
 
-<h4>Updating the function</h4>
+<ul class="phases clear" data-ui-phases>
+  <li>
+    <h3>Node.js</h3>
+    <div>
+      <p>Use `fetch` from `undici` to get the current conversion rate. This API call will return the current conversion rate between Euros and Dollars.</p>
+      <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+        <pre class="line-numbers"><code class="prism language-js" data-prism>import { fetch } from 'undici';
 
-<ol start="3">
-  <li>Update `index.js` to use `fetch` from `undici` to get the current conversion rate. This API call will return the current conversion rate between Euros and Dollars.
-
-<div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-<pre class="line-numbers"><code class="prism language-js" data-prism>const { fetch } = require('undici');
-
-module.exports = async function ({ req, res }) {
+export default async function ({ req, res }) {
   const amountInEuros = Number(req.query.amount);
-  const response = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/eur/usd.json');
+  const response = await fetch('https://api.exchangerate.host/latest?base=EUR&symbols=USD');
   const data = await response.json();
-  const amountInDollars = amountInEuros * data.usd;
-  return res.end(amountInDollars.toString());
+  const amountInDollars = amountInEuros * data.rates.USD;
+  return res.send(amountInDollars.toString());
 };</code></pre>
-</div>
+      </div>
+    </div>
+  </li>
+</ul>
 
-  <li>Commit your changes and push them to your Git repository.</li>
-</ol>
+<p>Deploy your changes</p>
+<p>After your function has updated, you can test it by visiting the URL and providing different amounts to convert in the query string. The conversion rate should now be more precise because we're using the current conversion rate.</p>
 
-<h4>Testing the function</h4>
+<h4>Adding More Routes</h4>
 
-<ol start="5">
-  <li>After your function has updated, you can test it by visiting the URL and providing different amounts to convert in the query string. The conversion rate should now be more precise because we're using the current conversion rate.</li>
-</ol>
+<p>Let's add support multiple paths like `/eur` and `/inr`. Each path will convert from that currency to dollars.</p>
 
-<h3>Section 4: More Routes</h3>
+<ul class="phases clear" data-ui-phases>
+  <li>
+    <h3>Node.js</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+        <pre class="line-numbers"><code class="prism language-js" data-prism>import { fetch } from 'undici';
 
-<h4>Updating the function</h4>
+export default async function ({ req, res }) {
+  if (req.path === '/eur') {
+    const amountInEuros = Number(req.query.amount);
+    const response = await fetch('https://api.exchangerate.host/latest?base=EUR&symbols=USD');
+    const data = await response.json();
+    const amountInDollars = amountInEuros * data.rates.USD;
+    return res.send(amountInDollars.toString());
+  }
 
-<ol>
-  <li>Edit `index.js` to support multiple paths like `/eur`, `/czk`, `/ft`, `/rub`. Each path will convert from that currency to dollars. Note that you will need to update the fetch URL for each new path.</li>
-  <li>Commit your changes and push them to your Git repository.</li>
-</ol>
+  if (req.path === '/inr') {
+    const amountInRupees = Number(req.query.amount);
+    const response = await fetch('https://api.exchangerate.host/latest?base=INR&symbols=USD');
+    const data = await response.json();
+    const amountInDollars = amountInRupees * data.rates.USD;
+    return res.send(amountInDollars.toString());
+  }
 
-<h4>Testing the function</h4>
+  return res.send('Invalid path');
+};</code></pre>
+      </div>
+    </div>
+  </li>
+</ul>
 
-<ol start="3">
-  <li>After your function has updated, you can try out the new paths. For example, `ghrfu9ewji.functions.appwrite.app/eur?amount=5` should convert Euros to Dollars, while `ghrfu9ewji.functions.appwrite.app/czk?amount=100` should convert Czech Koruna to Dollars.</li>
-</ol>
-
+<p>After your function has updated, you can try out the new paths. For example, `ghrfu9ewji.functions.appwrite.app/eur?amount=5` should convert Euros to Dollars, while `ghrfu9ewji.functions.appwrite.app/inr?amount=100` should convert Indian Rupees to Dollars.</p>
 <p>Congratulations! You've built a powerful currency conversion function using Appwrite!</p>
 
 [TODO: @luke -> translate code for other runtimes]
