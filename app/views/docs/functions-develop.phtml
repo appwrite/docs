@@ -102,8 +102,8 @@
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
     log(req.bodyRaw);     // Raw request body, contains request data
-    log(req.body);        // Body parsed on content-type, only supports JSON
-    log(req.headers);     // Request headers
+    log(JSON.stringify(req.body));        // Body parsed on content-type, only supports JSON
+    log(JSON.stringify(req.headers));     // Request headers
     log(req.scheme);      // Value of the x-forwarded-proto header, usually http or https
     log(req.method);      // Request method, such as GET, POST, PUT, DELETE, PATCH, etc.
     log(req.url);         // Full URL, for example: http://awesome.appwrite.io:8000/v1/hooks?limit=12&offset=50
@@ -235,13 +235,13 @@
         <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
-    switch (req.body) {
+    switch (req.query.type) {
         case 'send':
             return res.send(
                 "This is a text response", 
                 200, 
                 {
-                    "content-type": "application/text"
+                    "content-type": "text/plain"
                 }
             );
         case 'json':
@@ -630,9 +630,21 @@
     </li>
 </ul>
 
-<h2><a href="#dependencies" id="dependencies">Depencies</a></h2>
+<h2><a href="#dependencies" id="dependencies">Dependencies</a></h2>
 
 [TODO: @luke is this different for every language? Idk what to put here, do we need to also @matej?]
+
+- The NodeJS runtime has npm installed.
+- The PHP runtime has composer installed.
+- The Python runtime has pip installed.
+- The Ruby runtime has bundler installed.
+- The Deno runtime has deno installed.
+- The Dart runtime has pub installed.
+- The Swift runtime has swift installed.
+- The .NET runtime has nuget installed.
+- The Kotlin runtime has gradle installed.
+- The Java runtime has gradle installed.
+
 
 <h2><a href="#appwrite" id="appwrite">Using Appwrite in a Function</a></h2>
 [TODO: @luke @matej 2 examples -> JWT and API keys]
