@@ -134,7 +134,8 @@ return function ($context) {
     $context->log($context->req->queryString);          // Raw query params string. For example "limit=12&offset=50"
     $context->log(json_encode($context->req->query));   // Parsed query params. For example, req.query.limit
 
-    return $context->res->send("All the request parameters are logged to the Appwrite Console.");</code></pre>
+    return $context->res->send("All the request parameters are logged to the Appwrite Console.");
+}</code></pre>
         </div>
         </div>
     </li>
@@ -344,7 +345,9 @@ public class Main {
         context.log(context.getReq().getQueryString());            // Raw query params string. For example "limit=12&offset=50"
         context.log(gson.toString(context.getReq().getQuery()));   // Parsed query params. For example, req.query.limit
 
-        return context.getRes().send("All the request parameters are logged to the Appwrite Console.");</code></pre>
+        return context.getRes().send("All the request parameters are logged to the Appwrite Console.");
+    }
+}</code></pre>
         </div>
         </div>
     </li>
@@ -364,37 +367,37 @@ public class Main {
         <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
+
     switch (req.query.type) {
-        case 'send':
+        case 'text':
             return res.send(
                 "This is a text response", 
-                200, 
-                {
-                    "content-type": "text/plain"
-                }
+                200
             );
         case 'json':
             return res.json(
                 {
                     "type": "This is a JSON response"
                 }, 
-                200, 
-                {
-                    "content-type": "application/json"
-                }
+                200
             );
         case 'redirect':
-            return res.json(
+            return res.redirect(
                 "https://appwrite.io", 
-                301, 
+                301
+            );
+        case 'html':
+            return res.send(
+                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 
+                200,
                 {
-                    "content-type": "application/json"
+                    "content-type": "text/html"
                 }
             );
         default:
             return res.empty();
     }
-};</code></pre>
+}</code></pre>
         </div>
         </div>
     </li>
@@ -402,9 +405,39 @@ public class Main {
         <h3>PHP</h3>
         <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>
+            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
-            </code></pre>
+return function ($context) {
+    switch ($context->req->query['type']) {
+        case 'text':
+            return $context->res->send(
+                "This is a text response", 
+                200
+            );
+        case 'json':
+            return $context->res->json(
+                [
+                    "type" => "This is a JSON response"
+                ], 
+                200
+            );
+        case 'redirect':
+            return $context->res->redirect(
+                "https://appwrite.io", 
+                301
+            );
+        case 'html':
+            return $context->res->send(
+                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 
+                200,
+                [
+                    "content-type" => "text/html"
+                ]
+            );
+        default:
+            return $context->res->empty();
+    }
+};</code></pre>
         </div>
         </div>
     </li>
@@ -412,9 +445,35 @@ public class Main {
         <h3>Python</h3>
         <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>
-
-            </code></pre>
+            <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
+    switch context.req.query['type']:
+        case 'text':
+            return context.res.send(
+                "This is a text response", 
+                200
+            )
+        case 'json':
+            return context.res.json(
+                {
+                    "type": "This is a JSON response"
+                }, 
+                200
+            )
+        case 'redirect':
+            return context.res.redirect(
+                "https://appwrite.io", 
+                301
+            )
+        case 'html':
+            return context.res.send(
+                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 
+                200,
+                {
+                    "content-type": "text/html"
+                }
+            )
+        default:
+            return context.res.empty()</code></pre>
         </div>
         </div>
     </li>
@@ -422,9 +481,37 @@ public class Main {
         <h3>Ruby</h3>
         <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>
-
-            </code></pre>
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
+    case context.req.query['type']
+        when 'text'
+            return context.res.send(
+                "This is a text response", 
+                200
+            )
+        when 'json'
+            return context.res.json(
+                {
+                    "type": "This is a JSON response"
+                }, 
+                200
+            )
+        when 'redirect'
+            return context.res.redirect(
+                "https://appwrite.io", 
+                301
+            )
+        when 'html'
+            return context.res.send(
+                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 
+                200,
+                {
+                    "content-type": "text/html"
+                }
+            )
+        else
+            return context.res.empty()
+    end
+end</code></pre>
         </div>
         </div>
     </li>
@@ -432,9 +519,38 @@ public class Main {
         <h3>Deno</h3>
         <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }) => {
 
-            </code></pre>
+    switch (req.query.type) {
+        case 'text':
+            return res.send(
+                "This is a text response", 
+                200
+            );
+        case 'json':
+            return res.json(
+                {
+                    "type": "This is a JSON response"
+                }, 
+                200
+            );
+        case 'redirect':
+            return res.redirect(
+                "https://appwrite.io", 
+                301
+            );
+        case 'html':
+            return res.send(
+                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 
+                200,
+                {
+                    "content-type": "text/html"
+                }
+            );
+        default:
+            return res.empty();
+    }
+}</code></pre>
         </div>
         </div>
     </li>
@@ -442,9 +558,31 @@ public class Main {
         <h3>Dart</h3>
         <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 
-            </code></pre>
+Future&lt;dynamic> main(final context) async {
+    switch (context.req.query['type']) {
+        case 'text':
+            return context.res
+                .send('This is a text response', 200);
+        case 'json':
+            return context.res
+                .json({
+                    'type': 'This is a JSON response'
+                });
+        case 'redirect':
+            return context.res
+                .redirect('https://appwrite.io', 301);
+        case 'html':
+            return context.res
+                .send('&lt;h1&gt;This is an HTML response&lt;/h1&gt;', 200, {
+                    'content-type': 'text/html'
+                });
+        default:
+            return context.res
+                .empty();
+    }
+}</code></pre>
         </div>
         </div>
     </li>
@@ -738,7 +876,6 @@ public class Main {
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>System.getenv("MY_VAR")</code></pre>
         </div>
-
         </div>
     </li>
     <li>
@@ -761,19 +898,78 @@ public class Main {
 
 <h2><a href="#dependencies" id="dependencies">Dependencies</a></h2>
 
-[TODO: @luke is this different for every language? Idk what to put here, do we need to also @matej?]
+<p> 
+    Your function's dependencies should be managed by the package manager of each language. By default, we include the following package manages in each runtime:
+</p>
 
-- The NodeJS runtime has npm installed.
-- The PHP runtime has composer installed.
-- The Python runtime has pip installed.
-- The Ruby runtime has bundler installed.
-- The Deno runtime has deno installed.
-- The Dart runtime has pub installed.
-- The Swift runtime has swift installed.
-- The .NET runtime has nuget installed.
-- The Kotlin runtime has gradle installed.
-- The Java runtime has gradle installed.
+<p>
+    To install your dependencies before your function is built, you should add the relevant install command to the top your functions Build Commands script.
+</p>
 
+<table class="full text-size-small">
+    <thead>
+        <tr>
+            <th>Language</th>
+            <th>Package Manager</th>
+            <th>Install Command</th>
+        </tr>
+    </thead>
+    <tr>
+        <td><b>Node.js</b></td>
+        <td><a href="https://www.npmjs.com/" target="_blank">npm</a></td>
+        <td><code>npm install</code></td>
+    </tr>
+    <tr>
+        <td><b>PHP</b></td>
+        <td><a href="https://getcomposer.org/" target="_blank">Composer</a></td>
+        <td><code>composer install</code></td>
+    </tr>
+    <tr>
+        <td><b>Python</b></td>
+        <td><a href="https://pypi.org/project/pip/" target="_blank">pip</a></td>
+        <td><code>pip install -r requirements.txt</code></td>
+    </tr>
+    <tr>
+        <td><b>Ruby</b></td>
+        <td><a href="https://bundler.io/" target="_blank">Bundler</a></td>
+        <td><code>bundle install</code></td>
+    </tr>
+    <tr>
+        <td><b>Deno</b></td>
+        <td><a href="https://deno.land/" target="_blank">deno</a></td>
+        <td><code>deno cache</code></td>
+    </tr>
+    <tr>
+        <td><b>Dart</b></td>
+        <td><a href="https://pub.dev/" target="_blank">pub</a></td>
+        <td><code>pub get</code></td>
+    </tr>
+    <tr>
+        <td><b>Swift</b></td>
+        <td><a href="https://swift.org/package-manager/" target="_blank">Swift Package Manager</a></td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+        <td><b>.NET</b></td>
+        <td><a href="https://www.nuget.org/" target="_blank">NuGet</a></td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+        <td><b>Kotlin</b></td>
+        <td><a href="https://kotlinlang.org/docs/reference/using-gradle.html" target="_blank">Gradle</a></td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+        <td><b>Java</b></td>
+        <td><a href="https://gradle.org/" target="_blank">Gradle</a></td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+        <td><b>C++</b></td>
+        <td>None</td>
+        <td>N/A</td>
+    </tr>
+</table>
 
 <h2><a href="#appwrite" id="appwrite">Using Appwrite in a Function</a></h2>
 [TODO: @luke @matej 2 examples -> JWT and API keys]
