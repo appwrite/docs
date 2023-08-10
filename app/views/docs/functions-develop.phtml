@@ -58,7 +58,7 @@
     </tbody>
 </table>
 
-<p>Some languages support destructuring. You'll see us use destructing in examples, which has the following syntax.</p>
+<p>Some languages, namely JavaScript, support destructuring. You'll see us use destructing in examples, which has the following syntax.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
@@ -93,25 +93,23 @@
     Explore the request object with the following function, which logs all request params to the Appwrite Console.
 </p>
 
-[TODO: @luke Let's make sure we show an example for event runtime with good string manip methods.]
-
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
         <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
-    log(req.bodyRaw);     // Raw request body, contains request data
-    log(JSON.stringify(req.body));        // Body parsed on content-type, only supports JSON
-    log(JSON.stringify(req.headers));     // Request headers
-    log(req.scheme);      // Value of the x-forwarded-proto header, usually http or https
-    log(req.method);      // Request method, such as GET, POST, PUT, DELETE, PATCH, etc.
-    log(req.url);         // Full URL, for example: http://awesome.appwrite.io:8000/v1/hooks?limit=12&offset=50
-    log(req.host);        // Hostname from the host header, such as awesome.appwrite.io
-    log(req.port);        // Port from the host header, for example 8000
-    log(req.path);        // Path part of URL, for example /v1/hooks
-    log(req.queryString); // Raw query params string. For example "limit=12&offset=50"
-    log(req.query);       // Parsed query params. For example, req.query.limit
+    log(req.bodyRaw);                     // Raw request body, contains request data
+    log(JSON.stringify(req.body));        // Object from parsed JSON request body, otherwise string
+    log(JSON.stringify(req.headers));     // String key-value pairs of all request headers, keys are lowercase
+    log(req.scheme);                      // Value of the x-forwarded-proto header, usually http or https
+    log(req.method);                      // Request method, such as GET, POST, PUT, DELETE, PATCH, etc.
+    log(req.url);                         // Full URL, for example: http://awesome.appwrite.io:8000/v1/hooks?limit=12&offset=50
+    log(req.host);                        // Hostname from the host header, such as awesome.appwrite.io
+    log(req.port);                        // Port from the host header, for example 8000
+    log(req.path);                        // Path part of URL, for example /v1/hooks
+    log(req.queryString);                 // Raw query params string. For example "limit=12&offset=50"
+    log(req.query);                       // Parsed query params. For example, req.query.limit
 
     return res.send("All the request parameters are logged to the Appwrite Console.");
 };</code></pre>
@@ -122,9 +120,21 @@
         <h3>PHP</h3>
         <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>
+            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+return function ($context) {
+    $context->log($context->req->bodyRaw);              // Raw request body, contains request data
+    $context->log(json_encode($context->req->body));    // Object from parsed JSON request body, otherwise string
+    $context->log(json_encode($context->req->headers)); // String key-value pairs of all request headers, keys are lowercase
+    $context->log($context->req->scheme);               // Value of the x-forwarded-proto header, usually http or https
+    $context->log($context->req->method);               // Request method, such as GET, POST, PUT, DELETE, PATCH, etc.
+    $context->log($context->req->url);                  // Full URL, for example: http://awesome.appwrite.io:8000/v1/hooks?limit=12&offset=50
+    $context->log($context->req->host);                 // Hostname from the host header, such as awesome.appwrite.io
+    $context->log($context->req->port);                 // Port from the host header, for example 8000
+    $context->log($context->req->path);                 // Path part of URL, for example /v1/hooks
+    $context->log($context->req->queryString);          // Raw query params string. For example "limit=12&offset=50"
+    $context->log(json_encode($context->req->query));   // Parsed query params. For example, req.query.limit
 
-            </code></pre>
+    return $context->res->send("All the request parameters are logged to the Appwrite Console.");</code></pre>
         </div>
         </div>
     </li>
@@ -132,9 +142,22 @@
         <h3>Python</h3>
         <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>
+            <pre class="line-numbers"><code class="prism language-python" data-prism>import json
 
-            </code></pre>
+def main(context):
+    context.log(context.req.bodyRaw)             # Raw request body, contains request data
+    context.log(json.dumps(context.req.body))    # Object from parsed JSON request body, otherwise string
+    context.log(json.dumps(context.req.headers)) # String key-value pairs of all request headers, keys are lowercase
+    context.log(context.req.scheme)              # Value of the x-forwarded-proto header, usually http or https
+    context.log(context.req.method)              # Request method, such as GET, POST, PUT, DELETE, PATCH, etc.
+    context.log(context.req.url)                 # Full URL, for example: http://awesome.appwrite.io:8000/v1/hooks?limit=12&offset=50
+    context.log(context.req.host)                # Hostname from the host header, such as awesome.appwrite.io
+    context.log(context.req.port)                # Port from the host header, for example 8000
+    context.log(context.req.path)                # Path part of URL, for example /v1/hooks
+    context.log(context.req.queryString)         # Raw query params string. For example "limit=12&offset=50"
+    context.log(json.dumps(context.req.query))   # Parsed query params. For example, req.query.limit
+
+    return context.res.send("All the request parameters are logged to the Appwrite Console.")</code></pre>
         </div>
         </div>
     </li>
@@ -142,9 +165,23 @@
         <h3>Ruby</h3>
         <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'json'
+                
+def main(context)
+    context.log(context.req.bodyRaw)                #  Raw request body, contains request data
+    context.log(JSON.generate(context.req.body))    # Object from parsed JSON request body, otherwise string
+    context.log(JSON.generate(context.req.headers)) # String key-value pairs of all request headers, keys are lowercase
+    context.log(context.req.scheme)                 # Value of the x-forwarded-proto header, usually http or https
+    context.log(context.req.method)                 # Request method, such as GET, POST, PUT, DELETE, PATCH, etc.
+    context.log(context.req.url)                    # Full URL, for example: http://awesome.appwrite.io:8000/v1/hooks?limit=12&offset=50
+    context.log(context.req.host)                   # Hostname from the host header, such as awesome.appwrite.io
+    context.log(context.req.port)                   # Port from the host header, for example 8000
+    context.log(context.req.path)                   # Path part of URL, for example /v1/hooks
+    context.log(context.req.queryString)            # Raw query params string. For example "limit=12&offset=50"
+    context.log(JSON.generate(context.req.query))   # Parsed query params. For example, req.query.limit
 
-            </code></pre>
+    return context.res.send("All the request parameters are logged to the Appwrite Console.")
+end</code></pre>
         </div>
         </div>
     </li>
@@ -152,9 +189,20 @@
         <h3>Deno</h3>
         <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }: any) => {
+    log(req.bodyRaw);                 // Raw request body, contains request data
+    log(JSON.stringify(req.body));    // Object from parsed JSON request body, otherwise string
+    log(JSON.stringify(req.headers)); // String key-value pairs of all request headers, keys are lowercase
+    log(req.scheme);                  // Value of the x-forwarded-proto header, usually http or https
+    log(req.method);                  // Request method, such as GET, POST, PUT, DELETE, PATCH, etc.
+    log(req.url);                     // Full URL, for example: http://awesome.appwrite.io:8000/v1/hooks?limit=12&offset=50
+    log(req.host);                    // Hostname from the host header, such as awesome.appwrite.io
+    log(req.port);                    // Port from the host header, for example 8000
+    log(req.path);                    // Path part of URL, for example /v1/hooks
+    log(req.queryString);             // Raw query params string. For example "limit=12&offset=50"
+    log(req.query);                   // Parsed query params. For example, req.query.limit
 
-            </code></pre>
+    return res.send("All the request parameters are logged to the Appwrite Console.");</code></pre>
         </div>
         </div>
     </li>
@@ -162,9 +210,24 @@
         <h3>Dart</h3>
         <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+import 'dart:convert';
 
-            </code></pre>
+Future&lt;dynamic> main(final context) async {
+    context.log(context.req.bodyRaw);              // Raw request body, contains request data
+    context.log(json.encode(context.req.body));    // Object from parsed JSON request body, otherwise string
+    context.log(json.encode(context.req.headers)); // String key-value pairs of all request headers, keys are lowercase
+    context.log(context.req.scheme);               // Value of the x-forwarded-proto header, usually http or https
+    context.log(context.req.method);               // Request method, such as GET, POST, PUT, DELETE, PATCH, etc.
+    context.log(context.req.url);                  // Full URL, for example: http://awesome.appwrite.io:8000/v1/hooks?limit=12&offset=50
+    context.log(context.req.host);                 // Hostname from the host header, such as awesome.appwrite.io
+    context.log(context.req.port);                 // Port from the host header, for example 8000
+    context.log(context.req.path);                 // Path part of URL, for example /v1/hooks
+    context.log(context.req.queryString);          // Raw query params string. For example "limit=12&offset=50"
+    context.log(json.encode(context.req.query));   // Parsed query params. For example, req.query.limit
+
+    return context.res.send("All the request parameters are logged to the Appwrite Console.");
+}</code></pre>
         </div>
         </div>
     </li>
@@ -172,9 +235,24 @@
         <h3>Swift</h3>
         <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
+import Foundation
 
-            </code></pre>
+func main(context: RuntimeContext) async throws -> RuntimeOutput {
+    context.log(context.req.bodyRaw)                                                     // Raw request body, contains request data
+    context.log(NSJSONSerialization.jsonObject(with: context.req.body, options: [])!)    // Object from parsed JSON request body, otherwise string
+    context.log(NSJSONSerialization.jsonObject(with: context.req.headers, options: [])!) // String key-value pairs of all request headers, keys are lowercase
+    context.log(context.req.scheme)                                                      // Value of the x-forwarded-proto header, usually http or https
+    context.log(context.req.method)                                                      // Request method, such as GET, POST, PUT, DELETE, PATCH, etc.
+    context.log(context.req.url)                                                         // Full URL, for example: http://awesome.appwrite.io:8000/v1/hooks?limit=12&offset=50 
+    context.log(context.req.host)                                                        // Hostname from the host header, such as awesome.appwrite.io
+    context.log(context.req.port)                                                        // Port from the host header, for example 8000
+    context.log(context.req.path)                                                        // Path part of URL, for example /v1/hooks
+    context.log(context.req.queryString)                                                 // Raw query params string. For example "limit=12&offset=50"
+    context.log(NSJSONSerialization.jsonObject(with: context.req.query, options: [])!)   // Parsed query params. For example, req.query.limit
+
+    return try context.res.send("All the request parameters are logged to the Appwrite Console.")
+}</code></pre>
         </div>
         </div>
     </li>
@@ -182,9 +260,28 @@
         <h3>.NET</h3>
         <div>
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
 
-            </code></pre>
+using System.Text.Json;
+
+public class Handler {
+    public async Task&lt;RuntimeOutput> Main(RuntimeContext Context) 
+    {
+        Context.Log(Context.Req.BodyRaw);                                                     // Raw request body, contains request data
+        Context.Log(JsonSerializer.Serialize&lt;object>(Context.Req.Body));                 // Object from parsed JSON request body, otherwise string
+        Context.Log(JsonSerializer.Serialize&lt;object>(Context.Req.Headers));              // String key-value pairs of all request headers, keys are lowercase
+        Context.Log(Context.Req.Scheme);                                                      // Value of the x-forwarded-proto header, usually http or https
+        Context.Log(Context.Req.Method);                                                      // Request method, such as GET, POST, PUT, DELETE, PATCH, etc.
+        Context.Log(Context.Req.Url);                                                         // Full URL, for example: http://awesome.appwrite.io:8000/v1/hooks?limit=12&offset=50
+        Context.Log(Context.Req.Host);                                                        // Hostname from the host header, such as awesome.appwrite.io
+        Context.Log(Context.Req.Port);                                                        // Port from the host header, for example 8000
+        Context.Log(Context.Req.Path);                                                        // Path part of URL, for example /v1/hooks
+        Context.Log(Context.Req.QueryString);                                                 // Raw query params string. For example "limit=12&offset=50"
+        Context.Log(JsonSerializer.Serialize&lt;object>(Context.Req.Query));                // Parsed query params. For example, req.query.limit
+
+        return Context.Res.Send("All the request parameters are logged to the Appwrite Console.");
+    }
+}</code></pre>
         </div>
         </div>
     </li>
@@ -192,9 +289,31 @@
         <h3>Kotlin</h3>
         <div>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
 
-            </code></pre>
+import io.openruntimes.kotlin.RuntimeContext
+import io.openruntimes.kotlin.RuntimeOutput
+import com.google.gson.Gson
+
+class Main {
+    fun main(context: RuntimeContext): RuntimeOutput {
+        val gson = Gson()
+
+        context.log(context.req.bodyRaw)                // Raw request body, contains request data
+        context.log(gson.toString(context.req.body))    // Object from parsed JSON request body, otherwise string
+        context.log(gson.toString(context.req.headers)) // String key-value pairs of all request headers, keys are lowercase
+        context.log(context.req.scheme)                 // Value of the x-forwarded-proto header, usually http or https
+        context.log(context.req.method)                 // Request method, such as GET, POST, PUT, DELETE, PATCH, etc.
+        context.log(context.req.url)                    // Full URL, for example: http://awesome.appwrite.io:8000/v1/hooks?limit=12&offset=50
+        context.log(context.req.host)                   // Hostname from the host header, such as awesome.appwrite.io
+        context.log(context.req.port)                   // Port from the host header, for example 8000
+        context.log(context.req.path)                   // Path part of URL, for example /v1/hooks
+        context.log(context.req.queryString)            // Raw query params string. For example "limit=12&offset=50"
+        context.log(gson.toString(context.req.query))   // Parsed query params. For example, req.query.limit
+
+        return context.res.send("All the request parameters are logged to the Appwrite Console.")
+    }
+}</code></pre>
         </div>
 
         </div>
@@ -203,19 +322,29 @@
         <h3>Java</h3>
         <div>
         <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>
+            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java;
 
-            </code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>C++</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
+import com.google.gson.Gson;
+import io.openruntimes.java.models.RuntimeContext;
+import io.openruntimes.java.models.RuntimeOutput;
 
-            </code></pre>
+public class Main {
+    public RuntimeOutput main(RuntimeContext context) {
+        Gson gson = new Gson();
+
+        context.log(context.getReq().getBodyRaw());                // Raw request body, contains request data
+        context.log(gson.toString(context.getReq().getBody()));    // Object from parsed JSON request body, otherwise string
+        context.log(gson.toString(context.getReq().getHeaders())); // String key-value pairs of all request headers, keys are lowercase
+        context.log(context.getReq().getScheme());                 // Value of the x-forwarded-proto header, usually http or https
+        context.log(context.getReq().getMethod());                 // Request method, such as GET, POST, PUT, DELETE, PATCH, etc.
+        context.log(context.getReq().getUrl());                    // Full URL, for example: http://awesome.appwrite.io:8000/v1/hooks?limit=12&offset=50
+        context.log(context.getReq().getHost());                   // Hostname from the host header, such as awesome.appwrite.io
+        context.log(context.getReq().getPort());                   // Port from the host header, for example 8000
+        context.log(context.getReq().getPath());                   // Path part of URL, for example /v1/hooks
+        context.log(context.getReq().getQueryString());            // Raw query params string. For example "limit=12&offset=50"
+        context.log(gson.toString(context.getReq().getQuery()));   // Parsed query params. For example, req.query.limit
+
+        return context.getRes().send("All the request parameters are logged to the Appwrite Console.");</code></pre>
         </div>
         </div>
     </li>
