@@ -12,7 +12,7 @@ Before you can use Amazon to authenticate users, you need to enable the provider
 Don't close this modal, we'll need to create a Amazon Security Profile to complete this form.
 
 ## Creating a Amazon Security Profile
-To use Amazon OAuth with Appwrite, you need to create an Security Profile on your Amazon account. You can do this by following the [Login with Amazon](https://developer.amazon.com/docs/login-with-amazon/security-profile.html) guide from Amazon. Once you create your **Security profile**, follow these steps:
+To use Amazon OAuth with Appwrite, you need to create a Security Profile on your Amazon account. You can do this by following the [Login with Amazon guide](https://developer.amazon.com/docs/login-with-amazon/security-profile.html) from Amazon. Once you create your **Security profile**, follow these steps:
 - Under the **Login with Amazon Console** tab, you will find the list of all **Security Profile**
 - Click on **Manage Security Profile** button of your just created Security profile.
 - **Security Profile Management** page will open. Under **Web Settings** tab you need to add **Allowed Return URLs** as the **URI** found in the **Amazon OAuth2 Settings** modal from your Appwrite console.
