@@ -5,7 +5,9 @@
 </p>
 [TODO: @matej @luke -> Let's have some simple recipes here for common actions]
 
-<h4>Getting Started</h4>
+<h2>Currency Conversion API</h2>
+
+<h3>Getting Started</h3>
 
 <p>
   In this recipe, we'll build a simple function for currency conversion.
@@ -78,9 +80,9 @@ end</code></pre>
 
 <p>This code will return <code>1.13</code> when the function is called, because 1€ equals approximately 1.13$.</p>
 <p>Now, create a function in the Appwrite console, adding your Git repository as the remote source and using the path file you created as the entry point.</p>
-<li>Finally, execute the function and visit the URL (like <code>ghrfu9ewji.functions.appwrite.app</code>) to see the response.</li>
+<p>Finally, execute the function and visit the URL (like <code>ghrfu9ewji.functions.appwrite.app</code>) to see the response.</p>
 
-<h4>Currency Conversion</h4>
+<h3>Adding the Business Logic</h3>
 
 <p>Now, let's update the function to use the request payload.</p>
 <p>You can use a query string to pass data to your function. For example, <code>ghrfu9ewji.functions.appwrite.app?amount=5</code> will pass <code>5</code> as the <code>amount</code> parameter.</p>
@@ -158,7 +160,7 @@ end</code></pre>
 <p>Commit your changes and push them to your Git repository.</p>
 
 
-<h4>Testing the function</h4>
+<h3>Testing our Function</h3>
 
 <p>
   Execute the function and visit the URL (like <code>ghrfu9ewji.functions.appwrite.app?amount=5</code>) to see the response.
@@ -209,7 +211,7 @@ end</code></pre>
       <p>Install the <code>requests</code> library. This library includes a <code>get</code> function that you can use to make HTTP requests.</p>
       <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
         <pre class="line-numbers"><code class="prism language-bash" data-prism>echo "requests" >> requirements.txt
-pip -r requirements.txt</code></pre>
+pip install -r requirements.txt</code></pre>
       </div>
       <p>Finally, add <code>pip install -r requirements.txt</code> to your function's build commands in the Appwrite console.</p>
     </div>
@@ -227,8 +229,7 @@ pip -r requirements.txt</code></pre>
 description: Appwrite Function
 version: 1.0.0
 environment:
-  sdk: '>=2.12.0 &lt;3.0.0'
-</code></pre>
+  sdk: '>=2.12.0 &lt;3.0.0'</code></pre>
       </div>
       <p>
         Install the <code>http</code> library. This library includes a <code>get</code> function that you can use to make HTTP requests.
@@ -236,6 +237,7 @@ environment:
       <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
         <pre class="line-numbers"><code class="prism language-bash" data-prism>
           pub install http
+        </code></pre>
       </div>
       <p>
         Finally, add <code>pub get</code> to your function's build commands in the Appwrite console.
@@ -268,7 +270,7 @@ bundle install</code></pre>
   </li>
 </ul>
 
-<h4>Using Dependencies</h4>
+<h3>Using Dependencies</h3>
 
 <ul class="phases clear" data-ui-phases>
   <li>
@@ -363,10 +365,9 @@ end</code></pre>
   </li>
 </ul>
 
-<p>Deploy your changes</p>
 <p>After your function has updated, you can test it by visiting the URL and providing different amounts to convert in the query string. The conversion rate should now be more precise because we're using the current conversion rate.</p>
 
-<h4>Adding More Routes</h4>
+<h3>Adding Multiple Routes</h3>
 
 <p>Let's add support multiple paths like <code>/eur</code> and <code>/inr</code>. Each path will convert from that currency to dollars.</p>
 
@@ -489,7 +490,7 @@ end</code></pre>
 </ul>
 
 <p>After your function has updated, you can try out the new paths. For example, <code>ghrfu9ewji.functions.appwrite.app/eur?amount=5</code> should convert Euros to Dollars, while <code>ghrfu9ewji.functions.appwrite.app/inr?amount=100</code> should convert Indian Rupees to Dollars.</p>
-<p>Congratulations! You've built a powerful currency conversion function using Appwrite!</p>
+<p>Congratulations! You've built a currency conversion API using Appwrite functions!</p>
 
 [TODO: @luke -> Example with JWT, show both client and server code]
 [TODO: @luke -> Example with API Key]
