@@ -105,6 +105,15 @@
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy function</code></pre>
 </div>
 
+<div class="notice">
+  <h2>Overwrite Warning</h2>
+    <p>
+        If you made changes in the Appwrite console that is different from your <code>appwrite.json</code>, 
+        using the CLI deploy command will overwrite your console changes, such as execution schedule or permissions.
+        Update your <code>appwrite.json</code> manually before deploying to avoid overwriting changes.
+    </p>
+</div>
+
 <h3>Manual Deployment</h3>
 <p>You can also upload your functions to be deployed using the Appwrite console. The example below shows a simple Node.JS function, but the same idea applies to any other language.</p>
 
