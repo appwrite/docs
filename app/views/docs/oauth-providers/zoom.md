@@ -15,7 +15,7 @@ Don't close this modal, we'll need to create a Zoom OAuth app in Zoom App Market
 To establish Zoom OAuth integration with Appwrite, start by creating a Zoom OAuth app via your [Zoom App Marketplace Dashboard](https://marketplace.zoom.us/user/build). In the navigation bar, access the **Build App** menu and opt for an OAuth app. Assign a suitable name to your app and proceed with its creation. In the **App Credentials** section, When prompted to provide a **Redirect URI**, , provide the **URI** found in the **Zoom OAuth2 Settings** modal from your Appwrite console. Also include your domain name in the designated allow list. In the **Information** section, add basic app information and developer contact information. Add all necessary scopes for your app in **Scopes** section. 
 
 After you've created your Zoom OAuth app, you can head back to your Appwrite console to complete the form in the **Zoom OAuth2 Settings** modal.
-- You can find the **Client ID** in your Zoom OAuth app credentials and provide this in the **App ID** field in the **Zoom OAuth2 Settings** modal from the Appwrite console.
+- Find the **Client ID** in your Zoom OAuth app credentials. Provide this in the Appwrite console's **Zoom OAuth2 Settings** modal, in the **App ID** field.
 - Your app's **Client Secret** is in the designated field under app credentials.
 - Copy the client secret and provide this in the **App Secret** field in the **Zoom OAuth2 Settings** modal from the Appwrite console.
 
