@@ -15,9 +15,9 @@ Don't close this modal, we'll need an OAuth client ID to complete this form.
 
 ## Creating a Google OAuth2.0 client
 
-To use Google OAuth with Appwrite, you need to create an OAuth 2.0 client from your google cloud console. You can do this by following the [Setting up OAuth 2.0](https://support.google.com/googleapi/answer/6158849) guide from Google.
+To use Google OAuth with Appwrite, you need to create an OAuth 2.0 client from your Google Cloud console. You can do this by following the [Setting up OAuth 2.0](https://support.google.com/googleapi/answer/6158849) guide from Google.
 
-- When prompted to provide an **Application type**, select **web application**, irrespective of your target platform. This is because the communication occurs between Appwrite (a Web App) and the OAuth2 provider.
+- When prompted to provide an **Application type**, select **web application**, irrespective of your target platform. This is because the communication occurs between Appwrite (a web app) and the OAuth2 provider on behalf of your web or mobile app.
 - When prompted to provide a **Authorized redirect URIs** field, provide the **URI** found in the **Google OAuth2 Settings** modal from your Appwrite console.
 
 After you've created the OAuth client, you can head back to your Appwrite console to complete the form in the **Google OAuth2 Settings** modal.
@@ -44,7 +44,7 @@ const account = new Account(client);
 
 client
   .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-  .setProject("[PROJECT_ID]"); // Your project ID
+  .setProject("[PROJECT_ID]");                 // Your project ID
 
 // Go to OAuth provider login page
 account.createOAuth2Session("google", "[LINK_ON_SUCCESS]", "[LINK_ON_FAILURE]");
@@ -104,8 +104,8 @@ void main() async {
     final client = new Client();
     final account = new Account(client);
     client
-        .setEndpoint('https://cloud.appwrite.io/v1') // YOUR API Endpoint
-        .setProject('[PROJECT_ID]')                  // YOUR PROJECT ID
+        .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+        .setProject('[PROJECT_ID]')                  // Your project ID
     ;
     // OAuth Login, for simplest implementation you can leave both success and
     // failure link empty so that Appwrite handles everything.
@@ -263,7 +263,7 @@ const account = new Account(client);
 
 client
   .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-  .setProject("[PROJECT_ID]"); // Your project ID
+  .setProject("[PROJECT_ID]");                 // Your project ID
 
 // Updates current session
 const promise = account.updateSession("current");
@@ -286,8 +286,8 @@ void main() async {
     final client = new Client();
     final account = new Account(client);
     client
-        .setEndpoint('https://cloud.appwrite.io/v1') // YOUR API Endpoint
-        .setProject('[PROJECT_ID]')                  // YOUR PROJECT ID
+        .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+        .setProject('[PROJECT_ID]')                  // Your project ID
     ;
     // OAuth Login, for simplest implementation you can leave both success and
     // failure link empty so that Appwrite handles everything.
