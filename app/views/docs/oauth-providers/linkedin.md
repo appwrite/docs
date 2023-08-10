@@ -17,12 +17,12 @@ Don't close this modal, we'll need to create a LinkedIn OAuth app to complete th
 
 To use LinkedIn OAuth with Appwrite, you need to create a LinkedIn Developer app. You can do this by following the [How to Implement OAuth](https://learn.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?tabs=HTTPS1#how-to-implement-3-legged-oauth) guide from LinkedIn.
 
-After you've created your LinkedIn OAuth app, you can head back to your Appwrite console to complete the form in the **Linkedin OAuth2 Settings** modal.
+After you've created your LinkedIn OAuth app, you can head back to your Appwrite console. There, complete the form in the **Linkedin OAuth2 Settings** modal.
 
-- Find the **Client ID** in the Auth tab of your LinkedIn developer app and provide this in the **App ID** field in the **Linkedin OAuth2 Settings** modal from the Appwrite console.
-- Similarly, find the **Client secret** in the Auth tab of your LinkedIn developer app and provide this in the **App Secret** field in the **Linkedin OAuth2 Settings** modal from the Appwrite console.
+- Find the **Client ID** in the Auth tab of your LinkedIn developer app. Provide this in the Appwrite console's **Linkedin OAuth2 Settings** modal, in the **App ID** field.
+- Similarly, find the **Client secret** in the Auth tab of your LinkedIn developer app. Provide this in the Appwrite console's **Linkedin OAuth2 Settings** modal, in the **App Secret** field.
 
-When adding a **Redirect URL** in OAuth 2.0 settings, provide the **URI** found in the **Linkedin OAuth2 Settings** modal from your Appwrite console and click on **Update**.
+In the OAuth 2.0 settings of your LinkedIn developer app, you'll need to provide a **Redirect URL**. This URL can be found in the Appwrite console's **Linkedin OAuth2 Settings** modal, in the **URI** field. After adding the URL, click on **Update**.
 
 ## Authenticating
 
@@ -43,7 +43,7 @@ const account = new Account(client);
 
 client
   .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-  .setProject("[PROJECT_ID]"); // Your project ID
+  .setProject("[PROJECT_ID]");                 // Your project ID
 
 // Go to OAuth provider login page
 account.createOAuth2Session(
@@ -266,7 +266,7 @@ const account = new Account(client);
 
 client
   .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-  .setProject("[PROJECT_ID]"); // Your project ID
+  .setProject("[PROJECT_ID]");                 // Your project ID
 
 // Updates current session
 const promise = account.updateSession("current");
