@@ -481,7 +481,7 @@ return function ($context) {
         <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
-    case context.req.query['type']
+    case context.req.query['type'] 
         when 'text'
             return context.res.send(
                 "This is a text response", 
@@ -736,7 +736,6 @@ namespace runtime {
 </p>
 
 <p>Here's an example of using logs and errors.</p>
-[TODO: @luke Let's make sure we show an example for evert runtime with good string manip methods.]
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
@@ -744,6 +743,7 @@ namespace runtime {
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ res, log, error }) => {
     log("This is a log, use for logging information to console");
+    log(`This function was called with ${context.req.method} method`);
     error("This is an error, use for logging errors to console");
 
     return res.send("Check the Appwrite Console to see logs and errors!");
@@ -755,9 +755,15 @@ namespace runtime {
         <h3>PHP</h3>
         <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>
+            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
-            </code></pre>
+return function ($context) {
+    $context-&gt;log("This is a log, use for logging information to console");
+    $context-&gt;log("This function was called with " . $context-&gt;req-&gt;method . " method");
+    $context-&gt;error("This is an error, use for logging errors to console");
+
+    return $context-&gt;send("Check the Appwrite Console to see logs and errors!");
+};</code></pre>
         </div>
         </div>
     </li>
@@ -765,9 +771,12 @@ namespace runtime {
         <h3>Python</h3>
         <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>
+            <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
+    context.log("This is a log, use for logging information to console")
+    context.log(f"This function was called with {context.req.method} method")
+    context.error("This is an error, use for logging errors to console")
 
-            </code></pre>
+    return context.send("Check the Appwrite Console to see logs and errors!")</code></pre>
         </div>
         </div>
     </li>
@@ -775,9 +784,13 @@ namespace runtime {
         <h3>Ruby</h3>
         <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
+    context.log("This is a log, use for logging information to console")
+    context.log("This function was called with #{context.req.method} method")
+    context.error("This is an error, use for logging errors to console")
 
-            </code></pre>
+    return context.send("Check the Appwrite Console to see logs and errors!")
+end</code></pre>
         </div>
         </div>
     </li>
@@ -785,9 +798,13 @@ namespace runtime {
         <h3>Deno</h3>
         <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ res, log, error }: any) => {
+    log("This is a log, use for logging information to console");
+    log(`This function was called with ${context.req.method} method`);
+    error("This is an error, use for logging errors to console");
 
-            </code></pre>
+    return res.send("Check the Appwrite Console to see logs and errors!");
+};</code></pre>
         </div>
         </div>
     </li>
@@ -795,9 +812,15 @@ namespace runtime {
         <h3>Dart</h3>
         <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 
-            </code></pre>
+Future&lt;dynamic> main(final context) async {
+    context.log("This is a log, use for logging information to console");
+    context.log("This function was called with ${context.req.method} method");
+    context.error("This is an error, use for logging errors to console");
+
+    return context.send("Check the Appwrite Console to see logs and errors!");
+}</code></pre>
         </div>
         </div>
     </li>
@@ -805,9 +828,15 @@ namespace runtime {
         <h3>Swift</h3>
         <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
 
-            </code></pre>
+func main(context: RuntimeContext) async throws -> RuntimeOutput {
+    context.log("This is a log, use for logging information to console")
+    context.log("This function was called with \(context.req.method) method")
+    context.error("This is an error, use for logging errors to console")
+
+    return try context.send("Check the Appwrite Console to see logs and errors!")
+}</code></pre>
         </div>
         </div>
     </li>
@@ -815,9 +844,18 @@ namespace runtime {
         <h3>.NET</h3>
         <div>
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
 
-            </code></pre>
+public class Handler {
+    public async Task&lt;RuntimeOutput> Main(RuntimeContext Context) 
+    {
+        Context.Log("This is a log, use for logging information to console");
+        Context.Log($"This function was called with {Context.Req.Method} method");
+        Context.Error("This is an error, use for logging errors to console");
+
+        return await Context.Send("Check the Appwrite Console to see logs and errors!");
+    }
+}</code></pre>
         </div>
         </div>
     </li>
@@ -825,20 +863,41 @@ namespace runtime {
         <h3>Kotlin</h3>
         <div>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
 
-            </code></pre>
+import io.openruntimes.kotlin.RuntimeContext
+import io.openruntimes.kotlin.RuntimeOutput
+
+class Main {
+    fun main(context: RuntimeContext): RuntimeOutput {
+        context.log("This is a log, use for logging information to console")
+        context.log("This function was called with ${context.req.method} method")
+        context.error("This is an error, use for logging errors to console")
+
+        return context.send("Check the Appwrite Console to see logs and errors!")
+    }
+}</code></pre>
         </div>
-
         </div>
     </li>
     <li>
         <h3>Java</h3>
         <div>
         <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>
+            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
 
-            </code></pre>
+import io.openruntimes.java.RuntimeContext;
+import io.openruntimes.java.RuntimeOutput;
+
+public class Main {
+    public RuntimeOutput main(RuntimeContext context) throws Exception {
+        context.log("This is a log, use for logging information to console");
+        context.log("This function was called with " + context.req.method + " method");
+        context.error("This is an error, use for logging errors to console");
+
+        return context.send("Check the Appwrite Console to see logs and errors!");
+    }
+}</code></pre>
         </div>
         </div>
     </li>
@@ -846,9 +905,23 @@ namespace runtime {
         <h3>C++</h3>
         <div>
         <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include "../RuntimeResponse.h"
+#include "../RuntimeRequest.h"
+#include "../RuntimeOutput.h"
+#include "../RuntimeContext.h"
 
-            </code></pre>
+namespace runtime {
+  class Handler {
+    public:
+      static RuntimeOutput main(RuntimeContext &context) {
+        context.log("This is a log, use for logging information to console");
+        context.log("This function was called with " + context.req.method + " method");
+        context.error("This is an error, use for logging errors to console");
+
+        return context.send("Check the Appwrite Console to see logs and errors!");
+      }
+  };
+}</code></pre>
         </div>
         </div>
     </li>
