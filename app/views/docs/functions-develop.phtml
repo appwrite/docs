@@ -1134,9 +1134,15 @@ namespace runtime {
 </table>
 
 <h2><a href="#appwrite" id="appwrite">Using Appwrite in a Function</a></h2>
-[TODO: @luke @matej 2 examples -> JWT and API keys]
 
-<h2><a href="#dependencies" id="dependencies">Quick Example</a></h2>
+<p>Appwrite can be used in your functions by adding the relevant SDK to your function's dependencies</p>
+<p>Authenticating with Appwrite is done via an API key or a JWT token. You can read more about authentication in the <a href="/docs/authentication-server">Server Authentication</a> section of the docs.</p>
+
+[TODO: @luke API key example]
+[TODO: @luke JWT example]
+
+
+<h2><a href="#dependencies" id="dependencies">Using with API Keys</a></h2>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
@@ -1246,6 +1252,317 @@ namespace runtime {
             <pre class="line-numbers"><code class="prism language-csharp" data-prism>
 
             </code></pre>
+        </div>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="#dependencies" id="dependencies">Using with JWT</a></h2>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+            <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, ID } from 'node-appwrite';
+
+export default async ({ req, res, log }) => {
+
+  const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+    // Put your secret key in environment variables, so it doesn't leak
+    .setKey(process.env.APPWRITE_API_KEY);
+
+  const databases = new Databases(client);
+
+  try {
+    databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
+  } catch (e) {
+    return res.send("We messed up, document not created")
+  }
+
+  return res.send("Document created")
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+
+require(__DIR__ . '/../vendor/autoload.php');
+
+use Appwrite\Client;
+use Appwrite\Exception;
+use Appwrite\Services\Databases;
+use Appwrite\ID;
+
+return function ($context) {
+    $client = new Client();
+    $client
+        ->setEndpoint('https://cloud.appwrite.io/v1')
+        ->setProject(getenv('APPWRITE_FUNCTION_PROJECT_ID'))
+        // Put your secret key in environment variables, so it doesn't leak
+        ->setKey(getenv('APPWRITE_API_KEY'));
+    
+    $databases = new Databases($client);
+
+    try {
+        $databases->createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID::unique(), []);
+    } catch (Exception $e) {
+        return $context->res->send("We messed up, document not created");
+    }
+
+    return $context->res->send("Document created");
+};</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+from appwrite.services.databases import Databases
+from appwrite.id import ID
+
+import os
+
+
+def main(context):
+    client = (
+        Client()
+        .set_endpoint("https://cloud.appwrite.io/v1")
+        .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
+        # Put your secret key in environment variables, so it doesn't leak
+        .set_key(os.environ["APPWRITE_API_KEY"])
+    )
+
+    databases = Databases(client)
+
+    try:
+        databases.create_document("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {})
+    except Exception as e:
+        return context.response.send("We messed up, document not created")
+
+    return context.response.send("Document created")</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
+
+def main(context)
+  client = Appwrite::Client.new
+  client
+    .set_endpoint('https://cloud.appwrite.io/v1')
+    .set_project(req.variables['APPWRITE_FUNCTION_PROJECT_ID'])
+    # Put your secret key in environment variables, so it doesn't leak
+    .set_key(req.variables['APPWRITE_API_KEY'])
+
+    databases = Appwrite::Databases.new(client)
+
+    begin
+        databases.create_document('[DATABASE_ID]', '[COLLECTION_ID]', Appwrite::ID.unique(), {})
+    rescue Appwrite::Exception => e
+        return context.response.send("We messed up, document not created")
+    end
+
+    return context.response.send("Document created")
+end</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases, ID } from "https://deno.land/x/appwrite/mod.ts";
+                
+export default function ({req, res}: any){
+    const client = new Client();
+    client
+        .setEndpoint("https://cloud.appwrite.io/v1")
+        .setProject(Deno.env.get("APPWRITE_FUNCTION_PROJECT_ID") || "")
+        // Put your secret key in environment variables, so it doesn't leak
+        .setKey(Deno.env.get("APPWRITE_API_KEY") || "");
+    
+    const databases = new Databases(client);
+    
+    try {
+        databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {});
+    } catch (e) {
+        return res.send("We messed up, document not created");
+    }
+    
+    return res.send("Document created");
+}</code></pre>      
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+import 'package:dart_appwrite/dart_appwrite.dart';
+
+
+Future&lt;dynamic> main(final context) async {
+    final client = Client()
+        .setEndpoint('https://cloud.appwrite.io/v1')
+        .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+        // Put your secret key in environment variables, so it doesn't leak
+        .setKey(process.env.APPWRITE_API_KEY);
+    
+    final databases = Databases(client);
+    
+    try {
+        await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {});
+    } catch (e) {
+        return context.res.send("We messed up, document not created");
+    }
+
+    return context.res.send("Document created");
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import AppwriteModels
+import Foundation
+
+func main(context: RuntimeContext) async throws -> RuntimeOutput {
+    let client = Client()
+       .setEndpoint("https://cloud.appwrite.io/v1")
+       .setProject(ProcessInfo.processInfo.environment["APPWRITE_FUNCTION_PROJECT_ID"])
+       // Put your secret key in environment variables, so it doesn't leak
+       .setKey(ProcessInfo.processInfo.environment["APPWRITE_API_KEY"]);
+
+    let databases = Databases(client: client)
+
+    do {
+        try await databases.createDocument(databaseId: "[DATABASE_ID]", collectionId: "[COLLECTION_ID]", data: [:])
+    } catch {
+        return context.res.send("We messed up, document not created")
+    }
+
+    return context.res.send("Document created")
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
+
+using Appwrite;
+using Appwrite.Services;
+using Appwrite.Models;
+
+public class Handler {
+
+    public async Task<RuntimeOutput> Main(RuntimeContext Context) 
+    {
+        var client = new Client()
+           .SetEndpoint("http://cloud.appwrite.io/v1")  
+           .SetProject(Environment.GetEnvironmentVariable("APPWRITE_FUNCTION_PROJECT_ID"))       
+            // Put your secret key in environment variables, so it doesn't leak
+           .SetKey(Environment.GetEnvironmentVariable("APPWRITE_API_KEY"))
+
+        var databases = new Databases(client);
+
+        try {
+            await databases.CreateDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.Unique(), new Dictionary&lt;string, object>());
+        } catch (Exception e) {
+            return Context.Response.Send("We messed up, document not created");
+        }
+
+        return Context.Response.Send("Document created");
+    }
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
+
+import io.openruntimes.kotlin.RuntimeContext
+import io.openruntimes.kotlin.RuntimeOutput
+import io.appwrite.Client
+import io.appwrite.services.Databases
+import io.appwrite.ID
+import java.util.HashMap
+
+class Main {
+    fun main(context: RuntimeContext): RuntimeOutput {
+        val client = Client().apply {
+           setEndpoint("https://cloud.appwrite.io/v1")
+           setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
+           // Put your secret key in environment variables, so it doesn't leak
+           setKey(System.getenv("APPWRITE_API_KEY"))
+        }
+
+        val databases = Databases(client)
+
+        try {
+            databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), HashMap())
+        } catch (e: Exception) {
+            return context.res.send("We messed up, document not created")
+        }
+
+        return context.res.send("Document created")
+    }
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Java</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
+
+import io.openruntimes.java.RuntimeContext;
+import io.openruntimes.java.RuntimeOutput;
+import java.util.HashMap;
+import io.appwrite.Client;
+
+public class Main {
+    public RuntimeOutput main(RuntimeContext context) throws Exception {
+        Client client = new Client();
+        client
+                .setEndpoint("https://cloud.appwrite.io/v1")
+                .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
+                // Put your secret key in environment variables, so it doesn't leak
+                .setKey(System.getenv("APPWRITE_API_KEY"));
+
+        Databases databases = new Databases(client);
+
+        try {
+            databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), new HashMap<>());
+        } catch (Exception e) {
+            return context.res.send("We messed up, document not created");
+        }
+
+        return context.res.send("Document created");
+
+    }
+}</code></pre>
         </div>
         </div>
     </li>
