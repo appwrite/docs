@@ -16,10 +16,10 @@
 </p>
 
 <ol class="margin-top margin-bottom-large text-size-normal">
-	<li>Invokation, where Appwrite receives a event to execute a Function. This event could be a request from an SDK, a request to the function's domain, a scheduled execution, or an execution triggered by an event within your Appwrite project.</li>
+	<li>Invocation, where Appwrite receives a event to execute a Function. This event could be a request from an SDK, a request to the function's domain, a scheduled execution, or an execution triggered by an event within your Appwrite project.</li>
 	<li>After a function is invoked, Appwrite passes request information to your function's executor.</li>
 	<li>The executor runs the function code you deployed and waits for it to return.</li>
-	<li>Function terminates either when the user returns with a method from <code>context.res</code>, when the user code throws an exception, or times out.</li>
+	<li>Function terminates either when the user returns with a method from <code>res</code>, when the user code throws an exception, or times out.</li>
 </ol>
 
 
@@ -39,19 +39,19 @@
     </thead>
     <tbody>
     <tr>
-        <td><code>context.req</code></td>
+        <td><code>req</code></td>
         <td>Contains request information like method, body, and headers. See full examples <a href="#context-req">here</a>.</td>
     </tr>
     <tr>
-        <td><code>context.res</code></td>
+        <td><code>res</code></td>
         <td>Contains methods to build a response and return information. See full examples <a href="#context-res">here</a>.</td>
     </tr>
     <tr>
-        <td><code>context.log</code></td>
+        <td><code>log</code></td>
         <td>Logs information to the Appwrite Console, end users will not be able to see these logs. See full examples <a href="#context-log">here</a>.</td>
     </tr>
     <tr>
-        <td><code>context.error</code></td>
+        <td><code>error</code></td>
         <td>Logs errors to the Appwrite Console, end users will not be able to see these errors. See full examples <a href="#context-error">here</a>.</td>
         <td></td>
     </tr>
@@ -89,7 +89,7 @@
 <h3><a href="#request" id="request">Request</a></h3>
 <p>
     If you pass data into an Appwrite function, it'll be found in the request object. 
-    This includes all invokation methods, such as data from Appwrite SDKs, HTTP calls, Appwrite events, and browsers visiting the configured domain.
+    This includes all invocation methods, such as data from Appwrite SDKs, HTTP calls, Appwrite events, and browsers visiting the configured domain.
     Explore the request object with the following function, which logs all request params to the Appwrite Console.
 </p>
 
@@ -731,7 +731,7 @@ namespace runtime {
 <h3><a href="#logging" id="logging">Logging</a></h3>
 <p>
     To protect user privacy, the request and response objects are not logged to the Appwrite Console by default.
-    This means, to see logs or debug function executions you need to use the <code>context.log()</code> and <code>context.error()</code> methods.
+    This means, to see logs or debug function executions you need to use the <code>log()</code> and <code>error()</code> methods.
     These logs are only visible to developers with access to the Appwrite Console.
 </p>
 
@@ -1061,7 +1061,7 @@ namespace runtime {
 <h2><a href="#dependencies" id="dependencies">Dependencies</a></h2>
 
 <p> 
-    Your function's dependencies should be managed by the package manager of each language. By default, we include the following package manages in each runtime:
+    Your function's dependencies should be managed by the package manager of each language. By default, we include the following package managers in each runtime:
 </p>
 
 <p>

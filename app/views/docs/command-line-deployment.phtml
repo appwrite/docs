@@ -49,9 +49,16 @@ The Apprite CLI allows you to create and deploy databases, collections, buckets,
 
 <h2><a href="/docs/command-line-deployment#deployCollections" id="deployCollections">Deploying Databases and Collections</a></h2>
 
-<p>The Appwrite CLI also helps you migrate your project's databases and collections from a development server to a production server.</p>
+<p>The Appwrite CLI also helps you deploy your project's databases and collections schema from one project to another.</p>
 
-<p>You can deploy all the databases and collections in your <a href="/docs/command-line-deployment#appwriteJSON">appwrite.json</a> file by running this command in the folder holding your <code>appwrite.json</code> file.</p>
+<p>
+    You can deploy all the databases and collections in your <a href="/docs/command-line-deployment#appwriteJSON">appwrite.json</a> file by running this command in the folder holding your <code>appwrite.json</code> file. 
+</p>
+
+<p>
+    The deploy command will overwrite existing collections causing existing data to be lost. 
+    If you already have data in your project, you will need to write your own migration script using a Server SDK instead of using the CLI.
+</p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="CLI">
     <pre class="line-numbers"><code class="prism language-bash" data-prism>appwrite deploy collection</code></pre>
