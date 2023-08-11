@@ -1,0 +1,189 @@
+<p>
+    OAuth authentication allows users to log in using accounts from other popular services. 
+    This can be convenient for users because they can start using your app without creating a new account.
+    It can also be more secure, because the user has one less password that could become vulnerable.
+</p>
+
+<p>
+    When using OAuth to authenticate, the authentication request is initiated from the client application. 
+    The user is then redirected to an OAuth2 provider to complete the authentication step, and finally, the user is redirected back to the client application.
+</p>
+
+<h2><a href="#configure" id="configure">Configure OAuth2 Login</a></h2>
+<p>
+    Before using OAuth2 login, you need to enable and configure a OAuth2 login provider.
+</p>
+
+[TODO]
+1. Navigate to your Appwrite project
+2. Navigate to **Auth** > **Settings**
+3. Find and open the OAuth provider
+4. In the **Zoom OAuth2 Settings** modal, use the toggle to enable the provider
+
+<h2><a href="#init" id="init">Initialize OAuth2 Login</a></h2>
+
+<p>
+    To initialize the OAuth2 login process, use the <a href="/docs/client/account#accountCreateOAuth2Session">Create OAuth2 Session</a> route.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+        <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+const account = new Account(client);
+
+// Go to OAuth provider login page
+account.createOAuth2Session('amazon');</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+final account = Account(client);
+
+// Go to OAuth provider login page
+await account.createOAuth2Session(provider: 'amazon');</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
+
+val account = Account(client)
+
+// Go to OAuth provider login page
+account.createOAuth2Session(provider = "amazon")</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
+
+let account = Account(client)
+
+// Go to OAuth provider login page
+try await account.createOAuth2Session(provider: "amazon")</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="notice">
+            <p>OAuth 2 is not available through the GraphQL API. You can use the REST API or any Client SDK instead.</p>
+        </div>
+    </li>
+</ul>
+
+<p>
+    You'll be redirected to the OAuth 2 provider's login page to log in. 
+    Once complete, you'll be redirected to the redirect URL configured in your OAuth 2 provider.
+</p>
+
+<h2><a href="#profile" id="profile">OAuth 2 Profile</a></h2>
+<p>
+
+</p>
+
+
+<h2><a href="#refresh" id="refresh">Refresh Tokens</a></h2>
+<p>
+    OAuth2 sessions expire to protect from security risks. 
+    This means, OAuth2 sessions should be refreshed to keep the user authenticated. 
+    You can do this by calling the <a href="/docs/client/account#accountUpdateSession">Update OAuth Session</a> endpoint when ever your user visits your app.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+        <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client();
+
+const account = new Account(client);
+
+client
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]')                  // Your Project ID
+;
+
+// Go to Zoom OAuth login page
+account.createOAuth2Session('zoom', '[LINK_ON_SUCCESS]', '[LINK_ON_FAILURE]');</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+void main() async {
+    final client = new Client();
+    final account = new Account(client);
+    
+    client
+        .setEndpoint('https://cloud.appwrite.io/v1') // YOUR API Endpoint
+        .setProject('[PROJECT_ID]')                  // YOUR PROJECT ID
+    ;
+    
+    // OAuth Login, for simplest implementation you can leave both success and
+    // failure link empty so that Appwrite handles everything.
+    await account.createOAuth2Session(provider: 'zoom');
+        
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your Project ID
+
+val account = Account(client)
+
+account.createOAuth2Session(provider = "zoom")</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    guard let url = URLContexts.first?.url,
+        url.absoluteString.contains("appwrite-callback") else {
+        return
+    }
+    WebAuthComponent.handleIncomingCookie(from: url)
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="notice">
+            <p>OAuth 2 is not available through the GraphQL API. You can use the REST API or any Client SDK instead.</p>
+        </div>
+    </li>
+</ul>

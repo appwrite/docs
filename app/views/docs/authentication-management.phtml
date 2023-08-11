@@ -1,115 +1,12 @@
 <p>
-   Magic URL is a password-less way to authenticate users. 
-   When a user logs in, they will receive an email with a magic url that contains a secret used to log in the user.
+    [TODO]    
 </p>
 
-<h2><a href="#init" id="init">Send Email</a></h2>
-
-<p>
-    Initialize the log in process with the <a href="/docs/client/account#accountCreateMagicURLSession">Create Magic URL Session</a> route.
-    We recommend you use the user's email as their user ID instead of a random ID.
-    This way, you will only need an email, and not an ID to log in the user.
-</p>
-
+<h2><a href="/docs/authentication#preferences" id="preferences">User Preferences</a></h2>
+<p>You can store user preferences on a user's account using Appwrite's <a href="/docs/client/account#accountUpdatePrefs">Update Preferences</a> endpoint. You can store user preferences such as theme, notification settings, or preferred language so they can be synced across multiple devices.</p>
+<p>Preferences are stored as a key-value JSON object. The maximum allowed prefs size is 64kB and throws an error if exceeded.</p> 
 <ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Web</h3>
-        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
-
-const client = new Client()
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
-
-const account = new Account(client);
-
-const promise = account.createMagicURLSession('email@example.com', 'email@example.com');
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Flutter</h3>
-        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
-
-final client = Client()
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
-
-final account = Account(client);
-
-final user = await account.createMagicURLSession(
-    userId: 'email@example.com',
-    email: 'email@example.com',
-);</code></pre>
-    </li>
-    <li>
-        <h3>Android</h3>
-        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
-import io.appwrite.services.Account
-
-val client = Client(context)
-    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
-
-val account = Account(client)
-
-val user = account.createMagicURLSession(
-    userId = 'email@example.com',
-    email = "email@example.com"
-)</code></pre>
-    </li>
-    <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
-
-let account = Account(client)
-
-let user = try await account.createMagicURLSession(
-    userId: 'email@example.com',
-    email: "email@example.com"
-)</code></pre>
-    </li>
-    <li>
-        <h3>GraphQL</h3>
-        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
-    accountCreateMagicURLSession(
-        userId: "email@example.com",
-        email: "email@example.com"
-    ) {
-        _id
-        _createdAt
-        userId
-        secret
-        expire
-    }
-}</code></pre>
-        </div>
-    </li>
-</ul>
-
-<h2><a href="#login" id="login">Log In</a></h2>
-
-<p>
-    After receiving your secret from an email, you can create a session.
-</p>
-
-[TODO: Engineers, please update the examples below with how to get the secret from the magic URL]
-
-<ul class="phases clear" data-ui-phases>
-    <li>
+<li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
@@ -120,7 +17,7 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.updateMagicURLSession('email@example.com', '[SECRET]');
+const promise = account.updatePrefs({darkTheme: true, language: 'en'});
 
 promise.then(function (response) {
     console.log(response);
@@ -140,9 +37,11 @@ final client = Client()
 
 final account = Account(client);
 
-final user = await account.updateMagicURLSession(
-    userId: 'email@example.com',
-    secret: '[SECRET]',
+final user = await account.updatePrefs(
+    prefs: {
+        "darkTheme": true,
+        "language": "en",
+    }
 );</code></pre>
     </li>
     <li>
@@ -151,15 +50,14 @@ final user = await account.updateMagicURLSession(
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
 
-val client = Client(context)
+val client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("[PROJECT_ID]")                // Your project ID
 
 val account = Account(client)
 
-val user = account.updateMagicURLSession(
-    userId = 'email@example.com',
-    secret = '[SECRET]'
+val user = account.updatePrefs(
+    prefs = mapOf("darkTheme" to true, "language" to "en")
 )</code></pre>
     </li>
     <li>
@@ -173,24 +71,106 @@ let client = Client()
 
 let account = Account(client)
 
-let user = try await account.updateMagicURLSession(
-    userId: 'email@example.com',
-    secret: "[SECRET]"
+let user = try await account.updatePrefs(
+    prefs: ["darkTheme": true, "language": "en"]
 )</code></pre>
     </li>
     <li>
         <h3>GraphQL</h3>
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
             <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
-    accountUpdateMagicURLSession(
-        userId: "email@example.com",
-        secret: "[SECRET]"
+    accountUpdatePrefs(
+        prefs: "{\"darkTheme\": true, \"language\": \"en\"}"
     ) {
         _id
         _createdAt
-        userId
-        expire
-        provider
+        _updatedAt
+        name
+        registration
+        status
+        passwordUpdate
+        email
+        phone
+        emailVerification
+        phoneVerification
+        prefs {
+            data
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>After a user's preferences are updated, they can be retrieved using the <a href="/docs/client/account#accountGetPrefs">Get Preferences</a> endpoint.</p> 
+
+<ul class="phases clear" data-ui-phases>
+<li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.getPrefs();
+
+promise.then(function (prefs) {
+    console.log(prefs);
+}, function (error) {
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+final account = Account(client);
+
+final prefs = await account.getPrefs();</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
+
+val account = Account(client)
+
+val prefs = account.getPrefs()</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
+
+let account = Account(client)
+
+let prefs = try await account.getPrefs()</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    accountGetPrefs {
+        data
     }
 }</code></pre>
         </div>
