@@ -1138,19 +1138,39 @@ namespace runtime {
 <p>Appwrite can be used in your functions by adding the relevant SDK to your function's dependencies</p>
 <p>Authenticating with Appwrite is done via an API key or a JWT token. You can read more about authentication in the <a href="/docs/authentication-server">Server Authentication</a> section of the docs.</p>
 
-[TODO: @luke API key example]
-[TODO: @luke JWT example]
 
 
-<h2><a href="#dependencies" id="dependencies">Using with API Keys</a></h2>
+
+<h2><a href="#dependencies" id="dependencies">Using JWT</a></h2>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
         <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>
+            <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, ID } from 'node-appwrite';
 
-            </code></pre>
+export default async ({ req, res, log }) => {
+
+  const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+
+  if (req.headers['x-appwrite-jwt']) {
+    client.setJWT(req.headers['x-appwrite-jwt'])
+  } else {
+    return res.send("Please sign in, JWT not found")
+  }
+    
+  const databases = new Databases(client);
+
+  try {
+    databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
+  } catch (e) {
+    return res.send("We messed up, document not created")
+  }
+
+  return res.send("Document created")
+}</code></pre>
         </div>
         </div>
     </li>
@@ -1158,9 +1178,37 @@ namespace runtime {
         <h3>PHP</h3>
         <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>
+            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
-            </code></pre>
+require(__DIR__ . '/../vendor/autoload.php');
+
+use Appwrite\Client;
+use Appwrite\Exception;
+use Appwrite\Services\Databases;
+use Appwrite\ID;
+
+return function ($context) {
+    $client = new Client();
+    $client
+        ->setEndpoint('https://cloud.appwrite.io/v1')
+        ->setProject(getenv('APPWRITE_FUNCTION_PROJECT_ID'))
+    
+    if (isset($context->req->headers['x-appwrite-jwt'])) {
+        $client->setJWT($context->req->headers['x-appwrite-jwt']);
+    } else {
+        return $context->res->send("Please sign in, JWT not found");
+    }
+    
+    $databases = new Databases($client);
+
+    try {
+        $databases->createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID::unique(), []);
+    } catch (Exception $e) {
+        return $context->res->send("We messed up, document not created");
+    }
+
+    return $context->res->send("Document created");
+};</code></pre>
         </div>
         </div>
     </li>
@@ -1168,9 +1216,33 @@ namespace runtime {
         <h3>Python</h3>
         <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>
+            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+from appwrite.services.databases import Databases
+from appwrite.id import ID
 
-            </code></pre>
+import os
+
+
+def main(context):
+    client = (
+        Client()
+        .set_endpoint("https://cloud.appwrite.io/v1")
+        .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
+    )
+
+    if "x-appwrite-jwt" in context.req.headers:
+        client.set_jwt(context.req.headers["x-appwrite-jwt"])
+    else:
+        return context.res.send("Please sign in, JWT not found")
+
+    databases = Databases(client)
+
+    try:
+        databases.create_document("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {})
+    except Exception as e:
+        return context.response.send("We messed up, document not created")
+
+    return context.response.send("Document created")</code></pre>
         </div>
         </div>
     </li>
@@ -1178,9 +1250,30 @@ namespace runtime {
         <h3>Ruby</h3>
         <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
 
-            </code></pre>
+def main(context)
+  client = Appwrite::Client.new
+  client
+    .set_endpoint('https://cloud.appwrite.io/v1')
+    .set_project(req.variables['APPWRITE_FUNCTION_PROJECT_ID'])
+    
+    if context.request.headers['x-appwrite-jwt']
+        client.set_jwt(context.request.headers['x-appwrite-jwt'])
+    else
+        return context.response.send("Please sign in, JWT not found")
+    end
+
+    databases = Appwrite::Databases.new(client)
+
+    begin
+        databases.create_document('[DATABASE_ID]', '[COLLECTION_ID]', Appwrite::ID.unique(), {})
+    rescue Appwrite::Exception => e
+        return context.response.send("We messed up, document not created")
+    end
+
+    return context.response.send("Document created")
+end</code></pre>
         </div>
         </div>
     </li>
@@ -1188,9 +1281,30 @@ namespace runtime {
         <h3>Deno</h3>
         <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>
-
-            </code></pre>
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases, ID } from "https://deno.land/x/appwrite/mod.ts";
+                
+export default function ({req, res}: any){
+    const client = new Client();
+    client
+        .setEndpoint("https://cloud.appwrite.io/v1")
+        .setProject(Deno.env.get("APPWRITE_FUNCTION_PROJECT_ID") || "")
+    
+    if (req.headers["x-appwrite-jwt"]) {
+        client.setJWT(req.headers["x-appwrite-jwt"]);
+    } else {
+        return res.send("Please sign in, JWT not found");
+    }
+    
+    const databases = new Databases(client);
+    
+    try {
+        databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {});
+    } catch (e) {
+        return res.send("We messed up, document not created");
+    }
+    
+    return res.send("Document created");
+}</code></pre>      
         </div>
         </div>
     </li>
@@ -1198,9 +1312,31 @@ namespace runtime {
         <h3>Dart</h3>
         <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+import 'package:dart_appwrite/dart_appwrite.dart';
 
-            </code></pre>
+
+Future&lt;dynamic> main(final context) async {
+    final client = Client()
+        .setEndpoint('https://cloud.appwrite.io/v1')
+        .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+    
+    if (context.req.headers['x-appwrite-jwt'] != null) {
+        client.setJWT(context.req.headers['x-appwrite-jwt']);
+    } else {
+        return context.res.send("Please sign in, JWT not found");
+    }
+    
+    final databases = Databases(client);
+    
+    try {
+        await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {});
+    } catch (e) {
+        return context.res.send("We messed up, document not created");
+    }
+
+    return context.res.send("Document created");
+}</code></pre>
         </div>
         </div>
     </li>
@@ -1208,9 +1344,31 @@ namespace runtime {
         <h3>Swift</h3>
         <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import AppwriteModels
+import Foundation
 
-            </code></pre>
+func main(context: RuntimeContext) async throws -> RuntimeOutput {
+    let client = Client()
+       .setEndpoint("https://cloud.appwrite.io/v1")
+       .setProject(ProcessInfo.processInfo.environment["APPWRITE_FUNCTION_PROJECT_ID"])
+    
+    if let jwt = context.req.headers["x-appwrite-jwt"] {
+        client.setJWT(jwt)
+    } else {
+        return context.res.send("Please sign in, JWT not found")
+    }
+
+    let databases = Databases(client: client)
+
+    do {
+        try await databases.createDocument(databaseId: "[DATABASE_ID]", collectionId: "[COLLECTION_ID]", data: [:])
+    } catch {
+        return context.res.send("We messed up, document not created")
+    }
+
+    return context.res.send("Document created")
+}</code></pre>
         </div>
         </div>
     </li>
@@ -1218,9 +1376,37 @@ namespace runtime {
         <h3>.NET</h3>
         <div>
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
 
-            </code></pre>
+using Appwrite;
+using Appwrite.Services;
+using Appwrite.Models;
+
+public class Handler {
+
+    public async Task<RuntimeOutput> Main(RuntimeContext Context) 
+    {
+        var client = new Client()
+           .SetEndpoint("http://cloud.appwrite.io/v1")  
+           .SetProject(Environment.GetEnvironmentVariable("APPWRITE_FUNCTION_PROJECT_ID"))       
+        
+        if (Context.Req.Headers.ContainsKey("x-appwrite-jwt")) {
+            client.SetJWT(Context.Req.Headers["x-appwrite-jwt"]);
+        } else {
+            return Context.Res.Send("Please sign in, JWT not found");
+        }
+
+        var databases = new Databases(client);
+
+        try {
+            await databases.CreateDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.Unique(), new Dictionary&lt;string, object>());
+        } catch (Exception e) {
+            return Context.Res.Send("We messed up, document not created");
+        }
+
+        return Context.Res.Send("Document created");
+    }
+}</code></pre>
         </div>
         </div>
     </li>
@@ -1228,36 +1414,84 @@ namespace runtime {
         <h3>Kotlin</h3>
         <div>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
 
-            </code></pre>
+import io.openruntimes.kotlin.RuntimeContext
+import io.openruntimes.kotlin.RuntimeOutput
+import io.appwrite.Client
+import io.appwrite.services.Databases
+import io.appwrite.ID
+import java.util.HashMap
+
+class Main {
+    fun main(context: RuntimeContext): RuntimeOutput {
+        val client = Client().apply {
+           setEndpoint("https://cloud.appwrite.io/v1")
+           setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
+        }
+
+        if (context.req.headers["x-appwrite-jwt"] != null) {
+            client.setJWT(context.req.headers["x-appwrite-jwt"])
+        } else {
+            return context.res.send("Please sign in, JWT not found")
+        }
+
+        val databases = Databases(client)
+
+        try {
+            databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), HashMap())
+        } catch (e: Exception) {
+            return context.res.send("We messed up, document not created")
+        }
+
+        return context.res.send("Document created")
+    }
+}</code></pre>
         </div>
-
         </div>
     </li>
     <li>
         <h3>Java</h3>
         <div>
         <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>
+            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
 
-            </code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>C++</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>
+import io.openruntimes.java.RuntimeContext;
+import io.openruntimes.java.RuntimeOutput;
+import java.util.HashMap;
+import io.appwrite.Client;
 
-            </code></pre>
+public class Main {
+    public RuntimeOutput main(RuntimeContext context) throws Exception {
+        Client client = new Client();
+        client
+                .setEndpoint("https://cloud.appwrite.io/v1")
+                .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
+                
+        if (context.req.headers.containsKey("x-appwrite-jwt")) {
+            client.setJWT(context.req.headers.get("x-appwrite-jwt"));
+        } else {
+            return context.res.send("Please sign in, JWT not found");
+        }
+
+        Databases databases = new Databases(client);
+
+        try {
+            databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), new HashMap<>());
+        } catch (Exception e) {
+            return context.res.send("We messed up, document not created");
+        }
+
+        return context.res.send("Document created");
+
+    }
+}</code></pre>
         </div>
         </div>
     </li>
 </ul>
 
-<h2><a href="#dependencies" id="dependencies">Using with JWT</a></h2>
+<h2><a href="#dependencies" id="dependencies">Using with API Key</a></h2>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>

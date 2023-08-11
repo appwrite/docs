@@ -6,13 +6,22 @@
 
 <h2><a href="#domain" id="domain">Domain</a></h2>
 <p>
-    Each Appwrite function has its own domain. (can be custom)
-    When requests are made to this link, whether through a browser or through an HTTP requests, 
+    Each Appwrite function has its own domain. You can find this in the Appwrite Console, under the Function overview.
+    It looks something like this.<code>https://64d4d22db370ae41a32e.functions.cloud.appwrite.io</code>
+    Alternatively you can add a custom domain to your Appwrite project, and use that instead.
+</p>
+
+<p>
+    When requests are made to this domain, whether through a browser or through an HTTP requests, 
     the request information like request headers and request body will be passed to the function.
     This unlocks interesting ways to integrate other apps and backends to your Appwrite project.
-
-    [TODO: @luke can we do a curl example here?]
 </p>
+
+<h2><a href="#rest" id="rest">REST API</a></h2>
+<pre><code class="language-bash" data-prism>curl -X POST [APPWRITE_FUNCTION_DOMAIN] \
+-H "X-Custom-Header: 123" \
+-H "Content-Type: application/json" \
+-d '{"foo":"bar"}'</code></pre>
 
 
 [TODO: @matej @luke when the SDKs are generated, what other optional params exist for this function? Can we show them in example, too?]
