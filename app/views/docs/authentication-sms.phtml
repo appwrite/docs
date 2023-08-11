@@ -1,0 +1,211 @@
+<p>
+    Phone authentication lets users create accounts using their phone numbers and log in through SMS messages.
+</p>
+
+
+<h2><a href="#init" id="init">Send SMS Message</a></h2>
+
+<p>
+    Phone authentication is done using a two-step authentication process. 
+    When using phone authentication, the authentication request is initiated from the client application and an SMS message is sent to the user's phone.
+    The SMS message will contain a secret the user can use to log in.
+</p>
+
+<p>
+    Send an SMS message to initiate the authentication process. 
+    A <b>new account</b> will be created for this phone number if it has never been used before.
+</p>
+
+[TODO: to engineer: update these examples to show where the userID comes from (continuity from first request to next)]
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+        <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.createPhoneSession(
+    ID.unique(),
+    '+14255550123'
+);
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});
+
+</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+final account = Account(client);
+
+final session = await account.createPhoneSession(
+    userId: ID.unique(),
+    phone: '+14255550123'
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+import io.appwrite.ID
+
+val client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
+
+val account = Account(client)
+
+val session = account.createPhoneSession(
+    userId = ID.unique(),
+    phone = "+14255550123"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.createPhoneSession(
+    userId: ID.unique(),
+    phone: "+14255550123"
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreatePhoneSession(userId: "unique()", phone: "+14255550123") {
+        _id
+        userId
+        secret
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+
+<h2><a href="#login" id="login">Log In</a></h2>
+<p>
+    After initiation, the returned user ID and secret are used to confirm the user. 
+    The secret will usually be a 6-digit number in the SMS message sent to the user.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+        <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.updatePhoneSession(
+    '[USER_ID]',
+    '[SECRET]'
+);
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+final account = Account(client);
+
+final session = await account.updatePhoneSession(
+    userId: '[USER_ID]',
+    secret: '[SECRET]'
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+import io.appwrite.ID
+
+val client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
+
+val account = Account(client)
+
+val session = account.updatePhoneSession(
+    userId = "[USER_ID]",
+    secret = "[SECRET]"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
+
+let account = Account(client)
+
+let session = try await account.updatePhoneSession(
+    userId: "[USER_ID]",
+    secret: "[SECRET]"
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
+mutation {
+    accountUpdatePhoneSession(userId: "[USER_ID]", secret: "[SECRET]") {
+        _id
+        userId
+        provider
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>
+    After the secret is verified, a session will be created.
+</p>
