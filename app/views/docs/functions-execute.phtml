@@ -41,25 +41,25 @@
         <h3>Node.js</h3>
         <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>const sdk = require('node-appwrite');
+            <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Functions } from 'node-appwrite';  
 
-const client = new sdk.Client();
-
-const functions = new sdk.Functions(client);
+const client = new Client()
 
 client
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('[PROJECT_ID]')
+    .setKey('[API_KEY]')
 
-const promise = functions.createExecution('[FUNCTION_ID]');
+const functions = new Functions(client)
 
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
+try {
+    const data = await functions.createExecution('[FUNCTION_ID]')
+    console.log(data)
+} catch (err) {
+    console.err(err.message)
+}
+
+</code></pre>
         </div>
         </div>
     </li>
@@ -75,9 +75,9 @@ use Appwrite\Services\Functions;
 $client = new Client();
 
 $client
-    ->setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    ->setProject('5df5acd0d48c2') // Your project ID
-    ->setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+    ->setEndpoint('https://cloud.appwrite.io/v1')
+    ->setProject('[PROJECT_ID]')
+    ->setKey('[API_KEY]')
 ;
 
 $functions = new Functions($client);
@@ -96,9 +96,9 @@ from appwrite.services.functions import Functions
 client = Client()
 
 (client
-  .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
-  .set_project('5df5acd0d48c2') # Your project ID
-  .set_key('919c2d18fb5d4...a2ae413da83346ad2') # Your secret API key
+  .set_endpoint('https://cloud.appwrite.io/v1')
+  .set_project('[PROJECT_ID]')
+  .set_key('[API_KEY]')
 )
 
 functions = Functions(client)
@@ -116,9 +116,9 @@ result = functions.create_execution('[FUNCTION_ID]')</code></pre>
 include Appwrite
 
 client = Client.new
-    .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
-    .set_project('5df5acd0d48c2') # Your project ID
-    .set_key('919c2d18fb5d4...a2ae413da83346ad2') # Your secret API key
+    .set_endpoint('https://cloud.appwrite.io/v1') 
+    .set_project('[PROJECT_ID]') 
+    .set_key('[API_KEY]') 
 
 functions = Functions.new(client)
 
@@ -132,27 +132,23 @@ puts response.inspect</code></pre>
         <h3>Deno</h3>
         <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import * as sdk from "https://deno.land/x/appwrite/mod.ts";
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Functions } from "https://deno.land/x/appwrite/mod.ts";
 
-// Init SDK
-let client = new sdk.Client();
-
-let functions = new sdk.Functions(client);
+const client = new Client()
 
 client
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;
+    .setEndpoint('https://cloud.appwrite.io/v1') 
+    .setProject('[PROJECT_ID]')
+    .setKey('[API_KEY]')
 
+const functions = new Functions(client)
 
-let promise = functions.createExecution('[FUNCTION_ID]');
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
+try {
+    const data = await functions.createExecution('[FUNCTION_ID]')
+    console.log(data)
+} catch (err) {
+    console.err(err.message)
+}</code></pre>
         </div>
         </div>
     </li>
@@ -162,14 +158,14 @@ promise.then(function (response) {
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
-void main() { // Init SDK
+void main() {
   Client client = Client();
   Functions functions = Functions(client);
 
   client
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('[PROJECT_ID]')
+    .setKey('[API_KEY]')
   ;
 
   Future result = functions.createExecution(
@@ -193,9 +189,9 @@ void main() { // Init SDK
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
-    .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
+    .setEndpoint("https://cloud.appwrite.io/v1")
+    .setProject("[PROJECT_ID]")
+    .setKey("[API_KEY]")
 
 let functions = Functions(client)
 
@@ -214,9 +210,9 @@ using Appwrite.Services;
 using Appwrite.Models;
 
 var client = new Client()
-    .SetEndPoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .SetProject("5df5acd0d48c2") // Your project ID
-    .SetKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
+    .SetEndPoint("https://cloud.appwrite.io/v1")
+    .SetProject("[PROJECT_ID]")
+    .SetKey("[API_KEY]");
 
 var functions = new Functions(client);
 
@@ -233,9 +229,9 @@ Execution result = await functions.CreateExecution(
 import io.appwrite.services.Functions
 
 val client = Client(context)
-    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
-    .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
+    .setEndpoint("https://cloud.appwrite.io/v1")
+    .setProject("[PROJECT_ID]")
+    .setKey("[API_KEY]")
 
 val functions = Functions(client)
 
@@ -255,9 +251,9 @@ import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Functions;
 
 Client client = new Client()
-    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
-    .setKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
+    .setEndpoint("https://cloud.appwrite.io/v1")
+    .setProject("[PROJECT_ID]")
+    .setKey("[API_KEY]");
 
 Functions functions = new Functions(client);
 
