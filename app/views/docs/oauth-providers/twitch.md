@@ -15,8 +15,8 @@ Don't close this modal, we'll need to register a Twitch developer app to complet
 To use Twitch OAuth with Appwrite, you need to register a Twitch developer application. You can do this by following the [Registering Your App](https://dev.twitch.tv/docs/authentication/register-app/) guide from Twitch. When prompted to add a **OAuth Redirect URL**, provide the **URI** found in the **Twitch OAuth2 Settings** modal from your Appwrite console.
 
 After you've created your Twitch developer app, you can head back to your Appwrite console to complete the form in the **Twitch OAuth2 Settings** modal.
-- Find the **Client ID** in your Twitch Manage Application page and provide this in the **App ID** field in the **Twitch OAuth2 Settings** modal from the Appwrite console.
-- Navigate to  **Client Secret** in your Twitch Manage Application page and click **New Secret**.
+- Find the **Client ID** in the Manage Application page of your Twitch app. Provide this in the **App ID** field in the **Twitch OAuth2 Settings** modal from the Appwrite console.
+- Navigate to **Client Secret** in the Manage Application page of your Twitch app and click **New Secret**.
 - Copy your new client secret and provide this in the **App Secret** field in the **Twitch OAuth2 Settings** modal from the Appwrite console.
 
 ## Authenticating
