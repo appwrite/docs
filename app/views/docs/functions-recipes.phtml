@@ -466,20 +466,20 @@ Future&lt;dynamic> main(final context) async {
         <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'httparty'
 
 def main(context)
-  if context.request.path == '/eur'
-    amount_in_euros = context.request.query['amount'].to_f
+  if context.req.path == '/eur'
+    amount_in_euros = context.req.query['amount'].to_f
     response = HTTParty.get('https://api.exchangerate.host/latest?base=EUR&symbols=USD')
     data = JSON.parse(response.body)
     amount_in_dollars = amount_in_euros * data['rates']['USD']
-    return context.response.send(amount_in_dollars.to_s)
+    return context.res.send(amount_in_dollars.to_s)
   end
 
-  if context.request.path == '/inr'
-    amount_in_rupees = context.request.query['amount'].to_f
+  if context.req.path == '/inr'
+    amount_in_rupees = context.req.query['amount'].to_f
     response = HTTParty.get('https://api.exchangerate.host/latest?base=INR&symbols=USD')
     data = JSON.parse(response.body)
     amount_in_dollars = amount_in_rupees * data['rates']['USD']
-    return context.response.send(amount_in_dollars.to_s)
+    return context.res.send(amount_in_dollars.to_s)
   end
 
   return 'Invalid path'
@@ -493,8 +493,374 @@ end</code></pre>
 <p>After your function has updated, you can try out the new paths. For example, <code>ghrfu9ewji.functions.appwrite.app/eur?amount=5</code> should convert Euros to Dollars, while <code>ghrfu9ewji.functions.appwrite.app/inr?amount=100</code> should convert Indian Rupees to Dollars.</p>
 <p>Congratulations! You've built a currency conversion API using Appwrite functions!</p>
 
+<h2>Voting System Using Appwrite</h2>
+
+<h3>Getting Started</h3>
+
+<p>
+  In this recipe, you will build a simple voting system that allows users to vote on various topics. Appwrite functions and the server SDK will be used to enforce voting rules and prevent multiple votes from the same user for a single topic.
+</p>
+
+<h3>Setting Up</h3>
+
+<ul class="phases clear" data-ui-phases>
+  <li>
+    <h3>Appwrite Project</h3>
+    <div>
+      <p>1. Create a new Appwrite project.</p>
+      <p>2. Add your development domain to your Appwrite project's trusted domains.</p>
+    </div>
+  </li>
+  <li>
+    <h3>Create Collections</h3>
+    <div>
+      <p>Create two collections named "topics" and "votes."</p>
+      <p>For "topics" collection, have fields: title and description.</p>
+      <p>For "votes" collection, have fields: topicId, userId, and vote.</p>
+    </div>
+  </li>
+</ul>
+
+<h3>Building the Voting Function</h3>
+
+<ul class="phases clear" data-ui-phases>
+  <li>
+    <h3>Node.js</h3>
+    <div>
+      <p>Create a new located at <code>functions/vote/src/main.js</code>.</p>
+      <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+        <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, Query } from 'node-appwrite';
+
+export default async function ({ req, res }) {
+  const vote = {
+    userId: req.query.userId,
+    topicId: req.query.topicId,
+    vote: req.query.vote
+  };
+
+  if (vote.vote !== 'yes' && vote.vote !== 'no') {
+    return res.json({ ok: false, message: 'You must vote yes or no.' });
+  }
+
+  const client = new Client();
+  client
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+    .setKey(process.env.APPWRITE_API_KEY);
+
+  const database = new Database(client);
+  
+  const existingVotes = await database.listDocuments('[VOTES_COLLECTION_ID]', [
+    Query.equals('userId', vote.userId),
+    Query.equals('topicId', vote.topicId)
+  ]);
+
+  if (existingVotes.total > 0) {
+    return res.json({ message: 'You have already voted on this topic.' });
+  }
+
+  const voteDocument = await database.createDocument('[VOTES_COLLECTION_ID]', {
+    userId,
+    topicId,
+    vote,
+  });
+
+  return res.json({ ok: true, message: 'Vote cast.', vote: voteDocument });
+}</code></pre>
+    </div>
+    </div>
+  </li>
+  <li>
+    <h3>Python</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+        <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+from appwrite.services.databases import Databases
+from appwrite.query import Query
+import os
+
+def main(context):
+    vote = {
+        'userId': context.req.query['userId'],
+        'topicId': context.req.query['topicId'],
+        'vote': context.req.query['vote']
+    }
+
+    if vote['vote'] != 'yes' and vote['vote'] != 'no':
+        return context.res.json({'ok': False, 'message': 'You must vote yes or no.'})
+
+    client = Client()
+    client.set_endpoint('https://cloud.appwrite.io/v1')
+    client.set_project(os.environ['APPWRITE_FUNCTION_PROJECT_ID'])
+    client.set_key(os.environ['APPWRITE_API_KEY'])
+
+    database = Databases(client)
+    
+    existing_votes = database.list_documents('[VOTES_COLLECTION_ID]', [
+        Query.equals('userId', vote['userId']),
+        Query.equals('topicId', vote['topicId'])
+    ])
+
+    if existing_votes['total'] > 0:
+        return context.res.json({
+          'ok': False, 
+          'message': 'You have already voted on this topic.'
+        })
+
+    vote_document = database.create_document('[VOTES_COLLECTION_ID]', {
+        'userId': vote['userId'],
+        'topicId': vote['topicId'],
+        'vote': vote['vote'],
+    })
+
+    return context.res.json({'ok': True, 'message': 'Vote cast.', 'vote': vote_document})</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>PHP</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+        <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+
+require(__DIR__ . '/../vendor/autoload.php');
+
+use Appwrite\Client;
+use Appwrite\Exception;
+use Appwrite\Services\Database;
+use Appwrite\Query;
+
+return function ($context) {
+    $vote = [
+        'userId' => $context->req->query['userId'],
+        'topicId' => $context->req->query['topicId'],
+        'vote' => $context->req->query['vote']
+    ];
+
+    if ($vote['vote'] !== 'yes' && $vote['vote'] !== 'no') {
+        return $context->res->json(['ok' => false, 'message' => 'You must vote yes or no.']);
+    }
+
+    $client = new Client();
+    $client
+        ->setEndpoint('https://cloud.appwrite.io/v1')
+        ->setProject(getenv('APPWRITE_FUNCTION_PROJECT_ID'))
+        ->setKey(getenv('APPWRITE_API_KEY'));
+
+    $database = new Database($client);
+
+    $existingVotes = $database->listDocuments('[VOTES_COLLECTION_ID]', [
+        Query->equal('userId', $vote['userId']),
+        Query->equal('topicId', $vote['topicId'])
+    ]);
+
+    if ($existingVotes['total'] > 0) {
+        return $context->res->json([
+          'ok' => false, 
+          'message' => 'You have already voted on this topic.'
+        ]);
+    }
+
+    $voteDocument = $database->createDocument('[VOTES_COLLECTION_ID]', [
+        'userId' => $vote['userId'],
+        'topicId' => $vote['topicId'],
+        'vote' => $vote['vote'],
+    ]);
+
+    return $context->res->json([
+      'ok' => true, 
+      'message' => 'Vote cast.', 
+      'vote' => $voteDocument
+    ]);
+};</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Ruby</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+        <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
+
+def main(context)
+
+    vote = {
+        'userId' => context.req.query['userId'],
+        'topicId' => context.req.query['topicId'],
+        'vote' => context.req.query['vote']
+    }
+
+    if vote['vote'] != 'yes' and vote['vote'] != 'no'
+        return context.res.json({'ok': false, 'message': 'You must vote yes or no.'})
+    end
+
+    client = Appwrite::Client.new()
+    client
+        .set_endpoint('https://cloud.appwrite.io/v1')
+        .set_project(ENV['APPWRITE_FUNCTION_PROJECT_ID'])
+        .set_key(ENV['APPWRITE_API_KEY'])
+
+    database = Appwrite::Database.new(client)
+    
+    existing_votes = database.list_documents('[VOTES_COLLECTION_ID]', [
+        Appwrite::Query.new('userId', '=', vote['userId']),
+        Appwrite::Query.new('topicId', '=', vote['topicId'])
+    ])
+
+    if existing_votes['total'] > 0
+        return context.res.json({
+          'ok': false, 
+          'message': 'You have already voted on this topic.'
+        })
+    end
+
+    vote_document = database.create_document('[VOTES_COLLECTION_ID]', {
+        'userId': vote['userId'],
+        'topicId': vote['topicId'],
+        'vote': vote['vote'],
+    })
+
+    return context.res.json({
+      'ok': true, 
+      'message': 'Vote cast.', 
+      'vote': vote_document
+    })
+end</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Dart</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+import 'package:dart_appwrite/dart_appwrite.dart';
+
+Future<dynamic> main(final context) async {
+    final vote = {
+        'userId': context.req.query['userId'],
+        'topicId': context.req.query['topicId'],
+        'vote': context.req.query['vote']
+    };
+
+    if (vote['vote'] != 'yes' && vote['vote'] != 'no') {
+        return context.res.json({'ok': false, 'message': 'You must vote yes or no.'});
+    }
+
+    final client = Client()
+        .setEndpoint('https://cloud.appwrite.io/v1')
+        .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+        .setKey(process.env.APPWRITE_API_KEY);
+
+    final database = Database(client);
+
+    final existingVotes = await database.listDocuments('[VOTES_COLLECTION_ID]', [
+        Query.equals('userId', vote['userId']),
+        Query.equals('topicId', vote['topicId'])
+    ]);
+
+    if (existingVotes['total'] > 0) {
+        return context.res.json({
+          'ok': false, 
+          'message': 'You have already voted on this topic.'
+        });
+    }
+
+    final voteDocument = await database.createDocument('[VOTES_COLLECTION_ID]', {
+        'userId': vote['userId'],
+        'topicId': vote['topicId'],
+        'vote': vote['vote'],
+    });
+
+    return context.res.json({
+      'ok': true, 
+      'message': 'Vote cast.', 
+      'vote': voteDocument
+    });
+}</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Python</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+        <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+from appwrite.services.databases import Databases
+from appwrite.query import Query
+
+import os
+
+def main(context):
+    vote = {
+        'userId': context.req.query['userId'],
+        'topicId': context.req.query['topicId'],
+        'vote': context.req.query['vote']
+    }
+
+    if vote['vote'] != 'yes' and vote['vote'] != 'no':
+        return context.res.json({'ok': False, 'message': 'You must vote yes or no.'})
+
+    client = Client()
+    client.set_endpoint('https://cloud.appwrite.io/v1')
+    client.set_project(os.environ['APPWRITE_FUNCTION_PROJECT_ID'])
+    client.set_key(os.environ['APPWRITE_API_KEY'])
+
+    database = Databases(client)
+
+    existing_votes = database.list_documents('[VOTES_COLLECTION_ID]', [
+        Query.equal('userId', vote['userId']),
+        Query.equal('topicId', vote['topicId'])
+    ])
+    
+    if existing_votes['total'] > 0:
+        return context.res.json({
+          'ok': False, 
+          'message': 'You have already voted on this topic.'
+        })
+
+    vote_document = database.create_document('[VOTES_COLLECTION_ID]', vote)
+
+    return context.res.json({
+      'ok': True, 
+      'message': 'Vote cast.', 
+      'vote': vote_document
+    })</code></pre>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<p>In the Appwrite console, create a function and use the file you created as the entry point.</p>
+
+<h3>Testing the Function</h3>
+
+<p>
+  Execute the function and visit the URL, passing the required parameters <code>[YOUR_FUNCTION_URL]?userId=[USER_ID]&amp;topicId=[TOPIC_ID];&amp;vote=yes</code> to cast a vote. You should see a response confirming the vote. Trying to vote again with the same user ID and topic ID should result in a message indicating that the user has already voted on this topic.
+</p>
+
+<h3>Conclusion</h3>
+
+<p>
+  To further improve this function, try adding the following checks:
+  <ul>
+    <li>Check that the user ID and topic ID exist.</li>
+    <li>Replace the user ID query parameter with the <code>x-appwrite-user-id</code> header, so votes may only be cast by logged in users.</li>
+    <li>Convert the function to POST requests with a JSON body to cast votes, so that the vote data is not visible in the URL.</li>
+  </ul>
+</p>
+
+<p>
+  Congratulations! You've built a voting system that leverages Appwrite functions and the Appwrite server SDK to enforce business logic and ensure that users can only vote once per topic.
+</p>
+
+
 [TODO: @luke -> Example with JWT, show both client and server code]
-[TODO: @luke -> Example with API Key]
 
 <!-- Here's more ideas -->
 
