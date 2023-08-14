@@ -2070,3 +2070,50 @@ public class Main {
 <p>
 <a href="/docs/command-line-ci"><i class="icon-angle-circled-right"></i>Explore examples and recipes</a>
 </p>
+
+<h2><a href="#upgrade" id="upgrade">Upgrade</a></h2>
+<p>
+    Appwrite Functions received major updates in Appwrite version 1.4. 
+    If you still have functions from previous versions, they will be <b>read-only</b> in Appwrite 1.4.
+    You will have to migrate your old functions to follow new runtime syntax.
+</p>
+
+<p>
+    Here's a checklist of things you need to know.
+</p>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>
+        The parameter passed into functions has changed. 
+        <code>req</code> and <code>res</code> has been replaced by <code>context</code>, which contains new logger methods.
+        <a href="docs/functions-develop#context">Learn about context.</a>
+    </li>
+    <li>
+        To improve privacy and logging reliability, we provide new <code>context.log()</code> and <code>context.error()</code> functions.
+        You can no longer use native logging methods.
+        <a href="docs/functions-develop#logging">Learn about logging.</a>
+    </li>
+    <li>
+        The old way of <code>req.variables</code> has been deprecated. 
+        You can now access variables passed into each function as environment variables.
+        <a href="docs/functions-develop#environment-variables">Learn about environment variables.</a>
+    </li>
+    <li>
+        The <code>req</code> object has been updated to use terminology consistent with typical HTTP concepts.
+        You'll now find familiar concepts like headers, body, HTTP methods, and others.
+        <a href="docs/functions-develop#request">Learn about request.</a>
+    </li>
+    <li>
+        The response object has been updated. 
+        You can now specify headers, as well as use new methods like return redirects or empty responses.
+        <a href="docs/functions-develop#response">Learn about response.</a>
+    </li>
+    <li>
+        Now, you <b>must return a response</b> such as <code>return context.res.send("")</code>. 
+        This prevents confusing errors when functions are terminated prematurely before a response is sent.
+        <a href="docs/functions-develop#response">Learn about response.</a>
+    </li>
+    <li>
+        Some variables about how a function was triggered are now found in the <code>context.req</code> object as <a href="/docs/functions-develop#request">headers</a>.
+    </li>
+</ol>
