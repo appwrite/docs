@@ -24,8 +24,6 @@
 -d '{"foo":"bar"}'</code></pre>
 
 
-[TODO: @matej @luke when the SDKs are generated, what other optional params exist for this function? Can we show them in example, too?]
-[for example body (data)]
 <h2><a href="#sdk" id="sdk">SDK</a></h2>
 <p>
    You can invoke your Appwrite Functions directly from the Appwrite SDKs.
@@ -34,7 +32,107 @@
 <a href="/docs/sdk/functions"><i class="icon-angle-circled-right"></i>Learn more about using the Appwrite SDKs</a>
 
 <h3>Client SDKs</h3>
-[TODO: @matej @luke client SDK examples here are needed, too.]
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Functions } from 'appwrite';  
+
+const client = new Client()
+
+client
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('[PROJECT_ID]')
+
+const functions = new Functions(client)
+
+try {
+    const data = await functions.createExecution('[FUNCTION_ID]', {
+        'foo': 'bar'
+    })
+    console.log(data)
+} catch (err) {
+    console.err(err.message)
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client();
+client
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('[PROJECT_ID]')
+
+final functions = Functions(client);
+
+try {
+    final response = await functions.createExecution('[FUNCTION_ID]', {
+        'foo': 'bar'
+    });
+    print(response.data);
+} catch (e) {
+    print(e.message);
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client;
+import io.appwrite.services.Functions;
+
+val client = new Client();
+client
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('[PROJECT_ID]')
+
+val functions = new Functions(client);
+
+try {
+    val response = await functions.createExecution('[FUNCTION_ID]', {
+        'foo': 'bar'
+    });
+    print(response.data);
+} catch (e) {
+    print(e.message);
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+client
+    .setEndpoint("https://cloud.appwrite.io/v1")
+    .setProject("[PROJECT_ID]")
+
+let functions = Functions(client: client)
+
+do {
+    let response = try functions.createExecution(functionId: "[FUNCTION_ID]", data: ["foo": "bar"])
+    print(response)
+} catch let error {
+    print(error)
+}</code></pre>
+        </div>
+        </div>
+    </li>
+</ul>
+
+
 <h3>Server SDKs</h3>
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -53,7 +151,9 @@ client
 const functions = new Functions(client)
 
 try {
-    const data = await functions.createExecution('[FUNCTION_ID]')
+    const data = await functions.createExecution('[FUNCTION_ID]', {
+        'foo': 'bar'
+    })
     console.log(data)
 } catch (err) {
     console.err(err.message)
@@ -103,7 +203,11 @@ client = Client()
 
 functions = Functions(client)
 
-result = functions.create_execution('[FUNCTION_ID]')</code></pre>
+result = functions.create_execution('[FUNCTION_ID]',
+    {
+        'foo': 'bar'
+    }
+)</code></pre>
         </div>
         </div>
     </li>
@@ -122,7 +226,9 @@ client = Client.new
 
 functions = Functions.new(client)
 
-response = functions.create_execution(function_id: '[FUNCTION_ID]')
+response = functions.create_execution(function_id: '[FUNCTION_ID]', data: {
+    'foo': 'bar'
+})
 
 puts response.inspect</code></pre>
         </div>
@@ -144,7 +250,9 @@ client
 const functions = new Functions(client)
 
 try {
-    const data = await functions.createExecution('[FUNCTION_ID]')
+    const data = await functions.createExecution('[FUNCTION_ID]', {
+        'foo': 'bar'
+    })
     console.log(data)
 } catch (err) {
     console.err(err.message)
@@ -170,6 +278,9 @@ void main() {
 
   Future result = functions.createExecution(
     functionId: '[FUNCTION_ID]',
+    data: {
+      'foo': 'bar'
+    }
   );
 
   result
@@ -196,7 +307,10 @@ let client = Client()
 let functions = Functions(client)
 
 let execution = try await functions.createExecution(
-    functionId: "[FUNCTION_ID]"
+    functionId: "[FUNCTION_ID]",
+    data: [
+        "foo": "bar"
+    ]
 )</code></pre>
         </div>
         </div>
@@ -217,7 +331,11 @@ var client = new Client()
 var functions = new Functions(client);
 
 Execution result = await functions.CreateExecution(
-    functionId: "[FUNCTION_ID]");</code></pre>
+    functionId: "[FUNCTION_ID]",
+    data: new Dictionary&lt;string, object&gt; {
+        { "foo", "bar" }
+    }
+);</code></pre>
         </div>
         </div>
     </li>
@@ -228,16 +346,23 @@ Execution result = await functions.CreateExecution(
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Functions
 
-val client = Client(context)
-    .setEndpoint("https://cloud.appwrite.io/v1")
-    .setProject("[PROJECT_ID]")
-    .setKey("[API_KEY]")
+fun main(args: Array&lt;String&gt;) {
+    val client = Client(context)
+        .setEndpoint("https://cloud.appwrite.io/v1")
+        .setProject("[PROJECT_ID]")
+        .setKey("[API_KEY]")
 
-val functions = Functions(client)
+    val functions = Functions(client)
 
-val response = functions.createExecution(
-    functionId = "[FUNCTION_ID]",
-)</code></pre>
+    val response = functions.createExecution(
+        functionId = "[FUNCTION_ID]",
+        data = mapOf(
+            "foo" to "bar"
+        )
+    )
+}
+
+</code></pre>
         </div>
 
         </div>
@@ -247,27 +372,32 @@ val response = functions.createExecution(
         <div>
         <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
             <pre class="line-numbers"><code class="prism language-java" data-prism>import io.appwrite.Client;
-import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Functions;
+import java.util.HashMap;
 
-Client client = new Client()
-    .setEndpoint("https://cloud.appwrite.io/v1")
-    .setProject("[PROJECT_ID]")
-    .setKey("[API_KEY]");
+public static void main(String[] args) throws Exception {
+    Client client = new Client()
+        .setEndpoint("https://cloud.appwrite.io/v1")
+        .setProject("[PROJECT_ID]")
+        .setKey("[API_KEY]");
 
-Functions functions = new Functions(client);
+    Functions functions = new Functions(client);
 
-functions.createExecution(
-    "[FUNCTION_ID]",
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+    functions.createExecution(
+        "[FUNCTION_ID]",
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);</code></pre>
+            System.out.println(result);
+        }),
+        new HashMap<String, Object>() {{
+            put("foo", "bar");
+        }}
+    );
+}</code></pre>
         </div>
         </div>
     </li>

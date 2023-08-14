@@ -1803,8 +1803,246 @@ public class Main {
 </ul>
 
 <h2><a href="#multi-file" id="multi-file">Using Multiple Files</a></h2>
-[TODO: @luke show how you can use multiple files in the same project]
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+            <pre class="line-numbers"><code class="prism language-js" data-prism>// src/utils.js
 
+export function add(a, b) {
+    return a + b;
+}
+            </code></pre>
+        </div>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+            <pre class="line-numbers"><code class="prism language-js" data-prism>// src/main.js
+
+import { add } from './utils.js';
+
+export defaut function ({res}) {
+    return res.send(add(1, 2));
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>// src/utils.php
+
+function add($a, $b) {
+    return $a + $b;
+}</code></pre>
+        </div>
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>// src/main.php
+
+include 'utils.php';
+
+return function ($context) {
+    return $context->res->send(add(1, 2));
+};</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>// src/utils.py
+
+def add(a, b):
+    return a + b;</code>
+        </pre>
+        </div>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>// src/main.py
+
+import utils
+
+def main(context):
+    return context.res.send(utils.add(1, 2))</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism># lib/utils.rb
+
+def add(a, b)
+    return a + b
+end</code></pre>
+        </div>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism># lib/main.rb
+
+require_relative 'utils'
+
+def main(context)
+    return context.res.send(add(1, 2))
+end</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>// src/utils.ts
+
+export function add(a: number, b: number): number {
+    return a + b;
+}</code></pre>  
+        </div>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>// src/main.ts
+
+import { add } from './utils.ts';
+
+export default function ({res}: {res: any}) {
+    return res.send(add(1, 2));
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>// lib/utils.dart
+
+int add(int a, int b) {
+    return a + b;
+}</code></pre>
+        </div>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>// lib/main.dart
+import 'dart:async';
+
+Future&lt;dynamic> main(final context) async {
+    return context.res.send(add(1, 2));
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>// Sources/utils.swift
+
+func add(_ a: Int, _ b: Int) -> Int {
+    return a + b
+}
+            </code></pre>
+        </div>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>// Sources/index.swift
+
+import Foundation
+
+func main(context: RuntimeContext) async throws -> RuntimeOutput {
+    return context.res.send(add(1, 2))
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>// src/Utils.cs
+
+namespace DotNetRuntime
+
+public static class Utils
+{
+    public static int Add(int a, int b)
+    {
+        return a + b;
+    }
+}</code></pre>
+        </div>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>// src/Index.cs
+
+namespace DotNetRuntime
+
+public class Handler {
+    public async Task<RuntimeOutput> Main(RuntimeContext Context) 
+    {
+        return Context.Res.Send(Utils.Add(1, 2));
+    }
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// src/Utils.kt
+
+package io.openruntimes.kotlin.src
+
+class Utils {
+    fun add(a: Int, b: Int): Int {
+        return a + b
+    }
+}</code></pre>
+        </div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// src/Main.kt
+
+package io.openruntimes.kotlin.src
+
+import io.openruntimes.kotlin.RuntimeContext
+import io.openruntimes.kotlin.RuntimeOutput
+import io.openruntimes.kotlin.Utils
+
+class Main {
+    fun main(context: RuntimeContext): RuntimeOutput {
+        return context.res.send(Utils.add(1, 2))
+    }
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Java</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>
+// src/Utils.java
+
+package io.openruntimes.java.src;
+
+class Utils {
+    public static int add(int a, int b) {
+        return a + b;
+    }
+}</code></pre>
+        </div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.java.src;
+
+import io.openruntimes.java.RuntimeContext;
+import io.openruntimes.java.RuntimeOutput;
+import io.openruntimes.java.Utils;
+
+public class Main {
+    public RuntimeOutput main(RuntimeContext context) throws Exception {
+        return context.res.send(Utils.add(1, 2));
+    }
+}</code></pre>
+        </div>
+        </div>
+    </li>
+</ul>
 
 <h2><a href="#recipes" id="recipes">Recipes</a></h2>
 <p>
