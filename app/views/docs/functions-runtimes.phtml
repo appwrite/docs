@@ -4,7 +4,12 @@ use Appwrite\Utopia\View;
 
 $events = $this->getParam('events', []);
 $runtimes = $this->getParam('runtimes', []);
-
+$runtimes['node-16.0']["cloud"] = true;
+$runtimes['node-18.0']["cloud"] = true;
+$runtimes['php-8.0']["cloud"] = true;
+$runtimes['ruby-3.0']["cloud"] = true;
+$runtimes['python-3.9']["cloud"] = true;
+$runtimes['dart-2.17']["cloud"] = true;
 ?>
 
 
@@ -26,6 +31,7 @@ $runtimes = $this->getParam('runtimes', []);
             <th style="width: 120px">Name</th>
             <th>Image</th>
             <th>Architectures</th>
+            <th>Platforms</th>
         </tr>
     </thead>
     <tbody>
@@ -35,6 +41,12 @@ $runtimes = $this->getParam('runtimes', []);
             <td><span data-general-copy><?php echo $this->escape($key); ?> </span></td>
             <td><a href="https://hub.docker.com/r/<?php echo $this->escape(strtok($runtime['image'], ':')); ?>" target="_blank" rel="noopener"><?php echo $this->escape($runtime['image'] ?? ''); ?> <i class="icon-link-ext"></i></a></td>
             <td><?php echo $this->escape(implode(' / ', $runtime['supports'] ?? [])); ?></td>
+            <td>
+                <?php if (isset($runtimes[$key]["cloud"])): ?>
+                    <span class="tag green">Cloud</span>
+                <?php endif; ?>
+                <span class="tag">Self-hosted</span>
+            </td>
         </tr>
         <?php endforeach; ?>
     </tbody>
