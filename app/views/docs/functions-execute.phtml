@@ -4,11 +4,21 @@
     Here are all the different ways to consume your new Appwrite Functions.
 </p>
 
-<h2><a href="#domain" id="domain">Domain</a></h2>
+<h2><a href="#domains" id="domains">Domains</a></h2>
 <p>
-    Each Appwrite function has its own domain. You can find this in the Appwrite Console, under the Function overview.
-    It looks something like this.<code>https://64d4d22db370ae41a32e.functions.cloud.appwrite.io</code>
-    Alternatively you can add a custom domain to your Appwrite project, and use that instead.
+    Each Appwrite function has its own domain. 
+    You can find this in the Appwrite Console, under the Function overview.
+</p>
+
+<p>    
+    The generated domains will look like this.
+</p>
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>https://64d4d22db370ae41a32e.functions.cloud.appwrite.io</code></pre>
+</div>
+
+<p>
+    Alternatively you can <a href="/docs/functions-deploy#domain">add a custom domain</a> to your Appwrite project. 
 </p>
 
 <p>
@@ -18,10 +28,12 @@
 </p>
 
 <h2><a href="#rest" id="rest">REST API</a></h2>
-<pre><code class="language-bash" data-prism>curl -X POST [APPWRITE_FUNCTION_DOMAIN] \
--H "X-Custom-Header: 123" \
--H "Content-Type: application/json" \
--d '{"foo":"bar"}'</code></pre>
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre><code class="language-bash" data-prism>curl -X POST https://64d4d22db370ae41a32e.functions.cloud.appwrite.io \
+    -H "X-Custom-Header: 123" \
+    -H "Content-Type: application/json" \
+    -d '{"data":"this is json data"}'</code></pre>
+</div>
 
 
 <h2><a href="#sdk" id="sdk">SDK</a></h2>
@@ -455,6 +467,8 @@ public static void main(String[] args) throws Exception {
 </table>
 
 <h2>Permissions</h2>
+<h2><a href="#permissions" id="permissions">Permissions</a></h2>
+
 <p>
     Appwrite Functions can be executed using Client or Server SDKs. 
     Client SDKs must be authenticated with an account that has been granted execution <a href="/docs/permissions">permissions</a> on the function's settings page. 
@@ -466,7 +480,7 @@ public static void main(String[] args) throws Exception {
     If you need to enforce permissions for functions with a domain, use authentication methods like JWT.
 </p>
 
-<h2>Logs and results</h2>
+<h2><a href="#logs" id="logs">Logs and results</a></h2>
 <p>
     You can view the logs your function executions in the Appwrite Console. 
     Navigate to <b>Functions</b> and click on a function to view it's executions.
