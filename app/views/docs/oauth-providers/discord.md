@@ -43,7 +43,7 @@ const account = new Account(client);
 
 client
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]') // Your project ID
+    .setProject('[PROJECT_ID]')                  // Your Project ID
 ;
 
 // Go to the OAuth provider login page
@@ -105,8 +105,8 @@ void main() async {
     final account = new Account(client);
     
     client
-        .setEndpoint('https://cloud.appwrite.io/v1') // YOUR API Endpoint
-        .setProject('[PROJECT_ID]')                         // YOUR PROJECT ID
+        .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+        .setProject('[PROJECT_ID]')                  // Your Project ID
     ;
     
     // OAuth Login, for simplest implementation you can leave both success and
@@ -147,7 +147,7 @@ import io.appwrite.services.Account
 
 val client = Client(context)
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]") // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your Project ID
 
 val account = Account(client)
 
@@ -186,7 +186,7 @@ import io.appwrite.services.Account;
 
 Client client = new Client(context)
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]"); // Your project ID
+    .setProject("[PROJECT_ID]");                 // Your Project ID
 
 Account account = new Account(client);
 
@@ -240,7 +240,7 @@ import Appwrite
 
 let client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]") // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your Project ID
 
 let account = Account(client)
 
@@ -260,7 +260,7 @@ const account = new Account(client);
 
 client
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]') // Your project ID
+    .setProject('[PROJECT_ID]')                  // Your Project ID
 ;
 
 // Updates current session
@@ -284,7 +284,7 @@ void main() async {
     
     client
         .setEndpoint('https://cloud.appwrite.io/v1') // YOUR API Endpoint
-        .setProject('[PROJECT_ID]'); // YOUR PROJECT ID
+        .setProject('[PROJECT_ID]');                 // Your Project ID
     
     // Simplest implementation of updating an OAuth2 session
     // prints Session Object value on success and error message on failure
@@ -304,7 +304,7 @@ import io.appwrite.services.Account
 
 val client = Client(context)
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]") // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your Project ID
 
 val account = Account(client)
 
@@ -319,7 +319,7 @@ import io.appwrite.services.Account;
 
 Client client = new Client(context)
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]"); // Your project ID
+    .setProject("[PROJECT_ID]");                 // Your Project ID
 
 Account account = new Account(client);
 
@@ -342,7 +342,7 @@ import Appwrite
 
 let client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]") // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your Project ID
 
 let account = Account(client)
 
