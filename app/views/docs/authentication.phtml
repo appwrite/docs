@@ -1,15 +1,73 @@
 <p>
-    Appwrite provides authentication for many different use cases to fit the needs of developers. 
-    Appwrite manages authentication with a combination of accounts and sessions. 
-    Accounts can be created in many different ways, such as through an anonymous session, email and password, OAuth authentication, magic URLs, and more.
+    Appwrite Authentication delivers more than just user sign up and log in.
+    Authentication makes it easy to build secure and robust authentication with support for many differnt authentication methods.
+    You can manage user accounts with user preferences, user labeling, or organizing users into teams.
+    Combined with a robust permissions system, Appwrite Authentication provides everything you need to authenticate and manager users.
 </p>
 
-<h2><a href="/docs/authentication#account-vs-user-api" id="account-vs-user-api">Account vs Users API</a></h2>
+<h2><a href="#account-vs-user-api" id="account-vs-user-api">Account vs Users API</a></h2>
 
 <p>
-    The Account API operates in the scope of the currently logged-in account and is usually used in a frontend or mobile app. The Users API is used in backend integrations and uses an API key with access to all your project users.
+    Appwrite has two auth APIs for different purposes, which are Account and Users.
+    Here's how you choose between the two, depending on your needs.
 </p>
 
-<p> 
-    Some of the Account API methods are available from Server SDKs when you authenticate with a JWT. This allows your Server SDK to perform actions on behalf of a user.
+<h3>Account API</h3>
+<p>
+    Use the Account API when acting on behalf of <b>individual users</b> when building client applications, like websites or mobile apps.
+    The Account API is authenticated through secure cookies that store session information, so Appwrite knows which authenticated user is accessing data.
+    The Account API is safe to expose to end users, because their access to data and resources is <b>limited by Appwrite's permission system</b>.
+</p>
+
+<h3>Users API</h3>
+<p>
+    Use the Users API when <b>acting as an administrator</b> in use cases like building admin consoles or server integrations.
+    The Users API uses API keys to authenticate, which means Appwrite only knows which API key is accessing data.
+    API keys <b>don't respect permissions</b>, which means they can access all data, and should never be shared with end users in client applications.
+    The Users API also has batch operations, letting your query and manage users from an admin's perspective.
+</p>
+
+<h2><a href="#explore" id="explore">Explore</a></h2>
+<p>Explore Appwrite Authentication's features.</p>
+
+<p>
+<a href="/docs/authentication-email-pass"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> 
+    Log in with email and password
+</a>
+</p>
+
+<p>
+<a href="/docs/authentication-sms"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> 
+    Log in with SMS messages
+</a>
+</p>
+
+<p>
+<a href="/docs/authentication-magic"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> 
+    Log in with magic URL
+</a>
+</p>
+
+<p>
+<a href="/docs/authentication-oauth"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> 
+    Log in with OAuth 2
+</a>
+</p>
+
+<p>
+<a href="/docs/authentication-anonymous"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> 
+    Log in as a guest (anonymous)
+</a>
+</p>
+
+<p>
+<a href="/docs/authentication-server"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> 
+    Server integrations
+</a>
+</p>
+
+<p>
+<a href="/docs/authentication-server"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> 
+    Security
+</a>
 </p>
