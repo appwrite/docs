@@ -14,11 +14,13 @@
     Before using OAuth2 login, you need to enable and configure a OAuth2 login provider.
 </p>
 
-[TODO]
-1. Navigate to your Appwrite project
-2. Navigate to **Auth** > **Settings**
-3. Find and open the OAuth provider
-4. In the **Zoom OAuth2 Settings** modal, use the toggle to enable the provider
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>Navigate to your Appwrite project</li>
+    <li>Navigate to <b>Auth</b> > <b>Settings</b></li>
+    <li>Find and open the OAuth provider.</li>
+    <li>In the OAuth2 settings modal, use the toggle to enable the provider</li>
+</ol>
+
 
 <h2><a href="#init" id="init">Initialize OAuth2 Login</a></h2>
 
@@ -103,9 +105,8 @@ try await account.createOAuth2Session(provider: "amazon")</code></pre>
 
 <h2><a href="#profile" id="profile">OAuth 2 Profile</a></h2>
 <p>
-
+    [TODO: @steven fill the docs to access profile information]
 </p>
-
 
 <h2><a href="#refresh" id="refresh">Refresh Tokens</a></h2>
 <p>
@@ -129,8 +130,8 @@ client
     .setProject('[PROJECT_ID]')                  // Your Project ID
 ;
 
-// Go to Zoom OAuth login page
-account.createOAuth2Session('zoom', '[LINK_ON_SUCCESS]', '[LINK_ON_FAILURE]');</code></pre>
+// Go to Amazon OAuth login page
+account.createOAuth2Session('amazon', '[LINK_ON_SUCCESS]', '[LINK_ON_FAILURE]');</code></pre>
         </div>
     </li>
     <li>
@@ -148,7 +149,7 @@ void main() async {
     
     // OAuth Login, for simplest implementation you can leave both success and
     // failure link empty so that Appwrite handles everything.
-    await account.createOAuth2Session(provider: 'zoom');
+    await account.createOAuth2Session(provider: 'amazon');
         
 }</code></pre>
         </div>
@@ -165,7 +166,7 @@ val client = Client(context)
 
 val account = Account(client)
 
-account.createOAuth2Session(provider = "zoom")</code></pre>
+account.createOAuth2Session(provider = "amazon")</code></pre>
         </div>
     </li>
     <li>
