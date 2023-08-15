@@ -1,9 +1,0 @@
-{
-  "editor.formatOnSave": false,
-  "[html][phtml]": {
-    "editor.formatOnSave": false
-  },
-  "[php]": {
-    "editor.formatOnSave": false
-  }
-}
