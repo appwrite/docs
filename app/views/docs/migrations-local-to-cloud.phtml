@@ -1,6 +1,6 @@
 <p>
-    Moving to a self-hosted instance? We've got you covered. 
-    Migrations makes it as easy as a couple clicks to move all of your Appwrite Cloud project data to a self-hosted instance.
+    Making the move to Appwrite Cloud? We've got your back.
+    Migrations makes it as easy as a couple clicks to move all of your self-hosted project data to a Cloud instance.
 </p>
 
 <h2><a href="#notices" id="notices">Things to keep in mind</a></h2>
@@ -12,23 +12,27 @@
 </ol>
 
 <h2><a href="#migration-process" id="migration-process">Migrating to Self-hosted from Cloud</a></h2>
-
 <p>
-    To begin migrating to Appwrite Self-hosted, make sure to read the <a href="/docs/migration">migration overview</a>
+    To begin migrating to self-hosted, make sure to read the <a href="/docs/migrations">migration overview</a>
     and <a href="#notices">things to keep in mind</a> sections above.
 </p>
 
-<h3>Steps on Your Cloud Project</h3>
+<h3>Steps on Your Self-hosted Project</h3>
+
 <ol class="margin-top margin-bottom-large text-size-normal">
-    <li>Navigate to your Appwrite Cloud Console and click on the <b>Migrations</b> tab.</li>
-    <li>Click <b>Export to Self-hosted</b>, you will be prompted to input the URL of your self-hosted Appwrite project.</li>
-    <li>Optionally, tell us about why you're moving to self-hosted.</li>
-    <li>After clicking <b>Continue</b>, you'll be directed back to your self-hosted project to complete the process.</li>
+    <li>Navigate to your self-hosted project's console and click on the <b>Migrations</b> tab.</li>
+    <li>Click <b>Deploy to cloud</b>, you will be redirected to Appwrite Cloud.</li>
+    <li>You will complete the migration on Appwrite Cloud.</li>
 </ol>
 
-<h3>Steps on Your Self-hosted Project</h3>
+<h3>Steps on Your Cloud Project</h3>
 <ol class="margin-top margin-bottom-large text-size-normal">
-    <li>Once redirected to your self-hosted project, you'll be prompted to select an organization and a project. You can migrate to an existing project or create a new one.</li>
+    <li>Once redirected to Appwrite Cloud, you'll be prompted to select an organization and a project. You can migrate to an existing project or create a new one.</li>
     <li>Select the data you wish to migrate. You can choose among accounts, databases, documents, files, and functions.</li>
     <li>Click <b>Start migration</b> to start the migration process. You do not need to keep the Appwrite Console open through the process.</li>
 </ol>
+
+<div class="notice">
+    <h2>Keep in mind</h2>
+    <p>Your Self-hosted instance will generate a API Key in the background to pass to Cloud. You can revoke this key after the migration process is complete.</p>
+</div>
