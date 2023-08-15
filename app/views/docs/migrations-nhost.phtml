@@ -1,0 +1,84 @@
+<p>
+  Moving your project from NHost to Appwrite?
+  Appwrite Migrations can help you streamline the process.
+  
+  Here's what you need to know to get started.
+</p>
+
+<h2><a href="#notices" id="notices">Things to keep in mind</a></h2>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+  <li>Appwrite will not incur usage charges during migrations, but NHost may still incur service charges.</li>
+  <li>Appwrite's Database doesn't support all the features of the postgreSQL database so more advanced postgres centric things things like advanced indexes, postgres functions and scheduling will not be migrated.</li>
+  <li>OAuth users will not be transferred. You will need to re-authenticate with your OAuth provider after the migration is complete.</li>
+</ol>
+
+<h2><a href="#resources" id="resources">Supported resource types</a></h2>
+<table>
+<thead>
+  <tr>
+    <th></th>
+    <th>Users</th>
+    <th>Databases</th>
+    <th>Documents</th>
+    <th>Files</th>
+    <th>Functions</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>NHost</td>
+    <td>✅</td>
+    <td>✅</td>
+    <td>✅</td>
+    <td>✅</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<h2><a href="#migration-process" id="migration-process">Migrating to Appwrite from NHost</a></h2>
+<p>
+  To begin migrating to Appwrite make sure to read the <a href="/docs/migrations">migration overview</a> 
+  and <a href="#notices">things to keep in mind</a> sections above.
+</p>
+   
+<ol class="margin-top margin-bottom-large text-size-normal">
+  <li>
+    Create a new project and click on the <b>Migrations</b> tab.
+  </li>
+  <li>
+    Click on the <b>Create Migration</b> button and select <b>NHost</b> as your source.
+  </li>
+  <li>
+    Enter the credentials following the <a href="#credentials">instructions below</a> and click <b>Next</b>.
+  </li>
+  <li>
+    Select the resources you want to migrate and finally click <b>Start migration</b> to begin the migration process.
+  </li>
+</ol>
+
+<h3><a href="#credentials" id="credentials">NHost Credentials</a></h3>
+<p>
+Enter all the following credentials from your NHost project.
+</p>
+<ol class="margin-top margin-bottom-large text-size-normal">
+  <li>
+      <b>Region</b> - The region your NHost project is hosted in. This can be found in your NHost project environment variables as <b>NHOST_REGION</b>.
+  </li>
+  <li>
+      <b>Subdomain</b> - The subdomain of your NHost project. This can be found in your NHost project environment variables as <b>NHOST_SUBDOMAIN</b>.
+  </li>
+  <li>
+      <b>Database</b> - The name of your NHost database. This can be found in your NHost project Database settings.
+  </li>
+  <li>
+      <b>Username</b> - The username of your NHost database. This can be found in your NHost project Database settings.
+  </li>
+  <li>
+      <b>Password</b> - The password of your NHost database. You set this when you created your NHost project, if you don't remember it you can reset it from your NHost project Database settings.
+  </li>
+  <li>
+      <b>Admin Secret</b> - The admin secret of your NHost project. This can be found in your NHost project environment variables as <b>NHOST_ADMIN_SECRET</b>. We use this to transfer your NHost files to Appwrite.
+  </li>
+</ol>

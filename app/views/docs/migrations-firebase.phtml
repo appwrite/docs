@@ -1,0 +1,90 @@
+<p>
+  Moving your project from Firebase to Appwrite?
+  Appwrite Migrations can help you streamline the process.
+  
+  Here's what you need to know to get started.
+</p>
+
+<h2><a href="#notices" id="notices">Things to keep in mind</a></h2>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+  <li>Appwrite will not incur usage charges during migrations, but Firebase may still incur service charges.</li>
+  <li>Appwrite Migrations only supports Firestore as a database source. Realtime Database is <b>currently not supported</b>.</li>
+  <li>At the moment only top level document migration is supported. Nested documents will not be transferred automatically.</li>
+  <li>OAuth users will not be transferred. Users will need to re-authenticate with your OAuth provider after the migration is complete.</li>
+</ol>
+
+<h2><a href="#resources" id="resources">Supported resource types</a></h2>
+<table>
+<thead>
+  <tr>
+    <th></th>
+    <th>Users</th>
+    <th>Databases</th>
+    <th>Documents</th>
+    <th>Files</th>
+    <th>Functions</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Firebase</td>
+    <td>✅</td>
+    <td>✅</td>
+    <td>✅</td>
+    <td>✅</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<h2><a href="#migration-process" id="migration-process">Migrating to Appwrite from Firebase</a></h2>
+<p>
+  To begin migrating to Appwrite make sure to read the <a href="/docs/migrations">migration overview</a> 
+  and <a href="#notices">things to keep in mind</a> sections above.
+</p>
+   
+<ol class="margin-top margin-bottom-large text-size-normal">
+  <li>
+    Create a new project and click on the <b>Migrations</b> tab.
+  </li>
+  <li>
+    Click on the <b>Create Migration</b> button and select <b>Firebase</b> as your source.
+  </li>
+  <li>
+    Depending on where your Appwrite project is hosted, you'll need to use different methods to authorize with Firebase. 
+    See the <a href="#cloud">Cloud</a> and <a href="#self-hosted">Self-hosting</a> sections for details.
+  </li>
+  <li>
+    Finally, add the platforms for your <a href="/docs/getting-started-for-web">Web</a>, <a href="getting-started-for-flutter/docs/getting-started-for-flutter">Flutter</a>, <a href="/docs/getting-started-for-android">Android</a>, and <a href="/docs/getting-started-for-apple">iOS</a> apps.
+  </li>
+</ol>
+
+<h3><a href="#cloud" id="cloud">Appwrite Cloud</a></h3>
+<p>
+  To simplify the migration process we have created an OAuth application that will allow you to sign in with Google and automatically
+  discover your Firebase projects. Simply select the source project and follow the migration wizard.
+</p>
+
+<h3><a href="#self-hosted" id="self-hosted">Migrating to Appwrite Self-Hosted</a></h3>
+<p>
+  If you are self-hosting Appwrite you will need to create a service account in your Firebase project and download the JSON file.
+</p>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+  <li>
+    Navigate to your Firebase console.
+  </li>
+  <li>
+    Click the gear icon to access your <b>Project Settings</b>.
+  </li>
+  <li>
+    Click <b>Service Accounts</b>, then <b>Generate New Private Key</b>. Don't share this key with anyone!
+  </li>
+  <li>
+    Once you've downloaded your private key, head back to Appwrite and click <b>Manual Authentication</b>.
+  </li>
+  <li>
+    Upload the JSON private key and follow the wizard.
+  </li>
+</ol>
