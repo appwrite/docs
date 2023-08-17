@@ -353,6 +353,67 @@ public class Main {
     </li>
 </ul>
 
+<h4><a href="#headers" id="headers">Headers</a></h3>
+<p>
+    Appwrite Functions will always receive a set of headers that provide meta data about the function execution.
+    These are provided along side any custom headers sent to the function.
+</p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Variable</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>x-appwrite-trigger</td>
+            <td>
+                Describes how the function execution was invoked.
+            </td>
+        </tr>
+        <tr>
+            <td>x-appwrite-event</td>
+            <td>
+                If the function execution was triggered by an event, describes the triggering event.
+            </td>
+        </tr>
+        <tr>
+            <td>x-appwrite-user-id</td>
+            <td>
+                If the function execution was invoked by an authenticated user, display the user ID. 
+                This doesn't apply to Appwrite Console users or API keys.
+            </td>
+        </tr>
+        <tr>
+            <td>x-appwrite-user-jwt</td>
+            <td>
+                [TODO: @meldiron whats this]
+            </td>
+        </tr>
+        <tr>
+            <td>x-appwrite-country-code</td>
+            <td>
+                Displays the country code of the configured locale.
+            </td>
+        </tr>
+        <tr>
+            <td>x-appwrite-continent-code</td>
+            <td>
+                Displays the continent code of the configured locale.
+            </td>
+        </tr>
+        <tr>
+            <td>x-appwrite-continent-eu</td>
+            <td>
+                Describes if the configured local is within the EU.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
 <h3><a href="#response" id="response">Response</a></h3>
 <p>
     If you need to send a response to the invoker of the function, such as a user, client app, or an integration, use the response object.
@@ -941,7 +1002,19 @@ namespace runtime {
 </p>
 
 <h3>Default Environment Variables</h3>
-<p>Appwrite Runtimes have some default environment variables. These are always accesible </p>
+<p>
+    Appwrite runtimes passes in some environment variables by default. 
+    These are always accesible for every function at runtime.
+</p>
+
+<div class="notice">
+  <h2>Appwrite API keys</h2>
+  <p>
+    If your function is using an Appwrite SDK with an API key, this API key needs to be generated and passed in manually.
+    API keys are not passed by default for security reasons.
+  </p>
+</div>
+
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
     <thead>
         <tr>
@@ -951,12 +1024,42 @@ namespace runtime {
     </thead>
     <tbody>
         <tr>
-            <td></td>
+            <td>APPWRITE_FUNCTION_ID</td>
+            <td>
+                The ID of the running function.
+            </td>
+        </tr>
+        <tr>
+            <td>APPWRITE_FUNCTION_NAME</td>
+            <td>
+                The Name of the running function.
+            </td>
+        </tr>
+        <tr>
+            <td>APPWRITE_FUNCTION_DEPLOYMENT</td>
+            <td>
+                The deployment ID of the running function.
+            </td>
+        </tr>
+        <tr>
+            <td>APPWRITE_FUNCTION_PROJECT_ID</td>
+            <td>
+                The project ID of the running function.
+            </td>
+        </tr>
+        <tr>
+            <td>APPWRITE_FUNCTION_RUNTIME_NAME</td>
+            <td>
+                The runtime of the running function.
+            </td>
+        </tr>
+        <tr>
+            <td>APPWRITE_FUNCTION_RUNTIME_VERSION</td>
+                The runtime version of the running function.
             <td></td>
         </tr>
     </tbody>
 </table>
-
 
 <h3>Local Environment Variables</h3>
 <p>
