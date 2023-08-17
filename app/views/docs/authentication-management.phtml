@@ -9,7 +9,7 @@
 [TODO @steven: Labels docs]
 
 
-<h2><a href="/docs/authentication#preferences" id="preferences">User Preferences</a></h2>
+<h2><a href="#preferences" id="preferences">User Preferences</a></h2>
 <p>You can store user preferences on a user's account using Appwrite's <a href="/docs/client/account#accountUpdatePrefs">Update Preferences</a> endpoint. You can store user preferences such as theme, notification settings, or preferred language so they can be synced across multiple devices.</p>
 <p>Preferences are stored as a key-value JSON object. The maximum allowed prefs size is 64kB and throws an error if exceeded.</p> 
 <ul class="phases clear" data-ui-phases>
@@ -171,3 +171,22 @@ let prefs = try await account.getPrefs()</code></pre>
         </div>
     </li>
 </ul>
+
+<h2><a href="#users-api" id="users-api">Users API</a></h2>
+<p>
+    The Users API is a dedicated API for managing users from an admin's perspective. 
+    You'll notice that the Account API doesn't allow you to view or make changes to other users. 
+    This is by design and for <b>security reasons</b>.
+</p>
+
+<p>
+    You can use the Users API with an API key authenticated <a href="/docs/sdks">Server SDK</a> to manage users.
+    If you must expose parts of the Users API to normal users, we suggest doing so through an Appwrite Function.
+    Exposing API keys to users is <b>dangerous and a security risk</b>, by using an Appwrite Function, you can add your own validation to prevent malicious behavior.
+</p>
+
+<p>
+<a href="/docs//server/users"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> 
+    Learn more about the Users API
+</a>
+</p>
