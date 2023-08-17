@@ -2,246 +2,67 @@
 
 use Appwrite\Utopia\View;
 
-$events = $this->getParam('events', []);
-$runtimes = $this->getParam('runtimes', []);
-
 ?>
 
 <p>
-    Appwrite Functions let you extend Appwrite by adding your own code and logic. 
-    You can think of them as code snippets that are triggered by server events, webhooks, scheduled executions, or user invokation.
+    Appwrite Functions unlock limitless potential for developers to extend Appwrite with code snippets.
+    Appwrite Functions are user defined functions that can start small and scale big, deploying automatically from source control. 
+    These Functions can be triggered by HTTP requests, SDK methods, server events, webhooks, scheduled executions.
     Each function will have their own URL, execute in their own isolated container, and have their own configurable environment variables and permissions.
-    With these features, Appwrite Functions unlock limitless potential to expand Appwrite's capabilities with custom logic and integrations.
 </p>
 
 <h2><a href="#gettingStarted" id="gettingStarted">Getting Started</a></h2>
 <p>
-    Appwrite Functions unlock limitless possibilities, but it's simple to get started. You can deploy your first function and execute it in minutes.
+    Appwrite Functions let you build anything you can imagine, but this flexibility makes is difficult to know where to start.
+    Start exploring by cloning one of the quick start templates or using a template with pre-built integration to quickly implement features.
 </p>
 
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Node.js</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ res }) => {
-    return res.json({
-        motto: 'Build Fast. Scale Big. All in One Place.'
-    });
-};</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>PHP</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>return function ($context) {
-    return $context->res->json([
-        'motto' => 'Build Fast. Scale Big. All in One Place.'
-    ]);
-}</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Python</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
-    return context.res.json({
-        "motto": "Build Fast. Scale Big. All in One Place.",
-})</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Ruby</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
-    return context.res.json(
-        {
-            "motto": "Build Fast. Scale Big. All in One Place."
-        }
-    )
-end</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Deno</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default ({ req, res, log, error }: any) => {
-  return res.json({
-    motto: "Build Fast. Scale Big. All in One Place."
-  });
-};</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Dart</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
-
-Future<dynamic> main(final context) async {
-    return context.res.json({
-        'motto': 'Build Fast. Scale Big. All in One Place.',
-    });
-}</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Swift</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
-
-            func main(context: RuntimeContext) async throws -> RuntimeOutput {
-    return try context.res.json([
-        "motto": "Build Fast. Scale Big. All in One Place."
-    ])
-}</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>.NET</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
-public class Handler {
-    public async Task<RuntimeOutput> Main(RuntimeContext Context) 
-    {
-        return Context.Res.Json(new Dictionary<string, object?>()
-        {
-            { "motto", "Build Fast. Scale Big. All in One Place." }
-        });
-    }
-}</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Kotlin</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
-
-import io.openruntimes.kotlin.RuntimeContext
-import io.openruntimes.kotlin.RuntimeOutput
-
-class Main {
-    fun main(context: RuntimeContext): RuntimeOutput {
-        return context.res.json(mutableMapOf(
-            "motto" to "Build Fast. Scale Big. All in One Place.",
-            "learn" to "https://appwrite.io/docs",
-            "connect" to "https://appwrite.io/discord",
-            "getInspired" to "https://builtwith.appwrite.io"
-        ))
-    }
-}</code></pre>
-        </div>
-
-        </div>
-    </li>
-    <li>
-        <h3>Java</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
-
-import io.openruntimes.java.RuntimeContext;
-import io.openruntimes.java.RuntimeOutput;
-import java.util.HashMap;
-
-public class Main {
-    public RuntimeOutput main(RuntimeContext context) throws Exception {
-        Map<String, Object> json = new HashMap<>();
-        json.put("motto", "Build Fast. Scale Big. All in One Place.");
-        return context.getRes().json(json);
-    }
-}</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>C++</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include "../RuntimeResponse.h"
-#include "../RuntimeRequest.h"
-#include "../RuntimeOutput.h"
-#include "../RuntimeContext.h"
-
-namespace runtime {
-  class Handler {
-    public:
-      static RuntimeOutput main(RuntimeContext &context) {
-        Json::Value response;
-        response["motto"] = "Build Fast. Scale Big. All in One Place.";
-        return context.res.json(response);
-      }
-  };
-}</code></pre>
-        </div>
-        </div>
-    </li>
-</ul>
-
+<?php
+$image = new View(__DIR__.'/../general/image.phtml');
+    echo $image
+        ->setParam('srcLight', '/images-ee/docs/functions-starter-light.png')
+        ->setParam('srcDark', '/images-ee/docs/functions-starter-dark.png')
+        ->setParam('alt', 'Function settings page.')
+        ->setParam('description', 'Function settings page.')
+        ->render();
+?>
 
 <h2><a href="#exploreFeatures" id="exploreFeatures">Explore Features</a></h2>
 <p>
-    Appwrite Functions help you start small and scale big. 
-    Now you've created your first Appwrite Function, it's time to learn the different ways to develop, deploy, and execute your Appwrite Functions. 
-    To fully harness the power of Appwrite Functions, explore the following features.
+    Appwrite Functions use familiar HTTP concepts, so you can learn quickly and grain transferable skills.
 </p>
-
-<h3><a href="#familiar-concepts" id="familiar-concepts">Familiar Concepts</a></h3>
-<p>
-    Appwrite Functions follow common HTTP concepts you already know. 
-    You can start building with minimal learning curve, without needing to learn niche concepts that don't apply elsewhere.
-</p>
-
 <p>
 <a href="/docs/functions-develop"><i class="icon-angle-circled-right"></i>Learn more about developing functions</a>
 </p>
 
-<h3><a href="#automated-deployment" id="automated-concepts">Automated Deployment</a></h3>
 <p>
-    Appwrite Functions can be deployed automatically from GitHub.
-    Integrate Appwrite Functions seemlessly into your existing development workflow, without needing annoying CI/CD configuration.
+    Appwrite Functions can be deployed automatically from Git, through the Appwrite CLI, or be uploaded manually.
+    Develop and deploy with the workflow you're already comfortable with.
 </p>
 <p>
 <a href="/docs/functions-deploy"><i class="icon-angle-circled-right"></i>Learn more about deploying functions</a>
 </p>
 
-<h3><a href="#flexible-execution" id="#flexible-execution">Flexible Execution</a></h3>
 <p>
-    Appwrite Functions can be executed through HTTP requests, async or synchronous SDK calls, webhooks, event or scheduled triggers, and even serve webpages to browsers.
-    Integrate Appwrite with infinite possibilities through a simple function.
+    Appwrite Functions can be triggered by HTTP requests, SDK methods, server events, webhooks, scheduled executions.
+    Explore how Appwrite Functions can be invoked.
 </p>
 <p>
 <a href="/docs/functions-deploy"><i class="icon-angle-circled-right"></i>Learn more about executing functions</a>
 </p>
 
-<h3><a href="#runtimes" id="runtimes">All Your Favorite Runtimes</a></h3>
 <p>
-    Appwrite supports a growing list of 10+ runtimes.
-    Keep your codebase simple by writing functions in a language you already work with.
+    Appwrite supports a growing list of 10+ runtimes. 
+    Avoid adding additional complexity to your codebase by coding in languages you already use and love.
 </p>
 <p>
 <a href="/docs/runtimes"><i class="icon-angle-circled-right"></i>Learn more about using function runtimes</a>
 </p>
-<h3><a href="#template" id="template">Start with a Template</a></h3>
+
 <p>
-    Appwrite Functions has many built in templates that help you jumpstart your creativity.
-    Add integrations by using templates out of the box, or clone the template to customize and fit your needs.
+    Like to learn from examples?
+    Here's a curated list of examples that showcase Appwrite Function's capabilies.
 </p>
 <p>
-<a href="/docs/deploy#templates"><i class="icon-angle-circled-right"></i>Learn more about using function templates</a>
+<a href="/docs/examples"><i class="icon-angle-circled-right"></i>Learn more about using function examples</a>
 </p>
