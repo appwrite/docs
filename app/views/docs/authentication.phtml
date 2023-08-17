@@ -1,8 +1,109 @@
 <p>
     Appwrite Authentication delivers more than just user sign up and log in.
-    Authentication makes it easy to build secure and robust authentication with support for many differnt authentication methods.
+    Authentication makes it easy to build secure and robust authentication with support for many different authentication methods.
+</p>
+
+<p>
     You can manage user accounts with user preferences, user labeling, or organizing users into teams.
-    Combined with a robust permissions system, Appwrite Authentication provides everything you need to authenticate and manager users.
+    Combined with a robust permissions system, Appwrite Authentication provides everything you need to authenticate and manage users.
+</p>
+
+<h2><a href="#starter" id="starter">Getting Started</a></h2>
+<p>
+    Adding Appwrite Authentication to your apps can be as easy as these lines of code.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+const account = new Account(client);
+
+const user = await account.create(
+    ID.unique(),
+    'email@example.com',
+    'password'
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+final account = Account(client);
+
+final user = await account.create(
+    userId: ID.unique(),
+    email: 'email@example.com',
+    password: 'password',
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+import io.appwrite.ID
+
+val client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
+
+val account = Account(client)
+
+val user = account.create(
+    userId = ID.unique(),
+    email = "email@example.com",
+    password = "password"
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
+
+let account = Account(client)
+
+let user = try await account.create(
+    userId: ID.unique(),
+    email: "email@example.com",
+    password: "password"
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
+mutation {
+    accountCreate(userId: "unique()", email: "email@example.com", password: "password") {
+        _id
+        email
+        name
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>
+    Use email and password authentication as a starting point and explore the many powerful features of Appwrite authentication.
 </p>
 
 <h2><a href="#account-vs-user-api" id="account-vs-user-api">Account vs Users API</a></h2>

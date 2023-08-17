@@ -30,16 +30,10 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.createPhoneSession(
+const user = await account.createPhoneSession(
     ID.unique(),
     '+14255550123'
 );
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});
 
 </code></pre>
         </div>
@@ -128,16 +122,10 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.updatePhoneSession(
+const user = await account.updatePhoneSession(
     '[USER_ID]',
     '[SECRET]'
-);
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
+);</code></pre>
         </div>
     </li>
     <li>

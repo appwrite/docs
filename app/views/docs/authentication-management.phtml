@@ -24,13 +24,7 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.updatePrefs({darkTheme: true, language: 'en'});
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
+const user = await account.updatePrefs({darkTheme: true, language: 'en'});</code></pre>
         </div>
     </li>
     <li>
@@ -123,13 +117,7 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.getPrefs();
-
-promise.then(function (prefs) {
-    console.log(prefs);
-}, function (error) {
-    console.log(error);
-});</code></pre>
+const user = await account.getPrefs();</code></pre>
         </div>
     </li>
     <li>

@@ -26,13 +26,7 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.createAnonymousSession();
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
+const user = await account.createAnonymousSession();</code></pre>
         </div>
     </li>
     <li>

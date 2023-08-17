@@ -22,17 +22,11 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.create(
+const user = await account.create(
     ID.unique(),
     'email@example.com',
     'password'
-);
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
+);</code></pre>
         </div>
     </li>
     <li>
@@ -181,16 +175,10 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.createEmailSession(
+const user = await account.createEmailSession(
     'email@example.com',
     'password'
-);
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
+);</code></pre>
         </div>
     </li>
     <li>
@@ -278,13 +266,7 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.createPasswordRecovery('email@example.com', 'https://example.com');
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
+const user = await account.createPasswordRecovery('email@example.com', 'https://example.com');</code></pre>
         </div>
     </li>
     <li>
@@ -371,13 +353,7 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.updateRecovery('[USER_ID]', '[SECRET]', 'password', 'password');
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
+const user = await account.updateRecovery('[USER_ID]', '[SECRET]', 'password', 'password');</code></pre>
         </div>
     </li>
     <li>

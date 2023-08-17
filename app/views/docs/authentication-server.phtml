@@ -30,13 +30,7 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.createJWT();
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
+const user = await account.createJWT();</code></pre>
         </div>
     </li>
     <li>

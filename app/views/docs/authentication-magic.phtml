@@ -23,13 +23,7 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.createMagicURLSession('email@example.com', 'email@example.com');
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
+const user = await account.createMagicURLSession('email@example.com', 'email@example.com');</code></pre>
         </div>
     </li>
     <li>
@@ -120,13 +114,7 @@ const client = new Client()
 
 const account = new Account(client);
 
-const promise = account.updateMagicURLSession('email@example.com', '[SECRET]');
-
-promise.then(function (response) {
-    console.log(response);
-}, function (error) {
-    console.log(error);
-});</code></pre>
+const user = await account.updateMagicURLSession('email@example.com', '[SECRET]');</code></pre>
         </div>
     </li>
     <li>
