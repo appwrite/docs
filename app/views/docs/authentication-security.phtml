@@ -10,7 +10,7 @@
 
 <div class="notice">
   <h2>Best Practice</h2>
-  <p>Only keep user sessions active as long as needed and only maintain <b>one</b> instance of the Client SDK in your app to avoid conflicting session data.</p>
+  <p>Only keep user sessions active as long as needed and maintain exactly <b>one</b> instance of the Client SDK in your app to avoid conflicting session data.</p>
 </div>
 
 <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large text-size-small vertical">
@@ -74,7 +74,7 @@
 </table>
 
 <h2><a href="/docs/authentication-security#limits" id="limits">Session Limits</a></h2>
-<p>In Appwrite versions 1.2 and above, you can limit the number of active sessions created per user to prevent the accumulation of unused but active sessions. New sessions created by the same user past the session limit deletes the oldest session.</p>
+<p>In Appwrite versions 1.2 and above, you can limit the number of active sessions created per user to prevent the accumulation of unused but active sessions. New sessions created by the same user past the session limit delete the oldest session.</p>
 
 <p>You can change the session limit in the <b>Security</b> tab of the Auth Service in your Appwrite Console. The default session limit is 10 with a maximum configurable limit of 100.</p> 
 
@@ -85,7 +85,7 @@
 </p>
 
 <h2><a href="#password-history" id="password-history">Password History</a></h2>
-<p>Password history prevents users from reusing recent passwords. This protects user accounts from security risks by enforcing a new password everytime it's changed.</p>
+<p>Password history prevents users from reusing recent passwords. This protects user accounts from security risks by enforcing a new password every time it's changed.</p>
 
 <p>Password history can be enabled in the Auth service's <b>Security</b> tab on the Appwrite console. You can choose how many previous passwords to remember up to a maximum of 20 and block users from reusing them.</p>
 
