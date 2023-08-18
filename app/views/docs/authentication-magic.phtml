@@ -100,8 +100,6 @@ let user = try await account.createMagicURLSession(
     After receiving your secret from an email, you can create a session.
 </p>
 
-[TODO: @bradley, please update the examples below with how to get the secret from the magic URL]
-
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
@@ -114,7 +112,11 @@ const client = new Client()
 
 const account = new Account(client);
 
-const user = await account.updateMagicURLSession('email@example.com', '[SECRET]');</code></pre>
+const urlParams = new URLSearchParams(window.location.search);
+const secret = urlParams.get('secret');
+const userId = urlParams.get('userId');
+
+const user = await account.updateMagicURLSession(userId, secret);</code></pre>
         </div>
     </li>
     <li>

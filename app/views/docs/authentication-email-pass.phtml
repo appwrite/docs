@@ -154,7 +154,32 @@ mutation {
     In this example, the code below will be found in the page served at <code>https://example.com/verify</code>.
 </p>
 
-[TODO: @bradley examples to parse query params from page and complete verification]
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+const account = new Account(client);
+
+const urlParams = new URLSearchParams(window.location.search);
+const secret = urlParams.get('secret');
+const userId = urlParams.get('userId');
+
+const promise = account.updateVerification(userId, secret);
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+</ul>
 
 
 <h2><a href="#login" id="login">Log In</a></h2>

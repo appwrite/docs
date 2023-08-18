@@ -16,8 +16,6 @@
     A <b>new account</b> will be created for this phone number if it has never been used before.
 </p>
 
-[TODO: @bradley update these examples to show where the userID comes from (continuity from first request to next)]
-
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
@@ -30,12 +28,12 @@ const client = new Client()
 
 const account = new Account(client);
 
-const user = await account.createPhoneSession(
+const sessionToken = await account.createPhoneSession(
     ID.unique(),
     '+14255550123'
 );
 
-</code></pre>
+var userId = sessionToken.userId // Store this somewhere to use later when logging in</code></pre>
         </div>
     </li>
     <li>
@@ -49,10 +47,12 @@ final client = Client()
 
 final account = Account(client);
 
-final session = await account.createPhoneSession(
+final sessionToken = await account.createPhoneSession(
     userId: ID.unique(),
     phone: '+14255550123'
-);</code></pre>
+);
+
+final userId = sessionToken.userId // Store this somewhere to use later when logging in</code></pre>
     </li>
     <li>
         <h3>Android</h3>
@@ -67,10 +67,12 @@ val client = Client()
 
 val account = Account(client)
 
-val session = account.createPhoneSession(
+val sessionToken = account.createPhoneSession(
     userId = ID.unique(),
     phone = "+14255550123"
-)</code></pre>
+)
+
+val userId = sessionToken.userId // Store this somewhere to use later when logging in</code></pre>
     </li>
     <li>
         <h3>Apple</h3>
@@ -83,10 +85,12 @@ let client = Client()
 
 let account = Account(client)
 
-let session = try await account.createPhoneSession(
+let sessionToken = try await account.createPhoneSession(
     userId: ID.unique(),
     phone: "+14255550123"
-)</code></pre>
+)
+
+let userId = sessionToken.userId // Store this somewhere to use later when logging in</code></pre>
     </li>
     <li>
         <h3>GraphQL</h3>
@@ -122,10 +126,11 @@ const client = new Client()
 
 const account = new Account(client);
 
-const user = await account.updatePhoneSession(
-    '[USER_ID]',
-    '[SECRET]'
-);</code></pre>
+const session = await account.updatePhoneSession(
+    userId, // From when you called createPhoneSession
+    '[SECRET]' // The 6-digit code from the SMS message
+);
+</code></pre>
         </div>
     </li>
     <li>
@@ -140,8 +145,8 @@ final client = Client()
 final account = Account(client);
 
 final session = await account.updatePhoneSession(
-    userId: '[USER_ID]',
-    secret: '[SECRET]'
+    userId: userId, // From when you called createPhoneSession
+    secret: '[SECRET]' // The 6-digit code from the SMS message
 );</code></pre>
     </li>
     <li>
@@ -158,8 +163,8 @@ val client = Client()
 val account = Account(client)
 
 val session = account.updatePhoneSession(
-    userId = "[USER_ID]",
-    secret = "[SECRET]"
+    userId = userId, // From when you called createPhoneSession
+    secret = "[SECRET]" // The 6-digit code from the SMS message
 )</code></pre>
     </li>
     <li>
@@ -174,8 +179,8 @@ let client = Client()
 let account = Account(client)
 
 let session = try await account.updatePhoneSession(
-    userId: "[USER_ID]",
-    secret: "[SECRET]"
+    userId: userId, // From when you called createPhoneSession
+    secret: "[SECRET]" // The 6-digit code from the SMS message
 )</code></pre>
     </li>
     <li>
