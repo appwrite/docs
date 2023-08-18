@@ -105,7 +105,125 @@ try await account.createOAuth2Session(provider: "amazon")</code></pre>
 
 <h2><a href="#profile" id="profile">OAuth 2 Profile</a></h2>
 <p>
-    [TODO: @steven fill the docs to access oauth account profile information]
+After authenticating a user through their OAuth2 provider, you can fetch their profile information such as their avatar image or name. 
+To do this you can use the access token from the OAuth2 provider and make API calls to the provider.
+</p>
+
+<p>
+After creating an OAuth2 session, you can fetch the session to get information about the provider.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+<li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client();
+
+const account = new Account(client);
+
+const session = account.getSession('current');
+
+// Provider information
+console.log(session.provider);
+console.log(session.providerUid);
+console.log(session.provderAccessToken);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+final account = Account(client);
+
+final session = await getSession(
+    sessionId : "[SESSION_ID]"
+);
+
+// Provider information
+print(session.provider);
+print(session.providerUid);
+print(session.provderAccessToken);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+
+val account = Account(client)
+
+val response = account.getSession(
+    sessionId = "[SESSION_ID]"
+)
+
+// Provider information
+print(session.provider);
+print(session.providerUid);
+print(session.provderAccessToken);</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+
+let account = Account(client)
+
+let session = try await account.getSession(
+    sessionId: "[SESSION_ID]"
+)
+
+// Provider information
+print(session.provider);
+print(session.providerUid);
+print(session.provderAccessToken);</code></pre>
+    </li>
+</ul>
+
+<p>
+    An OAuth2 <a href="https://appwrite.io/docs/models/session">session</a> will have the following attributes.
+</p>
+
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 200px">property</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>provider</td>
+        <td>The OAuth2 Provider.</td>
+    </tr>
+    <tr>
+        <td>providerUid</td>
+        <td> User ID from the OAuth2 Provider.</td>
+    </tr>
+    <tr>
+        <td>provderAccessToken</td>
+        <td>Access token from the OAuth2 provider. Use this to <b>make requests to the OAuth2 provider</b> to fetch personal information.</td>
+    </tr>
+    </tbody>
+</table>
+
+<p>
+    You can use the <code>provderAccessToken</code> to make requests to your OAuth2 provider.
+    Refer to the docs for the OAuth2 provider you're using to learn about making API calls with the access token.
 </p>
 
 <h2><a href="#refresh" id="refresh">Refresh Tokens</a></h2>
