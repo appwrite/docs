@@ -370,7 +370,8 @@ public class Main {
         <tr>
             <td>x-appwrite-trigger</td>
             <td>
-                Describes how the function execution was invoked.
+                Describes how the function execution was invoked. 
+                Possible values are <code>http</code>, <code>schedule</code> or <code>event</code>.
             </td>
         </tr>
         <tr>
@@ -389,7 +390,8 @@ public class Main {
         <tr>
             <td>x-appwrite-user-jwt</td>
             <td>
-                [TODO: @meldiron whats this]
+                JWT token generated from the invoking user's session. Used to authenticate Server SDKs to respect access permissions.
+                <a href="/docs/authentication-server">Learn more about JWT tokens.</a>
             </td>
         </tr>
         <tr>
