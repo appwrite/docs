@@ -6,8 +6,14 @@
 
 
 <h2><a href="#preferences" id="preferences">User Preferences</a></h2>
-<p>You can store user preferences on a user's account using Appwrite's <a href="/docs/client/account#accountUpdatePrefs">Update Preferences</a> endpoint. You can store user preferences such as theme, notification settings, or preferred language so they can be synced across multiple devices.</p>
-<p>Preferences are stored as a key-value JSON object. The maximum allowed prefs size is 64kB and throws an error if exceeded.</p> 
+<p>
+    You can store user preferences on a user's account using Appwrite's <a href="/docs/client/account#accountUpdatePrefs">Update Preferences</a> endpoint. 
+    You can store user preferences such as theme, notification settings, or preferred language so they can be synced across multiple devices.
+</p>
+<p>
+    Preferences are stored as a key-value JSON object.
+    The maximum allowed size for preferences is 64kB, and an error will be thrown if this limit is exceeded.
+</p> 
 <ul class="phases clear" data-ui-phases>
 <li>
         <h3>Web</h3>
@@ -376,7 +382,7 @@ func main() async throws {
 
 
 <p>
-    <li class="margin-bottom"><a href="/docs/permissions" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Learn more about permissions</a></li>
+    <a href="/docs/permissions" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Learn more about permissions</a>
 </p>
 
 <h2><a href="#teams" id="teams">Teams</a></h2>

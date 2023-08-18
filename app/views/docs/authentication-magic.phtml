@@ -1,14 +1,15 @@
 <p>
    Magic URL is a password-less way to authenticate users. 
-   When a user logs in, they will receive an email with a magic url that contains a secret used to log in the user.
+   When a user logs in, they will receive an email with a "magic" link that contains a secret used to log in the user.
+   The user can simply click the link to be logged in.
 </p>
 
 <h2><a href="#init" id="init">Send Email</a></h2>
 
 <p>
     Initialize the log in process with the <a href="/docs/client/account#accountCreateMagicURLSession">Create Magic URL Session</a> route.
-    We recommend you use the user's email as their user ID instead of a random ID.
-    This way, you will only need an email, and not an ID to log in the user.
+    If the email has never been used, a <b>new user ID is generated</b>, then the user will receive an email. 
+    If the email is already attached to an account, the <b>user ID is ignored</b> and the user will receive a link in their email.
 </p>
 
 <ul class="phases clear" data-ui-phases>
@@ -23,7 +24,10 @@ const client = new Client()
 
 const account = new Account(client);
 
-const user = await account.createMagicURLSession('email@example.com', 'email@example.com');</code></pre>
+const user = await account.createMagicURLSession(
+        ID.unique(), 
+        'email@example.com'
+    );</code></pre>
         </div>
     </li>
     <li>
@@ -33,12 +37,12 @@ const user = await account.createMagicURLSession('email@example.com', 'email@exa
 
 final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                // Your project ID
 
 final account = Account(client);
 
 final user = await account.createMagicURLSession(
-    userId: 'email@example.com',
+    userId: ID.unique(),
     email: 'email@example.com',
 );</code></pre>
     </li>
@@ -55,7 +59,7 @@ val client = Client(context)
 val account = Account(client)
 
 val user = account.createMagicURLSession(
-    userId = 'email@example.com',
+    userId = ID.unique(),
     email = "email@example.com"
 )</code></pre>
     </li>
@@ -71,7 +75,7 @@ let client = Client()
 let account = Account(client)
 
 let user = try await account.createMagicURLSession(
-    userId: 'email@example.com',
+    userId: ID.unique(),
     email: "email@example.com"
 )</code></pre>
     </li>

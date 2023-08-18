@@ -6,26 +6,26 @@
 
 <p>
     When using OAuth to authenticate, the authentication request is initiated from the client application. 
-    The user is then redirected to an OAuth2 provider to complete the authentication step, and finally, the user is redirected back to the client application.
+    The user is then redirected to an OAuth 2 provider to complete the authentication step, and finally, the user is redirected back to the client application.
 </p>
 
-<h2><a href="#configure" id="configure">Configure OAuth2 Login</a></h2>
+<h2><a href="#configure" id="configure">Configure OAuth 2 Login</a></h2>
 <p>
-    Before using OAuth2 login, you need to enable and configure a OAuth2 login provider.
+    Before using OAuth 2 login, you need to enable and configure an OAuth 2 login provider.
 </p>
 
 <ol class="margin-top margin-bottom-large text-size-normal">
     <li>Navigate to your Appwrite project</li>
     <li>Navigate to <b>Auth</b> > <b>Settings</b></li>
     <li>Find and open the OAuth provider.</li>
-    <li>In the OAuth2 settings modal, use the toggle to enable the provider</li>
+    <li>In the OAuth 2 settings modal, use the toggle to enable the provider</li>
 </ol>
 
 
-<h2><a href="#init" id="init">Initialize OAuth2 Login</a></h2>
+<h2><a href="#init" id="init">Initialize OAuth 2 Login</a></h2>
 
 <p>
-    To initialize the OAuth2 login process, use the <a href="/docs/client/account#accountCreateOAuth2Session">Create OAuth2 Session</a> route.
+    To initialize the OAuth 2 login process, use the <a href="/docs/client/account#accountCreateOAuth2Session">Create OAuth 2 Session</a> route.
 </p>
 
 <ul class="phases clear" data-ui-phases>
@@ -105,12 +105,12 @@ try await account.createOAuth2Session(provider: "amazon")</code></pre>
 
 <h2><a href="#profile" id="profile">OAuth 2 Profile</a></h2>
 <p>
-After authenticating a user through their OAuth2 provider, you can fetch their profile information such as their avatar image or name. 
-To do this you can use the access token from the OAuth2 provider and make API calls to the provider.
+After authenticating a user through their OAuth 2 provider, you can fetch their profile information such as their avatar image or name. 
+To do this you can use the access token from the OAuth 2 provider and make API calls to the provider.
 </p>
 
 <p>
-After creating an OAuth2 session, you can fetch the session to get information about the provider.
+After creating an OAuth 2 session, you can fetch the session to get information about the provider.
 </p>
 
 <ul class="phases clear" data-ui-phases>
@@ -128,7 +128,7 @@ const session = account.getSession('current');
 // Provider information
 console.log(session.provider);
 console.log(session.providerUid);
-console.log(session.provderAccessToken);</code></pre>
+console.log(session.providerAccessToken);</code></pre>
         </div>
     </li>
     <li>
@@ -149,7 +149,7 @@ final session = await getSession(
 // Provider information
 print(session.provider);
 print(session.providerUid);
-print(session.provderAccessToken);</code></pre>
+print(session.providerAccessToken);</code></pre>
     </li>
     <li>
         <h3>Android</h3>
@@ -170,7 +170,7 @@ val response = account.getSession(
 // Provider information
 print(session.provider);
 print(session.providerUid);
-print(session.provderAccessToken);</code></pre>
+print(session.providerAccessToken);</code></pre>
     </li>
     <li>
         <h3>Apple</h3>
@@ -190,12 +190,12 @@ let session = try await account.getSession(
 // Provider information
 print(session.provider);
 print(session.providerUid);
-print(session.provderAccessToken);</code></pre>
+print(session.providerAccessToken);</code></pre>
     </li>
 </ul>
 
 <p>
-    An OAuth2 <a href="https://appwrite.io/docs/models/session">session</a> will have the following attributes.
+    An OAuth 2 <a href="https://appwrite.io/docs/models/session">session</a> will have the following attributes.
 </p>
 
 <table class="full text-size-small">
@@ -212,24 +212,24 @@ print(session.provderAccessToken);</code></pre>
     </tr>
     <tr>
         <td>providerUid</td>
-        <td> User ID from the OAuth2 Provider.</td>
+        <td> User ID from the OAuth 2 Provider.</td>
     </tr>
     <tr>
-        <td>provderAccessToken</td>
-        <td>Access token from the OAuth2 provider. Use this to <b>make requests to the OAuth2 provider</b> to fetch personal information.</td>
+        <td>providerAccessToken</td>
+        <td>Access token from the OAuth 2 provider. Use this to <b>make requests to the OAuth 2 provider</b> to fetch personal information.</td>
     </tr>
     </tbody>
 </table>
 
 <p>
-    You can use the <code>provderAccessToken</code> to make requests to your OAuth2 provider.
-    Refer to the docs for the OAuth2 provider you're using to learn about making API calls with the access token.
+    You can use the <code>providerAccessToken</code> to make requests to your OAuth 2 provider.
+    Refer to the docs for the OAuth 2 provider you're using to learn about making API calls with the access token.
 </p>
 
 <h2><a href="#refresh" id="refresh">Refresh Tokens</a></h2>
 <p>
-    OAuth2 sessions expire to protect from security risks. 
-    This means, OAuth2 sessions should be refreshed to keep the user authenticated. 
+    OAuth 2 sessions expire to protect from security risks. 
+    OAuth 2 sessions should be periodically refreshed to keep the user authenticated. 
     You can do this by calling the <a href="/docs/client/account#accountUpdateSession">Update OAuth Session</a> endpoint when ever your user visits your app.
 </p>
 
