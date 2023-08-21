@@ -24,10 +24,14 @@ const client = new Client()
 
 const account = new Account(client);
 
-const user = await account.createMagicURLSession(
-        ID.unique(), 
-        'email@example.com'
-    );</code></pre>
+
+const promise = account.createMagicURLSession('[USER_ID]', 'email@example.com');
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
         </div>
     </li>
     <li>

@@ -123,7 +123,7 @@ const client = new Client();
 
 const account = new Account(client);
 
-const session = account.getSession('current');
+const session = await account.getSession('current');
 
 // Provider information
 console.log(session.provider);
@@ -237,38 +237,38 @@ print(session.providerAccessToken);</code></pre>
     <li>
         <h3>Web</h3>
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
-        <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+        <pre class="line-numbers"><code class="prism language-javascript" data-prism>const promise = account.updateSession('[SESSION_ID]');
 
-const client = new Client();
-
-const account = new Account(client);
-
-client
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]')                  // Your Project ID
-;
-
-// Go to Amazon OAuth login page
-account.createOAuth2Session('amazon', '[LINK_ON_SUCCESS]', '[LINK_ON_FAILURE]');</code></pre>
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
         </div>
     </li>
     <li>
         <h3>Flutter</h3>
         <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
-void main() async {
-    final client = new Client();
-    final account = new Account(client);
-    
-    client
-        .setEndpoint('https://cloud.appwrite.io/v1') // YOUR API Endpoint
-        .setProject('[PROJECT_ID]')                  // YOUR PROJECT ID
-    ;
-    
-    // OAuth Login, for simplest implementation you can leave both success and
-    // failure link empty so that Appwrite handles everything.
-    await account.createOAuth2Session(provider: 'amazon');
-        
+
+void main() { // Init SDK
+  Client client = Client();
+  Account account = Account(client);
+
+  client
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+  ;
+  Future result = account.updateSession(
+    sessionId: '[SESSION_ID]',
+  );
+
+  result
+    .then((response) {
+      print(response);
+    }).catchError((error) {
+      print(error.response);
+  });
 }</code></pre>
         </div>
     </li>
@@ -280,23 +280,29 @@ import io.appwrite.services.Account
 
 val client = Client(context)
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                  // Your Project ID
+    .setProject("5df5acd0d48c2") // Your project ID
 
 val account = Account(client)
 
-account.createOAuth2Session(provider = "amazon")</code></pre>
+val response = account.updateSession(
+    sessionId = "[SESSION_ID]"
+)</code></pre>
         </div>
     </li>
     <li>
         <h3>Apple</h3>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-    guard let url = URLContexts.first?.url,
-        url.absoluteString.contains("appwrite-callback") else {
-        return
-    }
-    WebAuthComponent.handleIncomingCookie(from: url)
-}</code></pre>
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+
+let account = Account(client)
+
+let session = try await account.updateSession(
+    sessionId: "[SESSION_ID]"
+)</code></pre>
         </div>
     </li>
     <li>
