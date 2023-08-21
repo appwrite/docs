@@ -14,7 +14,7 @@
     The generated domains will look like this.
 </p>
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre class="line-numbers"><code class="prism language-bash" data-prism>https://64d4d22db370ae41a32e.functions.cloud.appwrite.io</code></pre>
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>https://64d4d22db370ae41a32e.appwrite.global</code></pre>
 </div>
 
 <p>
@@ -29,7 +29,7 @@
 </p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
-    <pre><code class="language-bash" data-prism>curl -X POST https://64d4d22db370ae41a32e.functions.cloud.appwrite.io \
+    <pre><code class="language-bash" data-prism>curl -X POST https://64d4d22db370ae41a32e.appwrite.global \
     -H "X-Custom-Header: 123" \
     -H "Content-Type: application/json" \
     -d '{"data":"this is json data"}'</code></pre>
@@ -41,7 +41,9 @@
    You can invoke your Appwrite Functions directly from the Appwrite SDKs.
 </p>
 
+<p>
 <a href="/docs/sdk/functions"><i class="icon-angle-circled-right"></i>Learn more about using the Appwrite SDKs</a>
+</p>
 
 <h3>Client SDKs</h3>
 
@@ -416,6 +418,21 @@ public static void main(String[] args) throws Exception {
 </ul>
 
 
+<h2><a href="#console" id="console">Console</a></h2>
+<p>
+    Another easy way to test a function is directly in the Appwrite console.
+    You test a function by hitting the <b>Execute now</b> button and 
+</p>
+
+<?php
+$image = new View(__DIR__.'/../general/image.phtml');
+    echo $image
+        ->setParam('srcLight', '/images-ee/docs/functions-execute-light.png')
+        ->setParam('srcDark', '/images-ee/docs/functions-execute-dark.png')
+        ->setParam('alt', '"Create Function" page.')
+        ->setParam('description', '"Create Function" page.')
+        ->render();
+?>
 
 <h2><a href="#events" id="events">Events</a></h2>
 <p>

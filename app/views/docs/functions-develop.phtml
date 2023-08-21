@@ -1,13 +1,7 @@
 <p>
     Appwrite Functions offer a familiar interface if you've developed REST endpoints.
     Each function is handled following a request and response pattern.
-    Here's what you need to know to start writing your first Appwrite Function.
 </p>
-
-<div class="notice">
-  <h2>Just want the code? </h2>
-  <p>If you prefer to learn through examples, explore the <a href="/docs/functions-examples">examples page</a>.</p>
-</div>
 
 <h2>Function Flow</h2>
 <p>
@@ -16,17 +10,443 @@
 </p>
 
 <ol class="margin-top margin-bottom-large text-size-normal">
-	<li>Invocation, where Appwrite receives a event to execute a Function. This event could be a request from an SDK, a request to the function's domain, a scheduled execution, or an execution triggered by an event within your Appwrite project.</li>
-	<li>After a function is invoked, Appwrite passes request information to your function's executor.</li>
-	<li>The executor runs the function code you deployed and waits for it to return.</li>
-	<li>Function terminates either when the user returns with a method from <code>res</code>, when the user code throws an exception, or times out.</li>
+	<li>The function is invoked.</li>
+	<li>Appwrite passes in request information like headers and environment variables through the <code>context.req</code> object.</li>
+	<li>The runtime executes the code you defined, you can log through the <code>context.log</code> or <code>context.error</code> methods.</li>
+	<li>Function terminates when you return results using <code>context.res</code>.</li>
 </ol>
 
+<p>You'll find all of these steps in a simple function like this.</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+            <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client } from 'node-appwrite';
+
+// This is your Appwrite function
+// It's executed each time we get a request
+export default async ({ req, res, log, error }) => {
+  // Why not try the Appwrite SDK?
+  //
+  // const client = new Client()
+  //    .setEndpoint('https://cloud.appwrite.io/v1')
+  //    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+  //    .setKey(process.env.APPWRITE_API_KEY);
+
+  // You can log messages to the console
+  log('Hello, Logs!');
+
+  // If something goes wrong, log an error
+  error('Hello, Errors!');
+
+  // The `req` object contains the request data
+  if (req.method === 'GET') {
+    // Send a response with the res object helpers
+    // `res.send()` dispatches a string back to the client
+    return res.send('Hello, World!');
+  }
+
+  // `res.json()` is a handy helper for sending JSON
+  return res.json({
+    motto: 'Build Fast. Scale Big. All in One Place.',
+    learn: 'https://appwrite.io/docs',
+    connect: 'https://appwrite.io/discord',
+    getInspired: 'https://builtwith.appwrite.io',
+  });
+};</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>require(__DIR__ . '/../vendor/autoload.php');
+
+use Appwrite\Client;
+use Appwrite\Exception;
+
+// This is your Appwrite function
+// It's executed each time we get a request
+return function ($context) {
+    // Why not try the Appwrite SDK?
+    //
+    // $client = new Client();
+    // $client
+    //     ->setEndpoint('https://cloud.appwrite.io/v1')
+    //     ->setProject(getenv('APPWRITE_FUNCTION_PROJECT_ID'))
+    //      ->setKey(getenv('APPWRITE_API_KEY'));
+
+    // You can log messages to the console
+    $context->log('Hello, Logs!');
+
+    // If something goes wrong, log an error
+    $context->error('Hello, Errors!');
+
+    // The `req` object contains the request data
+    if ($context->req->method === 'GET') {
+        // Send a response with the res object helpers
+        // `res.send()` dispatches a string back to the client
+        return $context->res->send('Hello, World!');
+    }
+
+    // `res.json()` is a handy helper for sending JSON
+    return $context->res->json([
+        'motto' => 'Build Fast. Scale Big. All in One Place.',
+        'learn' => 'https://appwrite.io/docs',
+        'connect' => 'https://appwrite.io/discord',
+        'getInspired' => 'https://builtwith.appwrite.io',
+    ]);
+};</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+import os
+
+
+# This is your Appwrite function
+# It's executed each time we get a request
+def main(context):
+    # Why not try the Appwrite SDK?
+    #
+    # client = (
+    #     Client()
+    #     .set_endpoint("https://cloud.appwrite.io/v1")
+    #     .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
+    #     .set_key(os.environ["APPWRITE_API_KEY"])
+    # )
+
+    # You can log messages to the console
+    context.log("Hello, Logs!")
+
+    # If something goes wrong, log an error
+    context.error("Hello, Errors!")
+
+    # The `ctx.req` object contains the request data
+    if context.req.method == "GET":
+        # Send a response with the res object helpers
+        # `ctx.res.send()` dispatches a string back to the client
+        return context.res.send("Hello, World!")
+
+    # `ctx.res.json()` is a handy helper for sending JSON
+    return context.res.json(
+        {
+            "motto": "Build Fast. Scale Big. All in One Place.",
+            "learn": "https://appwrite.io/docs",
+            "connect": "https://appwrite.io/discord",
+            "getInspired": "https://builtwith.appwrite.io",
+        }
+    )</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
+
+# This is your Appwrite function
+# It's executed each time we get a request
+def main(context)
+  # Why not try the Appwrite SDK?
+  #
+  # client = Appwrite::Client.new
+  # client
+  #   .set_endpoint('https://cloud.appwrite.io/v1')
+  #   .set_project(ENV['APPWRITE_FUNCTION_PROJECT_ID'])
+  #   .set_key(ENV['APPWRITE_API_KEY'])
+
+  # You can log messages to the console
+  context.log("Hello, Logs!")
+
+  # If something goes wrong, log an error
+  context.error("Hello, Errors!")
+
+  # The `ctx.req` object contains the request data
+  if (context.req.method == "GET")
+    # Send a response with the res object helpers
+    # `ctx.res.send()` dispatches a string back to the client
+    return context.res.send("Hello, World!")
+  end
+
+  # `ctx.res.json()` is a handy helper for sending JSON
+  return context.res.json(
+           {
+             "motto": "Build Fast. Scale Big. All in One Place.",
+             "learn": "https://appwrite.io/docs",
+             "connect": "https://appwrite.io/discord",
+             "getInspired": "https://builtwith.appwrite.io",
+           }
+         )
+end</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client } from "https://deno.land/x/appwrite@7.0.0/mod.ts";
+
+// This is your Appwrite function
+// It's executed each time we get a request
+export default ({ req, res, log, error }: any) => {
+  // Why not try the Appwrite SDK?
+  //
+  // const client = new Client()
+  //    .setEndpoint('https://cloud.appwrite.io/v1')
+  //    .setProject(Deno.env.get("APPWRITE_FUNCTION_PROJECT_ID"))
+  //    .setKey(Deno.env.get("APPWRITE_API_KEY"));
+
+  // You can log messages to the console
+  log("Hello, Logs!");
+
+  // If something goes wrong, log an error
+  error("Hello, Errors!");
+
+  // The `req` object contains the request data
+  if (req.method === "GET") {
+    // Send a response with the res object helpers
+    // `res.send()` dispatches a string back to the client
+    return res.send("Hello, World!");
+  }
+
+  // `res.json()` is a handy helper for sending JSON
+  return res.json({
+    motto: "Build Fast. Scale Big. All in One Place.",
+    learn: "https://appwrite.io/docs",
+    connect: "https://appwrite.io/discord",
+    getInspired: "https://builtwith.appwrite.io",
+  });
+};</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+import 'package:dart_appwrite/dart_appwrite.dart';
+
+// This is your Appwrite function
+// It's executed each time we get a request
+Future<dynamic> main(final context) async {
+// Why not try the Appwrite SDK?
+  //
+  // final client = Client()
+  //    .setEndpoint('https://cloud.appwrite.io/v1')
+  //    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+  //    .setKey(process.env.APPWRITE_API_KEY);
+
+  // You can log messages to the console
+  context.log('Hello, Logs!');
+
+  // If something goes wrong, log an error
+  context.error('Hello, Errors!');
+
+  // The `req` object contains the request data
+  if (context.req.method == 'GET') {
+    // Send a response with the res object helpers
+    // `res.send()` dispatches a string back to the client
+    return context.res.send('Hello, World!');
+  }
+
+  // `res.json()` is a handy helper for sending JSON
+  return context.res.json({
+    'motto': 'Build Fast. Scale Big. All in One Place.',
+    'learn': 'https://appwrite.io/docs',
+    'connect': 'https://appwrite.io/discord',
+    'getInspired': 'https://builtwith.appwrite.io',
+  });
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import AppwriteModels
+import Foundation
+
+// This is your Appwrite function
+// It's executed each time we get a request
+func main(context: RuntimeContext) async throws -> RuntimeOutput {
+    // Why not try the Appwrite SDK?
+    //
+    // let client = Client()
+    //    .setEndpoint("https://cloud.appwrite.io/v1")
+    //    .setProject(ProcessInfo.processInfo.environment["APPWRITE_FUNCTION_PROJECT_ID"])
+    //    .setKey(ProcessInfo.processInfo.environment["APPWRITE_API_KEY"]);
+
+    // You can log messages to the console
+    context.log("Hello, Logs!")
+
+    // If something goes wrong, log an error
+    context.error("Hello, Errors!")
+
+    // The `context.req` object contains the request data
+    if context.req.method == "GET" {
+        // Send a response with the res object helpers
+        // `res.send()` dispatches a string back to the client
+        return try context.res.send("Hello, World!")
+    }
+
+    // `context.res.json()` is a handy helper for sending JSON
+    return try context.res.json([
+        "motto": "Build Fast. Scale Big. All in One Place.",
+        "learn": "https://appwrite.io/docs",
+        "connect": "https://appwrite.io/discord",
+        "getInspired": "https://builtwith.appwrite.io",
+    ])
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
+
+using Appwrite;
+using Appwrite.Services;
+using Appwrite.Models;
+
+public class Handler {
+
+    // This is your Appwrite function
+    // It"s executed each time we get a request
+    public async Task<RuntimeOutput> Main(RuntimeContext Context) 
+    {
+        // Why not try the Appwrite SDK?
+        //
+        // var client = new Client()
+        //     .SetEndpoint("http://cloud.appwrite.io/v1")  
+        //     .SetProject(Environment.GetEnvironmentVariable("APPWRITE_FUNCTION_PROJECT_ID"))        
+        //     .SetKey(Environment.GetEnvironmentVariable("APPWRITE_API_KEY"))
+
+        // You can log messages to the console
+        Context.Log("Hello, Logs!");
+
+        // If something goes wrong, log an error
+        Context.Error("Hello, Errors!");
+
+        // The `Context.Req` object contains the request data
+        if (Context.Req.Method == "GET") {
+            // Send a response with the res object helpers
+            // `Context.Res.Send()` dispatches a string back to the client
+            return Context.Res.Send("Hello, World!");
+        }
+
+        // `Context.Res.Json()` is a handy helper for sending JSON
+        return Context.Res.Json(new Dictionary<string, object?>()
+        {
+            { "motto", "Build Fast. Scale Big. All in One Place." },
+            { "learn", "https://appwrite.io/docs" },
+            { "connect", "https://appwrite.io/discord" },
+            { "getInspired", "https://builtwith.appwrite.io" },
+        });
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
+
+import io.openruntimes.kotlin.RuntimeContext
+import io.openruntimes.kotlin.RuntimeOutput
+import io.appwrite.Client
+import java.util.HashMap
+
+class Main {
+    // This is your Appwrite function
+    // It's executed each time we get a request
+    fun main(context: RuntimeContext): RuntimeOutput {
+        // Why not try the Appwrite SDK?
+        // val client = Client().apply {
+        //    setEndpoint("https://cloud.appwrite.io/v1")
+        //    setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
+        //    setKey(System.getenv("APPWRITE_API_KEY"))
+        // }
+
+        // You can log messages to the console
+        context.log("Hello, Logs!")
+
+        // If something goes wrong, log an error
+        context.error("Hello, Errors!")
+
+        // The `context.req` object contains the request data
+        if (context.req.method == "GET") {
+            // Send a response with the res object helpers
+            // `context.res.send()` dispatches a string back to the client
+            return context.res.send("Hello, World!")
+        }
+
+        // `context.res.json()` is a handy helper for sending JSON
+        return context.res.json(mutableMapOf(
+            "motto" to "Build Fast. Scale Big. All in One Place.",
+            "learn" to "https://appwrite.io/docs",
+            "connect" to "https://appwrite.io/discord",
+            "getInspired" to "https://builtwith.appwrite.io"
+        ))
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Java</h3>
+        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
+
+import io.openruntimes.java.RuntimeContext;
+import io.openruntimes.java.RuntimeOutput;
+import java.util.HashMap;
+import io.appwrite.Client;
+
+public class Main {
+
+    // This is your Appwrite function
+    // It's executed each time we get a request
+    public RuntimeOutput main(RuntimeContext context) throws Exception {
+        // Why not try the Appwrite SDK?
+        //
+        // Client client = new Client();
+        // client
+        //         .setEndpoint("https://cloud.appwrite.io/v1")
+        //         .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
+        //         .setKey(System.getenv("APPWRITE_API_KEY"));
+
+        // You can log messages to the console
+        context.log("Hello, Logs!");
+
+        // If something goes wrong, log an error
+        context.error("Hello, Errors!");
+
+        // The `context.getReq()` object contains the request data
+        if (context.getReq().getMethod().equals("GET")) {
+            // Send a response with the res object helpers
+            // `context.getRes().send()` dispatches a string back to the client
+            return context.getRes().send("Hello, World!");
+        }
+
+        Map<String, Object> json = new HashMap<>();
+        json.put("motto", "Build Fast. Scale Big. All in One Place.");
+        json.put("learn", "https://appwrite.io/docs");
+        json.put("connect", "https://appwrite.io/discord");
+        json.put("getInspired", "https://builtwith.appwrite.io");
+        
+        // `context.getRes().json()` is a handy helper for sending JSON
+        return context.getRes().json(json);
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>If you prefer to learn through more examples like this, explore the <a href="/docs/functions-examples">examples page</a>.</p>
 
 <h2><a href="#context" id="context">The Context Object</a></h2>
 <p>
     Context is an object passed into every function to handle communication to both the end users, and logging to the Appwrite console.
-    All input, output, anddlogging **must be** handled through the context object passed in.
+    All input, output, anddlogging <b>must be</b> handled through the context object passed in.
 </p>
 
 <p>You'll find these properties in the context object.</p>
@@ -58,11 +478,11 @@
     </tbody>
 </table>
 
+<h3>Destructuring Assignment</h3>
 <p>Some languages, namely JavaScript, support destructuring. You'll see us use destructing in examples, which has the following syntax.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>export default async function ({ req, res, log, error }) {
     log('This is a log!');
@@ -70,18 +490,15 @@
     return res.send(`This function was called with ${req.method} method!`)
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Deno</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async function ({ req, res, log, error }: any) {
     log('This is a log!');
     error('This is an error!');
     return res.send(`This function was called with ${req.method} method!`)
 }</code></pre>
-        </div>
         </div>
     </li>
 </ul>
@@ -96,7 +513,6 @@
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
     log(req.bodyRaw);                     // Raw request body, contains request data
@@ -114,11 +530,9 @@
     return res.send("All the request parameters are logged to the Appwrite Console.");
 };</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>PHP</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
             <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 return function ($context) {
@@ -137,11 +551,9 @@ return function ($context) {
     return $context->res->send("All the request parameters are logged to the Appwrite Console.");
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Python</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
             <pre class="line-numbers"><code class="prism language-python" data-prism>import json
 
@@ -160,11 +572,9 @@ def main(context):
 
     return context.res.send("All the request parameters are logged to the Appwrite Console.")</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Ruby</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'json'
                 
@@ -184,11 +594,9 @@ def main(context)
     return context.res.send("All the request parameters are logged to the Appwrite Console.")
 end</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Deno</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }: any) => {
     log(req.bodyRaw);                 // Raw request body, contains request data
@@ -205,11 +613,9 @@ end</code></pre>
 
     return res.send("All the request parameters are logged to the Appwrite Console.");</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Dart</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 import 'dart:convert';
@@ -230,11 +636,9 @@ Future&lt;dynamic> main(final context) async {
     return context.res.send("All the request parameters are logged to the Appwrite Console.");
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Swift</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
 import Foundation
@@ -255,11 +659,9 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
     return try context.res.send("All the request parameters are logged to the Appwrite Console.")
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>.NET</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
             <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
 
@@ -284,11 +686,9 @@ public class Handler {
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Kotlin</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
 
@@ -316,12 +716,9 @@ class Main {
     }
 }</code></pre>
         </div>
-
-        </div>
     </li>
     <li>
         <h3>Java</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
             <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java;
 
@@ -348,7 +745,6 @@ public class Main {
         return context.getRes().send("All the request parameters are logged to the Appwrite Console.");
     }
 }</code></pre>
-        </div>
         </div>
     </li>
 </ul>
@@ -426,199 +822,115 @@ public class Main {
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
 
     switch (req.query.type) {
         case 'text':
-            return res.send(
-                "This is a text response", 
-                200
-            );
+            return res.send("This is a text response", 200);
         case 'json':
-            return res.json(
-                {
-                    "type": "This is a JSON response"
-                }, 
-                200
-            );
+            return res.json({"type": "This is a JSON response"}, 200);
         case 'redirect':
-            return res.redirect(
-                "https://appwrite.io", 
-                301
-            );
+            return res.redirect("https://appwrite.io", 301);
         case 'html':
             return res.send(
-                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 
-                200,
-                {
+                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, {
                     "content-type": "text/html"
-                }
-            );
+                });
         default:
             return res.empty();
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>PHP</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
             <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
 return function ($context) {
     switch ($context->req->query['type']) {
         case 'text':
-            return $context->res->send(
-                "This is a text response", 
-                200
-            );
+            return $context->res->send("This is a text response", 200);
         case 'json':
-            return $context->res->json(
-                [
-                    "type" => "This is a JSON response"
-                ], 
-                200
-            );
+            return $context->res->json(["type" => "This is a JSON response"], 200);
         case 'redirect':
-            return $context->res->redirect(
-                "https://appwrite.io", 
-                301
-            );
+            return $context->res->redirect("https://appwrite.io", 301);
         case 'html':
-            return $context->res->send(
-                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 
-                200,
-                [
-                    "content-type" => "text/html"
-                ]
-            );
+            return $context->res->send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, [
+                "content-type" => "text/html"
+                ]);
         default:
             return $context->res->empty();
     }
 };</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Python</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
             <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
     switch context.req.query['type']:
         case 'text':
-            return context.res.send(
-                "This is a text response", 
-                200
-            )
+            return context.res.send("This is a text response", 200)
         case 'json':
-            return context.res.json(
-                {
-                    "type": "This is a JSON response"
-                }, 
-                200
-            )
+            return context.res.json({"type": "This is a JSON response"}, 200)
         case 'redirect':
-            return context.res.redirect(
-                "https://appwrite.io", 
-                301
-            )
+            return context.res.redirect("https://appwrite.io", 301)
         case 'html':
-            return context.res.send(
-                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 
-                200,
-                {
-                    "content-type": "text/html"
-                }
-            )
+            return context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, {
+                "content-type": "text/html"
+            })
         default:
             return context.res.empty()</code></pre>
-        </div>
         </div>
     </li>
     <li>
         <h3>Ruby</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
     case context.req.query['type'] 
         when 'text'
-            return context.res.send(
-                "This is a text response", 
-                200
-            )
+            return context.res.send("This is a text response", 200)
         when 'json'
-            return context.res.json(
-                {
-                    "type": "This is a JSON response"
-                }, 
-                200
-            )
+            return context.res.json({"type": "This is a JSON response"}, 200)
         when 'redirect'
-            return context.res.redirect(
-                "https://appwrite.io", 
-                301
-            )
+            return context.res.redirect("https://appwrite.io", 301)
         when 'html'
-            return context.res.send(
-                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 
-                200,
-                {
-                    "content-type": "text/html"
-                }
-            )
+            return context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, {
+                "content-type": "text/html"
+            })
         else
             return context.res.empty()
     end
 end</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Deno</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }) => {
 
     switch (req.query.type) {
         case 'text':
-            return res.send(
-                "This is a text response", 
-                200
-            );
+            return res.send("This is a text response", 200);
         case 'json':
-            return res.json(
-                {
-                    "type": "This is a JSON response"
-                }, 
-                200
-            );
+            return res.json({type": "This is a JSON response"}, 200);
         case 'redirect':
-            return res.redirect(
-                "https://appwrite.io", 
-                301
-            );
+            return res.redirect("https://appwrite.io", 301);
         case 'html':
             return res.send(
-                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 
-                200,
-                {
+                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, {
                     "content-type": "text/html"
-                }
-            );
+                });
         default:
             return res.empty();
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Dart</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 
@@ -629,9 +941,7 @@ Future&lt;dynamic> main(final context) async {
                 .send('This is a text response', 200);
         case 'json':
             return context.res
-                .json({
-                    'type': 'This is a JSON response'
-                });
+                .json({'type': 'This is a JSON response'});
         case 'redirect':
             return context.res
                 .redirect('https://appwrite.io', 301);
@@ -646,11 +956,9 @@ Future&lt;dynamic> main(final context) async {
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Swift</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
 
@@ -663,17 +971,17 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
         case "redirect":
             return try await context.redirect("https://appwrite.io", 301)
         case "html":
-            return try await context.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, ["content-type": "text/html"])
+            return try await context.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, [
+                "content-type": "text/html"
+                ])
         default:
             return try await context.empty()
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>.NET</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
             <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
 
@@ -689,18 +997,18 @@ public class Handler {
             case "redirect":
                 return await Context.Redirect("https://appwrite.io", 301);
             case "html":
-                return await Context.Send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, new Dictionary&lt;string, string&gt;() { { "content-type", "text/html" } });
+                return await Context.Send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, new Dictionary&lt;string, string&gt;() {
+                    { "content-type", "text/html" } 
+                });
             default:    
                 return await Context.Empty();
         }
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Kotlin</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
 
@@ -719,11 +1027,9 @@ class Main {
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Java</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
             <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
 
@@ -751,11 +1057,9 @@ public class Main {
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>C++</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
             <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include "../RuntimeResponse.h"
 #include "../RuntimeRequest.h"
@@ -787,7 +1091,6 @@ namespace runtime {
   };
 }</code></pre>
         </div>
-        </div>
     </li>
 </ul>
 
@@ -802,7 +1105,6 @@ namespace runtime {
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ res, log, error }) => {
     log("This is a log, use for logging information to console");
@@ -812,11 +1114,9 @@ namespace runtime {
     return res.send("Check the Appwrite Console to see logs and errors!");
 };</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>PHP</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
             <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
@@ -828,11 +1128,9 @@ return function ($context) {
     return $context-&gt;send("Check the Appwrite Console to see logs and errors!");
 };</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Python</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
             <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
     context.log("This is a log, use for logging information to console")
@@ -841,11 +1139,9 @@ return function ($context) {
 
     return context.send("Check the Appwrite Console to see logs and errors!")</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Ruby</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
     context.log("This is a log, use for logging information to console")
@@ -855,11 +1151,9 @@ return function ($context) {
     return context.send("Check the Appwrite Console to see logs and errors!")
 end</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Deno</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ res, log, error }: any) => {
     log("This is a log, use for logging information to console");
@@ -869,11 +1163,9 @@ end</code></pre>
     return res.send("Check the Appwrite Console to see logs and errors!");
 };</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Dart</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 
@@ -885,11 +1177,9 @@ Future&lt;dynamic> main(final context) async {
     return context.send("Check the Appwrite Console to see logs and errors!");
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Swift</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
 
@@ -901,11 +1191,9 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
     return try context.send("Check the Appwrite Console to see logs and errors!")
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>.NET</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
             <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
 
@@ -920,11 +1208,9 @@ public class Handler {
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Kotlin</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
 
@@ -941,11 +1227,9 @@ class Main {
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Java</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
             <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
 
@@ -962,11 +1246,9 @@ public class Main {
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>C++</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
             <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include "../RuntimeResponse.h"
 #include "../RuntimeRequest.h"
@@ -985,7 +1267,6 @@ namespace runtime {
       }
   };
 }</code></pre>
-        </div>
         </div>
     </li>
 </ul>
@@ -1057,16 +1338,17 @@ namespace runtime {
         </tr>
         <tr>
             <td>APPWRITE_FUNCTION_RUNTIME_VERSION</td>
+            <td>
                 The runtime version of the running function.
-            <td></td>
+            </td>
         </tr>
     </tbody>
 </table>
 
 <h3>Local Environment Variables</h3>
 <p>
-    Local variables will only be accessible in the function they belong to. 
-    Local variables will override global variables when they have conflicting names.
+    Local environment variables will only be accessible in the function they belong to. 
+    Local environment variables will override global environment variables when they have conflicting names.
 </p>
 <ol class="margin-top margin-bottom-large text-size-normal">
     <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
@@ -1075,10 +1357,10 @@ namespace runtime {
     <li>Create an environment variable by clicking <b>Create variable</b>, using the <b>Editor</b>, or import new variables through a <code>.env</code> file.</li>
 </ol>
 
-<h3>Global Variables</h3>
+<h3>Global Environment Variables</h3>
 <p>
-    Global variables are accessible to all Appwrite Functions. 
-    Local variables will override global variables when they have conflicting names.
+    Global environment variables are accessible to all Appwrite Functions. 
+    Local environment variables will override global environment variables when they have conflicting names.
 </p>
 <ol class="margin-top margin-bottom-large text-size-normal">
     <li>In Appwrite Console, navigate to your project's <b>Settings</b> page.</li>
@@ -1093,7 +1375,6 @@ namespace runtime {
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>process.env.MY_VAR</code></pre>
         </div>
@@ -1101,7 +1382,6 @@ namespace runtime {
     </li>
     <li>
         <h3>PHP</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
             <pre class="line-numbers"><code class="prism language-php" data-prism>getenv('MY_VAR')</code></pre>
         </div>
@@ -1109,74 +1389,56 @@ namespace runtime {
     </li>
     <li>
         <h3>Python</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
             <pre class="line-numbers"><code class="prism language-python" data-prism>os.environ['MY_VAR']</code></pre>
-        </div>
         </div>
     </li>
     <li>
         <h3>Ruby</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>ENV['MY_VAR']</code></pre>
-        </div>
         </div>
     </li>
     <li>
         <h3>Deno</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>Deno.env.get('MY_VAR')</code></pre>
-        </div>
         </div>
     </li>
     <li>
         <h3>Dart</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>Platform.environment['MY_VAR']</code></pre>
-        </div>
         </div>
     </li>
     <li>
         <h3>Swift</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>ProcessInfo.processInfo.environment["MY_VAR"]</code></pre>
-        </div>
         </div>
     </li>
     <li>
         <h3>.NET</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
             <pre class="line-numbers"><code class="prism language-csharp" data-prism>Environment.GetEnvironmentVariable("MY_VAR")</code></pre>
-        </div>
         </div>
     </li>
     <li>
         <h3>Kotlin</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>System.getenv("MY_VAR")</code></pre>
-        </div>
         </div>
     </li>
     <li>
         <h3>Java</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
             <pre class="line-numbers"><code class="prism language-java" data-prism>System.getenv("MY_VAR")</code></pre>
-        </div>
         </div>
     </li>
     <li>
         <h3>C++</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
             <pre class="line-numbers"><code class="prism language-csharp" data-prism>std::getenv("MY_VAR")</code></pre>
-        </div>
         </div>
     </li>
 </ul>
@@ -1196,7 +1458,7 @@ namespace runtime {
         <tr>
             <th>Language</th>
             <th>Package Manager</th>
-            <th>Install Command</th>
+            <th>Commands</th>
         </tr>
     </thead>
     <tr>
@@ -1262,13 +1524,316 @@ namespace runtime {
 <p>Authenticating with Appwrite is done via an API key or a JWT token. You can read more about authentication in the <a href="/docs/authentication-server">Server Authentication</a> section of the docs.</p>
 
 
-
-
-<h2><a href="#dependencies" id="dependencies">Using JWT</a></h2>
+<h2><a href="#dependencies" id="dependencies">Using with API Key</a></h2>
+<p>
+    API keys have defined scopes when you create them.
+    They ignore permissions and operate without a sessions. 
+    Use API keys if the function should act as an admin type role, instead of acting on behalf of a user.
+</p>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
-        <div>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+            <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, ID } from 'node-appwrite';
+
+export default async ({ req, res, log }) => {
+
+  const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+    // Pass in your API key as an environment variable. Never share API keys with users.
+    .setKey(process.env.APPWRITE_API_KEY);
+
+  const databases = new Databases(client);
+
+  try {
+    databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
+  } catch (e) {
+    return res.send("We messed up, document not created")
+  }
+
+  return res.send("Document created")
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+
+require(__DIR__ . '/../vendor/autoload.php');
+
+use Appwrite\Client;
+use Appwrite\Exception;
+use Appwrite\Services\Databases;
+use Appwrite\ID;
+
+return function ($context) {
+    $client = new Client();
+    $client
+        ->setEndpoint('https://cloud.appwrite.io/v1')
+        ->setProject(getenv('APPWRITE_FUNCTION_PROJECT_ID'))
+        // Pass in your API key as an environment variable. Never share API keys with users.
+        ->setKey(getenv('APPWRITE_API_KEY'));
+    
+    $databases = new Databases($client);
+
+    try {
+        $databases->createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID::unique(), []);
+    } catch (Exception $e) {
+        return $context->res->send("We messed up, document not created");
+    }
+
+    return $context->res->send("Document created");
+};</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+from appwrite.services.databases import Databases
+from appwrite.id import ID
+
+import os
+
+def main(context):
+    client = (
+        Client()
+        .set_endpoint("https://cloud.appwrite.io/v1")
+        .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
+        # Pass in your API key as an environment variable. Never share API keys with users.
+        .set_key(os.environ["APPWRITE_API_KEY"])
+    )
+
+    databases = Databases(client)
+
+    try:
+        databases.create_document("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {})
+    except Exception as e:
+        return context.response.send("We messed up, document not created")
+
+    return context.response.send("Document created")</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
+
+def main(context)
+  client = Appwrite::Client.new
+  client
+    .set_endpoint('https://cloud.appwrite.io/v1')
+    .set_project(req.variables['APPWRITE_FUNCTION_PROJECT_ID'])
+    # Pass in your API key as an environment variable. Never share API keys with users.
+    .set_key(req.variables['APPWRITE_API_KEY'])
+
+    databases = Appwrite::Databases.new(client)
+
+    begin
+        databases.create_document('[DATABASE_ID]', '[COLLECTION_ID]', Appwrite::ID.unique(), {})
+    rescue Appwrite::Exception => e
+        return context.response.send("We messed up, document not created")
+    end
+
+    return context.response.send("Document created")
+end</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases, ID } from "https://deno.land/x/appwrite/mod.ts";
+                
+export default function ({req, res}: any){
+    const client = new Client();
+    client
+        .setEndpoint("https://cloud.appwrite.io/v1")
+        .setProject(Deno.env.get("APPWRITE_FUNCTION_PROJECT_ID") || "")
+        // Pass in your API key as an environment variable. Never share API keys with users.
+        .setKey(Deno.env.get("APPWRITE_API_KEY") || "");
+    
+    const databases = new Databases(client);
+    
+    try {
+        databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {});
+    } catch (e) {
+        return res.send("We messed up, document not created");
+    }
+    
+    return res.send("Document created");
+}</code></pre>      
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+import 'package:dart_appwrite/dart_appwrite.dart';
+
+
+Future&lt;dynamic> main(final context) async {
+    final client = Client()
+        .setEndpoint('https://cloud.appwrite.io/v1')
+        .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+        // Pass in your API key as an environment variable. Never share API keys with users.
+        .setKey(process.env.APPWRITE_API_KEY);
+    
+    final databases = Databases(client);
+    
+    try {
+        await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {});
+    } catch (e) {
+        return context.res.send("We messed up, document not created");
+    }
+
+    return context.res.send("Document created");
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import AppwriteModels
+import Foundation
+
+func main(context: RuntimeContext) async throws -> RuntimeOutput {
+    let client = Client()
+       .setEndpoint("https://cloud.appwrite.io/v1")
+       .setProject(ProcessInfo.processInfo.environment["APPWRITE_FUNCTION_PROJECT_ID"])
+       // Pass in your API key as an environment variable. Never share API keys with users.
+       .setKey(ProcessInfo.processInfo.environment["APPWRITE_API_KEY"]);
+
+    let databases = Databases(client: client)
+
+    do {
+        try await databases.createDocument(databaseId: "[DATABASE_ID]", collectionId: "[COLLECTION_ID]", data: [:])
+    } catch {
+        return context.res.send("We messed up, document not created")
+    }
+
+    return context.res.send("Document created")
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
+
+using Appwrite;
+using Appwrite.Services;
+using Appwrite.Models;
+
+public class Handler {
+
+    public async Task<RuntimeOutput> Main(RuntimeContext Context) 
+    {
+        var client = new Client()
+           .SetEndpoint("http://cloud.appwrite.io/v1")  
+           .SetProject(Environment.GetEnvironmentVariable("APPWRITE_FUNCTION_PROJECT_ID"))       
+            // Pass in your API key as an environment variable. Never share API keys with users.
+           .SetKey(Environment.GetEnvironmentVariable("APPWRITE_API_KEY"))
+
+        var databases = new Databases(client);
+
+        try {
+            await databases.CreateDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.Unique(), new Dictionary&lt;string, object>());
+        } catch (Exception e) {
+            return Context.Response.Send("We messed up, document not created");
+        }
+
+        return Context.Response.Send("Document created");
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
+
+import io.openruntimes.kotlin.RuntimeContext
+import io.openruntimes.kotlin.RuntimeOutput
+import io.appwrite.Client
+import io.appwrite.services.Databases
+import io.appwrite.ID
+import java.util.HashMap
+
+class Main {
+    fun main(context: RuntimeContext): RuntimeOutput {
+        val client = Client().apply {
+           setEndpoint("https://cloud.appwrite.io/v1")
+           setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
+           // Pass in your API key as an environment variable. Never share API keys with users.
+           setKey(System.getenv("APPWRITE_API_KEY"))
+        }
+
+        val databases = Databases(client)
+
+        try {
+            databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), HashMap())
+        } catch (e: Exception) {
+            return context.res.send("We messed up, document not created")
+        }
+
+        return context.res.send("Document created")
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Java</h3>
+        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
+
+import io.openruntimes.java.RuntimeContext;
+import io.openruntimes.java.RuntimeOutput;
+import java.util.HashMap;
+import io.appwrite.Client;
+
+public class Main {
+    public RuntimeOutput main(RuntimeContext context) throws Exception {
+        Client client = new Client();
+        client
+                .setEndpoint("https://cloud.appwrite.io/v1")
+                .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
+                // Pass in your API key as an environment variable. Never share API keys with users.
+                .setKey(System.getenv("APPWRITE_API_KEY"));
+
+        Databases databases = new Databases(client);
+
+        try {
+            databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), new HashMap<>());
+        } catch (Exception e) {
+            return context.res.send("We messed up, document not created");
+        }
+
+        return context.res.send("Document created");
+
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+
+<h2><a href="#dependencies" id="dependencies">Using JWT</a></h2>
+<p>
+    JWTs allow you to act on behalf of an user in your Appwrite Function.
+    When using JWTs, you will be able to access and change <b>only</b> the resources with the same permissions as the user account that signed the JWT.
+    This preserves the permissions you configured on each resource.
+</p>
+
+<p>
+    If the Appwrite Function is invoked by an authenticated user, the <code>x-appwrite-user-jwt</code> header is automatically passed in.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, ID } from 'node-appwrite';
 
@@ -1278,8 +1843,8 @@ export default async ({ req, res, log }) => {
     .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
 
-  if (req.headers['x-appwrite-jwt']) {
-    client.setJWT(req.headers['x-appwrite-jwt'])
+  if (req.headers['x-appwrite-user-jwt']) {
+    client.setJWT(req.headers['x-appwrite-user-jwt'])
   } else {
     return res.send("Please sign in, JWT not found")
   }
@@ -1295,11 +1860,9 @@ export default async ({ req, res, log }) => {
   return res.send("Document created")
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>PHP</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
             <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
@@ -1316,8 +1879,8 @@ return function ($context) {
         ->setEndpoint('https://cloud.appwrite.io/v1')
         ->setProject(getenv('APPWRITE_FUNCTION_PROJECT_ID'))
     
-    if (isset($context->req->headers['x-appwrite-jwt'])) {
-        $client->setJWT($context->req->headers['x-appwrite-jwt']);
+    if (isset($context->req->headers['x-appwrite-user-jwt'])) {
+        $client->setJWT($context->req->headers['x-appwrite-user-jwt']);
     } else {
         return $context->res->send("Please sign in, JWT not found");
     }
@@ -1333,11 +1896,9 @@ return function ($context) {
     return $context->res->send("Document created");
 };</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Python</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 from appwrite.services.databases import Databases
@@ -1353,8 +1914,8 @@ def main(context):
         .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
     )
 
-    if "x-appwrite-jwt" in context.req.headers:
-        client.set_jwt(context.req.headers["x-appwrite-jwt"])
+    if "x-appwrite-user-jwt" in context.req.headers:
+        client.set_jwt(context.req.headers["x-appwrite-user-jwt"])
     else:
         return context.res.send("Please sign in, JWT not found")
 
@@ -1367,11 +1928,9 @@ def main(context):
 
     return context.response.send("Document created")</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Ruby</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
 
@@ -1381,8 +1940,8 @@ def main(context)
     .set_endpoint('https://cloud.appwrite.io/v1')
     .set_project(req.variables['APPWRITE_FUNCTION_PROJECT_ID'])
     
-    if context.request.headers['x-appwrite-jwt']
-        client.set_jwt(context.request.headers['x-appwrite-jwt'])
+    if context.request.headers['x-appwrite-user-jwt']
+        client.set_jwt(context.request.headers['x-appwrite-user-jwt'])
     else
         return context.response.send("Please sign in, JWT not found")
     end
@@ -1398,11 +1957,9 @@ def main(context)
     return context.response.send("Document created")
 end</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Deno</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases, ID } from "https://deno.land/x/appwrite/mod.ts";
                 
@@ -1412,8 +1969,8 @@ export default function ({req, res}: any){
         .setEndpoint("https://cloud.appwrite.io/v1")
         .setProject(Deno.env.get("APPWRITE_FUNCTION_PROJECT_ID") || "")
     
-    if (req.headers["x-appwrite-jwt"]) {
-        client.setJWT(req.headers["x-appwrite-jwt"]);
+    if (req.headers["x-appwrite-user-jwt"]) {
+        client.setJWT(req.headers["x-appwrite-user-jwt"]);
     } else {
         return res.send("Please sign in, JWT not found");
     }
@@ -1429,11 +1986,9 @@ export default function ({req, res}: any){
     return res.send("Document created");
 }</code></pre>      
         </div>
-        </div>
     </li>
     <li>
         <h3>Dart</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 import 'package:dart_appwrite/dart_appwrite.dart';
@@ -1444,8 +1999,8 @@ Future&lt;dynamic> main(final context) async {
         .setEndpoint('https://cloud.appwrite.io/v1')
         .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
     
-    if (context.req.headers['x-appwrite-jwt'] != null) {
-        client.setJWT(context.req.headers['x-appwrite-jwt']);
+    if (context.req.headers['x-appwrite-user-jwt'] != null) {
+        client.setJWT(context.req.headers['x-appwrite-user-jwt']);
     } else {
         return context.res.send("Please sign in, JWT not found");
     }
@@ -1461,11 +2016,9 @@ Future&lt;dynamic> main(final context) async {
     return context.res.send("Document created");
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Swift</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 import AppwriteModels
@@ -1476,7 +2029,7 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
        .setEndpoint("https://cloud.appwrite.io/v1")
        .setProject(ProcessInfo.processInfo.environment["APPWRITE_FUNCTION_PROJECT_ID"])
     
-    if let jwt = context.req.headers["x-appwrite-jwt"] {
+    if let jwt = context.req.headers["x-appwrite-user-jwt"] {
         client.setJWT(jwt)
     } else {
         return context.res.send("Please sign in, JWT not found")
@@ -1493,11 +2046,9 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
     return context.res.send("Document created")
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>.NET</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
             <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
 
@@ -1513,8 +2064,8 @@ public class Handler {
            .SetEndpoint("http://cloud.appwrite.io/v1")  
            .SetProject(Environment.GetEnvironmentVariable("APPWRITE_FUNCTION_PROJECT_ID"))       
         
-        if (Context.Req.Headers.ContainsKey("x-appwrite-jwt")) {
-            client.SetJWT(Context.Req.Headers["x-appwrite-jwt"]);
+        if (Context.Req.Headers.ContainsKey("x-appwrite-user-jwt")) {
+            client.SetJWT(Context.Req.Headers["x-appwrite-user-jwt"]);
         } else {
             return Context.Res.Send("Please sign in, JWT not found");
         }
@@ -1531,11 +2082,9 @@ public class Handler {
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Kotlin</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
 
@@ -1553,8 +2102,8 @@ class Main {
            setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
         }
 
-        if (context.req.headers["x-appwrite-jwt"] != null) {
-            client.setJWT(context.req.headers["x-appwrite-jwt"])
+        if (context.req.headers["x-appwrite-user-jwt"] != null) {
+            client.setJWT(context.req.headers["x-appwrite-user-jwt"])
         } else {
             return context.res.send("Please sign in, JWT not found")
         }
@@ -1571,11 +2120,9 @@ class Main {
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Java</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
             <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
 
@@ -1591,8 +2138,8 @@ public class Main {
                 .setEndpoint("https://cloud.appwrite.io/v1")
                 .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
                 
-        if (context.req.headers.containsKey("x-appwrite-jwt")) {
-            client.setJWT(context.req.headers.get("x-appwrite-jwt"));
+        if (context.req.headers.containsKey("x-appwrite-user-jwt")) {
+            client.setJWT(context.req.headers.get("x-appwrite-user-jwt"));
         } else {
             return context.res.send("Please sign in, JWT not found");
         }
@@ -1610,326 +2157,19 @@ public class Main {
     }
 }</code></pre>
         </div>
-        </div>
     </li>
 </ul>
 
-<h2><a href="#dependencies" id="dependencies">Using with API Key</a></h2>
+
+<h2><a href="#code-splitting" id="code-splitting">Code Splitting</a></h2>
+<p>
+    As your functions grow, you may find yourself needing to split your code into multiple files.
+    This helps you keep your codebase maintainable and easy to read.
+    Here's how you can accomplish code splitting.
+</p>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, ID } from 'node-appwrite';
-
-export default async ({ req, res, log }) => {
-
-  const client = new Client()
-    .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-    // Put your secret key in environment variables, so it doesn't leak
-    .setKey(process.env.APPWRITE_API_KEY);
-
-  const databases = new Databases(client);
-
-  try {
-    databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
-  } catch (e) {
-    return res.send("We messed up, document not created")
-  }
-
-  return res.send("Document created")
-}</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>PHP</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
-
-require(__DIR__ . '/../vendor/autoload.php');
-
-use Appwrite\Client;
-use Appwrite\Exception;
-use Appwrite\Services\Databases;
-use Appwrite\ID;
-
-return function ($context) {
-    $client = new Client();
-    $client
-        ->setEndpoint('https://cloud.appwrite.io/v1')
-        ->setProject(getenv('APPWRITE_FUNCTION_PROJECT_ID'))
-        // Put your secret key in environment variables, so it doesn't leak
-        ->setKey(getenv('APPWRITE_API_KEY'));
-    
-    $databases = new Databases($client);
-
-    try {
-        $databases->createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID::unique(), []);
-    } catch (Exception $e) {
-        return $context->res->send("We messed up, document not created");
-    }
-
-    return $context->res->send("Document created");
-};</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Python</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
-from appwrite.services.databases import Databases
-from appwrite.id import ID
-
-import os
-
-
-def main(context):
-    client = (
-        Client()
-        .set_endpoint("https://cloud.appwrite.io/v1")
-        .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
-        # Put your secret key in environment variables, so it doesn't leak
-        .set_key(os.environ["APPWRITE_API_KEY"])
-    )
-
-    databases = Databases(client)
-
-    try:
-        databases.create_document("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {})
-    except Exception as e:
-        return context.response.send("We messed up, document not created")
-
-    return context.response.send("Document created")</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Ruby</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
-
-def main(context)
-  client = Appwrite::Client.new
-  client
-    .set_endpoint('https://cloud.appwrite.io/v1')
-    .set_project(req.variables['APPWRITE_FUNCTION_PROJECT_ID'])
-    # Put your secret key in environment variables, so it doesn't leak
-    .set_key(req.variables['APPWRITE_API_KEY'])
-
-    databases = Appwrite::Databases.new(client)
-
-    begin
-        databases.create_document('[DATABASE_ID]', '[COLLECTION_ID]', Appwrite::ID.unique(), {})
-    rescue Appwrite::Exception => e
-        return context.response.send("We messed up, document not created")
-    end
-
-    return context.response.send("Document created")
-end</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Deno</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases, ID } from "https://deno.land/x/appwrite/mod.ts";
-                
-export default function ({req, res}: any){
-    const client = new Client();
-    client
-        .setEndpoint("https://cloud.appwrite.io/v1")
-        .setProject(Deno.env.get("APPWRITE_FUNCTION_PROJECT_ID") || "")
-        // Put your secret key in environment variables, so it doesn't leak
-        .setKey(Deno.env.get("APPWRITE_API_KEY") || "");
-    
-    const databases = new Databases(client);
-    
-    try {
-        databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {});
-    } catch (e) {
-        return res.send("We messed up, document not created");
-    }
-    
-    return res.send("Document created");
-}</code></pre>      
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Dart</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
-import 'package:dart_appwrite/dart_appwrite.dart';
-
-
-Future&lt;dynamic> main(final context) async {
-    final client = Client()
-        .setEndpoint('https://cloud.appwrite.io/v1')
-        .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-        // Put your secret key in environment variables, so it doesn't leak
-        .setKey(process.env.APPWRITE_API_KEY);
-    
-    final databases = Databases(client);
-    
-    try {
-        await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {});
-    } catch (e) {
-        return context.res.send("We messed up, document not created");
-    }
-
-    return context.res.send("Document created");
-}</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Swift</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-import AppwriteModels
-import Foundation
-
-func main(context: RuntimeContext) async throws -> RuntimeOutput {
-    let client = Client()
-       .setEndpoint("https://cloud.appwrite.io/v1")
-       .setProject(ProcessInfo.processInfo.environment["APPWRITE_FUNCTION_PROJECT_ID"])
-       // Put your secret key in environment variables, so it doesn't leak
-       .setKey(ProcessInfo.processInfo.environment["APPWRITE_API_KEY"]);
-
-    let databases = Databases(client: client)
-
-    do {
-        try await databases.createDocument(databaseId: "[DATABASE_ID]", collectionId: "[COLLECTION_ID]", data: [:])
-    } catch {
-        return context.res.send("We messed up, document not created")
-    }
-
-    return context.res.send("Document created")
-}</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>.NET</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
-
-using Appwrite;
-using Appwrite.Services;
-using Appwrite.Models;
-
-public class Handler {
-
-    public async Task<RuntimeOutput> Main(RuntimeContext Context) 
-    {
-        var client = new Client()
-           .SetEndpoint("http://cloud.appwrite.io/v1")  
-           .SetProject(Environment.GetEnvironmentVariable("APPWRITE_FUNCTION_PROJECT_ID"))       
-            // Put your secret key in environment variables, so it doesn't leak
-           .SetKey(Environment.GetEnvironmentVariable("APPWRITE_API_KEY"))
-
-        var databases = new Databases(client);
-
-        try {
-            await databases.CreateDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.Unique(), new Dictionary&lt;string, object>());
-        } catch (Exception e) {
-            return Context.Response.Send("We messed up, document not created");
-        }
-
-        return Context.Response.Send("Document created");
-    }
-}</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Kotlin</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
-
-import io.openruntimes.kotlin.RuntimeContext
-import io.openruntimes.kotlin.RuntimeOutput
-import io.appwrite.Client
-import io.appwrite.services.Databases
-import io.appwrite.ID
-import java.util.HashMap
-
-class Main {
-    fun main(context: RuntimeContext): RuntimeOutput {
-        val client = Client().apply {
-           setEndpoint("https://cloud.appwrite.io/v1")
-           setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
-           // Put your secret key in environment variables, so it doesn't leak
-           setKey(System.getenv("APPWRITE_API_KEY"))
-        }
-
-        val databases = Databases(client)
-
-        try {
-            databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), HashMap())
-        } catch (e: Exception) {
-            return context.res.send("We messed up, document not created")
-        }
-
-        return context.res.send("Document created")
-    }
-}</code></pre>
-        </div>
-        </div>
-    </li>
-    <li>
-        <h3>Java</h3>
-        <div>
-        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
-
-import io.openruntimes.java.RuntimeContext;
-import io.openruntimes.java.RuntimeOutput;
-import java.util.HashMap;
-import io.appwrite.Client;
-
-public class Main {
-    public RuntimeOutput main(RuntimeContext context) throws Exception {
-        Client client = new Client();
-        client
-                .setEndpoint("https://cloud.appwrite.io/v1")
-                .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
-                // Put your secret key in environment variables, so it doesn't leak
-                .setKey(System.getenv("APPWRITE_API_KEY"));
-
-        Databases databases = new Databases(client);
-
-        try {
-            databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), new HashMap<>());
-        } catch (Exception e) {
-            return context.res.send("We messed up, document not created");
-        }
-
-        return context.res.send("Document created");
-
-    }
-}</code></pre>
-        </div>
-        </div>
-    </li>
-</ul>
-
-<h2><a href="#multi-file" id="multi-file">Using Multiple Files</a></h2>
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Node.js</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
             <pre class="line-numbers"><code class="prism language-js" data-prism>// src/utils.js
 
@@ -1947,11 +2187,9 @@ export defaut function ({res}) {
     return res.send(add(1, 2));
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>PHP</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
             <pre class="line-numbers"><code class="prism language-php" data-prism>// src/utils.php
 
@@ -1972,7 +2210,6 @@ return function ($context) {
     </li>
     <li>
         <h3>Python</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
             <pre class="line-numbers"><code class="prism language-python" data-prism>// src/utils.py
 
@@ -1988,11 +2225,9 @@ import utils
 def main(context):
     return context.res.send(utils.add(1, 2))</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Ruby</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
             <pre class="line-numbers"><code class="prism language-ruby" data-prism># lib/utils.rb
 
@@ -2009,11 +2244,9 @@ def main(context)
     return context.res.send(add(1, 2))
 end</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Deno</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>// src/utils.ts
 
@@ -2030,11 +2263,9 @@ export default function ({res}: {res: any}) {
     return res.send(add(1, 2));
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Dart</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>// lib/utils.dart
 
@@ -2050,11 +2281,9 @@ Future&lt;dynamic> main(final context) async {
     return context.res.send(add(1, 2));
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Swift</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>// Sources/utils.swift
 
@@ -2072,11 +2301,9 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
     return context.res.send(add(1, 2))
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>.NET</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
             <pre class="line-numbers"><code class="prism language-csharp" data-prism>// src/Utils.cs
 
@@ -2102,11 +2329,9 @@ public class Handler {
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Kotlin</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// src/Utils.kt
 
@@ -2133,11 +2358,9 @@ class Main {
     }
 }</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Java</h3>
-        <div>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>
 // src/Utils.java
@@ -2162,7 +2385,6 @@ public class Main {
         return context.res.send(Utils.add(1, 2));
     }
 }</code></pre>
-        </div>
         </div>
     </li>
 </ul>
