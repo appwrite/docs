@@ -64,7 +64,7 @@ $appleVersion = $versions['apple'] ?? '';
 
 <h3><a href="/docs/getting-started-for-apple#OAuthCallback" id="OAuthCallback">OAuth Callback</a></h3>
 
-<p>In order to capture the Appwrite OAuth callback url, the following URL scheme needs to added to your `Info.plist`</p>
+<p>In order to capture the Appwrite OAuth callback url, the following URL scheme needs to added to your <code>Info.plist</code>.</p>
 
 <div class="ide" data-lang="html" data-lang-label="XML">
     <pre class="line-numbers"><code class="prism language-xml" data-prism><?php echo $this->escape('<key>CFBundleURLTypes</key>
@@ -83,7 +83,7 @@ $appleVersion = $versions['apple'] ?? '';
 ');?></code></pre>
 </div>
 
-<p>If you're using UIKit, you'll also need to add a hook to your <b>SceneDelegate.swift</b> file to ensure cookies work correctly.</p>
+<p>If you're using UIKit, you'll also need to add a hook to your <code>SceneDelegate.swift</code> file to ensure cookies work correctly.</p>
 
 <div class="ide" data-lang="swift" data-lang-label="Swift">
   <pre class="line-numbers"><code class="prism language-swift" data-prism><?php echo $this->escape('
