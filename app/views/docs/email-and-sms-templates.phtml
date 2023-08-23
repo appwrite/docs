@@ -91,7 +91,56 @@
 </table>
 
 <h3><a href="#email-template-examples" id="email-template-components">Email Template Examples</a></h3>
-[TODO: @dlohani once we're ready, let's do examples for each type of template (maybe also what it would look like rendered)]
+<p>Here's an example of using these variables in a template.</p>
+<div class="ide margin-bottom" data-lang="html" data-lang-label="html">
+    <pre class="line-numbers"><code class="prism language-html" data-prism>&lt!doctype html&gt
+&lthtml&gt
+
+&lthead&gt
+    &ltstyle&gt
+        ... your style here
+    &lt/style&gt
+&lt/head&gt
+
+&ltbody style="direction: ltr"&gt
+
+&ltdiv style="max-width:650px; word-wrap: break-wrod; overflow-wrap: break-word;
+  word-break: break-all; margin:0 auto;"&gt
+    &lttable style="margin-top: 32px"&gt
+        &lttr&gt
+            &lttd&gt
+                &lth1&gt
+                    {{subject}}
+                &lt/h1&gt
+            &lt/td&gt
+        &lt/tr&gt
+    &lt/table&gt
+
+    &lttable style="margin-top: 40px"&gt
+        &lttr&gt
+            &lttd&gt
+                &ltp&gtHello &lt/p&gt
+
+                &ltp&gtFollow this link to reset your {{project}} password.&lt/p&gt
+
+                &lta href="{{redirect}}" target="_blank"&gt{{redirect}}&lt/a&gt
+
+                &ltp&gt&ltbr /&gtIf you didn't ask to reset your password, you can ignore this message.&lt/p&gt
+                &ltbr /&gt
+
+                &ltp&gtThanks
+                &ltbr /&gt
+                {{project}} team
+                &lt/p&gt
+            &lt/td&gt
+        &lt/tr&gt
+    &lt/table&gt
+&lt/div&gt
+
+&lt/body&gt
+
+&lt/html&gt</code></pre>
+</div>
 
 <h2><a href="#sms-templates" id="sms-templates">SMS Templates</a></h2>
 <p>You can customize the SMS emplates used for phone verification and login.</p>
@@ -123,27 +172,109 @@
     </thead>
     <tbody>
     <tr>
-        <td><code>{{project}}</code></td>
-        <td>The project name.</td>
-    </tr>
-    <tr>
-        <td><code>{{team}}</code></td>
-        <td>Thee project team's name.</td>
-    </tr>
-    <tr>
-        <td><code>{{user}}</code></td>
-        <td>The name of the uer receiving the email.</td>
-    </tr>
-    <tr>
-        <td><code>{{passcode}}</code></td>
+        <td><code>{{token}}</code></td>
         <td>The secret code sent to users for phone verification or authentication.</td>
     </tr>
     </tbody>
 </table>
 
 <h3><a href="#sms-template-examples" id="sms-template-components">SMS Template Examples</a></h3>
-[TODO: @dlohani once we're ready, let's do examples for each type of template (maybe also what it would look like rendered)]
+<p>Here's an example of using these variables in a template.</p>
+<div class="ide margin-bottom" data-lang="html" data-lang-label="html">
+    <pre class="line-numbers"><code class="prism language-html" data-prism>Your account verification code is {{token}}</code></pre>
+</div>
+
 
 <h2>Localization</h2>
-<p>You can configure localization by settling locale with <code>client.setLocale</code> in the SDKs or the <code>X-Appwrite-Locale</code> HTTP header.</p>
-[TODO: @dlohani Maybe example of a template in two languages? (maybe also what it would look like rendered)]
+<p>
+    Each template can have multiple supported locales, displayed in different format and language. 
+    This can be configured under the <b>Template language</b> selector of each template.
+</p>
+
+<p>
+    You can send messages in different localizations by settling locale with <code>client.setLocale()</code> in the SDKs or the <code>X-Appwrite-Locale</code> HTTP header.
+</p>
+
+<p>For example, you can send a phone verification in French.</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client();
+
+const account = new Account(client);
+
+client
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                 // Your project ID
+    .setLocale('fr')                             // Your locale
+;
+
+const promise = account.createPhoneVerification();
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+void main() { // Init SDK
+  Client client = Client();
+  Account account = Account(client);
+
+  client
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                 // Your project ID
+    .setLocale('fr')                             // Your locale
+  ;
+  Future result = account.createPhoneVerification();
+
+  result
+    .then((response) {
+      print(response);
+    }).catchError((error) {
+      print(error.response);
+  });
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
+    .setLocale('fr')                             // Your locale
+
+val account = Account(client)
+
+val response = account.createPhoneVerification()</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
+    .setLocale('fr')                             // Your locale
+
+let account = Account(client)
+
+let token = try await account.createPhoneVerification()</code></pre>
+        </div>
+    </li>
+</ul>
