@@ -3,7 +3,7 @@
 
 <h2><a href="/docs/storage#bucket" id="bucket">Buckets</a></h2>
 
-<p>With version 0.13 of Appwrite, we also have introduced storage buckets. Storage buckets are similar to collections we have in our <a href="/docs/databases">Databases</a> service. The difference is buckets also provide more power to decide what kinds of files, what sizes you want to allow in that bucket, whether or not to encrypt the files, scan with antivirus, and more. Let's look at how we can create a bucket and configure it to your needs.</p>
+<p>Storage buckets are similar to collections in the <a href="/docs/databases">Databases</a> service. The difference is buckets also provide more power to decide what kinds of files, what sizes you want to allow in that bucket, whether or not to encrypt the files, scan with antivirus, and more. Let's look at how we can create a bucket and configure it to your needs.</p>
 
 <h3><a href="/docs/storage#createBucket" id="createBucket">Create Bucket</a></h3>
 
@@ -53,7 +53,7 @@
     </tbody>
 </table>
 
-<p>You can learn more about storage buckets and APIs you can use to manage storage buckets from our <a href="docs/server/storage">Storage documentation</a>. Now that we know how to create and configure buckets for our applications, let's look at how to manage files using the storage service.</p>
+<p>You can learn more about storage buckets and APIs you can use to manage storage buckets from our <a href="/docs/server/storage">Storage documentation</a>. Now that we know how to create and configure buckets for our applications, let's look at how to manage files using the storage service.</p>
 
 <h2><a href="/docs/storage#createFile" id="createFile">Create File</a></h2>
 
@@ -62,7 +62,7 @@
 <p>When you are in the <b>Files</b> tab, you can click <b>Add File</b> and select a file to upload. If the bucket is configured to accept the file type and size you are uploading, your file will be uploaded, and you will see the file in the list of files.
 </p>
 
-<p>You can also upload files programmatically using our SDKs</p>
+<p>You can also upload files programmatically using our SDKs:</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>
@@ -71,7 +71,7 @@
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Storage } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 const storage = new Storage(client);
@@ -97,7 +97,7 @@ promise.then(function (response) {
 
 void main() { // Init SDK
   final client = Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
   final storage = Storage(client);
@@ -105,7 +105,7 @@ void main() { // Init SDK
   final file = await storage.createFile(
     bucketId: '[BUCKET_ID]',
     fileId: ID.unique(),
-    file: InputFile(path: './path-to-files/image.jpg', filename: 'image.jpg'),
+    file: InputFile.fromPath(path: './path-to-files/image.jpg', filename: 'image.jpg'),
   );
 }</code></pre>
         </div>
@@ -118,8 +118,8 @@ import io.appwrite.services.Storage
 
 suspend fun main() {
     val client = Client(applicationContext)
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-        .setProject("5df5acd0d48c2") // Your project ID
+        .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+        .setProject("[PROJECT_ID]") // Your project ID
 
     val storage = Storage(client)
 
@@ -138,7 +138,7 @@ suspend fun main() {
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+      .setEndpoint("https://cloud.appwrite.io/v1")
       .setProject("[PROJECT_ID]")
 
     let storage = Storage(client)
@@ -160,7 +160,7 @@ func main() async throws {
             <pre class="line-numbers"><code class="prism language-http" data-prism>POST /v1/storage/buckets/{bucketId}/files HTTP/1.1
 Content-Type: multipart/form-data; boundary="cec8e8123c05ba25"
 Content-Length: *Length of your entity body in bytes*
-X-Appwrite-Project: 5df5acd0d48c2
+X-Appwrite-Project: [PROJECT_ID]
 
 --cec8e8123c05ba25
 Content-Disposition: form-data; name="operations"
@@ -181,8 +181,371 @@ File content.
     </li>
 </ul>
 
-<p>When you are trying to upload any files above 5MB, you will need to upload them in chunks. Don't worry; if you are using Appwrite's console or any of our SDKs, we handle that internally, so it will work no matter what file size you try to upload.
+<p>
+    When you are trying to upload any files above 5MB, you will need to upload them in chunks for better reliability and performance. If you're using an Appwrite SDK, this is handled automatically. If you're not using an SDK, you can learn more about file handling in the <a href="/docs/rest#file-handling">REST API</a> docs.
 </p>
+
+<h2><a href="/docs/storage#file-input" id="file-input">File Input</a></h2>
+
+<p>
+    Every language and platform handles file inputs differently. This section documents the expected input type of each SDK. Where applicable, Appwrite provides a <code>InputFile</code> class to accept multiple file sources, like paths, buffers, streams, or plain text.
+</p>
+
+<h3><a href="/docs/storage#file-input-client" id="file-input-client">Client SDK</a></h3>
+<ul class="phases clear" data-ui-phases>
+<li>
+    <h3>Web</h3>
+    <p>
+        The Appwrite Web SDK expects a <a href="https://developer.mozilla.org/en-US/docs/Web/API/File" target="_blank" rel="noopener">File</a> object for file creation. This is most commonly associated with DOM file inputs.
+    </p>
+
+    <p>
+        For example, for the input tag <code><?php echo htmlentities('<input type="file" id="uploader" />'); ?></code>, you would call create file like this:
+    </p>
+    <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+        <pre class="line-numbers"><code class="prism language-javascript" data-prism>const promise = storage.createFile(
+    '[BUCKET_ID]',
+    ID.unique(),
+    document.getElementById('uploader').files[0]
+);</code></pre>
+    </div>
+
+</li>
+<li>
+    <h3>Flutter</h3>
+    <p>
+        The Appwrite Flutter SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.fromPath(path: [PATH], filename: [NAME], contentType: [MIME TYPE])</code></td>
+            <td>Used to upload files from a provided path, <code>filename</code> and <code>contentType</code> are optional. Used for Flutter apps on mobile and desktop.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromBytes(bytes: [BYTE LIST], filename: [NAME], contentType: [MIME TYPE])</code></td>
+            <td>Used to upload files from a byte list, <code>contentType</code> is optional. Used for Flutter apps on web</td>
+        </tr>
+        </tbody>
+    </table>
+</li>
+<li>
+    <h3>Android</h3>
+    <p>
+        The Appwrite Android SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.fromPath(path: String)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromFile(file: File)</code></td>
+            <td>Used to upload files from a <a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html" target="_blank" rel="noopener">File</a> object.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromBytes(bytes: ByteArray, filename: String, mimeType: String)</code></td>
+            <td>Used to upload files from a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/" target="_blank" rel="noopener">ByteArray</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
+        </tr>
+        </tbody>
+    </table>
+</li>
+<li>
+    <h3>Apple</h3>
+    <p>
+        The Appwrite Apple SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.fromPath(_ path: String)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromData(_ data: Data, filename: String, mimeType: String)</code></td>
+            <td>Used to upload files from a <a href="https://developer.apple.com/documentation/foundation/data" target="_blank" rel="noopener">Data</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromBuffer(_ buffer: ByteBuffer, filename: String, mimeType: String)</code></td>
+            <td>Used to upload files from a <a href="https://swiftinit.org/reference/swift-nio/niocore/bytebuffer" target="_blank" rel="noopener">NIO Buffer</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
+        </tr>
+        </tbody>
+    </table>
+</li>
+</ul>
+
+<h3><a href="/docs/storage#file-input-server" id="file-input-server">Server SDK</a></h3>
+<ul class="phases clear" data-ui-phases>
+<li>
+    <h3>Node.js</h3>
+
+    <p>
+        The Appwrite NodeJS SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.fromPath(filePath, filename)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromBuffer(buffer, filename)</code></td>
+            <td>Used to upload files from a <a href="https://nodejs.org/api/buffer.html#buffer" target="_blank" rel="noopener">Buffer</a> object.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromBlob(blob, filename)</code></td>
+            <td>Used to upload files from a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob" target="_blank" rel="noopener">Blob</a> object.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromStream(stream, filename, size)</code></td>
+            <td>Used to upload files from a <a href="https://nodejs.org/api/stream.html#readable-streams" target="_blank" rel="noopener">Readable Stream</a> object.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromPlainText(content, filename)</code></td>
+            <td>Used to upload files in plain text. Expects a string encoded in UTF-8.</td>
+        </tr>
+        </tbody>
+    </table>
+</li>
+<li>
+    <h3>PHP</h3>
+    <p>
+        The Appwrite PHP SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.withPath(string $path, ?string $mimeType = null, ?string $filename = null)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.withData(string $data, ?string $mimeType = null, ?string $filename = null)</code></td>
+            <td>Used to upload files from a string.</td>
+        </tr>
+        </tbody>
+    </table>
+</li>
+<li>
+    <h3>Python</h3>
+    <p>
+        The Appwrite Python SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.from_path(path)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.from_bytes(bytes)</code></td>
+            <td>Used to upload files from an array of bytes.</td>
+        </tr>
+        </tbody>
+    </table>
+</li>
+<li>
+    <h3>Ruby</h3>
+    <p>
+        The Appwrite Ruby SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.from_path(path)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.from_string(string)</code></td>
+            <td>Used to upload files from a String.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.from_bytes(bytes)</code></td>
+            <td>Used to upload files from an array of bytes.</td>
+        </tr>
+        </tbody>
+    </table>
+</li>
+<li>
+    <h3>Deno</h3>    
+    <p>
+        The Appwrite Deno SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.fromPath(filePath, filename)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromBuffer(buffer, filename)</code></td>
+            <td>Used to upload files from a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array" target="_blank" rel="noopener">Uint8Array</a> object.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromPlainText(content, filename)</code></td>
+            <td>Used to upload files in plain text. Expects a string encoded in UTF-8.</td>
+        </tr>
+        </tbody>
+    </table>
+</li>
+<li>
+    <h3>Dart</h3>
+    <p>
+        The Appwrite Dart SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.fromPath(path: [PATH], filename: [NAME], contentType: [MIME TYPE])</code></td>
+            <td>Used to upload files from a provided path, <code>filename</code> and <code>contentType</code> are optional.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromBytes(bytes: [BYTE LIST], filename: [NAME], contentType: [MIME TYPE])</code></td>
+            <td>Used to upload files from a byte list, <code>contentType</code> is optional.</td>
+        </tr>
+        </tbody>
+    </table>
+</li>
+<li>
+    <h3>Kotlin</h3>
+    <p>
+        The Appwrite Kotlin SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.fromPath(path: String)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromFile(file: File)</code></td>
+            <td>Used to upload files from a <a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html" target="_blank" rel="noopener">File</a> object.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromBytes(bytes: ByteArray, filename: String, mimeType: String)</code></td>
+            <td>Used to upload files from a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/" target="_blank" rel="noopener">ByteArray</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
+        </tr>
+        </tbody>
+    </table>
+    
+</li>
+<li>
+    <h3>Swift</h3>
+    <p>
+        The Appwrite Swift SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.fromPath(_ path: String)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromData(_ data: Data, filename: String, mimeType: String)</code></td>
+            <td>Used to upload files from a <a href="https://developer.apple.com/documentation/foundation/data" target="_blank" rel="noopener">Data</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.fromBuffer(_ buffer: ByteBuffer, filename: String, mimeType: String)</code></td>
+            <td>Used to upload files from a <a href="https://swiftinit.org/reference/swift-nio/niocore/bytebuffer" target="_blank" rel="noopener">NIO Buffer</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
+        </tr>
+        </tbody>
+    </table>
+</li><li>
+    <h3>.NET</h3>
+    <p>
+        The Appwrite .NET SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.FromPath(string path)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.FromStream(Stream stream, string filename, string mimeType)</code></td>
+            <td>Used to upload files from a <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream?view=net-7.0" target="_blank" rel="noopener">Stream</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.FromBytes(byte[] bytes, string filename, string mimeType)</code></td>
+            <td>Used to upload files from an array of bytes. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
+        </tr>
+        </tbody>
+    </table>
+</li>
+</ul>
+
 
 <h2><a href="/docs/storage#imagePreview" id="imagePreview">Image Manipulation</a></h2>
 
@@ -251,4 +614,4 @@ File content.
 
 <h2><a href="/docs/storage#streaming" id="streaming">Downloading and Streaming with Range</a></h2>
 
-<p>Apart from previewing files and images, downloading is another important feature. With 0.13 we also support streamed download using the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range" target="_blank">HTTP range header</a>. If you are using our SDKs or console, nothing is different. Even if you want to download the whole file at once, even if you use the REST endpoint directly, there isn't any difference. However, if you want to get only a part of a file from storage, you can supply the range header and the server will respond with an appropriate chunk of the file.</p>
+<p>Appwrite supports streamed downloads using the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range" target="_blank">HTTP range header</a> to gracefully handle large files. If you are using our SDKs or console, nothing is different. Even if you want to download the whole file at once, even if you use the REST endpoint directly, there isn't any difference. However, if you want to get only a part of a file from storage, you can supply the range header and the server will respond with an appropriate chunk of the file.</p>

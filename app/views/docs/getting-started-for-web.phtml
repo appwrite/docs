@@ -17,11 +17,7 @@ $demos = $platform['demos'] ?? [];
 ?>
 <p>Appwrite is a development platform that provides a powerful API and management console to get your next project up and running quickly.</p>
 
-<p>This tutorial helps you start using Appwrite with your project. Before starting, make sure you have followed the Appwrite <a href="/docs/installation">installation guide</a>, and you have an Appwrite server instance up and running on your host machine or server.</p>
-
-<h2><a href="/docs/getting-started-for-web#createProject" id="createProject">Create Your First Appwrite Project</a></h2>
-
-<p>Go to your new Appwrite console and click the <i class="icon-plus"></i> icon in the top navigation header or on the <b>'Create Project'</b> button on your console homepage. Choose a name for your project and click create to get started.</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.appwrite.io/">Create your first project now</a> and start building on Appwrite Cloud.</p>
 
 <h2><a href="/docs/getting-started-for-web#addPlatform" id="addPlatform">Add Your Web Platform</a></h2>
 
@@ -67,8 +63,8 @@ $demos = $platform['demos'] ?? [];
 
 <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
     <pre class="line-numbers"><code class="prism language-javascript" data-prism>const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 </code></pre>
 </div>
 
@@ -111,8 +107,8 @@ client.subscribe('files', response => {
                     <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2');               // Your project ID
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
 
 const account = new Account(client);
 

@@ -7,7 +7,7 @@ $runtimes = $this->getParam('runtimes', []);
 
 ?>
 
-<p>Appwrite Functions allow you to extend and customize your Appwrite server functionality by executing your custom code. Appwrite can execute your custom code in response to any <a href="/docs/events" target="_blank">Appwrite system event</a> like account creation, user login, or document update. You can also schedule your functions to run according to a CRON schedule or start them manually by triggering your function from an HTTP endpoint using the Appwrite client or server APIs.</p>
+<p>Appwrite Functions allow you to extend and customize your Appwrite server functionality by executing your custom code. Appwrite can execute your custom code in response to any <a href="/docs/events" target="_blank">Appwrite system event</a> like account creation, user login, or document update. You can also <a href="/docs/functions#scheduled-execution">schedule your functions</a> or start them manually by triggering your function from an HTTP endpoint using the Appwrite client or server APIs.</p>
 
 <p>Appwrite Functions run in a secure, isolated Docker container. By default, Appwrite supports multiple runtimes for different languages that you can use to run your code.</p>
 
@@ -593,7 +593,7 @@ $image = new View(__DIR__.'/../general/image.phtml');
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Functions } from "appwrite";
 
 const client = new Client()
-    .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+    .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]');
 
 const functions = new Functions(client);
@@ -615,7 +615,7 @@ promise.then(function (response) {
 
 void main() async {
     final client = Client()
-        .setEndpoint('https://[HOSTNAME_OR_IP]/v1')
+        .setEndpoint('https://cloud.appwrite.io/v1')
         .setProject('[PROJECT_ID]');
 
     final functions = Functions(client);
@@ -635,7 +635,7 @@ import io.appwrite.services.Functions
 
 suspend fun main() {
     val client = Client(applicationContext)
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+        .setEndpoint("https://cloud.appwrite.io/v1")
         .setProject("[PROJECT_ID]")
 
     val functions = Functions(client)
@@ -654,7 +654,7 @@ suspend fun main() {
 
 func main() async throws {
     let client = Client()
-      .setEndpoint("https://[HOSTNAME_OR_IP]/v1")
+      .setEndpoint("https://cloud.appwrite.io/v1")
       .setProject("[PROJECT_ID]")
 
     let functions = Functions(client)
@@ -683,16 +683,45 @@ func main() async throws {
     </li>
 </ul>
 
+<h2><a href="/docs/functions#scheduled-execution" id="scheduled-execution">Scheduled Execution</a></h2>
+<p>Appwrite supports scheduled function executions. You can schedule executions using <a href="https://en.wikipedia.org/wiki/Cron" target="_blank" rel="noopener">cron expressions</a> in the settings of your function. Cron supports recurring executions as frequently as <b>every minute</b>.</p>
+
+<p>Here are some cron expressions for common intervals.</p>
+
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td>Cron Expression</td>
+        <td>Schedule</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>*/15 * * * *</td>
+        <td>Every 15 minutes</td>
+    </tr>
+    <tr>
+        <td>0 * * * *</td>
+        <td>Every Hour</td>
+    </tr>
+    <tr>
+        <td>0 0 * * *</td>
+        <td>Every day at 00:00</td>
+    </tr>
+    <tr>
+        <td>0 0 * * 1</td>
+        <td>Every monday at 00:00</td>
+    </tr>
+    </tbody>
+</table>
 
 <h3><a href="/docs/functions#abuseLimits" id="abuseLimits">Abuse and Limits</a></h3>
 
 <p>Appwrite Functions can be executed using Client or Server SDKs. Client SDKs must be authenticated with an account that has been granted execution <a href="/docs/permissions">permissions</a> on the function's settings page. Server SDKs require an API key with the correct scopes.</p>
 
-<p>The Functions Service APIs are rate limited to 60 calls per minute per account when using a Client SDK. Learn more about <a href="docs/rate-limits">rate limiting</a>. The response size of a Cloud Function is limited to 1MB. Responses larger than 1MB should be handled using Appwrite's Databases or Storage service.</p>
+<p>The Functions Service APIs are rate limited to 60 calls per minute per account when using a Client SDK. Learn more about <a href="/docs/rate-limits">rate limiting</a>. The response size of a Cloud Function is limited to 1MB. Responses larger than 1MB should be handled using Appwrite's Databases or Storage service.</p>
 
 <p>Each execution has a default timeout of 15 seconds to prevent hanging functions from blocking resources. This timeout can be configured per function on a function's settings page or in <code>appwrite.json</code> for up to 900 seconds.</p>
-
-<p>The maximum configurable timeout can be increased by changing the <code>_APP_FUNCTIONS_TIMEOUT</code> environment variable. This environment variable changes the configurable maximum but does not alter existing individual configurations.</p>
 
 <h2><a href="/docs/functions#ignoreFiles" id="ignoreFiles">Ignore Files</a></h2>
 
@@ -750,7 +779,7 @@ func main() async throws {
     </tbody>
 </table>
 
-<p>By default, the following runtimes are enabled: "node-16.0, php-8.0, python-3.9, ruby-3.0". To enable or disable runtimes, you can edit the <code>_APP_FUNCTIONS_RUNTIMES</code> <a href="docs/environment-variables#functions">environment variable</a>.</p>
+<p>By default, the following runtimes are enabled: <code>node-16.0</code>, <code>php-8.0</code>, <code>python-3.9</code>, <code>ruby-3.0</code>, and <code>dart-2.17</code>.</p>
 
 <h2><a href="/docs/functions#functionVariables" id="functionVariables">Function Variables</a></h2>
 

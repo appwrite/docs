@@ -2,25 +2,25 @@
 $clients = [
     [
         'title' => 'Getting Started for Web',
-        'description' => 'Integrate Appwrite with your Web apps.',
+        'description' => 'Build Web apps with Appwrite.',
         'logo' => '/images/clients/web.png',
         'link' => '/docs/getting-started-for-web',
     ],
     [
         'title' => 'Getting Started for Flutter',
-        'description' => 'Integrate Appwrite with your Flutter apps.',
+        'description' => 'Build Flutter apps with Appwrite.',
         'logo' => '/images/clients/flutter.png',
         'link' => '/docs/getting-started-for-flutter',
     ],
     [
         'title' => 'Getting Started for Apple',
-        'description' => 'Integrate Appwrite with your Apple apps.',
+        'description' => 'Build iOS apps with Appwrite.',
         'logo' => '/images/clients/apple.png',
         'link' => '/docs/getting-started-for-apple',
     ],
     [
         'title' => 'Getting Started for Android',
-        'description' => 'Integrate Appwrite with your Android apps.',
+        'description' => 'Build Android apps with Appwrite.',
         'logo' => '/images/clients/android.png',
         'link' => '/docs/getting-started-for-android',
     ],
@@ -32,7 +32,7 @@ $clients = [
     ],*/
     [
         'title' => 'Getting Started for Servers',
-        'description' => 'Integrate Appwrite with your server side.',
+        'description' => 'Integrate Appwrite with your backend.',
         'logo' => '/images/clients/servers.png',
         'link' => '/docs/getting-started-for-server',
     ],
@@ -57,15 +57,20 @@ $getSpecsUrl = function($type, $platform) use ($latestVersion) {
 
 <div class="zone xxl">
 
-    <p class="margin-bottom">Welcome to our documentation section. Here you will be able to find quick guides to setup and integrate with Appwrite on your platform of choice. You can also review full and detailed API references to all of our services, tools, and features.</p>
+    <p class="margin-bottom">This documentation contains all the information you need to start building Web, Flutter, Android, or iOS apps with Appwrite. You can also review the complete and detailed API references to our services, tools, and features.</p>
     
+    <div class="notice">
+        <h2>Can't wait to get started?</h2>
+        <p><a target="_blank" rel="noopener" href="https://cloud.appwrite.io/">Create your first project now</a> and start building on Appwrite Cloud.</p>
+    </div>
+
     <h2 class="margin-bottom">Overview</h2>
 
-    <p>Appwrite is an end-to-end backend server that aims to abstract the complexity of common, complex, and repetitive tasks required for building a modern app.</p>
+    <p>Appwrite is a secure, open-source backend that abstracts the complexity of common, complex, and repetitive tasks required for building a modern app.</p>
 
-    <p>Appwrite provides you with a set of APIs, tools, and a management console UI to help you build your apps a lot faster, and in a much more secure way. Within Appwrite's different services, you can find user authentication and account management, user preferences, database and storage persistence, cloud functions, localization, image manipulation, and more.</p>
+    <p>Appwrite provides you with a set of secure APIs, tools, and a management console UI to help you build your apps quickly without compromising security. Use Appwrite to add user authentication and management, data and file storage, run server-side code, image manipulation, localization, and more into your apps.</p>
 
-    <p>Appwrite is both cross-platform and technology-agnostic, meaning it can run on any operating system, coding language, framework, or platform. Although Appwrite can easily fit the definition of a serverless technology, it's designed to run well in multiple configurations. You can integrate Appwrite directly with your client app, use it behind your custom backend or alongside your custom backend server.</p>
+    <p>Appwrite adapts to your unique habits and needs. You can integrate Appwrite directly with your client app or use it alongside your existing backend server, using the language and technologies you're most comfortable with.</p>
 
     <h2 class="margin-bottom">Quickstart Tutorials</h2>
 
@@ -92,23 +97,20 @@ $getSpecsUrl = function($type, $platform) use ($latestVersion) {
     </div>
 
     <div class="margin-bottom-large">
-        <h2 class="margin-bottom">API References</h2>
-        
-        <p>The Appwrite API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded or JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.</p>
-
-        <p>Specifications for the Appwrite API are available in multiple formats, including Open API 3 for <a href="<?php echo $getSpecsUrl('open-api3', 'client'); ?>">clients</a> or <a href="<?php echo $getSpecsUrl('open-api3', 'server'); ?>">servers</a> and Swagger2 for <a href="<?php echo $getSpecsUrl('swagger2', 'client'); ?>">clients</a> or <a href="<?php echo $getSpecsUrl('swagger2', 'server'); ?>">servers</a>.</p>
+        <h2 class="margin-bottom">Explore Appwrite</h2>
+        <p>Appwrite provides all the core features of a modern backend. Explore Appwrite's features for <a href="/docs/authentication">authentication</a>, <a href="/docs/databases">databases</a>, <a href="/docs/storage">file storage</a>, and executing server-side code with <a href="/docs/functions">functions</a>.</p>
+        <p>Appwrite is technology-agnostic. You can integrate Appwrite with any of the <a href="/docs/sdks">SDKs</a>, or directly with the <a href="/docs/rest">REST</a> or <a href="/docs/graphql">GraphQL</a> API.</p>
+        <p>You can also respond to events in real time with Appwrite's <a href="/docs/realtime">Realtime API</a> or through <a href="/docs/webhooks">webhooks</a>.</p>
     </div>
 
     <div class="margin-bottom-large">
         <h2 class="margin-bottom">Contributing</h2>
 
-        <p>Are you looking to get started contributing to Appwrite? Our <a href="https://github.com/appwrite/appwrite/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">contribution guide</a> has you covered. Want an SDK for a language we don't yet support? Check out the <a href="https://github.com/appwrite/sdk-generator" target="_blank" rel="noopener">SDK generator</a> project. Also, have a look at our <a href="https://github.com/appwrite" target="_blank" rel="noopener">GitHub organization</a>.</p>
+        <p>Are you looking to contribute to Appwrite? Our <a href="https://github.com/appwrite/appwrite/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">contribution guide</a> has you covered. Want an SDK for a language we don't yet support? Check out the <a href="https://github.com/appwrite/sdk-generator" target="_blank" rel="noopener">SDK generator</a> project. Also, have a look at our <a href="https://github.com/appwrite" target="_blank" rel="noopener">GitHub organization</a> for all of our other projects.</p>
     </div>
 
     <div class="margin-bottom-large">
         <h2 class="margin-bottom">Learn More</h2>
-
         <p>Follow our <a href="https://dev.to/appwrite" target="_blank" rel="noopener">blog</a> and subscribe to our newsletter to learn more about Appwrite and stay up-to-date with Appwrite's latest news and announcements. You can also join our <a href="https://appwrite.io/discord" target="_blank" rel="noopener">Discord server</a>, where you can chat with fellow developers and get support from our team and community members.</p>
     </div>
-
 </div>
