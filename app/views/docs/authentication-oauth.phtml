@@ -41,7 +41,7 @@ const client = new Client()
 const account = new Account(client);
 
 // Go to OAuth provider login page
-account.createOAuth2Session('amazon');</code></pre>
+account.createOAuth2Session('amazon', [LINK_ON_SUCCESS], [LINK_ON_FAILURE]);</code></pre>
         </div>
     </li>
     <li>
@@ -61,6 +61,26 @@ await account.createOAuth2Session(provider: 'amazon');</code></pre>
     </li>
     <li>
         <h3>Android</h3>
+        <p>In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `&lt;application&gt;` tag, along side the existing `&lt;activity&gt;` tags in your <a href="https://github.com/appwrite/playground-for-android/blob/master/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener">AndroidManifest.xml</a>. Be sure to replace the <b>[PROJECT_ID]</b> string with your actual Appwrite project ID. You can find your Appwrite project ID in your project settings screen in your Appwrite console.</p>
+
+<div class="ide" data-lang="html" data-lang-label="XML">
+    <pre class="line-numbers"><code class="prism language-xml" data-prism><?php echo $this->escape('<manifest ...>
+  ...
+  <application ...>
+    ...
+    <!-- Add this inside the `<application>` tag, along side the existing `<activity>` tags -->
+    <activity android:name="io.appwrite.views.CallbackActivity" android:exported="true">
+      <intent-filter android:label="android_web_auth">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="appwrite-callback-[PROJECT_ID]" />
+      </intent-filter>
+    </activity>
+  </application>
+</manifest>'); ?>
+</code></pre>
+</div>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
@@ -77,6 +97,38 @@ account.createOAuth2Session(provider = "amazon")</code></pre>
     </li>
     <li>
         <h3>Apple</h3>
+        <p>In order to capture the Appwrite OAuth callback url, the following URL scheme needs to added to your `Info.plist`</p>
+
+<div class="ide" data-lang="html" data-lang-label="XML">
+    <pre class="line-numbers"><code class="prism language-xml" data-prism><?php echo $this->escape('<key>CFBundleURLTypes</key>
+<array>
+<dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLName</key>
+    <string>io.appwrite</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+        <string>appwrite-callback-[PROJECT_ID]</string>
+    </array>
+</dict>
+</array>
+');?></code></pre>
+</div>
+
+<p>If you're using UIKit, you'll also need to add a hook to your <b>SceneDelegate.swift</b> file to ensure cookies work correctly.</p>
+
+<div class="ide" data-lang="swift" data-lang-label="Swift">
+  <pre class="line-numbers"><code class="prism language-swift" data-prism><?php echo $this->escape('
+func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    guard let url = URLContexts.first?.url,
+        url.absoluteString.contains("appwrite-callback") else {
+        return
+    }
+    WebAuthComponent.handleIncomingCookie(from: url)
+}
+');?></code></pre>
+</div>
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
@@ -101,6 +153,10 @@ try await account.createOAuth2Session(provider: "amazon")</code></pre>
 <p>
     You'll be redirected to the OAuth 2 provider's login page to log in. 
     Once complete, you'll be redirected to the redirect URL configured in your OAuth 2 provider.
+</p>
+
+<p>
+    You can optionally configure <code>success</code> or <code>failure</code> redirect links on web to handle success and failure scenarios.
 </p>
 
 <h2><a href="#profile" id="profile">OAuth 2 Profile</a></h2>
