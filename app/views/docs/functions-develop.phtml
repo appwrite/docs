@@ -1372,73 +1372,191 @@ namespace runtime {
     You can access the environment variables through the systems library of each language.
 </p>
 
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+    <thead>
+        <tr>
+            <th style="width: 250px">Variable</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>x-appwrite-trigger</td>
+            <td>
+                Describes how the function execution was invoked. 
+                Possible values are <code>http</code>, <code>schedule</code> or <code>event</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>x-appwrite-event</td>
+            <td>
+                If the function execution was triggered by an event, describes the triggering event.
+            </td>
+        </tr>
+        <tr>
+            <td>x-appwrite-user-id</td>
+            <td>
+                If the function execution was invoked by an authenticated user, display the user ID. 
+                This doesn't apply to Appwrite Console users or API keys.
+            </td>
+        </tr>
+        <tr>
+            <td>x-appwrite-user-jwt</td>
+            <td>
+                JWT token generated from the invoking user's session. Used to authenticate Server SDKs to respect access permissions.
+                <a href="/docs/authentication-server">Learn more about JWT tokens.</a>
+            </td>
+        </tr>
+        <tr>
+            <td>x-appwrite-country-code</td>
+            <td>
+                Displays the country code of the configured locale.
+            </td>
+        </tr>
+        <tr>
+            <td>x-appwrite-continent-code</td>
+            <td>
+                Displays the continent code of the configured locale.
+            </td>
+        </tr>
+        <tr>
+            <td>x-appwrite-continent-eu</td>
+            <td>
+                Describes if the configured local is within the EU.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3><a href="#response" id="response">Response</a></h3>
+<p>
+    If you need to send a response to the invoker of the function, such as a user, client app, or an integration, use the response object.
+    The response information <b>will not be logged</b> to the Appwrite Console.
+    There are several possible ways to send a response, explore them in the following Appwrite Function.
+</p>
+
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>process.env.MY_VAR</code></pre>
-        </div>
+            <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
+    return res.send(process.env.MY_VAR, 200);
+}</code></pre>
         </div>
     </li>
     <li>
         <h3>PHP</h3>
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>getenv('MY_VAR')</code></pre>
-        </div>
+            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+
+return function ($context) {
+    return $context->res->send(getenv('MY_VAR'), 200);
+};</code></pre>
         </div>
     </li>
     <li>
         <h3>Python</h3>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>os.environ['MY_VAR']</code></pre>
+            <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
+    return context.res.send(os.environ['MY_VAR'], 200)</code></pre>
         </div>
     </li>
     <li>
         <h3>Ruby</h3>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>ENV['MY_VAR']</code></pre>
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
+    return context.res.send(ENV['MY_VAR'], 200)
+end</code></pre>
         </div>
     </li>
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>Deno.env.get('MY_VAR')</code></pre>
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }) => {
+    return res.send(Deno.env.get('MY_VAR'), 200);
+}</code></pre>
         </div>
     </li>
     <li>
         <h3>Dart</h3>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>Platform.environment['MY_VAR']</code></pre>
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+
+Future&lt;dynamic> main(final context) async {
+    return context.res.send(Platform.environment['MY_VAR'], 200);
+}</code></pre>
         </div>
     </li>
     <li>
         <h3>Swift</h3>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>ProcessInfo.processInfo.environment["MY_VAR"]</code></pre>
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
+
+func main(context: RuntimeContext) async throws -> RuntimeOutput {
+    return try await context.send(ProcessInfo.processInfo.environment["MY_VAR"], 200)
+}</code></pre>
         </div>
     </li>
     <li>
         <h3>.NET</h3>
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>Environment.GetEnvironmentVariable("MY_VAR")</code></pre>
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
+
+public class Handler {
+    public async Task&lt;RuntimeOutput> Main(RuntimeContext Context) 
+    {
+        return await Context.Send(Environment.GetEnvironmentVariable("MY_VAR"), 200);
+    }
+}</code></pre>
         </div>
     </li>
     <li>
         <h3>Kotlin</h3>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>System.getenv("MY_VAR")</code></pre>
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
+
+import io.openruntimes.kotlin.RuntimeContext
+import io.openruntimes.kotlin.RuntimeOutput
+
+class Main {
+    fun main(context: RuntimeContext): RuntimeOutput {
+        return context.send(System.getenv("MY_VAR"), 200)
+    }
+}</code></pre>
         </div>
     </li>
     <li>
         <h3>Java</h3>
         <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>System.getenv("MY_VAR")</code></pre>
+            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
+
+import io.openruntimes.java.RuntimeContext;
+import io.openruntimes.java.RuntimeOutput;
+
+public class Main {
+    public RuntimeOutput main(RuntimeContext context) throws Exception {
+        return context.send(System.getenv("MY_VAR"), 200);
+    }
+}</code></pre>
         </div>
     </li>
     <li>
         <h3>C++</h3>
         <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>std::getenv("MY_VAR")</code></pre>
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include "../RuntimeResponse.h"
+#include "../RuntimeRequest.h"
+#include "../RuntimeOutput.h"
+#include "../RuntimeContext.h"
+
+namespace runtime {
+  class Handler {
+    public:
+      static RuntimeOutput main(RuntimeContext &context) {
+
+      return context.send(std::getenv("MY_VAR"), 200);
+  };
+}</code></pre>
         </div>
     </li>
 </ul>
@@ -2206,7 +2324,6 @@ return function ($context) {
     return $context->res->send(add(1, 2));
 };</code></pre>
         </div>
-        </div>
     </li>
     <li>
         <h3>Python</h3>
@@ -2362,8 +2479,7 @@ class Main {
     <li>
         <h3>Java</h3>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>
-// src/Utils.java
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// src/Utils.java
 
 package io.openruntimes.java.src;
 
