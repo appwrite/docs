@@ -1665,7 +1665,7 @@ export default async ({ req, res, log, error }) => {
   const databases = new Databases(client);
 
   try {
-    databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
+    await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
   } catch (e) {
     error("Failed to create document: " + e.message)
     return res.send("Failed to create document")
@@ -1980,7 +1980,7 @@ export default async ({ req, res, log }) => {
   const databases = new Databases(client);
 
   try {
-    databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
+    await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
   } catch (e) {
     log("Failed to create document: " + e.message)
     return res.send("Failed to create document")
