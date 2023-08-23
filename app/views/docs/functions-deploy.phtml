@@ -164,4 +164,35 @@
 
 <h2><a href="#domains" id="domains">Domains</a></h2>
 
-[TODO: @matej steps to add a custom domain thanks]
+<p>
+    Each deployed function can have it's own domain. 
+    By default, one is generated for each of your functions.
+    You can find the generated domain for your function like this.
+</p>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li class="margin-bottom-small">Navigate to the Appwrite Console's <b>Functions</b> page.</li>
+    <li class="margin-bottom-small">Navigate to the <b>Domains</b> tab.</li>
+    <li class="margin-bottom-small">In the table, you'll find a link formatted similar to <code>https://64d4d22db370ae41a32e.appwrite.global</code>. This is your preview.</li>
+</ol>
+
+<p>
+    You can also add a custom domain, which allows you to build custom REST APIs using nothing but Appwrite Functions.
+    To do this, you need to first buy and register a domain.
+    After obtaining a domain, follow these steps to add the domain to Appwrite.
+</p>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li class="margin-bottom-small">Navigate to the Appwrite Console's <b>Functions</b> page.</li>
+    <li class="margin-bottom-small">Navigate to the <b>Domains</b> tab.</li>
+    <li class="margin-bottom-small">Click on <b>Create domain</b>.</li>
+    <li class="margin-bottom-small">Input your domain in the <b>Domain</b> input field and click <b>Next</b>.</li>
+    <li class="margin-bottom-small">Copy the <b>CNAME</b> record provided to you, and add it to your domain registar.</li>
+    <li class="margin-bottom-small">Click <b>Go to console</b> and wait for the domain name to be verified and certificate to generate.</li>
+</ol>
+
+<p>
+    DNS records can take up to 48 hours to propagate after they're added. 
+    Please retry verification over the next 48 hours. 
+    If the domain verification still fails and you have confirmed DNS records are added correctly, please contact support.
+</p>
