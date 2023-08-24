@@ -16,7 +16,7 @@
 </p>
 
 <h3>Create Funcion</h3>
-<p>Before deploying your function with Git, create a new function attached to your Git repo.</p>
+<p>Before deploying your function with VCS, create a new function attached to your VCS repo.</p>
 <ol class="margin-top margin-bottom-large text-size-normal">
     <li>
         Navigate to <b>Functions</b> from the side bar of the Appwrite Console.
@@ -43,7 +43,8 @@
         Name your function, select a runtime that matches your function, and enter an entry point path, relative to the root directory from the previous step.
     </li>
     <li>
-        If you have build steps, like installing dependencies, input the commands into the <b>Build settings</b> heading's <b>Command</b> field.
+        If you have build steps, like installing dependencies, input the commands into the <b>Build settings</b> heading's <b>Command</b> field. 
+        You can combine multiple commands using <code>&&</code>, such as <code>npm install && npm build</code>.
     </li>
     <li>
         Finally, configure the execute permissions of the function. For security, only provide execute permissions to the necessary roles.
@@ -64,14 +65,6 @@
     <li>
         A new deployment will be automatically created. Deployments will be automatically activated when new commits are added to the production branch.
     </li>
-</ol>
-<h3>Debugging Builds</h3>
-<p>After deploying a function, you can find the status of the deployment and build logs in the Appwrite Console.</p>
-<ol class="margin-top margin-bottom-large text-size-normal">
-    <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
-    <li>Click to open a function you wish to inspect.</li>
-    <li>Under the <b>Deployments</b> tab, you'll find the status of the current active deployment and previous inactive deployments.</li>
-    <li>You can access build logs for the active deployment by clicking the <b>Build logs</b> button. You can click on an inactive function's three dots button to find their build logs.</li>
 </ol>
 
 <h2><a href="#cli" id="cli">CLI</a></h2>
@@ -163,7 +156,6 @@
 </ol>
 
 <h2><a href="#domains" id="domains">Domains</a></h2>
-
 <p>
     Each deployed function can have it's own domain. 
     By default, one is generated for each of your functions.
@@ -195,4 +187,30 @@
     DNS records can take up to 48 hours to propagate after they're added. 
     Please retry verification over the next 48 hours. 
     If the domain verification still fails and you have confirmed DNS records are added correctly, please contact support.
+</p>
+
+<h2><a href="#debugging" id="debugging">Debugging Build</a></h2>
+<p>After deploying a function, you can find the status of the deployment and build logs in the Appwrite Console.</p>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
+    <li>Click to open a function you wish to inspect.</li>
+    <li>Under the <b>Deployments</b> tab, you'll find the status of the current active deployment and previous inactive deployments.</li>
+    <li>You can access build logs for the active deployment by clicking the <b>Build logs</b> button. You can click on an inactive function's three dots button to find their build logs.</li>
+</ol>
+
+<h2><a href="#redeploy" id="redeploy">Redeploy Builds</a></h2>
+<p>
+    After updateing the configuration of your Appwrite Function, you need to redeploy your function for the changes to take effect.
+    You can also redeploy builds to retry failed builds.
+</p>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
+    <li>Click to open a function you wish to inspect.</li>
+    <li>Under the <b>Deployments</b> tab, you'll find the status of the current active deployment.</li>
+    <li>You can redeploy by clicking the <b>Redeploy</b> button.</li>
+</ol>
+<p>
+    The redeployment behavior varies depending on how the initial deployment is created.
+    For VCS deployments, redeploy uses the same commit hash but updated function settings.
+    For manual and CLI deployments, redeploy uses previously updated code but updated function settings.
 </p>
