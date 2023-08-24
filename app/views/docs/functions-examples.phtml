@@ -611,6 +611,334 @@ def main(context):
   For example, <code>[YOUR_FUNCTION_URL]?userId=[USER_ID]&amp;topicId=[TOPIC_ID];&amp;vote=yes</code> to cast a vote.
 </p>
 
+<h3>HTML Contact Form</h3>
+
+<p>
+  Here's a simple form page that can be used to store a user's message in a collection.
+  The form is submitted to the function using the <code>POST</code> method and the form data is sent as a URL-encoded string in the request body.
+</p>
+
+<h3>Prerequisites</h3>
+
+<p>Create a Messages collection with the following attributes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 150px">Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td>The name of the message author</td>
+    <tr>
+      <td><code>email</code></td>
+      <td>string</td>
+      <td>The email of the message author</td>
+    </tr>
+    <tr>
+      <td><code>content</code></td>
+      <td>string</td>
+      <td>The content of the message</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Code</h3>
+
+<ul class="phases clear" data-ui-phases>
+  <li>
+    <h3>Node.js</h3>
+    <div>
+      <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+        <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, Query, ID } from 'node-appwrite';
+import querystring from 'node:querystring';
+
+const html = `&lt;!doctype html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="utf-8">
+    &lt;title>Contact Form&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;form action="/" method="POST">
+      &lt;input type="text" id="name" name="name" placeholder="Name" required>
+      &lt;input type="email" id="email" name="email" placeholder="Email" required>
+      &lt;textarea id="content" name="content" placeholder="Message" required>&lt;/textarea>
+      &lt;button type="submit">Submit&lt;/button>
+    &lt;/form>
+  &lt;/body>
+&lt;/html>`
+
+export default async function ({ req, res }) {
+  if (req.method === 'GET') {
+    return res.send(html, 200, {'content-type': 'text/html'});
+  }
+
+  if (req.method === 'POST' && req.headers['content-type'] === 'application/x-www-form-urlencoded') {
+    const formData = querystring.parse(req.body);
+
+    const message = {
+      name: formData.name,
+      email: formData.email,
+      content: formData.content
+    };
+
+    const client = new Client();
+    client
+      .setEndpoint('https://cloud.appwrite.io/v1')
+      .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+      .setKey(process.env.APPWRITE_API_KEY);
+
+    const databases = new Databases(client);
+    const document = await databases.createDocument('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID.unique(), message);
+
+    return res.send("Message sent", 200);
+  }
+
+  return res.send('Not found', 404);
+}</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Python</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+        <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+from appwrite.services.databases import Databases
+from appwrite.query import Query
+from urllib.parse import parse_qs
+import os
+
+html = '''&lt;!doctype html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="utf-8">
+    &lt;title>Contact Form&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;form action="/" method="POST">
+      &lt;input type="text" id="name" name="name" placeholder="Name" required>
+      &lt;input type="email" id="email" name="email" placeholder="Email" required>
+      &lt;textarea id="content" name="content" placeholder="Message" required>&lt;/textarea>
+      &lt;button type="submit">Submit&lt;/button>
+    &lt;/form>
+  &lt;/body>
+&lt;/html>
+'''
+
+def main(context):
+    if context.req.method == 'GET':
+        return context.res.send(html, 200, {'content-type': 'text/html'})
+
+    if context.req.method == 'POST' and context.req.headers['content-type'] == 'application/x-www-form-urlencoded':
+        formData = parse_qs(context.req.body)
+
+        message = {
+            'name': formData['name'][0],
+            'email': formData['email'][0],
+            'content': formData['content'][0]
+        }
+
+        client = (
+          Client()
+            .set_endpoint('https://cloud.appwrite.io/v1')
+            .set_project(os.environ['APPWRITE_FUNCTION_PROJECT_ID'])
+            .set_key(os.environ['APPWRITE_API_KEY'])
+        )
+
+        databases = Databases(client)
+        document = databases.create_document('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID.unique(), message)
+
+        return context.res.send("Message sent", 200)
+
+    return context.res.send('Not found', 404)</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>PHP</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+        <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+
+require(__DIR__ . '/../vendor/autoload.php');
+
+use Appwrite\Client;
+use Appwrite\Exception;
+use Appwrite\Services\Databases;
+
+$html = '&lt;!doctype html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="utf-8">
+    &lt;title>Contact Form&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;form action="/" method="POST">
+      &lt;input type="text" id="name" name="name" placeholder="Name" required>
+      &lt;input type="email" id="email" name="email" placeholder="Email" required>
+      &lt;textarea id="content" name="content" placeholder="Message" required>&lt;/textarea>
+      &lt;button type="submit">Submit&lt;/button>
+    &lt;/form>
+  &lt;/body>
+&lt;/html>';
+
+return function ($context) {
+  global $html;
+
+  if ($context->req->method === 'GET') {
+    return $context->res->send($html, 200, ['content-type' => 'text/html']);
+  }
+
+  if ($context->req->method === 'POST' && $context->req->headers['content-type'] === 'application/x-www-form-urlencoded') {
+    \parse_str($context->req->body, $formData);
+    
+    $message = [
+      'name' => $formData['name'],
+      'email' => $formData['email'],
+      'content' => $formData['content']
+    ];
+
+    $client = new Client();
+    $client
+      ->setEndpoint('https://cloud.appwrite.io/v1')
+      ->setProject(getenv('APPWRITE_FUNCTION_PROJECT_ID'))
+      ->setKey(getenv('APPWRITE_API_KEY'));
+
+    $databases = new Databases($client);
+    $document = $databases->createDocument('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID::unique(), $message);
+
+    return $context->res->send("Message sent", 200);
+  }
+
+  return $context->res->send('Not found', 404);
+};</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Ruby</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+        <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
+
+html = '''&lt;!doctype html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="utf-8">
+    &lt;title>Contact Form&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;form action="/" method="POST">
+      &lt;input type="text" id="name" name="name" placeholder="Name" required>
+      &lt;input type="email" id="email" name="email" placeholder="Email" required>
+      &lt;textarea id="content" name="content" placeholder="Message" required>&lt;/textarea>
+      &lt;button type="submit">Submit&lt;/button>
+    &lt;/form>
+  &lt;/body>
+&lt;/html>
+'''
+
+def main(context)
+    if context.req.method == 'GET'
+        return context.res.send(html, 200, {'content-type': 'text/html'})
+    end
+
+    if context.req.method == 'POST' and context.req.headers['content-type'] == 'application/x-www-form-urlencoded'
+        formData = URI.decode_www_form(context.req.body).to_h
+
+        message = {
+            'name' => formData['name'],
+            'email' => formData['email'],
+            'content' => formData['content']
+        }
+
+        client = Appwrite::Client.new()
+        client
+            .set_endpoint('https://cloud.appwrite.io/v1')
+            .set_project(ENV['APPWRITE_FUNCTION_PROJECT_ID'])
+            .set_key(ENV['APPWRITE_API_KEY'])
+
+        databases = Appwrite::Database.new(client)
+        document = databases.create_document('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID.unique(), message)
+
+        return context.res.send("Message sent", 200)
+    end
+
+    return context.res.send('Not found', 404)
+end</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Dart</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+import 'package:dart_appwrite/dart_appwrite.dart';
+
+Future<dynamic> main(final context) async {
+    final html = '''&lt;!doctype html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="utf-8">
+    &lt;title>Contact Form&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;form action="/" method="POST">
+      &lt;input type="text" id="name" name="name" placeholder="Name" required>
+      &lt;input type="email" id="email" name="email" placeholder="Email" required>
+      &lt;textarea id="content" name="content" placeholder="Message" required>&lt;/textarea>
+      &lt;button type="submit">Submit&lt;/button>
+    &lt;/form>
+  &lt;/body>
+&lt;/html>
+''';
+
+    if (context.req.method == 'GET') {
+        return context.res.send(html, 200, {'content-type': 'text/html'});
+    }
+
+    if (context.req.method == 'POST' && context.req.headers['content-type'] == 'application/x-www-form-urlencoded') {
+        final formData = Uri.splitQueryString(context.req.body);
+
+        final message = {
+            'name': formData['name'],
+            'email': formData['email'],
+            'content': formData['content']
+        };
+
+        final client = Client()
+            .setEndpoint('https://cloud.appwrite.io/v1')
+            .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+            .setKey(process.env.APPWRITE_API_KEY);
+
+        final databases = Database(client);
+        final document = await databases.createDocument('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID.unique(), message);
+
+        return context.res.send("Message sent", 200);
+    }
+
+    return context.res.send('Not found', 404);
+}</code></pre>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<p>
+  Use the function by navigating to the function URL in the browser. Submit the form to store the message in the collection.
+</p>
 
 
 [TODO: @luke -> Example with JWT, show both client and server code]
@@ -618,15 +946,12 @@ def main(context):
 <!-- Here's more ideas -->
 
 <!-- 
-  How to handle different methods (POST, GET, PUT,DELETE)
   How to cache response (cache headers, json)
   How to file response (send img file, also cache it)
-  How to handle HTML form submittion
   How to do basic auth (there is some header for it)
   How to recieve data in body
   How to redirect
   How to log
   How to do Bearer Auth
   How to access event data
-  How to access env vars 
 -->
