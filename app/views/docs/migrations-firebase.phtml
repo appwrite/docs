@@ -36,13 +36,15 @@
   </li>
 </ol>
 
-<h3><a href="#cloud" id="cloud">Appwrite Cloud</a></h3>
+<h3><a href="#cloud" id="cloud">Migrate to Cloud</a></h3>
 <p>
   To simplify the migration process we have created an OAuth application that will allow you to sign in with Google and automatically
   discover your Firebase projects. Simply select the source project and follow the migration wizard.
 </p>
 
-<h3><a href="#self-hosted" id="self-hosted">Migrating to Appwrite Self-Hosted</a></h3>
+<p>After completing the migration wizard, migration will begin. Return to step 4 of <a href="#migration-process">the migration steps</a>.</p>
+
+<h3><a href="#self-hosted" id="self-hosted">Migrating to Self-Hosted</a></h3>
 <p>
   If you are self-hosting Appwrite you will need to create a service account in your Firebase project and download the JSON file.
 </p>
@@ -63,7 +65,7 @@
   <li>
     Next you'll be prompted to grant the service account roles. You need to grant the following roles.
   </li>
-  <table>
+  <table class="full text-size-small">
     <thead>
       <tr>
         <th>Role</th>
@@ -81,8 +83,8 @@
       </tr>
     </tbody>
   </table>
-  <li>If you prefer to create a custom role, you can use the following permissions:</li>
-  <table>
+  <li>If you prefer to create a custom role, you can use the following permissions.</li>
+  <table class="full text-size-small">
     <thead>
       <tr>
         <th>Permission</th>
@@ -92,67 +94,67 @@
     <tbody>
       <tr>
         <td>datastore.databases.get</td>
-        <td>Read access to your Firestore database</td>
+        <td>Read access to your Firestore database.</td>
       </tr>
       <tr>
         <td>datastore.databases.list</td>
-        <td>Read access to your Firestore database</td>
+        <td>Read access to your Firestore database.</td>
       </tr>
       <tr>
         <td>datastore.entities.get</td>
-        <td>Read access to your Firestore database's documents</td>
+        <td>Read access to your Firestore database's documents.</td>
       </tr>
       <tr>
         <td>datastore.entities.list</td>
-        <td>Read access to your Firestore database's documents</td>
+        <td>Read access to your Firestore database's documents.</td>
       </tr>
       <tr>
         <td>datastore.indexes.get</td>
-        <td>Read access to your Firestore database's indexes</td>
+        <td>Read access to your Firestore database's indexes.</td>
       </tr>
       <tr>
         <td>datastore.indexes.list</td>
-        <td>Read access to your Firestore database's indexes</td>
+        <td>Read access to your Firestore database's indexes.</td>
       </tr>
       <tr>
         <td>firebaseauth.configs.get</td>
-        <td>Read access to your Firebase project's authentication configs</td>
+        <td>Read access to your Firebase project's authentication configs.</td>
       </tr>
       <tr>
         <td>firebaseauth.configs.getHashConfig</td>
-        <td>Read access to your Firebase project's authentication configs including hash salt</td>
+        <td>Read access to your Firebase project's authentication configs including hash salt.</td>
       </tr>
       <tr>
         <td>firebaseauth.configs.getSecret</td>
-        <td>Read access to your Firebase project's authentication configs including secret</td>
+        <td>Read access to your Firebase project's authentication configs including secret.</td>
       </tr>
       <tr>
         <td>firebaseauth.users.get</td>
-        <td>Read access to your Firebase project's users</td>
+        <td>Read access to your Firebase project's users.</td>
       </tr>
       <tr>
         <td>identitytoolkit.tenants.get</td>
-        <td>Read access to your Firebase project's users</td>
+        <td>Read access to your Firebase project's users.</td>
       </tr>
       <tr>
         <td>identitytoolkit.tenants.list</td>
-        <td>Read access to your Firebase project's users</td>
+        <td>Read access to your Firebase project's users.</td>
       </tr>
       <tr>
         <td>storage.buckets.get</td>
-        <td>Read access to your Firebase project's storage buckets</td>
+        <td>Read access to your Firebase project's storage buckets.</td>
       </tr>
       <tr>
         <td>storage.buckets.list</td>
-        <td>Read access to your Firebase project's storage buckets</td>
+        <td>Read access to your Firebase project's storage buckets.</td>
       </tr>
       <tr>
         <td>storage.objects.get</td>
-        <td>Read access to your Firebase project's storage objects</td>
+        <td>Read access to your Firebase project's storage objects.</td>
       </tr>
       <tr>
         <td>storage.objects.list</td>
-        <td>Read access to your Firebase project's storage objects</td>
+        <td>Read access to your Firebase project's storage objects.</td>
       </tr>
     </tbody>
   </table>
@@ -164,5 +166,8 @@
   </li>
   <li>
     Upload the JSON file to Appwrite and follow the migration wizard.
+  </li>
+  <li>
+    After completing the migration wizard, migration will begin. Return to step 4 of <a href="#migration-process">the migration steps</a>.
   </li>
 </ol>
