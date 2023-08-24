@@ -10,10 +10,10 @@
 </p>
 
 <ol class="margin-top margin-bottom-large text-size-normal">
-	<li>The function is invoked.</li>
-	<li>Appwrite passes in request information like headers and environment variables through the <code>context.req</code> object.</li>
-	<li>The runtime executes the code you defined, you can log through the <code>context.log</code> or <code>context.error</code> methods.</li>
-	<li>Function terminates when you return results using <code>context.res</code>.</li>
+    <li>The function is invoked.</li>
+    <li>Appwrite passes in request information like headers and environment variables through the <code>context.req</code> object.</li>
+    <li>The runtime executes the code you defined, you can log through the <code>context.log</code> or <code>context.error</code> methods.</li>
+    <li>Function terminates when you return results using <code>context.res</code>.</li>
 </ol>
 
 <p>You'll find all of these steps in a simple function like this.</p>
@@ -452,29 +452,29 @@ public class Main {
 <p>You'll find these properties in the context object.</p>
 <table class="full text-size-small">
     <thead>
-    <tr>
-        <td>Property</td>
-        <td>Description</td>
-    </tr>
+        <tr>
+            <td>Property</td>
+            <td>Description</td>
+        </tr>
     </thead>
     <tbody>
-    <tr>
-        <td><code>req</code></td>
-        <td>Contains request information like method, body, and headers. See full examples <a href="#context-req">here</a>.</td>
-    </tr>
-    <tr>
-        <td><code>res</code></td>
-        <td>Contains methods to build a response and return information. See full examples <a href="#context-res">here</a>.</td>
-    </tr>
-    <tr>
-        <td><code>log</code></td>
-        <td>Logs information to the Appwrite Console, end users will not be able to see these logs. See full examples <a href="#context-log">here</a>.</td>
-    </tr>
-    <tr>
-        <td><code>error</code></td>
-        <td>Logs errors to the Appwrite Console, end users will not be able to see these errors. See full examples <a href="#context-error">here</a>.</td>
-        <td></td>
-    </tr>
+        <tr>
+            <td><code>req</code></td>
+            <td>Contains request information like method, body, and headers. See full examples <a href="#context-req">here</a>.</td>
+        </tr>
+        <tr>
+            <td><code>res</code></td>
+            <td>Contains methods to build a response and return information. See full examples <a href="#context-res">here</a>.</td>
+        </tr>
+        <tr>
+            <td><code>log</code></td>
+            <td>Logs information to the Appwrite Console, end users will not be able to see these logs. See full examples <a href="#context-log">here</a>.</td>
+        </tr>
+        <tr>
+            <td><code>error</code></td>
+            <td>Logs errors to the Appwrite Console, end users will not be able to see these errors. See full examples <a href="#context-error">here</a>.</td>
+            <td></td>
+        </tr>
     </tbody>
 </table>
 
@@ -505,7 +505,7 @@ public class Main {
 
 <h3><a href="#request" id="request">Request</a></h3>
 <p>
-    If you pass data into an Appwrite function, it'll be found in the request object. 
+    If you pass data into an Appwrite function, it'll be found in the request object.
     This includes all invocation methods, such as data from Appwrite SDKs, HTTP calls, Appwrite events, and browsers visiting the configured domain.
     Explore the request object with the following function, which logs all request params to the Appwrite Console.
 </p>
@@ -750,80 +750,80 @@ public class Main {
 </ul>
 
 <h4><a href="#headers" id="headers">Headers</a></h3>
-<p>
-    Appwrite Functions will always receive a set of headers that provide meta data about the function execution.
-    These are provided along side any custom headers sent to the function.
-</p>
+    <p>
+        Appwrite Functions will always receive a set of headers that provide meta data about the function execution.
+        These are provided along side any custom headers sent to the function.
+    </p>
 
-<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
-    <thead>
-        <tr>
-            <th style="width: 250px">Variable</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>x-appwrite-trigger</td>
-            <td>
-                Describes how the function execution was invoked. 
-                Possible values are <code>http</code>, <code>schedule</code> or <code>event</code>.
-            </td>
-        </tr>
-        <tr>
-            <td>x-appwrite-event</td>
-            <td>
-                If the function execution was triggered by an event, describes the triggering event.
-            </td>
-        </tr>
-        <tr>
-            <td>x-appwrite-user-id</td>
-            <td>
-                If the function execution was invoked by an authenticated user, display the user ID. 
-                This doesn't apply to Appwrite Console users or API keys.
-            </td>
-        </tr>
-        <tr>
-            <td>x-appwrite-user-jwt</td>
-            <td>
-                JWT token generated from the invoking user's session. Used to authenticate Server SDKs to respect access permissions.
-                <a href="/docs/authentication-server">Learn more about JWT tokens.</a>
-            </td>
-        </tr>
-        <tr>
-            <td>x-appwrite-country-code</td>
-            <td>
-                Displays the country code of the configured locale.
-            </td>
-        </tr>
-        <tr>
-            <td>x-appwrite-continent-code</td>
-            <td>
-                Displays the continent code of the configured locale.
-            </td>
-        </tr>
-        <tr>
-            <td>x-appwrite-continent-eu</td>
-            <td>
-                Describes if the configured local is within the EU.
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 250px">Variable</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>x-appwrite-trigger</td>
+                <td>
+                    Describes how the function execution was invoked.
+                    Possible values are <code>http</code>, <code>schedule</code> or <code>event</code>.
+                </td>
+            </tr>
+            <tr>
+                <td>x-appwrite-event</td>
+                <td>
+                    If the function execution was triggered by an event, describes the triggering event.
+                </td>
+            </tr>
+            <tr>
+                <td>x-appwrite-user-id</td>
+                <td>
+                    If the function execution was invoked by an authenticated user, display the user ID.
+                    This doesn't apply to Appwrite Console users or API keys.
+                </td>
+            </tr>
+            <tr>
+                <td>x-appwrite-user-jwt</td>
+                <td>
+                    JWT token generated from the invoking user's session. Used to authenticate Server SDKs to respect access permissions.
+                    <a href="/docs/authentication-server">Learn more about JWT tokens.</a>
+                </td>
+            </tr>
+            <tr>
+                <td>x-appwrite-country-code</td>
+                <td>
+                    Displays the country code of the configured locale.
+                </td>
+            </tr>
+            <tr>
+                <td>x-appwrite-continent-code</td>
+                <td>
+                    Displays the continent code of the configured locale.
+                </td>
+            </tr>
+            <tr>
+                <td>x-appwrite-continent-eu</td>
+                <td>
+                    Describes if the configured local is within the EU.
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
 
-<h3><a href="#response" id="response">Response</a></h3>
-<p>
-    If you need to send a response to the invoker of the function, such as a user, client app, or an integration, use the response object.
-    The response information <b>will not be logged</b> to the Appwrite Console.
-    There are several possible ways to send a response, explore them in the following Appwrite Function.
-</p>
+    <h3><a href="#response" id="response">Response</a></h3>
+    <p>
+        If you need to send a response to the invoker of the function, such as a user, client app, or an integration, use the response object.
+        The response information <b>will not be logged</b> to the Appwrite Console.
+        There are several possible ways to send a response, explore them in the following Appwrite Function.
+    </p>
 
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Node.js</h3>
-        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
+    <ul class="phases clear" data-ui-phases>
+        <li>
+            <h3>Node.js</h3>
+            <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+                <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
 
     switch (req.query.type) {
         case 'text':
@@ -841,12 +841,12 @@ public class Main {
             return res.empty();
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>PHP</h3>
-        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+            </div>
+        </li>
+        <li>
+            <h3>PHP</h3>
+            <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+                <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
 return function ($context) {
     switch ($context->req->query['type']) {
@@ -864,12 +864,12 @@ return function ($context) {
             return $context->res->empty();
     }
 };</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Python</h3>
-        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
+            </div>
+        </li>
+        <li>
+            <h3>Python</h3>
+            <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+                <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
     switch context.req.query['type']:
         case 'text':
             return context.res.send("This is a text response", 200)
@@ -883,12 +883,12 @@ return function ($context) {
             })
         default:
             return context.res.empty()</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Ruby</h3>
-        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
+            </div>
+        </li>
+        <li>
+            <h3>Ruby</h3>
+            <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+                <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
     case context.req.query['type'] 
         when 'text'
             return context.res.send("This is a text response", 200)
@@ -904,12 +904,12 @@ return function ($context) {
             return context.res.empty()
     end
 end</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Deno</h3>
-        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }) => {
+            </div>
+        </li>
+        <li>
+            <h3>Deno</h3>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }) => {
 
     switch (req.query.type) {
         case 'text':
@@ -927,12 +927,12 @@ end</code></pre>
             return res.empty();
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Dart</h3>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+            </div>
+        </li>
+        <li>
+            <h3>Dart</h3>
+            <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+                <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 
 Future&lt;dynamic> main(final context) async {
     switch (context.req.query['type']) {
@@ -955,12 +955,12 @@ Future&lt;dynamic> main(final context) async {
                 .empty();
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Swift</h3>
-        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
+            </div>
+        </li>
+        <li>
+            <h3>Swift</h3>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+                <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
 
 func main(context: RuntimeContext) async throws -> RuntimeOutput {
     switch context.req.query["type"] {
@@ -978,12 +978,12 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
             return try await context.empty()
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>.NET</h3>
-        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
+            </div>
+        </li>
+        <li>
+            <h3>.NET</h3>
+            <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+                <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
 
 public class Handler {
     public async Task&lt;RuntimeOutput> Main(RuntimeContext Context) 
@@ -1005,12 +1005,12 @@ public class Handler {
         }
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Kotlin</h3>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
+            </div>
+        </li>
+        <li>
+            <h3>Kotlin</h3>
+            <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+                <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
 
 import io.openruntimes.kotlin.RuntimeContext
 import io.openruntimes.kotlin.RuntimeOutput
@@ -1026,12 +1026,12 @@ class Main {
         }
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Java</h3>
-        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
+            </div>
+        </li>
+        <li>
+            <h3>Java</h3>
+            <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+                <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
 
 import io.openruntimes.java.RuntimeContext;
 import io.openruntimes.java.RuntimeOutput;
@@ -1056,12 +1056,12 @@ public class Main {
         }
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>C++</h3>
-        <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include "../RuntimeResponse.h"
+            </div>
+        </li>
+        <li>
+            <h3>C++</h3>
+            <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
+                <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include "../RuntimeResponse.h"
 #include "../RuntimeRequest.h"
 #include "../RuntimeOutput.h"
 #include "../RuntimeContext.h"
@@ -1090,35 +1090,35 @@ namespace runtime {
       }
   };
 }</code></pre>
-        </div>
-    </li>
-</ul>
+            </div>
+        </li>
+    </ul>
 
-<h3><a href="#logging" id="logging">Logging</a></h3>
-<p>
-    To protect user privacy, the request and response objects are not logged to the Appwrite Console by default.
-    This means, to see logs or debug function executions you need to use the <code>log()</code> and <code>error()</code> methods.
-    These logs are only visible to developers with access to the Appwrite Console.
-</p>
+    <h3><a href="#logging" id="logging">Logging</a></h3>
+    <p>
+        To protect user privacy, the request and response objects are not logged to the Appwrite Console by default.
+        This means, to see logs or debug function executions you need to use the <code>log()</code> and <code>error()</code> methods.
+        These logs are only visible to developers with access to the Appwrite Console.
+    </p>
 
-<p>Here's an example of using logs and errors.</p>
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Node.js</h3>
-        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ res, log, error }) => {
+    <p>Here's an example of using logs and errors.</p>
+    <ul class="phases clear" data-ui-phases>
+        <li>
+            <h3>Node.js</h3>
+            <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+                <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ res, log, error }) => {
     log("This is a log, use for logging information to console");
     log(`This function was called with ${context.req.method} method`);
     error("This is an error, use for logging errors to console");
 
     return res.send("Check the Appwrite Console to see logs and errors!");
 };</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>PHP</h3>
-        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+            </div>
+        </li>
+        <li>
+            <h3>PHP</h3>
+            <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+                <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
 return function ($context) {
     $context-&gt;log("This is a log, use for logging information to console");
@@ -1127,47 +1127,47 @@ return function ($context) {
 
     return $context-&gt;send("Check the Appwrite Console to see logs and errors!");
 };</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Python</h3>
-        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
+            </div>
+        </li>
+        <li>
+            <h3>Python</h3>
+            <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+                <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
     context.log("This is a log, use for logging information to console")
     context.log(f"This function was called with {context.req.method} method")
     context.error("This is an error, use for logging errors to console")
 
     return context.send("Check the Appwrite Console to see logs and errors!")</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Ruby</h3>
-        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
+            </div>
+        </li>
+        <li>
+            <h3>Ruby</h3>
+            <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+                <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
     context.log("This is a log, use for logging information to console")
     context.log("This function was called with #{context.req.method} method")
     context.error("This is an error, use for logging errors to console")
 
     return context.send("Check the Appwrite Console to see logs and errors!")
 end</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Deno</h3>
-        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ res, log, error }: any) => {
+            </div>
+        </li>
+        <li>
+            <h3>Deno</h3>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ res, log, error }: any) => {
     log("This is a log, use for logging information to console");
     log(`This function was called with ${context.req.method} method`);
     error("This is an error, use for logging errors to console");
 
     return res.send("Check the Appwrite Console to see logs and errors!");
 };</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Dart</h3>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+            </div>
+        </li>
+        <li>
+            <h3>Dart</h3>
+            <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+                <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 
 Future&lt;dynamic> main(final context) async {
     context.log("This is a log, use for logging information to console");
@@ -1176,12 +1176,12 @@ Future&lt;dynamic> main(final context) async {
 
     return context.send("Check the Appwrite Console to see logs and errors!");
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Swift</h3>
-        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
+            </div>
+        </li>
+        <li>
+            <h3>Swift</h3>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+                <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
 
 func main(context: RuntimeContext) async throws -> RuntimeOutput {
     context.log("This is a log, use for logging information to console")
@@ -1190,12 +1190,12 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
 
     return try context.send("Check the Appwrite Console to see logs and errors!")
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>.NET</h3>
-        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
+            </div>
+        </li>
+        <li>
+            <h3>.NET</h3>
+            <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+                <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
 
 public class Handler {
     public async Task&lt;RuntimeOutput> Main(RuntimeContext Context) 
@@ -1207,12 +1207,12 @@ public class Handler {
         return await Context.Send("Check the Appwrite Console to see logs and errors!");
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Kotlin</h3>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
+            </div>
+        </li>
+        <li>
+            <h3>Kotlin</h3>
+            <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+                <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
 
 import io.openruntimes.kotlin.RuntimeContext
 import io.openruntimes.kotlin.RuntimeOutput
@@ -1226,12 +1226,12 @@ class Main {
         return context.send("Check the Appwrite Console to see logs and errors!")
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Java</h3>
-        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
+            </div>
+        </li>
+        <li>
+            <h3>Java</h3>
+            <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+                <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
 
 import io.openruntimes.java.RuntimeContext;
 import io.openruntimes.java.RuntimeOutput;
@@ -1245,12 +1245,12 @@ public class Main {
         return context.send("Check the Appwrite Console to see logs and errors!");
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>C++</h3>
-        <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include "../RuntimeResponse.h"
+            </div>
+        </li>
+        <li>
+            <h3>C++</h3>
+            <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
+                <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include "../RuntimeResponse.h"
 #include "../RuntimeRequest.h"
 #include "../RuntimeOutput.h"
 #include "../RuntimeContext.h"
@@ -1267,241 +1267,241 @@ namespace runtime {
       }
   };
 }</code></pre>
-        </div>
-    </li>
-</ul>
-<p>You can access these logs through the following steps.</p>
-<ol class="margin-top margin-bottom-large text-size-normal">
-	<li>In Appwrite Console, navigate to <b>Functions</b>.</li>
-    <li>Click to open a function you wish to inspect.</li>
-    <li>Under the <b>Executions</b> tab, click on an execution.</li>
-    <li>In the <b>Response</b> section, you'll be able to view logs under the <b>Logs</b> and <b>Errors</b> tabs.</li>
-</ol>
+            </div>
+        </li>
+    </ul>
+    <p>You can access these logs through the following steps.</p>
+    <ol class="margin-top margin-bottom-large text-size-normal">
+        <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
+        <li>Click to open a function you wish to inspect.</li>
+        <li>Under the <b>Executions</b> tab, click on an execution.</li>
+        <li>In the <b>Response</b> section, you'll be able to view logs under the <b>Logs</b> and <b>Errors</b> tabs.</li>
+    </ol>
 
-<h2><a href="#environment-variables" id="environment-variables">Accessing Environment Variables</a></h2>
-<p>
-    If you need to pass constants or secrets to Appwrite Functions, you can use environment variables.
-    Environmental variables can be global, or function specific.
-</p>
+    <h2><a href="#environment-variables" id="environment-variables">Accessing Environment Variables</a></h2>
+    <p>
+        If you need to pass constants or secrets to Appwrite Functions, you can use environment variables.
+        Environmental variables can be global, or function specific.
+    </p>
 
-<h3>Default Environment Variables</h3>
-<p>
-    Appwrite runtimes passes in some environment variables by default. 
-    These are always accesible for every function at runtime.
-</p>
+    <h3>Default Environment Variables</h3>
+    <p>
+        Appwrite runtimes passes in some environment variables by default.
+        These are always accesible for every function at runtime.
+    </p>
 
-<div class="notice">
-  <h2>Appwrite API keys</h2>
-  <p>
-    If your function is using an Appwrite SDK with an API key, this API key needs to be generated and passed in manually.
-    API keys are not passed by default for security reasons.
-  </p>
-</div>
+    <div class="notice">
+        <h2>Appwrite API keys</h2>
+        <p>
+            If your function is using an Appwrite SDK with an API key, this API key needs to be generated and passed in manually.
+            API keys are not passed by default for security reasons.
+        </p>
+    </div>
 
-<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
-    <thead>
-        <tr>
-            <th style="width: 250px">Variable</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>APPWRITE_FUNCTION_ID</td>
-            <td>
-                The ID of the running function.
-            </td>
-        </tr>
-        <tr>
-            <td>APPWRITE_FUNCTION_NAME</td>
-            <td>
-                The Name of the running function.
-            </td>
-        </tr>
-        <tr>
-            <td>APPWRITE_FUNCTION_DEPLOYMENT</td>
-            <td>
-                The deployment ID of the running function.
-            </td>
-        </tr>
-        <tr>
-            <td>APPWRITE_FUNCTION_PROJECT_ID</td>
-            <td>
-                The project ID of the running function.
-            </td>
-        </tr>
-        <tr>
-            <td>APPWRITE_FUNCTION_RUNTIME_NAME</td>
-            <td>
-                The runtime of the running function.
-            </td>
-        </tr>
-        <tr>
-            <td>APPWRITE_FUNCTION_RUNTIME_VERSION</td>
-            <td>
-                The runtime version of the running function.
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 250px">Variable</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>APPWRITE_FUNCTION_ID</td>
+                <td>
+                    The ID of the running function.
+                </td>
+            </tr>
+            <tr>
+                <td>APPWRITE_FUNCTION_NAME</td>
+                <td>
+                    The Name of the running function.
+                </td>
+            </tr>
+            <tr>
+                <td>APPWRITE_FUNCTION_DEPLOYMENT</td>
+                <td>
+                    The deployment ID of the running function.
+                </td>
+            </tr>
+            <tr>
+                <td>APPWRITE_FUNCTION_PROJECT_ID</td>
+                <td>
+                    The project ID of the running function.
+                </td>
+            </tr>
+            <tr>
+                <td>APPWRITE_FUNCTION_RUNTIME_NAME</td>
+                <td>
+                    The runtime of the running function.
+                </td>
+            </tr>
+            <tr>
+                <td>APPWRITE_FUNCTION_RUNTIME_VERSION</td>
+                <td>
+                    The runtime version of the running function.
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-<h3>Local Environment Variables</h3>
-<p>
-    Local environment variables will only be accessible in the function they belong to. 
-    Local environment variables will override global environment variables when they have conflicting names.
-</p>
-<ol class="margin-top margin-bottom-large text-size-normal">
-    <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
-    <li>Click to open a function you wish to add variables to.</li>
-	<li>Under the <b>Settings</b> tab, navigate to <b>Environment variables</b>.</li>
-    <li>Create an environment variable by clicking <b>Create variable</b>, using the <b>Editor</b>, or import new variables through a <code>.env</code> file.</li>
-</ol>
+    <h3>Local Environment Variables</h3>
+    <p>
+        Local environment variables will only be accessible in the function they belong to.
+        Local environment variables will override global environment variables when they have conflicting names.
+    </p>
+    <ol class="margin-top margin-bottom-large text-size-normal">
+        <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
+        <li>Click to open a function you wish to add variables to.</li>
+        <li>Under the <b>Settings</b> tab, navigate to <b>Environment variables</b>.</li>
+        <li>Create an environment variable by clicking <b>Create variable</b>, using the <b>Editor</b>, or import new variables through a <code>.env</code> file.</li>
+    </ol>
 
-<h3>Global Environment Variables</h3>
-<p>
-    Global environment variables are accessible to all Appwrite Functions. 
-    Local environment variables will override global environment variables when they have conflicting names.
-</p>
-<ol class="margin-top margin-bottom-large text-size-normal">
-    <li>In Appwrite Console, navigate to your project's <b>Settings</b> page.</li>
-	<li>Navigate to <b>Global variables</b> section.</li>
-    <li>Create an environment variable by clicking <b>Create variable</b>, using the <b>Editor</b>, or import new variables through a <code>.env</code> file.</li>
-</ol>
+    <h3>Global Environment Variables</h3>
+    <p>
+        Global environment variables are accessible to all Appwrite Functions.
+        Local environment variables will override global environment variables when they have conflicting names.
+    </p>
+    <ol class="margin-top margin-bottom-large text-size-normal">
+        <li>In Appwrite Console, navigate to your project's <b>Settings</b> page.</li>
+        <li>Navigate to <b>Global variables</b> section.</li>
+        <li>Create an environment variable by clicking <b>Create variable</b>, using the <b>Editor</b>, or import new variables through a <code>.env</code> file.</li>
+    </ol>
 
-<p>
-    You can access the environment variables through the systems library of each language.
-</p>
+    <p>
+        You can access the environment variables through the systems library of each language.
+    </p>
 
-<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
-    <thead>
-        <tr>
-            <th style="width: 250px">Variable</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>x-appwrite-trigger</td>
-            <td>
-                Describes how the function execution was invoked. 
-                Possible values are <code>http</code>, <code>schedule</code> or <code>event</code>.
-            </td>
-        </tr>
-        <tr>
-            <td>x-appwrite-event</td>
-            <td>
-                If the function execution was triggered by an event, describes the triggering event.
-            </td>
-        </tr>
-        <tr>
-            <td>x-appwrite-user-id</td>
-            <td>
-                If the function execution was invoked by an authenticated user, display the user ID. 
-                This doesn't apply to Appwrite Console users or API keys.
-            </td>
-        </tr>
-        <tr>
-            <td>x-appwrite-user-jwt</td>
-            <td>
-                JWT token generated from the invoking user's session. Used to authenticate Server SDKs to respect access permissions.
-                <a href="/docs/authentication-server">Learn more about JWT tokens.</a>
-            </td>
-        </tr>
-        <tr>
-            <td>x-appwrite-country-code</td>
-            <td>
-                Displays the country code of the configured locale.
-            </td>
-        </tr>
-        <tr>
-            <td>x-appwrite-continent-code</td>
-            <td>
-                Displays the continent code of the configured locale.
-            </td>
-        </tr>
-        <tr>
-            <td>x-appwrite-continent-eu</td>
-            <td>
-                Describes if the configured local is within the EU.
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 250px">Variable</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>x-appwrite-trigger</td>
+                <td>
+                    Describes how the function execution was invoked.
+                    Possible values are <code>http</code>, <code>schedule</code> or <code>event</code>.
+                </td>
+            </tr>
+            <tr>
+                <td>x-appwrite-event</td>
+                <td>
+                    If the function execution was triggered by an event, describes the triggering event.
+                </td>
+            </tr>
+            <tr>
+                <td>x-appwrite-user-id</td>
+                <td>
+                    If the function execution was invoked by an authenticated user, display the user ID.
+                    This doesn't apply to Appwrite Console users or API keys.
+                </td>
+            </tr>
+            <tr>
+                <td>x-appwrite-user-jwt</td>
+                <td>
+                    JWT token generated from the invoking user's session. Used to authenticate Server SDKs to respect access permissions.
+                    <a href="/docs/authentication-server">Learn more about JWT tokens.</a>
+                </td>
+            </tr>
+            <tr>
+                <td>x-appwrite-country-code</td>
+                <td>
+                    Displays the country code of the configured locale.
+                </td>
+            </tr>
+            <tr>
+                <td>x-appwrite-continent-code</td>
+                <td>
+                    Displays the continent code of the configured locale.
+                </td>
+            </tr>
+            <tr>
+                <td>x-appwrite-continent-eu</td>
+                <td>
+                    Describes if the configured local is within the EU.
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
 
-<h3><a href="#response" id="response">Response</a></h3>
-<p>
-    If you need to send a response to the invoker of the function, such as a user, client app, or an integration, use the response object.
-    The response information <b>will not be logged</b> to the Appwrite Console.
-    There are several possible ways to send a response, explore them in the following Appwrite Function.
-</p>
+    <h3><a href="#response" id="response">Response</a></h3>
+    <p>
+        If you need to send a response to the invoker of the function, such as a user, client app, or an integration, use the response object.
+        The response information <b>will not be logged</b> to the Appwrite Console.
+        There are several possible ways to send a response, explore them in the following Appwrite Function.
+    </p>
 
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Node.js</h3>
-        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
+    <ul class="phases clear" data-ui-phases>
+        <li>
+            <h3>Node.js</h3>
+            <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+                <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
     return res.send(process.env.MY_VAR, 200);
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>PHP</h3>
-        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+            </div>
+        </li>
+        <li>
+            <h3>PHP</h3>
+            <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+                <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
 return function ($context) {
     return $context->res->send(getenv('MY_VAR'), 200);
 };</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Python</h3>
-        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
+            </div>
+        </li>
+        <li>
+            <h3>Python</h3>
+            <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+                <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
     return context.res.send(os.environ['MY_VAR'], 200)</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Ruby</h3>
-        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
+            </div>
+        </li>
+        <li>
+            <h3>Ruby</h3>
+            <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+                <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
     return context.res.send(ENV['MY_VAR'], 200)
 end</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Deno</h3>
-        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }) => {
+            </div>
+        </li>
+        <li>
+            <h3>Deno</h3>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }) => {
     return res.send(Deno.env.get('MY_VAR'), 200);
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Dart</h3>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+            </div>
+        </li>
+        <li>
+            <h3>Dart</h3>
+            <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+                <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 
 Future&lt;dynamic> main(final context) async {
     return context.res.send(Platform.environment['MY_VAR'], 200);
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Swift</h3>
-        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
+            </div>
+        </li>
+        <li>
+            <h3>Swift</h3>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+                <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
 
 func main(context: RuntimeContext) async throws -> RuntimeOutput {
     return try await context.send(ProcessInfo.processInfo.environment["MY_VAR"], 200)
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>.NET</h3>
-        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
+            </div>
+        </li>
+        <li>
+            <h3>.NET</h3>
+            <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+                <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
 
 public class Handler {
     public async Task&lt;RuntimeOutput> Main(RuntimeContext Context) 
@@ -1509,12 +1509,12 @@ public class Handler {
         return await Context.Send(Environment.GetEnvironmentVariable("MY_VAR"), 200);
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Kotlin</h3>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
+            </div>
+        </li>
+        <li>
+            <h3>Kotlin</h3>
+            <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+                <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
 
 import io.openruntimes.kotlin.RuntimeContext
 import io.openruntimes.kotlin.RuntimeOutput
@@ -1524,12 +1524,12 @@ class Main {
         return context.send(System.getenv("MY_VAR"), 200)
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Java</h3>
-        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
+            </div>
+        </li>
+        <li>
+            <h3>Java</h3>
+            <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+                <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
 
 import io.openruntimes.java.RuntimeContext;
 import io.openruntimes.java.RuntimeOutput;
@@ -1539,12 +1539,12 @@ public class Main {
         return context.send(System.getenv("MY_VAR"), 200);
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>C++</h3>
-        <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include "../RuntimeResponse.h"
+            </div>
+        </li>
+        <li>
+            <h3>C++</h3>
+            <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
+                <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include "../RuntimeResponse.h"
 #include "../RuntimeRequest.h"
 #include "../RuntimeOutput.h"
 #include "../RuntimeContext.h"
@@ -1557,19 +1557,19 @@ namespace runtime {
       return context.send(std::getenv("MY_VAR"), 200);
   };
 }</code></pre>
-        </div>
-    </li>
-</ul>
+            </div>
+        </li>
+    </ul>
 
-<h2><a href="#dependencies" id="dependencies">Dependencies</a></h2>
+    <h2><a href="#dependencies" id="dependencies">Dependencies</a></h2>
 
-<p> 
-    Your function's dependencies should be managed by the package manager of each language. By default, we include the following package managers in each runtime:
-</p>
+    <p>
+        Your function's dependencies should be managed by the package manager of each language. By default, we include the following package managers in each runtime:
+    </p>
 
-<p>
-    To install your dependencies before your function is built, you should add the relevant install command to the top your functions Build Commands script.
-</p>
+    <p>
+        To install your dependencies before your function is built, you should add the relevant install command to the top your functions Build Commands script.
+    </p>
 
 <table class="full text-size-small">
     <thead>
@@ -1636,25 +1636,25 @@ namespace runtime {
     </tr>
 </table>
 
-<h2><a href="#appwrite" id="appwrite">Using Appwrite in a Function</a></h2>
+    <h2><a href="#appwrite" id="appwrite">Using Appwrite in a Function</a></h2>
 
-<p>Appwrite can be used in your functions by adding the relevant SDK to your function's dependencies</p>
-<p>Authenticating with Appwrite is done via an API key or a JWT token. You can read more about authentication in the <a href="/docs/authentication-server">Server Authentication</a> section of the docs.</p>
+    <p>Appwrite can be used in your functions by adding the relevant SDK to your function's dependencies</p>
+    <p>Authenticating with Appwrite is done via an API key or a JWT token. You can read more about authentication in the <a href="/docs/authentication-server">Server Authentication</a> section of the docs.</p>
 
 
-<h2><a href="#dependencies" id="dependencies">Using with API Key</a></h2>
-<p>
-    API keys have defined scopes when you create them.
-    They ignore permissions and operate without a sessions. 
-    Use API keys if the function should act as an admin type role, instead of acting on behalf of a user.
-</p>
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Node.js</h3>
-        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, ID } from 'node-appwrite';
+    <h2><a href="#dependencies" id="dependencies">Using with API Key</a></h2>
+    <p>
+        API keys have defined scopes when you create them.
+        They ignore permissions and operate without a sessions.
+        Use API keys if the function should act as an admin type role, instead of acting on behalf of a user.
+    </p>
+    <ul class="phases clear" data-ui-phases>
+        <li>
+            <h3>Node.js</h3>
+            <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+                <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, ID } from 'node-appwrite';
 
-export default async ({ req, res, log }) => {
+export default async ({ req, res, log, error }) => {
 
   const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1')
@@ -1665,19 +1665,20 @@ export default async ({ req, res, log }) => {
   const databases = new Databases(client);
 
   try {
-    databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
+    await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
   } catch (e) {
-    return res.send("We messed up, document not created")
+    error("Failed to create document: " + e.message)
+    return res.send("Failed to create document")
   }
 
   return res.send("Document created")
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>PHP</h3>
-        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+            </div>
+        </li>
+        <li>
+            <h3>PHP</h3>
+            <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+                <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
 require(__DIR__ . '/../vendor/autoload.php');
 
@@ -1699,17 +1700,18 @@ return function ($context) {
     try {
         $databases->createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID::unique(), []);
     } catch (Exception $e) {
-        return $context->res->send("We messed up, document not created");
+        $context->error("Failed to create document: " . $e->getMessage());
+        return $context->res->send("Failed to create document");
     }
 
     return $context->res->send("Document created");
 };</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Python</h3>
-        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+            </div>
+        </li>
+        <li>
+            <h3>Python</h3>
+            <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+                <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 from appwrite.services.databases import Databases
 from appwrite.id import ID
 
@@ -1729,15 +1731,16 @@ def main(context):
     try:
         databases.create_document("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {})
     except Exception as e:
-        return context.response.send("We messed up, document not created")
+        context.error("Failed to create document: " + e.message)
+        return context.response.send("Failed to create document")
 
     return context.response.send("Document created")</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Ruby</h3>
-        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
+            </div>
+        </li>
+        <li>
+            <h3>Ruby</h3>
+            <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+                <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
 
 def main(context)
   client = Appwrite::Client.new
@@ -1752,19 +1755,20 @@ def main(context)
     begin
         databases.create_document('[DATABASE_ID]', '[COLLECTION_ID]', Appwrite::ID.unique(), {})
     rescue Appwrite::Exception => e
-        return context.response.send("We messed up, document not created")
+        context.error("Failed to create document: " + e.message)
+        return context.response.send("Failed to create document")
     end
 
     return context.response.send("Document created")
 end</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Deno</h3>
-        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases, ID } from "https://deno.land/x/appwrite/mod.ts";
+            </div>
+        </li>
+        <li>
+            <h3>Deno</h3>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases, ID } from "https://deno.land/x/appwrite/mod.ts";
                 
-export default function ({req, res}: any){
+export default function ({req, res, error}: any){
     const client = new Client();
     client
         .setEndpoint("https://cloud.appwrite.io/v1")
@@ -1777,17 +1781,18 @@ export default function ({req, res}: any){
     try {
         databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {});
     } catch (e) {
-        return res.send("We messed up, document not created");
+        error("Failed to create document: " + e.message);
+        return res.send("Failed to create document");
     }
     
     return res.send("Document created");
-}</code></pre>      
-        </div>
-    </li>
-    <li>
-        <h3>Dart</h3>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+}</code></pre>
+            </div>
+        </li>
+        <li>
+            <h3>Dart</h3>
+            <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+                <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 import 'package:dart_appwrite/dart_appwrite.dart';
 
 
@@ -1803,17 +1808,18 @@ Future&lt;dynamic> main(final context) async {
     try {
         await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {});
     } catch (e) {
-        return context.res.send("We messed up, document not created");
+        context.error("Failed to create document: " + e.message);
+        return context.res.send("Failed to create document");
     }
 
     return context.res.send("Document created");
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Swift</h3>
-        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+            </div>
+        </li>
+        <li>
+            <h3>Swift</h3>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+                <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 import AppwriteModels
 import Foundation
 
@@ -1829,17 +1835,18 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
     do {
         try await databases.createDocument(databaseId: "[DATABASE_ID]", collectionId: "[COLLECTION_ID]", data: [:])
     } catch {
-        return context.res.send("We messed up, document not created")
+        context.error("Failed to create document: \(error.localizedDescription)")
+        return try await context.res.send("Failed to create document")
     }
 
     return context.res.send("Document created")
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>.NET</h3>
-        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
+            </div>
+        </li>
+        <li>
+            <h3>.NET</h3>
+            <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+                <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
 
 using Appwrite;
 using Appwrite.Services;
@@ -1860,18 +1867,19 @@ public class Handler {
         try {
             await databases.CreateDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.Unique(), new Dictionary&lt;string, object>());
         } catch (Exception e) {
-            return Context.Response.Send("We messed up, document not created");
+            Context.Error("Failed to create document: " + e.Message);
+            return Context.Response.Send("Failed to create document");
         }
 
         return Context.Response.Send("Document created");
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Kotlin</h3>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
+            </div>
+        </li>
+        <li>
+            <h3>Kotlin</h3>
+            <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+                <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
 
 import io.openruntimes.kotlin.RuntimeContext
 import io.openruntimes.kotlin.RuntimeOutput
@@ -1894,18 +1902,19 @@ class Main {
         try {
             databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), HashMap())
         } catch (e: Exception) {
-            return context.res.send("We messed up, document not created")
+            context.error("Failed to create document: " + e.message)
+            return context.res.send("Failed to create document")
         }
 
         return context.res.send("Document created")
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Java</h3>
-        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
+            </div>
+        </li>
+        <li>
+            <h3>Java</h3>
+            <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+                <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
 
 import io.openruntimes.java.RuntimeContext;
 import io.openruntimes.java.RuntimeOutput;
@@ -1926,34 +1935,35 @@ public class Main {
         try {
             databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), new HashMap<>());
         } catch (Exception e) {
-            return context.res.send("We messed up, document not created");
+            context.error("Failed to create document: " + e.getMessage());
+            return context.res.send("Failed to create document");
         }
 
         return context.res.send("Document created");
 
     }
 }</code></pre>
-        </div>
-    </li>
-</ul>
+            </div>
+        </li>
+    </ul>
 
 
-<h2><a href="#dependencies" id="dependencies">Using JWT</a></h2>
-<p>
-    JWTs allow you to act on behalf of an user in your Appwrite Function.
-    When using JWTs, you will be able to access and change <b>only</b> the resources with the same permissions as the user account that signed the JWT.
-    This preserves the permissions you configured on each resource.
-</p>
+    <h2><a href="#dependencies" id="dependencies">Using JWT</a></h2>
+    <p>
+        JWTs allow you to act on behalf of an user in your Appwrite Function.
+        When using JWTs, you will be able to access and change <b>only</b> the resources with the same permissions as the user account that signed the JWT.
+        This preserves the permissions you configured on each resource.
+    </p>
 
-<p>
-    If the Appwrite Function is invoked by an authenticated user, the <code>x-appwrite-user-jwt</code> header is automatically passed in.
-</p>
+    <p>
+        If the Appwrite Function is invoked by an authenticated user, the <code>x-appwrite-user-jwt</code> header is automatically passed in.
+    </p>
 
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Node.js</h3>
-        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, ID } from 'node-appwrite';
+    <ul class="phases clear" data-ui-phases>
+        <li>
+            <h3>Node.js</h3>
+            <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+                <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, ID } from 'node-appwrite';
 
 export default async ({ req, res, log }) => {
 
@@ -1970,19 +1980,20 @@ export default async ({ req, res, log }) => {
   const databases = new Databases(client);
 
   try {
-    databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
+    await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
   } catch (e) {
-    return res.send("We messed up, document not created")
+    log("Failed to create document: " + e.message)
+    return res.send("Failed to create document")
   }
 
   return res.send("Document created")
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>PHP</h3>
-        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+            </div>
+        </li>
+        <li>
+            <h3>PHP</h3>
+            <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+                <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
 require(__DIR__ . '/../vendor/autoload.php');
 
@@ -2008,17 +2019,18 @@ return function ($context) {
     try {
         $databases->createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID::unique(), []);
     } catch (Exception $e) {
-        return $context->res->send("We messed up, document not created");
+        $context->error("Failed to create document: " . $e->getMessage());
+        return $context->res->send("Failed to create document");
     }
 
     return $context->res->send("Document created");
 };</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Python</h3>
-        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+            </div>
+        </li>
+        <li>
+            <h3>Python</h3>
+            <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+                <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 from appwrite.services.databases import Databases
 from appwrite.id import ID
 
@@ -2042,15 +2054,16 @@ def main(context):
     try:
         databases.create_document("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {})
     except Exception as e:
-        return context.response.send("We messed up, document not created")
+        context.error("Failed to create document: " + e.message)
+        return context.response.send("Failed to create document")
 
     return context.response.send("Document created")</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Ruby</h3>
-        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
+            </div>
+        </li>
+        <li>
+            <h3>Ruby</h3>
+            <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+                <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
 
 def main(context)
   client = Appwrite::Client.new
@@ -2069,19 +2082,20 @@ def main(context)
     begin
         databases.create_document('[DATABASE_ID]', '[COLLECTION_ID]', Appwrite::ID.unique(), {})
     rescue Appwrite::Exception => e
-        return context.response.send("We messed up, document not created")
+        context.error("Failed to create document: " + e.message)
+        return context.response.send("Failed to create document")
     end
 
     return context.response.send("Document created")
 end</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Deno</h3>
-        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases, ID } from "https://deno.land/x/appwrite/mod.ts";
+            </div>
+        </li>
+        <li>
+            <h3>Deno</h3>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases, ID } from "https://deno.land/x/appwrite/mod.ts";
                 
-export default function ({req, res}: any){
+export default function ({req, res, error}: any){
     const client = new Client();
     client
         .setEndpoint("https://cloud.appwrite.io/v1")
@@ -2098,17 +2112,18 @@ export default function ({req, res}: any){
     try {
         databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {});
     } catch (e) {
-        return res.send("We messed up, document not created");
+        error("Failed to create document: " + e.message)
+        return res.send("Failed to create document");
     }
     
     return res.send("Document created");
-}</code></pre>      
-        </div>
-    </li>
-    <li>
-        <h3>Dart</h3>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+}</code></pre>
+            </div>
+        </li>
+        <li>
+            <h3>Dart</h3>
+            <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+                <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 import 'package:dart_appwrite/dart_appwrite.dart';
 
 
@@ -2128,17 +2143,18 @@ Future&lt;dynamic> main(final context) async {
     try {
         await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {});
     } catch (e) {
-        return context.res.send("We messed up, document not created");
+        context.error("Failed to create document: " + e.message);
+        return context.res.send("Failed to create document");
     }
 
     return context.res.send("Document created");
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Swift</h3>
-        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+            </div>
+        </li>
+        <li>
+            <h3>Swift</h3>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+                <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 import AppwriteModels
 import Foundation
 
@@ -2158,17 +2174,18 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
     do {
         try await databases.createDocument(databaseId: "[DATABASE_ID]", collectionId: "[COLLECTION_ID]", data: [:])
     } catch {
-        return context.res.send("We messed up, document not created")
+        context.error("Failed to create document: \(error.localizedDescription)")
+        return context.res.send("Failed to create document")
     }
 
     return context.res.send("Document created")
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>.NET</h3>
-        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
+            </div>
+        </li>
+        <li>
+            <h3>.NET</h3>
+            <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+                <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
 
 using Appwrite;
 using Appwrite.Services;
@@ -2193,18 +2210,19 @@ public class Handler {
         try {
             await databases.CreateDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.Unique(), new Dictionary&lt;string, object>());
         } catch (Exception e) {
-            return Context.Res.Send("We messed up, document not created");
+            Context.Error("Failed to create document: " + e.Message);
+            return Context.Res.Send("Failed to create document");
         }
 
         return Context.Res.Send("Document created");
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Kotlin</h3>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
+            </div>
+        </li>
+        <li>
+            <h3>Kotlin</h3>
+            <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+                <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
 
 import io.openruntimes.kotlin.RuntimeContext
 import io.openruntimes.kotlin.RuntimeOutput
@@ -2231,18 +2249,19 @@ class Main {
         try {
             databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), HashMap())
         } catch (e: Exception) {
-            return context.res.send("We messed up, document not created")
+            context.error("Failed to create document: " + e.message)
+            return context.res.send("Failed to create document")
         }
 
         return context.res.send("Document created")
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Java</h3>
-        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
+            </div>
+        </li>
+        <li>
+            <h3>Java</h3>
+            <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+                <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
 
 import io.openruntimes.java.RuntimeContext;
 import io.openruntimes.java.RuntimeOutput;
@@ -2267,162 +2286,163 @@ public class Main {
         try {
             databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), new HashMap<>());
         } catch (Exception e) {
-            return context.res.send("We messed up, document not created");
+            context.error("Failed to create document: " + e.getMessage());
+            return context.res.send("Failed to create document");
         }
 
         return context.res.send("Document created");
 
     }
 }</code></pre>
-        </div>
-    </li>
-</ul>
+            </div>
+        </li>
+    </ul>
 
 
-<h2><a href="#code-splitting" id="code-splitting">Code Splitting</a></h2>
-<p>
-    As your functions grow, you may find yourself needing to split your code into multiple files.
-    This helps you keep your codebase maintainable and easy to read.
-    Here's how you can accomplish code splitting.
-</p>
-<ul class="phases clear" data-ui-phases>
-    <li>
-        <h3>Node.js</h3>
-        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>// src/utils.js
+    <h2><a href="#code-splitting" id="code-splitting">Code Splitting</a></h2>
+    <p>
+        As your functions grow, you may find yourself needing to split your code into multiple files.
+        This helps you keep your codebase maintainable and easy to read.
+        Here's how you can accomplish code splitting.
+    </p>
+    <ul class="phases clear" data-ui-phases>
+        <li>
+            <h3>Node.js</h3>
+            <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+                <pre class="line-numbers"><code class="prism language-js" data-prism>// src/utils.js
 
 export function add(a, b) {
     return a + b;
 }
             </code></pre>
-        </div>
-        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>// src/main.js
+            </div>
+            <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+                <pre class="line-numbers"><code class="prism language-js" data-prism>// src/main.js
 
 import { add } from './utils.js';
 
 export defaut function ({res}) {
     return res.send(add(1, 2));
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>PHP</h3>
-        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>// src/utils.php
+            </div>
+        </li>
+        <li>
+            <h3>PHP</h3>
+            <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+                <pre class="line-numbers"><code class="prism language-php" data-prism>// src/utils.php
 
 function add($a, $b) {
     return $a + $b;
 }</code></pre>
-        </div>
-        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-            <pre class="line-numbers"><code class="prism language-php" data-prism>// src/main.php
+            </div>
+            <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+                <pre class="line-numbers"><code class="prism language-php" data-prism>// src/main.php
 
 include 'utils.php';
 
 return function ($context) {
     return $context->res->send(add(1, 2));
 };</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Python</h3>
-        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>// src/utils.py
+            </div>
+        </li>
+        <li>
+            <h3>Python</h3>
+            <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+                <pre class="line-numbers"><code class="prism language-python" data-prism>// src/utils.py
 
 def add(a, b):
     return a + b;</code>
         </pre>
-        </div>
-        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-            <pre class="line-numbers"><code class="prism language-python" data-prism>// src/main.py
+            </div>
+            <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+                <pre class="line-numbers"><code class="prism language-python" data-prism>// src/main.py
 
 import utils
 
 def main(context):
     return context.res.send(utils.add(1, 2))</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Ruby</h3>
-        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism># lib/utils.rb
+            </div>
+        </li>
+        <li>
+            <h3>Ruby</h3>
+            <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+                <pre class="line-numbers"><code class="prism language-ruby" data-prism># lib/utils.rb
 
 def add(a, b)
     return a + b
 end</code></pre>
-        </div>
-        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism># lib/main.rb
+            </div>
+            <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+                <pre class="line-numbers"><code class="prism language-ruby" data-prism># lib/main.rb
 
 require_relative 'utils'
 
 def main(context)
     return context.res.send(add(1, 2))
 end</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Deno</h3>
-        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>// src/utils.ts
+            </div>
+        </li>
+        <li>
+            <h3>Deno</h3>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>// src/utils.ts
 
 export function add(a: number, b: number): number {
     return a + b;
-}</code></pre>  
-        </div>
-        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>// src/main.ts
+}</code></pre>
+            </div>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>// src/main.ts
 
 import { add } from './utils.ts';
 
 export default function ({res}: {res: any}) {
     return res.send(add(1, 2));
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Dart</h3>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>// lib/utils.dart
+            </div>
+        </li>
+        <li>
+            <h3>Dart</h3>
+            <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+                <pre class="line-numbers"><code class="prism language-dart" data-prism>// lib/utils.dart
 
 int add(int a, int b) {
     return a + b;
 }</code></pre>
-        </div>
-        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>// lib/main.dart
+            </div>
+            <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+                <pre class="line-numbers"><code class="prism language-dart" data-prism>// lib/main.dart
 import 'dart:async';
 
 Future&lt;dynamic> main(final context) async {
     return context.res.send(add(1, 2));
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Swift</h3>
-        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>// Sources/utils.swift
+            </div>
+        </li>
+        <li>
+            <h3>Swift</h3>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+                <pre class="line-numbers"><code class="prism language-swift" data-prism>// Sources/utils.swift
 
 func add(_ a: Int, _ b: Int) -> Int {
     return a + b
 }
             </code></pre>
-        </div>
-        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>// Sources/index.swift
+            </div>
+            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+                <pre class="line-numbers"><code class="prism language-swift" data-prism>// Sources/index.swift
 
 import Foundation
 
 func main(context: RuntimeContext) async throws -> RuntimeOutput {
     return context.res.send(add(1, 2))
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>.NET</h3>
-        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>// src/Utils.cs
+            </div>
+        </li>
+        <li>
+            <h3>.NET</h3>
+            <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+                <pre class="line-numbers"><code class="prism language-csharp" data-prism>// src/Utils.cs
 
 namespace DotNetRuntime
 
@@ -2433,9 +2453,9 @@ public static class Utils
         return a + b;
     }
 }</code></pre>
-        </div>
-        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism>// src/Index.cs
+            </div>
+            <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+                <pre class="line-numbers"><code class="prism language-csharp" data-prism>// src/Index.cs
 
 namespace DotNetRuntime
 
@@ -2445,12 +2465,12 @@ public class Handler {
         return Context.Res.Send(Utils.Add(1, 2));
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Kotlin</h3>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// src/Utils.kt
+            </div>
+        </li>
+        <li>
+            <h3>Kotlin</h3>
+            <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+                <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// src/Utils.kt
 
 package io.openruntimes.kotlin.src
 
@@ -2459,9 +2479,9 @@ class Utils {
         return a + b
     }
 }</code></pre>
-        </div>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// src/Main.kt
+            </div>
+            <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+                <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// src/Main.kt
 
 package io.openruntimes.kotlin.src
 
@@ -2474,12 +2494,12 @@ class Main {
         return context.res.send(Utils.add(1, 2))
     }
 }</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Java</h3>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// src/Utils.java
+            </div>
+        </li>
+        <li>
+            <h3>Java</h3>
+            <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+                <pre class="line-numbers"><code class="prism language-kotlin" data-prism>// src/Utils.java
 
 package io.openruntimes.java.src;
 
@@ -2488,9 +2508,9 @@ class Utils {
         return a + b;
     }
 }</code></pre>
-        </div>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.java.src;
+            </div>
+            <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+                <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.java.src;
 
 import io.openruntimes.java.RuntimeContext;
 import io.openruntimes.java.RuntimeOutput;
@@ -2501,54 +2521,54 @@ public class Main {
         return context.res.send(Utils.add(1, 2));
     }
 }</code></pre>
-        </div>
-    </li>
-</ul>
+            </div>
+        </li>
+    </ul>
 
 
-<h2><a href="#upgrade" id="upgrade">Upgrade</a></h2>
-<p>
-    Appwrite Functions received major updates in Appwrite version 1.4. 
-    If you still have functions from previous versions, they will be <b>read-only</b> in Appwrite 1.4.
-    You will have to migrate your old functions to follow new runtime syntax.
-</p>
+    <h2><a href="#upgrade" id="upgrade">Upgrade</a></h2>
+    <p>
+        Appwrite Functions received major updates in Appwrite version 1.4.
+        If you still have functions from previous versions, they will be <b>read-only</b> in Appwrite 1.4.
+        You will have to migrate your old functions to follow new runtime syntax.
+    </p>
 
-<p>
-    Here's a checklist of things you need to know.
-</p>
+    <p>
+        Here's a checklist of things you need to know.
+    </p>
 
-<ol class="margin-top margin-bottom-large text-size-normal">
-    <li>
-        The parameter passed into functions has changed. 
-        <code>req</code> and <code>res</code> has been replaced by <code>context</code>, which contains new logger methods.
-        <a href="docs/functions-develop#context">Learn about context.</a>
-    </li>
-    <li>
-        To improve privacy and logging reliability, we provide new <code>context.log()</code> and <code>context.error()</code> functions.
-        You can no longer use native logging methods.
-        <a href="docs/functions-develop#logging">Learn about logging.</a>
-    </li>
-    <li>
-        The old way of <code>req.variables</code> has been deprecated. 
-        You can now access variables passed into each function as environment variables.
-        <a href="docs/functions-develop#environment-variables">Learn about environment variables.</a>
-    </li>
-    <li>
-        The <code>req</code> object has been updated to use terminology consistent with typical HTTP concepts.
-        You'll now find familiar concepts like headers, body, HTTP methods, and others.
-        <a href="docs/functions-develop#request">Learn about request.</a>
-    </li>
-    <li>
-        The response object has been updated. 
-        You can now specify headers, as well as use new methods like return redirects or empty responses.
-        <a href="docs/functions-develop#response">Learn about response.</a>
-    </li>
-    <li>
-        Now, you <b>must return a response</b> such as <code>return context.res.send("")</code>. 
-        This prevents confusing errors when functions are terminated prematurely before a response is sent.
-        <a href="docs/functions-develop#response">Learn about response.</a>
-    </li>
-    <li>
-        Some variables about how a function was triggered are now found in the <code>context.req</code> object as <a href="/docs/functions-develop#request">headers</a>.
-    </li>
-</ol>
+    <ol class="margin-top margin-bottom-large text-size-normal">
+        <li>
+            The parameter passed into functions has changed.
+            <code>req</code> and <code>res</code> has been replaced by <code>context</code>, which contains new logger methods.
+            <a href="docs/functions-develop#context">Learn about context.</a>
+        </li>
+        <li>
+            To improve privacy and logging reliability, we provide new <code>context.log()</code> and <code>context.error()</code> functions.
+            You can no longer use native logging methods.
+            <a href="docs/functions-develop#logging">Learn about logging.</a>
+        </li>
+        <li>
+            The old way of <code>req.variables</code> has been deprecated.
+            You can now access variables passed into each function as environment variables.
+            <a href="docs/functions-develop#environment-variables">Learn about environment variables.</a>
+        </li>
+        <li>
+            The <code>req</code> object has been updated to use terminology consistent with typical HTTP concepts.
+            You'll now find familiar concepts like headers, body, HTTP methods, and others.
+            <a href="docs/functions-develop#request">Learn about request.</a>
+        </li>
+        <li>
+            The response object has been updated.
+            You can now specify headers, as well as use new methods like return redirects or empty responses.
+            <a href="docs/functions-develop#response">Learn about response.</a>
+        </li>
+        <li>
+            Now, you <b>must return a response</b> such as <code>return context.res.send("")</code>.
+            This prevents confusing errors when functions are terminated prematurely before a response is sent.
+            <a href="docs/functions-develop#response">Learn about response.</a>
+        </li>
+        <li>
+            Some variables about how a function was triggered are now found in the <code>context.req</code> object as <a href="/docs/functions-develop#request">headers</a>.
+        </li>
+    </ol>
