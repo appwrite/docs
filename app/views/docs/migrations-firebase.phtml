@@ -1,7 +1,7 @@
 <p>
   Moving your project from Firebase to Appwrite?
   Appwrite Migrations can help you streamline the process.
-  
+
   Here's what you need to know to get started.
 </p>
 
@@ -16,34 +16,34 @@
 
 <h2><a href="#resources" id="resources">Supported resource types</a></h2>
 <table>
-<thead>
-  <tr>
-    <th></th>
-    <th>Users</th>
-    <th>Databases</th>
-    <th>Documents</th>
-    <th>Files</th>
-    <th>Functions</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Firebase</td>
-    <td>✅</td>
-    <td>✅</td>
-    <td>✅</td>
-    <td>✅</td>
-    <td></td>
-  </tr>
-</tbody>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Users</th>
+      <th>Databases</th>
+      <th>Documents</th>
+      <th>Files</th>
+      <th>Functions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Firebase</td>
+      <td>✅</td>
+      <td>✅</td>
+      <td>✅</td>
+      <td>✅</td>
+      <td></td>
+    </tr>
+  </tbody>
 </table>
 
 <h2><a href="#migration-process" id="migration-process">Migrating to Appwrite from Firebase</a></h2>
 <p>
-  To begin migrating to Appwrite make sure to read the <a href="/docs/migrations">migration overview</a> 
+  To begin migrating to Appwrite make sure to read the <a href="/docs/migrations">migration overview</a>
   and <a href="#notices">things to keep in mind</a> sections above.
 </p>
-   
+
 <ol class="margin-top margin-bottom-large text-size-normal">
   <li>
     Create a new project and click on the <b>Migrations</b> tab.
@@ -52,7 +52,7 @@
     Click on the <b>Create Migration</b> button and select <b>Firebase</b> as your source.
   </li>
   <li>
-    Depending on where your Appwrite project is hosted, you'll need to use different methods to authorize with Firebase. 
+    Depending on where your Appwrite project is hosted, you'll need to use different methods to authorize with Firebase.
     See the <a href="#cloud">Cloud</a> and <a href="#self-hosted">Self-hosting</a> sections for details.
   </li>
   <li>
@@ -79,12 +79,114 @@
     Click the gear icon to access your <b>Project Settings</b>.
   </li>
   <li>
-    Click <b>Service Accounts</b>, then <b>Generate New Private Key</b>. Don't share this key with anyone!
+    Click on <b>Service Accounts</b>, then click on the <b>Manage service account permissions</b> link redirecting you to the Google Cloud Console.
   </li>
   <li>
-    Once you've downloaded your private key, head back to Appwrite and click <b>Manual Authentication</b>.
+    Click on <b>Create Service Account</b>, give it any name, id and description you want, then click <b>Continue</b>.
   </li>
   <li>
-    Upload the JSON private key and follow the wizard.
+    Next you'll be prompted to grant the service account roles, grant the following roles:
+  </li>
+  <table>
+    <thead>
+      <tr>
+        <th>Role</th>
+        <th>Reason<br></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Firebase Viewer</td>
+        <td>Read access to your entire Firebase project including Database and Storage<br></td>
+      </tr>
+      <tr>
+        <td>Identity Toolkit Viewer</td>
+        <td>Read access to your users including their hash config<br></td>
+      </tr>
+    </tbody>
+  </table>
+  <li>If you prefer to create a custom role, you can use the following permissions:</li>
+  <table>
+    <thead>
+      <tr>
+        <th>Permission</th>
+        <th>Reason</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>datastore.databases.get</td>
+        <td>Read access to your Firestore database</td>
+      </tr>
+      <tr>
+        <td>datastore.databases.list</td>
+        <td>Read access to your Firestore database</td>
+      </tr>
+      <tr>
+        <td>datastore.entities.get</td>
+        <td>Read access to your Firestore database's documents</td>
+      </tr>
+      <tr>
+        <td>datastore.entities.list</td>
+        <td>Read access to your Firestore database's documents</td>
+      </tr>
+      <tr>
+        <td>datastore.indexes.get</td>
+        <td>Read access to your Firestore database's indexes</td>
+      </tr>
+      <tr>
+        <td>datastore.indexes.list</td>
+        <td>Read access to your Firestore database's indexes</td>
+      </tr>
+      <tr>
+        <td>firebaseauth.configs.get</td>
+        <td>Read access to your Firebase project's authentication configs</td>
+      </tr>
+      <tr>
+        <td>firebaseauth.configs.getHashConfig</td>
+        <td>Read access to your Firebase project's authentication configs including hash salt</td>
+      </tr>
+      <tr>
+        <td>firebaseauth.configs.getSecret</td>
+        <td>Read access to your Firebase project's authentication configs including secret</td>
+      </tr>
+      <tr>
+        <td>firebaseauth.users.get</td>
+        <td>Read access to your Firebase project's users</td>
+      </tr>
+      <tr>
+        <td>identitytoolkit.tenants.get</td>
+        <td>Read access to your Firebase project's users</td>
+      </tr>
+      <tr>
+        <td>identitytoolkit.tenants.list</td>
+        <td>Read access to your Firebase project's users</td>
+      </tr>
+      <tr>
+        <td>storage.buckets.get</td>
+        <td>Read access to your Firebase project's storage buckets</td>
+      </tr>
+      <tr>
+        <td>storage.buckets.list</td>
+        <td>Read access to your Firebase project's storage buckets</td>
+      </tr>
+      <tr>
+        <td>storage.objects.get</td>
+        <td>Read access to your Firebase project's storage objects</td>
+      </tr>
+      <tr>
+        <td>storage.objects.list</td>
+        <td>Read access to your Firebase project's storage objects</td>
+      </tr>
+    </tbody>
+  </table>
+  <li>
+    Click <b>Done</b> to create the service account. After that you'll be redirected back to the service accounts page. Select the service account you just created and click <b>Keys</b>.
+  </li>
+  <li>
+    Click <b>Add Key</b> and select <b>Create new key</b>. Select <b>JSON</b> as the key type and click <b>Create</b>. This will download a JSON file to your computer.
+  </li>
+  <li>
+    Upload the JSON file to Appwrite and follow the migration wizard.
   </li>
 </ol>
