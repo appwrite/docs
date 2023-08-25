@@ -1,16 +1,9 @@
-<p>Appwrite uses email and SMS messages to communicate with users to perform authentication and verification actions. Emails and SMS messages can be customized to fit your app's design and voice.</p>
+<p>Appwrite uses emails to communicate with users to perform authentication and verification actions. Emails can be customized to fit your app's design and voice.</p>
 
 <p>
     Each Appwrite project can have its own set of unique templates. 
     Templates also support localization, so every template can be written in multiple languages and served 
     depending on the configured locale.
-</p>
-
-<p>
-<a href="#email-templates"><i class="icon-angle-circled-right"></i>Email Templates</a>
-</p>
-<p>
-<a href="#sms-templates"><i class="icon-angle-circled-right"></i>SMS Templates</a>
 </p>
 
 <h2><a href="#customize" id="customize">Customize Templates</a></h2>
@@ -142,48 +135,6 @@
 &lt/html&gt</code></pre>
 </div>
 
-<h2><a href="#sms-templates" id="sms-templates">SMS Templates</a></h2>
-<p>You can customize the SMS templates used for phone verification and login.</p>
-<h3><a href="#sms-template-components" id="sms-template-components">SMS Template Components</a></h3>
-<table class="full text-size-small">
-    <thead>
-    <tr>
-        <td style="width: 200px">Component</td>
-        <td>Description</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>Message</td>
-        <td>The body of the SMS message. You can find the variables available in the <a href="#sms-template-syntax">SMS Template Syntax</a> section.</td>
-    </tr>
-    </tbody>
-</table>
-
-<h3><a href="#sms-template-syntax" id="sms-template-syntax">SMS Template Syntax</a></h3>
-<p>Variables can be used in SMS templates to dynamically format unique messages for each reader.</p>
-
-<table class="full text-size-small">
-    <thead>
-    <tr>
-        <td style="width: 200px">Variable</td>
-        <td>Description</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><code>{{token}}</code></td>
-        <td>The secret code sent to users for phone verification or authentication.</td>
-    </tr>
-    </tbody>
-</table>
-
-<h3><a href="#sms-template-examples" id="sms-template-components">SMS Template Examples</a></h3>
-<p>Here's an example of using these variables in a template.</p>
-<div class="ide margin-bottom" data-lang="html" data-lang-label="html">
-    <pre class="line-numbers"><code class="prism language-html" data-prism>Your account verification code is {{token}}</code></pre>
-</div>
-
 <h2><a href="#localization" id="localization">Localization</a></h2>
 
 <p>
@@ -195,7 +146,7 @@
     You can send messages in different languages by setting the locale with <code>client.setLocale()</code> in the SDKs or the <code>X-Appwrite-Locale</code> HTTP header. <a href="https://github.com/appwrite/appwrite/blob/master/app/config/locale/codes.php">View here the list of available locales</a>
 </p>
 
-<p>For example, you can send a phone verification in French.</p>
+<p>For example, you can send an email verification in French.</p>
 <ul class="phases clear" data-ui-phases>
     <li>
         <h3>Web</h3>
@@ -212,7 +163,7 @@ client
     .setLocale('fr')                             // Your locale
 ;
 
-const promise = account.createPhoneVerification();
+const promise = account.createVerification('https://example.com');
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -235,7 +186,7 @@ void main() { // Init SDK
     .setProject('5df5acd0d48c2')                 // Your project ID
     .setLocale('fr')                             // Your locale
   ;
-  Future result = account.createPhoneVerification();
+  Future result = account.createVerification('https://example.com');
 
   result
     .then((response) {
@@ -259,7 +210,7 @@ val client = Client(context)
 
 val account = Account(client)
 
-val response = account.createPhoneVerification()</code></pre>
+val response = account.createVerification('https://example.com')</code></pre>
         </div>
     </li>
     <li>
@@ -274,7 +225,7 @@ let client = Client()
 
 let account = Account(client)
 
-let token = try await account.createPhoneVerification()</code></pre>
+let token = try await account.createVerification('https://example.com')</code></pre>
         </div>
     </li>
 </ul>
