@@ -10,8 +10,9 @@
 <ol class="margin-top margin-bottom-large text-size-normal">
   <li>Appwrite will not incur usage charges during migrations, but Firebase may still incur service charges.</li>
   <li>Appwrite Migrations only supports Firestore as a database source. Realtime Database is <b>currently not supported</b>.</li>
-  <li>At the moment only top level document migration is supported. Nested documents will not be transferred automatically.</li>
-  <li>OAuth users will not be transferred. Users will need to re-authenticate with your OAuth provider after the migration is complete.</li>
+  <li>At the moment only top level document migration is supported. Nested documents will not be migrated automatically.</li>
+  <li>OAuth users will not be migrated because the sessions are managed by the third-party OAuth provider. Users will need to re-authenticate with your OAuth provider after the migration is complete.</li>
+  <li>Functions are not automatically migrated because of syntax and runtime differences.</li>
 </ol>
 
 <h2><a href="#migration-process" id="migration-process">Migrating to Appwrite from Firebase</a></h2>

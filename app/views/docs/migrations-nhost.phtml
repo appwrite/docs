@@ -10,7 +10,8 @@
 <ol class="margin-top margin-bottom-large text-size-normal">
   <li>Appwrite will not incur usage charges during migrations, but NHost may still incur service charges.</li>
   <li>Appwrite's Database doesn't support all the features of the postgreSQL database so more advanced postgres centric things things like advanced indexes, postgres functions and scheduling will not be migrated.</li>
-  <li>OAuth users will not be transferred. You will need to re-authenticate with your OAuth provider after the migration is complete.</li>
+  <li>OAuth users will not be migrated because the sessions are managed by the third-party OAuth provider. Users will need to re-authenticate with your OAuth provider after the migration is complete.</li>
+  <li>Functions are not automatically migrated because of syntax and runtime differences.</li>
 </ol>
 
 <h2><a href="#migration-process" id="migration-process">Migrating to Appwrite from NHost</a></h2>
