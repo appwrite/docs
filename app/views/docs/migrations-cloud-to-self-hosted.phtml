@@ -1,0 +1,34 @@
+<p>
+    Moving to a self-hosted instance? We've got you covered. 
+    Migrations makes it as easy as a couple clicks to move all of your Appwrite Cloud project data to a self-hosted instance.
+</p>
+
+<h2><a href="#notices" id="notices">Things to keep in mind</a></h2>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>Data transferred by migrations will reset `$createdAt` and `$updatedAt` timestamps to the date of the migration.</li>
+    <li>Your self-hosted Appwrite project must be accessible from the internet for the migration to work.</li>
+    <li>Migrations are non-destructive. No data will be deleted or lost in the source project.</li>
+</ol>
+
+<h2><a href="#migrations-process" id="migrations-process">Migrating to Self-hosted from Cloud</a></h2>
+
+<p>
+    To begin migrating to Appwrite Self-hosted, make sure to read the <a href="/docs/migrations">migrations overview</a>
+    and <a href="#notices">things to keep in mind</a> sections above.
+</p>
+
+<h3>Steps on Your Cloud Project</h3>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>Navigate to your Appwrite Cloud Console and click on the <b>Migrations</b> tab.</li>
+    <li>Click <b>Export to Self-hosted</b>, you will be prompted to input the URL of your self-hosted Appwrite project.</li>
+    <li>Optionally, tell us about why you're moving to self-hosted.</li>
+    <li>After clicking <b>Continue</b>, you'll be directed back to your self-hosted project to complete the process.</li>
+</ol>
+
+<h3>Steps on Your Self-hosted Project</h3>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>Once redirected to your self-hosted project, you'll be prompted to select an organization and a project. You can migrate to an existing project or create a new one.</li>
+    <li>Select the data you wish to migrate. You can choose among accounts, databases, documents, files, and functions.</li>
+    <li>Click <b>Start migration</b> to start the migration process. You do not need to keep the Appwrite Console open through the process.</li>
+</ol>

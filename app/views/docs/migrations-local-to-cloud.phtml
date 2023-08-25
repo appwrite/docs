@@ -1,0 +1,38 @@
+<p>
+    If you're moving your self-hosted projects to Appwrite Cloud, we've got your back.
+    Migrations makes it as easy as a couple clicks to move all of your self-hosted project data to a Cloud instance.
+</p>
+
+<h2><a href="#notices" id="notices">Things to keep in mind</a></h2>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>Data transferred by migrations will reset <code>$createdAt</code> and <code>$updatedAt</code> timestamps to the date of the migration.</li>
+    <li>Your self-hosted Appwrite project must be accessible from the internet for the migration to work.</li>
+    <li>Migrations are non-destructive. No data will be deleted or lost in the source project.</li>
+</ol>
+
+<h2><a href="#migration-process" id="migration-process">Migrating to Cloud from Self-hosted</a></h2>
+<p>
+    To begin migrating to self-hosted, make sure to read the <a href="/docs/migrations">migration overview</a>
+    and <a href="#notices">things to keep in mind</a> sections above.
+</p>
+
+<h3>Steps in Self-hosted Console</h3>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>Navigate to your self-hosted project's console and click on the <b>Migrations</b> tab in <b>Project Settings</b>.</li>
+    <li>Click <b>Deploy to cloud</b>, and you will be redirected to Appwrite Cloud.</li>
+    <li>You will complete the migration on Appwrite Cloud.</li>
+</ol>
+
+<h3>Steps in Cloud Console</h3>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>Once redirected to Appwrite Cloud, you'll be prompted to select a project. If you have multiple organizations, you will also be asked to pick one. You can migrate to an existing project or create a new one.</li>
+    <li>Select the data you wish to migrate. You can choose among accounts, databases, documents, files, and functions.</li>
+    <li>Click <b>Start migration</b> to start the migration process. You do not need to keep the Appwrite Console open through the process.</li>
+</ol>
+
+<div class="notice">
+    <h2>Keep in mind</h2>
+    <p>Your Self-hosted instance will generate a API Key in the background to pass to Cloud. You can revoke this key after the migration process is complete.</p>
+</div>

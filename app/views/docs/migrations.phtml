@@ -1,0 +1,90 @@
+<p>
+    If you're looking to migrate existing projects to Appwrite, Migrations can help you make the move more quickly.
+    You can move your app from Firebase, Supabase, NHost, and even move between self-hosted and Cloud projects using Migrations.
+    You can also use Migrations to move between two self-hosted instances or even to duplicate project on the same instance.
+    Migrations will automatically move accounts, database documents, and storage files from one source to another.
+</p>
+
+<h2><a href="#supported-sources" id="supported-sources">Supported sources</a></h2>
+<p>
+    You can transfer from these sources to an Appwrite project. 
+    Resources marked <span class="tag green">supported</span> are migrated automatically.
+    Resources marked <span class="tag yellow">partial</span> can be migrated, but with limitations or caveats, check the guide for each source to learn more.
+    Resources marked <span class="tag">manual</span> require manual migration.
+</p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large text-size-small vertical">
+    <thead>
+        <tr>
+            <th>Source</th>
+            <th>Users</th>
+            <th>Databases</th>
+            <th>Documents</th>
+            <th>Files</th>
+            <th>Functions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <p><a href="/docs/migrations-firebase"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Firebase</a></p>
+            </td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag yellow">partial</span></td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag">manual</span></td>
+        </tr>
+        <tr>
+            <td>
+                <p><a href="/docs/migrations-supabase"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Supabase</a></p>
+            </td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag yellow">partial</span></td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag">manual</span></td>
+        </tr> 
+        <tr>
+            <td>
+                <p><a href="/docs/migrations-nhost"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> NHost</a></p>
+            </td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag yellow">partial</span></td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag">manual</span></td>
+        </tr>   
+        <tr>
+            <td>
+                <p><a href="/docs/migrations-cloud-to-self-hosted"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Cloud to Self-hosted</a></p>
+            </td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag green">supported</span></td>
+        </tr>   
+        <tr>
+            <td>
+                <p><a href="/docs/migrations-self-hosted-to-cloud"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Self-hosted to Cloud</a></p>
+            </td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag green">supported</span></td>
+            <td><span class="tag green">supported</span></td>
+        </tr>         
+    </tbody>
+</table>
+
+<h2><a href="#limitations" id="limitations">Limitations</a></h2>
+<p>
+    Migrations cannot transfer all data perfectly, so certain fields, such as <code>$createdAt</code> and <code>$updatedAt</code>, may not be transferred. 
+    More information can be found on the migration page for each source.
+</p>
+
+<p>
+    Migrations help you jump start your move, but because each product is unique, complex databases and product unique features like functions might need to be migrated manually.
+    We also recommend you carefully <b>validate permissions and data integrity</b> when moving between platforms. 
+</p>
