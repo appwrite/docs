@@ -1,176 +1,16 @@
 <p>
   Appwrite Functions is all about flexibility.
-  Behind the simple workflow hides some useful recipes that can help you accomplish your goals faster.
+  Behind the simple workflow hides some useful examples that can help you accomplish your goals faster.
   Take a look at the following.
 </p>
-[TODO: @matej @luke -> Let's have some simple recipes here for common actions]
 
 <h2>Currency Conversion API</h2>
 
-<h3>Getting Started</h3>
-
 <p>
-  In this recipe, we'll build a simple function for currency conversion.
-  Let's start with a static converstion rate. We'll show you how to integrate an API later in this example.
+  Here's a currency conversion API that converts from Euros and Indian Rupees to US Dollars. We'll use an external API to get the latest exchange rates, and query it using an dependency specific to each runtime.
 </p>
 
-<ul class="phases clear" data-ui-phases>
-  <li>
-    <h3>Node.js</h3>
-    <div>
-      <p>Create a new file, <code>index.js</code>.</p>
-      <p>Add the following code to <code>index.js</code>.</p>
-      <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-        <pre class="line-numbers"><code class="prism language-js" data-prism>export default async function ({ res }) {
-  return res.send('1.13');
-};</code></pre>
-      </div>
-    </div>
-  </li>
-  <li>
-    <h3>PHP</h3>
-    <div>
-      <p>Create a new file, <code>index.php</code>.</p>
-      <p>Add the following code to <code>index.php</code>.</p>
-      <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-        <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
-return function ($context) {
-  return $context->res->send('1.13');
-};</code></pre>
-      </div>
-    </div>
-  </li>
-  <li>
-    <h3>Python</h3>
-    <div>
-      <p>Create a new file, <code>index.py</code>.</p>
-      <p>Add the following code to <code>index.py</code>.</p>
-      <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-        <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
-  return context.res.send('1.13')</code></pre>
-      </div>
-    </div>
-  </li>
-  <li>
-    <h3>Dart</h3>
-    <div>
-      <p>Create a new file, <code>index.dart</code>.</p>
-      <p>Add the following code to <code>index.dart</code>.</p>
-      <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
-
-Future&lt;dynamic> main(final context) async {
-  return context.res.send('1.13');
-}</code></pre>
-      </div>
-    </div>
-  </li>
-  <li>
-    <h3>Ruby</h3>
-    <div>
-      <p>Create a new file, <code>index.rb</code>.</p>
-      <p>Add the following code to <code>index.rb</code>.</p>
-      <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-        <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
-  return context.res.send('1.13')
-end</code></pre>
-      </div>
-    </div>
-  </li>
-</ul>
-
-<p>This code will return <code>1.13</code> when the function is called, because 1€ equals approximately 1.13$.</p>
-<p>Now, create a function in the Appwrite console, adding your Git repository as the remote source and using the path file you created as the entry point.</p>
-<p>Finally, execute the function and visit the URL (like <code>ghrfu9ewji.functions.appwrite.app</code>) to see the response.</p>
-
-<h3>Adding the Business Logic</h3>
-
-<p>Now, let's update the function to use the request payload.</p>
-<p>You can use a query string to pass data to your function. For example, <code>ghrfu9ewji.functions.appwrite.app?amount=5</code> will pass <code>5</code> as the <code>amount</code> parameter.</p>
-
-<ul class="phases clear" data-ui-phases>
-  <li>
-    <h3>Node.js</h3>
-    <div>
-      <p>Update <code>index.js</code> to use <code>req.query.amount</code> to access the <code>amount</code> parameter, and return the conversion result.</p>
-      <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-        <pre class="line-numbers"><code class="prism language-js" data-prism>export default async function ({ req, res }) {
-  const amountInEuros = Number(req.query.amount);
-  const amountInDollars = amountInEuros * 1.13;
-  return res.send(amountInDollars.toString());
-};</code></pre>
-      </div>
-    </div>
-  </li>
-  <li>
-    <h3>PHP</h3>
-    <div>
-      <p>Update <code>index.php</code> to use <code>$context->req->query['amount']</code> to access the <code>amount</code> parameter, and return the conversion result.</p>
-      <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-        <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
-return function ($context) {
-  $amountInEuros = $context->req->query['amount'];
-  $amountInDollars = $amountInEuros * 1.13;
-  return $context->res->send($amountInDollars);
-};</code></pre>
-      </div>
-    </div>
-  </li>
-  <li>
-    <h3>Python</h3>
-    <div>
-      <p>Update <code>index.py</code> to use <code>context.req.query['amount']</code> to access the <code>amount</code> parameter, and return the conversion result.</p>
-      <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-        <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
-  amountInEuros = context.req.query['amount']
-  amountInDollars = amountInEuros * 1.13
-  return context.res.send(amountInDollars)</code></pre>
-      </div>
-    </div>
-  </li>
-  <li>
-    <h3>Dart</h3>
-    <div>
-      <p>Update <code>index.dart</code> to use <code>context.req.query['amount']</code> to access the <code>amount</code> parameter, and return the conversion result.</p>
-      <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
-
-Future&lt;dynamic> main(final context) async {
-  final amountInEuros = context.req.query['amount'];
-  final amountInDollars = amountInEuros * 1.13;
-  return context.res.send(amountInDollars);
-}</code></pre>
-      </div>
-    </div>
-  </li>
-  <li>
-    <h3>Ruby</h3>
-    <div>
-      <p>Update <code>index.rb</code> to use <code>context.req.query['amount']</code> to access the <code>amount</code> parameter, and return the conversion result.</p>
-      <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-        <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
-  amountInEuros = context.req.query['amount']
-  amountInDollars = amountInEuros * 1.13
-  return context.res.send(amountInDollars)
-end</code></pre>
-      </div>
-    </div>
-  </li>
-</ul>
-
-<p>Commit your changes and push them to your Git repository.</p>
-
-
-<h3>Testing our Function</h3>
-
-<p>
-  Execute the function and visit the URL (like <code>ghrfu9ewji.functions.appwrite.app?amount=5</code>) to see the response.
-</p>
-<p>
-  You should see the result of the conversion, like <code>5.65</code>.
-</p>
-
-<h4>Adding Dependencies</h4>
+<h3>Prerequisites</h3>
 
 <ul class="phases clear" data-ui-phases>
   <li>
@@ -190,7 +30,6 @@ end</code></pre>
   <li>
     <h3>PHP</h3>
     <div>
-      <p>You can use Composer to manage your PHP project's dependencies. Install it from <a href="https://getcomposer.org/download/" target="_blank">getcomposer.org/download</a>.</p>
       <p>Run the following bash command to create a <code>composer.json</code> file. This file is used to manage your PHP project's dependencies.</p>
       <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
         <pre class="line-numbers"><code class="prism language-bash" data-prism>composer init -y</code></pre>
@@ -236,9 +75,7 @@ environment:
         Install the <code>http</code> library. This library includes a <code>get</code> function that you can use to make HTTP requests.
       </p>
       <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
-        <pre class="line-numbers"><code class="prism language-bash" data-prism>
-          pub install http
-        </code></pre>
+        <pre class="line-numbers"><code class="prism language-bash" data-prism>pub install http</code></pre>
       </div>
       <p>
         Finally, add <code>pub get</code> to your function's build commands in the Appwrite console.
@@ -254,8 +91,7 @@ environment:
         Create a <code>Gemfile</code> file with the following contents. This file is used to manage your Ruby project's dependencies.
       </p>
       <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-        <pre class="line-numbers"><code class="prism language-ruby" data-prism>source 'https://rubygems.org'
-        </code></pre>
+        <pre class="line-numbers"><code class="prism language-ruby" data-prism>source 'https://rubygems.org'</code></pre>
       </div>
       <p>
         Install the <code>httparty</code> library. This library includes a <code>get</code> function that you can use to make HTTP requests.
@@ -271,106 +107,7 @@ bundle install</code></pre>
   </li>
 </ul>
 
-<h3>Using Dependencies</h3>
-
-<ul class="phases clear" data-ui-phases>
-  <li>
-    <h3>Node.js</h3>
-    <div>
-      <p>Use <code>fetch</code> from <code>undici</code> to get the current conversion rate. This API call will return the current conversion rate between Euros and Dollars.</p>
-      <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-        <pre class="line-numbers"><code class="prism language-js" data-prism>import { fetch } from 'undici';
-
-export default async function ({ req, res }) {
-  const amountInEuros = Number(req.query.amount);
-  const response = await fetch('https://api.exchangerate.host/latest?base=EUR&symbols=USD');
-  const data = await response.json();
-  const amountInDollars = amountInEuros * data.rates.USD;
-  return res.send(amountInDollars.toString());
-};</code></pre>
-      </div>
-    </div>
-  </li>
-  <li>
-    <h3>PHP</h3>
-    <div>
-      <p>
-      <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-        <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
-
-require(__DIR__ . '/../vendor/autoload.php');
-
-use GuzzleHttp\Client;
-
-return function (&#36;context) {
-  &#36;amountInEuros = &#36;context->getRequest()->getQuery('amount');
-  &#36;client = new Client();
-  &#36;response = &#36;client->get('https://api.exchangerate.host/latest?base=EUR&amp;symbols=USD');
-  &#36;data = json_decode(&#36;response->getBody(), true);
-  &#36;amountInDollars = &#36;amountInEuros * &#36;data['rates']['USD'];
-  return &#36;context->res->send(strval(&#36;amountInDollars));
-};</code></pre>
-      </div>
-    </div>
-  </li>
-  <li>
-    <h3>Python</h3>
-    <div>
-      <p>Use <code>get</code> from <code>requests</code> to get the current conversion rate. This API call will return the current conversion rate between Euros and Dollars.</p>
-      <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-        <pre class="line-numbers"><code class="prism language-python" data-prism>import requests
-
-def main(context):
-  amount_in_euros = float(context.req.query['amount'])
-  response = requests.get('https://api.exchangerate.host/latest?base=EUR&symbols=USD')
-  data = response.json()
-  amount_in_dollars = amount_in_euros * data['rates']['USD']
-  return context.res.send(str(amount_in_dollars))</code></pre>
-      </div>
-    </div>
-  </li>
-  <li>
-    <h3>Dart</h3>
-    <div>
-      <p>Use <code>get</code> from <code>http</code> to get the current conversion rate. This API call will return the current conversion rate between Euros and Dollars.</p>
-      <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
-import 'package:http/http.dart' as http;
-
-Future&lt;dynamic> main(final context) async {
-  final amountInEuros = double.parse(context.req.query['amount'])
-  final response = await http.get(Uri.parse('https://api.exchangerate.host/latest?base=EUR&symbols=USD'));
-  final data = json.decode(response.body);
-  final amountInDollars = amountInEuros * data['rates']['USD'];
-  return context.res.send(amountInDollars.toString());
-}</code></pre>
-      </div>
-    </div>
-  </li>
-  <li>
-    <h3>Ruby</h3>
-    <div>
-      <p>Use <code>get</code> from <code>httparty</code> to get the current conversion rate. This API call will return the current conversion rate between Euros and Dollars.</p>
-      <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-        <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'httparty'
-
-def main(context)
-  amount_in_euros = context.req.query['amount'].to_f
-  response = HTTParty.get('https://api.exchangerate.host/latest?base=EUR&symbols=USD')
-  data = JSON.parse(response.body)
-  amount_in_dollars = amount_in_euros * data['rates']['USD']
-  return context.res.send(amount_in_dollars.to_s)
-end</code></pre>
-      </div>
-    </div>
-  </li>
-</ul>
-
-<p>After your function has updated, you can test it by visiting the URL and providing different amounts to convert in the query string. The conversion rate should now be more precise because we're using the current conversion rate.</p>
-
-<h3>Adding Multiple Routes</h3>
-
-<p>Let's add support multiple paths like <code>/eur</code> and <code>/inr</code>. Each path will convert from that currency to dollars.</p>
+<h3>Code</h3>
 
 <ul class="phases clear" data-ui-phases>
   <li>
@@ -490,44 +227,78 @@ end</code></pre>
 
 </ul>
 
-<p>After your function has updated, you can try out the new paths. For example, <code>ghrfu9ewji.functions.appwrite.app/eur?amount=5</code> should convert Euros to Dollars, while <code>ghrfu9ewji.functions.appwrite.app/inr?amount=100</code> should convert Indian Rupees to Dollars.</p>
-<p>Congratulations! You've built a currency conversion API using Appwrite functions!</p>
-
-<h2>Voting System Using Appwrite</h2>
-
-<h3>Getting Started</h3>
-
 <p>
-  In this recipe, you will build a simple voting system that allows users to vote on various topics. Appwrite functions and the server SDK will be used to enforce voting rules and prevent multiple votes from the same user for a single topic.
+  Use the function by navigating to function URL in the browser. The path should contain the currency and amount parameter.
+  For example, <code>[YOUR_FUNCTION_URL]/eur?amount=5</code> should convert Euros to Dollars.
 </p>
 
-<h3>Setting Up</h3>
 
-<ul class="phases clear" data-ui-phases>
-  <li>
-    <h3>Appwrite Project</h3>
-    <div>
-      <p>1. Create a new Appwrite project.</p>
-      <p>2. Add your development domain to your Appwrite project's trusted domains.</p>
-    </div>
-  </li>
-  <li>
-    <h3>Create Collections</h3>
-    <div>
-      <p>Create two collections named "topics" and "votes."</p>
-      <p>For "topics" collection, have fields: title and description.</p>
-      <p>For "votes" collection, have fields: topicId, userId, and vote.</p>
-    </div>
-  </li>
-</ul>
+<h2>Voting System Using Appwrite</h2>
+<p>
+  Here's a simple voting system that allows users to vote on various topics. Appwrite Functions and the server SDK are used to enforce voting rules and prevent multiple votes from the same user for a single topic.
+</p>
 
-<h3>Building the Voting Function</h3>
+<h3>Prerequisites</h3>
+
+<p>Create a Topics collection with the following attributes:</p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+  <thead>
+    <tr>
+      <th style="width: 150px">Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>title</code></td>
+      <td>string</td>
+      <td>The name of the topic</td>
+    </tr>
+    <tr>
+      <td><code>description</code></td>
+      <td>string</td>
+      <td>Long form description of the topic</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Create a Votes collection with the following attributes:</p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+  <thead>
+    <tr>
+      <th style="width: 150px">Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>userId</code></td>
+      <td>string</td>
+      <td>The ID of the user who cast the vote</td>
+    </tr>
+    <tr>
+      <td><code>topicId</code></td>
+      <td>string</td>
+      <td>The ID of the topic that was voted on</td>
+    </tr>
+    <tr>
+      <td><code>vote</code></td>
+      <td>string</td>
+      <td>The vote cast by the user. Must be either "yes" or "no"</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Code</h3>
 
 <ul class="phases clear" data-ui-phases>
   <li>
     <h3>Node.js</h3>
     <div>
-      <p>Create a new located at <code>functions/vote/src/main.js</code>.</p>
       <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
         <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, Query } from 'node-appwrite';
 
@@ -539,7 +310,7 @@ export default async function ({ req, res }) {
   };
 
   if (vote.vote !== 'yes' && vote.vote !== 'no') {
-    return res.json({ ok: false, message: 'You must vote yes or no.' });
+    return res.json({ ok: false, message: 'You must vote yes or no.' }, 400);
   }
 
   const client = new Client();
@@ -556,7 +327,7 @@ export default async function ({ req, res }) {
   ]);
 
   if (existingVotes.total > 0) {
-    return res.json({ message: 'You have already voted on this topic.' });
+    return res.json({ ok: false, message: 'You have already voted on this topic.' }, 400);
   }
 
   const voteDocument = await database.createDocument('[VOTES_COLLECTION_ID]', {
@@ -567,7 +338,7 @@ export default async function ({ req, res }) {
 
   return res.json({ ok: true, message: 'Vote cast.', vote: voteDocument });
 }</code></pre>
-    </div>
+      </div>
     </div>
   </li>
   <li>
@@ -588,7 +359,7 @@ def main(context):
     }
 
     if vote['vote'] != 'yes' and vote['vote'] != 'no':
-        return context.res.json({'ok': False, 'message': 'You must vote yes or no.'})
+        return context.res.json({'ok': False, 'message': 'You must vote yes or no.'}, 400)
 
     client = Client()
     client.set_endpoint('https://cloud.appwrite.io/v1')
@@ -606,7 +377,7 @@ def main(context):
         return context.res.json({
           'ok': False, 
           'message': 'You have already voted on this topic.'
-        })
+        }, 400)
 
     vote_document = database.create_document('[VOTES_COLLECTION_ID]', {
         'userId': vote['userId'],
@@ -640,7 +411,7 @@ return function ($context) {
     ];
 
     if ($vote['vote'] !== 'yes' && $vote['vote'] !== 'no') {
-        return $context->res->json(['ok' => false, 'message' => 'You must vote yes or no.']);
+        return $context->res->json(['ok' => false, 'message' => 'You must vote yes or no.'], 400);
     }
 
     $client = new Client();
@@ -660,7 +431,7 @@ return function ($context) {
         return $context->res->json([
           'ok' => false, 
           'message' => 'You have already voted on this topic.'
-        ]);
+        ], 400);
     }
 
     $voteDocument = $database->createDocument('[VOTES_COLLECTION_ID]', [
@@ -686,7 +457,6 @@ return function ($context) {
         <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
 
 def main(context)
-
     vote = {
         'userId' => context.req.query['userId'],
         'topicId' => context.req.query['topicId'],
@@ -694,7 +464,7 @@ def main(context)
     }
 
     if vote['vote'] != 'yes' and vote['vote'] != 'no'
-        return context.res.json({'ok': false, 'message': 'You must vote yes or no.'})
+        return context.res.json({'ok': false, 'message': 'You must vote yes or no.'}, 400)
     end
 
     client = Appwrite::Client.new()
@@ -714,7 +484,7 @@ def main(context)
         return context.res.json({
           'ok': false, 
           'message': 'You have already voted on this topic.'
-        })
+        }, 400)
     end
 
     vote_document = database.create_document('[VOTES_COLLECTION_ID]', {
@@ -748,7 +518,7 @@ Future<dynamic> main(final context) async {
     };
 
     if (vote['vote'] != 'yes' && vote['vote'] != 'no') {
-        return context.res.json({'ok': false, 'message': 'You must vote yes or no.'});
+        return context.res.json({'ok': false, 'message': 'You must vote yes or no.'}, 400);
     }
 
     final client = Client()
@@ -767,7 +537,7 @@ Future<dynamic> main(final context) async {
         return context.res.json({
           'ok': false, 
           'message': 'You have already voted on this topic.'
-        });
+        }, 400);
     }
 
     final voteDocument = await database.createDocument('[VOTES_COLLECTION_ID]', {
@@ -804,7 +574,7 @@ def main(context):
     }
 
     if vote['vote'] != 'yes' and vote['vote'] != 'no':
-        return context.res.json({'ok': False, 'message': 'You must vote yes or no.'})
+        return context.res.json({'ok': False, 'message': 'You must vote yes or no.'}, 400)
 
     client = Client()
     client.set_endpoint('https://cloud.appwrite.io/v1')
@@ -822,7 +592,7 @@ def main(context):
         return context.res.json({
           'ok': False, 
           'message': 'You have already voted on this topic.'
-        })
+        }, 400)
 
     vote_document = database.create_document('[VOTES_COLLECTION_ID]', vote)
 
@@ -836,27 +606,338 @@ def main(context):
   </li>
 </ul>
 
-<p>In the Appwrite console, create a function and use the file you created as the entry point.</p>
-
-<h3>Testing the Function</h3>
-
 <p>
-  Execute the function and visit the URL, passing the required parameters <code>[YOUR_FUNCTION_URL]?userId=[USER_ID]&amp;topicId=[TOPIC_ID];&amp;vote=yes</code> to cast a vote. You should see a response confirming the vote. Trying to vote again with the same user ID and topic ID should result in a message indicating that the user has already voted on this topic.
+  Use the function by navigating to the function URL in the browser. The URL should contain the required parameters.
+  For example, <code>[YOUR_FUNCTION_URL]?userId=[USER_ID]&amp;topicId=[TOPIC_ID];&amp;vote=yes</code> to cast a vote.
 </p>
 
-<h3>Conclusion</h3>
+<h3>HTML Contact Form</h3>
 
 <p>
-  To further improve this function, try adding the following checks:
-  <ul>
-    <li>Check that the user ID and topic ID exist.</li>
-    <li>Replace the user ID query parameter with the <code>x-appwrite-user-id</code> header, so votes may only be cast by logged in users.</li>
-    <li>Convert the function to POST requests with a JSON body to cast votes, so that the vote data is not visible in the URL.</li>
-  </ul>
+  Here's a simple form page that can be used to store a user's message in a collection.
+  The form is submitted to the function using the <code>POST</code> method and the form data is sent as a URL-encoded string in the request body.
 </p>
 
+<h3>Prerequisites</h3>
+
+<p>Create a Messages collection with the following attributes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 150px">Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td>The name of the message author</td>
+    <tr>
+      <td><code>email</code></td>
+      <td>string</td>
+      <td>The email of the message author</td>
+    </tr>
+    <tr>
+      <td><code>content</code></td>
+      <td>string</td>
+      <td>The content of the message</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Code</h3>
+
+<ul class="phases clear" data-ui-phases>
+  <li>
+    <h3>Node.js</h3>
+    <div>
+      <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+        <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, Query, ID } from 'node-appwrite';
+import querystring from 'node:querystring';
+
+const html = `&lt;!doctype html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="utf-8">
+    &lt;title>Contact Form&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;form action="/" method="POST">
+      &lt;input type="text" id="name" name="name" placeholder="Name" required>
+      &lt;input type="email" id="email" name="email" placeholder="Email" required>
+      &lt;textarea id="content" name="content" placeholder="Message" required>&lt;/textarea>
+      &lt;button type="submit">Submit&lt;/button>
+    &lt;/form>
+  &lt;/body>
+&lt;/html>`
+
+export default async function ({ req, res }) {
+  if (req.method === 'GET') {
+    return res.send(html, 200, {'content-type': 'text/html'});
+  }
+
+  if (req.method === 'POST' && req.headers['content-type'] === 'application/x-www-form-urlencoded') {
+    const formData = querystring.parse(req.body);
+
+    const message = {
+      name: formData.name,
+      email: formData.email,
+      content: formData.content
+    };
+
+    const client = new Client();
+    client
+      .setEndpoint('https://cloud.appwrite.io/v1')
+      .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+      .setKey(process.env.APPWRITE_API_KEY);
+
+    const databases = new Databases(client);
+    const document = await databases.createDocument('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID.unique(), message);
+
+    return res.send("Message sent", 200);
+  }
+
+  return res.send('Not found', 404);
+}</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Python</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+        <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+from appwrite.services.databases import Databases
+from appwrite.query import Query
+from urllib.parse import parse_qs
+import os
+
+html = '''&lt;!doctype html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="utf-8">
+    &lt;title>Contact Form&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;form action="/" method="POST">
+      &lt;input type="text" id="name" name="name" placeholder="Name" required>
+      &lt;input type="email" id="email" name="email" placeholder="Email" required>
+      &lt;textarea id="content" name="content" placeholder="Message" required>&lt;/textarea>
+      &lt;button type="submit">Submit&lt;/button>
+    &lt;/form>
+  &lt;/body>
+&lt;/html>
+'''
+
+def main(context):
+    if context.req.method == 'GET':
+        return context.res.send(html, 200, {'content-type': 'text/html'})
+
+    if context.req.method == 'POST' and context.req.headers['content-type'] == 'application/x-www-form-urlencoded':
+        formData = parse_qs(context.req.body)
+
+        message = {
+            'name': formData['name'][0],
+            'email': formData['email'][0],
+            'content': formData['content'][0]
+        }
+
+        client = (
+          Client()
+            .set_endpoint('https://cloud.appwrite.io/v1')
+            .set_project(os.environ['APPWRITE_FUNCTION_PROJECT_ID'])
+            .set_key(os.environ['APPWRITE_API_KEY'])
+        )
+
+        databases = Databases(client)
+        document = databases.create_document('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID.unique(), message)
+
+        return context.res.send("Message sent", 200)
+
+    return context.res.send('Not found', 404)</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>PHP</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+        <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+
+require(__DIR__ . '/../vendor/autoload.php');
+
+use Appwrite\Client;
+use Appwrite\Exception;
+use Appwrite\Services\Databases;
+
+$html = '&lt;!doctype html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="utf-8">
+    &lt;title>Contact Form&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;form action="/" method="POST">
+      &lt;input type="text" id="name" name="name" placeholder="Name" required>
+      &lt;input type="email" id="email" name="email" placeholder="Email" required>
+      &lt;textarea id="content" name="content" placeholder="Message" required>&lt;/textarea>
+      &lt;button type="submit">Submit&lt;/button>
+    &lt;/form>
+  &lt;/body>
+&lt;/html>';
+
+return function ($context) {
+  global $html;
+
+  if ($context->req->method === 'GET') {
+    return $context->res->send($html, 200, ['content-type' => 'text/html']);
+  }
+
+  if ($context->req->method === 'POST' && $context->req->headers['content-type'] === 'application/x-www-form-urlencoded') {
+    \parse_str($context->req->body, $formData);
+    
+    $message = [
+      'name' => $formData['name'],
+      'email' => $formData['email'],
+      'content' => $formData['content']
+    ];
+
+    $client = new Client();
+    $client
+      ->setEndpoint('https://cloud.appwrite.io/v1')
+      ->setProject(getenv('APPWRITE_FUNCTION_PROJECT_ID'))
+      ->setKey(getenv('APPWRITE_API_KEY'));
+
+    $databases = new Databases($client);
+    $document = $databases->createDocument('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID::unique(), $message);
+
+    return $context->res->send("Message sent", 200);
+  }
+
+  return $context->res->send('Not found', 404);
+};</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Ruby</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+        <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
+
+html = '''&lt;!doctype html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="utf-8">
+    &lt;title>Contact Form&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;form action="/" method="POST">
+      &lt;input type="text" id="name" name="name" placeholder="Name" required>
+      &lt;input type="email" id="email" name="email" placeholder="Email" required>
+      &lt;textarea id="content" name="content" placeholder="Message" required>&lt;/textarea>
+      &lt;button type="submit">Submit&lt;/button>
+    &lt;/form>
+  &lt;/body>
+&lt;/html>
+'''
+
+def main(context)
+    if context.req.method == 'GET'
+        return context.res.send(html, 200, {'content-type': 'text/html'})
+    end
+
+    if context.req.method == 'POST' and context.req.headers['content-type'] == 'application/x-www-form-urlencoded'
+        formData = URI.decode_www_form(context.req.body).to_h
+
+        message = {
+            'name' => formData['name'],
+            'email' => formData['email'],
+            'content' => formData['content']
+        }
+
+        client = Appwrite::Client.new()
+        client
+            .set_endpoint('https://cloud.appwrite.io/v1')
+            .set_project(ENV['APPWRITE_FUNCTION_PROJECT_ID'])
+            .set_key(ENV['APPWRITE_API_KEY'])
+
+        databases = Appwrite::Database.new(client)
+        document = databases.create_document('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID.unique(), message)
+
+        return context.res.send("Message sent", 200)
+    end
+
+    return context.res.send('Not found', 404)
+end</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>
+    <h3>Dart</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+        <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
+import 'package:dart_appwrite/dart_appwrite.dart';
+
+Future<dynamic> main(final context) async {
+    final html = '''&lt;!doctype html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="utf-8">
+    &lt;title>Contact Form&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;form action="/" method="POST">
+      &lt;input type="text" id="name" name="name" placeholder="Name" required>
+      &lt;input type="email" id="email" name="email" placeholder="Email" required>
+      &lt;textarea id="content" name="content" placeholder="Message" required>&lt;/textarea>
+      &lt;button type="submit">Submit&lt;/button>
+    &lt;/form>
+  &lt;/body>
+&lt;/html>
+''';
+
+    if (context.req.method == 'GET') {
+        return context.res.send(html, 200, {'content-type': 'text/html'});
+    }
+
+    if (context.req.method == 'POST' && context.req.headers['content-type'] == 'application/x-www-form-urlencoded') {
+        final formData = Uri.splitQueryString(context.req.body);
+
+        final message = {
+            'name': formData['name'],
+            'email': formData['email'],
+            'content': formData['content']
+        };
+
+        final client = Client()
+            .setEndpoint('https://cloud.appwrite.io/v1')
+            .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+            .setKey(process.env.APPWRITE_API_KEY);
+
+        final databases = Database(client);
+        final document = await databases.createDocument('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID.unique(), message);
+
+        return context.res.send("Message sent", 200);
+    }
+
+    return context.res.send('Not found', 404);
+}</code></pre>
+      </div>
+    </div>
+  </li>
+</ul>
+
 <p>
-  Congratulations! You've built a voting system that leverages Appwrite functions and the Appwrite server SDK to enforce business logic and ensure that users can only vote once per topic.
+  Use the function by navigating to the function URL in the browser. Submit the form to store the message in the collection.
 </p>
 
 
@@ -865,15 +946,12 @@ def main(context):
 <!-- Here's more ideas -->
 
 <!-- 
-  How to handle different methods (POST, GET, PUT,DELETE)
   How to cache response (cache headers, json)
   How to file response (send img file, also cache it)
-  How to handle HTML form submittion
   How to do basic auth (there is some header for it)
   How to recieve data in body
   How to redirect
   How to log
   How to do Bearer Auth
   How to access event data
-  How to access env vars 
 -->
