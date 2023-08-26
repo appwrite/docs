@@ -516,6 +516,33 @@ File content.
         </tr>
         </tbody>
     </table>
+</li><li>
+    <h3>.NET</h3>
+    <p>
+        The Appwrite .NET SDK expects an <code>InputFile</code> class for file inputs.
+    </p>
+    <table class="full text-size-small">
+        <thead>
+        <tr>
+            <td style="width: 200px">Method</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>InputFile.FromPath(string path)</code></td>
+            <td>Used to upload files from a provided path.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.FromStream(Stream stream, string filename, string mimeType)</code></td>
+            <td>Used to upload files from a <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream?view=net-7.0" target="_blank" rel="noopener">Stream</a> object. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
+        </tr>
+        <tr>
+            <td><code>InputFile.FromBytes(byte[] bytes, string filename, string mimeType)</code></td>
+            <td>Used to upload files from an array of bytes. Specify the file <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME type</a> using the <code>mimeType</code> param.</td>
+        </tr>
+        </tbody>
+    </table>
 </li>
 </ul>
 

@@ -493,7 +493,7 @@ subscription.close()</code></pre>
 
 <h2><a href="/docs/realtime#channels" id="channels">Channels</a></h2>
 
-<p>A list of all channels available you can subscribe to:</p>
+<p>A list of all channels available you can subscribe to. IDs cannot be wildcards.</p>
 
 <table class="full text-size-small">
     <thead>
@@ -514,9 +514,9 @@ subscription.close()</code></pre>
 
 <h2><a href="/docs/realtime#custom-endpoint" id="custom-endpoint">Custom Endpoint</a></h2>
 
-<p>The SDK will guess the endpoint of the Realtime API when setting the endpoint of your Appwrite instance. If you are running Appwrite with a custom proxy and changed the route of the Realtime API, you can call the <b>setEndpointRealtime</b> method on the Client SDK and set your new endpoint value.</p>
+<p>The SDK will guess the endpoint of the Realtime API when setting the endpoint of your Appwrite instance. If you are running Appwrite with a custom proxy and changed the route of the Realtime API, you can call the <code>setEndpointRealtime</code> method on the Client SDK and set your new endpoint value.</p>
 
-<p>By default the endpoint is <b>wss://cloud.appwrite.io/v1/realtime</b>.</p>
+<p>By default the endpoint is <code>wss://cloud.appwrite.io/v1/realtime</code>.</p>
 
 <ul class="phases clear" data-ui-phases>
     <li>

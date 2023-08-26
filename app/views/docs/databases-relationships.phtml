@@ -1,8 +1,8 @@
 <p>Relationships describe how documents in different collections are associated, so that related documents can be read, updated, or deleted together. Entities in real-life often associate with each other in an organic and logical way, like a person and their dog, an album and its songs, or friends in a social network. These types of association between entities can be modeled in Appwrite using relationships.</p>
 
 <div class="notice">
-    <h2>Beta Feature</h2>
-    <p>Appwrite Relationships is a beta feature. The API and behavior are subject to change in future versions.</p>
+    <h2>Experimental Feature</h2>
+    <p>Appwrite Relationships is an experimental feature. The API and behavior are subject to change in future versions.</p>
 </div>
 
 <h2><a href="#when-to-use-relationships" id="when-to-use-relationships">When to Use a Relationship</a></h2>
@@ -299,6 +299,29 @@ databases.createRelationshipAttribute(
 )</code></pre>
         </div>
     </li>
+    <li>
+        <h3>.NET</h3>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
+using Appwrite.Services;
+
+var client = new Client()
+    .SetEndpoint("https://cloud.appwrite.io/v1")
+    .SetProject("[PROJECT_ID]");
+
+var databases = new Databases(client);
+
+await databases.CreateRelationshipAttribute(
+    databaseId: "marvel",
+    collectionId: "movies",
+    relatedCollectionId: "reviews",
+    type: "oneToMany",
+    twoWay: true,
+    key: "reviews",
+    twoWayKey: "movie",
+    onDelete: "cascade");</code></pre>
+        </div>
+    </li>
 </ul>
 
 <p>The above example adds a relationship between the collections <b>movies</b> and <b>reviews</b>. A relationship attribute with the key <code>reviews</code> is added to the movies collection and another relationship attribute with the key <code>movie</code> is added to the reviews collection.</p>
@@ -535,7 +558,7 @@ databases.createDocument(
 
 <h2><a href="#query" id="query">Querying</a></h2>
 
-<p>Querying is currently not available in the beta version of Appwrite Relationships but will be added in a later version.</p>
+<p>Querying is currently not available in the experimental version of Appwrite Relationships but will be added in a later version.</p>
 
 <h2><a href="#update" id="update">Updating Relationships</a></h2>
 
