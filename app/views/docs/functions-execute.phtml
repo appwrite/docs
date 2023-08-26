@@ -4,8 +4,8 @@ use Appwrite\Utopia\View;
 
 ?>
 <p>
-    Appwrite Functions executions can be invoked in several ways.
-    Functions can be invoked through the Appwrite SDK and visting its REST endpoint. Functions can also be triggered by events and scheduled executions.
+    Appwrite Functions can be executed in several ways.
+    Executions can be invoked through the Appwrite SDK and visiting its REST endpoint. Functions can also be triggered by events and scheduled executions.
     Here are all the different ways to consume your new Appwrite Functions.
 </p>
 
@@ -73,7 +73,7 @@ try {
     })
     console.log(data)
 } catch (err) {
-    console.err(err.message)
+    console.error(err.message)
 }</code></pre>
         </div>
         </div>
@@ -175,7 +175,7 @@ try {
     })
     console.log(data)
 } catch (err) {
-    console.err(err.message)
+    console.error(err.message)
 }
 
 </code></pre>
@@ -274,7 +274,7 @@ try {
     })
     console.log(data)
 } catch (err) {
-    console.err(err.message)
+    console.error(err.message)
 }</code></pre>
         </div>
         </div>
@@ -425,8 +425,9 @@ public static void main(String[] args) throws Exception {
 
 <h2><a href="#console" id="console">Console</a></h2>
 <p>
-    Another easy way to test a function is directly in the Appwrite console.
-    You test a function by hitting the <b>Execute now</b> button and 
+    Another easy way to test a function is directly in the Appwrite Console.
+    You test a function by hitting the <b>Execute now</b> button, which will display with modal below.
+    You'll be able to mock executions by configuring the path, method, headers, and body.
 </p>
 
 <?php
@@ -446,12 +447,12 @@ $image = new View(__DIR__.'/../general/image.phtml');
 </p>
 <ol class="margin-top margin-bottom-large text-size-normal">
     <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
-    <li>Click to open a function you wish to add variables to.</li>
+    <li>Click to open a function you wish to configure.</li>
 	<li>Under the <b>Settings</b> tab, navigate to <b>Events</b>.</li>
     <li>Add one or multiple events as triggers for the function.</li>
     <li>
         Be careful to avoid selecting events that can be caused by the function itself. 
-        This can cause the function to trigger it's own execution, resulting in infinite recursions.
+        This can cause the function to trigger its own execution, resulting in infinite recursions.
     </li>
 </ol>
 
@@ -488,7 +489,6 @@ $image = new View(__DIR__.'/../general/image.phtml');
     </tbody>
 </table>
 
-<h2>Permissions</h2>
 <h2><a href="#permissions" id="permissions">Permissions</a></h2>
 
 <p>
@@ -497,15 +497,15 @@ $image = new View(__DIR__.'/../general/image.phtml');
     Server SDKs require an API key with the correct scopes.
 </p>
 <p>
-    If your function with a generated or custom domain, permissions are disabled for this function.
-    Anyone visiting this domain will be able to execute the function.
+    If your function has a generated or custom domain, execute permissions are ignored for this function.
+    Anyone visiting the configured domains will be able to execute the function.
     If you need to enforce permissions for functions with a domain, use authentication methods like JWT.
 </p>
 
 <h2><a href="#logs" id="logs">Logs and results</a></h2>
 <p>
     You can view the logs your function executions in the Appwrite Console. 
-    Navigate to <b>Functions</b> and click on a function to view it's executions.
+    Navigate to <b>Functions</b> and click on a function to view its executions.
 </p>
 <p>
     For security reasons, Appwrite does not store the response of function executions.
