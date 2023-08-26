@@ -4,12 +4,26 @@ use Appwrite\Utopia\View;
 
 $events = $this->getParam('events', []);
 $runtimes = $this->getParam('runtimes', []);
-$runtimes['node-16.0']["cloud"] = true;
-$runtimes['node-18.0']["cloud"] = true;
-$runtimes['php-8.0']["cloud"] = true;
-$runtimes['ruby-3.0']["cloud"] = true;
-$runtimes['python-3.9']["cloud"] = true;
-$runtimes['dart-2.17']["cloud"] = true;
+
+$sorted_runtimes = [];
+
+foreach ($runtimes as $key => $item) {
+    $name = $item['name'];
+    
+    if (!isset($sorted_runtimes[$name])) {
+        $sorted_runtimes[$name] = [];
+    }
+
+    $item['version'] = $key;
+
+    $sorted_runtimes[$name]['versions'][] = $item;
+}
+
+$sorted_runtimes['Node.js']["cloud"] = true;
+$sorted_runtimes['PHP']["cloud"] = true;
+$sorted_runtimes['Ruby']["cloud"] = true;
+$sorted_runtimes['Python']["cloud"] = true;
+$sorted_runtimes['Dart']["cloud"] = true;
 ?>
 
 
@@ -26,24 +40,32 @@ $runtimes['dart-2.17']["cloud"] = true;
     <thead>
         <tr>
             <th style="width: 50px"></th>
-            <th style="width: 120px">Name</th>
+            <th style="width: 80px">Name</th>
             <th>Image</th>
-            <th>Architectures</th>
-            <th>Platforms</th>
+            <th  style="width: 100px">Architectures</th>
+            <th  style="width: 140px">Platforms</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach($runtimes as $key => $runtime): ?>
+        <?php foreach($sorted_runtimes as $key => $runtime): ?>
         <tr>
-            <td><img src="" data-ls-attrs="src=/images/runtimes/<?php echo $this->escape($runtime['logo'] ?? ''); ?>" alt="Function Env." class="avatar xxs" /></td>
-            <td><span data-general-copy><?php echo $this->escape($key); ?> </span></td>
-            <td><a href="https://hub.docker.com/r/<?php echo $this->escape(strtok($runtime['image'], ':')); ?>" target="_blank" rel="noopener"><?php echo $this->escape($runtime['image'] ?? ''); ?> <i class="icon-link-ext"></i></a></td>
-            <td><?php echo $this->escape(implode(' / ', $runtime['supports'] ?? [])); ?></td>
             <td>
-                <?php if (isset($runtimes[$key]["cloud"])): ?>
+                <img src="" data-ls-attrs="src=/images/runtimes/<?php echo $this->escape($runtime['versions'][0]['logo'] ?? ''); ?>" alt="Function Env." class="avatar xxs" />
+            </td>
+            <td>
+                <?php echo $this->escape($key); ?>
+            </td>
+            <td>
+            <?php foreach($runtime['versions'] as $key => $version): ?>
+                <a href="https://hub.docker.com/r/<?php echo $this->escape(strtok($version['image'], ':')); ?>" target="_blank" rel="noopener"><?php echo $this->escape($version['image'] ?? ''); ?> <i class="icon-link-ext"></i></a>
+            <?php endforeach; ?>
+            </td>
+            <td><?php echo $this->escape(implode(' / ', $runtime['versions'][0]['supports'] ?? [])); ?></td>
+            <td>
+                <span class="tag">Self-hosted</span>         
+                <?php if (isset($runtime["cloud"])): ?>
                     <span class="tag green">Cloud</span>
-                <?php endif; ?>
-                <span class="tag">Self-hosted</span>
+                <?php endif; ?>  
             </td>
         </tr>
         <?php endforeach; ?>
