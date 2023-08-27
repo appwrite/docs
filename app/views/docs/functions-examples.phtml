@@ -24,7 +24,7 @@
       <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
         <pre class="line-numbers"><code class="prism language-bash" data-prism>npm install undici</code></pre>
       </div>
-      <p>Finally, add <code>npm install</code> to your function's build commands in the Appwrite console.</p>
+      <p>Finally, add <code>npm install</code> to your function's build commands in the Appwrite Console.</p>
     </div>
   </li>
   <li>
@@ -38,7 +38,7 @@
       <div class="ide margin-top-small" data-lang="bash" data-lang-label="Bash">
         <pre class="line-numbers"><code class="prism language-bash" data-prism>composer require guzzlehttp/guzzle</code></pre>
       </div>
-      <p>Finally, add <code>composer install</code> to your function's build commands in the Appwrite console.</p>
+      <p>Finally, add <code>composer install</code> to your function's build commands in the Appwrite Console.</p>
     </div>
   </li>
   <li>
@@ -53,7 +53,7 @@
         <pre class="line-numbers"><code class="prism language-bash" data-prism>echo "requests" >> requirements.txt
 pip install -r requirements.txt</code></pre>
       </div>
-      <p>Finally, add <code>pip install -r requirements.txt</code> to your function's build commands in the Appwrite console.</p>
+      <p>Finally, add <code>pip install -r requirements.txt</code> to your function's build commands in the Appwrite Console.</p>
     </div>
   </li>
   <li>
@@ -78,7 +78,7 @@ environment:
         <pre class="line-numbers"><code class="prism language-bash" data-prism>pub install http</code></pre>
       </div>
       <p>
-        Finally, add <code>pub get</code> to your function's build commands in the Appwrite console.
+        Finally, add <code>pub get</code> to your function's build commands in the Appwrite Console.
       </p>
     </div>
   </li>
@@ -101,7 +101,7 @@ environment:
 bundle install</code></pre>
       </div>
       <p>
-        Finally, add <code>bundle install</code> to your function's build commands in the Appwrite console.
+        Finally, add <code>bundle install</code> to your function's build commands in the Appwrite Console.
       </p>
     </div>
   </li>
@@ -608,7 +608,7 @@ def main(context):
 
 <p>
   Use the function by navigating to the function URL in the browser. The URL should contain the required parameters.
-  For example, <code>[YOUR_FUNCTION_URL]?userId=[USER_ID]&amp;topicId=[TOPIC_ID];&amp;vote=yes</code> to cast a vote.
+  For example, <code>[YOUR_FUNCTION_URL]/?userId=[USER_ID]&amp;topicId=[TOPIC_ID]&amp;vote=yes</code> to cast a vote.
 </p>
 
 <h3>HTML Contact Form</h3>
@@ -939,19 +939,3 @@ Future<dynamic> main(final context) async {
 <p>
   Use the function by navigating to the function URL in the browser. Submit the form to store the message in the collection.
 </p>
-
-
-[TODO: @luke -> Example with JWT, show both client and server code]
-
-<!-- Here's more ideas -->
-
-<!-- 
-  How to cache response (cache headers, json)
-  How to file response (send img file, also cache it)
-  How to do basic auth (there is some header for it)
-  How to recieve data in body
-  How to redirect
-  How to log
-  How to do Bearer Auth
-  How to access event data
--->

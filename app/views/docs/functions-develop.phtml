@@ -11,9 +11,9 @@
 
 <ol class="margin-top margin-bottom-large text-size-normal">
     <li>The function is invoked.</li>
-    <li>Appwrite passes in request information like headers and environment variables through the <code>context.req</code> object.</li>
-    <li>The runtime executes the code you defined, you can log through the <code>context.log</code> or <code>context.error</code> methods.</li>
-    <li>Function terminates when you return results using <code>context.res</code>.</li>
+    <li>Appwrite passes in request information like headers, body or path through the <code>context.req</code> object.</li>
+    <li>The runtime executes the code you defined, you can log through the <code>context.log()</code> or <code>context.error()</code> methods.</li>
+    <li>Function terminates when you return results using <code>return context.res.send()</code>, <code>return context.res.json()</code> or similar.</li>
 </ol>
 
 <p>You'll find all of these steps in a simple function like this.</p>
@@ -445,7 +445,7 @@ public class Main {
 
 <h2><a href="#context" id="context">The Context Object</a></h2>
 <p>
-    Context is an object passed into every function to handle communication to both the end users, and logging to the Appwrite console.
+    Context is an object passed into every function to handle communication to both the end users, and logging to the Appwrite Console.
     All input, output, and logging <b>must be</b> handled through the context object passed in.
 </p>
 
@@ -467,12 +467,12 @@ public class Main {
             <td>Contains methods to build a response and return information. See full examples <a href="#context-res">here</a>.</td>
         </tr>
         <tr>
-            <td><code>log</code></td>
-            <td>Logs information to the Appwrite Console, end users will not be able to see these logs. See full examples <a href="#context-log">here</a>.</td>
+            <td><code>log()</code></td>
+            <td>Method to log information to the Appwrite Console, end users will not be able to see these logs. See full examples <a href="#context-log">here</a>.</td>
         </tr>
         <tr>
-            <td><code>error</code></td>
-            <td>Logs errors to the Appwrite Console, end users will not be able to see these errors. See full examples <a href="#context-error">here</a>.</td>
+            <td><code>error()</code></td>
+            <td>Methoc to log errors to the Appwrite Console, end users will not be able to see these errors. See full examples <a href="#context-error">here</a>.</td>
             <td></td>
         </tr>
     </tbody>
@@ -508,8 +508,8 @@ public class Main {
 
 <h3><a href="#request" id="request">Request</a></h3>
 <p>
-    If you pass data into an Appwrite function, it'll be found in the request object.
-    This includes all invocation methods, such as data from Appwrite SDKs, HTTP calls, Appwrite events, and browsers visiting the configured domain.
+    If you pass data into an Appwrite Function, it'll be found in the request object.
+    This includes all invocation inputs from Appwrite SDKs, HTTP calls, Appwrite events, or browsers visiting the configured domain.
     Explore the request object with the following function, which logs all request params to the Appwrite Console.
 </p>
 
@@ -528,7 +528,7 @@ public class Main {
     log(req.port);                        // Port from the host header, for example 8000
     log(req.path);                        // Path part of URL, for example /v1/hooks
     log(req.queryString);                 // Raw query params string. For example "limit=12&offset=50"
-    log(req.query);                       // Parsed query params. For example, req.query.limit
+    log(JSON.stringify(req.query));       // Parsed query params. For example, req.query.limit
 
     return res.send("All the request parameters are logged to the Appwrite Console.");
 };</code></pre>
@@ -612,7 +612,7 @@ end</code></pre>
     log(req.port);                    // Port from the host header, for example 8000
     log(req.path);                    // Path part of URL, for example /v1/hooks
     log(req.queryString);             // Raw query params string. For example "limit=12&offset=50"
-    log(req.query);                   // Parsed query params. For example, req.query.limit
+    log(JSON.stringify(req.query));   // Parsed query params. For example, req.query.limit
 
     return res.send("All the request parameters are logged to the Appwrite Console.");</code></pre>
         </div>
@@ -1348,10 +1348,10 @@ namespace runtime {
         </tbody>
     </table>
 
-    <h3>Local Environment Variables</h3>
+    <h3>Function Environment Variables</h3>
     <p>
-        Local environment variables will only be accessible in the function they belong to.
-        Local environment variables will override global environment variables when they have conflicting names.
+        Function environment variables will only be accessible in the function they belong to.
+        Function environment variables will override global environment variables when they have conflicting names.
     </p>
     <ol class="margin-top margin-bottom-large text-size-normal">
         <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
@@ -1362,7 +1362,7 @@ namespace runtime {
 
     <h3>Global Environment Variables</h3>
     <p>
-        Global environment variables are accessible to all Appwrite Functions.
+        Global environment variables are accessible to all Appwrite Functions in your project.
         Local environment variables will override global environment variables when they have conflicting names.
     </p>
     <ol class="margin-top margin-bottom-large text-size-normal">
@@ -1373,13 +1373,6 @@ namespace runtime {
 
     <p>
         You can access the environment variables through the systems library of each language.
-    </p>
-
-    
-    <p>
-        If you need to send a response to the invoker of the function, such as a user, client app, or an integration, use the response object.
-        The response information <b>will not be logged</b> to the Appwrite Console.
-        There are several possible ways to send a response, explore them in the following Appwrite Function.
     </p>
 
     <ul class="phases clear" data-ui-phases>
@@ -1501,283 +1494,6 @@ namespace runtime {
       static RuntimeOutput main(RuntimeContext &context) {
 
       return context.send(std::getenv("MY_VAR"), 200);
-  };
-}</code></pre>
-            </div>
-        </li>
-    </ul>
-
-    <h3><a href="#response" id="response">Response</a></h3>
-    
-    <ul class="phases clear" data-ui-phases>
-        <li>
-            <h3>Node.js</h3>
-            <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-                <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
-
-    switch (req.query.type) {
-        case 'text':
-            return res.send("This is a text response", 200);
-        case 'json':
-            return res.json({"type": "This is a JSON response"}, 200);
-        case 'redirect':
-            return res.redirect("https://appwrite.io", 301);
-        case 'html':
-            return res.send(
-                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, {
-                    "content-type": "text/html"
-                });
-        default:
-            return res.empty();
-    }
-}</code></pre>
-            </div>
-        </li>
-        <li>
-            <h3>PHP</h3>
-            <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-                <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
-
-return function ($context) {
-    switch ($context->req->query['type']) {
-        case 'text':
-            return $context->res->send("This is a text response", 200);
-        case 'json':
-            return $context->res->json(["type" => "This is a JSON response"], 200);
-        case 'redirect':
-            return $context->res->redirect("https://appwrite.io", 301);
-        case 'html':
-            return $context->res->send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, [
-                "content-type" => "text/html"
-                ]);
-        default:
-            return $context->res->empty();
-    }
-};</code></pre>
-            </div>
-        </li>
-        <li>
-            <h3>Python</h3>
-            <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-                <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
-    switch context.req.query['type']:
-        case 'text':
-            return context.res.send("This is a text response", 200)
-        case 'json':
-            return context.res.json({"type": "This is a JSON response"}, 200)
-        case 'redirect':
-            return context.res.redirect("https://appwrite.io", 301)
-        case 'html':
-            return context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, {
-                "content-type": "text/html"
-            })
-        default:
-            return context.res.empty()</code></pre>
-            </div>
-        </li>
-        <li>
-            <h3>Ruby</h3>
-            <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
-                <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
-    case context.req.query['type'] 
-        when 'text'
-            return context.res.send("This is a text response", 200)
-        when 'json'
-            return context.res.json({"type": "This is a JSON response"}, 200)
-        when 'redirect'
-            return context.res.redirect("https://appwrite.io", 301)
-        when 'html'
-            return context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, {
-                "content-type": "text/html"
-            })
-        else
-            return context.res.empty()
-    end
-end</code></pre>
-            </div>
-        </li>
-        <li>
-            <h3>Deno</h3>
-            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-                <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }) => {
-
-    switch (req.query.type) {
-        case 'text':
-            return res.send("This is a text response", 200);
-        case 'json':
-            return res.json({type": "This is a JSON response"}, 200);
-        case 'redirect':
-            return res.redirect("https://appwrite.io", 301);
-        case 'html':
-            return res.send(
-                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, {
-                    "content-type": "text/html"
-                });
-        default:
-            return res.empty();
-    }
-}</code></pre>
-            </div>
-        </li>
-        <li>
-            <h3>Dart</h3>
-            <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
-                <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
-
-Future&lt;dynamic> main(final context) async {
-    switch (context.req.query['type']) {
-        case 'text':
-            return context.res
-                .send('This is a text response', 200);
-        case 'json':
-            return context.res
-                .json({'type': 'This is a JSON response'});
-        case 'redirect':
-            return context.res
-                .redirect('https://appwrite.io', 301);
-        case 'html':
-            return context.res
-                .send('&lt;h1&gt;This is an HTML response&lt;/h1&gt;', 200, {
-                    'content-type': 'text/html'
-                });
-        default:
-            return context.res
-                .empty();
-    }
-}</code></pre>
-            </div>
-        </li>
-        <li>
-            <h3>Swift</h3>
-            <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
-                <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
-
-func main(context: RuntimeContext) async throws -> RuntimeOutput {
-    switch context.req.query["type"] {
-        case "text":
-            return try await context.send("This is a text response", 200)
-        case "json":
-            return try await context.send(["type": "This is a JSON response"], 200)
-        case "redirect":
-            return try await context.redirect("https://appwrite.io", 301)
-        case "html":
-            return try await context.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, [
-                "content-type": "text/html"
-                ])
-        default:
-            return try await context.empty()
-    }
-}</code></pre>
-            </div>
-        </li>
-        <li>
-            <h3>.NET</h3>
-            <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-                <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
-
-public class Handler {
-    public async Task&lt;RuntimeOutput> Main(RuntimeContext Context) 
-    {
-        switch (Context.Request.Query["type"])
-        {
-            case "text":
-                return await Context.Send("This is a text response", 200);
-            case "json":
-                return await Context.Send(new Dictionary&lt;string, object&gt;() { { "type", "This is a JSON response" } }, 200);
-            case "redirect":
-                return await Context.Redirect("https://appwrite.io", 301);
-            case "html":
-                return await Context.Send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, new Dictionary&lt;string, string&gt;() {
-                    { "content-type", "text/html" } 
-                });
-            default:    
-                return await Context.Empty();
-        }
-    }
-}</code></pre>
-            </div>
-        </li>
-        <li>
-            <h3>Kotlin</h3>
-            <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-                <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
-
-import io.openruntimes.kotlin.RuntimeContext
-import io.openruntimes.kotlin.RuntimeOutput
-
-class Main {
-    fun main(context: RuntimeContext): RuntimeOutput {
-        when (context.req.query["type"]) {
-            "text" -> return context.send("This is a text response", 200)
-            "json" -> return context.send(mapOf("type" to "This is a JSON response"), 200)
-            "redirect" -> return context.redirect("https://appwrite.io", 301)
-            "html" -> return context.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, mapOf("content-type" to "text/html"))
-            else -> return context.empty()
-        }
-    }
-}</code></pre>
-            </div>
-        </li>
-        <li>
-            <h3>Java</h3>
-            <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-                <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
-
-import io.openruntimes.java.RuntimeContext;
-import io.openruntimes.java.RuntimeOutput;
-import java.util.Map;
-import java.util.HashMap;
-
-public class Main {
-    public RuntimeOutput main(RuntimeContext context) throws Exception {
-        switch (context.getReq().getQuery()["type"]) {
-            case "text":
-                return context.send("This is a text response", 200);
-            case "json":
-                HashMap&lt;String, Object&gt; data = new HashMap&lt;&gt;();
-                data.put("type", "This is a JSON response");
-                return context.send(data, 200);
-            case "redirect":
-                return context.redirect("https://appwrite.io", 301);
-            case "html":
-                return context.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, Map.of("content-type", "text/html"));
-            default:
-                return context.empty();
-        }
-    }
-}</code></pre>
-            </div>
-        </li>
-        <li>
-            <h3>C++</h3>
-            <div class="ide margin-top-small" data-lang="cpp" data-lang-label="C++">
-                <pre class="line-numbers"><code class="prism language-csharp" data-prism>#include "../RuntimeResponse.h"
-#include "../RuntimeRequest.h"
-#include "../RuntimeOutput.h"
-#include "../RuntimeContext.h"
-
-namespace runtime {
-  class Handler {
-    public:
-      static RuntimeOutput main(RuntimeContext &context) {
-        std::string type = context.req.query["type"];
-
-        if (type == "text") {
-          return context.send("This is a text response", 200);
-        } else if (type == "json") {
-          Json::Value data;
-          data["type"] = "This is a JSON response";
-          return context.send(data, 200);
-        } else if (type == "redirect") {
-          return context.redirect("https://appwrite.io", 301);
-        } else if (type == "html") {
-          Json::Value headers;
-          headers["content-type"] = "text/html";
-          return context.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, headers);
-        } else {
-          return context.empty();
-        }
-      }
   };
 }</code></pre>
             </div>
