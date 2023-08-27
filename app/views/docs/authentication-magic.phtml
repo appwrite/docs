@@ -1,6 +1,6 @@
 <p>
    Magic URL is a password-less way to authenticate users. 
-   When a user logs in, they will receive an email with a "magic" link that contains a secret used to log in the user.
+   When a user logs in by providing their email, they will receive an email with a "magic" link that contains a secret used to log in the user.
    The user can simply click the link to be logged in.
 </p>
 
@@ -83,7 +83,7 @@ const user = await account.updateMagicURLSession(userId, secret);</code></pre>
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
             <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
     accountUpdateMagicURLSession(
-        userId: "[USER_ID]",
+        userId: "unique()",
         secret: "[SECRET]"
     ) {
         _id
