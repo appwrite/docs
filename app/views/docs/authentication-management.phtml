@@ -26,7 +26,13 @@ const client = new Client()
 
 const account = new Account(client);
 
-const user = await account.updatePrefs({darkTheme: true, language: 'en'});</code></pre>
+const promise = account.updatePrefs({darkTheme: true, language: 'en'});
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
         </div>
     </li>
     <li>
@@ -86,16 +92,7 @@ let user = try await account.updatePrefs(
         prefs: "{\"darkTheme\": true, \"language\": \"en\"}"
     ) {
         _id
-        _createdAt
-        _updatedAt
         name
-        registration
-        status
-        passwordUpdate
-        email
-        phone
-        emailVerification
-        phoneVerification
         prefs {
             data
         }
@@ -119,7 +116,13 @@ const client = new Client()
 
 const account = new Account(client);
 
-const user = await account.getPrefs();</code></pre>
+const promise = account.getPrefs();
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
         </div>
     </li>
     <li>
@@ -205,11 +208,24 @@ let prefs = try await account.getPrefs()</code></pre>
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
 
+// Init SDK
 const client = new sdk.Client();
 
 const users = new sdk.Users(client);
 
-let res = await users.updateLabels('[USER_ID]', [ Role.label('subscriber') ]);</code></pre>
+client
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2') // Your project ID
+    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
+;
+
+const promise = users.updateLabels('[USER_ID]', [ Role.label('subscriber') ]);
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
         </div>
     </li>
     <li>
@@ -294,7 +310,13 @@ client
 ;
 
 
-let res = await users.updateLabels('[USER_ID]', [ Role.label('subscriber') ]);</code></pre>
+const promise = users.updateLabels('[USER_ID]', [ Role.label('subscriber') ]);
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
         </div>
     </li>
     <li>

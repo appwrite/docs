@@ -8,7 +8,7 @@
 
 <p>
     Initialize the log in process with the <a href="/docs/client/account#accountCreateMagicURLSession">Create Magic URL Session</a> route.
-    If the email has never been used, a <b>new user ID is generated</b>, then the user will receive an email. 
+    If the email has never been used, a <b>new account is generated</b>, then the user will receive an email. 
     If the email is already attached to an account, the <b>user ID is ignored</b> and the user will receive a link in their email.
 </p>
 
@@ -25,7 +25,7 @@ const client = new Client()
 const account = new Account(client);
 
 
-const promise = account.createMagicURLSession('[USER_ID]', 'email@example.com');
+const promise = account.createMagicURLSession(ID.unique(), 'email@example.com');
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -35,60 +35,11 @@ promise.then(function (response) {
         </div>
     </li>
     <li>
-        <h3>Flutter</h3>
-        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
-
-final client = Client()
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');                // Your project ID
-
-final account = Account(client);
-
-final user = await account.createMagicURLSession(
-    userId: ID.unique(),
-    email: 'email@example.com',
-);</code></pre>
-    </li>
-    <li>
-        <h3>Android</h3>
-        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
-import io.appwrite.services.Account
-
-val client = Client(context)
-    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
-
-val account = Account(client)
-
-val user = account.createMagicURLSession(
-    userId = ID.unique(),
-    email = "email@example.com"
-)</code></pre>
-    </li>
-    <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
-
-let account = Account(client)
-
-let user = try await account.createMagicURLSession(
-    userId: ID.unique(),
-    email: "email@example.com"
-)</code></pre>
-    </li>
-    <li>
         <h3>GraphQL</h3>
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
             <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
     accountCreateMagicURLSession(
-        userId: "email@example.com",
+        userId: "ID.unique()",
         email: "email@example.com"
     ) {
         _id
@@ -128,60 +79,11 @@ const user = await account.updateMagicURLSession(userId, secret);</code></pre>
         </div>
     </li>
     <li>
-        <h3>Flutter</h3>
-        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
-            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
-
-final client = Client()
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
-
-final account = Account(client);
-
-final user = await account.updateMagicURLSession(
-    userId: 'email@example.com',
-    secret: '[SECRET]',
-);</code></pre>
-    </li>
-    <li>
-        <h3>Android</h3>
-        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
-import io.appwrite.services.Account
-
-val client = Client(context)
-    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
-
-val account = Account(client)
-
-val user = account.updateMagicURLSession(
-    userId = 'email@example.com',
-    secret = '[SECRET]'
-)</code></pre>
-    </li>
-    <li>
-        <h3>Apple</h3>
-        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
-            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
-
-let client = Client()
-    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
-
-let account = Account(client)
-
-let user = try await account.updateMagicURLSession(
-    userId: 'email@example.com',
-    secret: "[SECRET]"
-)</code></pre>
-    </li>
-    <li>
         <h3>GraphQL</h3>
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
             <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
     accountUpdateMagicURLSession(
-        userId: "email@example.com",
+        userId: "[USER_ID]",
         secret: "[SECRET]"
     ) {
         _id

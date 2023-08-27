@@ -15,10 +15,13 @@
 </p>
 
 <ol class="margin-top margin-bottom-large text-size-normal">
-    <li>Navigate to your Appwrite project</li>
-    <li>Navigate to <b>Auth</b> > <b>Settings</b></li>
+    <li>Navigate to your Appwrite project.</li>
+    <li>Navigate to <b>Auth</b> > <b>Settings</b>.</li>
     <li>Find and open the OAuth provider.</li>
-    <li>In the OAuth 2 settings modal, use the toggle to enable the provider</li>
+    <li>In the OAuth 2 settings modal, use the toggle to enable the provider.</li>
+    <li>Create and OAuth 2 app on the provider's developer platform.</li>
+    <li>Copy information from your OAuth2 provider's developer platform to fill the <b>OAuth2 Settings</b> modal in the Appwrite Console.</li>
+    <li>Configure redirect URL in your OAuth 2 provider's developer platform. Set it to URL provided to you by <b>OAuth2 Settings</b> modal in Appwrite Console.</li>
 </ol>
 
 
@@ -152,7 +155,7 @@ try await account.createOAuth2Session(provider: "amazon")</code></pre>
 
 <p>
     You'll be redirected to the OAuth 2 provider's login page to log in. 
-    Once complete, you'll be redirected to the redirect URL configured in your OAuth 2 provider.
+    Once complete, your user will be redirected back to your app.
 </p>
 
 <p>
@@ -285,7 +288,9 @@ print(session.providerAccessToken);</code></pre>
 <h2><a href="#refresh" id="refresh">Refresh Tokens</a></h2>
 <p>
     OAuth 2 sessions expire to protect from security risks. 
-    OAuth 2 sessions should be periodically refreshed to keep the user authenticated. 
+    OAuth 2 sessions should be refreshed periodically, so access tokens don't expire. 
+    Check value of <code>providerAccessTokenExpiry</code> to know if the token is expired or is about to expire. 
+    Refreshing before every request might cause rate limit problems.
     You can do this by calling the <a href="/docs/client/account#accountUpdateSession">Update OAuth Session</a> endpoint when ever your user visits your app.
 </p>
 
