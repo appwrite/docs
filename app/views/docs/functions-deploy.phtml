@@ -9,14 +9,14 @@
     Here's everything you need to know to deploy your first Appwrite Function.
 </p>
 
-<h2><a href="#vcs" id="vcs">VCS (Version Control System)</a></h2>
+<h2><a href="#git" id="git">Git</a></h2>
 <p>
     The recommended way to manage your Appwrite Function deployments is to use a version control system, like Git.
     This offers simple versioning and collaboration that will easily fit into the rest of your development workflow.
 </p>
 
 <h3>Create Function</h3>
-<p>Before deploying your function with VCS, create a new function attached to your VCS repo.</p>
+<p>Before deploying your function with Git, create a new function attached to your Git repo.</p>
 <ol class="margin-top margin-bottom-large text-size-normal">
     <li>
         Navigate to <b>Functions</b> from the side bar of the Appwrite Console.
@@ -109,8 +109,7 @@
 </div>
 
 <h3>Manual Deployment</h3>
-<p>You can also upload your functions to be deployed using the Appwrite Console. The example below shows a simple Node.JS function, but the same idea applies to any other language.</p>
-
+<p>You can upload your functions to be deployed using the Appwrite Console. The example below shows a simple Node.js function, but the same idea applies to any other language.</p>
 <div class="ide margin-bottom">
     <pre class="line-numbers"><code class="prism" data-prism>.
 ├── package.json
@@ -166,7 +165,7 @@
 <ol class="margin-top margin-bottom-large text-size-normal">
     <li class="margin-bottom-small">Navigate to the Appwrite Console's <b>Functions</b> page.</li>
     <li class="margin-bottom-small">Navigate to the <b>Domains</b> tab.</li>
-    <li class="margin-bottom-small">In the table, you'll find a link formatted similar to <code>https://64d4d22db370ae41a32e.appwrite.global</code>. This is your preview.</li>
+    <li class="margin-bottom-small">In the table, you'll find a link formatted similar to <code>https://64d4d22db370ae41a32e.appwrite.global</code>. This is your generated domain.</li>
 </ol>
 
 <p>
@@ -208,10 +207,10 @@
     <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
     <li>Click to open a function you wish to inspect.</li>
     <li>Under the <b>Deployments</b> tab, you'll find the status of the current active deployment.</li>
-    <li>You can redeploy by clicking the <b>Redeploy</b> button.</li>
+    <li>You can redeploy by clicking the triple-dots beside an execution, and hitting the <b>Redeploy</b> button.</li>
 </ol>
 <p>
     The redeployment behavior varies depending on how the initial deployment is created.
-    For VCS deployments, redeploy uses the same commit hash but updated function settings.
+    For Git deployments, redeploy uses the same commit hash but updated function settings.
     For manual and CLI deployments, redeploy uses previously updated code but updated function settings.
 </p>
