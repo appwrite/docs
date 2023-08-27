@@ -40,7 +40,7 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 
 <h3><a href="/docs/getting-started-for-android#OAuthCallback" id="OAuthCallback">OAuth Callback</a></h3>
 
-<p>In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `&lt;application&gt;` tag, along side the existing `&lt;activity&gt;` tags in your <a href="https://github.com/appwrite/playground-for-android/blob/master/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener">AndroidManifest.xml</a>. Be sure to replace the <b>[PROJECT_ID]</b> string with your actual Appwrite project ID. You can find your Appwrite project ID in your project settings screen in your Appwrite Console.</p>
+<p>In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the <code>&lt;application&gt;</code> tag, along side the existing <code>&lt;activity&gt;</code> tags in your <a href="https://github.com/appwrite/playground-for-android/blob/master/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener">AndroidManifest.xml</a>. Be sure to replace the <code>[PROJECT_ID]</code> string with your actual Appwrite project ID. You can find your Appwrite project ID in your project settings screen in your Appwrite Console.</p>
 
 <div class="ide" data-lang="html" data-lang-label="XML">
     <pre class="line-numbers"><code class="prism language-xml" data-prism><?php echo $this->escape('<manifest ...>
