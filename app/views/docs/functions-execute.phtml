@@ -6,7 +6,7 @@ use Appwrite\Utopia\View;
 <p>
     Appwrite Functions can be executed in several ways.
     Executions can be invoked through the Appwrite SDK and visiting its REST endpoint. Functions can also be triggered by events and scheduled executions.
-    Here are all the different ways to consume your new Appwrite Functions.
+    Here are all the different ways to consume your Appwrite Functions.
 </p>
 
 <h2><a href="#domains" id="domains">Domains</a></h2>
@@ -23,14 +23,14 @@ use Appwrite\Utopia\View;
 </div>
 
 <p>
-    Alternatively you can <a href="/docs/functions-deploy#domain">add a custom domain</a> to your Appwrite project. 
+    Alternatively you can <a href="/docs/functions-deploy#domain">add a custom domain</a> to your Appwrite Function. 
 </p>
 
 <h2><a href="#rest" id="rest">REST API</a></h2>
 <p>
     When requests are made to this domain, whether through a browser or through an HTTP requests, 
-    the request information like request headers and request body will be passed to the function.
-    This unlocks interesting ways to integrate other apps and backends to your Appwrite project.
+    the request information like request URL, request headers, and request body will be passed to the function.
+    This unlocks ability for Appwrite Function to become a full-blown API server on its own. It also allows accepting incoming webhooks for handling online payments, hosting social platform bots, and much more.
 </p>
 
 <div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
@@ -68,8 +68,10 @@ client
 const functions = new Functions(client)
 
 try {
-    const data = await functions.createExecution('[FUNCTION_ID]', {
+    const data = await functions.createExecution('[FUNCTION_ID]', JSON.stringify({
         'foo': 'bar'
+    }), '/', 'GET', {
+      'X-Custom-Header': '123'
     })
     console.log(data)
 } catch (err) {
@@ -497,8 +499,8 @@ $image = new View(__DIR__.'/../general/image.phtml');
     Server SDKs require an API key with the correct scopes.
 </p>
 <p>
-    If your function has a generated or custom domain, execute permissions are ignored for this function.
-    Anyone visiting the configured domains will be able to execute the function.
+    If your function has a generated or custom domain, executions are not authenticated.
+    Anyone visiting the configured domains will be considered a guest, so make sure to give `Any` execute permission in order for domain executions to work.
     If you need to enforce permissions for functions with a domain, use authentication methods like JWT.
 </p>
 

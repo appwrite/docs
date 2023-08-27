@@ -31,20 +31,21 @@
         Search for the Git repository that hold your function and click <b>connect</b>.
     </li>
     <li>
-        Select a production branch. New commits made to the production branch will be <b>automatically deployed and activated</b>.
+        Select a production branch. New commits pushed to the production branch will be <b>automatically activated</b>. Commits to any other branch will still be deployed, but not be activated.
     </li>
     <li>
-        Input the root directory of the function inside the repository. 
+        Input the root directory of the function inside the repository. If you have only one function in your repository, you can leave this empty. If you have multiple, root directory should point to the folder of your function. This should be the directory in which your custom build commands can run successfully. It also improves efficiency because only what's necessary is cloned.
     </li>
     <li>
-        If you don't want deploy comments to be made on your PRs, select <b>Silent mode</b>.
+        If you don't want deploy comments to be made on your pull requests or commits, select <b>Silent mode</b>.
     </li>
     <li>
-        Name your function, select a runtime that matches your function, and enter an entry point path, relative to the root directory from the previous step.
+        Name your function, select a runtime that matches your function, and enter entrypoint, relative to the root directory from the previous step. Entrypoint is path to the main file of your function, which exports the function to be run on every execution.
     </li>
     <li>
         If you have build steps, like installing dependencies, input the commands into the <b>Build settings</b> heading's <b>Command</b> field. 
         You can combine multiple commands using <code>&&</code>, such as <code>npm install && npm build</code>.
+        For compiled languages you don't need to worry about installing dependencies, as that's done automatically during compilation step.
     </li>
     <li>
         Finally, configure the execute permissions of the function. For security, only provide execute permissions to the necessary roles.
@@ -54,7 +55,7 @@
 <h3>Deploy</h3>
 <ol class="margin-top margin-bottom-large text-size-normal">
     <li>
-        Checkout your production branch in Git. 
+        Using Git, checkout the branch you configured as production branch when creating the Appwrite Function. 
     </li>
     <li>
         Create a new commit.
@@ -63,18 +64,18 @@
         Push your new commit.
     </li>
     <li>
-        A new deployment will be automatically created. Deployments will be automatically activated when new commits are added to the production branch.
+        A new deployment will be automatically created, built and activated.
     </li>
 </ol>
 
 <h2><a href="#cli" id="cli">CLI</a></h2>
 <div class="notice">
   <h2>CLI Setup</h2>
-  <p>Before you can deploy with the Appwrite CLI, make sure you've <a href="docs/command-line">installed and initialized</a> the CLI</p>
+  <p>Before you can deploy with the Appwrite CLI, make sure you've <a href="docs/command-line">installed and initialized</a> the CLI.</p>
 </div>
 <p>
     To deploy with the Appwrite CLI, your function must be added to <code>appwrite.json</code> that tells the CLI where each function is stored.
-    To ensure the folder structure is setup correctly and <code>appwrite.json</code> is configured correctly, use the appwrite init function method to create a shell function, then paste in your function code.
+    To ensure the folder structure is setup correctly and <code>appwrite.json</code> is configured correctly, use the appwrite init function method to create a starter function, then paste in your function code.
 </p>
 
 <p>
@@ -151,7 +152,7 @@
   <li class="margin-bottom-small">Select the <b>Manual</b> tab.</li>
   <li class="margin-bottom-small">Input the entry point of your function under <b>Entrypoint</b>. For the example above, it would be <code>index.js</code>.</li>
   <li class="margin-bottom-small">Upload <code> code.tar.gz</code>.</li>
-  <li class="margin-bottom-small">Select <b>Activate deployment after build</b> to use your new function.</li>
+  <li class="margin-bottom-small">Select <b>Activate deployment after build</b> to use your new deployment.</li>
   <li class="margin-bottom-small">Click <b>Create</b> to deploy your function.</li>
 </ol>
 
