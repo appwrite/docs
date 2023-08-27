@@ -3,9 +3,9 @@
     Each function is handled following a request and response pattern.
 </p>
 
-<h2><a href="#function-flow" id="function-flow">Function Flow</a></h2>
+<h2><a href="#lifecycle" id="lifecycle">Lifecycle</a></h2>
 <p>
-    There is a clear flow for all Appwrite Functions, from beginning to end.
+    There is a clear lifecycle for all Appwrite Functions, from beginning to end.
     Here's everything that happens during a function execution.
 </p>
 
@@ -460,19 +460,19 @@ public class Main {
     <tbody>
         <tr>
             <td><code>req</code></td>
-            <td>Contains request information like method, body, and headers. See full examples <a href="#context-req">here</a>.</td>
+            <td>Contains request information like method, body, and headers. See full examples <a href="#request">here</a>.</td>
         </tr>
         <tr>
             <td><code>res</code></td>
-            <td>Contains methods to build a response and return information. See full examples <a href="#context-res">here</a>.</td>
+            <td>Contains methods to build a response and return information. See full examples <a href="#response">here</a>.</td>
         </tr>
         <tr>
             <td><code>log()</code></td>
-            <td>Method to log information to the Appwrite Console, end users will not be able to see these logs. See full examples <a href="#context-log">here</a>.</td>
+            <td>Method to log information to the Appwrite Console, end users will not be able to see these logs. See full examples <a href="#logging">here</a>.</td>
         </tr>
         <tr>
             <td><code>error()</code></td>
-            <td>Methoc to log errors to the Appwrite Console, end users will not be able to see these errors. See full examples <a href="#context-error">here</a>.</td>
+            <td>Methoc to log errors to the Appwrite Console, end users will not be able to see these errors. See full examples <a href="#logging">here</a>.</td>
             <td></td>
         </tr>
     </tbody>
@@ -487,20 +487,32 @@ public class Main {
     <li>
         <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-            <pre class="line-numbers"><code class="prism language-js" data-prism>export default async function ({ req, res, log, error }) {
-    log('This is a log!');
-    error('This is an error!');
-    return res.send(`This function was called with ${req.method} method!`)
+            <pre class="line-numbers"><code class="prism language-js" data-prism>// before destructuring
+export default async function (context) {
+    context.log("This is a log!");
+    // ... more code
+}
+
+// after destructuring
+export default async function ({ req, res, log, error }) {
+    log("This is a log!");
+    // ... more code
 }</code></pre>
         </div>
     </li>
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async function ({ req, res, log, error }: any) {
-    log('This is a log!');
-    error('This is an error!');
-    return res.send(`This function was called with ${req.method} method!`)
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>// before destructuring
+export default async function (context: any) {
+    context.log("This is a log!");
+    // ... more code
+}
+   
+// after destructuring
+export default async function ({ req, res, log, error }: any) {
+    context.log("This is a log!");
+    // ... more code
 }</code></pre>
         </div>
     </li>
@@ -829,7 +841,7 @@ public class Main {
                 <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
 
     switch (req.query.type) {
-        case 'text':
+        case 'text': 
             return res.send("This is a text response", 200);
         case 'json':
             return res.json({"type": "This is a JSON response"}, 200);
@@ -1097,6 +1109,47 @@ namespace runtime {
         </li>
     </ul>
 
+    <p>
+        To get the different response types, set one of the following query parameters in the <a href="/docs/functions-execute#domains">generated domain</a> of your function.
+    </p>
+
+    <table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 100px">Type</td>
+        <td style="width: 100px">Query Param</td>
+        <td>Example</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>text</td>
+        <td>/?type=text</td>
+        <td>https://64d4d22db370ae41a32e.appwrite.global/?type=text</td>
+    </tr>
+    <tr>
+        <td>json</td>
+        <td>/?type=json</td>
+        <td>https://64d4d22db370ae41a32e.appwrite.global/?type=json</td>
+    </tr>
+    <tr>
+        <td>redirect</td>
+        <td>/?type=redirect</td>
+        <td>https://64d4d22db370ae41a32e.appwrite.global/?type=redirect</td>
+    </tr>
+    <tr>
+        <td>html</td>
+        <td>/?type=html</td>
+        <td>https://64d4d22db370ae41a32e.appwrite.global/?type=html</td>
+    </tr>
+    <tr>
+        <td>empty</td>
+        <td>/</td>
+        <td>https://64d4d22db370ae41a32e.appwrite.global/</td>
+    </tr>
+    </tbody>
+</table>
+
     <h3><a href="#logging" id="logging">Logging</a></h3>
     <p>
         To protect user privacy, the request and response objects are not logged to the Appwrite Console by default.
@@ -1348,10 +1401,10 @@ namespace runtime {
         </tbody>
     </table>
 
-    <h3>Function Environment Variables</h3>
+    <h3>Function-level Environment Variables</h3>
     <p>
-        Function environment variables will only be accessible in the function they belong to.
-        Function environment variables will override global environment variables when they have conflicting names.
+        Function-level environment variables will only be accessible in the function they belong to.
+        Function-level environment variables will override project-level variables when they have conflicting names.
     </p>
     <ol class="margin-top margin-bottom-large text-size-normal">
         <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
@@ -1360,13 +1413,13 @@ namespace runtime {
         <li>Create an environment variable by clicking <b>Create variable</b>, using the <b>Editor</b>, or import new variables through a <code>.env</code> file.</li>
     </ol>
 
-    <h3>Global Environment Variables</h3>
+    <h3>Project-level Variables</h3>
     <p>
-        Global environment variables are accessible to all Appwrite Functions in your project.
-        Local environment variables will override global environment variables when they have conflicting names.
+        Project-level variables are accessible to all Appwrite Functions in your project.
+        Function-level environment variables will override project-level variables when they have conflicting names.
     </p>
     <ol class="margin-top margin-bottom-large text-size-normal">
-        <li>In Appwrite Console, navigate to your project's <b>Settings</b> page.</li>
+        <li>In the Appwrite Console, navigate to your project's <b>Settings</b> page.</li>
         <li>Navigate to <b>Global variables</b> section.</li>
         <li>Create an environment variable by clicking <b>Create variable</b>, using the <b>Editor</b>, or import new variables through a <code>.env</code> file.</li>
     </ol>
@@ -1506,79 +1559,119 @@ namespace runtime {
         Your function's dependencies should be managed by the package manager of each language. By default, we include the following package managers in each runtime:
     </p>
 
-    <p>
-        To install your dependencies before your function is built, you should add the relevant install command to the top your functions Build Commands script.
-    </p>
-
 <table class="full text-size-small">
     <thead>
         <tr>
-            <th>Language</th>
-            <th>Package Manager</th>
+            <th style="width: 50px"></th>
+            <th style="width: 100px">Language</th>
+            <th style="width: 150px">Package Manager</th>
             <th>Commands</th>
         </tr>
     </thead>
     <tr>
+        <td>
+            <img src="" data-ls-attrs="src=/images/runtimes/node.png" alt="Node icon" class="avatar xxs" />
+        </td>
         <td><b>Node.js</b></td>
         <td><a href="https://www.npmjs.com/" target="_blank">npm</a></td>
         <td><code>npm install</code></td>
     </tr>
     <tr>
+        <td>
+            <img src="" data-ls-attrs="src=/images/runtimes/php.png" alt="PHP icon" class="avatar xxs" />
+        </td>
         <td><b>PHP</b></td>
         <td><a href="https://getcomposer.org/" target="_blank">Composer</a></td>
         <td><code>composer install</code></td>
     </tr>
     <tr>
+        <td>
+            <img src="" data-ls-attrs="src=/images/runtimes/python.png" alt="Python icon" class="avatar xxs" />
+        </td>
         <td><b>Python</b></td>
         <td><a href="https://pypi.org/project/pip/" target="_blank">pip</a></td>
         <td><code>pip install -r requirements.txt</code></td>
     </tr>
     <tr>
+        <td>
+            <img src="" data-ls-attrs="src=/images/runtimes/ruby.png" alt="Ruby icon" class="avatar xxs" />
+        </td>
         <td><b>Ruby</b></td>
         <td><a href="https://bundler.io/" target="_blank">Bundler</a></td>
         <td><code>bundle install</code></td>
     </tr>
     <tr>
+        <td>
+            <img src="" data-ls-attrs="src=/images/runtimes/deno.png" alt="Deno icon" class="avatar xxs" />
+        </td>
         <td><b>Deno</b></td>
         <td><a href="https://deno.land/" target="_blank">deno</a></td>
         <td><code>deno cache &ltENTRYPOINT_FILE&gt</code></td>
     </tr>
     <tr>
+        <td>
+            <img src="" data-ls-attrs="src=/images/runtimes/dart.png" alt="Dart icon" class="avatar xxs" />
+        </td>
         <td><b>Dart</b></td>
         <td><a href="https://pub.dev/" target="_blank">pub</a></td>
         <td><code>pub get</code></td>
     </tr>
     <tr>
+        <td>
+            <img src="" data-ls-attrs="src=/images/runtimes/swift.png" alt="Swift icon" class="avatar xxs" />
+        </td>
         <td><b>Swift</b></td>
         <td><a href="https://swift.org/package-manager/" target="_blank">Swift Package Manager</a></td>
         <td>N/A</td>
     </tr>
     <tr>
+        <td>
+            <img src="" data-ls-attrs="src=/images/runtimes/dotnet.png" alt="Swift icon" class="avatar xxs" />
+        </td>
         <td><b>.NET</b></td>
         <td><a href="https://www.nuget.org/" target="_blank">NuGet</a></td>
         <td>N/A</td>
     </tr>
     <tr>
+        <td>
+            <img src="" data-ls-attrs="src=/images/runtimes/kotlin.png" alt="Swift icon" class="avatar xxs" />
+        </td>
         <td><b>Kotlin</b></td>
         <td><a href="https://kotlinlang.org/docs/reference/using-gradle.html" target="_blank">Gradle</a></td>
         <td>N/A</td>
     </tr>
     <tr>
+        <td>
+            <img src="" data-ls-attrs="src=/images/runtimes/java.png" alt="Swift icon" class="avatar xxs" />
+        </td>
         <td><b>Java</b></td>
         <td><a href="https://gradle.org/" target="_blank">Gradle</a></td>
         <td>N/A</td>
     </tr>
     <tr>
+        <td>
+            <img src="" data-ls-attrs="src=/images/runtimes/cpp.png" alt="C++ icon" class="avatar xxs" />
+        </td>
         <td><b>C++</b></td>
         <td>None</td>
         <td>N/A</td>
     </tr>
 </table>
 
+<p>
+    To install your dependencies before your function is built, you should add the relevant install command to the top your function's <b>Build setting</b> > <b>Commands</b>.
+</p>
+
     <h2><a href="#appwrite" id="appwrite">Using Appwrite in a Function</a></h2>
 
-    <p>Appwrite can be used in your functions by adding the relevant SDK to your function's dependencies</p>
-    <p>Authenticating with Appwrite is done via an API key or a JWT token. You can read more about authentication in the <a href="/docs/authentication-server">Server Authentication</a> section of the docs.</p>
+    <p>
+        Appwrite can be used in your functions by adding the relevant SDK to your function's dependencies. 
+        Authenticating with Appwrite is done via an API key or a JWT token. 
+        API keys must be generated and exported as an <a href="#environment-variables">environment variable</a>.
+    </p>
+    <p>
+        You can read more about authentication in the <a href="/docs/authentication-server">Server Authentication</a> section of the docs.
+    </p>
 
 
     <h2><a href="#dependencies" id="dependencies">Using with API Key</a></h2>
