@@ -19,7 +19,7 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 
 <h2><a href="/docs/getting-started-for-android#addProject" id="addProject">Add your Android Platform</a></h2>
 
-<p>To init your SDK and start interacting with Appwrite services, you need to add a new Android platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and click the 'Add Platform' button. Only API requests initiated from platforms added to your Appwrite project will be accepted. This prevents unauthorized apps from accessing your Appwrite project.</p>
+<p>To init your SDK and start interacting with Appwrite services, you need to add a new Android platform to your project. To add a new platform, go to your Appwrite Console, choose the project you created in the step before, and click the 'Add Platform' button. Only API requests initiated from platforms added to your Appwrite project will be accepted. This prevents unauthorized apps from accessing your Appwrite project.</p>
 
 <p>From the options, choose to add a new <b>Android</b> platform and add add your app <u>name</u> and <u>package name</u>, your package name is generally the <b>applicationId</b> in your app-level <a href="https://github.com/appwrite/playground-for-android/blob/master/app/build.gradle#L12" target="_blank" rel="noopener">build.gradle</a> file. By registering your new app platform, you are allowing your app to communicate with the Appwrite API.</p>
 
@@ -40,7 +40,7 @@ $androidVersion = (isset($versions['android'])) ? $versions['android'] : '';
 
 <h3><a href="/docs/getting-started-for-android#OAuthCallback" id="OAuthCallback">OAuth Callback</a></h3>
 
-<p>In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `&lt;application&gt;` tag, along side the existing `&lt;activity&gt;` tags in your <a href="https://github.com/appwrite/playground-for-android/blob/master/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener">AndroidManifest.xml</a>. Be sure to replace the <b>[PROJECT_ID]</b> string with your actual Appwrite project ID. You can find your Appwrite project ID in your project settings screen in your Appwrite console.</p>
+<p>In order to capture the Appwrite OAuth callback url, the following activity needs to be added inside the `&lt;application&gt;` tag, along side the existing `&lt;activity&gt;` tags in your <a href="https://github.com/appwrite/playground-for-android/blob/master/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener">AndroidManifest.xml</a>. Be sure to replace the <b>[PROJECT_ID]</b> string with your actual Appwrite project ID. You can find your Appwrite project ID in your project settings screen in your Appwrite Console.</p>
 
 <div class="ide" data-lang="html" data-lang-label="XML">
     <pre class="line-numbers"><code class="prism language-xml" data-prism><?php echo $this->escape('<manifest ...>
