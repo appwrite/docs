@@ -85,6 +85,7 @@ try {
         <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+import 'dart:convert';
 
 final client = Client();
 client
@@ -94,8 +95,10 @@ client
 final functions = Functions(client);
 
 try {
-    final response = await functions.createExecution('[FUNCTION_ID]', {
+    final response = await functions.createExecution('[FUNCTION_ID]', json.encode({
         'foo': 'bar'
+    }), '/', 'GET', {
+        'X-Custom-Header': '123'
     });
     print(response.data);
 } catch (e) {
@@ -110,6 +113,7 @@ try {
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Android SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client;
 import io.appwrite.services.Functions;
+import com.google.gson.Gson;
 
 val client = new Client();
 client
@@ -119,8 +123,10 @@ client
 val functions = new Functions(client);
 
 try {
-    val response = await functions.createExecution('[FUNCTION_ID]', {
+    val response = await functions.createExecution('[FUNCTION_ID]', gson.toString({
         'foo': 'bar'
+    }), '/', 'GET', {
+        'X-Custom-Header': '123'
     });
     print(response.data);
 } catch (e) {
@@ -134,6 +140,7 @@ try {
         <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import Foundation
 
 let client = Client()
 client
@@ -143,7 +150,15 @@ client
 let functions = Functions(client: client)
 
 do {
-    let response = try functions.createExecution(functionId: "[FUNCTION_ID]", data: ["foo": "bar"])
+    let response = try functions.createExecution(
+        functionId: "[FUNCTION_ID]",
+        data: NSJSONSerialization.jsonObject(with: ["foo": "bar"], options: [])!,
+        xpath: "/",
+        method: "GET",
+        headers: [
+            "X-Custom-Header": "123"
+        ]
+    )
     print(response)
 } catch let error {
     print(error)
@@ -172,8 +187,10 @@ client
 const functions = new Functions(client)
 
 try {
-    const data = await functions.createExecution('[FUNCTION_ID]', {
+    const data = await functions.createExecution('[FUNCTION_ID]', JSON.stringify({
         'foo': 'bar'
+    }), '/', 'GET', {
+        'X-Custom-Header': '123'
     })
     console.log(data)
 } catch (err) {
@@ -203,7 +220,11 @@ $client
 
 $functions = new Functions($client);
 
-$result = $functions->createExecution('[FUNCTION_ID]');</code></pre>
+$result = $functions->createExecution('[FUNCTION_ID]', json_encode([
+    'foo' => 'bar' 
+], '/', 'GET', [
+    'X-Custom-Header': '123'
+]);</code></pre>
         </div>
         </div>
     </li>
@@ -213,6 +234,7 @@ $result = $functions->createExecution('[FUNCTION_ID]');</code></pre>
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 from appwrite.services.functions import Functions
+import json
 
 client = Client()
 
@@ -224,11 +246,11 @@ client = Client()
 
 functions = Functions(client)
 
-result = functions.create_execution('[FUNCTION_ID]',
-    {
-        'foo': 'bar'
-    }
-)</code></pre>
+result = functions.create_execution('[FUNCTION_ID]', json.dumps({
+    'foo': 'bar'
+}, '/', 'GET', {
+    'X-Custom-Header': '123'
+})</code></pre>
         </div>
         </div>
     </li>
@@ -237,6 +259,7 @@ result = functions.create_execution('[FUNCTION_ID]',
         <div>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
             <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'Appwrite'
+require 'json'
 
 include Appwrite
 
@@ -247,8 +270,10 @@ client = Client.new
 
 functions = Functions.new(client)
 
-response = functions.create_execution(function_id: '[FUNCTION_ID]', data: {
+response = functions.create_execution(function_id: '[FUNCTION_ID]', data: JSON.generate({
     'foo': 'bar'
+}), '/', 'GET', {
+    'X-Custom-Header': '123'
 })
 
 puts response.inspect</code></pre>
@@ -271,8 +296,10 @@ client
 const functions = new Functions(client)
 
 try {
-    const data = await functions.createExecution('[FUNCTION_ID]', {
+    const data = await functions.createExecution('[FUNCTION_ID]', JSON.stringify({
         'foo': 'bar'
+    }), '/', 'GET', {
+        'X-Custom-Header': '123'
     })
     console.log(data)
 } catch (err) {
@@ -286,6 +313,7 @@ try {
         <div>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
+import 'dart:convert';
 
 void main() {
   Client client = Client();
@@ -299,8 +327,13 @@ void main() {
 
   Future result = functions.createExecution(
     functionId: '[FUNCTION_ID]',
-    data: {
+    data: json.encode({
       'foo': 'bar'
+    }),
+    xpath: '/',
+    method: 'GET',
+    headers: {
+        'X-Custom-Header': '123'
     }
   );
 
@@ -319,6 +352,7 @@ void main() {
         <div>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import Foundation
 
 let client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1")
@@ -329,10 +363,14 @@ let functions = Functions(client)
 
 let execution = try await functions.createExecution(
     functionId: "[FUNCTION_ID]",
-    data: [
+    data: NSJSONSerialization.jsonObject(with: [
         "foo": "bar"
-    ]
-)</code></pre>
+    ], options: [])!),
+    xpath: '/',
+    method: 'GET',
+    headers: [
+        "X-Custom-Header": "123"
+])</code></pre>
         </div>
         </div>
     </li>
@@ -343,6 +381,7 @@ let execution = try await functions.createExecution(
             <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
 using Appwrite.Services;
 using Appwrite.Models;
+using System.Text.Json;
 
 var client = new Client()
     .SetEndPoint("https://cloud.appwrite.io/v1")
@@ -353,10 +392,14 @@ var functions = new Functions(client);
 
 Execution result = await functions.CreateExecution(
     functionId: "[FUNCTION_ID]",
-    data: new Dictionary&lt;string, object&gt; {
+    data: JsonSerializer.Serialize&lt;object>(new Dictionary&lt;string, object&gt; {
         { "foo", "bar" }
-    }
-);</code></pre>
+    }),
+    xpath: "/",
+    method: "GET",
+    headers: new Dictionary&lt;string, object&gt; {
+        { "X-Custom-Header", "123" }
+});</code></pre>
         </div>
         </div>
     </li>
@@ -366,6 +409,7 @@ Execution result = await functions.CreateExecution(
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Functions
+import com.google.gson.Gson
 
 fun main(args: Array&lt;String&gt;) {
     val client = Client(context)
@@ -377,8 +421,13 @@ fun main(args: Array&lt;String&gt;) {
 
     val response = functions.createExecution(
         functionId = "[FUNCTION_ID]",
-        data = mapOf(
+        data = gson.toString(mapOf(
             "foo" to "bar"
+        )),
+        xpath = "/",
+        method = "GET",
+        headers = mapOf(
+            "X-Custom-Header" to "123"
         )
     )
 }
@@ -395,6 +444,7 @@ fun main(args: Array&lt;String&gt;) {
             <pre class="line-numbers"><code class="prism language-java" data-prism>import io.appwrite.Client;
 import io.appwrite.services.Functions;
 import java.util.HashMap;
+import com.google.gson.Gson;
 
 public static void main(String[] args) throws Exception {
     Client client = new Client()
@@ -414,9 +464,14 @@ public static void main(String[] args) throws Exception {
 
             System.out.println(result);
         }),
-        new HashMap<String, Object>() {{
+        gson.toString(new HashMap<String, Object>() {{
             put("foo", "bar");
-        }}
+        }}),
+        "/",
+        "GET",
+        new HashMap<String, Object>() {{
+            put("X-Custom-Header", "123");
+        }},
     );
 }</code></pre>
         </div>
