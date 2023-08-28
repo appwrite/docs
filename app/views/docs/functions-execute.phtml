@@ -1,0 +1,570 @@
+<?php
+
+use Appwrite\Utopia\View;
+
+?>
+<p>
+    Appwrite Functions can be executed in several ways.
+    Executions can be invoked through the Appwrite SDK and visiting its REST endpoint. Functions can also be triggered by events and scheduled executions.
+    Here are all the different ways to consume your Appwrite Functions.
+</p>
+
+<h2><a href="#domains" id="domains">Domains</a></h2>
+<p>
+    Each Appwrite function has its own domain. 
+    You can find this in the Appwrite Console, under the Function overview.
+</p>
+
+<p>    
+    The generated domains will look like this.
+</p>
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>https://64d4d22db370ae41a32e.appwrite.global</code></pre>
+</div>
+
+<p>
+    Alternatively you can <a href="/docs/functions-deploy#domain">add a custom domain</a> to your Appwrite Function. 
+</p>
+
+<h2><a href="#rest" id="rest">REST API</a></h2>
+<p>
+    When requests are made to this domain, whether through a browser or through an HTTP requests, 
+    the request information like request URL, request headers, and request body will be passed to the function.
+    This unlocks ability for Appwrite Function to become a full-blown API server on its own. It also allows accepting incoming webhooks for handling online payments, hosting social platform bots, and much more.
+</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre><code class="language-bash" data-prism>curl -X POST https://64d4d22db370ae41a32e.appwrite.global \
+    -H "X-Custom-Header: 123" \
+    -H "Content-Type: application/json" \
+    -d '{"data":"this is json data"}'</code></pre>
+</div>
+
+
+<h2><a href="#sdk" id="sdk">SDK</a></h2>
+<p>
+   You can invoke your Appwrite Functions directly from the Appwrite SDKs.
+</p>
+
+<p>
+<a href="/docs/sdks"><i class="icon-angle-circled-right"></i>Learn more about using the Appwrite SDKs</a>
+</p>
+
+<h3>Client SDKs</h3>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Functions } from 'appwrite';  
+
+const client = new Client()
+
+client
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('[PROJECT_ID]')
+
+const functions = new Functions(client)
+
+try {
+    const data = await functions.createExecution('[FUNCTION_ID]', JSON.stringify({
+        'foo': 'bar'
+    }), '/', 'GET', {
+      'X-Custom-Header': '123'
+    })
+    console.log(data)
+} catch (err) {
+    console.error(err.message)
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+import 'dart:convert';
+
+final client = Client();
+client
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('[PROJECT_ID]')
+
+final functions = Functions(client);
+
+try {
+    final response = await functions.createExecution('[FUNCTION_ID]', json.encode({
+        'foo': 'bar'
+    }), '/', 'GET', {
+        'X-Custom-Header': '123'
+    });
+    print(response.data);
+} catch (e) {
+    print(e.message);
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client;
+import io.appwrite.services.Functions;
+import com.google.gson.Gson;
+
+val client = new Client();
+client
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('[PROJECT_ID]')
+
+val functions = new Functions(client);
+
+try {
+    val response = await functions.createExecution('[FUNCTION_ID]', gson.toString({
+        'foo': 'bar'
+    }), '/', 'GET', {
+        'X-Custom-Header': '123'
+    });
+    print(response.data);
+} catch (e) {
+    print(e.message);
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import Foundation
+
+let client = Client()
+client
+    .setEndpoint("https://cloud.appwrite.io/v1")
+    .setProject("[PROJECT_ID]")
+
+let functions = Functions(client: client)
+
+do {
+    let response = try functions.createExecution(
+        functionId: "[FUNCTION_ID]",
+        data: NSJSONSerialization.jsonObject(with: ["foo": "bar"], options: [])!,
+        xpath: "/",
+        method: "GET",
+        headers: [
+            "X-Custom-Header": "123"
+        ]
+    )
+    print(response)
+} catch let error {
+    print(error)
+}</code></pre>
+        </div>
+        </div>
+    </li>
+</ul>
+
+
+<h3>Server SDKs</h3>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
+            <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Functions } from 'node-appwrite';  
+
+const client = new Client()
+
+client
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('[PROJECT_ID]')
+    .setKey('[API_KEY]')
+
+const functions = new Functions(client)
+
+try {
+    const data = await functions.createExecution('[FUNCTION_ID]', JSON.stringify({
+        'foo': 'bar'
+    }), '/', 'GET', {
+        'X-Custom-Header': '123'
+    })
+    console.log(data)
+} catch (err) {
+    console.error(err.message)
+}
+
+</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+
+use Appwrite\Client;
+use Appwrite\Services\Functions;
+
+$client = new Client();
+
+$client
+    ->setEndpoint('https://cloud.appwrite.io/v1')
+    ->setProject('[PROJECT_ID]')
+    ->setKey('[API_KEY]')
+;
+
+$functions = new Functions($client);
+
+$result = $functions->createExecution('[FUNCTION_ID]', json_encode([
+    'foo' => 'bar' 
+], '/', 'GET', [
+    'X-Custom-Header': '123'
+]);</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+from appwrite.services.functions import Functions
+import json
+
+client = Client()
+
+(client
+  .set_endpoint('https://cloud.appwrite.io/v1')
+  .set_project('[PROJECT_ID]')
+  .set_key('[API_KEY]')
+)
+
+functions = Functions(client)
+
+result = functions.create_execution('[FUNCTION_ID]', json.dumps({
+    'foo': 'bar'
+}, '/', 'GET', {
+    'X-Custom-Header': '123'
+})</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'Appwrite'
+require 'json'
+
+include Appwrite
+
+client = Client.new
+    .set_endpoint('https://cloud.appwrite.io/v1') 
+    .set_project('[PROJECT_ID]') 
+    .set_key('[API_KEY]') 
+
+functions = Functions.new(client)
+
+response = functions.create_execution(function_id: '[FUNCTION_ID]', data: JSON.generate({
+    'foo': 'bar'
+}), '/', 'GET', {
+    'X-Custom-Header': '123'
+})
+
+puts response.inspect</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Functions } from "https://deno.land/x/appwrite/mod.ts";
+
+const client = new Client()
+
+client
+    .setEndpoint('https://cloud.appwrite.io/v1') 
+    .setProject('[PROJECT_ID]')
+    .setKey('[API_KEY]')
+
+const functions = new Functions(client)
+
+try {
+    const data = await functions.createExecution('[FUNCTION_ID]', JSON.stringify({
+        'foo': 'bar'
+    }), '/', 'GET', {
+        'X-Custom-Header': '123'
+    })
+    console.log(data)
+} catch (err) {
+    console.error(err.message)
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
+import 'dart:convert';
+
+void main() {
+  Client client = Client();
+  Functions functions = Functions(client);
+
+  client
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('[PROJECT_ID]')
+    .setKey('[API_KEY]')
+  ;
+
+  Future result = functions.createExecution(
+    functionId: '[FUNCTION_ID]',
+    data: json.encode({
+      'foo': 'bar'
+    }),
+    xpath: '/',
+    method: 'GET',
+    headers: {
+        'X-Custom-Header': '123'
+    }
+  );
+
+  result
+    .then((response) {
+      print(response);
+    }).catchError((error) {
+      print(error.response);
+  });
+}</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+import Foundation
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1")
+    .setProject("[PROJECT_ID]")
+    .setKey("[API_KEY]")
+
+let functions = Functions(client)
+
+let execution = try await functions.createExecution(
+    functionId: "[FUNCTION_ID]",
+    data: NSJSONSerialization.jsonObject(with: [
+        "foo": "bar"
+    ], options: [])!),
+    xpath: '/',
+    method: 'GET',
+    headers: [
+        "X-Custom-Header": "123"
+])</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
+using Appwrite.Services;
+using Appwrite.Models;
+using System.Text.Json;
+
+var client = new Client()
+    .SetEndPoint("https://cloud.appwrite.io/v1")
+    .SetProject("[PROJECT_ID]")
+    .SetKey("[API_KEY]");
+
+var functions = new Functions(client);
+
+Execution result = await functions.CreateExecution(
+    functionId: "[FUNCTION_ID]",
+    data: JsonSerializer.Serialize&lt;object>(new Dictionary&lt;string, object&gt; {
+        { "foo", "bar" }
+    }),
+    xpath: "/",
+    method: "GET",
+    headers: new Dictionary&lt;string, object&gt; {
+        { "X-Custom-Header", "123" }
+});</code></pre>
+        </div>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Functions
+import com.google.gson.Gson
+
+fun main(args: Array&lt;String&gt;) {
+    val client = Client(context)
+        .setEndpoint("https://cloud.appwrite.io/v1")
+        .setProject("[PROJECT_ID]")
+        .setKey("[API_KEY]")
+
+    val functions = Functions(client)
+
+    val response = functions.createExecution(
+        functionId = "[FUNCTION_ID]",
+        data = gson.toString(mapOf(
+            "foo" to "bar"
+        )),
+        xpath = "/",
+        method = "GET",
+        headers = mapOf(
+            "X-Custom-Header" to "123"
+        )
+    )
+}
+
+</code></pre>
+        </div>
+
+        </div>
+    </li>
+    <li>
+        <h3>Java</h3>
+        <div>
+        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+            <pre class="line-numbers"><code class="prism language-java" data-prism>import io.appwrite.Client;
+import io.appwrite.services.Functions;
+import java.util.HashMap;
+import com.google.gson.Gson;
+
+public static void main(String[] args) throws Exception {
+    Client client = new Client()
+        .setEndpoint("https://cloud.appwrite.io/v1")
+        .setProject("[PROJECT_ID]")
+        .setKey("[API_KEY]");
+
+    Functions functions = new Functions(client);
+
+    functions.createExecution(
+        "[FUNCTION_ID]",
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
+
+            System.out.println(result);
+        }),
+        gson.toString(new HashMap<String, Object>() {{
+            put("foo", "bar");
+        }}),
+        "/",
+        "GET",
+        new HashMap<String, Object>() {{
+            put("X-Custom-Header", "123");
+        }},
+    );
+}</code></pre>
+        </div>
+        </div>
+    </li>
+</ul>
+
+
+<h2><a href="#console" id="console">Console</a></h2>
+<p>
+    Another easy way to test a function is directly in the Appwrite Console.
+    You test a function by hitting the <b>Execute now</b> button, which will display with modal below.
+    You'll be able to mock executions by configuring the path, method, headers, and body.
+</p>
+
+<?php
+$image = new View(__DIR__.'/../general/image.phtml');
+    echo $image
+        ->setParam('srcLight', '/images-ee/docs/functions-execute-light.png')
+        ->setParam('srcDark', '/images-ee/docs/functions-execute-dark.png')
+        ->setParam('alt', '"Execute Function" modal.')
+        ->setParam('description', '"Execute Function" modal.')
+        ->render();
+?>
+
+<h2><a href="#events" id="events">Events</a></h2>
+<p>
+    Changes in Appwrite emit events. 
+    You can configure Functions to be executed in response to these events.
+</p>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>In Appwrite Console, navigate to <b>Functions</b>.</li>
+    <li>Click to open a function you wish to configure.</li>
+	<li>Under the <b>Settings</b> tab, navigate to <b>Events</b>.</li>
+    <li>Add one or multiple events as triggers for the function.</li>
+    <li>
+        Be careful to avoid selecting events that can be caused by the function itself. 
+        This can cause the function to trigger its own execution, resulting in infinite recursions.
+    </li>
+</ol>
+
+
+<h2><a href="#schedule" id="schedule">Schedule</a></h2>
+<p>Appwrite supports scheduled function executions. You can schedule executions using <a href="https://en.wikipedia.org/wiki/Cron" target="_blank" rel="noopener">cron expressions</a> in the settings of your function. Cron supports recurring executions as frequently as <b>every minute</b>.</p>
+
+<p>Here are some cron expressions for common intervals.</p>
+
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td>Cron Expression</td>
+        <td>Schedule</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>*/15 * * * *</td>
+        <td>Every 15 minutes</td>
+    </tr>
+    <tr>
+        <td>0 * * * *</td>
+        <td>Every Hour</td>
+    </tr>
+    <tr>
+        <td>0 0 * * *</td>
+        <td>Every day at 00:00</td>
+    </tr>
+    <tr>
+        <td>0 0 * * 1</td>
+        <td>Every monday at 00:00</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2><a href="#permissions" id="permissions">Permissions</a></h2>
+
+<p>
+    Appwrite Functions can be executed using Client or Server SDKs. 
+    Client SDKs must be authenticated with an account that has been granted execution <a href="/docs/permissions">permissions</a> on the function's settings page. 
+    Server SDKs require an API key with the correct scopes.
+</p>
+<p>
+    If your function has a generated or custom domain, executions are not authenticated.
+    Anyone visiting the configured domains will be considered a guest, so make sure to give `Any` execute permission in order for domain executions to work.
+    If you need to enforce permissions for functions with a domain, use authentication methods like JWT.
+</p>
+
+<h2><a href="#logs" id="logs">Logs and results</a></h2>
+<p>
+    You can view the logs your function executions in the Appwrite Console. 
+    Navigate to <b>Functions</b> and click on a function to view its executions.
+</p>
+<p>
+    For security reasons, Appwrite does not store the response of function executions.
+    If you need to debug, we recommend logging the response in your function code.
+</p>

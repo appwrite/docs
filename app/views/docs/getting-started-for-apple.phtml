@@ -19,7 +19,7 @@ $appleVersion = $versions['apple'] ?? '';
 
 <h2><a href="/docs/getting-started-for-apple#addProject" id="addProject">Add your Apple Platform</a></h2>
 
-<p>To init your SDK and start interacting with Appwrite services, you need to add a new Apple platform to your project. To add a new platform, go to your Appwrite console, choose the project you created in the step before, and click the <b>'Add Platform'</b> button. Only API requests initiated from platforms added to your Appwrite project will be accepted. This prevents unauthorized apps from accessing your Appwrite project.</p>
+<p>To init your SDK and start interacting with Appwrite services, you need to add a new Apple platform to your project. To add a new platform, go to your Appwrite Console, choose the project you created in the step before, and click the <b>'Add Platform'</b> button. Only API requests initiated from platforms added to your Appwrite project will be accepted. This prevents unauthorized apps from accessing your Appwrite project.</p>
 
 <p>From the options, choose to add a new <b>Apple</b> platform, select the iOS, macOS, watchOS or tvOS tab and add your app <u>name</u> and <u>bundle identifier</u>, Your bundle identifier can be found at the top of the <b>General</b> tab in your project settings, or in your <b>Info.plist</b> file. By registering your new app platform, you are allowing your app to communicate with the Appwrite API.</p>
 
@@ -64,7 +64,7 @@ $appleVersion = $versions['apple'] ?? '';
 
 <h3><a href="/docs/getting-started-for-apple#OAuthCallback" id="OAuthCallback">OAuth Callback</a></h3>
 
-<p>In order to capture the Appwrite OAuth callback url, the following URL scheme needs to added to your `Info.plist`</p>
+<p>In order to capture the Appwrite OAuth callback url, the following URL scheme needs to added to your <code>Info.plist</code>.</p>
 
 <div class="ide" data-lang="html" data-lang-label="XML">
     <pre class="line-numbers"><code class="prism language-xml" data-prism><?php echo $this->escape('<key>CFBundleURLTypes</key>
@@ -83,7 +83,7 @@ $appleVersion = $versions['apple'] ?? '';
 ');?></code></pre>
 </div>
 
-<p>If you're using UIKit, you'll also need to add a hook to your <b>SceneDelegate.swift</b> file to ensure cookies work correctly.</p>
+<p>If you're using UIKit, you'll also need to add a hook to your <code>SceneDelegate.swift</code> file to ensure cookies work correctly.</p>
 
 <div class="ide" data-lang="swift" data-lang-label="Swift">
   <pre class="line-numbers"><code class="prism language-swift" data-prism><?php echo $this->escape('
