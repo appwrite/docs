@@ -1,8 +1,7 @@
 <?php
-$variables = $this->getParam('variables', []);
 
-$markdown = new \Parsedown();
-$markdown->setSafeMode(true);
+$variables = $this->getParam('variables', []);
+$markdown = $this->getParam('markdown', false);
 ?>
 
 <p>Appwrite environment variables allow you to edit your server setup configuration and customize it. You can easily change the environment variables by changing them when running Appwrite using Docker CLI or Docker Compose.</p>
@@ -39,7 +38,7 @@ $markdown->setSafeMode(true);
     <h2 id="<?php echo $this->escape(strtolower(str_replace(' ', '_', $category))); ?>"><a href="/docs/environment-variables#<?php echo $this->escape(strtolower(str_replace(' ', '_', $category))); ?>"><?php echo $this->escape($category); ?></a></h2>
 
     <?php if($description): ?>
-        <p><?php echo $markdown->text($this->escape($description)); ?></p>
+        <p><?php echo $markdown->convert($this->escape($description)); ?></p>
     <?php endif; ?>
 
     <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
@@ -63,7 +62,7 @@ $markdown->setSafeMode(true);
                             <p class="margin-top-small text-fade">version >= <?php echo $this->escape($introduction); ?></p>
                         <?php endif; ?>
                     </td>
-                    <td><?php echo $markdown->text($this->escape($description)); ?></td>
+                    <td><?php echo $markdown->convert($this->escape($description)); ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

@@ -1,10 +1,8 @@
 <?php
 $models = $this->getParam('models', []);
 $model = $this->getParam('model', null);
+$markdown = $this->getParam('markdown', false);
 $rules = $model['properties'] ?? [];
-
-$markdown = new \Parsedown();
-$markdown->setSafeMode(true);
 
 $example = function ($model, $models) use (&$example)
 {
@@ -123,7 +121,7 @@ $example = function ($model, $models) use (&$example)
                     <?php endif; ?>
                 <?php endif; ?>
             </td>
-            <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>"><?php echo $markdown->text($description); ?></td>
+            <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>"><?php echo $markdown->convert($description); ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

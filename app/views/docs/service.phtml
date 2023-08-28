@@ -4,6 +4,7 @@ $service        = $this->getParam('service', []);
 $blacklist      = $this->getParam('blacklist', []);
 $description    = $this->getParam('description', '');
 $spec           = $this->getParam('spec', []);
+$markdown       = $this->getParam('markdown', false);
 $host           = (isset($spec['host'])) ? $spec['host'] : '';
 $base           = (isset($spec['basePath'])) ? $spec['basePath'] : '';
 $endpoint       = $this->getParam('protocol', 'https') . '://' . $host . $base;
@@ -31,9 +32,6 @@ $codes          = [
         'class' => 'text-success'
     ],
 ];
-
-$markdown = new \Parsedown();
-$markdown->setSafeMode(true);
 
 $paramSDK = (!empty($sdk)) ? '?sdk='.$sdk : '';
 
@@ -246,7 +244,7 @@ if (!\function_exists('skipLanguage')) {
             <div class="col span-8 margin-bottom">
 
                 <div class="content margin-end-xl">
-                    <?php echo $markdown->text(file_get_contents($path)); ?>
+                    <?php echo $markdown->convert(file_get_contents($path)); ?>
 
                     <div class="clear">
                         <a href="https://github.com/appwrite/appwrite/edit/master<?php echo $description; ?>" class="pull-end text-size-small" target="_blank">Edit on GitHub <i class="icon-github-circled"></i></a>
@@ -354,7 +352,7 @@ if (!\function_exists('skipLanguage')) {
                         </div>
 
                         <?php if(!empty($description)): ?>
-                            <?php echo $markdown->text($description); ?>
+                            <?php echo $markdown->convert($description); ?>
                         <?php endif; ?>
 
                         <div class="clear">
@@ -460,7 +458,7 @@ if (!\function_exists('skipLanguage')) {
                                         <?php endif; ?>
                                     </td>
                                     <td data-title="Type: "><?php echo $this->escape($type); ?></td>
-                                    <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>"><?php echo $markdown->text($description); ?></td>
+                                    <td data-title="<?php echo (!empty($description)) ? 'Description: ' : ''; ?>"><?php echo $markdown->convert($description); ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
