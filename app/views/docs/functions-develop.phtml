@@ -511,7 +511,7 @@ export default async function (context: any) {
    
 // after destructuring
 export default async function ({ req, res, log, error }: any) {
-    context.log("This is a log!");
+    log("This is a log!");
     return res.send("This is a response!");
 }</code></pre>
         </div>
