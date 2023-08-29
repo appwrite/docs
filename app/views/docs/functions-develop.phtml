@@ -171,14 +171,12 @@ def main(context)
   end
 
   # `ctx.res.json()` is a handy helper for sending JSON
-  return context.res.json(
-           {
-             "motto": "Build Fast. Scale Big. All in One Place.",
-             "learn": "https://appwrite.io/docs",
-             "connect": "https://appwrite.io/discord",
-             "getInspired": "https://builtwith.appwrite.io",
-           }
-         )
+  return context.res.json({
+    "motto": "Build Fast. Scale Big. All in One Place.",
+    "learn": "https://appwrite.io/docs",
+    "connect": "https://appwrite.io/discord",
+    "getInspired": "https://builtwith.appwrite.io",
+  })
 end</code></pre>
         </div>
     </li>
@@ -286,7 +284,7 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
     if context.req.method == "GET" {
         // Send a response with the res object helpers
         // `res.send()` dispatches a string back to the client
-        return try context.res.send("Hello, World!")
+        return context.res.send("Hello, World!")
     }
 
     // `context.res.json()` is a handy helper for sending JSON
@@ -671,7 +669,7 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
     context.log(context.req.queryString)                                                 // Raw query params string. For example "limit=12&offset=50"
     context.log(NSJSONSerialization.jsonObject(with: context.req.query, options: [])!)   // Parsed query params. For example, req.query.limit
 
-    return try context.res.send("All the request parameters are logged to the Appwrite Console.")
+    return context.res.send("All the request parameters are logged to the Appwrite Console.")
 }</code></pre>
         </div>
     </li>
@@ -974,17 +972,17 @@ Future&lt;dynamic> main(final context) async {
 func main(context: RuntimeContext) async throws -> RuntimeOutput {
     switch context.req.query["type"] {
         case "empty":
-            return try await context.res.empty()
+            return context.res.empty()
         case "json":
-            return try await context.res.send(["type": "This is a JSON response"])
+            return context.res.send(["type": "This is a JSON response"])
         case "redirect":
-            return try await context.res.redirect("https://appwrite.io", 301)
+            return context.res.redirect("https://appwrite.io", 301)
         case "html":
-            return try await context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, [
+            return context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, [
                 "content-type": "text/html"
                 ])
         default:
-            return try await context.res.send("This is a text response")
+            return context.res.send("This is a text response")
     }
 }</code></pre>
             </div>
@@ -1000,17 +998,17 @@ public class Handler {
         switch (Context.Request.Query["type"])
         {
             case "empty":
-                return await Context.Res.Empty();
+                return Context.Res.Empty();
             case "json":
-                return await Context.Res.Send(new Dictionary&lt;string, object&gt;() { { "type", "This is a JSON response" } });
+                return Context.Res.Send(new Dictionary&lt;string, object&gt;() { { "type", "This is a JSON response" } });
             case "redirect":
-                return await Context.Res.Redirect("https://appwrite.io", 301);
+                return Context.Res.Redirect("https://appwrite.io", 301);
             case "html":
-                return await Context.Res.Send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, new Dictionary&lt;string, string&gt;() {
+                return Context.Res.Send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, new Dictionary&lt;string, string&gt;() {
                     { "content-type", "text/html" } 
                 });
             default:
-                return await Context.Res.Send("This is a text response");   
+                return Context.Res.Send("This is a text response");
         }
     }
 }</code></pre>
@@ -1156,7 +1154,7 @@ namespace runtime {
         <li>
             <h3>Node.js</h3>
             <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
-                <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ res, log, error }) => {
+                <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log, error }) => {
     log("This is a log, use for logging information to console");
     log(`This function was called with ${req.method} method`);
     error("This is an error, use for logging errors to console");
@@ -1254,7 +1252,7 @@ public class Handler {
         Context.Log($"This function was called with {Context.Req.Method} method");
         Context.Error("This is an error, use for logging errors to console");
 
-        return await Context.Res.Send("Check the Appwrite Console to see logs and errors!");
+        return Context.Res.Send("Check the Appwrite Console to see logs and errors!");
     }
 }</code></pre>
             </div>
@@ -1480,7 +1478,7 @@ Future&lt;dynamic> main(final context) async {
                 <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
 
 func main(context: RuntimeContext) async throws -> RuntimeOutput {
-    return await context.res.send(ProcessInfo.processInfo.environment["MY_VAR"])
+    return context.res.send(ProcessInfo.processInfo.environment["MY_VAR"])
 }</code></pre>
             </div>
         </li>
@@ -1492,7 +1490,7 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
 public class Handler {
     public async Task&lt;RuntimeOutput> Main(RuntimeContext Context) 
     {
-        return await Context.Res.Send(Environment.GetEnvironmentVariable("MY_VAR"));
+        return Context.Res.Send(Environment.GetEnvironmentVariable("MY_VAR"));
     }
 }</code></pre>
             </div>
@@ -1862,7 +1860,7 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
         try await databases.createDocument(databaseId: "[DATABASE_ID]", collectionId: "[COLLECTION_ID]", data: [:])
     } catch {
         context.error("Failed to create document: \(error.localizedDescription)")
-        return try await context.res.send("Failed to create document")
+        return context.res.send("Failed to create document")
     }
 
     return context.res.send("Document created")
