@@ -140,6 +140,43 @@ export default async function ({ req, res }) {
     </div>
   </li>
   <li>
+    <h3>PHP</h3>
+    <div>
+      <p>
+      <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
+        <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+
+require(__DIR__ . '/../vendor/autoload.php');
+
+use Appwrite\Client;
+use Appwrite\Exception;
+use Appwrite\Services\Database;
+use GuzzleHttp\Client as GuzzleClient;
+
+return function ($context) {
+    $client = new GuzzleClient();
+
+    if ($context->req->path === '/eur') {
+        $amountInEuros = floatval($context->req->query['amount']);
+        $response = $client->get('https://api.exchangerate.host/latest?base=EUR&symbols=USD');
+        $data = $response->json();
+        $amountInDollars = $amountInEuros * $data['rates']['USD'];
+        return $context->res->send(strval($amountInDollars));
+    }
+
+    if ($context->req->path === '/inr') {
+        $amountInRupees = floatval($context->req->query['amount']);
+        $response = $client->get('https://api.exchangerate.host/latest?base=INR&symbols=USD');
+        $data = $response->json();
+        $amountInDollars = $amountInRupees * $data['rates']['USD'];
+        return $context->res->send(strval($amountInDollars));
+    }
+
+    return $context->res->send('Invalid path');
+};</code></pre>
+      </div>
+  </li>
+  <li>
     <h3>Python</h3>
     <div>
       <p>
@@ -552,55 +589,6 @@ Future<dynamic> main(final context) async {
       'vote': voteDocument
     });
 }</code></pre>
-      </div>
-    </div>
-  </li>
-  <li>
-    <h3>Python</h3>
-    <div>
-      <p>
-      <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-        <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
-from appwrite.services.databases import Databases
-from appwrite.query import Query
-
-import os
-
-def main(context):
-    vote = {
-        'userId': context.req.query['userId'],
-        'topicId': context.req.query['topicId'],
-        'vote': context.req.query['vote']
-    }
-
-    if vote['vote'] != 'yes' and vote['vote'] != 'no':
-        return context.res.json({'ok': False, 'message': 'You must vote yes or no.'}, 400)
-
-    client = Client()
-    client.set_endpoint('https://cloud.appwrite.io/v1')
-    client.set_project(os.environ['APPWRITE_FUNCTION_PROJECT_ID'])
-    client.set_key(os.environ['APPWRITE_API_KEY'])
-
-    database = Databases(client)
-
-    existing_votes = database.list_documents('[VOTES_COLLECTION_ID]', [
-        Query.equal('userId', vote['userId']),
-        Query.equal('topicId', vote['topicId'])
-    ])
-    
-    if existing_votes['total'] > 0:
-        return context.res.json({
-          'ok': False, 
-          'message': 'You have already voted on this topic.'
-        }, 400)
-
-    vote_document = database.create_document('[VOTES_COLLECTION_ID]', vote)
-
-    return context.res.json({
-      'ok': True, 
-      'message': 'Vote cast.', 
-      'vote': vote_document
-    })</code></pre>
       </div>
     </div>
   </li>
