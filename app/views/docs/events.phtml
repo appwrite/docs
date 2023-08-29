@@ -20,8 +20,8 @@ $events = $this->getParam('events', []);
     <tbody>
     <?php foreach($events as $event):
         $pattern = $event['pattern'] ?? '';
-        $description = $event['description'] ?? '';
-        $model = $event['model'] ?? '';
+        $description = $event['$description'] ?? '';
+        $model = $event['$model'] ?? '';
     ?>
     <?php if(str_starts_with($pattern, 'bucket')): ?>
     <tr>
@@ -53,8 +53,8 @@ $events = $this->getParam('events', []);
     <tbody>
     <?php foreach($events as $event):
         $pattern = $event['pattern'] ?? '';
-        $description = $event['description'] ?? '';
-        $model = $event['model'] ?? '';
+        $description = $event['$description'] ?? '';
+        $model = $event['$model'] ?? '';
     ?>
     <?php if(str_starts_with($pattern, 'databases')): ?>
     <tr>
@@ -86,8 +86,8 @@ $events = $this->getParam('events', []);
     <tbody>
     <?php foreach($events as $event):
         $pattern = $event['pattern'] ?? '';
-        $description = $event['description'] ?? '';
-        $model = $event['model'] ?? '';
+        $description = $event['$description'] ?? '';
+        $model = $event['$model'] ?? '';
     ?>
     <?php if(str_starts_with($pattern, 'functions')): ?>
     <tr>
@@ -120,8 +120,8 @@ $events = $this->getParam('events', []);
     <tbody>
     <?php foreach($events as $event):
         $pattern = $event['pattern'] ?? '';
-        $description = $event['description'] ?? '';
-        $model = $event['model'] ?? '';
+        $description = $event['$description'] ?? '';
+        $model = $event['$model'] ?? '';
     ?>
     <?php if(str_starts_with($pattern, 'users') || str_starts_with($pattern, 'teams')): ?>
     <tr>
