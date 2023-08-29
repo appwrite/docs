@@ -6,6 +6,26 @@
     depending on the configured locale.
 </p>
 
+<h2><a href="#smtp" id="#smtp">Custom SMTP server</a></h2>
+<p>
+    Appwrite Cloud has a default SMTP server to get you started.
+    This SMTP server sends generic emails and doesn't allow customizing SMTP templates.
+    To use custom SMTP templates, you will need to configure your own SMTP server.
+</p>
+
+<p>
+    There are many third-party SMTP providers like SendGrid and Mailgun. 
+    Before proceeding, pick an SMTP provider, create an account, and obtain <b>Sender name</b>, <b>Sender email</b>, <b>Server host</b>, <b>Server port</b>, <b>Username</b>, and <b>Password</b>.
+</p>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>Navigate to your project's <b>Settings</b>.</li>
+    <li>Navigate to the <b>SMTP</b> tab.</li>
+    <li>Under <b>SMTP server</b>, toggle <b>Custom SMTP server</b>.</li>
+    <li>Input <b>Sender name</b>, <b>Sender email</b>, <b>Server host</b>, <b>Server port</b>, <b>Username</b>, and <b>Password</b> from your provider.</li>
+    <li>Click <b>Update</b>.</li>
+</ol>
+
 <h2><a href="#customize" id="customize">Customize Templates</a></h2>
 <p>You can customize email templates for each of your projects in the Appwrite Console. </p>
 <div class="notice">
@@ -17,7 +37,7 @@
     <li>Under the <b>Auth</b> service, navigate to the <b>Templates</b> tab.</li>
     <li>Expand the email template you want to edit.</li>
     <li>Select the <b>Template language</b>. You can have a different template for each language your app supports.</li>
-    <li>Update the email template fields and click **Update** to save your changes.</li>
+    <li>Update the email template fields and click <b>Update</b> to save your changes.</li>
 </ol>
 <h2><a href="#email-templates" id="email-templates">Email Templates</a></h2>
 <p>You can customize the email templates for account verification, magic-url authentication, password resets, and user invites.</p>
