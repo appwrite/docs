@@ -2383,10 +2383,10 @@ def add(a, b):
             <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
                 <pre class="line-numbers"><code class="prism language-python" data-prism>// src/main.py
 
-import utils
+from .utils import add
 
 def main(context):
-    return context.res.send(utils.add(1, 2))</code></pre>
+    return context.res.send(add(1, 2))</code></pre>
             </div>
         </li>
         <li>
