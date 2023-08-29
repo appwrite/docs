@@ -841,8 +841,8 @@ public class Main {
                 <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
 
     switch (req.query.type) {
-        case 'text': 
-            return res.send("This is a text response", 200);
+        case 'empty': 
+            return res.empty();
         case 'json':
             return res.json({"type": "This is a JSON response"}, 200);
         case 'redirect':
@@ -853,7 +853,7 @@ public class Main {
                     "content-type": "text/html"
                 });
         default:
-            return res.empty();
+            return res.send("This is a text response", 200);
     }
 }</code></pre>
             </div>
@@ -865,8 +865,8 @@ public class Main {
 
 return function ($context) {
     switch ($context->req->query['type']) {
-        case 'text':
-            return $context->res->send("This is a text response", 200);
+        case 'empty':
+            return $context->res->empty();
         case 'json':
             return $context->res->json(["type" => "This is a JSON response"], 200);
         case 'redirect':
@@ -876,7 +876,7 @@ return function ($context) {
                 "content-type" => "text/html"
                 ]);
         default:
-            return $context->res->empty();
+            return $context->res->send("This is a text response", 200);  
     }
 };</code></pre>
             </div>
@@ -886,8 +886,8 @@ return function ($context) {
             <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
                 <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
     switch context.req.query['type']:
-        case 'text':
-            return context.res.send("This is a text response", 200)
+        case 'empty':
+            return context.res.empty()
         case 'json':
             return context.res.json({"type": "This is a JSON response"}, 200)
         case 'redirect':
@@ -897,7 +897,7 @@ return function ($context) {
                 "content-type": "text/html"
             })
         default:
-            return context.res.empty()</code></pre>
+            return context.res.send("This is a text response", 200)</code></pre>
             </div>
         </li>
         <li>
@@ -905,8 +905,8 @@ return function ($context) {
             <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
                 <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
     case context.req.query['type'] 
-        when 'text'
-            return context.res.send("This is a text response", 200)
+        when 'empty'
+            return context.res.empty()
         when 'json'
             return context.res.json({"type": "This is a JSON response"}, 200)
         when 'redirect'
@@ -916,7 +916,8 @@ return function ($context) {
                 "content-type": "text/html"
             })
         else
-            return context.res.empty()
+            return context.res.send("This is a text response", 200)
+            
     end
 end</code></pre>
             </div>
@@ -927,8 +928,8 @@ end</code></pre>
                 <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }) => {
 
     switch (req.query.type) {
-        case 'text':
-            return res.send("This is a text response", 200);
+        case 'empty':
+            return res.empty();
         case 'json':
             return res.json({type": "This is a JSON response"}, 200);
         case 'redirect':
@@ -939,7 +940,7 @@ end</code></pre>
                     "content-type": "text/html"
                 });
         default:
-            return res.empty();
+            return res.send("This is a text response", 200);
     }
 }</code></pre>
             </div>
@@ -951,24 +952,18 @@ end</code></pre>
 
 Future&lt;dynamic> main(final context) async {
     switch (context.req.query['type']) {
-        case 'text':
-            return context.res
-                .send('This is a text response', 200);
+        case 'empty':
+            return context.res.empty();
         case 'json':
-            return context.res
-                .json({'type': 'This is a JSON response'});
+            return context.res.json({'type': 'This is a JSON response'});
         case 'redirect':
-            return context.res
-                .redirect('https://appwrite.io', 301);
+            return context.res.redirect('https://appwrite.io', 301);
         case 'html':
-            return context.res
-                .send('&lt;h1&gt;This is an HTML response&lt;/h1&gt;', 200, {
-                    'content-type': 'text/html'
-                });
+            return context.res.send('&lt;h1&gt;This is an HTML response&lt;/h1&gt;',
+                200, {'content-type': 'text/html'});
         default:
-            return context.res
-                .empty();
-    }
+            return context.res.send('This is a text response', 200);
+  }
 }</code></pre>
             </div>
         </li>
@@ -979,18 +974,18 @@ Future&lt;dynamic> main(final context) async {
 
 func main(context: RuntimeContext) async throws -> RuntimeOutput {
     switch context.req.query["type"] {
-        case "text":
-            return try await context.send("This is a text response", 200)
+        case "empty":
+            return try await context.res.empty()
         case "json":
-            return try await context.send(["type": "This is a JSON response"], 200)
+            return try await context.res.send(["type": "This is a JSON response"], 200)
         case "redirect":
-            return try await context.redirect("https://appwrite.io", 301)
+            return try await context.res.redirect("https://appwrite.io", 301)
         case "html":
-            return try await context.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, [
+            return try await context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, [
                 "content-type": "text/html"
                 ])
         default:
-            return try await context.empty()
+            return try await context.res.send("This is a text response", 200)
     }
 }</code></pre>
             </div>
@@ -1005,18 +1000,18 @@ public class Handler {
     {
         switch (Context.Request.Query["type"])
         {
-            case "text":
-                return await Context.Send("This is a text response", 200);
+            case "empty":
+                return await Context.Res.Empty();
             case "json":
-                return await Context.Send(new Dictionary&lt;string, object&gt;() { { "type", "This is a JSON response" } }, 200);
+                return await Context.Res.Send(new Dictionary&lt;string, object&gt;() { { "type", "This is a JSON response" } }, 200);
             case "redirect":
-                return await Context.Redirect("https://appwrite.io", 301);
+                return await Context.Res.Redirect("https://appwrite.io", 301);
             case "html":
-                return await Context.Send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, new Dictionary&lt;string, string&gt;() {
+                return await Context.Res.Send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, new Dictionary&lt;string, string&gt;() {
                     { "content-type", "text/html" } 
                 });
-            default:    
-                return await Context.Empty();
+            default:
+                return await Context.Res.Send("This is a text response", 200);   
         }
     }
 }</code></pre>
@@ -1033,11 +1028,11 @@ import io.openruntimes.kotlin.RuntimeOutput
 class Main {
     fun main(context: RuntimeContext): RuntimeOutput {
         when (context.req.query["type"]) {
-            "text" -> return context.send("This is a text response", 200)
-            "json" -> return context.send(mapOf("type" to "This is a JSON response"), 200)
-            "redirect" -> return context.redirect("https://appwrite.io", 301)
-            "html" -> return context.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, mapOf("content-type" to "text/html"))
-            else -> return context.empty()
+            "empty" -> return context.res.empty()
+            "json" -> return context.res.send(mapOf("type" to "This is a JSON response"), 200)
+            "redirect" -> return context.res.redirect("https://appwrite.io", 301)
+            "html" -> return context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, mapOf("content-type" to "text/html"))
+            else -> return context.res.send("This is a text response", 200)
         }
     }
 }</code></pre>
@@ -1057,17 +1052,17 @@ public class Main {
     public RuntimeOutput main(RuntimeContext context) throws Exception {
         switch (context.getReq().getQuery()["type"]) {
             case "text":
-                return context.send("This is a text response", 200);
+                return context.getRes().empty();
             case "json":
                 HashMap&lt;String, Object&gt; data = new HashMap&lt;&gt;();
                 data.put("type", "This is a JSON response");
-                return context.send(data, 200);
+                return context.getRes().send(data, 200);
             case "redirect":
-                return context.redirect("https://appwrite.io", 301);
+                return context.getRes().redirect("https://appwrite.io", 301);
             case "html":
-                return context.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, Map.of("content-type", "text/html"));
+                return context.getRes().send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, Map.of("content-type", "text/html"));
             default:
-                return context.empty();
+                return context.getRes().send("This is a text response", 200);
         }
     }
 }</code></pre>
@@ -1087,20 +1082,20 @@ namespace runtime {
       static RuntimeOutput main(RuntimeContext &context) {
         std::string type = context.req.query["type"];
 
-        if (type == "text") {
-          return context.send("This is a text response", 200);
+        if (type == "empty") {
+          return context.res.empty();
         } else if (type == "json") {
           Json::Value data;
           data["type"] = "This is a JSON response";
-          return context.send(data, 200);
+          return context.res.send(data, 200);
         } else if (type == "redirect") {
-          return context.redirect("https://appwrite.io", 301);
+          return context.res.redirect("https://appwrite.io", 301);
         } else if (type == "html") {
           Json::Value headers;
           headers["content-type"] = "text/html";
-          return context.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, headers);
+          return context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, headers);
         } else {
-          return context.empty();
+          return context.res.send("This is a text response", 200);
         }
       }
   };
@@ -1193,7 +1188,7 @@ return function ($context) {
     context.log(f"This function was called with {context.req.method} method")
     context.error("This is an error, use for logging errors to console")
 
-    return context.send("Check the Appwrite Console to see logs and errors!")</code></pre>
+    return context.res.send("Check the Appwrite Console to see logs and errors!")</code></pre>
             </div>
         </li>
         <li>
@@ -1204,7 +1199,7 @@ return function ($context) {
     context.log("This function was called with #{context.req.method} method")
     context.error("This is an error, use for logging errors to console")
 
-    return context.send("Check the Appwrite Console to see logs and errors!")
+    return context.res.send("Check the Appwrite Console to see logs and errors!")
 end</code></pre>
             </div>
         </li>
@@ -1230,7 +1225,7 @@ Future&lt;dynamic> main(final context) async {
     context.log("This function was called with ${context.req.method} method");
     context.error("This is an error, use for logging errors to console");
 
-    return context.send("Check the Appwrite Console to see logs and errors!");
+    return context.res.send("Check the Appwrite Console to see logs and errors!");
 }</code></pre>
             </div>
         </li>
@@ -1244,7 +1239,7 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
     context.log("This function was called with \(context.req.method) method")
     context.error("This is an error, use for logging errors to console")
 
-    return try context.send("Check the Appwrite Console to see logs and errors!")
+    return context.res.send("Check the Appwrite Console to see logs and errors!")
 }</code></pre>
             </div>
         </li>
@@ -1260,7 +1255,7 @@ public class Handler {
         Context.Log($"This function was called with {Context.Req.Method} method");
         Context.Error("This is an error, use for logging errors to console");
 
-        return await Context.Send("Check the Appwrite Console to see logs and errors!");
+        return await Context.Res.Send("Check the Appwrite Console to see logs and errors!");
     }
 }</code></pre>
             </div>
@@ -1279,7 +1274,7 @@ class Main {
         context.log("This function was called with ${context.req.method} method")
         context.error("This is an error, use for logging errors to console")
 
-        return context.send("Check the Appwrite Console to see logs and errors!")
+        return context.res.send("Check the Appwrite Console to see logs and errors!")
     }
 }</code></pre>
             </div>
@@ -1298,7 +1293,7 @@ public class Main {
         context.log("This function was called with " + context.req.method + " method");
         context.error("This is an error, use for logging errors to console");
 
-        return context.send("Check the Appwrite Console to see logs and errors!");
+        return context.getRes().send("Check the Appwrite Console to see logs and errors!");
     }
 }</code></pre>
             </div>
@@ -1319,7 +1314,7 @@ namespace runtime {
         context.log("This function was called with " + context.req.method + " method");
         context.error("This is an error, use for logging errors to console");
 
-        return context.send("Check the Appwrite Console to see logs and errors!");
+        return context.res.send("Check the Appwrite Console to see logs and errors!");
       }
   };
 }</code></pre>
@@ -1486,7 +1481,7 @@ Future&lt;dynamic> main(final context) async {
                 <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
 
 func main(context: RuntimeContext) async throws -> RuntimeOutput {
-    return try await context.send(ProcessInfo.processInfo.environment["MY_VAR"], 200)
+    return await context.res.send(ProcessInfo.processInfo.environment["MY_VAR"], 200)
 }</code></pre>
             </div>
         </li>
@@ -1498,7 +1493,7 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
 public class Handler {
     public async Task&lt;RuntimeOutput> Main(RuntimeContext Context) 
     {
-        return await Context.Send(Environment.GetEnvironmentVariable("MY_VAR"), 200);
+        return await Context.Res.Send(Environment.GetEnvironmentVariable("MY_VAR"), 200);
     }
 }</code></pre>
             </div>
@@ -1513,7 +1508,7 @@ import io.openruntimes.kotlin.RuntimeOutput
 
 class Main {
     fun main(context: RuntimeContext): RuntimeOutput {
-        return context.send(System.getenv("MY_VAR"), 200)
+        return context.res.send(System.getenv("MY_VAR"), 200)
     }
 }</code></pre>
             </div>
@@ -1528,7 +1523,7 @@ import io.openruntimes.java.RuntimeOutput;
 
 public class Main {
     public RuntimeOutput main(RuntimeContext context) throws Exception {
-        return context.send(System.getenv("MY_VAR"), 200);
+        return context.getRes().send(System.getenv("MY_VAR"), 200);
     }
 }</code></pre>
             </div>
@@ -1546,7 +1541,7 @@ namespace runtime {
     public:
       static RuntimeOutput main(RuntimeContext &context) {
 
-      return context.send(std::getenv("MY_VAR"), 200);
+      return context.res.send(std::getenv("MY_VAR"), 200);
   };
 }</code></pre>
             </div>
@@ -1559,114 +1554,114 @@ namespace runtime {
         Your function's dependencies should be managed by the package manager of each language. By default, we include the following package managers in each runtime:
     </p>
 
-<table class="full text-size-small">
-    <thead>
+    <table class="full text-size-small">
+        <thead>
+            <tr>
+                <th style="width: 50px"></th>
+                <th style="width: 100px">Language</th>
+                <th style="width: 150px">Package Manager</th>
+                <th>Commands</th>
+            </tr>
+        </thead>
         <tr>
-            <th style="width: 50px"></th>
-            <th style="width: 100px">Language</th>
-            <th style="width: 150px">Package Manager</th>
-            <th>Commands</th>
+            <td>
+                <img src="" data-ls-attrs="src=/images/runtimes/node.png" alt="Node icon" class="avatar xxs" />
+            </td>
+            <td><b>Node.js</b></td>
+            <td><a href="https://www.npmjs.com/" target="_blank">npm</a></td>
+            <td><code>npm install</code></td>
         </tr>
-    </thead>
-    <tr>
-        <td>
-            <img src="" data-ls-attrs="src=/images/runtimes/node.png" alt="Node icon" class="avatar xxs" />
-        </td>
-        <td><b>Node.js</b></td>
-        <td><a href="https://www.npmjs.com/" target="_blank">npm</a></td>
-        <td><code>npm install</code></td>
-    </tr>
-    <tr>
-        <td>
-            <img src="" data-ls-attrs="src=/images/runtimes/php.png" alt="PHP icon" class="avatar xxs" />
-        </td>
-        <td><b>PHP</b></td>
-        <td><a href="https://getcomposer.org/" target="_blank">Composer</a></td>
-        <td><code>composer install</code></td>
-    </tr>
-    <tr>
-        <td>
-            <img src="" data-ls-attrs="src=/images/runtimes/python.png" alt="Python icon" class="avatar xxs" />
-        </td>
-        <td><b>Python</b></td>
-        <td><a href="https://pypi.org/project/pip/" target="_blank">pip</a></td>
-        <td><code>pip install -r requirements.txt</code></td>
-    </tr>
-    <tr>
-        <td>
-            <img src="" data-ls-attrs="src=/images/runtimes/ruby.png" alt="Ruby icon" class="avatar xxs" />
-        </td>
-        <td><b>Ruby</b></td>
-        <td><a href="https://bundler.io/" target="_blank">Bundler</a></td>
-        <td><code>bundle install</code></td>
-    </tr>
-    <tr>
-        <td>
-            <img src="" data-ls-attrs="src=/images/runtimes/deno.png" alt="Deno icon" class="avatar xxs" />
-        </td>
-        <td><b>Deno</b></td>
-        <td><a href="https://deno.land/" target="_blank">deno</a></td>
-        <td><code>deno cache &ltENTRYPOINT_FILE&gt</code></td>
-    </tr>
-    <tr>
-        <td>
-            <img src="" data-ls-attrs="src=/images/runtimes/dart.png" alt="Dart icon" class="avatar xxs" />
-        </td>
-        <td><b>Dart</b></td>
-        <td><a href="https://pub.dev/" target="_blank">pub</a></td>
-        <td><code>pub get</code></td>
-    </tr>
-    <tr>
-        <td>
-            <img src="" data-ls-attrs="src=/images/runtimes/swift.png" alt="Swift icon" class="avatar xxs" />
-        </td>
-        <td><b>Swift</b></td>
-        <td><a href="https://swift.org/package-manager/" target="_blank">Swift Package Manager</a></td>
-        <td>N/A</td>
-    </tr>
-    <tr>
-        <td>
-            <img src="" data-ls-attrs="src=/images/runtimes/dotnet.png" alt="Swift icon" class="avatar xxs" />
-        </td>
-        <td><b>.NET</b></td>
-        <td><a href="https://www.nuget.org/" target="_blank">NuGet</a></td>
-        <td>N/A</td>
-    </tr>
-    <tr>
-        <td>
-            <img src="" data-ls-attrs="src=/images/runtimes/kotlin.png" alt="Swift icon" class="avatar xxs" />
-        </td>
-        <td><b>Kotlin</b></td>
-        <td><a href="https://kotlinlang.org/docs/reference/using-gradle.html" target="_blank">Gradle</a></td>
-        <td>N/A</td>
-    </tr>
-    <tr>
-        <td>
-            <img src="" data-ls-attrs="src=/images/runtimes/java.png" alt="Swift icon" class="avatar xxs" />
-        </td>
-        <td><b>Java</b></td>
-        <td><a href="https://gradle.org/" target="_blank">Gradle</a></td>
-        <td>N/A</td>
-    </tr>
-    <tr>
-        <td>
-            <img src="" data-ls-attrs="src=/images/runtimes/cpp.png" alt="C++ icon" class="avatar xxs" />
-        </td>
-        <td><b>C++</b></td>
-        <td>None</td>
-        <td>N/A</td>
-    </tr>
-</table>
+        <tr>
+            <td>
+                <img src="" data-ls-attrs="src=/images/runtimes/php.png" alt="PHP icon" class="avatar xxs" />
+            </td>
+            <td><b>PHP</b></td>
+            <td><a href="https://getcomposer.org/" target="_blank">Composer</a></td>
+            <td><code>composer install</code></td>
+        </tr>
+        <tr>
+            <td>
+                <img src="" data-ls-attrs="src=/images/runtimes/python.png" alt="Python icon" class="avatar xxs" />
+            </td>
+            <td><b>Python</b></td>
+            <td><a href="https://pypi.org/project/pip/" target="_blank">pip</a></td>
+            <td><code>pip install -r requirements.txt</code></td>
+        </tr>
+        <tr>
+            <td>
+                <img src="" data-ls-attrs="src=/images/runtimes/ruby.png" alt="Ruby icon" class="avatar xxs" />
+            </td>
+            <td><b>Ruby</b></td>
+            <td><a href="https://bundler.io/" target="_blank">Bundler</a></td>
+            <td><code>bundle install</code></td>
+        </tr>
+        <tr>
+            <td>
+                <img src="" data-ls-attrs="src=/images/runtimes/deno.png" alt="Deno icon" class="avatar xxs" />
+            </td>
+            <td><b>Deno</b></td>
+            <td><a href="https://deno.land/" target="_blank">deno</a></td>
+            <td><code>deno cache &ltENTRYPOINT_FILE&gt</code></td>
+        </tr>
+        <tr>
+            <td>
+                <img src="" data-ls-attrs="src=/images/runtimes/dart.png" alt="Dart icon" class="avatar xxs" />
+            </td>
+            <td><b>Dart</b></td>
+            <td><a href="https://pub.dev/" target="_blank">pub</a></td>
+            <td><code>pub get</code></td>
+        </tr>
+        <tr>
+            <td>
+                <img src="" data-ls-attrs="src=/images/runtimes/swift.png" alt="Swift icon" class="avatar xxs" />
+            </td>
+            <td><b>Swift</b></td>
+            <td><a href="https://swift.org/package-manager/" target="_blank">Swift Package Manager</a></td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>
+                <img src="" data-ls-attrs="src=/images/runtimes/dotnet.png" alt="Swift icon" class="avatar xxs" />
+            </td>
+            <td><b>.NET</b></td>
+            <td><a href="https://www.nuget.org/" target="_blank">NuGet</a></td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>
+                <img src="" data-ls-attrs="src=/images/runtimes/kotlin.png" alt="Swift icon" class="avatar xxs" />
+            </td>
+            <td><b>Kotlin</b></td>
+            <td><a href="https://kotlinlang.org/docs/reference/using-gradle.html" target="_blank">Gradle</a></td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>
+                <img src="" data-ls-attrs="src=/images/runtimes/java.png" alt="Swift icon" class="avatar xxs" />
+            </td>
+            <td><b>Java</b></td>
+            <td><a href="https://gradle.org/" target="_blank">Gradle</a></td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>
+                <img src="" data-ls-attrs="src=/images/runtimes/cpp.png" alt="C++ icon" class="avatar xxs" />
+            </td>
+            <td><b>C++</b></td>
+            <td>None</td>
+            <td>N/A</td>
+        </tr>
+    </table>
 
-<p>
-    To install your dependencies before your function is built, you should add the relevant install command to the top your function's <b>Build setting</b> > <b>Commands</b>.
-</p>
+    <p>
+        To install your dependencies before your function is built, you should add the relevant install command to the top your function's <b>Build setting</b> > <b>Commands</b>.
+    </p>
 
     <h2><a href="#appwrite" id="appwrite">Using Appwrite in a Function</a></h2>
 
     <p>
-        Appwrite can be used in your functions by adding the relevant SDK to your function's dependencies. 
-        Authenticating with Appwrite is done via an API key or a JWT token. 
+        Appwrite can be used in your functions by adding the relevant SDK to your function's dependencies.
+        Authenticating with Appwrite is done via an API key or a JWT token.
         API keys must be generated and exported as an <a href="#environment-variables">environment variable</a>.
     </p>
     <p>
