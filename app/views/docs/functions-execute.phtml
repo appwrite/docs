@@ -161,7 +161,7 @@ do {
     let execution = try await functions.createExecution(
         functionId: "[FUNCTION_ID]",
         data: JSONSerialization.jsonObject(with: ["foo": "bar"], options: [])!,
-        xpath: "/",
+        path: "/",
         method: "GET",
         headers: [
             "X-Custom-Header": "123"
@@ -267,7 +267,7 @@ try:
     execution = functions.create_execution(
         functionId="[FUNCTION_ID]",
         data=json.dumps({'foo': 'bar'}),
-        xpath='/',
+        path='/',
         method='GET',
         headers=[
             'X-Custom-Header': '123'
@@ -362,7 +362,7 @@ try {
           'foo': 'bar'
         }),
         async: false,
-        xpath: '/',
+        path: '/',
         method: 'GET',
         headers: {
             'X-Custom-Header': '123'
@@ -393,7 +393,7 @@ do {
         functionId: "[FUNCTION_ID]",
         body: JSONSerialization.jsonObject(with: ["foo": "bar"], options: [])!),
         async: false,
-        xpath: "/",
+        path: "/",
         method: "GET",
         headers: [
             "X-Custom-Header": "123"
@@ -430,7 +430,7 @@ try
             { "foo", "bar" }
         }),
         async: false,
-        xpath: "/",
+        path: "/",
         method: "GET",
         headers: new Dictionary&lt;string, object&gt; {
             { "X-Custom-Header", "123" }
@@ -466,7 +466,7 @@ try {
         body = gson.toJson(mapOf(
             "foo" to "bar"
         )),
-        xpath = "/",
+        path = "/",
         method = "GET",
         headers = mapOf(
             "X-Custom-Header" to "123"
