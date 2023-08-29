@@ -876,7 +876,7 @@ return function ($context) {
                 "content-type" => "text/html"
                 ]);
         default:
-            return $context->res->send("This is a text response", 200);  
+            return $context->res->send("This is a text response", 200);
     }
 };</code></pre>
             </div>
@@ -917,7 +917,6 @@ return function ($context) {
             })
         else
             return context.res.send("This is a text response", 200)
-            
     end
 end</code></pre>
             </div>
@@ -1159,7 +1158,7 @@ namespace runtime {
             <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
                 <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ res, log, error }) => {
     log("This is a log, use for logging information to console");
-    log(`This function was called with ${context.req.method} method`);
+    log(`This function was called with ${req.method} method`);
     error("This is an error, use for logging errors to console");
 
     return res.send("Check the Appwrite Console to see logs and errors!");
@@ -1428,7 +1427,7 @@ namespace runtime {
             <h3>Node.js</h3>
             <div class="ide margin-top-small" data-lang="javascript" data-lang-label="JavaScript">
                 <pre class="line-numbers"><code class="prism language-js" data-prism>export default async ({ req, res, log }) => {
-    return res.send(process.env.MY_VAR, 200);
+    return res.send(process.env.MY_VAR);
 }</code></pre>
             </div>
         </li>
@@ -1438,7 +1437,7 @@ namespace runtime {
                 <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
 
 return function ($context) {
-    return $context->res->send(getenv('MY_VAR'), 200);
+    return $context->res->send(getenv('MY_VAR'));
 };</code></pre>
             </div>
         </li>
@@ -1446,14 +1445,14 @@ return function ($context) {
             <h3>Python</h3>
             <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
                 <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
-    return context.res.send(os.environ['MY_VAR'], 200)</code></pre>
+    return context.res.send(os.environ['MY_VAR'])</code></pre>
             </div>
         </li>
         <li>
             <h3>Ruby</h3>
             <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
                 <pre class="line-numbers"><code class="prism language-ruby" data-prism>def main(context)
-    return context.res.send(ENV['MY_VAR'], 200)
+    return context.res.send(ENV['MY_VAR'])
 end</code></pre>
             </div>
         </li>
@@ -1461,7 +1460,7 @@ end</code></pre>
             <h3>Deno</h3>
             <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
                 <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }) => {
-    return res.send(Deno.env.get('MY_VAR'), 200);
+    return res.send(Deno.env.get('MY_VAR'));
 }</code></pre>
             </div>
         </li>
@@ -1471,7 +1470,7 @@ end</code></pre>
                 <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 
 Future&lt;dynamic> main(final context) async {
-    return context.res.send(Platform.environment['MY_VAR'], 200);
+    return context.res.send(Platform.environment['MY_VAR']);
 }</code></pre>
             </div>
         </li>
@@ -1481,7 +1480,7 @@ Future&lt;dynamic> main(final context) async {
                 <pre class="line-numbers"><code class="prism language-swift" data-prism>import Foundation
 
 func main(context: RuntimeContext) async throws -> RuntimeOutput {
-    return await context.res.send(ProcessInfo.processInfo.environment["MY_VAR"], 200)
+    return await context.res.send(ProcessInfo.processInfo.environment["MY_VAR"])
 }</code></pre>
             </div>
         </li>
@@ -1493,7 +1492,7 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
 public class Handler {
     public async Task&lt;RuntimeOutput> Main(RuntimeContext Context) 
     {
-        return await Context.Res.Send(Environment.GetEnvironmentVariable("MY_VAR"), 200);
+        return await Context.Res.Send(Environment.GetEnvironmentVariable("MY_VAR"));
     }
 }</code></pre>
             </div>
@@ -1508,7 +1507,7 @@ import io.openruntimes.kotlin.RuntimeOutput
 
 class Main {
     fun main(context: RuntimeContext): RuntimeOutput {
-        return context.res.send(System.getenv("MY_VAR"), 200)
+        return context.res.send(System.getenv("MY_VAR"))
     }
 }</code></pre>
             </div>
@@ -1523,7 +1522,7 @@ import io.openruntimes.java.RuntimeOutput;
 
 public class Main {
     public RuntimeOutput main(RuntimeContext context) throws Exception {
-        return context.getRes().send(System.getenv("MY_VAR"), 200);
+        return context.getRes().send(System.getenv("MY_VAR"));
     }
 }</code></pre>
             </div>
@@ -1541,7 +1540,7 @@ namespace runtime {
     public:
       static RuntimeOutput main(RuntimeContext &context) {
 
-      return context.res.send(std::getenv("MY_VAR"), 200);
+      return context.res.send(std::getenv("MY_VAR"));
   };
 }</code></pre>
             </div>
@@ -2348,7 +2347,7 @@ export function add(a, b) {
 
 import { add } from './utils.js';
 
-export default function ({res}) {
+export default function ({ res }) {
     return res.send(add(1, 2));
 }</code></pre>
             </div>
