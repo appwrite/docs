@@ -844,7 +844,7 @@ public class Main {
         case 'empty': 
             return res.empty();
         case 'json':
-            return res.json({"type": "This is a JSON response"}, 200);
+            return res.json({"type": "This is a JSON response"});
         case 'redirect':
             return res.redirect("https://appwrite.io", 301);
         case 'html':
@@ -853,7 +853,7 @@ public class Main {
                     "content-type": "text/html"
                 });
         default:
-            return res.send("This is a text response", 200);
+            return res.send("This is a text response");
     }
 }</code></pre>
             </div>
@@ -868,7 +868,7 @@ return function ($context) {
         case 'empty':
             return $context->res->empty();
         case 'json':
-            return $context->res->json(["type" => "This is a JSON response"], 200);
+            return $context->res->json(["type" => "This is a JSON response"]);
         case 'redirect':
             return $context->res->redirect("https://appwrite.io", 301);
         case 'html':
@@ -876,7 +876,7 @@ return function ($context) {
                 "content-type" => "text/html"
                 ]);
         default:
-            return $context->res->send("This is a text response", 200);
+            return $context->res->send("This is a text response");
     }
 };</code></pre>
             </div>
@@ -889,7 +889,7 @@ return function ($context) {
         case 'empty':
             return context.res.empty()
         case 'json':
-            return context.res.json({"type": "This is a JSON response"}, 200)
+            return context.res.json({"type": "This is a JSON response"})
         case 'redirect':
             return context.res.redirect("https://appwrite.io", 301)
         case 'html':
@@ -897,7 +897,7 @@ return function ($context) {
                 "content-type": "text/html"
             })
         default:
-            return context.res.send("This is a text response", 200)</code></pre>
+            return context.res.send("This is a text response")</code></pre>
             </div>
         </li>
         <li>
@@ -908,7 +908,7 @@ return function ($context) {
         when 'empty'
             return context.res.empty()
         when 'json'
-            return context.res.json({"type": "This is a JSON response"}, 200)
+            return context.res.json({"type": "This is a JSON response"})
         when 'redirect'
             return context.res.redirect("https://appwrite.io", 301)
         when 'html'
@@ -916,7 +916,7 @@ return function ($context) {
                 "content-type": "text/html"
             })
         else
-            return context.res.send("This is a text response", 200)
+            return context.res.send("This is a text response")
     end
 end</code></pre>
             </div>
@@ -930,7 +930,7 @@ end</code></pre>
         case 'empty':
             return res.empty();
         case 'json':
-            return res.json({type": "This is a JSON response"}, 200);
+            return res.json({type": "This is a JSON response"});
         case 'redirect':
             return res.redirect("https://appwrite.io", 301);
         case 'html':
@@ -939,7 +939,7 @@ end</code></pre>
                     "content-type": "text/html"
                 });
         default:
-            return res.send("This is a text response", 200);
+            return res.send("This is a text response");
     }
 }</code></pre>
             </div>
@@ -961,7 +961,7 @@ Future&lt;dynamic> main(final context) async {
             return context.res.send('&lt;h1&gt;This is an HTML response&lt;/h1&gt;',
                 200, {'content-type': 'text/html'});
         default:
-            return context.res.send('This is a text response', 200);
+            return context.res.send('This is a text response');
   }
 }</code></pre>
             </div>
@@ -976,7 +976,7 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
         case "empty":
             return try await context.res.empty()
         case "json":
-            return try await context.res.send(["type": "This is a JSON response"], 200)
+            return try await context.res.send(["type": "This is a JSON response"])
         case "redirect":
             return try await context.res.redirect("https://appwrite.io", 301)
         case "html":
@@ -984,7 +984,7 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
                 "content-type": "text/html"
                 ])
         default:
-            return try await context.res.send("This is a text response", 200)
+            return try await context.res.send("This is a text response")
     }
 }</code></pre>
             </div>
@@ -1002,7 +1002,7 @@ public class Handler {
             case "empty":
                 return await Context.Res.Empty();
             case "json":
-                return await Context.Res.Send(new Dictionary&lt;string, object&gt;() { { "type", "This is a JSON response" } }, 200);
+                return await Context.Res.Send(new Dictionary&lt;string, object&gt;() { { "type", "This is a JSON response" } });
             case "redirect":
                 return await Context.Res.Redirect("https://appwrite.io", 301);
             case "html":
@@ -1010,7 +1010,7 @@ public class Handler {
                     { "content-type", "text/html" } 
                 });
             default:
-                return await Context.Res.Send("This is a text response", 200);   
+                return await Context.Res.Send("This is a text response");   
         }
     }
 }</code></pre>
@@ -1028,10 +1028,10 @@ class Main {
     fun main(context: RuntimeContext): RuntimeOutput {
         when (context.req.query["type"]) {
             "empty" -> return context.res.empty()
-            "json" -> return context.res.send(mapOf("type" to "This is a JSON response"), 200)
+            "json" -> return context.res.send(mapOf("type" to "This is a JSON response"))
             "redirect" -> return context.res.redirect("https://appwrite.io", 301)
             "html" -> return context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, mapOf("content-type" to "text/html"))
-            else -> return context.res.send("This is a text response", 200)
+            else -> return context.res.send("This is a text response")
         }
     }
 }</code></pre>
@@ -1055,13 +1055,13 @@ public class Main {
             case "json":
                 HashMap&lt;String, Object&gt; data = new HashMap&lt;&gt;();
                 data.put("type", "This is a JSON response");
-                return context.getRes().send(data, 200);
+                return context.getRes().send(data);
             case "redirect":
                 return context.getRes().redirect("https://appwrite.io", 301);
             case "html":
                 return context.getRes().send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, Map.of("content-type", "text/html"));
             default:
-                return context.getRes().send("This is a text response", 200);
+                return context.getRes().send("This is a text response");
         }
     }
 }</code></pre>
@@ -1086,7 +1086,7 @@ namespace runtime {
         } else if (type == "json") {
           Json::Value data;
           data["type"] = "This is a JSON response";
-          return context.res.send(data, 200);
+          return context.res.send(data);
         } else if (type == "redirect") {
           return context.res.redirect("https://appwrite.io", 301);
         } else if (type == "html") {
@@ -1094,7 +1094,7 @@ namespace runtime {
           headers["content-type"] = "text/html";
           return context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, headers);
         } else {
-          return context.res.send("This is a text response", 200);
+          return context.res.send("This is a text response");
         }
       }
   };

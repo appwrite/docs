@@ -684,7 +684,7 @@ export default async function ({ req, res }) {
     const databases = new Databases(client);
     const document = await databases.createDocument('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID.unique(), message);
 
-    return res.send("Message sent", 200);
+    return res.send("Message sent");
   }
 
   return res.send('Not found', 404);
@@ -743,7 +743,7 @@ def main(context):
         databases = Databases(client)
         document = databases.create_document('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID.unique(), message)
 
-        return context.res.send("Message sent", 200)
+        return context.res.send("Message sent")
 
     return context.res.send('Not found', 404)</code></pre>
       </div>
@@ -803,7 +803,7 @@ return function ($context) {
     $databases = new Databases($client);
     $document = $databases->createDocument('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID::unique(), $message);
 
-    return $context->res->send("Message sent", 200);
+    return $context->res->send("Message sent");
   }
 
   return $context->res->send('Not found', 404);
@@ -858,7 +858,7 @@ def main(context)
         databases = Appwrite::Database.new(client)
         document = databases.create_document('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID.unique(), message)
 
-        return context.res.send("Message sent", 200)
+        return context.res.send("Message sent")
     end
 
     return context.res.send('Not found', 404)
@@ -913,7 +913,7 @@ Future<dynamic> main(final context) async {
         final databases = Database(client);
         final document = await databases.createDocument('[DATABASE_ID]', '[MESSAGES_COLLECTION_ID]', ID.unique(), message);
 
-        return context.res.send("Message sent", 200);
+        return context.res.send("Message sent");
     }
 
     return context.res.send('Not found', 404);
