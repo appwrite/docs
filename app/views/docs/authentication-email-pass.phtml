@@ -89,8 +89,7 @@ let user = try await account.create(
     <li>
         <h3>GraphQL</h3>
         <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
-            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
-mutation {
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
     accountCreate(userId: "unique()", email: "email@example.com", password: "password") {
         _id
         email
@@ -124,21 +123,18 @@ mutation {
         <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
 
-const client = new Client();
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                 // Your project ID
 
 const account = new Account(client);
-
-client
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-;
 
 const promise = account.createVerification('https://example.com');
 
 promise.then(function (response) {
-    console.log(response); // Success
+    console.log(response);
 }, function (error) {
-    console.log(error); // Failure
+    console.log(error);
 });</code></pre>
         </div>
     </li>
@@ -147,55 +143,31 @@ promise.then(function (response) {
         <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-void main() { // Init SDK
-  Client client = Client();
-  Account account = Account(client);
-
-  client
+final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-  ;
-  Future result = account.createVerification(
-    url: 'https://example.com',
-  );
+    .setProject('5df5acd0d48c2');                // Your project ID
 
-  result
-    .then((response) {
-      print(response);
-    }).catchError((error) {
-      print(error.response);
-  });
-}</code></pre>
+final account = Account(client);
+
+final token = await account.createVerification(
+    url: 'https://example.com',
+);</code></pre>
     </li>
     <li>
         <h3>Android</h3>
         <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import io.appwrite.Client
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 import io.appwrite.services.Account
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+val client = Client(applicationContext)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
 
-        val client = Client(applicationContext)
-            .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-            .setProject("5df5acd0d48c2") // Your project ID
+val account = Account(client)
 
-        val account = Account(client)
-
-        GlobalScope.launch {
-            val response = account.createVerification(
-                url = "https://example.com"
-            )
-            val json = response.body?.string()        
-        }
-    }
-}</code></pre>
+val token = account.createVerification(
+    url = "https://example.com"
+)</code></pre>
         </div>
     </li>
     <li>
@@ -203,17 +175,15 @@ class MainActivity : AppCompatActivity() {
         <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() async throws {
-    let client = Client()
-      .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-      .setProject("5df5acd0d48c2") // Your project ID
-    let account = Account(client)
-    let token = try await account.createVerification(
-        url: "https://example.com"
-    )
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
 
-    print(String(describing: token)
-}</code></pre>
+let account = Account(client)
+
+let token = try await account.createVerification(
+    url: "https://example.com"
+)</code></pre>
         </div>
     </li>
     <li>
@@ -252,7 +222,7 @@ func main() async throws {
 
 const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 const account = new Account(client);
 
@@ -274,26 +244,16 @@ promise.then(function (response) {
         <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-void main() { // Init SDK
-  Client client = Client();
-  Account account = Account(client);
-
-  client
+final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-  ;
-  Future result = account.updateVerification(
+    .setProject('5df5acd0d48c2');                // Your project ID
+
+final account = Account(client);
+
+final result = account.updateVerification(
     userId: '[USER_ID]',
     secret: '[SECRET]',
-  );
-
-  result
-    .then((response) {
-      print(response);
-    }).catchError((error) {
-      print(error.response);
-  });
-}</code></pre>
+);</code></pre>
     </li>
     <li>
         <h3>Android</h3>
@@ -303,7 +263,7 @@ import io.appwrite.services.Account
 
 val client = Client(context)
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
+    .setProject("5df5acd0d48c2")                 // Your project ID
 
 val account = Account(client)
 
@@ -320,7 +280,7 @@ val response = account.updateVerification(
 
 let client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
+    .setProject("5df5acd0d48c2")                 // Your project ID
 
 let account = Account(client)
 
@@ -364,7 +324,7 @@ let token = try await account.updateVerification(
 
 const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 const account = new Account(client);
 
@@ -384,7 +344,7 @@ promise.then(function (response) {
 
 final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 final account = Account(client);
 
@@ -401,7 +361,7 @@ import io.appwrite.services.Account
 
 val client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 val account = Account(client)
 
@@ -417,7 +377,7 @@ val session = account.createEmailSession(
 
 let client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 let account = Account(client)
 
@@ -458,7 +418,7 @@ let session = try await account.createEmailSession(
 
 const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 const promise = account.createRecovery('email@example.com', 'https://example.com');
 
@@ -476,7 +436,7 @@ promise.then(function (response) {
 
 final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 final account = Account(client);
 
@@ -493,7 +453,7 @@ import io.appwrite.services.Account
 
 val client = Client(context)
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 val account = Account(client)
 
@@ -509,7 +469,7 @@ val response = account.createRecovery(
 
 let client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 let account = Account(client)
 
@@ -549,9 +509,14 @@ After receiving an email with the secret attached to the redirect link, submit a
 
 const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
-const promise = account.updateRecovery('[USER_ID]', '[SECRET]', 'password', 'password');
+const promise = account.updateRecovery(
+    '[USER_ID]',
+    '[SECRET]',
+    'password',
+    'password'
+);
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -567,7 +532,7 @@ promise.then(function (response) {
 
 final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 final account = Account(client);
 
@@ -586,7 +551,7 @@ import io.appwrite.services.Account
 
 val client = Client(context)
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 val account = Account(client)
 
@@ -604,7 +569,7 @@ val token = account.updateRecovery(
 
 let client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 let account = Account(client)
 
@@ -638,7 +603,7 @@ let token = try await account.updateRecovery(
 
 <h2><a href="#security" id="security">Security</a></h2>
 <p>
-   Appwrite's security first mindset goes beyond a securely implementated of authentication API.
+   Appwrite's security first mindset goes beyond a securely implemented of authentication API.
    You can enable features like password dictionary, password history, and disallow personal data in passwords to encourage users to pick better passwords.
    By enabling these features, you protect user data and teach better password choices, which helps make the internet a safer place.
 </p>

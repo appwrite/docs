@@ -24,7 +24,7 @@
 
 const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 const account = new Account(client);
 
@@ -33,7 +33,7 @@ const sessionToken = await account.createPhoneSession(
     '+14255550123'
 );
 
-var userId = sessionToken.userId; // Store this somewhere to use later when logging in</code></pre>
+const userId = sessionToken.userId; // Store this somewhere to use later when logging in</code></pre>
         </div>
     </li>
     <li>
@@ -43,7 +43,7 @@ var userId = sessionToken.userId; // Store this somewhere to use later when logg
 
 final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 final account = Account(client);
 
@@ -63,7 +63,7 @@ import io.appwrite.ID
 
 val client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 val account = Account(client)
 
@@ -81,7 +81,7 @@ val userId = sessionToken.userId // Store this somewhere to use later when loggi
 
 let client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 let account = Account(client)
 
@@ -122,15 +122,14 @@ let userId = sessionToken.userId // Store this somewhere to use later when loggi
 
 const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 const account = new Account(client);
 
 const session = await account.updatePhoneSession(
-    userId, // From when you called createPhoneSession
+    userId,    // From when you called createPhoneSession
     '[SECRET]' // The 6-digit code from the SMS message
-);
-</code></pre>
+);</code></pre>
         </div>
     </li>
     <li>
@@ -140,12 +139,12 @@ const session = await account.updatePhoneSession(
 
 final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 final account = Account(client);
 
 final session = await account.updatePhoneSession(
-    userId: userId, // From when you called createPhoneSession
+    userId: userId,    // From when you called createPhoneSession
     secret: '[SECRET]' // The 6-digit code from the SMS message
 );</code></pre>
     </li>
@@ -158,12 +157,12 @@ import io.appwrite.ID
 
 val client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 val account = Account(client)
 
 val session = account.updatePhoneSession(
-    userId = userId, // From when you called createPhoneSession
+    userId = userId,    // From when you called createPhoneSession
     secret = "[SECRET]" // The 6-digit code from the SMS message
 )</code></pre>
     </li>
@@ -174,12 +173,12 @@ val session = account.updatePhoneSession(
 
 let client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 let account = Account(client)
 
 let session = try await account.updatePhoneSession(
-    userId: userId, // From when you called createPhoneSession
+    userId: userId,    // From when you called createPhoneSession
     secret: "[SECRET]" // The 6-digit code from the SMS message
 )</code></pre>
     </li>

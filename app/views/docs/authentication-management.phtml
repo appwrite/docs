@@ -22,7 +22,7 @@
 
 const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 const account = new Account(client);
 
@@ -42,7 +42,7 @@ promise.then(function (response) {
 
 final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 final account = Account(client);
 
@@ -61,12 +61,15 @@ import io.appwrite.services.Account
 
 val client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 val account = Account(client)
 
 val user = account.updatePrefs(
-    prefs = mapOf("darkTheme" to true, "language" to "en")
+    prefs = mapOf(
+        "darkTheme" to true, 
+        "language" to "en"
+    )
 )</code></pre>
     </li>
     <li>
@@ -76,12 +79,15 @@ val user = account.updatePrefs(
 
 let client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 let account = Account(client)
 
 let user = try await account.updatePrefs(
-    prefs: ["darkTheme": true, "language": "en"]
+    prefs: [
+        "darkTheme": true, 
+        "language": "en"
+    ]
 )</code></pre>
     </li>
     <li>
@@ -112,7 +118,7 @@ let user = try await account.updatePrefs(
 
 const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 const account = new Account(client);
 
@@ -132,7 +138,7 @@ promise.then(function (response) {
 
 final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 final account = Account(client);
 
@@ -146,7 +152,7 @@ import io.appwrite.services.Account
 
 val client = Client(context)
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 val account = Account(client)
 
@@ -159,7 +165,7 @@ val prefs = account.getPrefs()</code></pre>
 
 let client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 let account = Account(client)
 
@@ -207,19 +213,18 @@ let prefs = try await account.getPrefs()</code></pre>
         <h3>Node.js</h3>
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
-
-// Init SDK
-const client = new sdk.Client();
+                    
+const client = new sdk.Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                 // Your project ID
+    .setKey('98fd4...a2ad2');                    // Your secret API key
 
 const users = new sdk.Users(client);
 
-client
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;
-
-const promise = users.updateLabels('[USER_ID]', [ Role.label('subscriber') ]);
+const promise = users.updateLabels(
+    '[USER_ID]',
+    [ Role.label('subscriber') ]
+);
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -240,17 +245,14 @@ $client = new Client();
 
 $client
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;
+    .setProject('5df5acd0d48c2')                 // Your project ID
+    .setKey('98fd4...a2ad2');                    // Your secret API key
 
 $users = new Users($client);
 
 $result = $users->updateLabels(
     '[USER_ID]', 
-    [
-        Role.label('subscriber'),
-    ]
+    [ Role.label('subscriber') ]
 );</code></pre>
         </div>
     </li>
@@ -265,32 +267,36 @@ client = Client()
 
 (client
   .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
-  .set_project('5df5acd0d48c2') # Your project ID
-  .set_key('919c2d18fb5d4...a2ae413da83346ad2') # Your secret API key
+  .set_project('5df5acd0d48c2')                 # Your project ID
+  .set_key('98fd4...a2ad2')                     # Your secret API key
 )
  
 users = Users(client)
 
-result = users.update_labels('[USER_ID]', [ Role.label('subscriber') ])</code></pre>
+result = users.update_labels(
+    '[USER_ID]',
+    [ Role.label('subscriber') ]
+)</code></pre>
         </div>
     </li>
     <li>
         <h3>Ruby</h3>
         <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby SDK">
-            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'Appwrite'
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
 
 include Appwrite
 
 client = Client.new
     .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
-    .set_project('5df5acd0d48c2') # Your project ID
-    .set_key('919c2d18fb5d4...a2ae413da83346ad2') # Your secret API key
+    .set_project('5df5acd0d48c2')                 # Your project ID
+    .set_key('98fd4...a2ad2')                     # Your secret API key
 
 users = Users.new(client)
 
-response = users.update_labels(user_id: '[USER_ID]', labels: [ Role.label('subscriber') ])
-
-puts response.inspect</code></pre>
+response = users.update_labels(
+    user_id: '[USER_ID]',
+    labels: [ Role.label('subscriber') ]
+)</code></pre>
         </div>
     </li>
     <li>
@@ -298,19 +304,17 @@ puts response.inspect</code></pre>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>import * as sdk from "https://deno.land/x/appwrite/mod.ts";
 
-// Init SDK
-let client = new sdk.Client();
+let client = new sdk.Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                 // Your project ID
+    .setKey('98fd4...a2ad2');                    // Your secret API key
 
 let users = new sdk.Users(client);
 
-client
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-;
-
-
-const promise = users.updateLabels('[USER_ID]', [ Role.label('subscriber') ]);
+const promise = users.updateLabels(
+    '[USER_ID]',
+    [ Role.label('subscriber') ]
+);
 
 promise.then(function (response) {
     console.log(response); // Success
@@ -324,50 +328,37 @@ promise.then(function (response) {
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
-void main() { // Init SDK
-  Client client = Client();
-  Users users = Users(client);
-
-  client
+final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2') // Your secret API key
-  ;
+    .setProject('5df5acd0d48c2')                 // Your project ID
+    .setKey('98fd4...a2ad2');                    // Your secret API key
 
-  Future result = users.updateLabels(
+final users = Users(client);
+
+final result = await users.updateLabels(
     userId: '[USER_ID]',
     labels: [ Role.label('subscriber') ],
-  );
-
-  result
-    .then((response) {
-      print(response);
-    }).catchError((error) {
-      print(error.response);
-  });
-}</code></pre>
+);</code></pre>
         </div>
     </li>
     <li>
         <h3>Kotlin</h3>
         <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
-import io.appwrite.services.Users
 import io.appwrite.Role
+import io.appwrite.services.Users
 
-suspend fun main() {
-    val client = Client(context)
-      .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-      .setProject("5df5acd0d48c2") // Your project ID
-      .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
+val client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
+    .setKey("98fd4...a2ad2")                     // Your secret API key
 
-    val users = Users(client)
-    val response = users.updateLabels(
-        userId = "[USER_ID]",
-        labels = [ Role.label('subscriber') ]
-    )
-    val json = response.body?.string()
-}</code></pre>
+val users = Users(client)
+
+val response = users.updateLabels(
+    userId = "[USER_ID]",
+    labels = [ Role.label('subscriber') ]
+)</code></pre>
         </div>
     </li>
     <li>
@@ -375,25 +366,35 @@ suspend fun main() {
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
-func main() async throws {
-    let client = Client()
-      .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-      .setProject("5df5acd0d48c2") // Your project ID
-      .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
-    let users = Users(client)
-    let response = try await users.updateLabels(
-        userId: "[USER_ID]",
-        labels: [ Role.label('subscriber') ]
-    )
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
+    .setKey("98fd4...a2ad2")                     // Your secret API key
 
-    print(String(describing: response)
-}</code></pre>
+let users = Users(client)
+
+let response = try await users.updateLabels(
+    userId: "[USER_ID]",
+    labels: [ Role.label('subscriber') ]
+)</code></pre>
         </div>
     </li>
     <li>
         <h3>.NET</h3>
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
-            <pre class="line-numbers"><code class="prism language-csharp" data-prism></code></pre>
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism></code>using Appwrite;
+
+var client = new Client()
+    .SetEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .SetProject("5df5acd0d48c2")                 // Your project ID
+    .SetKey("98fd4...a2ad2");                    // Your secret API key
+
+var users = new Users(client);
+
+var response = await users.UpdateLabels(
+    userId: "[USER_ID]",
+    labels: [ Role.Label('subscriber') ]
+);</pre>
         </div>
     </li>
 </ul>

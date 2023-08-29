@@ -39,7 +39,7 @@
 
 const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]');               // Your project ID
+    .setProject('[PROJECT_ID]');                 // Your project ID
 
 const account = new Account(client);
 
@@ -90,7 +90,7 @@ import io.appwrite.services.Account
 
 val client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("[PROJECT_ID]")                // Your project ID
+    .setProject("[PROJECT_ID]")                  // Your project ID
 
 val account = Account(client)
 
@@ -316,25 +316,15 @@ promise.then(function (response) {
         <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 
-void main() { // Init SDK
-  Client client = Client();
-  Account account = Account(client);
-
-  client
+final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
-  ;
-  Future result = account.updateSession(
-    sessionId: '[SESSION_ID]',
-  );
+    .setProject('5df5acd0d48c2');                // Your project ID
 
-  result
-    .then((response) {
-      print(response);
-    }).catchError((error) {
-      print(error.response);
-  });
-}</code></pre>
+Account account = Account(client);
+
+final result = await account.updateSession(
+    sessionId: '[SESSION_ID]'
+);</code></pre>
         </div>
     </li>
     <li>
@@ -345,7 +335,7 @@ import io.appwrite.services.Account
 
 val client = Client(context)
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
+    .setProject("5df5acd0d48c2")                 // Your project ID
 
 val account = Account(client)
 

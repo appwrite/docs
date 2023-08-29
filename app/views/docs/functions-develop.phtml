@@ -113,9 +113,9 @@ def main(context):
     #
     # client = (
     #     Client()
-    #     .set_endpoint("https://cloud.appwrite.io/v1")
-    #     .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
-    #     .set_key(os.environ["APPWRITE_API_KEY"])
+    #         .set_endpoint("https://cloud.appwrite.io/v1")
+    #         .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
+    #         .set_key(os.environ["APPWRITE_API_KEY"])
     # )
 
     # You can log messages to the console
@@ -131,14 +131,12 @@ def main(context):
         return context.res.send("Hello, World!")
 
     # `context.res.json()` is a handy helper for sending JSON
-    return context.res.json(
-        {
-            "motto": "Build Fast. Scale Big. All in One Place.",
-            "learn": "https://appwrite.io/docs",
-            "connect": "https://appwrite.io/discord",
-            "getInspired": "https://builtwith.appwrite.io",
-        }
-    )</code></pre>
+    return context.res.json({
+        "motto": "Build Fast. Scale Big. All in One Place.",
+        "learn": "https://appwrite.io/docs",
+        "connect": "https://appwrite.io/discord",
+        "getInspired": "https://builtwith.appwrite.io",
+    })</code></pre>
         </div>
     </li>
     <li>
@@ -258,6 +256,97 @@ Future<dynamic> main(final context) async {
         </div>
     </li>
     <li>
+        <h3>Kotlin</h3>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
+
+import io.openruntimes.kotlin.RuntimeContext
+import io.openruntimes.kotlin.RuntimeOutput
+import io.appwrite.Client
+import java.util.HashMap
+
+class Main {
+    // This is your Appwrite function
+    // It's executed each time we get a request
+    fun main(context: RuntimeContext): RuntimeOutput {
+        // Why not try the Appwrite SDK?
+        // val client = Client()
+        //    .setEndpoint("https://cloud.appwrite.io/v1")
+        //    .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
+        //    .setKey(System.getenv("APPWRITE_API_KEY"))
+
+        // You can log messages to the console
+        context.log("Hello, Logs!")
+
+        // If something goes wrong, log an error
+        context.error("Hello, Errors!")
+
+        // The `context.req` object contains the request data
+        if (context.req.method == "GET") {
+            // Send a response with the res object helpers
+            // `context.res.send()` dispatches a string back to the client
+            return context.res.send("Hello, World!")
+        }
+
+        // `context.res.json()` is a handy helper for sending JSON
+        return context.res.json(mutableMapOf(
+            "motto" to "Build Fast. Scale Big. All in One Place.",
+            "learn" to "https://appwrite.io/docs",
+            "connect" to "https://appwrite.io/discord",
+            "getInspired" to "https://builtwith.appwrite.io"
+        ))
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Java</h3>
+        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
+            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
+
+import io.openruntimes.java.RuntimeContext;
+import io.openruntimes.java.RuntimeOutput;
+import java.util.HashMap;
+import io.appwrite.Client;
+
+public class Main {
+
+    // This is your Appwrite function
+    // It's executed each time we get a request
+    public RuntimeOutput main(RuntimeContext context) throws Exception {
+        // Why not try the Appwrite SDK?
+        //
+        // Client client = new Client()
+        //     .setEndpoint("https://cloud.appwrite.io/v1")
+        //     .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
+        //     .setKey(System.getenv("APPWRITE_API_KEY"));
+
+        // You can log messages to the console
+        context.log("Hello, Logs!");
+
+        // If something goes wrong, log an error
+        context.error("Hello, Errors!");
+
+        // The `context.getReq()` object contains the request data
+        if (context.getReq().getMethod().equals("GET")) {
+            // Send a response with the res object helpers
+            // `context.getRes().send()` dispatches a string back to the client
+            return context.getRes().send("Hello, World!");
+        }
+
+        Map<String, Object> json = new HashMap<>();
+        json.put("motto", "Build Fast. Scale Big. All in One Place.");
+        json.put("learn", "https://appwrite.io/docs");
+        json.put("connect", "https://appwrite.io/discord");
+        json.put("getInspired", "https://builtwith.appwrite.io");
+
+        // `context.getRes().json()` is a handy helper for sending JSON
+        return context.getRes().json(json);
+    }
+}</code></pre>
+        </div>
+    </li>
+    <li>
         <h3>Swift</h3>
         <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift">
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
@@ -315,7 +404,7 @@ public class Handler {
         // Why not try the Appwrite SDK?
         //
         // var client = new Client()
-        //     .SetEndpoint("http://cloud.appwrite.io/v1")  
+        //     .SetEndpoint("https://cloud.appwrite.io/v1")  
         //     .SetProject(Environment.GetEnvironmentVariable("APPWRITE_FUNCTION_PROJECT_ID"))        
         //     .SetKey(Environment.GetEnvironmentVariable("APPWRITE_API_KEY"))
 
@@ -340,99 +429,6 @@ public class Handler {
             { "connect", "https://appwrite.io/discord" },
             { "getInspired", "https://builtwith.appwrite.io" },
         });
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Kotlin</h3>
-        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin">
-            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>package io.openruntimes.kotlin.src
-
-import io.openruntimes.kotlin.RuntimeContext
-import io.openruntimes.kotlin.RuntimeOutput
-import io.appwrite.Client
-import java.util.HashMap
-
-class Main {
-    // This is your Appwrite function
-    // It's executed each time we get a request
-    fun main(context: RuntimeContext): RuntimeOutput {
-        // Why not try the Appwrite SDK?
-        // val client = Client().apply {
-        //    setEndpoint("https://cloud.appwrite.io/v1")
-        //    setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
-        //    setKey(System.getenv("APPWRITE_API_KEY"))
-        // }
-
-        // You can log messages to the console
-        context.log("Hello, Logs!")
-
-        // If something goes wrong, log an error
-        context.error("Hello, Errors!")
-
-        // The `context.req` object contains the request data
-        if (context.req.method == "GET") {
-            // Send a response with the res object helpers
-            // `context.res.send()` dispatches a string back to the client
-            return context.res.send("Hello, World!")
-        }
-
-        // `context.res.json()` is a handy helper for sending JSON
-        return context.res.json(mutableMapOf(
-            "motto" to "Build Fast. Scale Big. All in One Place.",
-            "learn" to "https://appwrite.io/docs",
-            "connect" to "https://appwrite.io/discord",
-            "getInspired" to "https://builtwith.appwrite.io"
-        ))
-    }
-}</code></pre>
-        </div>
-    </li>
-    <li>
-        <h3>Java</h3>
-        <div class="ide margin-top-small" data-lang="java" data-lang-label="Java">
-            <pre class="line-numbers"><code class="prism language-java" data-prism>package io.openruntimes.java.src;
-
-import io.openruntimes.java.RuntimeContext;
-import io.openruntimes.java.RuntimeOutput;
-import java.util.HashMap;
-import io.appwrite.Client;
-
-public class Main {
-
-    // This is your Appwrite function
-    // It's executed each time we get a request
-    public RuntimeOutput main(RuntimeContext context) throws Exception {
-        // Why not try the Appwrite SDK?
-        //
-        // Client client = new Client();
-        // client
-        //         .setEndpoint("https://cloud.appwrite.io/v1")
-        //         .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
-        //         .setKey(System.getenv("APPWRITE_API_KEY"));
-
-        // You can log messages to the console
-        context.log("Hello, Logs!");
-
-        // If something goes wrong, log an error
-        context.error("Hello, Errors!");
-
-        // The `context.getReq()` object contains the request data
-        if (context.getReq().getMethod().equals("GET")) {
-            // Send a response with the res object helpers
-            // `context.getRes().send()` dispatches a string back to the client
-            return context.getRes().send("Hello, World!");
-        }
-
-        Map<String, Object> json = new HashMap<>();
-        json.put("motto", "Build Fast. Scale Big. All in One Place.");
-        json.put("learn", "https://appwrite.io/docs");
-        json.put("connect", "https://appwrite.io/discord");
-        json.put("getInspired", "https://builtwith.appwrite.io");
-        
-        // `context.getRes().json()` is a handy helper for sending JSON
-        return context.getRes().json(json);
     }
 }</code></pre>
         </div>
@@ -478,7 +474,7 @@ public class Main {
 
 <h3><a href="#destructuring-assignment" id="destructuring-assignment">Destructuring Assignment</a></h3>
 <p>
-    Some languages, namely JavaScript, support destructuring. You'll see us use destructing in examples, which has the following syntax.
+    Some languages, namely JavaScript, support destructuring. You'll see us use destructuring in examples, which has the following syntax.
     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" target="_blank" rel="noopener">Learn more about destructuring assignment</a>.
 </p>
 <ul class="phases clear" data-ui-phases>
@@ -883,19 +879,20 @@ return function ($context) {
             <h3>Python</h3>
             <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
                 <pre class="line-numbers"><code class="prism language-python" data-prism>def main(context):
-    switch context.req.query['type']:
-        case 'empty':
-            return context.res.empty()
-        case 'json':
-            return context.res.json({"type": "This is a JSON response"})
-        case 'redirect':
-            return context.res.redirect("https://appwrite.io", 301)
-        case 'html':
-            return context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, {
-                "content-type": "text/html"
-            })
-        default:
-            return context.res.send("This is a text response")</code></pre>
+    type = context.req.query['type']
+
+    if type == 'empty':
+        return context.res.empty()
+    elif type =='json':
+        return context.res.json({"type": "This is a JSON response"})
+    elif type == 'redirect':
+        return context.res.redirect("https://appwrite.io", 301)
+    elif type == 'html':
+        return context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, {
+            "content-type": "text/html"
+        })
+    else:
+        return context.res.send("This is a text response")</code></pre>
             </div>
         </li>
         <li>
@@ -971,18 +968,18 @@ Future&lt;dynamic> main(final context) async {
 
 func main(context: RuntimeContext) async throws -> RuntimeOutput {
     switch context.req.query["type"] {
-        case "empty":
-            return context.res.empty()
-        case "json":
-            return context.res.send(["type": "This is a JSON response"])
-        case "redirect":
-            return context.res.redirect("https://appwrite.io", 301)
-        case "html":
-            return context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, [
-                "content-type": "text/html"
-                ])
-        default:
-            return context.res.send("This is a text response")
+    case "empty":
+        return context.res.empty()
+    case "json":
+        return context.res.send(["type": "This is a JSON response"])
+    case "redirect":
+        return context.res.redirect("https://appwrite.io", 301)
+    case "html":
+        return context.res.send("&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, [
+            "content-type": "text/html"
+            ])
+    default:
+        return context.res.send("This is a text response")
     }
 }</code></pre>
             </div>
@@ -990,9 +987,7 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
         <li>
             <h3>.NET</h3>
             <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-                <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
-
-public class Handler {
+                <pre class="line-numbers"><code class="prism language-csharp" data-prism>public class Handler {
     public async Task&lt;RuntimeOutput> Main(RuntimeContext Context) 
     {
         switch (Context.Request.Query["type"])
@@ -1614,7 +1609,7 @@ namespace runtime {
             </td>
             <td><b>Swift</b></td>
             <td><a href="https://swift.org/package-manager/" target="_blank">Swift Package Manager</a></td>
-            <td>N/A</td>
+            <td>swift package resolve</td>
         </tr>
         <tr>
             <td>
@@ -1622,7 +1617,7 @@ namespace runtime {
             </td>
             <td><b>.NET</b></td>
             <td><a href="https://www.nuget.org/" target="_blank">NuGet</a></td>
-            <td>N/A</td>
+            <td>dotnet restore</td>
         </tr>
         <tr>
             <td>
@@ -1671,6 +1666,7 @@ namespace runtime {
         API keys have defined scopes when you create them.
         They ignore permissions and operate without a sessions.
         Use API keys if the function should act as an admin type role, instead of acting on behalf of a user.
+        Pass in your API key as an environment variable. Never share API keys with users.
     </p>
     <ul class="phases clear" data-ui-phases>
         <li>
@@ -1680,22 +1676,26 @@ namespace runtime {
 
 export default async ({ req, res, log, error }) => {
 
-  const client = new Client()
-    .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-    // Pass in your API key as an environment variable. Never share API keys with users.
-    .setKey(process.env.APPWRITE_API_KEY);
+    const client = new Client()
+        .setEndpoint('https://cloud.appwrite.io/v1')
+        .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+        .setKey(process.env.APPWRITE_API_KEY);
 
-  const databases = new Databases(client);
+    const databases = new Databases(client);
 
-  try {
-    await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
-  } catch (e) {
-    error("Failed to create document: " + e.message)
-    return res.send("Failed to create document")
-  }
+    try {
+        await databases.createDocument(
+            '[DATABASE_ID]',
+            '[COLLECTION_ID]',
+            ID.unique(),
+            {}
+        )
+    } catch (e) {
+        error("Failed to create document: " + e.message)
+        return res.send("Failed to create document")
+    }
 
-  return res.send("Document created")
+    return res.send("Document created")
 }</code></pre>
             </div>
         </li>
@@ -1712,17 +1712,20 @@ use Appwrite\Services\Databases;
 use Appwrite\ID;
 
 return function ($context) {
-    $client = new Client();
-    $client
+    $client = (new Client())
         ->setEndpoint('https://cloud.appwrite.io/v1')
         ->setProject(getenv('APPWRITE_FUNCTION_PROJECT_ID'))
-        // Pass in your API key as an environment variable. Never share API keys with users.
         ->setKey(getenv('APPWRITE_API_KEY'));
     
     $databases = new Databases($client);
 
     try {
-        $databases->createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID::unique(), []);
+        $databases->createDocument(
+            databaseId: '[DATABASE_ID]',
+            collectionId: '[COLLECTION_ID]',
+            documentId: ID::unique(),
+            data: []
+        );
     } catch (Exception $e) {
         $context->error("Failed to create document: " . $e->getMessage());
         return $context->res->send("Failed to create document");
@@ -1744,16 +1747,20 @@ import os
 def main(context):
     client = (
         Client()
-        .set_endpoint("https://cloud.appwrite.io/v1")
-        .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
-        # Pass in your API key as an environment variable. Never share API keys with users.
-        .set_key(os.environ["APPWRITE_API_KEY"])
+            .set_endpoint("https://cloud.appwrite.io/v1")
+            .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
+            .set_key(os.environ["APPWRITE_API_KEY"])
     )
 
     databases = Databases(client)
 
     try:
-        databases.create_document("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {})
+        databases.create_document(
+            database_id="[DATABASE_ID]",
+            collection_id="[COLLECTION_ID]",
+            document_id=ID.unique(),
+            data={}
+        )
     except Exception as e:
         context.error("Failed to create document: " + e.message)
         return context.response.send("Failed to create document")
@@ -1766,19 +1773,24 @@ def main(context):
             <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
                 <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
 
+include Appwrite
+
 def main(context)
-  client = Appwrite::Client.new
-  client
-    .set_endpoint('https://cloud.appwrite.io/v1')
-    .set_project(req.variables['APPWRITE_FUNCTION_PROJECT_ID'])
-    # Pass in your API key as an environment variable. Never share API keys with users.
-    .set_key(req.variables['APPWRITE_API_KEY'])
+    client = Client.new
+        .set_endpoint('https://cloud.appwrite.io/v1')
+        .set_project(req.variables['APPWRITE_FUNCTION_PROJECT_ID'])
+        .set_key(req.variables['APPWRITE_API_KEY'])
 
     databases = Appwrite::Databases.new(client)
 
     begin
-        databases.create_document('[DATABASE_ID]', '[COLLECTION_ID]', Appwrite::ID.unique(), {})
-    rescue Appwrite::Exception => e
+        databases.create_document(
+            databaseId: '[DATABASE_ID]',
+            collectionId: '[COLLECTION_ID]',
+            documentId: ID.unique(),
+            data: {}
+        )
+    rescue Exception => e
         context.error("Failed to create document: " + e.message)
         return context.response.send("Failed to create document")
     end
@@ -1793,17 +1805,20 @@ end</code></pre>
                 <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases, ID } from "https://deno.land/x/appwrite/mod.ts";
                 
 export default function ({req, res, error}: any){
-    const client = new Client();
-    client
+    const client = new Client()
         .setEndpoint("https://cloud.appwrite.io/v1")
         .setProject(Deno.env.get("APPWRITE_FUNCTION_PROJECT_ID") || "")
-        // Pass in your API key as an environment variable. Never share API keys with users.
         .setKey(Deno.env.get("APPWRITE_API_KEY") || "");
     
     const databases = new Databases(client);
     
     try {
-        databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {});
+        databases.createDocument(
+            "[DATABASE_ID]",
+            "[COLLECTION_ID]",
+            ID.unique(),
+            {}
+        );
     } catch (e) {
         error("Failed to create document: " + e.message);
         return res.send("Failed to create document");
@@ -1819,18 +1834,21 @@ export default function ({req, res, error}: any){
                 <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 import 'package:dart_appwrite/dart_appwrite.dart';
 
-
 Future&lt;dynamic> main(final context) async {
     final client = Client()
         .setEndpoint('https://cloud.appwrite.io/v1')
         .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-        // Pass in your API key as an environment variable. Never share API keys with users.
         .setKey(process.env.APPWRITE_API_KEY);
     
     final databases = Databases(client);
     
     try {
-        await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {});
+        await databases.createDocument(
+            databaseId: '[DATABASE_ID]',
+            collectionId: '[COLLECTION_ID]',
+            documentId: ID.unique(),
+            data: {}
+        );
     } catch (e) {
         context.error("Failed to create document: " + e.message);
         return context.res.send("Failed to create document");
@@ -1851,13 +1869,17 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
     let client = Client()
        .setEndpoint("https://cloud.appwrite.io/v1")
        .setProject(ProcessInfo.processInfo.environment["APPWRITE_FUNCTION_PROJECT_ID"])
-       // Pass in your API key as an environment variable. Never share API keys with users.
        .setKey(ProcessInfo.processInfo.environment["APPWRITE_API_KEY"]);
 
     let databases = Databases(client: client)
 
     do {
-        try await databases.createDocument(databaseId: "[DATABASE_ID]", collectionId: "[COLLECTION_ID]", data: [:])
+        try await databases.createDocument(
+            databaseId: "[DATABASE_ID]", 
+            collectionId: "[COLLECTION_ID]",
+            documentId: ID.unique(),
+            data: [:]
+        )
     } catch {
         context.error("Failed to create document: \(error.localizedDescription)")
         return context.res.send("Failed to create document")
@@ -1870,32 +1892,36 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
         <li>
             <h3>.NET</h3>
             <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-                <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
-
-using Appwrite;
+                <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
 using Appwrite.Services;
-using Appwrite.Models;
-
-public class Handler {
-
-    public async Task<RuntimeOutput> Main(RuntimeContext Context) 
+using Appwrite.Models;                        
+                        
+namespace DotNetRuntime
+{
+    public class Handler 
     {
-        var client = new Client()
-           .SetEndpoint("http://cloud.appwrite.io/v1")  
-           .SetProject(Environment.GetEnvironmentVariable("APPWRITE_FUNCTION_PROJECT_ID"))       
-            // Pass in your API key as an environment variable. Never share API keys with users.
-           .SetKey(Environment.GetEnvironmentVariable("APPWRITE_API_KEY"))
-
-        var databases = new Databases(client);
-
-        try {
-            await databases.CreateDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.Unique(), new Dictionary&lt;string, object>());
-        } catch (Exception e) {
-            Context.Error("Failed to create document: " + e.Message);
-            return Context.Response.Send("Failed to create document");
+        public async Task<RuntimeOutput> Main(RuntimeContext Context) 
+        {
+            var client = new Client()
+               .SetEndpoint("https://cloud.appwrite.io/v1")
+               .SetProject(Environment.GetEnvironmentVariable("APPWRITE_FUNCTION_PROJECT_ID"))
+               .SetKey(Environment.GetEnvironmentVariable("APPWRITE_API_KEY"))
+    
+            var databases = new Databases(client);
+    
+            try {
+                await databases.CreateDocument(
+                    databaseId: "[DATABASE_ID]",
+                    collectionId: "[COLLECTION_ID]",
+                    documentId: ID.Unique(),
+                    data: new Dictionary&lt;string, object>());
+            } catch (Exception e) {
+                Context.Error("Failed to create document: " + e.Message);
+                return Context.Response.Send("Failed to create document");
+            }
+    
+            return Context.Response.Send("Document created");
         }
-
-        return Context.Response.Send("Document created");
     }
 }</code></pre>
             </div>
@@ -1914,17 +1940,20 @@ import java.util.HashMap
 
 class Main {
     fun main(context: RuntimeContext): RuntimeOutput {
-        val client = Client().apply {
-           setEndpoint("https://cloud.appwrite.io/v1")
-           setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
-           // Pass in your API key as an environment variable. Never share API keys with users.
-           setKey(System.getenv("APPWRITE_API_KEY"))
-        }
+        val client = Client()
+           .setEndpoint("https://cloud.appwrite.io/v1")
+           .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
+           .setKey(System.getenv("APPWRITE_API_KEY"))
 
         val databases = Databases(client)
 
         try {
-            databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), HashMap())
+            databases.createDocument(
+                databaseId = "[DATABASE_ID]",
+                collectionId = "[COLLECTION_ID]",
+                documentId = ID.unique()
+                data = mapOf()
+            )
         } catch (e: Exception) {
             context.error("Failed to create document: " + e.message)
             return context.res.send("Failed to create document")
@@ -1947,24 +1976,26 @@ import io.appwrite.Client;
 
 public class Main {
     public RuntimeOutput main(RuntimeContext context) throws Exception {
-        Client client = new Client();
-        client
-                .setEndpoint("https://cloud.appwrite.io/v1")
-                .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
-                // Pass in your API key as an environment variable. Never share API keys with users.
-                .setKey(System.getenv("APPWRITE_API_KEY"));
+        Client client = new Client()
+            .setEndpoint("https://cloud.appwrite.io/v1")
+            .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
+            .setKey(System.getenv("APPWRITE_API_KEY"));
 
         Databases databases = new Databases(client);
 
         try {
-            databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), new HashMap<>());
+            databases.createDocument(
+                "[DATABASE_ID]",
+                "[COLLECTION_ID]",
+                ID.unique(),
+                new HashMap<>()
+            );
         } catch (Exception e) {
             context.error("Failed to create document: " + e.getMessage());
             return context.res.send("Failed to create document");
         }
 
         return context.res.send("Document created");
-
     }
 }</code></pre>
             </div>
@@ -1990,27 +2021,31 @@ public class Main {
                 <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Databases, ID } from 'node-appwrite';
 
 export default async ({ req, res, log }) => {
+    const client = new Client()
+        .setEndpoint('https://cloud.appwrite.io/v1')
+        .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
 
-  const client = new Client()
-    .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+    if (req.headers['x-appwrite-user-jwt']) {
+        client.setJWT(req.headers['x-appwrite-user-jwt'])
+    } else {
+        return res.send("Please sign in, JWT not found")
+    }
 
-  if (req.headers['x-appwrite-user-jwt']) {
-    client.setJWT(req.headers['x-appwrite-user-jwt'])
-  } else {
-    return res.send("Please sign in, JWT not found")
-  }
-    
-  const databases = new Databases(client);
+    const databases = new Databases(client);
 
-  try {
-    await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {})
-  } catch (e) {
-    log("Failed to create document: " + e.message)
-    return res.send("Failed to create document")
-  }
+    try {
+        await databases.createDocument(
+            '[DATABASE_ID]',
+            '[COLLECTION_ID]',
+            ID.unique(),
+            {}
+        )
+    } catch (e) {
+        log("Failed to create document: " + e.message)
+        return res.send("Failed to create document")
+    }
 
-  return res.send("Document created")
+    return res.send("Document created")
 }</code></pre>
             </div>
         </li>
@@ -2027,8 +2062,7 @@ use Appwrite\Services\Databases;
 use Appwrite\ID;
 
 return function ($context) {
-    $client = new Client();
-    $client
+    $client = new (Client())
         ->setEndpoint('https://cloud.appwrite.io/v1')
         ->setProject(getenv('APPWRITE_FUNCTION_PROJECT_ID'))
     
@@ -2041,7 +2075,12 @@ return function ($context) {
     $databases = new Databases($client);
 
     try {
-        $databases->createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID::unique(), []);
+        $databases->createDocument(
+            databaseId: '[DATABASE_ID]',
+            collectionId: '[COLLECTION_ID]',
+            documentId: ID::unique(),
+            data: []
+        );
     } catch (Exception $e) {
         $context->error("Failed to create document: " . $e->getMessage());
         return $context->res->send("Failed to create document");
@@ -2060,12 +2099,11 @@ from appwrite.id import ID
 
 import os
 
-
 def main(context):
     client = (
         Client()
-        .set_endpoint("https://cloud.appwrite.io/v1")
-        .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
+            .set_endpoint("https://cloud.appwrite.io/v1")
+            .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
     )
 
     if "x-appwrite-user-jwt" in context.req.headers:
@@ -2076,7 +2114,12 @@ def main(context):
     databases = Databases(client)
 
     try:
-        databases.create_document("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {})
+        databases.create_document(
+            database_id="[DATABASE_ID]",
+            collection_id="[COLLECTION_ID]",
+            document_id=ID.unique(),
+            data={}
+        )
     except Exception as e:
         context.error("Failed to create document: " + e.message)
         return context.response.send("Failed to create document")
@@ -2089,12 +2132,13 @@ def main(context):
             <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby">
                 <pre class="line-numbers"><code class="prism language-ruby" data-prism>require "appwrite"
 
+include Appwrite
+
 def main(context)
-  client = Appwrite::Client.new
-  client
-    .set_endpoint('https://cloud.appwrite.io/v1')
-    .set_project(req.variables['APPWRITE_FUNCTION_PROJECT_ID'])
-    
+    client = Client.new
+        .set_endpoint('https://cloud.appwrite.io/v1')
+        .set_project(req.variables['APPWRITE_FUNCTION_PROJECT_ID'])
+
     if context.request.headers['x-appwrite-user-jwt']
         client.set_jwt(context.request.headers['x-appwrite-user-jwt'])
     else
@@ -2120,8 +2164,7 @@ end</code></pre>
                 <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases, ID } from "https://deno.land/x/appwrite/mod.ts";
                 
 export default function ({req, res, error}: any){
-    const client = new Client();
-    client
+    const client = new Client()
         .setEndpoint("https://cloud.appwrite.io/v1")
         .setProject(Deno.env.get("APPWRITE_FUNCTION_PROJECT_ID") || "")
     
@@ -2134,7 +2177,12 @@ export default function ({req, res, error}: any){
     const databases = new Databases(client);
     
     try {
-        databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), {});
+        databases.createDocument(
+            "[DATABASE_ID]",
+            "[COLLECTION_ID]",
+            ID.unique(),
+            {}
+        );
     } catch (e) {
         error("Failed to create document: " + e.message)
         return res.send("Failed to create document");
@@ -2150,7 +2198,6 @@ export default function ({req, res, error}: any){
                 <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
 import 'package:dart_appwrite/dart_appwrite.dart';
 
-
 Future&lt;dynamic> main(final context) async {
     final client = Client()
         .setEndpoint('https://cloud.appwrite.io/v1')
@@ -2165,7 +2212,12 @@ Future&lt;dynamic> main(final context) async {
     final databases = Databases(client);
     
     try {
-        await databases.createDocument('[DATABASE_ID]', '[COLLECTION_ID]', ID.unique(), {});
+        await databases.createDocument(
+            databaseId: '[DATABASE_ID]',
+            collectionId: '[COLLECTION_ID]',
+            documentId: ID.unique(),
+            data: {}
+        );
     } catch (e) {
         context.error("Failed to create document: " + e.message);
         return context.res.send("Failed to create document");
@@ -2196,7 +2248,12 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
     let databases = Databases(client: client)
 
     do {
-        try await databases.createDocument(databaseId: "[DATABASE_ID]", collectionId: "[COLLECTION_ID]", data: [:])
+        try await databases.createDocument(
+            databaseId: "[DATABASE_ID]",
+            collectionId: "[COLLECTION_ID]",
+            documentId: ID.unique()
+            data: [:]
+        )
     } catch {
         context.error("Failed to create document: \(error.localizedDescription)")
         return context.res.send("Failed to create document")
@@ -2209,36 +2266,41 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
         <li>
             <h3>.NET</h3>
             <div class="ide margin-top-small" data-lang="csharp" data-lang-label="C#">
-                <pre class="line-numbers"><code class="prism language-csharp" data-prism>namespace DotNetRuntime;
-
-using Appwrite;
+                <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
 using Appwrite.Services;
 using Appwrite.Models;
 
-public class Handler {
-
-    public async Task<RuntimeOutput> Main(RuntimeContext Context) 
+namespace DotNetRuntime
+{
+    public class Handler
     {
-        var client = new Client()
-           .SetEndpoint("http://cloud.appwrite.io/v1")  
-           .SetProject(Environment.GetEnvironmentVariable("APPWRITE_FUNCTION_PROJECT_ID"))       
-        
-        if (Context.Req.Headers.ContainsKey("x-appwrite-user-jwt")) {
-            client.SetJWT(Context.Req.Headers["x-appwrite-user-jwt"]);
-        } else {
-            return Context.Res.Send("Please sign in, JWT not found");
+        public async Task<RuntimeOutput> Main(RuntimeContext Context)
+        {
+            var client = new Client()
+               .SetEndpoint("https://cloud.appwrite.io/v1")
+               .SetProject(Environment.GetEnvironmentVariable("APPWRITE_FUNCTION_PROJECT_ID"))
+
+            if (Context.Req.Headers.ContainsKey("x-appwrite-user-jwt")) {
+                client.SetJWT(Context.Req.Headers["x-appwrite-user-jwt"]);
+            } else {
+                return Context.Res.Send("Please sign in, JWT not found");
+            }
+
+            var databases = new Databases(client);
+
+            try {
+                await databases.CreateDocument(
+                    databaseId: "[DATABASE_ID]",
+                    collectionId: "[COLLECTION_ID]",
+                    documentId: ID.Unique(),
+                    data: new Dictionary&lt;string, object>());
+            } catch (Exception e) {
+                Context.Error("Failed to create document: " + e.Message);
+                return Context.Res.Send("Failed to create document");
+            }
+
+            return Context.Res.Send("Document created");
         }
-
-        var databases = new Databases(client);
-
-        try {
-            await databases.CreateDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.Unique(), new Dictionary&lt;string, object>());
-        } catch (Exception e) {
-            Context.Error("Failed to create document: " + e.Message);
-            return Context.Res.Send("Failed to create document");
-        }
-
-        return Context.Res.Send("Document created");
     }
 }</code></pre>
             </div>
@@ -2257,10 +2319,9 @@ import java.util.HashMap
 
 class Main {
     fun main(context: RuntimeContext): RuntimeOutput {
-        val client = Client().apply {
-           setEndpoint("https://cloud.appwrite.io/v1")
-           setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
-        }
+        val client = Client()
+           .setEndpoint("https://cloud.appwrite.io/v1")
+           .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
 
         if (context.req.headers["x-appwrite-user-jwt"] != null) {
             client.setJWT(context.req.headers["x-appwrite-user-jwt"])
@@ -2271,7 +2332,12 @@ class Main {
         val databases = Databases(client)
 
         try {
-            databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), HashMap())
+            databases.createDocument(
+                databaseId = "[DATABASE_ID]",
+                collectionId = "[COLLECTION_ID]",
+                documentId = ID.unique(),
+                data = mapOf()
+            )
         } catch (e: Exception) {
             context.error("Failed to create document: " + e.message)
             return context.res.send("Failed to create document")
@@ -2294,10 +2360,9 @@ import io.appwrite.Client;
 
 public class Main {
     public RuntimeOutput main(RuntimeContext context) throws Exception {
-        Client client = new Client();
-        client
-                .setEndpoint("https://cloud.appwrite.io/v1")
-                .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
+        Client client = new Client()
+            .setEndpoint("https://cloud.appwrite.io/v1")
+            .setProject(System.getenv("APPWRITE_FUNCTION_PROJECT_ID"))
                 
         if (context.req.headers.containsKey("x-appwrite-user-jwt")) {
             client.setJWT(context.req.headers.get("x-appwrite-user-jwt"));
@@ -2308,7 +2373,12 @@ public class Main {
         Databases databases = new Databases(client);
 
         try {
-            databases.createDocument("[DATABASE_ID]", "[COLLECTION_ID]", ID.unique(), new HashMap<>());
+            databases.createDocument(
+                "[DATABASE_ID]",
+                "[COLLECTION_ID]",
+                ID.unique(),
+                new HashMap<>()
+            );
         } catch (Exception e) {
             context.error("Failed to create document: " + e.getMessage());
             return context.res.send("Failed to create document");
@@ -2469,12 +2539,13 @@ func main(context: RuntimeContext) async throws -> RuntimeOutput {
                 <pre class="line-numbers"><code class="prism language-csharp" data-prism>// src/Utils.cs
 
 namespace DotNetRuntime
-
-public static class Utils
 {
-    public static int Add(int a, int b)
+    public static class Utils
     {
-        return a + b;
+        public static int Add(int a, int b)
+        {
+            return a + b;
+        }
     }
 }</code></pre>
             </div>
@@ -2482,11 +2553,12 @@ public static class Utils
                 <pre class="line-numbers"><code class="prism language-csharp" data-prism>// src/Index.cs
 
 namespace DotNetRuntime
-
-public class Handler {
-    public async Task<RuntimeOutput> Main(RuntimeContext Context) 
-    {
-        return Context.Res.Send(Utils.Add(1, 2));
+{
+    public class Handler {
+        public async Task<RuntimeOutput> Main(RuntimeContext Context)
+        {
+            return Context.Res.Send(Utils.Add(1, 2));
+        }
     }
 }</code></pre>
             </div>
@@ -2498,7 +2570,7 @@ public class Handler {
 
 package io.openruntimes.kotlin.src
 
-class Utils {
+object Utils {
     fun add(a: Int, b: Int): Int {
         return a + b
     }

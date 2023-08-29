@@ -95,9 +95,7 @@ let jwt = try await account.createJWT()</code></pre>
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client } = require('node-appwrite');
 
-const client = new Client();
-
-client
+const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
     .setProject('[PROJECT_ID]')                  // Your project ID
     .setJWT('eyJJ9.eyJ...886ca');                // Your secret JSON Web Token</code></pre>
@@ -109,9 +107,7 @@ client
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
             <pre class="line-numbers"><code class="prism language-php" data-prism>use Appwrite\Client;
 
-$client = new Client();
-
-$client
+$client = (new Client())
     ->setEndpoint('https://cloud.appwrite.io/v1')            // Your API Endpoint
     ->setProject('[PROJECT_ID]')                             // Your project ID
     ->setJWT('eyJJ9.eyJ...886ca');                           // Your secret JSON Web Token</code></pre>
@@ -139,8 +135,6 @@ client = Client()
 include Appwrite
 
 client = Client.new
-
-client
     .set_endpoint('https://cloud.appwrite.io/v1')   # Your API Endpoint
     .set_project('[PROJECT_ID]')                    # Your project ID
     .set_jwt('eyJJ9.eyJ...886ca')                   # Your secret JSON Web Token</code></pre>
@@ -151,9 +145,7 @@ client
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client } from "https://deno.land/x/appwrite/mod.ts";
 
-let client = new Client();
-
-client
+let client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1')    // Your API Endpoint
     .setProject('[PROJECT_ID]')                     // Your project ID
     .setJWT('eyJJ9.eyJ...886ca');                   // Your secret JSON Web Token</code></pre>
@@ -164,9 +156,7 @@ client
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
-final client = Client();
-
-client
+final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1')    // Your API Endpoint
     .setProject('[PROJECT_ID]')                     // Your project ID
     .setJWT('eyJJ9.eyJ...886ca');                   // Your secret JSON Web Token</code></pre>
@@ -178,8 +168,6 @@ client
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 
 val client = Client()
-
-client
     .setEndpoint("https://cloud.appwrite.io/v1")    // Your API Endpoint
     .setProject("[PROJECT_ID]")                     // Your project ID
     .setJWT("eyJJ9.eyJ...886ca")                    // Your secret JSON Web Token</code></pre>
@@ -191,8 +179,6 @@ client
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-
-client
     .setEndpoint("https://cloud.appwrite.io/v1")    // Your API Endpoint
     .setProject("[PROJECT_ID]")                     // Your project ID
     .setJWT("eyJJ9.eyJ...886ca")                    // Your secret JSON Web Token</code></pre>
@@ -203,9 +189,7 @@ client
         <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
             <pre class="line-numbers"><code class="prism language-csharp" data-prism>using Appwrite;
 
-var client = new Client();
-
-client
+var client = new Client()
     .SetEndpoint("https://cloud.appwrite.io/v1")    // Your API Endpoint
     .SetProject("[PROJECT_ID]")                     // Your project ID
     .SetJWT("eyJJ9.eyJ...886ca");                   // Your secret JSON Web Token</code></pre>
@@ -263,16 +247,17 @@ client
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client } = require('node-appwrite');
 
-const client = new Client();
-
-client
+const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('[PROJECT_ID]')                // Your project ID
-    .setJWT('eyJJ9.eyJ...886ca');               // Your secret JSON Web Token
+    .setProject('[PROJECT_ID]')                  // Your project ID
+    .setJWT('eyJJ9.eyJ...886ca');                // Your secret JSON Web Token
 
 const databases = new sdk.Databases(client);
 
-const birthday = await databases.listDocuments('642f358bf4084c662590', '642f3592aa5fc856ad1e');
+const documents = await databases.listDocuments(
+    '642f358bf4084c662590',
+    '642f3592aa5fc856ad1e'
+);
 // ... More code to manipulate the results</code></pre>
         </div>
     </li>
@@ -282,16 +267,17 @@ const birthday = await databases.listDocuments('642f358bf4084c662590', '642f3592
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
             <pre class="line-numbers"><code class="prism language-php" data-prism>use Appwrite\Client;
 
-$client = new Client();
-
-$client
+$client = (new Client())
     ->setEndpoint('https://cloud.appwrite.io/v1')            // Your API Endpoint
     ->setProject('[PROJECT_ID]')                           // Your project ID
     ->setJWT('eyJJ9.eyJ...886ca');                          // Your secret JSON Web Tokens
 
 $databases = new Databases($client);
 
-$result = $databases->listDocuments('642f358bf4084c662590', '642f3592aa5fc856ad1e');
+$documents = $databases->listDocuments(
+    databaseId: '642f358bf4084c662590',
+    collectionId: '642f3592aa5fc856ad1e'
+);
 // ... More code to manipulate the results</code></pre>
         </div>
     </li>
@@ -310,7 +296,10 @@ client = Client()
 
 databases = Databases(client)
 
-result = databases.list_documents('642f358bf4084c662590', '642f3592aa5fc856ad1e')
+documents = databases.list_documents(
+    database_id='642f358bf4084c662590',
+    collection_id='642f3592aa5fc856ad1e'
+)
 # ... More code to manipulate the results</code></pre>
 </code></pre>
         </div>
@@ -322,16 +311,17 @@ result = databases.list_documents('642f358bf4084c662590', '642f3592aa5fc856ad1e'
 
 include Appwrite
 
-client = Client
-
-client.new
+client = Client.new
     .set_endpoint('https://cloud.appwrite.io/v1')            # Your API Endpoint
     .set_project('[PROJECT_ID]')                           # Your project ID
     .set_jwt('eyJJ9.eyJ...886ca')                           # Your secret JSON Web Token
 
 databases = Databases.new(client)
 
-response = databases.list_documents(database_id: '642f358bf4084c662590', '642f3592aa5fc856ad1e')
+documents = databases.list_documents(
+    database_id: '642f358bf4084c662590',
+    collection_id: '642f3592aa5fc856ad1e'
+)
 # ... More code to manipulate the results</code></pre>
         </div>
     </li>
@@ -340,16 +330,17 @@ response = databases.list_documents(database_id: '642f358bf4084c662590', '642f35
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client } from "https://deno.land/x/appwrite/mod.ts";
 
-let client = new Client();
-
-client
+let client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1')    // Your API Endpoint
     .setProject('[PROJECT_ID]')                     // Your project ID
     .setJWT('eyJJ9.eyJ...886ca');                   // Your secret JSON Web Token
 
 let databases = new sdk.Databases(client);
 
-let promise = databases.listDocuments('642f358bf4084c662590', '642f3592aa5fc856ad1e');
+let documents = await databases.listDocuments(
+    '642f358bf4084c662590',
+    '642f3592aa5fc856ad1e'
+);
 // ... More code to manipulate the results</code></pre>
         </div>
     </li>
@@ -358,16 +349,14 @@ let promise = databases.listDocuments('642f358bf4084c662590', '642f3592aa5fc856a
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
-final client = Client();
-
-client
+final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1')    // Your API Endpoint
     .setProject('[PROJECT_ID]')                     // Your project ID
     .setJWT('eyJJ9.eyJ...886ca');                   // Your secret JSON Web Token
 
-Databases databases = Databases(client);
+final databases = Databases(client);
 
-Future result = databases.listDocuments(
+final documents = await databases.listDocuments(
     databaseId: '642f358bf4084c662590',
     collectionId: '642f3592aa5fc856ad1e',
 );
@@ -380,15 +369,13 @@ Future result = databases.listDocuments(
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 
 val client = Client()
-
-client
     .setEndpoint("https://cloud.appwrite.io/v1")    // Your API Endpoint
     .setProject("[PROJECT_ID]")                     // Your project ID
     .setJWT("eyJJ9.eyJ...886ca")                    // Your secret JSON Web Token
 
 val databases = Databases(client)
 
-val response = databases.listDocuments(
+val documents = databases.listDocuments(
     databaseId = "642f358bf4084c662590",
     collectionId = "642f3592aa5fc856ad1e",
 )
@@ -401,19 +388,17 @@ val response = databases.listDocuments(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
-
-client
     .setEndpoint("https://cloud.appwrite.io/v1")    // Your API Endpoint
     .setProject("[PROJECT_ID]")                     // Your project ID
     .setJWT("eyJJ9.eyJ...886ca")                    // Your secret JSON Web Token
     
 let databases = Databases(client)
 
-let documentList = try await databases.listDocuments(
+let documents = try await databases.listDocuments(
     databaseId: "642f358bf4084c662590",
     collectionId: "642f3592aa5fc856ad1e"
 )
-/ ... More code to manipulate the results</code></pre>
+// ... More code to manipulate the results</code></pre>
         </div>
     </li>
     <li>
@@ -423,16 +408,14 @@ let documentList = try await databases.listDocuments(
 using Appwrite.Services;
 using Appwrite.Models;
 
-var client = new Client();
-
-client
+var client = new Client()
     .SetEndpoint("https://cloud.appwrite.io/v1")    // Your API Endpoint
     .SetProject("[PROJECT_ID]")                     // Your project ID
     .SetJWT("eyJJ9.eyJ...886ca");                   // Your secret JSON Web Token
 
 var databases = new Databases(client);
 
-var documentList = await databases.ListDocuments(
+var documents = await databases.ListDocuments(
     databaseId: "642f358bf4084c662590",
     collectionId: "642f3592aa5fc856ad1e");
 
@@ -468,16 +451,17 @@ var documentList = await databases.ListDocuments(
         <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
             <pre class="line-numbers"><code class="prism language-javascript" data-prism>const { Client } = require('node-appwrite');
 
-const client = new Client();
-
-client
-    .setEndpoint('https://cloud.appwrite.io/v1')    // Your API Endpoint
-    .setProject('[PROJECT_ID]')                     // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2')    // Your secret API key
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]')                  // Your project ID
+    .setKey('98fd4...a2ad2');                    // Your secret API key
 
 const databases = new sdk.Databases(client);
 
-const birthday = await databases.listDocuments('642f358bf4084c662590', '642f3592aa5fc856ad1e');
+const documents = await databases.listDocuments(
+    '642f358bf4084c662590',
+    '642f3592aa5fc856ad1e'
+);
 // ... More code to manipulate the results</code></pre>
         </div>
     </li>
@@ -487,16 +471,17 @@ const birthday = await databases.listDocuments('642f358bf4084c662590', '642f3592
         <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
             <pre class="line-numbers"><code class="prism language-php" data-prism>use Appwrite\Client;
 
-$client = new Client();
-
-$client
-    ->setEndpoint('https://cloud.appwrite.io/v1')   // Your API Endpoint
-    ->setProject('[PROJECT_ID]')                    // Your project ID
-    ->setKey('919c2d18fb5d4...a2ae413da83346ad2')   // Your secret API key
+$client = (new Client())
+    ->setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    ->setProject('[PROJECT_ID]')                  // Your project ID
+    ->setKey('98fd4...a2ad2');                    // Your secret API key
 
 $databases = new Databases($client);
 
-$result = $databases->listDocuments('642f358bf4084c662590', '642f3592aa5fc856ad1e');
+$documents = $databases->listDocuments(
+    databaseId: '642f358bf4084c662590',
+    collectionId: '642f3592aa5fc856ad1e'
+);
 // ... More code to manipulate the results</code></pre>
         </div>
     </li>
@@ -508,15 +493,19 @@ $result = $databases->listDocuments('642f358bf4084c662590', '642f3592aa5fc856ad1
 client = Client()
 
 (client
-  .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
-  .set_project('[PROJECT_ID]')                  # Your project ID
-  .setKey('919c2d18fb5d4...a2ae413da83346ad2')  # Your secret API key
+    .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
+    .set_project('[PROJECT_ID]')                  # Your project ID
+    .set_key('98fd4...a2ad2')                     # Your secret API key
 )
 
 databases = Databases(client)
 
-result = databases.list_documents('642f358bf4084c662590', '642f3592aa5fc856ad1e')
+documents = databases.list_documents(
+    database_id='642f358bf4084c662590',
+    collection_id='642f3592aa5fc856ad1e'
+)
 # ... More code to manipulate the results</code></pre>
+            </code></pre>
         </div>
     </li>
     <li>
@@ -526,16 +515,17 @@ result = databases.list_documents('642f358bf4084c662590', '642f3592aa5fc856ad1e'
 
 include Appwrite
 
-client = Client
-
-client.new
-    .set_endpoint('https://cloud.appwrite.io/v1')   # Your API Endpoint
-    .set_project('[PROJECT_ID]')                    # Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2')    # Your secret API key
+client = Client.new
+    .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
+    .set_project('[PROJECT_ID]')                  # Your project ID
+    .set_key('98fd4...a2ad2')                     # Your secret API key
 
 databases = Databases.new(client)
 
-response = databases.list_documents(database_id: '642f358bf4084c662590', '642f3592aa5fc856ad1e')
+documents = databases.list_documents(
+    database_id: '642f358bf4084c662590',
+    collection_id: '642f3592aa5fc856ad1e'
+)
 # ... More code to manipulate the results</code></pre>
         </div>
     </li>
@@ -544,16 +534,17 @@ response = databases.list_documents(database_id: '642f358bf4084c662590', '642f35
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client } from "https://deno.land/x/appwrite/mod.ts";
 
-let client = new Client();
-
-client
-    .setEndpoint('https://cloud.appwrite.io/v1')    // Your API Endpoint
-    .setProject('[PROJECT_ID]')                     // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2')    // Your secret API key
+let client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]')                  // Your project ID
+    .setKey('98fd4...a2ad2');                    // Your secret API key
 
 let databases = new sdk.Databases(client);
 
-let promise = databases.listDocuments('642f358bf4084c662590', '642f3592aa5fc856ad1e');
+let documents = await databases.listDocuments(
+    '642f358bf4084c662590',
+    '642f3592aa5fc856ad1e'
+);
 // ... More code to manipulate the results</code></pre>
         </div>
     </li>
@@ -562,16 +553,14 @@ let promise = databases.listDocuments('642f358bf4084c662590', '642f3592aa5fc856a
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 
-final client = Client();
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]')                  // Your project ID
+    .setKey('98fd4...a2ad2');                    // Your secret API key
 
-client
-    .setEndpoint('https://cloud.appwrite.io/v1')    // Your API Endpoint
-    .setProject('[PROJECT_ID]')                     // Your project ID
-    .setKey('919c2d18fb5d4...a2ae413da83346ad2')    // Your secret API key
+final databases = Databases(client);
 
-Databases databases = Databases(client);
-
-Future result = databases.listDocuments(
+final documents = await databases.listDocuments(
     databaseId: '642f358bf4084c662590',
     collectionId: '642f3592aa5fc856ad1e',
 );
@@ -584,15 +573,13 @@ Future result = databases.listDocuments(
             <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
 
 val client = Client()
-
-client
-    .setEndpoint("https://cloud.appwrite.io/v1")    // Your API Endpoint
-    .setProject("[PROJECT_ID]")                     // Your project ID
-    .setKey("919c2d18fb5d4...a2ae413da83346ad2")    // Your secret API key
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+    .setKey('98fd4...a2ad2');                    // Your secret API key
 
 val databases = Databases(client)
 
-val response = databases.listDocuments(
+val documents = databases.listDocuments(
     databaseId = "642f358bf4084c662590",
     collectionId = "642f3592aa5fc856ad1e",
 )
@@ -605,19 +592,17 @@ val response = databases.listDocuments(
             <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
 
 let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+    .setKey('98fd4...a2ad2');                    // Your secret API key
 
-client
-    .setEndpoint("https://cloud.appwrite.io/v1")    // Your API Endpoint
-    .setProject("[PROJECT_ID]")                     // Your project ID
-    .setKey("919c2d18fb5d4...a2ae413da83346ad2")    // Your secret API key
-    
-    let databases = Databases(client)
-    
-    let documentList = try await databases.listDocuments(
-        databaseId: "642f358bf4084c662590",
-        collectionId: "642f3592aa5fc856ad1e"
-    )
-    // ... More code to manipulate the results</code></pre>
+let databases = Databases(client)
+
+let documents = try await databases.listDocuments(
+    databaseId: "642f358bf4084c662590",
+    collectionId: "642f3592aa5fc856ad1e"
+)
+// ... More code to manipulate the results</code></pre>
         </div>
     </li>
     <li>
@@ -627,16 +612,14 @@ client
 using Appwrite.Services;
 using Appwrite.Models;
 
-var client = new Client();
-
-client
-    .SetEndpoint("https://cloud.appwrite.io/v1")    // Your API Endpoint
-    .SetProject("[PROJECT_ID]")                     // Your project ID
-    .SetKey("919c2d18fb5d4...a2ae413da83346ad2");   // Your secret API key
+var client = new Client()
+    .SetEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .SetProject("[PROJECT_ID]")                  // Your project ID
+    .SetKey('98fd4...a2ad2');                    // Your secret API key
 
 var databases = new Databases(client);
 
-var documentList = await databases.ListDocuments(
+var documents = await databases.ListDocuments(
     databaseId: "642f358bf4084c662590",
     collectionId: "642f3592aa5fc856ad1e");
 

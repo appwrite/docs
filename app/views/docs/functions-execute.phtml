@@ -60,20 +60,21 @@ use Appwrite\Utopia\View;
             <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Functions } from 'appwrite';  
 
 const client = new Client()
-
-client
     .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject('[PROJECT_ID]')
+    .setProject('[PROJECT_ID]');
 
 const functions = new Functions(client)
 
 try {
-    const data = await functions.createExecution('[FUNCTION_ID]', JSON.stringify({
-        'foo': 'bar'
-    }), '/', 'GET', {
-      'X-Custom-Header': '123'
-    })
-    console.log(data)
+    const execution = await functions.createExecution(
+        '[FUNCTION_ID]',
+        JSON.stringify({ 'foo': 'bar' }),
+        false,
+        '/',
+        'GET',
+        { 'X-Custom-Header': '123' }
+    )
+    console.log(execution)
 } catch (err) {
     console.error(err.message)
 }</code></pre>
@@ -87,20 +88,24 @@ try {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
 import 'dart:convert';
 
-final client = Client();
-client
+final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject('[PROJECT_ID]')
+    .setProject('[PROJECT_ID]');
 
 final functions = Functions(client);
 
 try {
-    final response = await functions.createExecution('[FUNCTION_ID]', json.encode({
-        'foo': 'bar'
-    }), '/', 'GET', {
-        'X-Custom-Header': '123'
-    });
-    print(response.data);
+    final execution = await functions.createExecution(
+        functionId: '[FUNCTION_ID]',
+        body: json.encode({ 'foo': 'bar' }),
+        async: false,
+        path: '/',
+        method: 'GET',
+        headers: {
+            'X-Custom-Header': '123'
+        }
+    );
+    print(execution.toMap());
 } catch (e) {
     print(e.message);
 }</code></pre>
@@ -115,22 +120,26 @@ try {
 import io.appwrite.services.Functions;
 import com.google.gson.Gson;
 
-val client = new Client();
-client
+val client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]')
 
-val functions = new Functions(client);
+val functions = Functions(client)
 
 try {
-    val response = await functions.createExecution('[FUNCTION_ID]', gson.toString({
-        'foo': 'bar'
-    }), '/', 'GET', {
-        'X-Custom-Header': '123'
-    });
-    print(response.data);
-} catch (e) {
-    print(e.message);
+    val execution = functions.createExecution(
+        functionId = "[FUNCTION_ID]",
+        body = gson.toJson(mapOf("foo" to "bar")),
+        async = false,
+        path = "/",
+        method = "GET",
+        headers = mapOf(
+            "X-Custom-Header" to "123"
+        )
+    )
+    print(execution.toMap())
+} catch (AppwriteException e) {
+    e.printStackTrace()
 }</code></pre>
         </div>
         </div>
@@ -143,25 +152,24 @@ try {
 import Foundation
 
 let client = Client()
-client
     .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("[PROJECT_ID]")
 
-let functions = Functions(client: client)
+let functions = Functions(client)
 
 do {
-    let response = try functions.createExecution(
+    let execution = try await functions.createExecution(
         functionId: "[FUNCTION_ID]",
-        data: NSJSONSerialization.jsonObject(with: ["foo": "bar"], options: [])!,
+        data: JSONSerialization.jsonObject(with: ["foo": "bar"], options: [])!,
         xpath: "/",
         method: "GET",
         headers: [
             "X-Custom-Header": "123"
         ]
     )
-    print(response)
-} catch let error {
-    print(error)
+    print(execution.toMap())
+} catch {
+    print(error.localizedDescription)
 }</code></pre>
         </div>
         </div>
@@ -178,26 +186,25 @@ do {
             <pre class="line-numbers"><code class="prism language-js" data-prism>import { Client, Functions } from 'node-appwrite';  
 
 const client = new Client()
-
-client
     .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]')
-    .setKey('[API_KEY]')
+    .setKey('[API_KEY]');
 
-const functions = new Functions(client)
+const functions = new Functions(client);
 
 try {
-    const data = await functions.createExecution('[FUNCTION_ID]', JSON.stringify({
-        'foo': 'bar'
-    }), '/', 'GET', {
-        'X-Custom-Header': '123'
-    })
-    console.log(data)
-} catch (err) {
-    console.error(err.message)
-}
-
-</code></pre>
+    const execution = await functions.createExecution(
+        '[FUNCTION_ID]',
+        JSON.stringify({ 'foo': 'bar' }),
+        false,
+        '/',
+        'GET',
+        { 'X-Custom-Header': '123' }
+    )
+    console.log(execution)
+} catch (error) {
+    console.error(error.message)
+}</code></pre>
         </div>
         </div>
     </li>
@@ -215,16 +222,25 @@ $client = new Client();
 $client
     ->setEndpoint('https://cloud.appwrite.io/v1')
     ->setProject('[PROJECT_ID]')
-    ->setKey('[API_KEY]')
-;
+    ->setKey('[API_KEY]');
 
 $functions = new Functions($client);
 
-$result = $functions->createExecution('[FUNCTION_ID]', json_encode([
-    'foo' => 'bar' 
-], '/', 'GET', [
-    'X-Custom-Header': '123'
-]);</code></pre>
+try {
+    $execution = $functions->createExecution(
+        functionId: '[FUNCTION_ID]',
+        body: json_encode([ 'foo' => 'bar' ]),
+        async: false,
+        path: '/',
+        method: 'GET',
+        headers: [
+            'X-Custom-Header' => '123'
+        ]
+    );
+    echo $execution;
+} catch ($e) {
+    echo $e->getMessage();
+}</code></pre>
         </div>
         </div>
     </li>
@@ -234,6 +250,7 @@ $result = $functions->createExecution('[FUNCTION_ID]', json_encode([
         <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
             <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
 from appwrite.services.functions import Functions
+
 import json
 
 client = Client()
@@ -246,11 +263,19 @@ client = Client()
 
 functions = Functions(client)
 
-result = functions.create_execution('[FUNCTION_ID]', json.dumps({
-    'foo': 'bar'
-}, '/', 'GET', {
-    'X-Custom-Header': '123'
-})</code></pre>
+try:
+    execution = functions.create_execution(
+        functionId="[FUNCTION_ID]",
+        data=json.dumps({'foo': 'bar'}),
+        xpath='/',
+        method='GET',
+        headers=[
+            'X-Custom-Header': '123'
+        ]
+    )
+    print(execution)
+except Exception as e:
+    print(e.message)</code></pre>
         </div>
         </div>
     </li>
@@ -270,13 +295,20 @@ client = Client.new
 
 functions = Functions.new(client)
 
-response = functions.create_execution(function_id: '[FUNCTION_ID]', data: JSON.generate({
-    'foo': 'bar'
-}), '/', 'GET', {
-    'X-Custom-Header': '123'
-})
-
-puts response.inspect</code></pre>
+begin
+    execution = functions.create_execution(
+        function_id: '[FUNCTION_ID]',
+        body: JSON.generate({ 'foo': 'bar'}),
+        async: false,
+        path: '/',
+        method: 'GET',
+        headers: {
+        'X-Custom-Header': '123'
+    })
+    puts execution
+rescue => e
+    puts e.message
+end</code></pre>
         </div>
         </div>
     </li>
@@ -287,23 +319,24 @@ puts response.inspect</code></pre>
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Functions } from "https://deno.land/x/appwrite/mod.ts";
 
 const client = new Client()
-
-client
     .setEndpoint('https://cloud.appwrite.io/v1') 
     .setProject('[PROJECT_ID]')
-    .setKey('[API_KEY]')
+    .setKey('[API_KEY]');
 
-const functions = new Functions(client)
+const functions = new Functions(client);
 
 try {
-    const data = await functions.createExecution('[FUNCTION_ID]', JSON.stringify({
-        'foo': 'bar'
-    }), '/', 'GET', {
-        'X-Custom-Header': '123'
-    })
-    console.log(data)
-} catch (err) {
-    console.error(err.message)
+    const execution = await functions.createExecution(
+        '[FUNCTION_ID]',
+        JSON.stringify({ 'foo': 'bar' }),
+        false,
+        '/',
+        'GET',
+        { 'X-Custom-Header': '123' }
+    )
+    console.log(execution)
+} catch (error) {
+    console.error(error.message)
 }</code></pre>
         </div>
         </div>
@@ -315,34 +348,28 @@ try {
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
 import 'dart:convert';
 
-void main() {
-  Client client = Client();
-  Functions functions = Functions(client);
-
-  client
+final client = Client();
     .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject('[PROJECT_ID]')
-    .setKey('[API_KEY]')
-  ;
+    .setKey('[API_KEY]');
 
-  Future result = functions.createExecution(
-    functionId: '[FUNCTION_ID]',
-    data: json.encode({
-      'foo': 'bar'
-    }),
-    xpath: '/',
-    method: 'GET',
-    headers: {
-        'X-Custom-Header': '123'
-    }
-  );
+final functions = Functions(client);
 
-  result
-    .then((response) {
-      print(response);
-    }).catchError((error) {
-      print(error.response);
-  });
+try {
+    final execution = await functions.createExecution(
+        functionId: '[FUNCTION_ID]',
+        body: json.encode({
+          'foo': 'bar'
+        }),
+        async: false,
+        xpath: '/',
+        method: 'GET',
+        headers: {
+            'X-Custom-Header': '123'
+        }
+    );
+} catch (e) {
+    print(e.message);
 }</code></pre>
         </div>
         </div>
@@ -361,16 +388,21 @@ let client = Client()
 
 let functions = Functions(client)
 
-let execution = try await functions.createExecution(
-    functionId: "[FUNCTION_ID]",
-    data: NSJSONSerialization.jsonObject(with: [
-        "foo": "bar"
-    ], options: [])!),
-    xpath: '/',
-    method: 'GET',
-    headers: [
-        "X-Custom-Header": "123"
-])</code></pre>
+do {
+    let execution = try await functions.createExecution(
+        functionId: "[FUNCTION_ID]",
+        body: JSONSerialization.jsonObject(with: ["foo": "bar"], options: [])!),
+        async: false,
+        xpath: "/",
+        method: "GET",
+        headers: [
+            "X-Custom-Header": "123"
+        ]
+    )
+    print(execution)
+catch {
+    print(error.localizedDescription)
+}</code></pre>
         </div>
         </div>
     </li>
@@ -390,16 +422,26 @@ var client = new Client()
 
 var functions = new Functions(client);
 
-Execution result = await functions.CreateExecution(
-    functionId: "[FUNCTION_ID]",
-    data: JsonSerializer.Serialize&lt;object>(new Dictionary&lt;string, object&gt; {
-        { "foo", "bar" }
-    }),
-    xpath: "/",
-    method: "GET",
-    headers: new Dictionary&lt;string, object&gt; {
-        { "X-Custom-Header", "123" }
-});</code></pre>
+try
+{
+    var execution = await functions.CreateExecution(
+        functionId: "[FUNCTION_ID]",
+        body: JsonSerializer.Serialize&lt;object>(new Dictionary&lt;string, object&gt; {
+            { "foo", "bar" }
+        }),
+        async: false,
+        xpath: "/",
+        method: "GET",
+        headers: new Dictionary&lt;string, object&gt; {
+            { "X-Custom-Header", "123" }
+        });
+
+    Debug.Write(execution)
+}
+catch (Exception e)
+{
+    Debug.Write(e);
+}</code></pre>
         </div>
         </div>
     </li>
@@ -411,17 +453,17 @@ Execution result = await functions.CreateExecution(
 import io.appwrite.services.Functions
 import com.google.gson.Gson
 
-fun main(args: Array&lt;String&gt;) {
-    val client = Client(context)
-        .setEndpoint("https://cloud.appwrite.io/v1")
-        .setProject("[PROJECT_ID]")
-        .setKey("[API_KEY]")
+val client = Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1")
+    .setProject("[PROJECT_ID]")
+    .setKey("[API_KEY]")
 
-    val functions = Functions(client)
+val functions = Functions(client)
 
-    val response = functions.createExecution(
+try {
+    val execution = functions.createExecution(
         functionId = "[FUNCTION_ID]",
-        data = gson.toString(mapOf(
+        body = gson.toJson(mapOf(
             "foo" to "bar"
         )),
         xpath = "/",
@@ -430,9 +472,10 @@ fun main(args: Array&lt;String&gt;) {
             "X-Custom-Header" to "123"
         )
     )
-}
-
-</code></pre>
+    print(execution)
+} catch (e: Exception) {
+    e.printStackTrace()
+}</code></pre>
         </div>
 
         </div>
@@ -446,34 +489,33 @@ import io.appwrite.services.Functions;
 import java.util.HashMap;
 import com.google.gson.Gson;
 
-public static void main(String[] args) throws Exception {
-    Client client = new Client()
-        .setEndpoint("https://cloud.appwrite.io/v1")
-        .setProject("[PROJECT_ID]")
-        .setKey("[API_KEY]");
+Client client = new Client()
+    .setEndpoint("https://cloud.appwrite.io/v1")
+    .setProject("[PROJECT_ID]")
+    .setKey("[API_KEY]");
 
-    Functions functions = new Functions(client);
+Functions functions = new Functions(client);
 
-    functions.createExecution(
-        "[FUNCTION_ID]",
-        new CoroutineCallback<>((result, error) -> {
-            if (error != null) {
-                error.printStackTrace();
-                return;
-            }
+functions.createExecution(
+    "[FUNCTION_ID]",
+    gson.toJson(new HashMap<String, Object>() {{
+        put("foo", "bar");
+    }}),
+    false,
+    "/",
+    "GET",
+    new HashMap<String, Object>() {{
+        put("X-Custom-Header", "123");
+    }},
+    new CoroutineCallback<>((execution, error) -> {
+        if (error != null) {
+            error.printStackTrace();
+            return;
+        }
 
-            System.out.println(result);
-        }),
-        gson.toString(new HashMap<String, Object>() {{
-            put("foo", "bar");
-        }}),
-        "/",
-        "GET",
-        new HashMap<String, Object>() {{
-            put("X-Custom-Header", "123");
-        }},
-    );
-}</code></pre>
+        System.out.println(result);
+    }),
+);</code></pre>
         </div>
         </div>
     </li>
