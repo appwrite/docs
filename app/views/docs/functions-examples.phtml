@@ -398,10 +398,12 @@ def main(context):
     if vote['vote'] != 'yes' and vote['vote'] != 'no':
         return context.res.json({'ok': False, 'message': 'You must vote yes or no.'}, 400)
 
-    client = Client()
-    client.set_endpoint('https://cloud.appwrite.io/v1')
-    client.set_project(os.environ['APPWRITE_FUNCTION_PROJECT_ID'])
-    client.set_key(os.environ['APPWRITE_API_KEY'])
+    client = (
+        Client()
+        .set_endpoint("https://cloud.appwrite.io/v1")
+        .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
+        .set_key(os.environ["APPWRITE_API_KEY"])
+    )
 
     database = Databases(client)
     
@@ -734,10 +736,10 @@ def main(context):
         }
 
         client = (
-          Client()
-            .set_endpoint('https://cloud.appwrite.io/v1')
-            .set_project(os.environ['APPWRITE_FUNCTION_PROJECT_ID'])
-            .set_key(os.environ['APPWRITE_API_KEY'])
+            Client()
+            .set_endpoint("https://cloud.appwrite.io/v1")
+            .set_project(os.environ["APPWRITE_FUNCTION_PROJECT_ID"])
+            .set_key(os.environ["APPWRITE_API_KEY"])
         )
 
         databases = Databases(client)
