@@ -19,6 +19,51 @@
 </p>
 <p><a href="/docs/sms-delivery"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Set up SMS delivery</a></p>
 
+<h2><a href="#git" id="git">Configure GitHub App</a></h2>
+<p>
+    Appwrite supports automatic deployments through Git integration. 
+    In order for Appwrite to access your repos, you must configure a GitHub app to enable this integration.
+</p>
+
+<p>You'll have to configure the following environment variables.</p>
+
+<table class="full">
+    <thead>
+    <tr>
+        <td style="width: 120px">Variable</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>_APP_VCS_GITHUB_APP_NAME</td>
+        <td>Name of your GitHub app. This value should be set to your GitHub application's URL.</td>
+    </tr>
+    <tr>
+        <td>_APP_VCS_GITHUB_PRIVATE_KEY</td>
+        <td>GitHub app RSA private key. You can generate private keys from GitHub application settings.</td>
+    </tr>
+    <tr>
+        <td>_APP_VCS_GITHUB_APP_ID</td>
+        <td>GitHub application ID. You can find it in your GitHub application details.</td>
+    </tr>
+    <tr>
+        <td>_APP_VCS_GITHUB_CLIENT_ID</td>
+        <td>GitHub client ID. You can find it in your GitHub application details.</td>
+    </tr>
+    <tr>
+        <td>_APP_VCS_GITHUB_CLIENT_SECRET</td>
+        <td>GitHub client secret. You can generate secrets in your GitHub application settings.</td>
+    </tr>
+    <tr>
+        <td>_APP_VCS_GITHUB_WEBHOOK_SECRET</td>
+        <td>GitHub webhook secret. You can configure it in your GitHub application settings under webhook section.</td>
+    </tr>
+    </tbody>
+</table>
+
+<p><a href="/docs/environment-variables"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Learn more about environment variables</a></p>
+
 <h2><a href="#functions" id="functions">Configure Function Runtimes</a></h2>
 <p>
     Not all function runtimes are enabled by default. Enable the runtimes that you need and disable unused runtimes to save disk space on your server.
@@ -40,7 +85,7 @@
 <h2><a href="#storage" id="storage">Storage Adaptors</a></h2>
 <p>Appwrite's Storage Service can be configured to store files locally, or with self-hosted and cloud storage services. By default, Appwrite's Storage Service <b>stores files on your server's local storage</b>. If you expect large volumes of data or the need to have scalable data storage, you may choose to use a separate storage service.</p>
 
-<p>Appwrite supports AWS S3, Digital Ocean Spaces, Backblaze, Akamai Object Storage, and Wasabi as storage adaptors. Some of these services can be self-hosted, just like Appwrite.</p>
+<p>Appwrite supports AWS S3, Digital Ocean Spaces, Backblaze, Linode, and Wasabi as storage adaptors. Some of these services can be self-hosted, just like Appwrite.</p>
 
 <p>You can select which storage adaptor to use by setting the <code>_APP_STORAGE_DEVICE</code> environment variable. Valid values are <code>local</code>, <code>s3</code>, <code>dospaces</code>, <code>backblaze</code>, <code>linode</code> and <code>wasabi</code>. Each storage adaptor requires its own set of additional environment variables to configure.</p>
 
