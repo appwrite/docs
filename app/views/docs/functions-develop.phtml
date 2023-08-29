@@ -490,13 +490,13 @@ public class Main {
             <pre class="line-numbers"><code class="prism language-js" data-prism>// before destructuring
 export default async function (context) {
     context.log("This is a log!");
-    // ... more code
+    return context.res.send("This is a response!");
 }
 
 // after destructuring
 export default async function ({ req, res, log, error }) {
     log("This is a log!");
-    // ... more code
+    return res.send("This is a response!");
 }</code></pre>
         </div>
     </li>
@@ -506,13 +506,13 @@ export default async function ({ req, res, log, error }) {
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>// before destructuring
 export default async function (context: any) {
     context.log("This is a log!");
-    // ... more code
+    return context.res.send("This is a response!");
 }
    
 // after destructuring
 export default async function ({ req, res, log, error }: any) {
     context.log("This is a log!");
-    // ... more code
+    return res.send("This is a response!");
 }</code></pre>
         </div>
     </li>
