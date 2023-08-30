@@ -30,7 +30,7 @@
         <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run -it --rm \
     --volume /var/run/docker.sock:/var/run/docker.sock \
     --volume "$(pwd)"/appwrite:/usr/src/code/appwrite:rw \
-    --entrypoint="install" \
+    --entrypoint="upgrade" \
     appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
     </div>
     </li>
@@ -41,7 +41,7 @@
             <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run -it --rm ^
     --volume //var/run/docker.sock:/var/run/docker.sock ^
     --volume "%cd%"/appwrite:/usr/src/code/appwrite:rw ^
-    --entrypoint="install" ^
+    --entrypoint="upgrade" ^
     appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
         </div>
     </li>
@@ -52,7 +52,7 @@
             <pre class="line-numbers"><code class="prism language-bash" data-prism>docker run -it --rm `
     --volume /var/run/docker.sock:/var/run/docker.sock `
     --volume ${pwd}/appwrite:/usr/src/code/appwrite:rw `
-    --entrypoint="install" `
+    --entrypoint="upgrade" `
     appwrite/appwrite:<?php echo APP_VERSION_STABLE; ?></code></pre>
         </div>
     </li>
