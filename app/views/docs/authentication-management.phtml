@@ -1,0 +1,420 @@
+<p>
+    Appwrite has built-in features to help manage user accounts.
+    Users can be organized into teams and be given labels, so they can be given different permissions and access different resources.
+    Each user can also have their own preference object, which you can use to save preferences such as theme, language, and notification settings.
+</p>
+
+
+<h2><a href="#preferences" id="preferences">User Preferences</a></h2>
+<p>
+    You can store user preferences on a user's account using Appwrite's <a href="/docs/client/account#accountUpdatePrefs">Update Preferences</a> endpoint. 
+    You can store user preferences such as theme, notification settings, or preferred language so they can be synced across multiple devices.
+</p>
+<p>
+    Preferences are stored as a key-value JSON object.
+    The maximum allowed size for preferences is 64kB, and an error will be thrown if this limit is exceeded.
+</p> 
+<ul class="phases clear" data-ui-phases>
+<li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');                 // Your project ID
+
+const account = new Account(client);
+
+const promise = account.updatePrefs({darkTheme: true, language: 'en'});
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');                 // Your project ID
+
+final account = Account(client);
+
+final user = await account.updatePrefs(
+    prefs: {
+        "darkTheme": true,
+        "language": "en",
+    }
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+
+val account = Account(client)
+
+val user = account.updatePrefs(
+    prefs = mapOf(
+        "darkTheme" to true, 
+        "language" to "en"
+    )
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+
+let account = Account(client)
+
+let user = try await account.updatePrefs(
+    prefs: [
+        "darkTheme": true, 
+        "language": "en"
+    ]
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountUpdatePrefs(
+        prefs: "{\"darkTheme\": true, \"language\": \"en\"}"
+    ) {
+        _id
+        name
+        prefs {
+            data
+        }
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>After a user's preferences are updated, they can be retrieved using the <a href="/docs/client/account#accountGetPrefs">Get Preferences</a> endpoint.</p> 
+
+<ul class="phases clear" data-ui-phases>
+<li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');                 // Your project ID
+
+const account = new Account(client);
+
+const promise = account.getPrefs();
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');                 // Your project ID
+
+final account = Account(client);
+
+final prefs = await account.getPrefs();</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+
+val account = Account(client)
+
+val prefs = account.getPrefs()</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+
+let account = Account(client)
+
+let prefs = try await account.getPrefs()</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>query {
+    accountGetPrefs {
+        data
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="#users-api" id="users-api">Users API</a></h2>
+<p>
+    The Users API is a dedicated API for managing users from an admin's perspective. 
+    You'll notice that the Account API doesn't allow you to view or make changes to other users. 
+    This is by design and for <b>security reasons</b>.
+</p>
+
+<p>
+    You can use the Users API with an API key authenticated <a href="/docs/sdks">Server SDK</a> to manage users.
+    If you must expose parts of the Users API to normal users, we suggest doing so through an Appwrite Function.
+    Exposing API keys to users is <b>dangerous and a security risk</b>, by using an Appwrite Function, you can add your own validation to prevent malicious behavior.
+</p>
+
+<p>
+<a href="/docs//server/users"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> 
+    Learn more about the Users API
+</a>
+</p>
+
+<h2><a href="#labels" id="labels">Labels</a></h2>
+<p>
+    Labels are a good way to flag a user to grant them access to resources. 
+    For example, a <code>subscriber</code> label can be added to a user once they've purchased a subscription.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <div class="ide margin-top-small" data-lang="nodejs" data-lang-label="Node.js SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>const sdk = require('node-appwrite');
+                    
+const client = new sdk.Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                 // Your project ID
+    .setKey('98fd4...a2ad2');                    // Your secret API key
+
+const users = new sdk.Users(client);
+
+const promise = users.updateLabels(
+    '[USER_ID]',
+    [ Role.label('subscriber') ]
+);
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>PHP</h3>
+
+        <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP SDK">
+            <pre class="line-numbers"><code class="prism language-php" data-prism>use Appwrite\Client;
+use Appwrite\Services\Users;
+use Appwrite\Role;
+
+$client = new Client();
+
+$client
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                 // Your project ID
+    .setKey('98fd4...a2ad2');                    // Your secret API key
+
+$users = new Users($client);
+
+$result = $users->updateLabels(
+    '[USER_ID]', 
+    [ Role.label('subscriber') ]
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <div class="ide margin-top-small" data-lang="python" data-lang-label="Python SDK">
+            <pre class="line-numbers"><code class="prism language-python" data-prism>from appwrite.client import Client
+from appwrite.services.users import Users
+from appwrite.role import Role
+
+client = Client()
+
+(client
+  .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
+  .set_project('5df5acd0d48c2')                 # Your project ID
+  .set_key('98fd4...a2ad2')                     # Your secret API key
+)
+ 
+users = Users(client)
+
+result = users.update_labels(
+    '[USER_ID]',
+    [ Role.label('subscriber') ]
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <div class="ide margin-top-small" data-lang="ruby" data-lang-label="Ruby SDK">
+            <pre class="line-numbers"><code class="prism language-ruby" data-prism>require 'appwrite'
+
+include Appwrite
+
+client = Client.new
+    .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
+    .set_project('5df5acd0d48c2')                 # Your project ID
+    .set_key('98fd4...a2ad2')                     # Your secret API key
+
+users = Users.new(client)
+
+response = users.update_labels(
+    user_id: '[USER_ID]',
+    labels: [ Role.label('subscriber') ]
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno SDK">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import * as sdk from "https://deno.land/x/appwrite/mod.ts";
+
+let client = new sdk.Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                 // Your project ID
+    .setKey('98fd4...a2ad2');                    // Your secret API key
+
+let users = new sdk.Users(client);
+
+const promise = users.updateLabels(
+    '[USER_ID]',
+    [ Role.label('subscriber') ]
+);
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:dart_appwrite/dart_appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                 // Your project ID
+    .setKey('98fd4...a2ad2');                    // Your secret API key
+
+final users = Users(client);
+
+final result = await users.updateLabels(
+    userId: '[USER_ID]',
+    labels: [ Role.label('subscriber') ],
+);</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <div class="ide margin-top-small" data-lang="kotlin" data-lang-label="Kotlin SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.Role
+import io.appwrite.services.Users
+
+val client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
+    .setKey("98fd4...a2ad2")                     // Your secret API key
+
+val users = Users(client)
+
+val response = users.updateLabels(
+    userId = "[USER_ID]",
+    labels = [ Role.label('subscriber') ]
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <div class="ide margin-top-small" data-lang="swift" data-lang-label="Swift SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
+    .setKey("98fd4...a2ad2")                     // Your secret API key
+
+let users = Users(client)
+
+let response = try await users.updateLabels(
+    userId: "[USER_ID]",
+    labels: [ Role.label('subscriber') ]
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>.NET</h3>
+        <div class="ide margin-top-small" data-lang="csharp" data-lang-label=".NET SDK">
+            <pre class="line-numbers"><code class="prism language-csharp" data-prism></code>using Appwrite;
+
+var client = new Client()
+    .SetEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .SetProject("5df5acd0d48c2")                 // Your project ID
+    .SetKey("98fd4...a2ad2");                    // Your secret API key
+
+var users = new Users(client);
+
+var response = await users.UpdateLabels(
+    userId: "[USER_ID]",
+    labels: [ Role.Label('subscriber') ]
+);</pre>
+        </div>
+    </li>
+</ul>
+
+<p>
+    This would correspond with the permissions <code>Permissions.read(Role.label('subscriber'))</code>, <code>Permissions.update(Role.label('subscriber'))</code>, <code>Permissions.delete(Role.label('subscriber'))</code>, and <code>Permissions.create(Role.label('subscriber'))</code>.
+</p>
+
+
+<p>
+    <a href="/docs/permissions" rel="noopener"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Learn more about permissions</a>
+</p>
+
+<h2><a href="#teams" id="teams">Teams</a></h2>
+<p>
+    Teams are a good way to allow users to share access to resources. 
+</p>
+
+<p>
+    For example, in a todo app, a user can <a href="docs/client/teams#teamsCreate">create a team</a> for one of their todo lists and <a href="/docs/client/teams#teamsCreateMembership">invite another user</a> to the team to grant the other user access.
+    The invited user can <a href="/docs/client/teams#teamsUpdateMembershipStatus">accept the invitation</a> to gain access.
+    If the user's ever removed from the team, they'll lose access again.
+</p>  

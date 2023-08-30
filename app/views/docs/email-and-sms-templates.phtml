@@ -1,0 +1,251 @@
+<p>Appwrite uses emails to communicate with users to perform authentication and verification actions. Emails can be customized to fit your app's design and voice.</p>
+
+<p>
+    Each Appwrite project can have its own set of unique templates. 
+    Templates also support localization, so every template can be written in multiple languages and served 
+    depending on the configured locale.
+</p>
+
+<h2><a href="#smtp" id="#smtp">Custom SMTP server</a></h2>
+<p>
+    Appwrite Cloud has a default SMTP server to get you started.
+    This SMTP server sends generic emails and doesn't allow customizing SMTP templates.
+    To use custom SMTP templates, you will need to configure your own SMTP server.
+</p>
+
+<p>
+    There are many third-party SMTP providers like SendGrid and Mailgun. 
+    Before proceeding, pick an SMTP provider, create an account, and obtain <b>Sender name</b>, <b>Sender email</b>, <b>Server host</b>, <b>Server port</b>, <b>Username</b>, and <b>Password</b>.
+</p>
+
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>Navigate to your project's <b>Settings</b>.</li>
+    <li>Navigate to the <b>SMTP</b> tab.</li>
+    <li>Under <b>SMTP server</b>, toggle <b>Custom SMTP server</b>.</li>
+    <li>Input <b>Sender name</b>, <b>Sender email</b>, <b>Server host</b>, <b>Server port</b>, <b>Username</b>, and <b>Password</b> from your provider.</li>
+    <li>Click <b>Update</b>.</li>
+</ol>
+
+<h2><a href="#customize" id="customize">Customize Templates</a></h2>
+<p>You can customize email templates for each of your projects in the Appwrite Console. </p>
+<div class="notice">
+    <h2>Custom SMTP Server Required</h2>
+    <p>The built-in email service does not support custom email templates to prevent malicious templates. Configure a <a href="#smtp">custom SMTP server</a> to enable custom email templates.</p>
+</div>
+<ol class="margin-top margin-bottom-large text-size-normal">
+    <li>In your project, navigate to the <b>Auth</b> service.</li>
+    <li>Under the <b>Auth</b> service, navigate to the <b>Templates</b> tab.</li>
+    <li>Expand the email template you want to edit.</li>
+    <li>Select the <b>Template language</b>. You can have a different template for each language your app supports.</li>
+    <li>Update the email template fields and click <b>Update</b> to save your changes.</li>
+</ol>
+<h2><a href="#email-templates" id="email-templates">Email Templates</a></h2>
+<p>You can customize the email templates for account verification, magic-url authentication, password resets, and user invites.</p>
+<h3><a href="#email-template-components" id="email-template-components">Email Template Components</a></h3>
+<p>Each email templates has the following components that you can customize.</p>
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 200px">Component</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Sender name</td>
+        <td>Readers will see this as a display name of the sender.</td>
+    </tr>
+    <tr>
+        <td>Sender email</td>
+        <td>Readers will see this as a display email of the sender. This email must be authenticated on the SMTP provider you've configured, otherwise it will be delivered to the spam folder. This usually means the email must end with the same domain as your SMTP username.</td>
+    </tr>
+    <tr>
+        <td>Reply to</td>
+        <td>Readers will reply to this email address instead of the sender address. You can leave this field empty, and the sender email will be used automatically.</td>
+    </tr>
+    <tr>
+        <td>Subject</td>
+        <td>The title of the email.</td>
+    </tr>
+    <tr>
+        <td>Message</td>
+        <td>The body of the email in HTML format. You can find the variables available in the <a href="#email-template-syntax">Email Template Syntax</a> section.</td>
+    </tr>
+    </tbody>
+</table>
+<h3><a href="#email-template-syntax" id="email-template-syntax">Email Template Syntax</a></h3>
+<p>Variables can be used in email templates to dynamically construct unique emails for each reader. These variables can only be used in the <b>Message</b> field of the email template.</p>
+
+<table class="full text-size-small">
+    <thead>
+    <tr>
+        <td style="width: 200px">Variable</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>{{project}}</code></td>
+        <td>The project name.</td>
+    </tr>
+    <tr>
+        <td><code>{{team}}</code></td>
+        <td>The project team's name.</td>
+    </tr>
+    <tr>
+        <td><code>{{user}}</code></td>
+        <td>The name of the user receiving the email. This variable is not available in the Magic URL template, as there might not be a user yet.</td>
+    </tr>
+    <tr>
+        <td><code>{{redirect}}</code></td>
+        <td>The URL for the user to complete the email template's action.</td>
+    </tr>
+    </tbody>
+</table>
+
+<h3><a href="#email-template-examples" id="email-template-components">Email Template Examples</a></h3>
+<p>Here's an example of using these variables in a template.</p>
+<div class="ide margin-bottom" data-lang="html" data-lang-label="html">
+    <pre class="line-numbers"><code class="prism language-html" data-prism>&lt!doctype html&gt
+&lthtml&gt
+
+&lthead&gt
+    &ltstyle&gt
+        ... your style here
+    &lt/style&gt
+&lt/head&gt
+
+&ltbody style="direction: ltr"&gt
+
+&ltdiv style="max-width:650px; word-wrap: break-word; overflow-wrap: break-word;
+  word-break: break-all; margin:0 auto;"&gt
+    &lttable style="margin-top: 32px"&gt
+        &lttr&gt
+            &lttd&gt
+                &lth1&gt
+                    {{subject}}
+                &lt/h1&gt
+            &lt/td&gt
+        &lt/tr&gt
+    &lt/table&gt
+
+    &lttable style="margin-top: 40px"&gt
+        &lttr&gt
+            &lttd&gt
+                &ltp&gtHello &lt/p&gt
+
+                &ltp&gtFollow this link to reset your {{project}} password.&lt/p&gt
+
+                &lta href="{{redirect}}" target="_blank"&gt{{redirect}}&lt/a&gt
+
+                &ltp&gt&ltbr /&gtIf you didn't ask to reset your password, you can ignore this message.&lt/p&gt
+                &ltbr /&gt
+
+                &ltp&gtThanks
+                &ltbr /&gt
+                {{project}} team
+                &lt/p&gt
+            &lt/td&gt
+        &lt/tr&gt
+    &lt/table&gt
+&lt/div&gt
+
+&lt/body&gt
+
+&lt/html&gt</code></pre>
+</div>
+
+<h2><a href="#localization" id="localization">Localization</a></h2>
+
+<p>
+    Each template can have multiple supported locales, displayed in different format and language. 
+    This can be configured under the <b>Template language</b> selector of each template.
+</p>
+
+<p>
+    You can send messages in different languages by setting the locale with <code>client.setLocale()</code> in the SDKs or the <code>X-Appwrite-Locale</code> HTTP header. <a href="https://github.com/appwrite/appwrite/blob/master/app/config/locale/codes.php">View here the list of available locales</a>
+</p>
+
+<p>For example, you can send an email verification in French.</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client();
+
+const account = new Account(client);
+
+client
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                 // Your project ID
+    .setLocale('fr')                             // Your locale
+;
+
+const promise = account.createVerification('https://example.com');
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+void main() { // Init SDK
+  Client client = Client();
+  Account account = Account(client);
+
+  client
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                 // Your project ID
+    .setLocale('fr')                             // Your locale
+  ;
+  Future result = account.createVerification('https://example.com');
+
+  result
+    .then((response) {
+      print(response);
+    }).catchError((error) {
+      print(error.response);
+  });
+}</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
+    .setLocale('fr')                             // Your locale
+
+val account = Account(client)
+
+val response = account.createVerification('https://example.com')</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
+    .setLocale('fr')                             // Your locale
+
+let account = Account(client)
+
+let token = try await account.createVerification('https://example.com')</code></pre>
+        </div>
+    </li>
+</ul>

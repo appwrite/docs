@@ -19,6 +19,51 @@
 </p>
 <p><a href="/docs/sms-delivery"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Set up SMS delivery</a></p>
 
+<h2><a href="#git" id="git">Configure GitHub App</a></h2>
+<p>
+    Appwrite supports automatic deployments through Git integration. 
+    In order for Appwrite to access your repos, you must configure a GitHub app to enable this integration.
+</p>
+
+<p>You'll have to configure the following environment variables.</p>
+
+<table class="full">
+    <thead>
+    <tr>
+        <td style="width: 250px">Variable</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>_APP_VCS_GITHUB_APP_NAME</td>
+        <td>Name of your GitHub app. This value should be set to your GitHub application's URL.</td>
+    </tr>
+    <tr>
+        <td>_APP_VCS_GITHUB_PRIVATE_KEY</td>
+        <td>GitHub app RSA private key. You can generate private keys from GitHub application settings.</td>
+    </tr>
+    <tr>
+        <td>_APP_VCS_GITHUB_APP_ID</td>
+        <td>GitHub application ID. You can find it in your GitHub application details.</td>
+    </tr>
+    <tr>
+        <td>_APP_VCS_GITHUB_CLIENT_ID</td>
+        <td>GitHub client ID. You can find it in your GitHub application details.</td>
+    </tr>
+    <tr>
+        <td>_APP_VCS_GITHUB_CLIENT_SECRET</td>
+        <td>GitHub client secret. You can generate secrets in your GitHub application settings.</td>
+    </tr>
+    <tr>
+        <td>_APP_VCS_GITHUB_WEBHOOK_SECRET</td>
+        <td>GitHub webhook secret. You can configure it in your GitHub application settings under webhook section.</td>
+    </tr>
+    </tbody>
+</table>
+
+<p><a href="/docs/environment-variables"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Learn more about environment variables</a></p>
+
 <h2><a href="#functions" id="functions">Configure Function Runtimes</a></h2>
 <p>
     Not all function runtimes are enabled by default. Enable the runtimes that you need and disable unused runtimes to save disk space on your server.

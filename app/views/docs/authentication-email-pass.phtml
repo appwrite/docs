@@ -1,0 +1,614 @@
+<p>
+    Email and password login is the most commonly used authentication method.
+    Appwrite Authentication promotes a safer internet by providing secure APIs and promoting better password choices to end users.
+    Appwrite supports added security features like blocking personal info in passwords, password dictionary, and password history to help users choose good passwords.
+</p>
+
+<h2><a href="#signup" id="signup">Sign Up</a></h2>
+
+<p>
+    You can use the Appwrite Client SDKs to create an account using email and password.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account, ID } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+const account = new Account(client);
+
+const promise = account.create('[USER_ID]', 'email@example.com', '');
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');               // Your project ID
+
+final account = Account(client);
+
+final user = await account.create(
+    userId: ID.unique(),
+    email: 'email@example.com',
+    password: 'password',
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+import io.appwrite.ID
+
+val client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
+
+val account = Account(client)
+
+val user = account.create(
+    userId = ID.unique(),
+    email = "email@example.com",
+    password = "password"
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                // Your project ID
+
+let account = Account(client)
+
+let user = try await account.create(
+    userId: ID.unique(),
+    email: "email@example.com",
+    password: "password"
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreate(userId: "unique()", email: "email@example.com", password: "password") {
+        _id
+        email
+        name
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>
+    Passwords are hashed with <a href="https://en.wikipedia.org/wiki/Argon2" target="_blank" rel="noopener">Argon2</a>, a resilient and secure password hashing algorithm.
+</p>
+
+<h2><a href="#signup" id="signup">Verification</a></h2>
+
+<p>
+    After an account is created, it can be verified through the <a href="/docs/account#accountCreateVerification">account create verification</a> route. 
+    The user doesn't need to be verified to log in, but you can restrict resource access to verified users only <a href="/docs/">using permissions</a> through the <code>user([USER_ID], "verified")</code> role.
+</p>
+
+<p>
+    First, send a verification email. 
+    Specify a redirect URL which users will be redirected to.
+    The verification secrets will be appended as query parameters to the redirect URL.
+    In this example, the redirect URL is <code>https://example.com/verify</code>.
+</p>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2')                 // Your project ID
+
+const account = new Account(client);
+
+const promise = account.createVerification('https://example.com');
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');                // Your project ID
+
+final account = Account(client);
+
+final token = await account.createVerification(
+    url: 'https://example.com',
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(applicationContext)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
+
+val account = Account(client)
+
+val token = account.createVerification(
+    url = "https://example.com"
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
+
+let account = Account(client)
+
+let token = try await account.createVerification(
+    url: "https://example.com"
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreateVerification(
+        url: "https://example.com"
+    ) {
+        _id
+        _createdAt
+        userId
+        secret
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>
+    Next, implement the verification page in your app. 
+    This page will parse the secrets passed in through the <code>userId</code> and <code>secret</code> query parameters. 
+    In this example, the code below will be found in the page served at <code>https://example.com/verify</code>.
+</p>
+
+<p>
+    Since the secrets are passed in through url params, it will be easiest to perform this step in the browser.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');                 // Your project ID
+
+const account = new Account(client);
+
+const urlParams = new URLSearchParams(window.location.search);
+const secret = urlParams.get('secret');
+const userId = urlParams.get('userId');
+
+const promise = account.updateVerification(userId, secret);
+
+promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});</code></pre>
+        </div>
+    </li>   
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('5df5acd0d48c2');                // Your project ID
+
+final account = Account(client);
+
+final result = account.updateVerification(
+    userId: '[USER_ID]',
+    secret: '[SECRET]',
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
+
+val account = Account(client)
+
+val response = account.updateVerification(
+    userId = "[USER_ID]",
+    secret = "[SECRET]"
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2")                 // Your project ID
+
+let account = Account(client)
+
+let token = try await account.updateVerification(
+    userId: "[USER_ID]",
+    secret: "[SECRET]"
+)</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountUpdateVerification(
+        userId: "[USER_ID]",
+        secret: "[SECRET]"
+    ) {
+        _id
+        _createdAt
+        userId
+        secret
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+
+<h2><a href="#login" id="login">Log In</a></h2>
+
+<p>
+    After you've created your account, users can be logged in using the <a href="/docs/client/account#accountCreateEmailSession">Create Email Session</a> route.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');                 // Your project ID
+
+const account = new Account(client);
+
+const promise = account.createEmailSession('email@example.com', 'password');
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');                 // Your project ID
+
+final account = Account(client);
+
+final session = await account.createEmailSession(
+    email: 'email@example.com',
+    password: 'password'
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+
+val account = Account(client)
+
+val session = account.createEmailSession(
+    email = "email@example.com",
+    password = "password"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+
+let account = Account(client)
+
+let session = try await account.createEmailSession(
+    email: "email@example.com",
+    password: "password"
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreateEmailSession(email: "email@example.com", password: "password") {
+        _id
+        userId
+        provider
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="#recovery" id="recovery">Password Recovery</a></h2>
+<p>
+    If a user forgets their password, they can initiate a password recovery flow to recover their password. The <a href="/docs/client/account#accountCreateRecovery">Create Password Recovery</a> endpoint sends the user an email with a temporary secret key for password reset. When the user clicks the confirmation link, they are redirected back to the password reset URL with the secret key and email address values attached to the URL as query strings. 
+</p>
+
+<p>
+    Only redirect URLs to domains added as a <a href="/docs/getting-started-for-web#addPlatform">platform</a> on your Appwrite console will be accepted. URLs not added as a platform are rejected to protect against <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md" target="_blank" rel="noopener">redirect attacks</a>.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+<li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');                 // Your project ID
+
+const promise = account.createRecovery('email@example.com', 'https://example.com');
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');                 // Your project ID
+
+final account = Account(client);
+
+final user = account.createRecovery(
+    email: 'email@example.com',
+    url: 'https://example.com',
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+
+val account = Account(client)
+
+val response = account.createRecovery(
+    email = "email@example.com",
+    url = "https://example.com"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+
+let account = Account(client)
+
+let token = try await account.createRecovery(
+    email: "email@example.com",
+    url: "https://example.com"
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountCreateRecovery(
+        email: "email@example.com",
+        url: "https://example.com"
+    ) {
+        _id
+        _createdAt
+        userId
+        secret
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<p>
+After receiving an email with the secret attached to the redirect link, submit a request to the <a href="/docs/client/account#accountUpdateRecovery">Create Password Recovery (confirmation)</a> endpoint to complete the recovery flow. The verification link sent to the user's email address is valid for 1 hour.
+</p>
+
+<ul class="phases clear" data-ui-phases>
+<li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');                 // Your project ID
+
+const promise = account.updateRecovery(
+    '[USER_ID]',
+    '[SECRET]',
+    'password',
+    'password'
+);
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');                 // Your project ID
+
+final account = Account(client);
+
+final user = await account.updateRecovery(
+    userId: '[USER_ID]',
+    secret: '[SECRET]',
+    password: 'password'
+    passwordAgain: 'password'
+);</code></pre>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client(context)
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+
+val account = Account(client)
+
+val token = account.updateRecovery(
+    userId = "[USER_ID]",
+    secret = "[SECRET]",
+    password = "password",
+    passwordAgain = "password"
+)</code></pre>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+
+let account = Account(client)
+
+let token = try await account.updateRecovery(
+    userId: "[USER_ID]",
+    secret: "[SECRET]",
+    password: "password",
+    passwordAgain: "password"
+)</code></pre>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>mutation {
+    accountUpdateRecovery(
+        userId: "[USER_ID]",
+        secret: "[SECRET]",
+        password: "password",
+        passwordAgain: "password"
+    ) {
+        _id
+        _createdAt
+        userId
+        secret
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="#security" id="security">Security</a></h2>
+<p>
+   Appwrite's security first mindset goes beyond a securely implemented of authentication API.
+   You can enable features like password dictionary, password history, and disallow personal data in passwords to encourage users to pick better passwords.
+   By enabling these features, you protect user data and teach better password choices, which helps make the internet a safer place.
+</p>
+<p>
+<a href="/docs/authentication-security#password-history"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> 
+    Learn more about security features
+</a>
+</p>

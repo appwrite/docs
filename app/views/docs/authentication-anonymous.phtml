@@ -1,0 +1,120 @@
+<p>
+    Anonymous sessions allow you to implement guest users.
+    Guest users let you store user information like items in their cart or theme preferences before they create an account.
+    This reduces the friction for your users to get started with your app.
+</p>
+
+<p>
+    If a user <b>later creates an account</b>, their information will be inherited by the newly created account.
+</p>
+
+<h2><a href="#createSession" id="createSession">Create Anonymous Session</a></h2>
+<p>
+    Create an anonymous session with <a href="/docs/client/account#accountCreateAnonymousSession">Create Anonymous Session</a> route.
+</p>
+
+
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <div class="ide" data-lang="javascript" data-lang-label="Web SDK">
+            <pre class="line-numbers"><code class="prism language-javascript" data-prism>import { Client, Account } from "appwrite";
+
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');                 // Your project ID
+
+const account = new Account(client);
+
+const promise = account.createAnonymousSession();
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+            <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'package:appwrite/appwrite.dart';
+
+final client = Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject('[PROJECT_ID]');                 // Your project ID
+
+final account = Account(client);
+
+final user = await account.createAnonymousSession();</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <div class="ide" data-lang="kotlin" data-lang-label="Android SDK">
+            <pre class="line-numbers"><code class="prism language-kotlin" data-prism>import io.appwrite.Client
+import io.appwrite.services.Account
+
+val client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+
+val account = Account(client)
+
+val user = account.createAnonymousSession()</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <div class="ide" data-lang="swift" data-lang-label="Apple SDK">
+            <pre class="line-numbers"><code class="prism language-swift" data-prism>import Appwrite
+
+let client = Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("[PROJECT_ID]")                  // Your project ID
+
+let account = Account(client)
+
+let user = try await account.createAnonymousSession()</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>GraphQL</h3>
+        <div class="ide" data-lang="graphql" data-lang-label="GraphQL">
+            <pre class="line-numbers"><code class="prism language-graphql" data-prism>
+mutation {
+    accountCreateAnonymousSession {
+        _id
+        userId
+        provider
+        expire
+    }
+}</code></pre>
+        </div>
+    </li>
+</ul>
+
+<h2><a href="#attach-account" id="attach-account">Attaching an Account</a></h2>
+<p>
+    Anonymous users cannot sign back in. 
+    If the session expires, they move to another computer, or they clear their browser data, they won't be able to log in again.
+    Remember to prompt the user to create an account to not lose their data.
+</p>
+
+<p>
+   Create an account with any of these methods to transition from an anonymous session to a user account session.
+</p>
+
+
+<p>
+<a href="/docs/authentication-email-pass"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny">Email and password</a>
+</p>
+<p>
+<a href="/docs/authentication-sms"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny">Phone (SMS)</a>
+</p>
+<p>
+<a href="/docs/authentication-magic"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny">Magic URL</a>   
+</p>
+<p>
+<a href="/docs/authentication-oauth"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny">OAuth2</a>
+</p>
