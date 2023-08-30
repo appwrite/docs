@@ -23,9 +23,77 @@
 <p>
     Appwrite supports automatic deployments through Git integration. 
     In order for Appwrite to access your repos, you must configure a GitHub app to enable this integration.
+    The GitHub app requires the following permissions。
 </p>
 
-<p>You'll have to configure the following environment variables.</p>
+<p><b>Repository permissions</b></p>
+
+<table class="full">
+    <thead>
+    <tr>
+        <td>Permission</td>
+        <td>Access</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Administration</td>
+        <td>Read and write</td>
+    </tr>
+    <tr>
+        <td>Checks</td>
+        <td>Read and write.</td>
+    </tr>
+    <tr>
+        <td>Contents</td>
+        <td>Read and write</td>
+    </tr>
+    <tr>
+        <td>Issues</td>
+        <td>Read and write</td>
+    </tr>
+    <tr>
+        <td>Pull requests</td>
+        <td>Read and write</td>
+    </tr>
+    <tr>
+        <td>Webhooks</td>
+        <td>Read and write</td>
+    </tr>
+    </tbody>
+</table>
+
+<p><b>Subscribe to events</b></p>
+
+<table class="full">
+    <thead>
+    <tr>
+        <td>Event</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Meta</td>
+    </tr>
+    <tr>
+        <td>Issue comment</td>
+    </tr>
+    <tr>
+        <td>Issues</td>
+    </tr>
+    <tr>
+        <td>Pull request</td>
+    </tr>
+    <tr>
+        <td>Push</td>
+    </tr>
+    <tr>
+        <td>Respository</td>
+    </tr>
+    </tbody>
+</table>
+
+<p>After creating your app, you'll have to configure the following environment variables.</p>
 
 <table class="full">
     <thead>
