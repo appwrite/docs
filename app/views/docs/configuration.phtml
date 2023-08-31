@@ -198,18 +198,18 @@
 
 <p>You can find a full list of supported runtimes on the <a href="/docs/environment-variables#functions">environment variables</a> page.</p>
 
-<p>You can also configure the maximum timeout that can be set on individual Appwrite functions. The maximum configurable timeout can be increased by changing the <code>_APP_FUNCTIONS_TIMEOUT</code> environment variable. This environment variable changes the configurable maximum but does not alter existing individual configurations.</p>
+<p>You can also configure the maximum timeout that can be set on individual Appwrite functions. The maximum configurable timeout can be increased by changing the <code>_APP_FUNCTIONS_TIMEOUT</code> environment variable. This environment variable changes the configurable maximum but does not alter existing configurations of individual functions.</p>
 
-<h2><a href="#storage" id="storage">Storage Adaptors</a></h2>
+<h2><a href="#storage" id="storage">Storage Adapters</a></h2>
 <p>Appwrite's Storage Service can be configured to store files locally, or with self-hosted and cloud storage services. By default, Appwrite's Storage Service <b>stores files on your server's local storage</b>. If you expect large volumes of data or the need to have scalable data storage, you may choose to use a separate storage service.</p>
 
-<p>Appwrite supports AWS S3, Digital Ocean Spaces, Backblaze, Akamai Object Storage, and Wasabi as storage adaptors. Some of these services can be self-hosted, just like Appwrite.</p>
+<p>Appwrite supports AWS S3, Digital Ocean Spaces, Backblaze, Akamai Object Storage, and Wasabi as storage adapters. Some of these services can be self-hosted, just like Appwrite.</p>
 
-<p>You can select which storage adaptor to use by setting the <code>_APP_STORAGE_DEVICE</code> environment variable. Valid values are <code>local</code>, <code>s3</code>, <code>dospaces</code>, <code>backblaze</code>, <code>linode</code> and <code>wasabi</code>. Each storage adaptor requires its own set of additional environment variables to configure.</p>
+<p>You can select which storage adaptor to use by setting the <code>_APP_STORAGE_DEVICE</code> environment variable. Valid values are <code>local</code>, <code>s3</code>, <code>dospaces</code>, <code>backblaze</code>, <code>linode</code>, and <code>wasabi</code>. Each storage adaptor requires its own set of additional environment variables to configure.</p>
 
 <p>The maximum size for individual file uploads is controlled by the <code>_APP_STORAGE_LIMIT</code> environment variable, which defaults to 30 MB. See <a href="/docs/environment-variables#storage">Environment Variables</a> for more information.</p>
 
-<p><a href="/docs/environment-variables#storage"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Configure storage adaptors</a></p>
+<p><a href="/docs/environment-variables#storage"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Configure storage adapters</a></p>
 
 <h2><a href="#apply-changes" id="apply-changes">Applying Changes</a></h2>
 <p>After editing your <code>docker-compose.yml</code> or <code>.env</code> files, you will need to recreate your Appwrite stack by running the following compose command in your terminal.</p>
