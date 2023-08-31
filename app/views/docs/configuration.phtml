@@ -22,7 +22,7 @@
 <h2><a href="#git" id="git">Configure GitHub App</a></h2>
 <p>
     Appwrite supports automatic deployments through Git integration. 
-    In order for Appwrite to access your repos, you must configure a GitHub app to enable this integration.
+    In order for Appwrite to access your repos, you must <a href="https://docs.github.com/en/apps/creating-github-apps/about-creating-github-apps/about-creating-github-apps" target="_blank" rel="noopener">create a GitHub app</a> to enable this integration.
     The GitHub app requires the following configurations.
 </p>
 
@@ -31,7 +31,7 @@
     If you're running on <code>localhost</code>, you need to run a proxy like <b>ngrok</b>.
 </p>
 
-<p><b>Callback URLs</b></p>
+<h3><a href="#callback" id="callback">Callback URL</a></h3>
 <p>
     GitHub will use <b>callback URLs</b> to communicate with Appwrite. 
     Set these callback URLs under <b>Identifying and authorizing users</b>.
@@ -44,19 +44,23 @@
     </thead>
     <tbody>
     <tr>
-        <td>http://[HOSTNAME_OR_IP]/v1/vcs/github/callback</td>
+        <td><code>http://[HOSTNAME_OR_IP]/v1/vcs/github/callback</code></td>
     </tr>
     <tr>
-        <td>http://[HOSTNAME_OR_IP]/v1/account/sessions/oauth2/callback/github/console</td>
+        <td><code>http://[HOSTNAME_OR_IP]/v1/account/sessions/oauth2/callback/github/console</code></td>
     </tr>
     </tbody>
 </table>
 
-<p><b>Post installation</b></p>
-<p>Check the <b> Redirect on update</b> box under the <b>Post installation</b> section.</p>
+<h3><a href="#post-install" id="post-install">Post Installation</a></h3>
+<p>
+    Check the <b> Redirect on update</b> box under the <b>Post installation</b> section.
+</p>
 
-<p><b>Repository permissions</b></p>
-
+<h3><a href="#repository-permission" id="repository-permission">Repository Permissions</a></h3>
+<p>
+    Configure these permissions under the <b>Repository permission</b> dropdown.
+</p>
 <table class="full">
     <thead>
     <tr>
@@ -100,8 +104,10 @@
     </tbody>
 </table>
 
-<p><b>Account permissions</b></p>
-
+<h3><a href="#account-permission" id="account-permission">Account Permissions</a></h3>
+<p>
+    Configure these permissions under the <b>Account Permission</b> dropdown.
+</p>
 <table class="full">
     <thead>
     <tr>
@@ -117,9 +123,10 @@
     </tbody>
 </table>
 
-
-<p><b>Subscribe to events</b></p>
-
+<h3><a href="#subscribe-events" id="subscribe-events">Subscribe to Events</a></h3>
+<p>
+    Select these under the <b>Subscribe to events</b> dropdown.
+</p>
 <table class="full">
     <thead>
     <tr>
@@ -135,6 +142,7 @@
     </tbody>
 </table>
 
+<h3><a href="#github-variables" id="github-variables">Environment Variables</a></h3>
 <p>After creating your app, you'll have to configure the following environment variables.</p>
 
 <table class="full">
@@ -147,7 +155,7 @@
     <tbody>
     <tr>
         <td>_APP_VCS_GITHUB_APP_NAME</td>
-        <td>Name of your GitHub app. This value should be set to your GitHub application's URL.</td>
+        <td>Name of your GitHub app. This is the display name you'll see on GitHub and it will be visible in your GitHub app's URL.</td>
     </tr>
     <tr>
         <td>_APP_VCS_GITHUB_PRIVATE_KEY</td>
@@ -171,8 +179,6 @@
     </tr>
     </tbody>
 </table>
-
-
 
 <p><a href="/docs/environment-variables"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Learn more about environment variables</a></p>
 
