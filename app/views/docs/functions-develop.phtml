@@ -2637,32 +2637,32 @@ public class Main {
         <li>
             The parameter passed into functions has changed.
             <code>req</code> and <code>res</code> has been replaced by <code>context</code>, which contains new logger methods.
-            <a href="docs/functions-develop#context">Learn about context.</a>
+            <a href="/docs/functions-develop#context">Learn about context.</a>
         </li>
         <li>
             To improve privacy and logging reliability, we provide new <code>context.log()</code> and <code>context.error()</code> functions.
             You can no longer use native logging methods.
-            <a href="docs/functions-develop#logging">Learn about logging.</a>
+            <a href="/docs/functions-develop#logging">Learn about logging.</a>
         </li>
         <li>
             The old way of <code>req.variables</code> has been deprecated.
             You can now access variables passed into each function as environment variables.
-            <a href="docs/functions-develop#environment-variables">Learn about environment variables.</a>
+            <a href="/docs/functions-develop#environment-variables">Learn about environment variables.</a>
         </li>
         <li>
             The <code>req</code> object has been updated to use terminology consistent with typical HTTP concepts.
             You'll now find familiar concepts like headers, body, HTTP methods, and others.
-            <a href="docs/functions-develop#request">Learn about request.</a>
+            <a href="/docs/functions-develop#request">Learn about request.</a>
         </li>
         <li>
             The response object has been updated.
             You can now specify headers, as well as use new methods like return redirects or empty responses.
-            <a href="docs/functions-develop#response">Learn about response.</a>
+            <a href="/docs/functions-develop#response">Learn about response.</a>
         </li>
         <li>
             Now, you <b>must return a response</b> such as <code>return context.res.send("")</code>.
             This prevents confusing errors when functions are terminated prematurely before a response is sent.
-            <a href="docs/functions-develop#response">Learn about response.</a>
+            <a href="#response">Learn about response.</a>
         </li>
         <li>
             Some variables about how a function was triggered are now found in the <code>context.req</code> object as <a href="/docs/functions-develop#request">headers</a>.

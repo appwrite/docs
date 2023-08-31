@@ -204,7 +204,7 @@ let prefs = try await account.getPrefs()</code></pre>
 
 <h2><a href="#labels" id="labels">Labels</a></h2>
 <p>
-    Labels are a good way to flag a user to grant them access to resources. 
+    Labels are a good way to categorize a user to grant them access to resources. 
     For example, a <code>subscriber</code> label can be added to a user once they've purchased a subscription.
 </p>
 
@@ -414,7 +414,7 @@ var response = await users.UpdateLabels(
 </p>
 
 <p>
-    For example, in a todo app, a user can <a href="docs/client/teams#teamsCreate">create a team</a> for one of their todo lists and <a href="/docs/client/teams#teamsCreateMembership">invite another user</a> to the team to grant the other user access.
+    For example, in a todo app, a user can <a href="/docs/client/teams#teamsCreate">create a team</a> for one of their todo lists and <a href="/docs/client/teams#teamsCreateMembership">invite another user</a> to the team to grant the other user access.
     The invited user can <a href="/docs/client/teams#teamsUpdateMembershipStatus">accept the invitation</a> to gain access.
     If the user's ever removed from the team, they'll lose access again.
 </p>  
