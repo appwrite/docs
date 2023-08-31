@@ -23,8 +23,37 @@
 <p>
     Appwrite supports automatic deployments through Git integration. 
     In order for Appwrite to access your repos, you must configure a GitHub app to enable this integration.
-    The GitHub app requires the following permissions。
+    The GitHub app requires the following configurations.
 </p>
+
+<p>
+    For automatic Git deployment to work, Appwrite needs to receive communication from GitHub, this means your Appwrite project must be accessible on the internet.
+    If you're running on <code>localhost</code>, you need to run a proxy like <b>ngrok</b>.
+</p>
+
+<p><b>Callback URLs</b></p>
+<p>
+    GitHub will use <b>callback URLs</b> to communicate with Appwrite. 
+    Set these callback URLs under <b>Identifying and authorizing users</b>.
+</p>
+<table class="full">
+    <thead>
+    <tr>
+        <td>URLs</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>http://[HOSTNAME_OR_IP]/v1/vcs/github/callback</td>
+    </tr>
+    <tr>
+        <td>http://[HOSTNAME_OR_IP]/v1/account/sessions/oauth2/callback/github/console</td>
+    </tr>
+    </tbody>
+</table>
+
+<p><b>Post installation</b></p>
+<p>Check the <b> Redirect on update</b> box under the <b>Post installation</b> section.</p>
 
 <p><b>Repository permissions</b></p>
 
@@ -45,12 +74,20 @@
         <td>Read and write.</td>
     </tr>
     <tr>
+        <td>Commit Statuses</td>
+        <td>Read and write</td>
+    </tr>
+    <tr>
         <td>Contents</td>
         <td>Read and write</td>
     </tr>
     <tr>
         <td>Issues</td>
         <td>Read and write</td>
+    </tr>
+    <tr>
+        <td>Metadata</td>
+        <td>Read-only</td>
     </tr>
     <tr>
         <td>Pull requests</td>
@@ -62,6 +99,24 @@
     </tr>
     </tbody>
 </table>
+
+<p><b>Account permissions</b></p>
+
+<table class="full">
+    <thead>
+    <tr>
+        <td>Permission</td>
+        <td>Access</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Email address</td>
+        <td>Read-only</td>
+        </tr>
+    </tbody>
+</table>
+
 
 <p><b>Subscribe to events</b></p>
 
@@ -75,10 +130,7 @@
     </thead>
     <tbody>
     <tr>
-        <td>Meta</td> <td>Issue comment</td> <td>Issues</td>
-    </tr>
-    <tr>
-        <td>Pull request</td> <td>Push</td> <td>Respository</td>
+        <td>Pull request</td> <td>Push</td> <td></td>
     </tr>
     </tbody>
 </table>
@@ -119,6 +171,8 @@
     </tr>
     </tbody>
 </table>
+
+
 
 <p><a href="/docs/environment-variables"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Learn more about environment variables</a></p>
 
