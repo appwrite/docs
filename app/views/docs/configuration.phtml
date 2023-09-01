@@ -192,7 +192,9 @@
     <tr>
         <td>_APP_DOMAIN_FUNCTIONS</td>
         <td>
-            This will be used for <a href="/docs/functions-deploy#domains">Function Domains</a>. When a function domain is generated, it will be <code>[UNIQUE_ID].[_APP_DOMAIN_FUNCTIONS]</code>.
+            This will be used for system generated <a href="/docs/functions-deploy#domains">Function Domains</a>. 
+            When a function domain is generated, it will be <code>[UNIQUE_ID].[_APP_DOMAIN_FUNCTIONS]</code>. 
+            If <code>_APP_DOMAIN_FUNCTIONS</code> is set to <code>example.com</code> for example, the generated domain for functions will be something like <code>64d4d22db370ae41a32e.example.com</code>.
             You can use the same value as used for the Appwrite <code>_APP_DOMAIN</code> variable.
         </td>
     </tr>
