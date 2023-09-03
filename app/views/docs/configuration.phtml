@@ -44,13 +44,17 @@
     </thead>
     <tbody>
         <tr>
-            <td><code>http://[HOSTNAME_OR_IP]/v1/vcs/github/callback</code></td>
+            <td><code>https://[HOSTNAME_OR_IP]/v1/vcs/github/callback</code></td>
         </tr>
         <tr>
-            <td><code>http://[HOSTNAME_OR_IP]/v1/account/sessions/oauth2/callback/github/console</code></td>
+            <td><code>https://[HOSTNAME_OR_IP]/v1/account/sessions/oauth2/callback/github/console</code></td>
         </tr>
     </tbody>
 </table>
+
+<p>
+    Also, check the <b>Request user authentication (OAuth) during installation</b> box.
+</p>
 
 <h3><a href="#post-install" id="post-install">Post Installation</a></h3>
 <p>
@@ -168,6 +172,32 @@
     </tr>
     </thead>
     <tbody>
+    <tr>
+        <td>_APP_DOMAIN</td>
+        <td>
+            Your main Appwrite domain used to access the Appwrite Console. 
+            When setting a public suffix domain, Appwrite will attempt to issue a valid SSL certificate automatically. 
+            When used with a dev domain, Appwrite will assign a self-signed SSL certificate.
+            If you're using a proxy for <b>localhost development</b>, such as <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a>, this will be the domain of your localhost proxy.
+        </td>
+    </tr>
+    <tr>
+        <td>_APP_DOMAIN_TARGET</td>
+        <td>
+            A hostname to serve as a CNAME target for your Appwrite custom domains. 
+            You can use the same value as used for the Appwrite <code>_APP_DOMAIN</code> variable.
+            If you're using a proxy for <b>localhost development</b>, such as <a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok</a>, this will be the domain of your localhost proxy, such as <code>dd65-2405-201-4013-d8d7-b4c5-fb73-39f9-285c.ngrok.io</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>_APP_DOMAIN_FUNCTIONS</td>
+        <td>
+            This will be used for system generated <a href="/docs/functions-deploy#domains">Function Domains</a>. 
+            When a function domain is generated, it will be <code>[UNIQUE_ID].[_APP_DOMAIN_FUNCTIONS]</code>. 
+            If <code>_APP_DOMAIN_FUNCTIONS</code> is set to <code>example.com</code> for example, the generated domain for functions will be something like <code>64d4d22db370ae41a32e.example.com</code>.
+            You can use the same value as used for the Appwrite <code>_APP_DOMAIN</code> variable.
+        </td>
+    </tr>
     <tr>
         <td>_APP_VCS_GITHUB_APP_NAME</td>
         <td>Name of your GitHub app. This is the display name you'll see on GitHub and it will be visible in your GitHub app's URL.</td>
