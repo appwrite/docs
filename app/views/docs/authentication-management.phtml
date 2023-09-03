@@ -223,7 +223,7 @@ const users = new sdk.Users(client);
 
 const promise = users.updateLabels(
     '[USER_ID]',
-    [ Role.label('subscriber') ]
+    [ 'subscriber' ]
 );
 
 promise.then(function (response) {
@@ -252,7 +252,7 @@ $users = new Users($client);
 
 $result = $users->updateLabels(
     '[USER_ID]', 
-    [ Role.label('subscriber') ]
+    [ 'subscriber' ]
 );</code></pre>
         </div>
     </li>
@@ -275,7 +275,7 @@ users = Users(client)
 
 result = users.update_labels(
     '[USER_ID]',
-    [ Role.label('subscriber') ]
+    [ 'subscriber' ]
 )</code></pre>
         </div>
     </li>
@@ -295,7 +295,7 @@ users = Users.new(client)
 
 response = users.update_labels(
     user_id: '[USER_ID]',
-    labels: [ Role.label('subscriber') ]
+    labels: [ 'subscriber' ]
 )</code></pre>
         </div>
     </li>
@@ -313,7 +313,7 @@ let users = new sdk.Users(client);
 
 const promise = users.updateLabels(
     '[USER_ID]',
-    [ Role.label('subscriber') ]
+    [ 'subscriber' ]
 );
 
 promise.then(function (response) {
@@ -337,7 +337,7 @@ final users = Users(client);
 
 final result = await users.updateLabels(
     userId: '[USER_ID]',
-    labels: [ Role.label('subscriber') ],
+    labels: [ 'subscriber' ],
 );</code></pre>
         </div>
     </li>
@@ -357,7 +357,7 @@ val users = Users(client)
 
 val response = users.updateLabels(
     userId = "[USER_ID]",
-    labels = [ Role.label('subscriber') ]
+    labels = [ 'subscriber' ]
 )</code></pre>
         </div>
     </li>
@@ -375,7 +375,7 @@ let users = Users(client)
 
 let response = try await users.updateLabels(
     userId: "[USER_ID]",
-    labels: [ Role.label('subscriber') ]
+    labels: [ 'subscriber' ]
 )</code></pre>
         </div>
     </li>
@@ -393,7 +393,7 @@ var users = new Users(client);
 
 var response = await users.UpdateLabels(
     userId: "[USER_ID]",
-    labels: [ Role.Label('subscriber') ]
+    labels: [ 'subscriber' ]
 );</pre>
         </div>
     </li>
