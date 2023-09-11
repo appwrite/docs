@@ -222,7 +222,7 @@ The homepage URL will appear when looking at the public page of your app. It can
     </tr>
     <tr>
         <td>_APP_VCS_GITHUB_PRIVATE_KEY</td>
-        <td>RSA private key from GitHub wrapped with double quotes and newlines replaced with <code>\n</code> like <code>"-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQEAuT8f3lo/X83hfvb0ZN/KD2pl86o/jl3ywKrkj/PQZBmtEv/z\nIugE//sfFoHWc4cizkcji+n3FNU+GEdvMioKuJlPBqPTY8hAbVn7R0geZLpDV/rs\n[...]\n-----END RSA PRIVATE KEY-----"</code>. You can generate private keys from GitHub application settings.</td>
+        <td>RSA private key from GitHub wrapped with double quotes and newlines replaced with <code>\n</code>. You can generate private keys from GitHub application settings.</td>
     </tr>
     <tr>
         <td>_APP_VCS_GITHUB_APP_ID</td>
@@ -242,6 +242,22 @@ The homepage URL will appear when looking at the public page of your app. It can
     </tr>
     </tbody>
 </table>
+
+<p>
+    For example, see below.
+</p>
+
+<div class="ide margin-bottom" data-lang="bash" data-lang-label="Bash">
+    <pre class="line-numbers"><code class="prism language-bash" data-prism>_APP_DOMAIN=appwrite.example.com
+_APP_DOMAIN_TARGET=appwrite.example.com
+_APP_DOMAIN_FUNCTIONS=functions.example.com
+_APP_VCS_GITHUB_APP_NAME=my-github-app
+_APP_VCS_GITHUB_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQEAuT8f3lo/X83hfvb0ZN/KD2pl86o/jl3ywKrkj/PQZBmtEv/z\nIugE//sfFoHWc4cizkcji+n3FNU+GEdvMioKuJlPBqPTY8hAbVn7R0geZLpDV/rs\n[...]\n-----END RSA PRIVATE KEY-----"
+_APP_VCS_GITHUB_APP_ID=12415
+_APP_VCS_GITHUB_CLIENT_ID=Iv1.35asdf43asd
+_APP_VCS_GITHUB_CLIENT_SECRET=35rsdse532q13
+_APP_VCS_GITHUB_WEBHOOK_SECRET=super-secret</code></pre>
+</div>
 
 <p><a href="/docs/environment-variables"><i class="icon-angle-circled-right margin-start-negative-tiny margin-end-tiny"></i> Learn more about environment variables</a></p>
 
