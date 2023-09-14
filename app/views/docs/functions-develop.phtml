@@ -2423,16 +2423,18 @@ export default function ({ res }) {
         <li>
             <h3>PHP</h3>
             <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-                <pre class="line-numbers"><code class="prism language-php" data-prism>// src/utils.php
+                <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+// src/utils.php
 
 function add($a, $b) {
     return $a + $b;
 }</code></pre>
             </div>
             <div class="ide margin-top-small" data-lang="php" data-lang-label="PHP">
-                <pre class="line-numbers"><code class="prism language-php" data-prism>// src/main.php
+                <pre class="line-numbers"><code class="prism language-php" data-prism>&lt;?php
+// src/main.php
 
-include 'utils.php';
+require_once(__DIR__ . '/utils.php');
 
 return function ($context) {
     return $context->res->send(add(1, 2));
@@ -2442,14 +2444,14 @@ return function ($context) {
         <li>
             <h3>Python</h3>
             <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-                <pre class="line-numbers"><code class="prism language-python" data-prism>// src/utils.py
+                <pre class="line-numbers"><code class="prism language-python" data-prism># src/utils.py
 
 def add(a, b):
-    return a + b;</code>
+    return a + b</code>
         </pre>
             </div>
             <div class="ide margin-top-small" data-lang="python" data-lang-label="Python">
-                <pre class="line-numbers"><code class="prism language-python" data-prism>// src/main.py
+                <pre class="line-numbers"><code class="prism language-python" data-prism># src/main.py
 
 from .utils import add
 
@@ -2507,6 +2509,8 @@ int add(int a, int b) {
             <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
                 <pre class="line-numbers"><code class="prism language-dart" data-prism>// lib/main.dart
 import 'dart:async';
+
+import 'package:package_name/utils.dart';
 
 Future&lt;dynamic> main(final context) async {
     return context.res.send(add(1, 2));
