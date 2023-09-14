@@ -43,7 +43,6 @@ foreach ($runtimes as $key => $item) {
             <th style="width: 70px">Name</th>
             <th style="width: 100px">Version</th>
             <th style="width: 60px"></th>
-            <th>Image</th>
             <th  style="width: 80px">Architectures</th>
         </tr>
     </thead>
@@ -53,8 +52,10 @@ foreach ($runtimes as $key => $item) {
             <td>
                 <img src="" data-ls-attrs="src=/images/runtimes/<?php echo $this->escape($runtime['versions'][0]['logo'] ?? ''); ?>" alt="Function Env." class="avatar xxs" />
             </td>
-            <td>
-                <?php echo $this->escape($key); ?>
+            <td>                
+            <a href="https://hub.docker.com/r/openruntimes/<?php echo $this->escape($runtime['versions'][0]['key']); ?>/tags" target="_blank" rel="noopener">
+                <?php echo $this->escape($key); ?><i class="icon-link-ext"></i>
+            </a>
             </td>
             <td>
             <?php foreach($runtime['versions'] as $key => $version): ?>
@@ -68,11 +69,6 @@ foreach ($runtimes as $key => $item) {
                 <?php endif; ?> 
             <?php endforeach; ?> 
             </td>   
-            <td>
-            <?php foreach($runtime['versions'] as $key => $version): ?>
-                <a href="https://hub.docker.com/r/<?php echo $this->escape(strtok($version['image'], ':')); ?>" target="_blank" rel="noopener"><?php echo $this->escape($version['image'] ?? ''); ?> <i class="icon-link-ext"></i></a>
-            <?php endforeach; ?>
-            </td>
             <td><?php echo $this->escape(implode(' / ', $runtime['versions'][0]['supports'] ?? [])); ?></td>
         </tr>
         <?php endforeach; ?>
