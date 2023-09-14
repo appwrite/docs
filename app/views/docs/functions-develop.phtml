@@ -2834,7 +2834,7 @@ export default function ({res}: {res: any}) {
     <p>
         Appwrite Functions received major updates in Appwrite version 1.4.
         If you still have functions from previous versions, they will be <b>read-only</b> in Appwrite 1.4.
-        You will have to migrate your old functions to follow new runtime syntax.
+        You will have to recreate your old functions to follow new runtime syntax.
     </p>
 
     <p>
@@ -2842,6 +2842,11 @@ export default function ({res}: {res: any}) {
     </p>
 
     <ol class="margin-top margin-bottom-large text-size-normal">
+        <li>
+            Your old function from 1.3 is marked read-only, but will continue to work.
+            You need to create a new function following 1.4 syntax. 
+            After you've created your new function, point your application code to the new function and delete the old function.
+        </li>
         <li>
             The parameter passed into functions has changed.
             <code>req</code> and <code>res</code> has been replaced by <code>context</code>, which contains new logger methods.
