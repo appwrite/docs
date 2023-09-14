@@ -1292,9 +1292,9 @@ end</code></pre>
         <li>
             <h3>Deno</h3>
             <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
-                <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ res, log, error }: any) => {
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log, error }: any) => {
     log("This is a log, use for logging information to console");
-    log(`This function was called with ${context.req.method} method`);
+    log(`This function was called with ${req.method} method`);
     error("This is an error, use for logging errors to console");
 
     return res.send("Check the Appwrite Console to see logs and errors!");
@@ -1409,9 +1409,9 @@ namespace runtime {
         <li>
             <h3>Bun</h3>
             <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Bun">
-                <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ res, log, error }: any) => {
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log, error }: any) => {
     log("This is a log, use for logging information to console");
-    log(`This function was called with ${context.req.method} method`);
+    log(`This function was called with ${req.method} method`);
     error("This is an error, use for logging errors to console");
 
     return res.send("Check the Appwrite Console to see logs and errors!");
