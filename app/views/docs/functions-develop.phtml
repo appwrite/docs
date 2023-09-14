@@ -217,6 +217,43 @@ export default ({ req, res, log, error }: any) => {
         </div>
     </li>
     <li>
+        <h3>Bun</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Bun">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client } from 'node-appwrite';
+
+// This is your Appwrite function
+// It's executed each time we get a request
+export default async ({ req, res, log, error }: any) => {
+  // Why not try the Appwrite SDK?
+  // const client = new Client()
+  //    .setEndpoint('https://cloud.appwrite.io/v1')
+  //    .setProject(Bun.env["APPWRITE_FUNCTION_PROJECT_ID"])
+  //    .setKey(Bun.env["APPWRITE_API_KEY"]);
+
+  // You can log messages to the console
+  log("Hello, Logs!");
+
+  // If something goes wrong, log an error
+  error("Hello, Errors!");
+
+  // The `req` object contains the request data
+  if (req.method === "GET") {
+    // Send a response with the res object helpers
+    // `res.send()` dispatches a string back to the client
+    return res.send("Hello, World!");
+  }
+
+  // `res.json()` is a handy helper for sending JSON
+  return res.json({
+    motto: "Build Fast. Scale Big. All in One Place.",
+    learn: "https://appwrite.io/docs",
+    connect: "https://appwrite.io/discord",
+    getInspired: "https://builtwith.appwrite.io",
+  });
+};</code></pre>
+        </div>
+    </li>
+    <li>
         <h3>Dart</h3>
         <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
             <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
@@ -510,6 +547,22 @@ export default async function ({ req, res, log, error }: any) {
 }</code></pre>
         </div>
     </li>
+    <li>
+        <h3>Bun</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Bun">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>// before destructuring
+export default async function (context: any) {
+    context.log("This is a log!");
+    return context.res.send("This is a response!");
+}
+   
+// after destructuring
+export default async function ({ req, res, log, error }: any) {
+    log("This is a log!");
+    return res.send("This is a response!");
+}</code></pre>
+        </div>
+    </li>
 </ul>
 
 <h3><a href="#request" id="request">Request</a></h3>
@@ -607,6 +660,25 @@ end</code></pre>
     <li>
         <h3>Deno</h3>
         <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+            <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }: any) => {
+    log(req.bodyRaw);                 // Raw request body, contains request data
+    log(JSON.stringify(req.body));    // Object from parsed JSON request body, otherwise string
+    log(JSON.stringify(req.headers)); // String key-value pairs of all request headers, keys are lowercase
+    log(req.scheme);                  // Value of the x-forwarded-proto header, usually http or https
+    log(req.method);                  // Request method, such as GET, POST, PUT, DELETE, PATCH, etc.
+    log(req.url);                     // Full URL, for example: http://awesome.appwrite.io:8000/v1/hooks?limit=12&offset=50
+    log(req.host);                    // Hostname from the host header, such as awesome.appwrite.io
+    log(req.port);                    // Port from the host header, for example 8000
+    log(req.path);                    // Path part of URL, for example /v1/hooks
+    log(req.queryString);             // Raw query params string. For example "limit=12&offset=50"
+    log(JSON.stringify(req.query));   // Parsed query params. For example, req.query.limit
+
+    return res.send("All the request parameters are logged to the Appwrite Console.");</code></pre>
+        </div>
+    </li>
+    <li>
+        <h3>Bun</h3>
+        <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Bun">
             <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }: any) => {
     log(req.bodyRaw);                 // Raw request body, contains request data
     log(JSON.stringify(req.body));    // Object from parsed JSON request body, otherwise string
@@ -940,6 +1012,29 @@ end</code></pre>
             </div>
         </li>
         <li>
+            <h3>Bun</h3>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Bun">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }) => {
+
+    switch (req.query.type) {
+        case 'empty':
+            return res.empty();
+        case 'json':
+            return res.json({type": "This is a JSON response"});
+        case 'redirect':
+            return res.redirect("https://appwrite.io", 301);
+        case 'html':
+            return res.send(
+                "&lt;h1&gt;This is an HTML response&lt;/h1&gt;", 200, {
+                    "content-type": "text/html"
+                });
+        default:
+            return res.send("This is a text response");
+    }
+}</code></pre>
+            </div>
+        </li>
+        <li>
             <h3>Dart</h3>
             <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
                 <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
@@ -1208,6 +1303,18 @@ end</code></pre>
             </div>
         </li>
         <li>
+            <h3>Bun</h3>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Bun">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ res, log, error }: any) => {
+    log("This is a log, use for logging information to console");
+    log(`This function was called with ${context.req.method} method`);
+    error("This is an error, use for logging errors to console");
+
+    return res.send("Check the Appwrite Console to see logs and errors!");
+};</code></pre>
+            </div>
+        </li>
+        <li>
             <h3>Dart</h3>
             <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
                 <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
@@ -1458,6 +1565,14 @@ end</code></pre>
             </div>
         </li>
         <li>
+            <h3>Bun</h3>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Bun">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>export default async ({ req, res, log }) => {
+    return res.send(Bun.env.get('MY_VAR'));
+}</code></pre>
+            </div>
+        </li>
+        <li>
             <h3>Dart</h3>
             <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
                 <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
@@ -1593,7 +1708,15 @@ namespace runtime {
             </td>
             <td><b>Deno</b></td>
             <td><a href="https://deno.land/" target="_blank">deno</a></td>
-            <td><code>deno cache &ltENTRYPOINT_FILE&gt</code></td>
+            <td><code>deno install</code></td>
+        </tr>
+        <tr>
+            <td>
+                <img src="" data-ls-attrs="src=/images/runtimes/bun.png" alt="Bun icon" class="avatar xxs" />
+            </td>
+            <td><b>Bun</b></td>
+            <td><a href="https://bun.sh/" target="_blank">bun</a></td>
+            <td><code>bun install</code></td>
         </tr>
         <tr>
             <td>
@@ -1809,6 +1932,35 @@ export default function ({req, res, error}: any){
         .setEndpoint("https://cloud.appwrite.io/v1")
         .setProject(Deno.env.get("APPWRITE_FUNCTION_PROJECT_ID") || "")
         .setKey(Deno.env.get("APPWRITE_API_KEY") || "");
+    
+    const databases = new Databases(client);
+    
+    try {
+        databases.createDocument(
+            "[DATABASE_ID]",
+            "[COLLECTION_ID]",
+            ID.unique(),
+            {}
+        );
+    } catch (e) {
+        error("Failed to create document: " + e.message);
+        return res.send("Failed to create document");
+    }
+    
+    return res.send("Document created");
+}</code></pre>
+            </div>
+        </li>
+        <li>
+            <h3>Bun</h3>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Bun">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases, ID } from 'node-appwrite';
+                
+export default function ({req, res, error}: any){
+    const client = new Client()
+        .setEndpoint("https://cloud.appwrite.io/v1")
+        .setProject(Bun.env.get("APPWRITE_FUNCTION_PROJECT_ID") || "")
+        .setKey(Bun.env.get("APPWRITE_API_KEY") || "");
     
     const databases = new Databases(client);
     
@@ -2193,6 +2345,40 @@ export default function ({req, res, error}: any){
             </div>
         </li>
         <li>
+            <h3>Bun</h3>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Bun">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>import { Client, Databases, ID } from 'node-appwrite';
+                
+export default function ({req, res, error}: any){
+    const client = new Client()
+        .setEndpoint("https://cloud.appwrite.io/v1")
+        .setProject(Bun.env.get("APPWRITE_FUNCTION_PROJECT_ID") || "")
+    
+    if (req.headers["x-appwrite-user-jwt"]) {
+        client.setJWT(req.headers["x-appwrite-user-jwt"]);
+    } else {
+        return res.send("Please sign in, JWT not found");
+    }
+    
+    const databases = new Databases(client);
+    
+    try {
+        databases.createDocument(
+            "[DATABASE_ID]",
+            "[COLLECTION_ID]",
+            ID.unique(),
+            {}
+        );
+    } catch (e) {
+        error("Failed to create document: " + e.message)
+        return res.send("Failed to create document");
+    }
+    
+    return res.send("Document created");
+}</code></pre>
+            </div>
+        </li>
+        <li>
             <h3>Dart</h3>
             <div class="ide margin-top-small" data-lang="dart" data-lang-label="Dart">
                 <pre class="line-numbers"><code class="prism language-dart" data-prism>import 'dart:async';
@@ -2488,6 +2674,25 @@ export function add(a: number, b: number): number {
 }</code></pre>
             </div>
             <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Deno">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>// src/main.ts
+
+import { add } from './utils.ts';
+
+export default function ({res}: {res: any}) {
+    return res.send(add(1, 2));
+}</code></pre>
+            </div>
+        </li>
+        <li>
+            <h3>Bun</h3>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Bun">
+                <pre class="line-numbers"><code class="prism language-typescript" data-prism>// src/utils.ts
+
+export function add(a: number, b: number): number {
+    return a + b;
+}</code></pre>
+            </div>
+            <div class="ide margin-top-small" data-lang="typescript" data-lang-label="Bun">
                 <pre class="line-numbers"><code class="prism language-typescript" data-prism>// src/main.ts
 
 import { add } from './utils.ts';
