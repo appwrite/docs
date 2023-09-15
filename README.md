@@ -1,15 +1,18 @@
 # The Appwrite Docs 📝
 
 The official [Appwrite Documentation](https://appwrite.io/docs) source code.
+
 ## 🚀 Contributing
+
 1. Clone the repository
 2. Update, add, or fix current docs
 3. Once content is ready, raise a PR
 
 ### Content Guidelines
+
 - Use proper title hierarchy (h1-h6) and valid HTML
 - All titles must follow the [Chicago style of headline capitalization](https://capitalizemytitle.com/style/Chicago/)
-- External links (not https://appwrite.io) should be opened in a new tab (`target="_blank"`)
+- External links (not [appwrite.io](https://appwrite.io)) should be opened in a new tab (`target="_blank"`)
 - External links should have an HTML attribute of `rel="noopener"`
 - All filenames should be dash-based and nested in such a way that makes sense
 - All images should be in PNG format and 2600x1400px. Do not include any sensitive data in images. All screenshots of the Appwrite dashboard should support light and dark mode.
@@ -27,27 +30,27 @@ Use the following HTML structure to present code examples:
 
 As of writing this, these are the supported languages for code examples:
 
-* Markup
-* CSS
-* CLike
-* JavaScript
-* Bash
-* C#
-* Dart
-* Go
-* GraphQL
-* HTTP
-* Java
-* JSON
-* Kotlin
-* Markup-templating
-* PHP
-* Powershell
-* Python
-* Ruby
-* Swift
-* TypeScript
-* YAML
+- Markup
+- CSS
+- CLike
+- JavaScript
+- Bash
+- C#
+- Dart
+- Go
+- GraphQL
+- HTTP
+- Java
+- JSON
+- Kotlin
+- Markup-templating
+- PHP
+- Powershell
+- Python
+- Ruby
+- Swift
+- TypeScript
+- YAML
 
 For showing examples in multiple languages use the list structure:
 
@@ -69,7 +72,7 @@ For showing examples in multiple languages use the list structure:
 </ul>
 ```
 
-> Don't forget to use proper indenting for all code examples. The indenting of the code examples should be independent from the indentation of the surrounding HTML tags.
+> **Note** Don't forget to use proper indenting for all code examples. The indenting of the code examples should be independent from the indentation of the surrounding HTML tags.
 
 #### Notes
 
@@ -98,9 +101,10 @@ $image = new View(__DIR__.'/../general/image.phtml');
 ?>
 ```
 
-## 🤘 Support 
+## 🤘 Support
+
 At any point, if you are stuck, feel free to hop on our [Discord server](https://appwrite.io/discord) to ask questions or seek mentorship!
 
 ## Follow Us
-Join our growing community around the world! See our official [Blog](https://medium.com/appwrite-io). Follow us on [Twitter](https://twitter.com/appwrite), [Facebook Page](https://www.facebook.com/appwrite.io), [Facebook Group](https://www.facebook.com/groups/appwrite.developers/) , [DEV Community](https://dev.to/appwrite) or join our live [Discord server](https://discord.gg/GSeTUeA) for more help, ideas, and discussions.
 
+Join our growing community around the world! See our official [Blog](https://medium.com/appwrite-io). Follow us on [Twitter](https://twitter.com/appwrite), [Facebook Page](https://www.facebook.com/appwrite.io), [Facebook Group](https://www.facebook.com/groups/appwrite.developers/) , [DEV Community](https://dev.to/appwrite) or join our live [Discord server](https://discord.gg/GSeTUeA) for more help, ideas, and discussions.
