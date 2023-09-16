@@ -1,0 +1,163 @@
+<?php
+
+use Appwrite\Utopia\View;
+
+?>
+
+<p>
+    Offline Support allows your client apps to continue functioning without an internet connection. Mobile devices frequently encounter situations where internet access becomes unstable or temporarily unavailable, like going through tunnels, getting on airplanes and subways, or going in and out of Wi-Fi range. Offline Support keeps your users engaged when transitioning through these real-life situations.
+</p>
+
+<h2><a href="#when-should-i-enable-offline" id="when-should-i-enable-offline">When Should I Enable Offline Support?</a></h2>
+<p>
+    You should consider enabling Offline Support if you expect the device running your application to experience short periods without a network connection, like going on an airplane or through a tunnel.
+</p>
+<p>
+  Offline Support can't help you if the app's data needs to remain up to date with frequent updates or if write requests need to be processed immediately. If you expect your app to be offline for days or weeks, you may need to find alternative solutions.
+</p>
+
+<h2><a href="#enable-offline" id="enable-offline">Enable Offline Support</a></h2>
+
+<div class="notice">
+<h3>Breaking Changes</h3>
+<p>Enabling Offline Support introduces breaking changes to the asynchronous operation behavior of Client SDKs. <b>Existing projects must be updated.</b></p>
+<p><a href="#async-operation">Learn more about asynchronous operations</a></p>
+</div>
+
+<h3>Toggle Persistency</h3>
+<p>
+    You can enable Offline Support by setting <code>setOffilnePersistency</code> to true on your SDK's client.
+</p>
+
+<div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>client.setOfflinePersistency(status: true);</code></pre>
+</div>
+
+<h3>Configure Cache</h3>
+<p>
+    Offline Support will cache all read requests in a <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#LRU" target="_blank" rel="noopener">Least Recently Used (LRU)</a> cache, so the information can remain available without internet connection. The LRU cache defaults to 16MB and can be configured using the <code>setOfflineCacheSize</code> method.
+</p>
+
+<div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>client.setOfflineCacheSize(40000);</code></pre>
+</div>
+
+<h2><a href="#cache" id="cache">Offline Support Cache</a></h2>
+<p>
+When Offline Support is enabled, Appwrite allows you to query and write data by adding a cache layer.
+</p>
+
+<h3>Reading Data Offline</h3>
+<p>
+  Queries will fetch data from Appwrite and update the cache while the device is online. If the device is not connected to the internet, the query fetches data from the local cache.
+</p>
+
+<?php
+$image = new View(__DIR__.'/../general/image.phtml');
+    echo $image
+        ->setParam('srcLight', '/images-ee/docs/offline-read-uml-light.png')
+        ->setParam('srcDark', '/images-ee/docs/offline-read-uml-dark.png')
+        ->setParam('alt', 'UML diagram depicting offline read operations.')
+        ->setParam('description', 'UML diagram depicting offline read operations.')
+        ->render();
+?>
+
+<h3>Writing Data Offline</h3>
+<p>
+  Writes will update the local cache first. If the device is online, the changes will be sent to Appwrite immediately. If the device is not connected to the internet, the operation will be queued and synced to Appwrite when internet is available again.
+</p>
+
+<?php
+$image = new View(__DIR__.'/../general/image.phtml');
+    echo $image
+        ->setParam('srcLight', '/images-ee/docs/offline-write-uml-light.png')
+        ->setParam('srcDark', '/images-ee/docs/offline-write-uml-dark.png')
+        ->setParam('alt', 'UML diagram depicting offline write operations.')
+        ->setParam('description', 'UML diagram depicting offline write operations.')
+        ->render();
+?>
+
+<h2><a href="#async-operation" id="async-operation">Asynchronous Operation</a></h2>
+<p>
+    When Offline Support is enabled, write operations only resolve after the server accepts the request. Requests made with the Client SDK may block code execution until network connection is available again.
+</p>
+<?php
+$image = new View(__DIR__.'/../general/image.phtml');
+    echo $image
+        ->setParam('srcLight', '/images-ee/docs/offline-async-uml-light.png')
+        ->setParam('srcDark', '/images-ee/docs/offline-async-uml-dark.png')
+        ->setParam('alt', 'UML diagram depicting offline cache in async operations.')
+        ->setParam('description', 'UML diagram depicting offline cache in async operations.')
+        ->setParam('width', '100%')
+        ->render();
+?>
+
+<p>
+    You should optimistically update your app's local state after a write operation. Once you're online again, the write will be synced with your Appwrite project, which will be fetched when you app restarts in the future.
+</p>
+
+<h3>Example</h3>
+<p>
+    For example, the code example below will <b>block code execution</b> when the device is offline.
+</p>
+<div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>void blockingSubmitTodo(Map todo) async {
+
+  try {
+    // THIS BLOCKS EXECUTION WHEN OFFLINE
+    await _databases.createDocument(
+      databaseId: '[DATABASE_ID]',
+      collectionId: '[COLLECTION_ID]',
+      documentId: todo.id,
+      data: todo,
+    );
+    todos.add(todo);
+  } catch (e) {
+    // ... handle errors
+  }
+
+  setState(() {
+    isLoading = false;
+  });
+}</code></pre>
+</div>
+
+<p>
+    To avoid blocking code execution, update local states and UI optimisitically instead of waiting for awaiting asynchronous operations.
+</p>
+
+<div class="ide" data-lang="dart" data-lang-label="Flutter SDK">
+  <pre class="line-numbers"><code class="prism language-dart" data-prism>  void nonBlockingSubmitTodo(Map todo) async {
+
+    // This won't block execution, but will still allow error handling.
+    _databases.createDocument(
+      databaseId: '[DATABASE_ID]',
+      collectionId: '[COLLECTION_ID]',
+      documentId: todo.id,
+      data: todo,
+    ).catchError((e) {
+      // ... handle errors
+    });
+
+    setState(() {
+      todos.add(todo);
+      isLoading = false;
+    });
+  }</code></pre>
+</div>
+
+<h2><a href="#conflict-resolution" id="conflict-resolution">Conflict Resolution</a></h2>
+<p>
+  With Offline Support enabled, your app can continue sending requests to Appwrite APIs while offline through a cache when offline. Read requests will be fetched from the locally cached data. Write requests will be queued and executed once the device is online again. This can lead to conflicts if another device makes a different change.
+</p>
+
+<h3>How Appwrite Handles Offline Writes</h3>
+
+<p>
+    Document updates made while your device is offline will be queued locally with a timestamp. When your device comes online, Appwrite will use the timestamps to accept the <b>latest version</b> of the document. Appwrite will reject a document update if the remote document has been updated later than the local document. 
+</p>
+
+<h3>Special Cases</h3>
+<p>
+    Additional considerations need to be considered when updating data based on the current value, such as incrementing a counter or appending values to the end of a paragraph. The default conflict resolution behavior may result in incorrect updates and writes. Consider disabling these operations while offline or using Appwrite Functions to implement logic to resolve conflicts.
+</p>
