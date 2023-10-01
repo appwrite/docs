@@ -5,114 +5,1322 @@
 
 <h2><a href="/docs/queries#query-class" id="query-class">Query Class</a></h2>
 <p>Appwrite SDKs provide a <code>Query</code> class to help you build queries. The <code>Query</code> class has a method for each type of supported query.</p>
-<table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
-    <thead>
-        <tr>
-            <th style="width: 100px">Query Method</th>
-            <th>SDK Method Example</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Select</td>
-            <td><code>Query.select(["name", "title"])</code></td>
-            <td>Select which attributes should be returned from a document.</td>
-        </tr>
-        <tr>
-            <td>Equal</td>
-            <td><code>Query.equal("title", ["Iron Man"])</code></td>
-            <td>Returns document if attribute is equal to any value in the provided array.</td>
-        </tr>
-        <tr>
-            <td>Not Equal</td>
-            <td><code>Query.notEqual("title", ["Iron Man"])</code></td>
-            <td>Returns document if attribute is not equal to any value in the provided array.</td>
-        </tr>
-        <tr>
-            <td>Less Than</td>
-            <td><code>Query.lessThan("score", 10)</code></td>
-            <td>Returns document if attribute is less than the provided value.</td>
-        </tr>
-        <tr>
-            <td>Less Than or Equal</td>
-            <td><code>Query.lessThanEqual("score", 10)</code></td>
-            <td>Returns document if attribute is less than or equal to the provided value.</td>
-        </tr>
-        <tr>
-            <td>Greater Than</td>
-            <td><code>Query.greaterThan("score", 10)</code></td>
-            <td>Returns document if attribute is greater than the provided value.</td>
-        </tr>
-        <tr>
-            <td>Greater Than or Equal</td>
-            <td><code>Query.greaterThanEqual("score", 10)</code></td>
-            <td>Returns document if attribute is greater than or equal to the provided value.</td>
-        </tr>
-        <tr>
-            <td>Between</td>
-            <td><code>Query.between("price", 5, 10)</code></td>
-            <td>Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.</td>
-        </tr>
-        <tr>
-            <td>Is Null</td>
-            <td><code>Query.isNull("name")</code></td>
-            <td>Returns documents where attribute value is null.</td>
-        </tr>
-        <tr>
-            <td>Is Not Null</td>
-            <td><code>Query.isNotNull("name")</code></td>
-            <td>Returns documents where attribute value is <b>not</b> null.</td>
-        </tr>
-        <tr>
-            <td>Starts With</td>
-            <td><code>Query.startsWith("name", "Once upon a time")</code></td>
-            <td>Returns documents if a string attributes starts with a substring.</td>
-        </tr>
-        <tr>
-            <td>Ends With</td>
-            <td><code>Query.endsWith("name", "happily ever after.")</code></td>
-            <td>Returns documents if a string attributes ends with a substring.</td>
-        </tr>
-        <tr>
-            <td>Search</td>
-            <td><code>Query.search("text", "key words")</code></td>
-            <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
-        </tr>
-        <tr>
-            <td>Order Descending</td>
-            <td><code>Query.orderDesc("attribute")</code></td>
-            <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
-        </tr>
-        <tr>
-            <td>Order Ascending</td>
-            <td><code>Query.orderAsc("attribute")</code></td>
-            <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
-        </tr>
-        <tr>
-            <td>Limit</td>
-            <td><code>Query.limit(25)</code></td>
-            <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>. If the limit query is not used, the limit defaults to 25 results.</td>
-        </tr>
-        <tr>
-            <td>Offset</td>
-            <td><code>Query.offset(0)</code></td>
-            <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
-        </tr>
-        <tr>
-            <td>Cursor After</td>
-            <td><code>Query.cursorAfter("62a7...f620")</code></td>
-            <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
-        </tr>
-        <tr>
-            <td>Cursor Before</td>
-            <td><code>Query.cursorBefore("62a7...a600")</code></td>
-            <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
-        </tr>
-    </tbody>
-</table>
 
+<h4>Client SDKs</h4>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Web</h3>
+        <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 100px">Query Method</th>
+                <th>SDK Method Example</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Select</td>
+                <td><code>Query.select(["name", "title"])</code></td>
+                <td>Select which attributes should be returned from a document.</td>
+            </tr>
+            <tr>
+                <td>Equal</td>
+                <td><code>Query.equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Not Equal</td>
+                <td><code>Query.notEqual("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is not equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Less Than</td>
+                <td><code>Query.lessThan("score", 10)</code></td>
+                <td>Returns document if attribute is less than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Less Than or Equal</td>
+                <td><code>Query.lessThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is less than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than</td>
+                <td><code>Query.greaterThan("score", 10)</code></td>
+                <td>Returns document if attribute is greater than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than or Equal</td>
+                <td><code>Query.greaterThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is greater than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Between</td>
+                <td><code>Query.between("price", 5, 10)</code></td>
+                <td>Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.</td>
+            </tr>
+            <tr>
+                <td>Is Null</td>
+                <td><code>Query.isNull("name")</code></td>
+                <td>Returns documents where attribute value is null.</td>
+            </tr>
+            <tr>
+                <td>Is Not Null</td>
+                <td><code>Query.isNotNull("name")</code></td>
+                <td>Returns documents where attribute value is <b>not</b> null.</td>
+            </tr>
+            <tr>
+                <td>Starts With</td>
+                <td><code>Query.startsWith("name", "Once upon a time")</code></td>
+                <td>Returns documents if a string attributes starts with a substring.</td>
+            </tr>
+            <tr>
+                <td>Ends With</td>
+                <td><code>Query.endsWith("name", "happily ever after.")</code></td>
+                <td>Returns documents if a string attributes ends with a substring.</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td><code>Query.search("text", "key words")</code></td>
+                <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
+            </tr>
+            <tr>
+                <td>Order Descending</td>
+                <td><code>Query.orderDesc("attribute")</code></td>
+                <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Order Ascending</td>
+                <td><code>Query.orderAsc("attribute")</code></td>
+                <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Limit</td>
+                <td><code>Query.limit(25)</code></td>
+                <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>. If the limit query is not used, the limit defaults to 25 results.</td>
+            </tr>
+            <tr>
+                <td>Offset</td>
+                <td><code>Query.offset(0)</code></td>
+                <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor After</td>
+                <td><code>Query.cursorAfter("62a7...f620")</code></td>
+                <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor Before</td>
+                <td><code>Query.cursorBefore("62a7...a600")</code></td>
+                <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+        </tbody>
+    </table>
+    </li>
+    <li>
+        <h3>Flutter</h3>
+        <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 100px">Query Method</th>
+                <th>SDK Method Example</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Select</td>
+                <td><code>Query.select(["name", "title"])</code></td>
+                <td>Select which attributes should be returned from a document.</td>
+            </tr>
+            <tr>
+                <td>Equal</td>
+                <td><code>Query.equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Not Equal</td>
+                <td><code>Query.notEqual("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is not equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Less Than</td>
+                <td><code>Query.lessThan("score", 10)</code></td>
+                <td>Returns document if attribute is less than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Less Than or Equal</td>
+                <td><code>Query.lessThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is less than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than</td>
+                <td><code>Query.greaterThan("score", 10)</code></td>
+                <td>Returns document if attribute is greater than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than or Equal</td>
+                <td><code>Query.greaterThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is greater than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Between</td>
+                <td><code>Query.between("price", 5, 10)</code></td>
+                <td>Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.</td>
+            </tr>
+            <tr>
+                <td>Is Null</td>
+                <td><code>Query.isNull("name")</code></td>
+                <td>Returns documents where attribute value is null.</td>
+            </tr>
+            <tr>
+                <td>Is Not Null</td>
+                <td><code>Query.isNotNull("name")</code></td>
+                <td>Returns documents where attribute value is <b>not</b> null.</td>
+            </tr>
+            <tr>
+                <td>Starts With</td>
+                <td><code>Query.startsWith("name", "Once upon a time")</code></td>
+                <td>Returns documents if a string attributes starts with a substring.</td>
+            </tr>
+            <tr>
+                <td>Ends With</td>
+                <td><code>Query.endsWith("name", "happily ever after.")</code></td>
+                <td>Returns documents if a string attributes ends with a substring.</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td><code>Query.search("text", "key words")</code></td>
+                <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
+            </tr>
+            <tr>
+                <td>Order Descending</td>
+                <td><code>Query.orderDesc("attribute")</code></td>
+                <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Order Ascending</td>
+                <td><code>Query.orderAsc("attribute")</code></td>
+                <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Limit</td>
+                <td><code>Query.limit(25)</code></td>
+                <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>. If the limit query is not used, the limit defaults to 25 results.</td>
+            </tr>
+            <tr>
+                <td>Offset</td>
+                <td><code>Query.offset(0)</code></td>
+                <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor After</td>
+                <td><code>Query.cursorAfter("62a7...f620")</code></td>
+                <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor Before</td>
+                <td><code>Query.cursorBefore("62a7...a600")</code></td>
+                <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+        </tbody>
+    </table>
+    </li>
+    <li>
+        <h3>Android</h3>
+        <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 100px">Query Method</th>
+                <th>SDK Method Example</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Select</td>
+                <td><code>Query.select(["name", "title"])</code></td>
+                <td>Select which attributes should be returned from a document.</td>
+            </tr>
+            <tr>
+                <td>Equal</td>
+                <td><code>Query.equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Not Equal</td>
+                <td><code>Query.notEqual("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is not equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Less Than</td>
+                <td><code>Query.lessThan("score", 10)</code></td>
+                <td>Returns document if attribute is less than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Less Than or Equal</td>
+                <td><code>Query.lessThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is less than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than</td>
+                <td><code>Query.greaterThan("score", 10)</code></td>
+                <td>Returns document if attribute is greater than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than or Equal</td>
+                <td><code>Query.greaterThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is greater than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Between</td>
+                <td><code>Query.between("price", 5, 10)</code></td>
+                <td>Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.</td>
+            </tr>
+            <tr>
+                <td>Is Null</td>
+                <td><code>Query.isNull("name")</code></td>
+                <td>Returns documents where attribute value is null.</td>
+            </tr>
+            <tr>
+                <td>Is Not Null</td>
+                <td><code>Query.isNotNull("name")</code></td>
+                <td>Returns documents where attribute value is <b>not</b> null.</td>
+            </tr>
+            <tr>
+                <td>Starts With</td>
+                <td><code>Query.startsWith("name", "Once upon a time")</code></td>
+                <td>Returns documents if a string attributes starts with a substring.</td>
+            </tr>
+            <tr>
+                <td>Ends With</td>
+                <td><code>Query.endsWith("name", "happily ever after.")</code></td>
+                <td>Returns documents if a string attributes ends with a substring.</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td><code>Query.search("text", "key words")</code></td>
+                <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
+            </tr>
+            <tr>
+                <td>Order Descending</td>
+                <td><code>Query.orderDesc("attribute")</code></td>
+                <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Order Ascending</td>
+                <td><code>Query.orderAsc("attribute")</code></td>
+                <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Limit</td>
+                <td><code>Query.limit(25)</code></td>
+                <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>. If the limit query is not used, the limit defaults to 25 results.</td>
+            </tr>
+            <tr>
+                <td>Offset</td>
+                <td><code>Query.offset(0)</code></td>
+                <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor After</td>
+                <td><code>Query.cursorAfter("62a7...f620")</code></td>
+                <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor Before</td>
+                <td><code>Query.cursorBefore("62a7...a600")</code></td>
+                <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+        </tbody>
+    </table>
+    </li>
+    <li>
+        <h3>Apple</h3>
+        <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 100px">Query Method</th>
+                <th>SDK Method Example</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Select</td>
+                <td><code>Query.select(["name", "title"])</code></td>
+                <td>Select which attributes should be returned from a document.</td>
+            </tr>
+            <tr>
+                <td>Equal</td>
+                <td><code>Query.equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Not Equal</td>
+                <td><code>Query.notEqual("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is not equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Less Than</td>
+                <td><code>Query.lessThan("score", 10)</code></td>
+                <td>Returns document if attribute is less than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Less Than or Equal</td>
+                <td><code>Query.lessThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is less than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than</td>
+                <td><code>Query.greaterThan("score", 10)</code></td>
+                <td>Returns document if attribute is greater than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than or Equal</td>
+                <td><code>Query.greaterThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is greater than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Between</td>
+                <td><code>Query.between("price", 5, 10)</code></td>
+                <td>Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.</td>
+            </tr>
+            <tr>
+                <td>Is Null</td>
+                <td><code>Query.isNull("name")</code></td>
+                <td>Returns documents where attribute value is null.</td>
+            </tr>
+            <tr>
+                <td>Is Not Null</td>
+                <td><code>Query.isNotNull("name")</code></td>
+                <td>Returns documents where attribute value is <b>not</b> null.</td>
+            </tr>
+            <tr>
+                <td>Starts With</td>
+                <td><code>Query.startsWith("name", "Once upon a time")</code></td>
+                <td>Returns documents if a string attributes starts with a substring.</td>
+            </tr>
+            <tr>
+                <td>Ends With</td>
+                <td><code>Query.endsWith("name", "happily ever after.")</code></td>
+                <td>Returns documents if a string attributes ends with a substring.</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td><code>Query.search("text", "key words")</code></td>
+                <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
+            </tr>
+            <tr>
+                <td>Order Descending</td>
+                <td><code>Query.orderDesc("attribute")</code></td>
+                <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Order Ascending</td>
+                <td><code>Query.orderAsc("attribute")</code></td>
+                <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Limit</td>
+                <td><code>Query.limit(25)</code></td>
+                <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>. If the limit query is not used, the limit defaults to 25 results.</td>
+            </tr>
+            <tr>
+                <td>Offset</td>
+                <td><code>Query.offset(0)</code></td>
+                <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor After</td>
+                <td><code>Query.cursorAfter("62a7...f620")</code></td>
+                <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor Before</td>
+                <td><code>Query.cursorBefore("62a7...a600")</code></td>
+                <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+        </tbody>
+    </table>
+    </li>
+</ul>
 
+<h4>Server SDKs</h4>
+<ul class="phases clear" data-ui-phases>
+    <li>
+        <h3>Node.js</h3>
+        <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 100px">Query Method</th>
+                <th>SDK Method Example</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Select</td>
+                <td><code>Query.select(["name", "title"])</code></td>
+                <td>Select which attributes should be returned from a document.</td>
+            </tr>
+            <tr>
+                <td>Equal</td>
+                <td><code>Query.equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Not Equal</td>
+                <td><code>Query.notEqual("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is not equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Less Than</td>
+                <td><code>Query.lessThan("score", 10)</code></td>
+                <td>Returns document if attribute is less than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Less Than or Equal</td>
+                <td><code>Query.lessThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is less than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than</td>
+                <td><code>Query.greaterThan("score", 10)</code></td>
+                <td>Returns document if attribute is greater than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than or Equal</td>
+                <td><code>Query.greaterThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is greater than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Between</td>
+                <td><code>Query.between("price", 5, 10)</code></td>
+                <td>Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.</td>
+            </tr>
+            <tr>
+                <td>Is Null</td>
+                <td><code>Query.isNull("name")</code></td>
+                <td>Returns documents where attribute value is null.</td>
+            </tr>
+            <tr>
+                <td>Is Not Null</td>
+                <td><code>Query.isNotNull("name")</code></td>
+                <td>Returns documents where attribute value is <b>not</b> null.</td>
+            </tr>
+            <tr>
+                <td>Starts With</td>
+                <td><code>Query.startsWith("name", "Once upon a time")</code></td>
+                <td>Returns documents if a string attributes starts with a substring.</td>
+            </tr>
+            <tr>
+                <td>Ends With</td>
+                <td><code>Query.endsWith("name", "happily ever after.")</code></td>
+                <td>Returns documents if a string attributes ends with a substring.</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td><code>Query.search("text", "key words")</code></td>
+                <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
+            </tr>
+            <tr>
+                <td>Order Descending</td>
+                <td><code>Query.orderDesc("attribute")</code></td>
+                <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Order Ascending</td>
+                <td><code>Query.orderAsc("attribute")</code></td>
+                <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Limit</td>
+                <td><code>Query.limit(25)</code></td>
+                <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>. If the limit query is not used, the limit defaults to 25 results.</td>
+            </tr>
+            <tr>
+                <td>Offset</td>
+                <td><code>Query.offset(0)</code></td>
+                <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor After</td>
+                <td><code>Query.cursorAfter("62a7...f620")</code></td>
+                <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor Before</td>
+                <td><code>Query.cursorBefore("62a7...a600")</code></td>
+                <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+        </tbody>
+        </table>
+    </li>
+    <li>
+        <h3>PHP</h3>
+        <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 100px">Query Method</th>
+                <th>SDK Method Example</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Select</td>
+                <td><code>Query::select(["name", "title"])</code></td>
+                <td>Select which attributes should be returned from a document.</td>
+            </tr>
+            <tr>
+                <td>Equal</td>
+                <td><code>Query::equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Not Equal</td>
+                <td><code>Query::notEqual("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is not equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Less Than</td>
+                <td><code>Query::lessThan("score", 10)</code></td>
+                <td>Returns document if attribute is less than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Less Than or Equal</td>
+                <td><code>Query::lessThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is less than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than</td>
+                <td><code>Query::greaterThan("score", 10)</code></td>
+                <td>Returns document if attribute is greater than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than or Equal</td>
+                <td><code>Query::greaterThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is greater than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Between</td>
+                <td><code>Query::between("price", 5, 10)</code></td>
+                <td>Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.</td>
+            </tr>
+            <tr>
+                <td>Is Null</td>
+                <td><code>Query::isNull("name")</code></td>
+                <td>Returns documents where attribute value is null.</td>
+            </tr>
+            <tr>
+                <td>Is Not Null</td>
+                <td><code>Query::isNotNull("name")</code></td>
+                <td>Returns documents where attribute value is <b>not</b> null.</td>
+            </tr>
+            <tr>
+                <td>Starts With</td>
+                <td><code>Query::startsWith("name", "Once upon a time")</code></td>
+                <td>Returns documents if a string attributes starts with a substring.</td>
+            </tr>
+            <tr>
+                <td>Ends With</td>
+                <td><code>Query::endsWith("name", "happily ever after.")</code></td>
+                <td>Returns documents if a string attributes ends with a substring.</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td><code>Query::search("text", "key words")</code></td>
+                <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
+            </tr>
+            <tr>
+                <td>Order Descending</td>
+                <td><code>Query::orderDesc("attribute")</code></td>
+                <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Order Ascending</td>
+                <td><code>Query::orderAsc("attribute")</code></td>
+                <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Limit</td>
+                <td><code>Query::limit(25)</code></td>
+                <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>. If the limit query is not used, the limit defaults to 25 results.</td>
+            </tr>
+            <tr>
+                <td>Offset</td>
+                <td><code>Query::offset(0)</code></td>
+                <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor After</td>
+                <td><code>Query::cursorAfter("62a7...f620")</code></td>
+                <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor Before</td>
+                <td><code>Query::cursorBefore("62a7...a600")</code></td>
+                <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+        </tbody>
+        </table>
+    </li>
+    <li>
+        <h3>Python</h3>
+        <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 100px">Query Method</th>
+                <th>SDK Method Example</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Select</td>
+                <td><code>Query.select(["name", "title"])</code></td>
+                <td>Select which attributes should be returned from a document.</td>
+            </tr>
+            <tr>
+                <td>Equal</td>
+                <td><code>Query.equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Not Equal</td>
+                <td><code>Query.not_equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is not equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Less Than</td>
+                <td><code>Query.less_than("score", 10)</code></td>
+                <td>Returns document if attribute is less than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Less Than or Equal</td>
+                <td><code>Query.less_than_equal("score", 10)</code></td>
+                <td>Returns document if attribute is less than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than</td>
+                <td><code>Query.greater_than("score", 10)</code></td>
+                <td>Returns document if attribute is greater than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than or Equal</td>
+                <td><code>Query.greater_than_equal("score", 10)</code></td>
+                <td>Returns document if attribute is greater than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Between</td>
+                <td><code>Query.between("price", 5, 10)</code></td>
+                <td>Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.</td>
+            </tr>
+            <tr>
+                <td>Is Null</td>
+                <td><code>Query.is_null("name")</code></td>
+                <td>Returns documents where attribute value is null.</td>
+            </tr>
+            <tr>
+                <td>Is Not Null</td>
+                <td><code>Query.is_not_null("name")</code></td>
+                <td>Returns documents where attribute value is <b>not</b> null.</td>
+            </tr>
+            <tr>
+                <td>Starts With</td>
+                <td><code>Query.starts_with("name", "Once upon a time")</code></td>
+                <td>Returns documents if a string attributes starts with a substring.</td>
+            </tr>
+            <tr>
+                <td>Ends With</td>
+                <td><code>Query.ends_with("name", "happily ever after.")</code></td>
+                <td>Returns documents if a string attributes ends with a substring.</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td><code>Query.search("text", "key words")</code></td>
+                <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
+            </tr>
+            <tr>
+                <td>Order Descending</td>
+                <td><code>Query.order_desc("attribute")</code></td>
+                <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Order Ascending</td>
+                <td><code>Query.order_asc("attribute")</code></td>
+                <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Limit</td>
+                <td><code>Query.limit(25)</code></td>
+                <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>. If the limit query is not used, the limit defaults to 25 results.</td>
+            </tr>
+            <tr>
+                <td>Offset</td>
+                <td><code>Query.offset(0)</code></td>
+                <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor After</td>
+                <td><code>Query.cursor_after("62a7...f620")</code></td>
+                <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor Before</td>
+                <td><code>Query.cursor_before("62a7...a600")</code></td>
+                <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+        </tbody>
+        </table>
+    </li>
+    <li>
+        <h3>Ruby</h3>
+        <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 100px">Query Method</th>
+                <th>SDK Method Example</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Select</td>
+                <td><code>Query.select(["name", "title"])</code></td>
+                <td>Select which attributes should be returned from a document.</td>
+            </tr>
+            <tr>
+                <td>Equal</td>
+                <td><code>Query.equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Not Equal</td>
+                <td><code>Query.not_equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is not equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Less Than</td>
+                <td><code>Query.less_than("score", 10)</code></td>
+                <td>Returns document if attribute is less than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Less Than or Equal</td>
+                <td><code>Query.less_than_equal("score", 10)</code></td>
+                <td>Returns document if attribute is less than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than</td>
+                <td><code>Query.greater_than("score", 10)</code></td>
+                <td>Returns document if attribute is greater than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than or Equal</td>
+                <td><code>Query.greater_than_equal("score", 10)</code></td>
+                <td>Returns document if attribute is greater than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Between</td>
+                <td><code>Query.between("price", 5, 10)</code></td>
+                <td>Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.</td>
+            </tr>
+            <tr>
+                <td>Is Null</td>
+                <td><code>Query.is_null("name")</code></td>
+                <td>Returns documents where attribute value is null.</td>
+            </tr>
+            <tr>
+                <td>Is Not Null</td>
+                <td><code>Query.is_not_null("name")</code></td>
+                <td>Returns documents where attribute value is <b>not</b> null.</td>
+            </tr>
+            <tr>
+                <td>Starts With</td>
+                <td><code>Query.starts_with("name", "Once upon a time")</code></td>
+                <td>Returns documents if a string attributes starts with a substring.</td>
+            </tr>
+            <tr>
+                <td>Ends With</td>
+                <td><code>Query.ends_with("name", "happily ever after.")</code></td>
+                <td>Returns documents if a string attributes ends with a substring.</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td><code>Query.search("text", "key words")</code></td>
+                <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
+            </tr>
+            <tr>
+                <td>Order Descending</td>
+                <td><code>Query.order_desc("attribute")</code></td>
+                <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Order Ascending</td>
+                <td><code>Query.order_asc("attribute")</code></td>
+                <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Limit</td>
+                <td><code>Query.limit(25)</code></td>
+                <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>. If the limit query is not used, the limit defaults to 25 results.</td>
+            </tr>
+            <tr>
+                <td>Offset</td>
+                <td><code>Query.offset(0)</code></td>
+                <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor After</td>
+                <td><code>Query.cursor_after("62a7...f620")</code></td>
+                <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor Before</td>
+                <td><code>Query.cursor_before("62a7...a600")</code></td>
+                <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+        </tbody>
+        </table>
+    </li>
+    <li>
+        <h3>Deno</h3>
+        <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 100px">Query Method</th>
+                <th>SDK Method Example</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Select</td>
+                <td><code>Query.select(["name", "title"])</code></td>
+                <td>Select which attributes should be returned from a document.</td>
+            </tr>
+            <tr>
+                <td>Equal</td>
+                <td><code>Query.equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Not Equal</td>
+                <td><code>Query.notEqual("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is not equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Less Than</td>
+                <td><code>Query.lessThan("score", 10)</code></td>
+                <td>Returns document if attribute is less than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Less Than or Equal</td>
+                <td><code>Query.lessThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is less than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than</td>
+                <td><code>Query.greaterThan("score", 10)</code></td>
+                <td>Returns document if attribute is greater than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than or Equal</td>
+                <td><code>Query.greaterThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is greater than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Between</td>
+                <td><code>Query.between("price", 5, 10)</code></td>
+                <td>Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.</td>
+            </tr>
+            <tr>
+                <td>Is Null</td>
+                <td><code>Query.isNull("name")</code></td>
+                <td>Returns documents where attribute value is null.</td>
+            </tr>
+            <tr>
+                <td>Is Not Null</td>
+                <td><code>Query.isNotNull("name")</code></td>
+                <td>Returns documents where attribute value is <b>not</b> null.</td>
+            </tr>
+            <tr>
+                <td>Starts With</td>
+                <td><code>Query.startsWith("name", "Once upon a time")</code></td>
+                <td>Returns documents if a string attributes starts with a substring.</td>
+            </tr>
+            <tr>
+                <td>Ends With</td>
+                <td><code>Query.endsWith("name", "happily ever after.")</code></td>
+                <td>Returns documents if a string attributes ends with a substring.</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td><code>Query.search("text", "key words")</code></td>
+                <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
+            </tr>
+            <tr>
+                <td>Order Descending</td>
+                <td><code>Query.orderDesc("attribute")</code></td>
+                <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Order Ascending</td>
+                <td><code>Query.orderAsc("attribute")</code></td>
+                <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Limit</td>
+                <td><code>Query.limit(25)</code></td>
+                <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>. If the limit query is not used, the limit defaults to 25 results.</td>
+            </tr>
+            <tr>
+                <td>Offset</td>
+                <td><code>Query.offset(0)</code></td>
+                <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor After</td>
+                <td><code>Query.cursorAfter("62a7...f620")</code></td>
+                <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor Before</td>
+                <td><code>Query.cursorBefore("62a7...a600")</code></td>
+                <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+        </tbody>
+        </table>
+    </li>
+    <li>
+        <h3>Dart</h3>
+        <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 100px">Query Method</th>
+                <th>SDK Method Example</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Select</td>
+                <td><code>Query.select(["name", "title"])</code></td>
+                <td>Select which attributes should be returned from a document.</td>
+            </tr>
+            <tr>
+                <td>Equal</td>
+                <td><code>Query.equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Not Equal</td>
+                <td><code>Query.notEqual("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is not equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Less Than</td>
+                <td><code>Query.lessThan("score", 10)</code></td>
+                <td>Returns document if attribute is less than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Less Than or Equal</td>
+                <td><code>Query.lessThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is less than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than</td>
+                <td><code>Query.greaterThan("score", 10)</code></td>
+                <td>Returns document if attribute is greater than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than or Equal</td>
+                <td><code>Query.greaterThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is greater than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Between</td>
+                <td><code>Query.between("price", 5, 10)</code></td>
+                <td>Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.</td>
+            </tr>
+            <tr>
+                <td>Is Null</td>
+                <td><code>Query.isNull("name")</code></td>
+                <td>Returns documents where attribute value is null.</td>
+            </tr>
+            <tr>
+                <td>Is Not Null</td>
+                <td><code>Query.isNotNull("name")</code></td>
+                <td>Returns documents where attribute value is <b>not</b> null.</td>
+            </tr>
+            <tr>
+                <td>Starts With</td>
+                <td><code>Query.startsWith("name", "Once upon a time")</code></td>
+                <td>Returns documents if a string attributes starts with a substring.</td>
+            </tr>
+            <tr>
+                <td>Ends With</td>
+                <td><code>Query.endsWith("name", "happily ever after.")</code></td>
+                <td>Returns documents if a string attributes ends with a substring.</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td><code>Query.search("text", "key words")</code></td>
+                <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
+            </tr>
+            <tr>
+                <td>Order Descending</td>
+                <td><code>Query.orderDesc("attribute")</code></td>
+                <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Order Ascending</td>
+                <td><code>Query.orderAsc("attribute")</code></td>
+                <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Limit</td>
+                <td><code>Query.limit(25)</code></td>
+                <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>. If the limit query is not used, the limit defaults to 25 results.</td>
+            </tr>
+            <tr>
+                <td>Offset</td>
+                <td><code>Query.offset(0)</code></td>
+                <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor After</td>
+                <td><code>Query.cursorAfter("62a7...f620")</code></td>
+                <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor Before</td>
+                <td><code>Query.cursorBefore("62a7...a600")</code></td>
+                <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+        </tbody>
+        </table>
+    </li>
+    <li>
+        <h3>Kotlin</h3>
+        <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 100px">Query Method</th>
+                <th>SDK Method Example</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Select</td>
+                <td><code>Query.select(["name", "title"])</code></td>
+                <td>Select which attributes should be returned from a document.</td>
+            </tr>
+            <tr>
+                <td>Equal</td>
+                <td><code>Query.equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Not Equal</td>
+                <td><code>Query.notEqual("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is not equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Less Than</td>
+                <td><code>Query.lessThan("score", 10)</code></td>
+                <td>Returns document if attribute is less than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Less Than or Equal</td>
+                <td><code>Query.lessThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is less than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than</td>
+                <td><code>Query.greaterThan("score", 10)</code></td>
+                <td>Returns document if attribute is greater than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than or Equal</td>
+                <td><code>Query.greaterThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is greater than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Between</td>
+                <td><code>Query.between("price", 5, 10)</code></td>
+                <td>Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.</td>
+            </tr>
+            <tr>
+                <td>Is Null</td>
+                <td><code>Query.isNull("name")</code></td>
+                <td>Returns documents where attribute value is null.</td>
+            </tr>
+            <tr>
+                <td>Is Not Null</td>
+                <td><code>Query.isNotNull("name")</code></td>
+                <td>Returns documents where attribute value is <b>not</b> null.</td>
+            </tr>
+            <tr>
+                <td>Starts With</td>
+                <td><code>Query.startsWith("name", "Once upon a time")</code></td>
+                <td>Returns documents if a string attributes starts with a substring.</td>
+            </tr>
+            <tr>
+                <td>Ends With</td>
+                <td><code>Query.endsWith("name", "happily ever after.")</code></td>
+                <td>Returns documents if a string attributes ends with a substring.</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td><code>Query.search("text", "key words")</code></td>
+                <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
+            </tr>
+            <tr>
+                <td>Order Descending</td>
+                <td><code>Query.orderDesc("attribute")</code></td>
+                <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Order Ascending</td>
+                <td><code>Query.orderAsc("attribute")</code></td>
+                <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Limit</td>
+                <td><code>Query.limit(25)</code></td>
+                <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>. If the limit query is not used, the limit defaults to 25 results.</td>
+            </tr>
+            <tr>
+                <td>Offset</td>
+                <td><code>Query.offset(0)</code></td>
+                <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor After</td>
+                <td><code>Query.cursorAfter("62a7...f620")</code></td>
+                <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor Before</td>
+                <td><code>Query.cursorBefore("62a7...a600")</code></td>
+                <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+        </tbody>
+        </table>
+    </li>
+    <li>
+        <h3>Swift</h3>
+        <table cellspacing="0" cellpadding="0" border="0" class="full margin-bottom-large">
+        <thead>
+            <tr>
+                <th style="width: 100px">Query Method</th>
+                <th>SDK Method Example</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Select</td>
+                <td><code>Query.select(["name", "title"])</code></td>
+                <td>Select which attributes should be returned from a document.</td>
+            </tr>
+            <tr>
+                <td>Equal</td>
+                <td><code>Query.equal("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Not Equal</td>
+                <td><code>Query.notEqual("title", ["Iron Man"])</code></td>
+                <td>Returns document if attribute is not equal to any value in the provided array.</td>
+            </tr>
+            <tr>
+                <td>Less Than</td>
+                <td><code>Query.lessThan("score", 10)</code></td>
+                <td>Returns document if attribute is less than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Less Than or Equal</td>
+                <td><code>Query.lessThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is less than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than</td>
+                <td><code>Query.greaterThan("score", 10)</code></td>
+                <td>Returns document if attribute is greater than the provided value.</td>
+            </tr>
+            <tr>
+                <td>Greater Than or Equal</td>
+                <td><code>Query.greaterThanEqual("score", 10)</code></td>
+                <td>Returns document if attribute is greater than or equal to the provided value.</td>
+            </tr>
+            <tr>
+                <td>Between</td>
+                <td><code>Query.between("price", 5, 10)</code></td>
+                <td>Returns document if attribute value falls between the two values. The boundary values are inclusive and can be strings or numbers.</td>
+            </tr>
+            <tr>
+                <td>Is Null</td>
+                <td><code>Query.isNull("name")</code></td>
+                <td>Returns documents where attribute value is null.</td>
+            </tr>
+            <tr>
+                <td>Is Not Null</td>
+                <td><code>Query.isNotNull("name")</code></td>
+                <td>Returns documents where attribute value is <b>not</b> null.</td>
+            </tr>
+            <tr>
+                <td>Starts With</td>
+                <td><code>Query.startsWith("name", "Once upon a time")</code></td>
+                <td>Returns documents if a string attributes starts with a substring.</td>
+            </tr>
+            <tr>
+                <td>Ends With</td>
+                <td><code>Query.endsWith("name", "happily ever after.")</code></td>
+                <td>Returns documents if a string attributes ends with a substring.</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td><code>Query.search("text", "key words")</code></td>
+                <td>Searches string attributes for provided keywords. Requires a <a href="/docs/databases#indexes">Full-text index</a> on queried attributes.</td>
+            </tr>
+            <tr>
+                <td>Order Descending</td>
+                <td><code>Query.orderDesc("attribute")</code></td>
+                <td>Orders results in descending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Order Ascending</td>
+                <td><code>Query.orderAsc("attribute")</code></td>
+                <td>Orders results in ascending order by attribute. Attribute must be indexed. Pass in an empty string to return in natural order.</td>
+            </tr>
+            <tr>
+                <td>Limit</td>
+                <td><code>Query.limit(25)</code></td>
+                <td>Limits the number of results returned by the query. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>. If the limit query is not used, the limit defaults to 25 results.</td>
+            </tr>
+            <tr>
+                <td>Offset</td>
+                <td><code>Query.offset(0)</code></td>
+                <td>Offset the results returned by skipping some of the results. Used for <a href="/docs/pagination#offset-pagination" id="offset-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor After</td>
+                <td><code>Query.cursorAfter("62a7...f620")</code></td>
+                <td>Places the cursor after the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+            <tr>
+                <td>Cursor Before</td>
+                <td><code>Query.cursorBefore("62a7...a600")</code></td>
+                <td>Places the cursor before the specified resource ID. Used for <a href="/docs/pagination#cursor-pagination" id="cursor-pagination">pagination</a>.</td>
+            </tr>
+        </tbody>
+        </table>
+    </li>
+</ul>
 <h2><a href="/docs/queries#building-queries" id="building-queries">Building Queries</a></h2>
 <p>
     Queries are passed to an endpoint through the <code>queries</code> parameter as an array of query strings, which can be generated using the <code>Query</code> class.
